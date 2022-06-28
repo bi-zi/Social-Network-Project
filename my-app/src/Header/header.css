@@ -1,0 +1,109 @@
+/* header */
+.header {
+  width: 100%;
+  height: 60px;
+
+  background: #393939;
+  color: #ffffff;
+}
+
+/* Wave */
+.wave {
+  position: absolute;
+  width: 96px;
+  height: 58px;
+  left: 164px;
+  top: 4px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 49px;
+}
+
+/* profile */
+.profile {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 443px;
+  top: 10px;
+}
+
+/* bell */
+.bell {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 503px;
+  top: 10px;
+}
+
+/* news */
+
+.news {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 563px;
+  top: 10px;
+}
+
+.message {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 623px;
+  top: 10px;
+}
+
+.users {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 683px;
+  top: 10px;
+}
+
+/* community */
+
+.community {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 743px;
+  top: 10px;
+}
+
+.image {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 803px;
+  top: 10px;
+}
+
+.video {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 863px;
+  top: 10px;
+}
+
+.music {
+  position: absolute;
+  width: 35px;
+  height: 40px;
+  left: 920px;
+  top: 10px;
+}
+
+.menu {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  left: 1382px;
+  top: 10px;
+}

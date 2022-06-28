@@ -1,0 +1,691 @@
+/* avatar */
+
+.avatar {
+  position: absolute;
+  width: 380px;
+  height: 470px;
+  left: 20px;
+  top: 80px;
+}
+
+/* avatar_backGround */
+
+.avatar_backGround {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: #393939;
+  border-radius: 25px;
+}
+
+/* image */
+
+.avatar_image {
+  position: absolute;
+  width: 328px;
+  height: 375px;
+  left: 26px;
+  top: 18px;
+
+  border-radius: 15px;
+}
+
+/* button */
+
+.avatar_button {
+  position: absolute;
+  width: 328px;
+  height: 51px;
+  left: 26px;
+  top: 407px;
+
+  background: linear-gradient(88.95deg, #0a0404 -15.87%, #280404 80.66%);
+  border-radius: 25px;
+}
+
+/* Сhange photo */
+
+.avatar_change {
+  position: absolute;
+  width: 118px;
+  height: 28px;
+  left: 105px;
+  top: 15px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+}
+
+/* about */
+.about {
+  position: absolute;
+  width: 1000px;
+  height: 350px;
+  left: 420px;
+  top: 80px;
+}
+
+/* about_backGround */
+.about_backGround {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: #393939;
+  border-radius: 25px;
+}
+
+/* Alexey Tsvetkov */
+.full_name {
+  position: absolute;
+  width: 204px;
+  height: 30px;
+  left: 21px;
+  top: 18px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #ffffff;
+}
+
+/* Line */
+.line {
+  position: absolute;
+  width: 962px;
+  height: 0px;
+  left: 19px;
+  top: 65px;
+
+  border: 10px solid #2d2d2d;
+  transform: rotate(-0.12deg);
+}
+
+/* Lives in */
+.lives {
+  position: absolute;
+  width: 312px;
+  height: 30px;
+  left: 21px;
+  top: 94px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #ffffff;
+}
+
+/* From */
+.from {
+  position: absolute;
+  width: 259px;
+  height: 30px;
+  left: 21px;
+  top: 134px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #ffffff;
+}
+
+/* Born on */
+.born {
+  position: absolute;
+  width: 264px;
+  height: 30px;
+  left: 21px;
+  top: 174px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #ffffff;
+}
+
+/* Profession */
+.profession {
+  position: absolute;
+  width: 294px;
+  height: 30px;
+  left: 21px;
+  top: 214px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #ffffff;
+}
+
+/* In a relationship with */
+.relationship {
+  position: absolute;
+  width: 377px;
+  height: 30px;
+  left: 21px;
+  top: 254px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #ffffff;
+}
+
+/* Student at */
+.student {
+  position: absolute;
+  width: 301px;
+  height: 30px;
+  left: 21px;
+  top: 294px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #ffffff;
+}
+
+/* friends */
+.friends {
+  position: absolute;
+  width: 380px;
+  height: 249px;
+  left: 20px;
+  top: 569px;
+}
+
+/* friends_backGround */
+.friends_backGround {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: #393939;
+  border-radius: 25px;
+}
+
+/* friends_title */
+.friends_title {
+  position: absolute;
+  width: 99px;
+  height: 30px;
+  left: 24px;
+  top: 4px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #ffffff;
+}
+
+/* images */
+.images {
+  position: absolute;
+  width: 1000px;
+  height: 370px;
+  left: 421px;
+  top: 449px;
+}
+
+/* images_backGround */
+.images_backGround {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: #393939;
+  border-radius: 25px;
+}
+
+/* image_1 */
+.image_1 {
+  position: absolute;
+  width: 483px;
+  height: 346px;
+  left: 499px;
+  top: 13px;
+
+  border-radius: 15px;
+}
+
+/* image_2 */
+.image_2 {
+  position: absolute;
+  width: 460px;
+  height: 346.26px;
+  left: 20px;
+  top: 13px;
+
+  border-radius: 15px;
+}
+
+/* subscriptions */
+.subscriptions {
+  position: absolute;
+  width: 380px;
+  height: 397px;
+  left: 20px;
+  top: 838px;
+}
+
+/* subscriptions_backGround */
+.subscriptions_backGround {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: #393939;
+  border-radius: 25px;
+}
+
+/* subscriptions_title */
+.subscriptions_title {
+  position: absolute;
+  width: 198px;
+  height: 30px;
+  left: 22px;
+  top: 5px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #ffffff;
+}
+
+/* post */
+.post {
+  position: absolute;
+  width: 1000px;
+  height: 70px;
+  left: 421px;
+  top: 834px;
+}
+
+/* post_backGround */
+.post_backGround {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: #393939;
+  border-radius: 25px;
+}
+
+/* post_avatar */
+.post_avatar {
+  position: absolute;
+  width: 53px;
+  height: 53px;
+  left: 20px;
+  top: 9px;
+  border-radius: 100%;
+
+  background: linear-gradient(180deg, #0a0404 0%, #300f0f 97.4%);
+}
+
+/* post_title */
+.post_title {
+  position: absolute;
+  width: 171px;
+  height: 37px;
+  left: 114px;
+  top: 16px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+}
+
+/* post_image */
+.post_image {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 675px;
+  top: 15px;
+  color: #ffffff;
+}
+
+/* post_video */
+.post_video {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 740px;
+  top: 15px;
+  color: #ffffff;
+}
+
+/* post_audio */
+.post_audio {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 805px;
+  top: 15px;
+  color: #ffffff;
+}
+
+/* post_location */
+.post_location {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 864px;
+  top: 15px;
+  color: #ffffff;
+}
+
+/* post_file */
+.post_file {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 929px;
+  top: 15px;
+  color: #ffffff;
+}
+
+/* ready_post */
+.ready_post {
+position: absolute;
+width: 1000px;
+height: 728px;
+left: 421px;
+top: 924px;
+}
+
+
+/* ready_post_backGround */
+.ready_post_backGround {
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #393939;
+border-radius: 25px;
+}
+
+/* ready_post_avatar */
+.ready_post_avatar {
+position: absolute;
+width: 126px;
+height: 132px;
+left: 20px;
+top: 17px;
+
+
+border-radius: 68.5px;
+}
+
+
+/* ready_post_fullName */
+.ready_post_fullName {
+position: absolute;
+width: 204px;
+height: 30px;
+left: 152px;
+top: 34px;
+
+font-family: 'Iceberg';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 37px;
+
+color: #FFFFFF;
+}
+
+/* ready_post_date */
+.ready_post_date {
+position: absolute;
+width: 194px;
+height: 30px;
+left: 152px;
+top: 70px;
+
+font-family: 'Iceberg';
+font-style: normal;
+font-weight: 400;
+font-size: 22px;
+line-height: 27px;
+
+color: #FFFFFF;
+}
+
+/* ready_post_menu */
+.ready_post_menu {
+position: absolute;
+width: 48px;
+height: 45px;
+left: 928px;
+top: 26px;
+color: #FFFFFF;
+}
+
+/* ready_post_message */
+.ready_post_message {
+position: absolute;
+width: 268px;
+height: 29px;
+left: 20px;
+top: 160px;
+
+font-family: 'Iceberg';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+
+color: #FFFFFF;
+}
+
+/* ready_post_content */
+.ready_post_content {
+position: absolute;
+width: 953px;
+height: 414px;
+left: 20px;
+top: 195px;
+color: #FFFFFF;
+}
+
+/* ready_post_from */
+.ready_post_from {
+position: absolute;
+width: 246px;
+height: 24px;
+left: 20px;
+top: 615px;
+
+font-family: 'Iceberg';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+
+color: #FFFFFF;
+}
+
+/* ready_post_views */
+.ready_post_views {
+position: absolute;
+width: 157px;
+height: 22px;
+left: 20px;
+top: 642px;
+
+font-family: 'Iceberg';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+
+color: #FFFFFF;
+}
+
+/* ready_post_like */
+.ready_post_like {
+position: absolute;
+width: 30px;
+height: 30px;
+left: 20px;
+top: 678px;
+color: #FFFFFF;
+}
+
+/* ready_post_dislike */
+.ready_post_dislike {
+position: absolute;
+width: 30px;
+height: 30px;
+left: 60px;
+top: 681px;
+color: #FFFFFF;
+}
+
+/* ready_post_comment */
+.ready_post_comment {
+position: absolute;
+width: 27px;
+height: 24px;
+left: 100px;
+top: 681px;
+color: #FFFFFF;
+}
+
+/* .ready_post_share */
+.ready_post_share {
+position: absolute;
+width: 27px;
+height: 24px;
+left: 137px;
+top: 682px;
+color: #FFFFFF;
+}
+
+/* video */
+.videos {
+position: absolute;
+width: 380px;
+height: 397px;
+left: 20px;
+top: 1255px;
+}
+
+/* videos_backGround */
+.videos_backGround {
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #393939;
+border-radius: 25px;
+}
+
+/* videos_title */
+.videos_title {
+position: absolute;
+width: 222px;
+height: 30px;
+left: 22px;
+top: 8px;
+
+font-family: 'Iceberg';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 37px;
+
+color: #FFFFFF;
+}
+
+/* music */
+.music {
+position: absolute;
+width: 380px;
+height: 215px;
+left: 20px;
+top: 1666px;
+}
+
+
+/* music_backGround */
+.music_backGround {
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #393939;
+border-radius: 25px;
+}
+
+/* music_title */
+.music_title {
+position: absolute;
+width: 198px;
+height: 30px;
+left: 22px;
+top: 5px;
+
+font-family: 'Iceberg';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 37px;
+
+color: #FFFFFF;
+}
