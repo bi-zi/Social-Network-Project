@@ -1,0 +1,45 @@
+.registration {
+  width: 300px;
+  height: 300px;
+  margin-top: 200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  border-radius: 20px;
+  background-color: #393939;
+}
+
+.registr_form {
+  position: relative;
+  text-align: center;
+
+  padding-top: 60px;
+}
+
+.firstName,
+.lastName,
+.password {
+  width: 220px;
+  height: 40px;
+  border: 0px solid white;
+  border-radius: 5px;
+  font-size: 20px;
+  font-family: 'Iceberg';
+  padding-left: 10px;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.submit {
+  width: 220px;
+  height: 25px;
+
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  font-size: 20px;
+  font-family: 'Iceberg';
+  padding-left: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(46, 224, 46);
+  color: black;
+}
