@@ -4,7 +4,7 @@ import './profile.css';
 
 function Profile() {
   return (
-    <>
+    <div className="container">
       <div className="avatar">
         <div className="avatar_backGround">
           <img
@@ -18,6 +18,7 @@ function Profile() {
           </div>
         </div>
       </div>
+
       <div className="about">
         <div className="about_backGround"></div>
         <div className="full_name">Alexey Tsvetkov</div>
@@ -34,6 +35,7 @@ function Profile() {
           <div className="friends_title">Friends</div>
         </div>
       </div>
+
       <div className="images">
         <div className="images_backGround">
           <img
@@ -44,11 +46,13 @@ function Profile() {
           <img src="https://i.gifer.com/PGB7.gif" alt="" className="image_2" />
         </div>
       </div>
+
       <div className="subscriptions">
         <div className="subscriptions_backGround">
           <div className="subscriptions_title">Subscriptions</div>
         </div>
       </div>
+
       <div className="post">
         <div className="post_backGround">
           <img
@@ -64,6 +68,13 @@ function Profile() {
           <FontAwesomeIcon className="post_file" icon="fa-solid fa-file-lines" />
         </div>
       </div>
+
+      <div className="videos">
+        <div className="videos_backGround">
+          <div className="videos_title">Video recordings</div>
+        </div>
+      </div>
+
       <div className="ready_post">
         <div className="ready_post_backGround">
           <img
@@ -84,17 +95,13 @@ function Profile() {
           <FontAwesomeIcon className="ready_post_share" icon="fa-solid fa-share-nodes" />
         </div>
       </div>
-      <div className="videos">
-        <div className="videos_backGround">
-          <div className="videos_title">Video recordings</div>
-        </div>
-      </div>
-      <div className="music">
+
+      <div className="music_profile">
         <div className="music_backGround">
           <div className="music_title">Music</div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

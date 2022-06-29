@@ -1,11 +1,11 @@
 /* avatar */
 
 .avatar {
-  position: absolute;
+  position: relative;
   width: 380px;
   height: 470px;
   left: 20px;
-  top: 80px;
+  top: 20px;
 }
 
 /* avatar_backGround */
@@ -66,11 +66,11 @@
 
 /* about */
 .about {
-  position: absolute;
-  width: 1000px;
+  position: relative;
+  width: 980px;
   height: 350px;
-  left: 420px;
-  top: 80px;
+  left: -20px;
+  top: 20px;
 }
 
 /* about_backGround */
@@ -105,7 +105,7 @@
 /* Line */
 .line {
   position: absolute;
-  width: 962px;
+  width: 942px;
   height: 0px;
   left: 19px;
   top: 65px;
@@ -218,11 +218,11 @@
 
 /* friends */
 .friends {
-  position: absolute;
+  position: relative;
   width: 380px;
   height: 249px;
   left: 20px;
-  top: 569px;
+  top: 40px;
 }
 
 /* friends_backGround */
@@ -256,11 +256,11 @@
 
 /* images */
 .images {
-  position: absolute;
-  width: 1000px;
+  position: relative;
+  width: 980px;
   height: 370px;
-  left: 421px;
-  top: 449px;
+  left: -20px;
+  top: -80px;
 }
 
 /* images_backGround */
@@ -278,9 +278,9 @@
 /* image_1 */
 .image_1 {
   position: absolute;
-  width: 483px;
+  width: 473px;
   height: 346px;
-  left: 499px;
+  left: 489px;
   top: 13px;
 
   border-radius: 15px;
@@ -289,7 +289,7 @@
 /* image_2 */
 .image_2 {
   position: absolute;
-  width: 460px;
+  width: 450px;
   height: 346.26px;
   left: 20px;
   top: 13px;
@@ -299,11 +299,11 @@
 
 /* subscriptions */
 .subscriptions {
-  position: absolute;
+  position: relative;
   width: 380px;
   height: 397px;
   left: 20px;
-  top: 838px;
+  top: -60px;
 }
 
 /* subscriptions_backGround */
@@ -337,11 +337,11 @@
 
 /* post */
 .post {
-  position: absolute;
-  width: 1000px;
+  position: relative;
+  width: 980px;
   height: 70px;
-  left: 421px;
-  top: 834px;
+  left: -20px;
+  top: -60px;
 }
 
 /* post_backGround */
@@ -428,20 +428,19 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  left: 929px;
+  left: 919px;
   top: 15px;
   color: #ffffff;
 }
 
 /* ready_post */
 .ready_post {
-position: absolute;
-width: 1000px;
+position: relative;
+width: 980px;
 height: 728px;
-left: 421px;
-top: 924px;
+left: -20px;
+top: -366px;
 }
-
 
 /* ready_post_backGround */
 .ready_post_backGround {
@@ -462,7 +461,6 @@ width: 126px;
 height: 132px;
 left: 20px;
 top: 17px;
-
 
 border-radius: 68.5px;
 }
@@ -507,7 +505,7 @@ color: #FFFFFF;
 position: absolute;
 width: 48px;
 height: 45px;
-left: 928px;
+left: 908px;
 top: 26px;
 color: #FFFFFF;
 }
@@ -532,7 +530,7 @@ color: #FFFFFF;
 /* ready_post_content */
 .ready_post_content {
 position: absolute;
-width: 953px;
+width: 933px;
 height: 414px;
 left: 20px;
 top: 195px;
@@ -613,13 +611,13 @@ top: 682px;
 color: #FFFFFF;
 }
 
-/* video */
+/* videos */
 .videos {
-position: absolute;
+position: relative;
 width: 380px;
 height: 397px;
 left: 20px;
-top: 1255px;
+top: -40px;
 }
 
 /* videos_backGround */
@@ -652,12 +650,12 @@ color: #FFFFFF;
 }
 
 /* music */
-.music {
-position: absolute;
+.music_profile {
+position: relative;
 width: 380px;
 height: 215px;
 left: 20px;
-top: 1666px;
+top: -350px;
 }
 
 
