@@ -1,19 +1,29 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './profile.css';
+import { useSelector } from 'react-redux';
 
 function Profile() {
+  const user = useSelector((state) => state.user);
+
+  let FReader = new FileReader();
+
   return (
     <div className="container">
       <div className="avatar">
         <div className="avatar_backGround">
-          <img
-            className="avatar_image"
-            src="https://smmis.ru/wp-content/uploads/2015/01/gifnaavatar.gif"
-            alt=""
-          />
+          <img className="avatar_image" id="result" src="" alt="" />
 
           <div className="avatar_button">
+            <input
+              className="firstName"
+              type="file"
+              name="myImg"
+              placeholder="First name"
+              onChange={(e) => {
+                FReader.readAsDataURL(document.querySelector('input').files[0]);
+              }}
+            />
             <div className="avatar_change">Сhange photo</div>
           </div>
         </div>
@@ -21,7 +31,7 @@ function Profile() {
 
       <div className="about">
         <div className="about_backGround"></div>
-        <div className="full_name">Alexey Tsvetkov</div>
+        <div className="full_name">{`${user.firstName} ${user.lastName}`}</div>
         <div className="line"></div>
         <div className="lives">Lives in</div>
         <div className="from">From</div>

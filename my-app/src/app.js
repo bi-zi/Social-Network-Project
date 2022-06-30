@@ -13,6 +13,7 @@ function App() {
   return (
     <>
       <Header />
+      <Registration />
       <Profile />
     </>
   );
