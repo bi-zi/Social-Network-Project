@@ -2,28 +2,21 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './profile.css';
 import { useSelector } from 'react-redux';
+import ImageUpload from './ImageUpload';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function Profile() {
   const user = useSelector((state) => state.user);
 
-  let FReader = new FileReader();
+
 
   return (
     <div className="container">
       <div className="avatar">
         <div className="avatar_backGround">
-          <img className="avatar_image" id="result" src="" alt="" />
-
           <div className="avatar_button">
-            <input
-              className="firstName"
-              type="file"
-              name="myImg"
-              placeholder="First name"
-              onChange={(e) => {
-                FReader.readAsDataURL(document.querySelector('input').files[0]);
-              }}
-            />
             <div className="avatar_change">Сhange photo</div>
           </div>
         </div>
@@ -48,12 +41,7 @@ function Profile() {
 
       <div className="images">
         <div className="images_backGround">
-          <img
-            src="https://i.pinimg.com/originals/89/06/bc/8906bcf9230e01dc532d2a47c594c50a.gif"
-            alt=""
-            className="image_1"
-          />
-          <img src="https://i.gifer.com/PGB7.gif" alt="" className="image_2" />
+          <ImageUpload />
         </div>
       </div>
 
