@@ -1,22 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './profile.css';
 import { useSelector } from 'react-redux';
 import ImageUpload from './ImageUpload';
-import Slider from 'react-slick';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 function Profile() {
   const user = useSelector((state) => state.user);
 
+  const [images, setImages] = React.useState([]);
+  const [imageURLs, setImageURLs] = React.useState([]);
 
+  useEffect(() => {
+    if (images.length < 1) return;
+    const newImageUrls = [];
+    images.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
+    setImageURLs(newImageUrls);
+  }, [images]);
+
+  function onImageChange(e) {
+    setImages([...e.target.files]);
+  }
 
   return (
     <div className="container">
       <div className="avatar">
         <div className="avatar_backGround">
+          {imageURLs.map((imageSrc) => (
+            <img src={imageSrc} alt="" className="avatar_image" />
+          ))}
           <div className="avatar_button">
+            <input type="file" multiple accept="image/*" onChange={onImageChange} />
             <div className="avatar_change">Сhange photo</div>
           </div>
         </div>
@@ -53,11 +69,9 @@ function Profile() {
 
       <div className="post">
         <div className="post_backGround">
-          <img
-            src="https://smmis.ru/wp-content/uploads/2015/01/gifnaavatar.gif"
-            alt=""
-            className="post_avatar"
-          />
+          {imageURLs.map((imageSrc) => (
+            <img src={imageSrc} alt="" className="post_avatar" />
+          ))}
           <div className="post_title">Post an entry</div>
           <FontAwesomeIcon className="post_image" icon="fa-regular fa-image" />
           <FontAwesomeIcon className="post_video" icon="fa-solid fa-film" />
@@ -75,11 +89,9 @@ function Profile() {
 
       <div className="ready_post">
         <div className="ready_post_backGround">
-          <img
-            src="https://smmis.ru/wp-content/uploads/2015/01/gifnaavatar.gif"
-            alt=""
-            className="ready_post_avatar"
-          />
+          {imageURLs.map((imageSrc) => (
+            <img src={imageSrc} alt="" className="ready_post_avatar" />
+          ))}
           <div className="ready_post_fullName">Alexey Tsvetkov</div>
           <div className="ready_post_date"> 23 July 2022</div>
           <FontAwesomeIcon className="ready_post_menu" icon="fa-solid fa-ellipsis" />

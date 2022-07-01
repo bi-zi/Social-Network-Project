@@ -10,11 +10,11 @@ function Registration() {
 
   return (
     <div className="registration">
-      <form className="registr_form">
+      <div className="registr_form" >
         <label>
           <input
             className="firstName"
-            type="file"
+            type="text"
             name="myImg"
             placeholder="First name"
             onChange={(e) => {
@@ -34,8 +34,8 @@ function Registration() {
           <input className="password" type="password" name="pass" placeholder="Password" />
         </label>
         <br />
-        <input className="submit" type="submit" value="Submit" />
-      </form>
+        <button className="submit"  >Submit</button>
+      </div>
     </div>
   );
 }

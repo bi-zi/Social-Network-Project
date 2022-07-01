@@ -337,7 +337,18 @@
   height: 350px;
 }
 .image-item__btn-wrapper {
+
+
   text-align: center;
+}
+
+.addPhoto {
+  position: relative;
+  z-index: 5;
+   border-radius: 15px;
+  width: 200px;
+  top: 345px;
+  left: 355px;
 }
 
 .updateImage {

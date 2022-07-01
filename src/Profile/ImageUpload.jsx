@@ -11,6 +11,9 @@ function ImageUpload() {
     setImages(imageList);
   };
 
+
+  
+
     const settings = {
       className: 'center',
       infinite: true,
@@ -26,27 +29,27 @@ function ImageUpload() {
       onChange={onChange}
       maxNumber={maxNumber}
       dataURLKey="data_url">
+      {({
+        imageList,
+        onImageUpload,
+        onImageRemoveAll,
+        onImageUpdate,
+        onImageRemove,
+        isDragging,
+        dragProps,
+      }) => (
+        // write your building UI
 
-        {({
-          imageList,
-          onImageUpload,
-          onImageRemoveAll,
-          onImageUpdate,
-          onImageRemove,
-          isDragging,
-          dragProps,
-        }) => (
-          // write your building UI
-
-          <div className="upload__image-wrapper">
-            <button
-              style={isDragging ? { color: 'red' } : undefined}
-              onClick={onImageUpload}
-              {...dragProps}>
-              Click or Drop here
-            </button>
+        <div className="upload__image-wrapper">
+          <button
+            className="addPhoto"
+            style={isDragging ? { color: 'red' } : undefined}
+            onClick={onImageUpload}
+            {...dragProps}>
+            Add photo
+          </button>
           &nbsp;
-        <Slider {...settings}>
+          <Slider {...settings}>
             {imageList.map((image, index) => {
               return (
                 <div className="slider_link" key={index}>
@@ -64,10 +67,9 @@ function ImageUpload() {
                 </div>
               );
             })}
-            </Slider>
-          </div>
-        )}
-
+          </Slider>
+        </div>
+      )}
     </ImageUploading>
   );
 }
