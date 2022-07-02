@@ -3,11 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './profile.css';
 import { useSelector } from 'react-redux';
 import ImageUpload from './ImageUpload';
-
+import { setPhotos } from '../store/registration';
+import { useDispatch } from 'react-redux';
+import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 function Profile() {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
   const [images, setImages] = React.useState([]);
@@ -15,8 +18,11 @@ function Profile() {
 
   useEffect(() => {
     if (images.length < 1) return;
+
     const newImageUrls = [];
     images.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
+    images.forEach((image) => dispatch(setPhotos(URL.createObjectURL(image))));
+    setImages([])
     setImageURLs(newImageUrls);
   }, [images]);
 
@@ -24,15 +30,29 @@ function Profile() {
     setImages([...e.target.files]);
   }
 
+  const settings = {
+    className: 'center',
+    infinite: true,
+    centerPadding: '0px',
+    slidesToShow: 3,
+    swipeToSlide: true,
+  };
+
+  // //   <div className="image-item__btn-wrapper">
+  //                     <button className="updateImage">Update</button>
+  //                     <button className="removeImage">Remove</button>
+  //                   </div>
+
+  console.log(user.photos);
   return (
     <div className="container">
       <div className="avatar">
         <div className="avatar_backGround">
-          {imageURLs.map((imageSrc) => (
+          {user.photos.map((imageSrc) => (
             <img src={imageSrc} alt="" className="avatar_image" />
           ))}
           <div className="avatar_button">
-            <input type="file" multiple accept="image/*" onChange={onImageChange} />
+            <input type="file" name="files" multiple accept="image/*" onChange={onImageChange} />
             <div className="avatar_change">Сhange photo</div>
           </div>
         </div>
@@ -57,7 +77,17 @@ function Profile() {
 
       <div className="images">
         <div className="images_backGround">
-          <ImageUpload />
+          <Slider {...settings}>
+            {user.photos.map((image, index) => {
+              return (
+                <div className="slider_link" key={index}>
+                  <div className="image_item" key={index}>
+                    <img src={image} alt="" className="slider_image" width="290px" height="290px" />
+                  </div>
+                </div>
+              );
+            })}
+          </Slider>
         </div>
       </div>
 
