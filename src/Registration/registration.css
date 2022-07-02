@@ -43,3 +43,10 @@
   background-color: rgb(46, 224, 46);
   color: black;
 }
+
+.already_register {
+  margin-top: 200px;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+}
