@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
+import UserInfo from './UserInfo/UserInfo';
 function Profile() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -49,12 +49,6 @@ function Profile() {
     setImageURLs(newImageUrls);
   }, [images]);
 
-  // //   <div className="image-item__btn-wrapper">
-  //                     <button className="updateImage">Update</button>
-  //                     <button className="removeImage">Remove</button>
-  //                   </div>
-
-  console.log(user.userAvatar, check);
   return (
     <div className="container">
       <div className="avatar">
@@ -82,17 +76,7 @@ function Profile() {
         </div>
       </div>
 
-      <div className="about">
-        <div className="about_backGround"></div>
-        <div className="full_name">{`${user.checkAuth[0]} ${user.checkAuth[1]}`}</div>
-        <div className="line"></div>
-        <div className="lives">Lives in</div>
-        <div className="from">From</div>
-        <div className="born">Born on</div>
-        <div className="profession">Profession</div>
-        <div className="relationship">In a relationship with</div>
-        <div className="student">Student at</div>
-      </div>
+      <UserInfo />
       <div className="friends">
         <div className="friends_backGround">
           <div className="friends_title">Friends</div>

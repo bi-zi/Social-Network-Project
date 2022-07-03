@@ -31,18 +31,18 @@ function Registration() {
      setCheckSubmit(1);
   }
 
-  console.log(
-    'firstName',
-    user.firstName,
-    'lastName',
-    user.lastName,
-    'password',
-    user.password,
-    'checkSubmit',
-    localStorage.checkSubmit,
-  );
-  console.log('чек', user.checkAuth);
-  console.log('локал', [localStorage.firstName, localStorage.lastName, localStorage.password]);
+  // console.log(
+  //   'firstName',
+  //   user.firstName,
+  //   'lastName',
+  //   user.lastName,
+  //   'password',
+  //   user.password,
+  //   'checkSubmit',
+  //   localStorage.checkSubmit,
+  // );
+  // console.log('чек', user.checkAuth);
+  // console.log('локал', [localStorage.firstName, localStorage.lastName, localStorage.password]);
   return (
     <>
       {checkSubmit === 1 ? (

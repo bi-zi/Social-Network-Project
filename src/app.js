@@ -3,13 +3,26 @@ import Layout from './Layout.jsx';
 import Header from './Header/Header.jsx';
 import Profile from './Profile/Profile.jsx'
 import Registration from './Registration/Registration.jsx'
-import Photo from './Profile/Photo'
+import Photo from './Profile/Photo/Photo'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPager, faUserGroup, faUsers, faFilm, faMusic, faAlignJustify, faLocationPin, faFileLines, faShareNodes, faEllipsis } from '@fortawesome/free-solid-svg-icons'
-import { faCircleUser, faBell, faComment, faImage, faThumbsUp, faThumbsDown, faCommentDots } from '@fortawesome/free-regular-svg-icons'
+import {
+  faPager, faUserGroup, faUsers, faFilm,
+  faMusic, faAlignJustify, faLocationPin, faFileLines,
+  faShareNodes, faEllipsis, faXmark
+} from '@fortawesome/free-solid-svg-icons'
+import {
+  faCircleUser, faBell, faComment, faImage,
+  faThumbsUp, faThumbsDown, faCommentDots
+} from '@fortawesome/free-regular-svg-icons'
 import './index.css'
 import { Routes, Route } from 'react-router-dom';
-library.add(faPager, faUsers, faUserGroup, faFilm, faMusic, faAlignJustify, faLocationPin, faFileLines, faShareNodes, faEllipsis, faCircleUser, faBell, faComment, faImage, faThumbsUp, faThumbsDown, faCommentDots)
+
+library.add(
+  faPager, faUsers, faUserGroup, faFilm,
+  faMusic, faAlignJustify, faLocationPin, faFileLines,
+  faShareNodes, faEllipsis, faXmark, faCircleUser, faBell,
+  faComment, faImage, faThumbsUp, faThumbsDown,
+  faCommentDots)
 
 function App() {
   return (

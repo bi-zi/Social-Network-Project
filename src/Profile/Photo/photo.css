@@ -1,0 +1,36 @@
+.photo_viewing {
+  position: relative;
+  margin: 40px auto 0 auto;
+  text-align: center;
+  width: 700px;
+  height: 750px;
+  border-radius: 19px;
+  background: linear-gradient(88.95deg, #795b5b -15.87%, #a12525 80.66%);
+}
+
+.photo {
+  width: 700px;
+  height: 700px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.cloce {
+  position: absolute;
+  cursor: pointer;
+  right: 15px;
+  top: 10px;
+  font-size: 33px;
+  z-index: 10;
+  filter:drop-shadow(0px 0px 2px rgb(255, 255, 255))
+}
+
+
+.delete_photo {
+  background-color: rgb(0, 0, 0);
+  margin: 5px 10px 0 10px;
+  border-radius: 15px;
+  border: 0px solid;
+  width: 320px;
+  height: 35px;
+}

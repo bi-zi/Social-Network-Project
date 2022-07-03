@@ -33,10 +33,17 @@ export const userSlice = createSlice({
     },
     setUserPhotos: (state, action) => {
       state.userPhotos.push(action.payload)
-    }
+    },
+    setUserPhotosDelete: (state, action) => {
+      state.userPhotos = action.payload
+    },
+
   }
 
 })
 
-export const { setFirstName, setLastName, setPassword, setCheckAuth, setUserAvatar, setUserPhotos } = userSlice.actions
+export const {
+  setFirstName, setLastName, setPassword,
+  setCheckAuth, setUserAvatar, setUserPhotos,
+  setUserPhotosDelete} = userSlice.actions
 export default userSlice.reducer
