@@ -54,6 +54,7 @@
 
 .images_input {
 position: relative;
+cursor: pointer;
   opacity: 0;
   width: 600px;
   height: 38px;
@@ -76,12 +77,12 @@ margin: -29px auto 0 auto;
 /* slider_image */
 .slider_image {
   border-radius: 15px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
 .slick-prev,
 .slick-next {
-  height: 300px !important;
+  height: 330px !important;
   z-index: 289;
   width: 35px;
   margin-top: 10px;
@@ -118,6 +119,7 @@ margin: -29px auto 0 auto;
 .slick-list {
   margin-left: 32px !important;
   width: 940px;
+  height: 310px;
   max-height: 333px;
 }
 

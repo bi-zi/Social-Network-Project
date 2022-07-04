@@ -13,34 +13,38 @@ function Avatar() {
   const onAvatarChange = (e) => {
     setImages([...e.target.files]);
     setCheckPicture(1);
+
   };
 
-  if (checkPicture === 1) localStorage.setItem('avatar', avatar.userAvatar);
+
+  // localStorage.setItem('slider', )
+  //localStorage.removeItem("avatar")
 
   if (localStorage.avatar === undefined || avatar.userAvatar[0].length === 0) {
     localStorage.setItem('avatar', 'https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png');
     dispatch(setUserAvatar(localStorage.avatar));
   }
 
-  localStorage.setItem('slider', avatar.userPhotos);
-  if (avatar.userPhotos[0] === undefined) {
-    localStorage.removeItem('slider');
-    localStorage.setItem('slider', avatar.userAvatar[0]);
-  }
-  // 0: "blob:http://localhost:3000/cfcbe01f-3813-4298-8928-55123c59861b"
-  // 0: "blob:http://localhost:3000/cfcbe01f-3813-4298-8928-55123c59861b"
-  console.log('юзер------', avatar.userPhotos, 'lock------', localStorage.slider);
-
   useEffect(() => {
     if (images.length < 1) return;
 
-    if (checkPicture === 1) {
-      dispatch(setUserAvatar(images.map((image) => URL.createObjectURL(image))));
-    }
-    images.forEach((image) => dispatch(setUserPhotos(URL.createObjectURL(image))));
+    let file = images[0];
+    let reader = new FileReader();
+    reader.onload = function (e) {
+      localStorage.setItem('avatar', e.target.result)
+      dispatch(setUserAvatar([localStorage.avatar]))
+    };
+    reader.readAsDataURL(file);
 
-    setImages([]);
+    // if (checkPicture === 1) {
+    //   dispatch(setUserAvatar(images.map((image) => URL.createObjectURL(image))));
+    // }
+    // images.forEach((image) => dispatch(setUserPhotos(URL.createObjectURL(image))));
+
+    // setImages([]);
   }, [images]);
+
+
 
   // сломана кнопка удаления фото неправильная длинна div или link в css
   return (
@@ -50,6 +54,7 @@ function Avatar() {
           <img
             src="https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png"
             alt=""
+
             className="avatar_image"
           />
         ) : (

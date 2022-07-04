@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import Avatar from './Avatar/Avatar';
 import UserInfo from './UserInfo/UserInfo';
 import PhotoSlider from './PhotoSlider/PhotoSlider';
+import Post from './Post/Post';
 
 function Profile() {
   const avatar = useSelector((state) => state.photo);
@@ -27,18 +28,8 @@ function Profile() {
           <div className="subscriptions_title">Subscriptions</div>
         </div>
       </div>
+<Post/>
 
-      <div className="post">
-        <div className="post_backGround">
-          <img src={avatar.userAvatar} alt="" className="post_avatar" />
-          <div className="post_title">Post an entry</div>
-          <FontAwesomeIcon className="post_image" icon="fa-regular fa-image" />
-          <FontAwesomeIcon className="post_video" icon="fa-solid fa-film" />
-          <FontAwesomeIcon className="post_audio" icon="fa-solid fa-music" />
-          <FontAwesomeIcon className="post_location" icon="fa-solid fa-location-pin" />
-          <FontAwesomeIcon className="post_file" icon="fa-solid fa-file-lines" />
-        </div>
-      </div>
 
       <div className="videos">
         <div className="videos_backGround">

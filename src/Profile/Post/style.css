@@ -1,0 +1,74 @@
+.post {
+  position: relative;
+  width: 980px;
+  height: 70px;
+  left: -20px;
+  top: -60px;
+}
+
+.post_backGround {
+  height: 70px;
+  background: #393939;
+  border-radius: 25px;
+}
+
+.post_avatar {
+  position: absolute;
+  width: 53px;
+  height: 53px;
+  left: 20px;
+  top: 9px;
+  border-radius: 100%;
+
+  background: linear-gradient(180deg, #0a0404 0%, #300f0f 97.4%);
+}
+
+.post_input {
+  position: absolute;
+  width: 440px;
+  height: 50px;
+  left: 90px;
+  top: 11px;
+  border-radius: 15px;
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 37px;
+  padding-left: 10px;
+  color: white;
+  background-color: #393939;
+}
+.post_button {
+  position: absolute;
+  width: 40px;
+  height: 50px;
+  left: 535px;
+  top: 11px;
+  border: 0px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: rgb(0, 0, 0);
+}
+
+.post_send {
+  position: relative;
+  font-size: 26px;
+  left: 3px;
+  color: white;
+}
+
+.post_image,
+.post_video,
+.post_audio,
+.post_location,
+.post_file {
+  position: relative;
+  cursor: pointer;
+  margin-right: 20px;
+  width: 40px;
+  height: 40px;
+  left: 675px;
+  top: 15px;
+  color: #ffffff;
+}

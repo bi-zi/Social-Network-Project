@@ -27,9 +27,20 @@ function PhotoSlider() {
 
   useEffect(() => {
     if (images.length < 1) return;
-    images.forEach((image) => dispatch(setUserPhotos(URL.createObjectURL(image))));
+
+    let file = images[0];
+    let reader = new FileReader();
+    reader.onload = function (e) {
+      localStorage.setItem('slider', photo.userPhotos)
+      dispatch(setUserPhotos([e.target.result]));
+    };
+    reader.readAsDataURL(file);
+
     setImages([]);
   }, [images]);
+
+  //console.log(localStorage.slider)
+  console.log(photo.userPhotos);
 
   return (
     <div className="images">

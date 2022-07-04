@@ -8,7 +8,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faPager, faUserGroup, faUsers, faFilm,
   faMusic, faAlignJustify, faLocationPin, faFileLines,
-  faShareNodes, faEllipsis, faXmark
+  faShareNodes, faEllipsis, faXmark, faPlay
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faCircleUser, faBell, faComment, faImage,
@@ -20,7 +20,7 @@ import { Routes, Route } from 'react-router-dom';
 library.add(
   faPager, faUsers, faUserGroup, faFilm,
   faMusic, faAlignJustify, faLocationPin, faFileLines,
-  faShareNodes, faEllipsis, faXmark, faCircleUser, faBell,
+  faShareNodes, faEllipsis, faXmark, faPlay, faCircleUser, faBell,
   faComment, faImage, faThumbsUp, faThumbsDown,
   faCommentDots)
 

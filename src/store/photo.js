@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   userAvatar: [localStorage.avatar],
-  userPhotos: [...localStorage.slider.split(',')],
+  userPhotos: [localStorage.slider],
 }
 
 export const photoSlice = createSlice({
