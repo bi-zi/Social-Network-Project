@@ -3,7 +3,7 @@ import Layout from './Layout.jsx';
 import Header from './Header/Header.jsx';
 import Profile from './Profile/Profile.jsx'
 import Registration from './Registration/Registration.jsx'
-import Photo from './Profile/Photo/Photo'
+import Photo from './Profile/SelectedPhoto/SelectedPhoto.jsx'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faPager, faUserGroup, faUsers, faFilm,

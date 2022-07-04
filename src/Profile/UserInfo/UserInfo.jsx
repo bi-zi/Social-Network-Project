@@ -1,20 +1,18 @@
 import React from 'react';
 import './userInfo.css';
 import { useDispatch, useSelector } from 'react-redux';
+
 import {
-  setLives,
-  setFrom,
-  setBorn,
-  setProfession,
-  setRelationship,
-  setStudent,
-  setInfo,
-} from '../../store/registration';
+  setLives, setFrom, setBorn,
+  setProfession, setRelationship, setStudent,
+  setInfo
+} from '../../store/info';
 
 
 function UserInfo() {
   const dispatch = useDispatch();
-  const info = useSelector((state) => state.user);
+  const info = useSelector((state) => state.info);
+  const user = useSelector((state) => state.user)
   const [closeInfo, setCloseInfo] = React.useState(0);
   const [saveStorage, setSaveStorage] = React.useState(0);
 
@@ -39,39 +37,39 @@ function UserInfo() {
   if (saveStorage === 5) localStorage.setItem('relationship', info.relationship);
   if (saveStorage === 6) localStorage.setItem('student', info.student);
 
-  console.log(info.checkAuth);
-  console.log(
-    'lives',
-    localStorage.lives,
-    'from',
-    localStorage.from,
-    'born',
-    localStorage.born,
-    'profession',
-    localStorage.profession,
-    'relationship',
-    localStorage.relationship,
-    'student',
-    localStorage.student,
-  );
+  // console.log(saveStorage);
+  // console.log(
+  //   'lives',
+  //   localStorage.lives,
+  //   'from',
+  //   localStorage.from,
+  //   'born',
+  //   localStorage.born,
+  //   'profession',
+  //   localStorage.profession,
+  //   'relationship',
+  //   localStorage.relationship,
+  //   'student',
+  //   localStorage.student,
+  // );
 
   return (
     <>
       <div className="about">
         <div className="about_backGround">
-          <div className="full_name">{`${info.checkAuth[0]} ${info.checkAuth[1]}`}</div>
+          <div className="full_name">{`${user.checkAuth[0]} ${user.checkAuth[1]}`}</div>
           <div className="line"></div>
           {closeInfo === 0 ? (
             <>
               <div className="about_info" onClick={() => setCloseInfo(1)}>
                 Edit Information
               </div>
-              <div className="lives">Lives in {info.userInfo[0]}</div>
-              <div className="from">From {info.userInfo[1]}</div>
-              <div className="born">Born on {info.userInfo[2]}</div>
-              <div className="profession">Profession {info.userInfo[3]}</div>
-              <div className="relationship">In a relationship with {info.userInfo[4]}</div>
-              <div className="student">Student at {info.userInfo[5]}</div>
+              <div className="lives">Lives in - {info.userInfo[0]}</div>
+              <div className="from">From - {info.userInfo[1]}</div>
+              <div className="born">Born on - {info.userInfo[2]}</div>
+              <div className="profession">Profession - {info.userInfo[3]}</div>
+              <div className="relationship">In a relationship with - {info.userInfo[4]}</div>
+              <div className="student">Student at - {info.userInfo[5]}</div>
             </>
           ) : (
             <div className="about_form">

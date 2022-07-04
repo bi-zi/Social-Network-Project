@@ -1,0 +1,74 @@
+    /* avatar */
+
+.avatar {
+  position: relative;
+  width: 380px;
+  height: 470px;
+  left: 20px;
+  top: 20px;
+}
+
+/* avatar_backGround */
+
+.avatar_backGround {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: #393939;
+  border-radius: 25px;
+}
+
+/* image */
+
+.avatar_image {
+  position: absolute;
+  width: 328px;
+  height: 375px;
+  left: 26px;
+  top: 18px;
+
+  border-radius: 15px;
+}
+
+/* button */
+
+.avatar_button {
+  position: absolute;
+  width: 328px;
+  height: 51px;
+  left: 26px;
+  top: 407px;
+
+  background: linear-gradient(88.95deg, #0a0404 -15.87%, #280404 80.66%);
+  border-radius: 25px;
+}
+
+.avatar_input {
+  opacity: 0;
+  position: absolute;
+  width: 328px;
+  height: 51px;
+  border-radius: 25px;
+  z-index: 3;
+}
+
+/* Сhange photo */
+
+.avatar_change {
+  position: absolute;
+  width: 118px;
+  height: 28px;
+  left: 105px;
+  top: 15px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+}
