@@ -33,6 +33,7 @@ function Avatar() {
     reader.onload = function (e) {
       localStorage.setItem('avatar', e.target.result);
       dispatch(setUserAvatar([localStorage.avatar]));
+      dispatch(setUserPhotos(e.target.result));
     };
     reader.readAsDataURL(file);
 

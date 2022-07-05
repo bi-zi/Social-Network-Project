@@ -1,11 +1,8 @@
-    /* avatar */
-
 .avatar {
-  position: relative;
+  position: absolute;
   width: 380px;
   height: 470px;
-  left: 20px;
-  top: 20px;
+  top: 80px;
 }
 
 /* avatar_backGround */

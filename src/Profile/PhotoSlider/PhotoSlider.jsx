@@ -44,14 +44,14 @@ function PhotoSlider() {
     ];
   }
 
-  console.log(
-    'readyPhotos',
-    readyPhotos,
-    'localStorage.slider',
-    localStorage.slider.split(','),
-    'state',
-    photo.userPhotos,
-  );
+  // console.log(
+  //   'readyPhotos',
+  //   readyPhotos,
+  //   'localStorage.slider',
+  //   localStorage.slider.split(','),
+  //   'state',
+  //   photo.userPhotos,
+  // );
 
     useEffect(() => {
       if (images.length < 1) return;
@@ -93,7 +93,6 @@ function PhotoSlider() {
           <input
             type="file"
             name="file"
-            multiple
             accept="image/*"
             onChange={onPhotosChange}
             className="images_input"

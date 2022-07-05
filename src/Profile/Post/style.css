@@ -2,14 +2,11 @@
   position: relative;
   width: 980px;
   height: 70px;
-  left: -20px;
-  top: -60px;
-}
-
-.post_backGround {
-  height: 70px;
+  left: 420px;
+  top: 60px;
   background: #393939;
   border-radius: 25px;
+  margin-bottom: 20px;
 }
 
 .post_avatar {
@@ -39,6 +36,7 @@
   color: white;
   background-color: #393939;
 }
+
 .post_button {
   position: absolute;
   width: 40px;
@@ -71,4 +69,81 @@
   left: 675px;
   top: 15px;
   color: #ffffff;
+}
+
+.post_photos {
+  height: 750px !important;
+  background-color: #393939;
+}
+
+.post_text {
+  height: 150px;
+}
+
+.postText {
+  position: absolute;
+  font-family: 'Iceberg';
+  font-style: normal;
+  color: white;
+  font-size: 24px;
+  top: 80px;
+  left: 40px;
+  width: 900px;
+  word-wrap: break-word;
+  height: 62px;
+}
+
+.container1 {
+  position: absolute;
+  width: 900px;
+  height: 550px;
+  left: 40px;
+  top: 150px;
+
+  background-color: rgb(167, 165, 165);
+  display: grid;
+  grid-template-areas:
+    'largetop largetop smalltop1'
+    'largetop largetop smalltop2'
+    'smallbottom1 smallbottom2 smallbottom3';
+}
+
+.photo-1 {
+  grid-area: largetop;
+}
+
+.photo-2 {
+  grid-area: smallbottom1;
+}
+
+.photo-3 {
+  grid-area: smallbottom2;
+}
+
+.photo-4 {
+  grid-area: smalltop1;
+}
+
+.photo-5 {
+  grid-area: smalltop2;
+}
+
+.photo-6 {
+  grid-area: smallbottom3;
+}
+
+.photo1 {
+  background-color: rgb(131, 123, 123);
+}
+
+.large {
+  border: 3px solid rgb(255, 255, 255);
+  width: 600px;
+  height: 380px;
+}
+
+.small {
+  border: 3px solid rgb(255, 255, 255);
+  width: 300px;
+  height: 190px;
 }

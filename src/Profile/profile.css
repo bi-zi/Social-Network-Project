@@ -1,87 +1,11 @@
-/* friends */
-.friends {
-  position: relative;
-  width: 380px;
-  height: 249px;
-  left: 20px;
-  top: 40px;
-}
-
-/* friends_backGround */
-.friends_backGround {
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-
-  background: #393939;
-  border-radius: 25px;
-}
-
-/* friends_title */
-.friends_title {
-  position: absolute;
-  width: 99px;
-  height: 30px;
-  left: 24px;
-  top: 4px;
-
-  font-family: 'Iceberg';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 37px;
-
-  color: #ffffff;
-}
-
-/* subscriptions */
-.subscriptions {
-  position: relative;
-  width: 380px;
-  height: 397px;
-  left: 20px;
-  top: -60px;
-}
-
-/* subscriptions_backGround */
-.subscriptions_backGround {
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-
-  background: #393939;
-  border-radius: 25px;
-}
-
-/* subscriptions_title */
-.subscriptions_title {
-  position: absolute;
-  width: 198px;
-  height: 30px;
-  left: 22px;
-  top: 5px;
-
-  font-family: 'Iceberg';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 37px;
-
-  color: #ffffff;
-}
-
 
 /* ready_post */
 .ready_post {
   position: relative;
   width: 980px;
   height: 728px;
-  left: -20px;
-  top: -366px;
+  left: 420px;
+  top: 60px;
 }
 
 /* ready_post_backGround */
@@ -249,6 +173,82 @@
   height: 24px;
   left: 137px;
   top: 682px;
+  color: #ffffff;
+}
+
+/* friends */
+.friends {
+  position: relative;
+  width: 380px;
+  height: 249px;
+  left: 20px;
+  top: 40px;
+}
+
+/* friends_backGround */
+.friends_backGround {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: #393939;
+  border-radius: 25px;
+}
+
+/* friends_title */
+.friends_title {
+  position: absolute;
+  width: 99px;
+  height: 30px;
+  left: 24px;
+  top: 4px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #ffffff;
+}
+
+/* subscriptions */
+.subscriptions {
+  position: relative;
+  width: 380px;
+  height: 397px;
+  left: 20px;
+  top: -60px;
+}
+
+/* subscriptions_backGround */
+.subscriptions_backGround {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: #393939;
+  border-radius: 25px;
+}
+
+/* subscriptions_title */
+.subscriptions_title {
+  position: absolute;
+  width: 198px;
+  height: 30px;
+  left: 22px;
+  top: 5px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
   color: #ffffff;
 }
 

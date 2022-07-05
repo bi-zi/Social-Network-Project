@@ -12,30 +12,9 @@ function Profile() {
 
   return (
     <div className="container">
-      <Avatar />
       <UserInfo />
-
-      <div className="friends">
-        <div className="friends_backGround">
-          <div className="friends_title">Friends</div>
-        </div>
-      </div>
-
       <PhotoSlider />
-
-      <div className="subscriptions">
-        <div className="subscriptions_backGround">
-          <div className="subscriptions_title">Subscriptions</div>
-        </div>
-      </div>
-<Post/>
-
-
-      <div className="videos">
-        <div className="videos_backGround">
-          <div className="videos_title">Video recordings</div>
-        </div>
-      </div>
+      <Post />
 
       <div className="ready_post">
         <div className="ready_post_backGround">
@@ -53,12 +32,29 @@ function Profile() {
           <FontAwesomeIcon className="ready_post_share" icon="fa-solid fa-share-nodes" />
         </div>
       </div>
+      <Avatar />
+      {/* <div className="friends">
+        <div className="friends_backGround">
+          <div className="friends_title">Friends</div>
+        </div>
+      </div>
+      <div className="subscriptions">
+        <div className="subscriptions_backGround">
+          <div className="subscriptions_title">Subscriptions</div>
+        </div>
+      </div> */}
+
+      {/* <div className="videos">
+        <div className="videos_backGround">
+          <div className="videos_title">Video recordings</div>
+        </div>
+      </div>
 
       <div className="music_profile">
         <div className="music_backGround">
           <div className="music_title">Music</div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

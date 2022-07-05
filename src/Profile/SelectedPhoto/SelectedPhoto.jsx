@@ -20,14 +20,16 @@ function Photo() {
     bufferPhotos.map((x, i) => (i % 2 === 0 ? readyPhotos.push(x + ',' + local[i + 1]) : ''));
   }
   if (local === 1) {
-    readyPhotos = ['https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg'];
+    readyPhotos = [
+      'https://cdn.icon-icons.com/icons2/510/PNG/512/android-arrow-down-right_icon-icons.com_50544.png',
+    ];
   }
 
   const onPhotoDelete = () => {
     dispatch(setUserPhotosDelete(readyPhotos.filter((x, index) => index !== +id)));
   };
 
-  console.log('удаление', user.userPhotos);
+  //console.log('удаление', user.userPhotos);
   return (
     <div className="photo_viewing">
       <Link to="/Profile" style={{ color: '#000000' }} className="cloce">
