@@ -21,6 +21,16 @@
   border-radius: 25px;
 }
 
+.placeHolder {
+
+  width: 293px;
+  height: 293px;
+  left: 10px;
+  top: 19px;
+  background-color: #393939;
+  z-index: 10;
+}
+
 .costili1 {
   position: absolute;
   width: 293px;

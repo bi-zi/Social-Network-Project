@@ -8,7 +8,7 @@ function Post() {
   const dispatch = useDispatch();
   const avatar = useSelector((state) => state.photo);
   const post = useSelector((state) => state.post)
- console.log(post.postText)
+
 
   return (
     <div className="post">

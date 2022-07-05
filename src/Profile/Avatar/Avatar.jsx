@@ -13,17 +13,17 @@ function Avatar() {
   const onAvatarChange = (e) => {
     setImages([...e.target.files]);
     setCheckPicture(1);
-
   };
-
 
   // localStorage.setItem('slider', )
   //localStorage.removeItem("avatar")
 
-  if (localStorage.avatar === undefined || avatar.userAvatar[0].length === 0) {
+    if (localStorage.avatar === undefined || avatar.userAvatar[0]?.length === 0) {
     localStorage.setItem('avatar', 'https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png');
     dispatch(setUserAvatar(localStorage.avatar));
   }
+
+
 
   useEffect(() => {
     if (images.length < 1) return;
@@ -31,8 +31,8 @@ function Avatar() {
     let file = images[0];
     let reader = new FileReader();
     reader.onload = function (e) {
-      localStorage.setItem('avatar', e.target.result)
-      dispatch(setUserAvatar([localStorage.avatar]))
+      localStorage.setItem('avatar', e.target.result);
+      dispatch(setUserAvatar([localStorage.avatar]));
     };
     reader.readAsDataURL(file);
 
@@ -44,8 +44,6 @@ function Avatar() {
     // setImages([]);
   }, [images]);
 
-
-
   // сломана кнопка удаления фото неправильная длинна div или link в css
   return (
     <div className="avatar">
@@ -54,7 +52,6 @@ function Avatar() {
           <img
             src="https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png"
             alt=""
-
             className="avatar_image"
           />
         ) : (
