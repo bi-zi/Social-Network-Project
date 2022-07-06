@@ -32,6 +32,7 @@ function App() {
         {/* <Route path="/Registration" element={}/> */}
         <Route path="/Profile" element={<Profile />} />,
         <Route path="/Photo/:id" element={<Photo />} />,
+    
       </Route>
     </Routes>
   );
