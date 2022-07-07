@@ -2,16 +2,17 @@ import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { setUserPhotosDelete } from '../../store/photo';
+import { setPostImageDelete} from '../../store/post'
 import { useDispatch, useSelector } from 'react-redux';
 import './selectedPhoto.css';
 
 function Photo() {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { category, id } = useParams();
   const user = useSelector((state) => state.photo);
-
+console.log(category);
   let readyPhotos = [];
-  let local = localStorage.slider.split(',');
+  let local = category === 'PostPhoto' ?  localStorage.postImage.split(',') : localStorage.slider.split(',');
   let bufferPhotos = local;
   if (bufferPhotos[0].length === 0) {
     bufferPhotos.shift();
@@ -26,7 +27,7 @@ function Photo() {
   }
 
   const onPhotoDelete = () => {
-    dispatch(setUserPhotosDelete(readyPhotos.filter((x, index) => index !== +id)));
+   category === 'PostPhoto' ? dispatch(setPostImageDelete(readyPhotos.filter((x, index) => index !== +id))) : dispatch(setUserPhotosDelete(readyPhotos.filter((x, index) => index !== +id)));
   };
 
   //console.log('удаление', user.userPhotos);

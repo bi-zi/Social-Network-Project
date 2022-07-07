@@ -111,11 +111,7 @@
   top: 150px;
 
   background-color: rgba(167, 165, 165, 0);
-  display: grid;
-  grid-template-areas:
-    'largetop largetop smallRight'
-    'largetop largetop smallRight'
-    'smallBottom smallBottom smallRight';
+
 }
 
 .photo-0 {
@@ -130,19 +126,25 @@
   grid-area: smallBottom;
 }
 
-.large {
+.large{
+   position: absolute;
   border: 3px solid rgb(255, 255, 255);
+
   width: 600px;
   height: 340px;
 }
 
 .small-right {
+   position: absolute;
+   right: 0px;
   border: 3px solid rgb(255, 255, 255);
   width: 300px;
   height: 550px;
 }
 
 .small-down {
+  position: absolute;
+  bottom: 0px;
   border: 3px solid rgb(255, 255, 255);
   width: 600px;
   height: 210px;

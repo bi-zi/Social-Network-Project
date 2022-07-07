@@ -29,10 +29,9 @@ function App() {
     <Routes>
 
       <Route path="/" element={<Layout />}>
-        {/* <Route path="/Registration" element={}/> */}
         <Route path="/Profile" element={<Profile />} />,
-        <Route path="/Photo/:id" element={<Photo />} />,
-    
+        <Route path="/:category/:id" element={<Photo />} />,
+
       </Route>
     </Routes>
   );
