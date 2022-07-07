@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPostText } from '../../store/post';
@@ -11,25 +11,23 @@ import './style.css';
 
 function Post() {
   const dispatch = useDispatch();
-  const avatar = useSelector((state) => state.photo);
-  const post = useSelector((state) => state.post);
-  const image1 = useSelector((state) => state.images);
-  const asz = useSelector((state) => state);
+  const state = useSelector((state) => state);
+
   //console.log(asz)
 
   const [postEffect, setPostEffect] = React.useState(11);
-  let test = ['photos', 'video', 'music', 'geo', 'file'];
+  //let test = ['photos', 'video', 'music', 'geo', 'file'];
 
-  localStorage.setItem('postImages', JSON.stringify(image1.postImages));
-  let readyPhotos = image1.postImages;
+  localStorage.setItem('postImages', JSON.stringify(state.images.postImages));
+  let readyPhotos = state.images.postImages;
 
 
   return (
     <div
-      className={`post ${post.postText.length > 0 ? 'post_text' : ''} ${
+      className={`post ${state.post.postText.length > 0 ? 'post_text' : ''} ${
         readyPhotos.length > 0 ? 'post_photos' : ''
       }`}>
-      <img src={avatar.userAvatar} alt="" className="post_avatar" />
+      <img src={state.images.avatarImages} alt="" className="post_avatar" />
       <input
         type="text"
         className="post_input"
@@ -54,13 +52,13 @@ function Post() {
       <FontAwesomeIcon className="post_location" icon="fa-solid fa-location-pin" />
       <FontAwesomeIcon className="post_file" icon="fa-solid fa-file-lines" />
 
-      {post.postText.length > 0 ? <div className="postText">{post.postText}</div> : ''}
+      {state.post.postText.length > 0 ? <div className="postText">{state.post.postText}</div> : ''}
 
       {readyPhotos.length > 0 ? (
         <div className="container3">
           {readyPhotos.map((image, index) => {
             return (
-              <Link to={`/PostPhoto/${index}`} key={index}>
+              <Link to={`/PhotoPost/${index}`} key={index}>
                 <img
                   key={index}
                   src={image}

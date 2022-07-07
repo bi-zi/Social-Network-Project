@@ -8,7 +8,7 @@ import PhotoSlider from './PhotoSlider/PhotoSlider';
 import Post from './Post/Post';
 
 function Profile() {
-  const avatar = useSelector((state) => state.photo);
+  const state = useSelector((state) => state);
 
   return (
     <div className="container">
@@ -18,7 +18,7 @@ function Profile() {
 
       <div className="ready_post">
         <div className="ready_post_backGround">
-          <img src={avatar.userAvatar} alt="" className="ready_post_avatar" />
+          <img src={state.images.avatarImages} alt="" className="ready_post_avatar" />
           <div className="ready_post_fullName">Alexey Tsvetkov</div>
           <div className="ready_post_date"> 23 July 2022</div>
           <FontAwesomeIcon className="ready_post_menu" icon="fa-solid fa-ellipsis" />

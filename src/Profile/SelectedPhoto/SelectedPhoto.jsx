@@ -1,36 +1,36 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { setUserPhotosDelete } from '../../store/photo';
-import { setPostImageDelete} from '../../store/post'
 import { useDispatch, useSelector } from 'react-redux';
+import { setAvatarImageDelete, setSLiderImagesDelete, setPostImagesDelete } from '../../store/images';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './selectedPhoto.css';
 
 function Photo() {
   const dispatch = useDispatch();
   const { category, id } = useParams();
-  const user = useSelector((state) => state.photo);
-console.log(category);
-  let readyPhotos = [];
-  let local = category === 'PostPhoto' ?  localStorage.postImage.split(',') : localStorage.slider.split(',');
-  let bufferPhotos = local;
-  if (bufferPhotos[0].length === 0) {
-    bufferPhotos.shift();
-  }
-  if (local.length > 1) {
-    bufferPhotos.map((x, i) => (i % 2 === 0 ? readyPhotos.push(x + ',' + local[i + 1]) : ''));
-  }
-  if (local === 1) {
-    readyPhotos = [
-      'https://cdn.icon-icons.com/icons2/510/PNG/512/android-arrow-down-right_icon-icons.com_50544.png',
-    ];
-  }
+  const state = useSelector((state) => state);
+
+
+
+  let readyPhotos =
+    category === 'PhotoAvatar'
+      ? [state.images.avatarImages]
+      : category === 'PhotoSlider'
+      ? state.images.sliderImages
+      : state.images.postImages;
+
 
   const onPhotoDelete = () => {
-   category === 'PostPhoto' ? dispatch(setPostImageDelete(readyPhotos.filter((x, index) => index !== +id))) : dispatch(setUserPhotosDelete(readyPhotos.filter((x, index) => index !== +id)));
+    category === 'PhotoAvatar'
+      ? dispatch(setAvatarImageDelete('https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png'))
+      : category === 'PhotoSlider'
+      ? dispatch(setSLiderImagesDelete(readyPhotos.filter((x, index) => index !== +id)))
+      : dispatch(setPostImagesDelete(readyPhotos.filter((x, index) => index !== +id)));
   };
 
-  //console.log('удаление', user.userPhotos);
+  console.log(category, id);
+  console.log(readyPhotos[0])
+
   return (
     <div className="photo_viewing">
       <Link to="/Profile" style={{ color: '#000000' }} className="cloce">

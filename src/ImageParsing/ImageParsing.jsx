@@ -14,7 +14,6 @@ function ImageParsing() {
     setImages([...e.target.files]);
   };
 
-
   useEffect(() => {
     if (images.length < 1) return;
 
@@ -22,7 +21,7 @@ function ImageParsing() {
     let reader = new FileReader();
     reader.onload = function (e) {
       parsing.inputNumber === '0'
-        ? dispatch(setAvatarImages(e.target.result))
+        ? dispatch(setAvatarImages(e.target.result)) && dispatch(setSliderImages(e.target.result))
         : parsing.inputNumber === '1'
         ? dispatch(setSliderImages(e.target.result))
         : dispatch(setPostImages(e.target.result));
