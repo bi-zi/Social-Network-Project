@@ -10,12 +10,13 @@ import Post from './Post/Post';
 function Profile() {
   const state = useSelector((state) => state);
 
+
   return (
     <div className="container">
       <UserInfo />
       <PhotoSlider />
       <Post />
-
+  
       <div className="ready_post">
         <div className="ready_post_backGround">
           <img src={state.images.avatarImages} alt="" className="ready_post_avatar" />

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   postText: '',
+  postVideo: localStorage.postVideo,
   postMusic: [],
   postLocation: [],
   postFile: [],
@@ -14,10 +15,13 @@ export const postSlice = createSlice({
   reducers: {
     setPostText: (state, action) => {
       state.postText = action.payload
+    },
+    setPostVideo: (state, action) => {
+      state.postVideo = action.payload
     }
 
   }
 })
 
-export const { setPostText, setPostImage, setPostImageDelete } = postSlice.actions
+export const { setPostText, setPostVideo } = postSlice.actions
 export default postSlice.reducer

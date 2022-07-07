@@ -28,8 +28,7 @@ function Photo() {
       : dispatch(setPostImagesDelete(readyPhotos.filter((x, index) => index !== +id)));
   };
 
-  console.log(category, id);
-  console.log(readyPhotos[0])
+
 
   return (
     <div className="photo_viewing">

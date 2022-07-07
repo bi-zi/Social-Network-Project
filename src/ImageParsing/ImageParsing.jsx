@@ -19,7 +19,7 @@ function ImageParsing() {
 
     let file = images[0];
     let reader = new FileReader();
-    reader.onload = function (e) {
+    reader.onload = (e) => {
       parsing.inputNumber === '0'
         ? dispatch(setAvatarImages(e.target.result)) && dispatch(setSliderImages(e.target.result))
         : parsing.inputNumber === '1'
@@ -34,7 +34,13 @@ function ImageParsing() {
   //console.log('slider', [parsing.sliderImages], 'post', [parsing.postImages]);
   return (
     <>
-      <input type="file" name="file" accept="image/*" onChange={onPhotosChange} />
+      <input
+        type="file"
+        name="file"
+        accept="image/*"
+        onChange={onPhotosChange}
+        className="input_parser"
+      />
     </>
   );
 }

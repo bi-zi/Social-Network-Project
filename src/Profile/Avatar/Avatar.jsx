@@ -13,7 +13,6 @@ function Avatar() {
   if (state.images.avatarImages.length === 0) {
     localStorage.setItem('avatarImages', 'https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png');
   }
-  console.log(state.images.avatarImages);
   return (
     <div className="avatar">
       <div className="avatar_backGround">
@@ -24,16 +23,16 @@ function Avatar() {
             className="avatar_image"
           />
         ) : (
-            <Link to={`/PhotoAvatar/0`}>
-
+          <Link to={`/PhotoAvatar/0`}>
             <img src={state.images.avatarImages} alt="" className="avatar_image" />
           </Link>
         )}
 
-        <div className="avatar_button" onChange={() => dispatch(setInputNumber('0'))}>
-          <ImageParsing />
-
+        <div className="avatar_button">
           <div className="avatar_change">Сhange photo</div>
+          <button onChange={() => dispatch(setInputNumber('0'))} className="avatar_input">
+            <ImageParsing  />
+          </button>
         </div>
       </div>
     </div>

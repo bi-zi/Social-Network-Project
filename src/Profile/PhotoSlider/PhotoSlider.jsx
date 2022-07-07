@@ -46,12 +46,8 @@ function PhotoSlider() {
           })}
         </Slider>
 
-        <button onChange={() => dispatch(setInputNumber('1'))}>
+        <div className="images_button" onChange={() => dispatch(setInputNumber('1'))}>
           <ImageParsing />
-        </button>
-
-        <div className="images_button">
-          <input type="file" name="file" accept="image/*" className="images_input" />
           <div className="add_images">Add photos</div>
         </div>
       </div>
