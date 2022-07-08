@@ -1,11 +1,12 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import './profile.css';
 import { useSelector } from 'react-redux';
 import Avatar from './Avatar/Avatar';
 import UserInfo from './UserInfo/UserInfo';
 import PhotoSlider from './PhotoSlider/PhotoSlider';
 import Post from './Post/Post';
+import Wall from './Wall/Wall';
 
 function Profile() {
   const state = useSelector((state) => state);
@@ -16,23 +17,9 @@ function Profile() {
       <UserInfo />
       <PhotoSlider />
       <Post />
-  
-      <div className="ready_post">
-        <div className="ready_post_backGround">
-          <img src={state.images.avatarImages} alt="" className="ready_post_avatar" />
-          <div className="ready_post_fullName">Alexey Tsvetkov</div>
-          <div className="ready_post_date"> 23 July 2022</div>
-          <FontAwesomeIcon className="ready_post_menu" icon="fa-solid fa-ellipsis" />
-          <div className="ready_post_message">Who is your friend?</div>
-          <img src="" alt="" className="ready_post_content"></img>
-          <div className="ready_post_from">Videos from Alexey Tsvetkov</div>
-          <div className="ready_post_views">Views 341</div>
-          <FontAwesomeIcon className="ready_post_like" icon="fa-regular fa-thumbs-up" />
-          <FontAwesomeIcon className="ready_post_dislike" icon="fa-regular fa-thumbs-down" />
-          <FontAwesomeIcon className="ready_post_comment" icon="fa-regular fa-comment-dots" />
-          <FontAwesomeIcon className="ready_post_share" icon="fa-solid fa-share-nodes" />
-        </div>
-      </div>
+      <Wall/>
+
+
       <Avatar />
       {/* <div className="friends">
         <div className="friends_backGround">

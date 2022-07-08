@@ -1,0 +1,166 @@
+.wall {
+  position: relative;
+  width: 980px;
+  left: 420px;
+  top: 60px;
+  border-radius: 25px;
+  background: #393939;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.wall_avatar {
+  position: relative;
+  width: 126px;
+  height: 132px;
+  left: 20px;
+  top: 17px;
+
+  border-radius: 68.5px;
+}
+
+.wall_fullName {
+  position: absolute;
+  width: 204px;
+  height: 30px;
+  left: 152px;
+  top: 34px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #ffffff;
+}
+
+.wall_date {
+  position: absolute;
+  width: 194px;
+  height: 30px;
+  left: 152px;
+  top: 70px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+
+  color: #ffffff;
+}
+
+.wall_menu {
+  position: absolute;
+  cursor: pointer;
+  width: 48px;
+  height: 45px;
+  left: 908px;
+  top: 26px;
+  color: #ffffff;
+}
+
+.wall_content {
+  position: relative;
+  width: 900px;
+  margin-top: 40px;
+  margin-left: 40px;
+  display: inline-block;
+
+  background-color: rgba(41, 117, 16, 0);
+}
+
+.wall_text {
+  word-wrap: break-word;
+  margin-bottom: 10px;
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  color: white;
+}
+
+.wall_images {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 10px;
+}
+
+.wall_large_image {
+  position: relative;
+  border: 3px solid rgb(255, 255, 255);
+  width: 600px;
+  height: 340px;
+}
+
+.wall_small_right_image {
+  position: relative;
+  border: 3px solid rgb(255, 255, 255);
+  width: 300px;
+  height: 552px;
+}
+
+.wall_small_down_image {
+  position: absolute;
+  width: 600px;
+  height: 212px;
+  top: 340px;
+  left: 0px;
+  border: 3px solid rgb(255, 255, 255);
+}
+
+
+.wall_one_image {
+  width: 900px !important;
+  height: 550px !important;
+}
+
+.wall_one_image {
+  width: 900px !important;
+  height: 550px !important;
+}
+
+.wall_two_image_first,
+.wall_two_image_second {
+  width: 450px !important;
+  height: 550px !important;
+}
+
+.wall_from {
+  position: relative;
+  width: 246px;
+  height: 24px;
+  margin-bottom: 10px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+}
+
+.wall_like_icon,
+.wall_dislike_icon,
+.wall_comment_icon,
+.wall_share_icon {
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-right: 15px;
+  width: 30px;
+  height: 30px;
+
+  color: #ffffff;
+}
+
+.wall_iframe {
+  position: relative;
+  margin-bottom: 10px;
+  width: 900px;
+  height: 350px;
+}

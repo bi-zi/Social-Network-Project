@@ -3,9 +3,6 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   postText: '',
   postVideo: localStorage.postVideo,
-  postMusic: [],
-  postLocation: [],
-  postFile: [],
 }
 
 export const postSlice = createSlice({
@@ -19,7 +16,7 @@ export const postSlice = createSlice({
     setPostVideo: (state, action) => {
       state.postVideo = action.payload
     }
-
+    
   }
 })
 

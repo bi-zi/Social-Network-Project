@@ -3,6 +3,7 @@ import userSlice from './registration';
 import infoSlice from './info';
 import postSlice from './post';
 import imagesSlice from './images';
+import  wallSlice  from './wall';
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     info: infoSlice,
     post: postSlice,
     images: imagesSlice,
+    wall: wallSlice,
   },
 });
