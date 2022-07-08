@@ -1,4 +1,4 @@
-.post {
+.post_container {
   position: relative;
   width: 980px;
   height: 70px;
@@ -7,6 +7,26 @@
   background: #393939;
   border-radius: 25px;
   margin-bottom: 20px;
+}
+
+/* Container of contentn */
+.post_images_size {
+  height: 750px !important;
+  background-color: #393939;
+}
+
+.post_text_size {
+  height: 150px;
+}
+
+.post_imges_video_size {
+  height: 1100px !important;
+  background-color: #393939;
+}
+
+.post_video_size {
+  height: 540px !important;
+  background-color: #393939;
 }
 
 .post_avatar {
@@ -20,7 +40,7 @@
   background: linear-gradient(180deg, #0a0404 0%, #300f0f 97.4%);
 }
 
-.post_input {
+.post_text_input {
   position: absolute;
   width: 440px;
   height: 50px;
@@ -37,7 +57,7 @@
   background-color: #393939;
 }
 
-.post_button {
+.post_make_button {
   position: absolute;
   width: 40px;
   height: 50px;
@@ -49,18 +69,31 @@
   background-color: rgb(0, 0, 0);
 }
 
-.post_send {
+.post_make_icon {
   position: relative;
   font-size: 26px;
   left: 3px;
   color: white;
 }
 
-.post_image,
-.post_video,
-.post_audio,
-.post_location,
-.post_file {
+.post_show_text {
+  position: absolute;
+  font-family: 'Iceberg';
+  font-style: normal;
+  color: white;
+  font-size: 24px;
+  top: 80px;
+  left: 40px;
+  width: 900px;
+  word-wrap: break-word;
+  height: 62px;
+}
+
+.post_image_icon,
+.post_video_icon,
+.post_audio_icon,
+.post_location_icon,
+.post_file_icon {
   position: relative;
   cursor: pointer;
   margin-right: 20px;
@@ -82,7 +115,7 @@
   opacity: 0;
 }
 
-.post_max_img {
+.post_max_image {
   position: absolute;
   left: 668px;
   top: 23px;
@@ -95,7 +128,7 @@
   color: red;
 }
 
-.post_input_vid {
+.post_input_video {
   position: absolute;
   left: 735px;
   top: 55px;
@@ -106,20 +139,7 @@
   opacity: 1;
 }
 
-.postText {
-  position: absolute;
-  font-family: 'Iceberg';
-  font-style: normal;
-  color: white;
-  font-size: 24px;
-  top: 80px;
-  left: 40px;
-  width: 900px;
-  word-wrap: break-word;
-  height: 62px;
-}
-
-.container3 {
+.post_images_container {
   user-select: none;
   position: absolute;
   width: 900px;
@@ -130,19 +150,19 @@
   background-color: rgba(167, 165, 165, 0);
 }
 
-.photo-0 {
+.post_image-0 {
   grid-area: largetop;
 }
 
-.photo-1 {
+.post_image-1 {
   grid-area: smallRight;
 }
 
-.photo-2 {
+.post_image-2 {
   grid-area: smallBottom;
 }
 
-.large {
+.post_large_image {
   position: absolute;
   border: 3px solid rgb(255, 255, 255);
   left: 8px;
@@ -150,7 +170,7 @@
   height: 340px;
 }
 
-.small-right {
+.post_small_right_image {
   position: absolute;
   right: 0px;
   border: 3px solid rgb(255, 255, 255);
@@ -158,7 +178,7 @@
   height: 550px;
 }
 
-.small-down {
+.post_small_down_image {
   position: absolute;
   bottom: 0px;
   border: 3px solid rgb(255, 255, 255);
@@ -171,24 +191,10 @@
   height: 550px !important;
 }
 
-.two_image_one,
-.two_image_two {
+.two_image_first,
+.two_image_second {
   width: 450px !important;
   height: 550px !important;
-}
-
-.post_photos {
-  height: 750px !important;
-  background-color: #393939;
-}
-
-.post_text {
-  height: 150px;
-}
-
-.post_img_vid {
-  height: 1100px !important;
-  background-color: #393939;
 }
 
 .post_iframe {
@@ -207,19 +213,13 @@
   height: 350px;
 }
 
-.post_vid {
-  height: 540px !important;
-  background-color: #393939;
-}
-
 .video_delete {
-position: absolute;
-
-   top: 15px;
-   left: 730px;
-   font-size: 14px;
-   width: 54px;
-   height: 40px;
+  position: absolute;
+  top: 15px;
+  left: 730px;
+  font-size: 14px;
+  width: 54px;
+  height: 40px;
   background-color: #0a0404;
   color: white;
 }
