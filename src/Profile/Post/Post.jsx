@@ -6,7 +6,7 @@ import { setPostImagesDelete } from '../../store/images';
 
 import ImageParsing from '../../ImageParsing/ImageParsing';
 import { setInputNumber } from '../../store/images';
-import { setWallContent } from '../../store/wall';
+import { setWallText, setWallImages, setWallVideo, setWallDate, setWallContent } from '../../store/wall';
 
 import { Link } from 'react-router-dom';
 import './style.css';
@@ -36,46 +36,21 @@ function Post() {
   const postText = state.post.postText;
   const numImg = readyPhotos.length;
 
-  const iframeSize = linkСheck && numImg > 0 ? 'post_iframe' : 'post_iframe_small';
-
-  const cssClass = [
-    'post_text_size',
-    'post_imges_video_size',
-    'post_images_size',
-    'post_video_size',
-    'post_large_image',
-    'post_small_right_image',
-    'post_small_down_image',
-    'one_image',
-    'two_image_first',
-    'two_image_second',
-  ];
-
-  const containerClass =
-    numImg > 0 && linkСheck > 0
-      ? cssClass[1]
-      : numImg > 0
-      ? cssClass[2]
-      : numImg < 1 && linkСheck
-      ? cssClass[3]
-      : '';
-
-  let date = new Date();
-  date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-
-  const wallArr = [state.post.postText, state.images.postImages, local, date];
-
   const sendPost = () => {
-    if (
-      state.post.postText.length > 0 ||
-      state.images.postImages.length > 0 ||
-      local.split('/')[4] !== 'undefined'
-    ) {
-      dispatch(setWallContent(wallArr));
+    let date = new Date();
+    date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+
+    if (textLength > 0 || numImg > 0 || local.split('/')[4] !== 'undefined') {
+      dispatch(setWallContent([state.post.postText, state.images.postImages, local, date, 0, 0, []]));
+      dispatch(setWallText(state.post.postText));
+      dispatch(setWallImages(state.images.postImages));
+      dispatch(setWallVideo(local));
+      dispatch(setWallDate(date));
     }
-    // dispatch(setPostImagesDelete([]));
-    // dispatch(setPostText(''));
-    // dispatch(setPostVideo(''));
+
+    dispatch(setPostImagesDelete([]));
+    dispatch(setPostText(''));
+    dispatch(setPostVideo(''));
     setPostEffect();
   };
 

@@ -64,8 +64,7 @@
 .wall_content {
   position: relative;
   width: 900px;
-  margin-top: 40px;
-  margin-left: 40px;
+  margin: 40px 0 20px 40px;
   display: inline-block;
 
   background-color: rgba(41, 117, 16, 0);
@@ -112,7 +111,6 @@
   border: 3px solid rgb(255, 255, 255);
 }
 
-
 .wall_one_image {
   width: 900px !important;
   height: 550px !important;
@@ -151,11 +149,21 @@
   position: relative;
   cursor: pointer;
   margin-bottom: 20px;
-  margin-right: 15px;
+  margin-right: 10px;
   width: 30px;
   height: 30px;
-
+  user-select: none;
   color: #ffffff;
+}
+
+.like_number,
+.dislike_number {
+  position: relative;
+  font-size: 20px;
+  top: -20px;
+  color: #ffffff;
+  user-select: none;
+  margin-right: 10px;
 }
 
 .wall_iframe {

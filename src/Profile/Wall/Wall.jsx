@@ -1,12 +1,40 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { setWallContent, setWallContentNew } from '../../store/wall';
 import './style.css';
 
 function Wall() {
+  const dispatch = useDispatch();
   const state = useSelector((state) => state);
-  const wallPost = state.wall.wallContent;
-  console.log([...wallPost].reverse());
+  const wall = useSelector((state) => state.wall);
+
+  let arr = [
+    ['name1', [], 'video1', 'date1'],
+    ['name2', [], 'video2', 'date2'],
+    ['name3', [], 'video3', 'date3'],
+  ];
+  let wallPost = wall.wallContent;
+
+  const like = ( b) => {
+    let mass = [...wallPost].reverse().slice();
+    let arr = [...wallPost].reverse()[b].slice();
+    let sum = arr[4]
+    arr.splice(4, 1, sum + 1);
+    mass.splice(b, 1, arr);
+    dispatch(setWallContentNew(mass.reverse()));
+
+  };
+  const dislike = (b) => {
+    let mass = [...wallPost].reverse().slice();
+    let arr = [...wallPost].reverse()[b].slice();
+    let sum = arr[5];
+    arr.splice(5, 1, sum + 1);
+    mass.splice(b, 1, arr);
+    dispatch(setWallContentNew(mass.reverse()));
+  };
+  console.log(wallPost)
+
   return (
     <>
       {[...wallPost].reverse().map((x, index) => (
@@ -18,9 +46,8 @@ function Wall() {
           <FontAwesomeIcon className="wall_menu" icon="fa-solid fa-ellipsis" />
 
           <div className="wall_content">
-            {x[0].length > 0 ? <div className="wall_text">{x[0]}</div> : ''}
-
-            {x[1].length > 0 ? (
+            {x[0]?.length > 0 ? <div className="wall_text">{x[0]}</div> : ''}
+            {x[1]?.length > 0 ? (
               <div className="wall_images">
                 {x[1].map((image, index) => {
                   return (
@@ -52,8 +79,7 @@ function Wall() {
             ) : (
               ''
             )}
-
-            {x[2] ? (
+            {x[2]?.split('/')[4] !== 'undefined' ? (
               <>
                 <iframe
                   src={x[2]}
@@ -66,10 +92,21 @@ function Wall() {
             ) : (
               ''
             )}
-            <div className="wall_from">Post from Alexey Tsvetkov</div>
-
-            <FontAwesomeIcon className="wall_like_icon" icon="fa-regular fa-thumbs-up" />
-            <FontAwesomeIcon className="wall_dislike_icon" icon="fa-regular fa-thumbs-down" />
+            <div className="wall_from">
+              Post from {`${state.user.checkAuth[0]} ${state.user.checkAuth[1]}`}
+            </div>
+            <FontAwesomeIcon
+              className="wall_like_icon"
+              icon="fa-regular fa-thumbs-up"
+              onClick={() => like(index)}
+            />
+            <span className="like_number">{x[4]}</span>
+            <FontAwesomeIcon
+              className="wall_dislike_icon"
+              icon="fa-regular fa-thumbs-down"
+              onClick={() => dislike(index)}
+            />
+            <span className="dislike_number">{x[5]}</span>
             <FontAwesomeIcon className="wall_comment_icon" icon="fa-regular fa-comment-dots" />
             <FontAwesomeIcon className="wall_share_icon" icon="fa-solid fa-share-nodes" />
           </div>
