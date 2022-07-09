@@ -10,7 +10,7 @@ const initialState = {
   wallDate: '',
   wallLike: '',
   wallDislike: '',
-  wallComments: []
+  wallComments: ''
 }
 
 export const wallSlice = createSlice({
@@ -35,18 +35,14 @@ export const wallSlice = createSlice({
     },
     setWallDate: (state, action) => {
       state.wallDate = action.payload
+    }, setWallComments: (state, action) => {
+      state.wallComments = action.payload
     },
-    setWallLike: (state, action) => {
-      state.wallLike += action.payload
-    },
-    setWallDislike: (state, action) => {
-      state.wallDislike += action.payload
-    }
   }
 })
 
 export const {
   setWallContent, setWallContentNew, setWallText, setWallImages,
   setWallVideo, setWallDate, setWallLike,
-  setWallDislike} = wallSlice.actions
+  setWallDislike, setWallComments } = wallSlice.actions
 export default wallSlice.reducer
