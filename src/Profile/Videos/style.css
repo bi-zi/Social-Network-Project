@@ -1,0 +1,37 @@
+/* videos */
+.videos {
+  position: absolute;
+  width: 380px;
+  height: 397px;
+
+  top: 1260px;
+}
+
+/* videos_backGround */
+.videos_backGround {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: #393939;
+  border-radius: 25px;
+}
+
+/* videos_title */
+.videos_title {
+  position: absolute;
+  width: 222px;
+  height: 30px;
+  left: 22px;
+  top: 8px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #ffffff;
+}

@@ -1,0 +1,37 @@
+/* music */
+.music_profile {
+  position: absolute;
+  width: 380px;
+  height: 215px;
+
+  top: 1680px;
+}
+
+/* music_backGround */
+.music_backGround {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: #393939;
+  border-radius: 25px;
+}
+
+/* music_title */
+.music_title {
+  position: absolute;
+  width: 198px;
+  height: 30px;
+  left: 22px;
+  top: 5px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+
+  color: #ffffff;
+}

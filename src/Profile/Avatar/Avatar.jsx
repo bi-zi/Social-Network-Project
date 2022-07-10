@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ImageParsing from '../../ImageParsing/ImageParsing';
 import { setInputNumber } from '../../store/images';
-import './avatar.css';
+import './style.css';
 
 function Avatar() {
   const dispatch = useDispatch();

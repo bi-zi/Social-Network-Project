@@ -1,5 +1,5 @@
 import React from 'react';
-import './userInfo.css';
+import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {

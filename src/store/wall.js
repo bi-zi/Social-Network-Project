@@ -35,7 +35,8 @@ export const wallSlice = createSlice({
     },
     setWallDate: (state, action) => {
       state.wallDate = action.payload
-    }, setWallComments: (state, action) => {
+    },
+    setWallComments: (state, action) => {
       state.wallComments = action.payload
     },
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { setWallContent, setWallContentNew, setWallComments } from '../../store/wall';
+import { setWallContent, setWallContentNew, setWallComments, setWallDate } from '../../store/wall';
 import './style.css';
 
 function Wall() {
@@ -11,19 +11,19 @@ function Wall() {
   const wall = useSelector((state) => state.wall);
   const [comment, setComment] = React.useState('0');
 
-  let arr = [
-    ['name1', [], 'video1', 'date1'],
-    ['name2', [], 'video2', 'date2'],
-    ['name3', [], 'video3', 'date3'],
-  ];
   let wallPost = wall.wallContent;
+
+  let date = new Date();
+  date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
   const like = (b) => {
     let mass = [...wallPost].reverse().slice();
     let arr = [...wallPost].reverse()[b].slice();
     let sum = arr[4];
+
     arr.splice(4, 1, sum + 1);
     mass.splice(b, 1, arr);
+
     dispatch(setWallContentNew(mass.reverse()));
   };
 
@@ -31,21 +31,24 @@ function Wall() {
     let mass = [...wallPost].reverse().slice();
     let arr = [...wallPost].reverse()[b].slice();
     let sum = arr[5];
+
     arr.splice(5, 1, sum + 1);
     mass.splice(b, 1, arr);
+
     dispatch(setWallContentNew(mass.reverse()));
   };
 
   const addComment = (b) => {
     let mass = [...wallPost].reverse().slice();
     let arr = [...wallPost].reverse()[b].slice();
-    let sum = [...arr[6], wall.wallComments];
+    let sum = [...arr[6], [wall.wallComments, date]];
 
     arr.splice(6, 1, sum);
-    console.log(arr);
     mass.splice(b, 1, arr);
+console.log(arr)
     dispatch(setWallContentNew(mass.reverse()));
   };
+
 
   return (
     <>
@@ -146,8 +149,8 @@ function Wall() {
                   <div className="comment" key={index}>
                     <img src={state.images.avatarImages} alt="" className="comment_avatar" />
                     <div className="comment_fullName">{`${state.user.checkAuth[0]} ${state.user.checkAuth[1]}`}</div>
-                    <div className="comment_time">12:40</div>
-                    <div className="comment_text">{x}</div>
+                    <div className="comment_time">{x[1]}</div>
+                    <div className="comment_text">{x[0]}</div>
                   </div>
                 ))}
               </div>

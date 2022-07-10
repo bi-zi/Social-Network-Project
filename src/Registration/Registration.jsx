@@ -1,5 +1,5 @@
 import React from 'react';
-import './registration.css';
+import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFirstName, setLastName, setPassword, setCheckAuth } from '../store/registration';
 import { connect } from 'react-redux';

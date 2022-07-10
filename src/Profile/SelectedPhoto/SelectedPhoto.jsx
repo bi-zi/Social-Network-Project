@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAvatarImageDelete, setSLiderImagesDelete, setPostImagesDelete } from '../../store/images';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './selectedPhoto.css';
+import './style.css';
 
 function Photo() {
   const dispatch = useDispatch();
