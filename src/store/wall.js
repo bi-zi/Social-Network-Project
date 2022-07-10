@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 //...JSON.parse(localStorage.getItem('wallPost'))
 const initialState = {
-  wallContent: [],
+  wallContent: [...JSON.parse(localStorage.getItem('wallContent'))],
   wallText: '',
   wallImages: [],
   wallVideo: '',

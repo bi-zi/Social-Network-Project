@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import Compressor from 'compressorjs';
 import { setPostImages, setSliderImages, setAvatarImages } from '../store/images';
-
 
 function ImageParsing() {
   const dispatch = useDispatch();
@@ -10,14 +9,23 @@ function ImageParsing() {
 
   const [images, setImages] = React.useState([]);
 
-  const onPhotosChange = (e) => {
-    setImages([...e.target.files]);
+
+  const handleCompressedUpload = (e) => {
+    const image = e.target.files[0];
+    console.log(e.target.files[0]['size']);
+    new Compressor(image, {
+      quality: 0.3, // 0.6 can also be used, but its not recommended to go below.
+      success: (compressedResult) => {
+        setImages(compressedResult);
+      },
+    });
   };
 
   useEffect(() => {
     if (images.length < 1) return;
 
-    let file = images[0];
+    let file = images;
+    console.log(images['size']);
     let reader = new FileReader();
     reader.onload = (e) => {
       parsing.inputNumber === '0'
@@ -38,7 +46,7 @@ function ImageParsing() {
         type="file"
         name="file"
         accept="image/*"
-        onChange={onPhotosChange}
+        onChange={(e) => handleCompressedUpload(e)}
         className="input_parser"
       />
     </>

@@ -11,6 +11,7 @@ function Wall() {
   const wall = useSelector((state) => state.wall);
   const [comment, setComment] = React.useState('0');
 
+  localStorage.setItem('wallContent', JSON.stringify(wall.wallContent));
   let wallPost = wall.wallContent;
 
   let date = new Date();
@@ -45,10 +46,9 @@ function Wall() {
 
     arr.splice(6, 1, sum);
     mass.splice(b, 1, arr);
-console.log(arr)
+
     dispatch(setWallContentNew(mass.reverse()));
   };
-
 
   return (
     <>
