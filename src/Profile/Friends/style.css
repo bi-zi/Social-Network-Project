@@ -1,25 +1,12 @@
-/* friends */
 .friends {
   position: absolute;
   width: 380px;
   height: 249px;
-
+  background: #393939;
+  border-radius: 25px;
   top: 570px;
 }
 
-/* friends_backGround */
-.friends_backGround {
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-
-  background: #393939;
-  border-radius: 25px;
-}
-
-/* friends_title */
 .friends_title {
   position: absolute;
   width: 99px;
@@ -34,4 +21,34 @@
   line-height: 37px;
 
   color: #ffffff;
+}
+
+.friends_container {
+  width: 340px;
+  height: 190px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 45px auto 0 auto;
+}
+
+.friend {
+  cursor: pointer;
+  margin: 10px 10px 0 10px;
+  text-align: center;
+}
+
+.friend_avatar {
+  background-color: black;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}
+
+.friend_name {
+  color: #ffffff;
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
 }

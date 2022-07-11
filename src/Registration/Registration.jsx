@@ -5,11 +5,18 @@ import { setFirstName, setLastName, setPassword, setCheckAuth } from '../store/r
 import { connect } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
+
+
+
+
 function Registration() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [checkSubmit, setCheckSubmit] = React.useState(localStorage.checkSubmit);
   const history = useNavigate();
+
+
+
 
   if (checkSubmit === 1) {
     localStorage.setItem('firstName', user.firstName);
@@ -28,8 +35,8 @@ function Registration() {
   };
 
   const test = () => {
-     setCheckSubmit(1);
-  }
+    setCheckSubmit(1);
+  };
 
   // console.log(
   //   'firstName',
