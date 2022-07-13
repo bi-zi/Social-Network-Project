@@ -1,130 +1,52 @@
 import express from 'express'
-import jwt from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
 import mongoose from 'mongoose'
-import { validationResult } from 'express-validator'
-import { registerValidation } from './src/validations/auth.js'
-import UserModel from './src/models/User.js'
-import checkAuth from './src/utils/checkAuth.js'
-import User from './src/models/User.js'
+import multer from 'multer'
 
-mongoose.connect('mongodb+srv://bi_zi:HAHAHAHAHAHAHA@cluster0.g2dffl4.mongodb.net/blog?retryWrites=true&w=majority')
+import { registerValidation, loginValidation } from './src/validations/auth.js'
+import checkAuth from './src/utils/checkAuth.js'
+
+import * as UserController from './src/controllers/UserController.js'
+import * as PostController from './src/controllers/PostController.js'
+
+import { postCreateValidation } from './src/validations/post.js'
+
+import handleValidationErrors from './src/utils/handleErros.js'
+
+mongoose.connect('mongodb+srv://bi_zi:HAHAHAHHA@cluster0.g2dffl4.mongodb.net/blog?retryWrites=true&w=majority')
   .then(() => console.log('DB ok'))
   .catch((err) => console.log('DB error', err))
 const app = express()
 
+const storage = multer.diskStorage({
+  destination: (_, __, cb) => {
+    cb(null, './src/uploads')
+  },
+  filename: (_, file, cb) => {
+    cb(null, file.originalname)
+  },
+})
+
+const upload = multer({ storage })
+
 app.use(express.json())
+app.use('/uploads', express.static('./src/uploads'))
 
-app.post('/auth/login', async (req, res) => {
-  try {
-    const user = await UserModel.findOne({ email: req.body.email });
+app.post('/auth/login', loginValidation, handleValidationErrors,UserController.login)
+app.post('/auth/register', registerValidation, handleValidationErrors,UserController.register)
+app.get('/auth/me', checkAuth, UserController.getMe)
 
-    if (!user) {
-      return res.status(404).json({
-        message: 'Пользователь не найден'
-      })
-    }
-
-    const isValidPass = await bcrypt.compare(req.body.password, user._doc.passwordHash)
-
-    if (!isValidPass) {
-      return res.status(400).json({
-        message: 'Неверный логин или пароль'
-      })
-    }
-
-    const token = jwt.sign({
-      _id: user._id
-    },
-      'secret123',
-      {
-        expiresIn: '30d',
-      }
-    )
-
-    const { passwordHash, ...userData } = user._doc
-
-    res.json({ ...userData, token })
-
-  } catch (err) {
-    res.status(500).json({
-      message: 'Не удалось авторизоваться'
-    })
-  }
+app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
+  res.json({
+    url: `/uploads/${req.file.originalname}`,
+  })
 })
 
-app.post('/auth/register', registerValidation, async (req, res) => {
-  try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json(errors.array())
-    }
+app.get('/posts', PostController.getAll)
+app.get('/posts/:id', PostController.getOne)
+app.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, PostController.create)
+app.delete('/posts/:id', checkAuth, PostController.remove)
+app.patch('/posts/:id', checkAuth, postCreateValidation, handleValidationErrors,PostController.update)
 
-    const password = req.body.password
-    const salt = await bcrypt.genSalt(10)
-    const hash = await bcrypt.hash(password, salt)
-
-    const doc = new UserModel({
-      email: req.body.email,
-      fullName: req.body.fullName,
-      avatarUrl: req.body.avatarUrl,
-      passwordHash: hash,
-    })
-
-    const user = await doc.save()
-
-    const token = jwt.sign({
-      _id: user._id
-    },
-      'secret123',
-      {
-        expiresIn: '30d',
-      }
-    )
-
-    const { passwordHash, ...userData } = user._doc
-
-    res.json({ ...userData, token })
-  } catch (err) {
-
-    console.log(err)
-
-    res.status(500).json({
-      message: 'Не удалось зарегестрироваться'
-    })
-
-  }
-})
-
-app.get('/auth/me', checkAuth, async (req, res) => {
-  try {
-    const user = await UserModel.findById(req.userId)
-    if (!user) {
-      return res.status(404).json({
-        message: 'Пользователь не найдет'
-      })
-    }
-
-    const token = jwt.sign({
-      _id: user._id
-    },
-      'secret123',
-      {
-        expiresIn: '30d',
-      }
-    )
-
-    const { passwordHash, ...userData } = user._doc
-
-    res.json({ ...userData, token })
-  } catch (err) {
-
-    res.status(500).json({
-      message: 'Нет доступа'
-    })
-
-  }
-})
 
 app.listen(4444, (err) => {
   if (err) {
