@@ -1,15 +1,18 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Registration from './Registration/Registration';
-
+import {  Navigate  } from 'react-router-dom';
 import Header from './Header/Header';
 
 const Layout = () => {
-  return (
+  const currentLocation = window.location.pathname;
+  if (currentLocation === '/') {
+    return <Navigate to="/Profile" />;
+  }
+
+   return (
     <>
       <Header />
       <Outlet></Outlet>
-      <Registration />
     </>
   );
 };

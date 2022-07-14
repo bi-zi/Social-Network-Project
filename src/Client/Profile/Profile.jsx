@@ -10,9 +10,19 @@ import Friends from './Friends/Friends';
 import Groups from './Groups/Groups';
 import Videos from './Videos/Videos';
 import Music from './Music/Music';
+import {  Navigate} from 'react-router-dom';
+import { selectIsAuth } from '../store/slices/auth';
 
 function Profile() {
+
+
   const state = useSelector((state) => state);
+  const isAuth = useSelector(selectIsAuth);
+  if (isAuth === false) {
+    return <Navigate to="/Login" />;
+  }
+
+
 
   return (
     <div className="container">

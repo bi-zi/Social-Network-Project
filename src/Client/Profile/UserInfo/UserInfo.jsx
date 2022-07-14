@@ -13,9 +13,10 @@ function UserInfo() {
   const dispatch = useDispatch();
   const info = useSelector((state) => state.info);
   const user = useSelector((state) => state.user)
+  const state = useSelector((state) => state);
   const [closeInfo, setCloseInfo] = React.useState(0);
   const [saveStorage, setSaveStorage] = React.useState(0);
-
+  console.log(state.auth.data.fullName);
   const saveUserInfo = () => {
     setCloseInfo(0)
   dispatch(
@@ -57,7 +58,7 @@ function UserInfo() {
     <>
       <div className="about">
         <div className="about_backGround">
-          <div className="full_name">{`${user.checkAuth[0]} ${user.checkAuth[1]}`}</div>
+          <div className="full_name">{`${state.auth.data.fullName}`}</div>
           <div className="line"></div>
           {closeInfo === 0 ? (
             <>

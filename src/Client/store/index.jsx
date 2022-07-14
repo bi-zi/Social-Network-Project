@@ -4,6 +4,7 @@ import infoSlice from './info';
 import postSlice from './post';
 import imagesSlice from './images';
 import  wallSlice  from './wall';
+import { authReducer } from './slices/auth.js';
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     post: postSlice,
     images: imagesSlice,
     wall: wallSlice,
+    auth: authReducer,
   },
 });

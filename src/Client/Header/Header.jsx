@@ -1,8 +1,19 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
+import { logout, selectIsAuth } from '../store/slices/auth';
 
 function Header() {
+  const dispatch = useDispatch();
+  const isAuth = useSelector(selectIsAuth);
+
+  const onClickLogout = () => {
+    if (window.confirm('Вы действительно хотите выйти?')) {
+      dispatch(logout());
+      window.localStorage.removeItem('token');
+    }
+  };
   return (
     <div className="header">
       <div className="container">
@@ -18,7 +29,7 @@ function Header() {
           <FontAwesomeIcon className="video" icon="fa-solid fa-film" />
           <FontAwesomeIcon className="music" icon="fa-solid fa-music" />
         </div>
-        <FontAwesomeIcon className="menu" icon="fa-solid fa-align-justify" />
+        <FontAwesomeIcon className="menu" icon="fa-solid fa-align-justify" onClick={onClickLogout} />
       </div>
     </div>
   );
