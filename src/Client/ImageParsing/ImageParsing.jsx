@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Compressor from 'compressorjs';
-import { setPostImages, setSliderImages, setAvatarImages } from '../store/images';
+import { setPostImages, setSliderImages, setAvatarImages } from '../store/images.js';
 
 function ImageParsing() {
   const dispatch = useDispatch();

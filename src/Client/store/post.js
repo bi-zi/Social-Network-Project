@@ -16,7 +16,7 @@ export const postSlice = createSlice({
     setPostVideo: (state, action) => {
       state.postVideo = action.payload
     }
-    
+
   }
 })
 

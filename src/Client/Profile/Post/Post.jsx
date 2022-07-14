@@ -17,8 +17,8 @@ function Post() {
   const [postEffect, setPostEffect] = React.useState();
 
   localStorage.setItem('postImages', JSON.stringify(state.images.postImages));
-  let linkСheck = state.post.postVideo.split('/');
-  linkСheck = linkСheck[0] === 'https:' && linkСheck[2] === 'www.youtube.com';
+  let linkСheck = state.post.postVideo?.split('/');
+  linkСheck = linkСheck?.[0] === 'https:' && linkСheck[2] === 'www.youtube.com';
 
   let readyPhotos = state.images.postImages;
   let url = state.post.postVideo;
@@ -30,7 +30,7 @@ function Post() {
   let local = `https://www.youtube.com/embed/${src}`;
 
   if (linkСheck) localStorage.setItem('postVideo', local);
-  if (state.post.postVideo.length === 0) localStorage.setItem('postVideo', url);
+  if (state.post.postVideo?.length === 0) localStorage.setItem('postVideo', url);
 
   const textLength = state.post.postText.length;
   const postText = state.post.postText;

@@ -21,20 +21,23 @@ function Friends() {
       'Dima',
     ],
     ['https://i.pinimg.com/736x/14/b9/36/14b936c28ed5bb31f64b8352ba562578.jpg', 'Misha'],
-    ['https://in-dee.ru/upload/iblock/1e1/1e1a7591899693f284f37ef2234b0d99.jpg', 'Alisa'],
+    [
+      'https://avatars.mds.yandex.net/i?id=e708784c502029fd3580605e76109216_l-5761336-images-thumbs&n=27&h=480&w=480',
+      'Alisa',
+    ],
     ['https://wonder-day.com/wp-content/uploads/2020/03/Wonder-Day-Ava-8.jpg', 'Dasha'],
   ];
   return (
     <div className="friends">
       <div className="friends_title">Friends</div>
       <div className="friends_container">
-        {arr.map((x) => (
-          <>
-            <div className='friend'>
+        {arr.map((x, i) => (
+          <div key={i}>
+            <div className='friend' >
               <img src={x[0]} alt="" className="friend_avatar" />
               <div className="friend_name">{x[1]}</div>
             </div>
-          </>
+          </div>
         ))}
       </div>
     </div>
