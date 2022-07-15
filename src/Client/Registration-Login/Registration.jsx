@@ -8,7 +8,7 @@ import { fetchAuth, fetchRegister, selectIsAuth } from '../store/slices/auth';
 export const Registration = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
-
+  const data = useSelector((state) => state.auth.data);
   const {
     register,
     handleSubmit,
@@ -24,7 +24,7 @@ export const Registration = () => {
 
   const onSubmit = async (values) => {
     const data = await dispatch(fetchRegister(values));
-
+    localStorage.setItem('userId', data.payload._id);
     if (!data.payload) {
       return alert('Не удалось регистрироваться!');
     }
@@ -35,7 +35,7 @@ export const Registration = () => {
   };
 
   if (isAuth) {
-    return <Navigate to="/Profile" />;
+    return <Navigate to={`/Profile/${data?._id}`} />;
   }
 
   return (
@@ -61,7 +61,6 @@ export const Registration = () => {
               <input
                 className="password"
                 type="password"
-
                 helpertext={errors.password?.message}
                 {...register('password', { required: 'Укажите пароль' })}
                 label="Пароль"

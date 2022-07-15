@@ -43,7 +43,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/Profile" element={<Profile />} />,
+        <Route path="/Profile/:id" element={<Profile />} />,
         <Route path="/:category/:id" element={<Photo />} />,
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Registration />} />

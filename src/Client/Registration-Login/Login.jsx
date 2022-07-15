@@ -8,7 +8,7 @@ import { fetchAuth, selectIsAuth } from '../store/slices/auth';
 export const Login = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
-
+  const data = useSelector((state) => state.auth.data);
   const {
     register,
     handleSubmit,
@@ -23,6 +23,9 @@ export const Login = () => {
 
   const onSubmit = async (values) => {
     const data = await dispatch(fetchAuth(values));
+
+    localStorage.setItem('userId', data.payload._id);
+
     if (!data.payload) {
       return alert('Не удалось авторизоваться!');
     }
@@ -31,10 +34,8 @@ export const Login = () => {
       window.localStorage.setItem('token', data.payload.token);
     }
   };
-
-
   if (isAuth) {
-    return <Navigate to="/Profile" />;
+    return <Navigate to={`/Profile/${data?._id}`} />;
   }
 
   return (

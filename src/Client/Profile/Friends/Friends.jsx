@@ -1,4 +1,6 @@
 import React from 'react';
+
+import {  Link } from 'react-router-dom';
 import './style.css';
 
 function Friends() {
@@ -32,12 +34,12 @@ function Friends() {
       <div className="friends_title">Friends</div>
       <div className="friends_container">
         {arr.map((x, i) => (
-          <div key={i}>
+          <Link to="/Profile/62d187a5756ece7c2d8b9e8e" key={i}>
             <div className='friend' >
               <img src={x[0]} alt="" className="friend_avatar" />
               <div className="friend_name">{x[1]}</div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
