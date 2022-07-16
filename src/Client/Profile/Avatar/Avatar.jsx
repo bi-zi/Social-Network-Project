@@ -13,6 +13,7 @@ function Avatar() {
   if (state.images.avatarImages.length === 0) {
     localStorage.setItem('avatarImages', 'https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png');
   }
+  console.log(state.images.avatarImages);
   return (
     <div className="avatar">
       <div className="avatar_backGround">

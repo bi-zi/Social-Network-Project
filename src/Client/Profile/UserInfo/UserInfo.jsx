@@ -6,6 +6,7 @@ import { fetchAllUsers } from '../../store/slices/user.js';
 import { Navigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { fetchAuthMe } from '../../store/slices/auth';
 
 function UserInfo() {
   const dispatch = useDispatch();
@@ -13,7 +14,6 @@ function UserInfo() {
   const { id } = useParams();
 
   const [closeInfo, setCloseInfo] = React.useState(0);
-
   const about = Array.isArray(state.about?.data) ? state.about.data?.find((x) => x.user === id) : '';
   const users = state.user.users?.find((x) => x._id === id);
 
@@ -34,7 +34,7 @@ function UserInfo() {
   } = useForm({
     mode: 'onSubmit',
   });
-
+                              
   React.useEffect(() => {
     dispatch(fetchAbout());
     dispatch(fetchAllUsers());
@@ -48,13 +48,17 @@ function UserInfo() {
           <div className="line"></div>
           {closeInfo === 0 ? (
             <>
-              <div
-                className="about_info"
-                onClick={() => {
-                  setCloseInfo(1);
-                }}>
-                Edit Information
-              </div>
+              {state.auth?.data._id === id ? (
+                <div
+                  className="about_info"
+                  onClick={() => {
+                    setCloseInfo(1);
+                  }}>
+                  Edit Information
+                </div>
+              ) : (
+                ''
+              )}
               <div className="lives">Lives in - {about?.livesIn}</div>
               <div className="from">From - {about?.from}</div>
               <div className="born">Born on - {about?.bornOn}</div>
@@ -68,44 +72,98 @@ function UserInfo() {
                 className="lives_input"
                 defaultValue={`${about?.livesIn}`}
                 placeholder="Lives in"
-                {...register('livesIn', { required: false })}
-                helpertext={errors.email?.message}
+                {...register('livesIn', { required: true, minLength: 2, maxLength: 25 })}
               />
+              {errors.livesIn && errors.livesIn.type === 'minLength' && (
+                <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
+                  Minimum length 2 characters
+                </span>
+              )}
+              {errors.livesIn && errors.livesIn.type === 'maxLength' && (
+                <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
+                  Max length 25 characters
+                </span>
+              )}
               <br />
               <input
                 className="lives_from"
                 defaultValue={`${about?.from}`}
                 placeholder="From"
-                {...register('from', { required: false })}
+                {...register('from', { required: true, minLength: 2, maxLength: 25 })}
               />
+              {errors.from && errors.from.type === 'minLength' && (
+                <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
+                  Minimum length 2 characters
+                </span>
+              )}
+              {errors.From && errors.From.type === 'maxLength' && (
+                <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
+                  Max length 25 characters
+                </span>
+              )}
               <br />
               <input
                 className="lives_born"
                 defaultValue={`${about?.bornOn}`}
                 placeholder="Born on"
-                {...register('bornOn', { required: false })}
+                {...register('bornOn', { required: true, minLength: 2, maxLength: 25 })}
               />
+              {errors.bornOn && errors.bornOn.type === 'minLength' && (
+                <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
+                  Minimum length 2 characters
+                </span>
+              )}
+              {errors.bornOn && errors.bornOn.type === 'maxLength' && (
+                <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
+                  Max length 25 characters
+                </span>
+              )}
               <br />
               <input
                 className="lives_profession"
                 defaultValue={`${about?.profession}`}
                 placeholder="Profession"
-                {...register('profession', { required: false })}
+                {...register('profession', { required: true, minLength: 2, maxLength: 25 })}
               />
+              {errors.profession && errors.profession.type === 'minLength' && (
+                <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
+                  Minimum length 2 characters
+                </span>
+              )}
+              {errors.profession && errors.profession.type === 'maxLength' && (
+                <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
+                  Max length 25 characters
+                </span>
+              )}
               <br />
               <input
                 className="lives_relationship"
                 defaultValue={`${about?.relations}`}
                 placeholder="In a relationship with"
-                {...register('relations', { required: false })}
+                {...register('relations', { required: true, minLength: 2, maxLength: 25 })}
               />
+              {errors.relations && errors.relations.type === 'minLength' && (
+                <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
+                  Minimum length 2 characters
+                </span>
+              )}
+              {errors.relations && errors.relations.type === 'maxLength' && (
+                <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
+                  Max length 25 characters
+                </span>
+              )}
               <br />
               <input
                 className="lives_student"
                 defaultValue={`${about?.studentAt}`}
                 placeholder="Student at"
-                {...register('studentAt', { required: false })}
+                {...register('studentAt', { required: true, minLength: 2, maxLength: 25 })}
               />
+              {errors.studentAt && errors.studentAt.type === 'maxLength' && (
+                <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
+                  Max length 25 characters
+                </span>
+              )}
               <br />
               <button type="submit">Submit</button>
             </form>

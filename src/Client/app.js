@@ -34,7 +34,6 @@ library.add(
 function App() {
 
   const dispatch = useDispatch();
-  const isAuth = useSelector(selectIsAuth);
 
   React.useEffect(() => {
     dispatch(fetchAuthMe());

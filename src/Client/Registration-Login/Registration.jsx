@@ -24,7 +24,6 @@ export const Registration = () => {
 
   const onSubmit = async (values) => {
     const data = await dispatch(fetchRegister(values));
-    localStorage.setItem('userId', data.payload._id);
     if (!data.payload) {
       return alert('Не удалось регистрироваться!');
     }
