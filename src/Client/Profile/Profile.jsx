@@ -17,7 +17,7 @@ import { fetchAbout } from '../store/slices/about';
 function Profile() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-  
+
   const isAuth = useSelector(selectIsAuth);
   if (isAuth === false) {
     return <Navigate to="/Login" />;
@@ -28,7 +28,7 @@ function Profile() {
       <UserInfo />
       <PhotoSlider />
       <Post />
-      <Wall />
+      
 
       <Avatar />
       <Friends />

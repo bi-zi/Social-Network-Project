@@ -6,6 +6,13 @@ export const fetchAbout = createAsyncThunk('about/fetchAbout', async () => {
   return data;
 });
 
+export const fetchAboutUpdate = createAsyncThunk('about/id/fetchAboutUpdate', async (params,id) => {
+
+  const { data } = await axios.patch(`/about/${id}`, params);
+  return data;
+});
+
+
 const initialState = {
   data: null,
   status: 'loading',

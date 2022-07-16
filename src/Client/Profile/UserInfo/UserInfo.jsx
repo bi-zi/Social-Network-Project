@@ -1,8 +1,8 @@
 import React from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAbout } from '../../store/slices/about.js';
-import { fetchAllUsers } from '../../store/slices/auth.js';
+import { fetchAbout, fetchAboutUpdate } from '../../store/slices/about.js';
+import { fetchAllUsers } from '../../store/slices/user.js';
 import { Navigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -11,29 +11,34 @@ function UserInfo() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const { id } = useParams();
+
   const [closeInfo, setCloseInfo] = React.useState(0);
-  const [close, setClose] = React.useState(0)
-  const about = state.about.data?.find((x) => x.user === id);
-  const users = state.auth.users?.find((x) => x._id === id);
-  const saveUserInfo = () => {
+
+  const about = Array.isArray(state.about?.data) ? state.about.data?.find((x) => x.user === id) : '';
+  const users = state.user.users?.find((x) => x._id === id);
+
+  const onSubmit = async (values, id) => {
     setCloseInfo(0);
+    const data = await dispatch(fetchAboutUpdate(values, id));
+
     dispatch(fetchAbout());
-    setClose(1);
+    if (!data.payload) {
+      return alert('Не удалось авторизоваться!');
+    }
   };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: 'onSubmit',
+  });
 
   React.useEffect(() => {
     dispatch(fetchAbout());
     dispatch(fetchAllUsers());
   }, []);
-
-  if (close === 1) {
-    console.log(1);
-    setClose(0);
-
-    return <Navigate to="/Profile/62d187a5756ece7c2d8b9e8e" />;
-  }
-  //62d187a5756ece7c2d8b9e8e
-  //62d187a5756ece7c2d8b9e8e
 
   return (
     <>
@@ -43,7 +48,11 @@ function UserInfo() {
           <div className="line"></div>
           {closeInfo === 0 ? (
             <>
-              <div className="about_info" onClick={() => setCloseInfo(1)}>
+              <div
+                className="about_info"
+                onClick={() => {
+                  setCloseInfo(1);
+                }}>
                 Edit Information
               </div>
               <div className="lives">Lives in - {about?.livesIn}</div>
@@ -54,27 +63,52 @@ function UserInfo() {
               <div className="student">Student at - {about?.studentAt}</div>
             </>
           ) : (
-            <div className="about_form">
-              <input className="lives_input" placeholder="Lives in" onChange={(e) => {}} />
+            <form className="about_form" onSubmit={handleSubmit(onSubmit)}>
+              <input
+                className="lives_input"
+                defaultValue={`${about?.livesIn}`}
+                placeholder="Lives in"
+                {...register('livesIn', { required: false })}
+                helpertext={errors.email?.message}
+              />
               <br />
-              <input className="lives_from" placeholder="From" onChange={(e) => {}} />
+              <input
+                className="lives_from"
+                defaultValue={`${about?.from}`}
+                placeholder="From"
+                {...register('from', { required: false })}
+              />
               <br />
-              <input className="lives_born" placeholder="Born on" onChange={(e) => {}} />
+              <input
+                className="lives_born"
+                defaultValue={`${about?.bornOn}`}
+                placeholder="Born on"
+                {...register('bornOn', { required: false })}
+              />
               <br />
-              <input className="lives_profession" placeholder="Profession" onChange={(e) => {}} />
+              <input
+                className="lives_profession"
+                defaultValue={`${about?.profession}`}
+                placeholder="Profession"
+                {...register('profession', { required: false })}
+              />
               <br />
               <input
                 className="lives_relationship"
+                defaultValue={`${about?.relations}`}
                 placeholder="In a relationship with"
-                onChange={(e) => {}}
+                {...register('relations', { required: false })}
               />
               <br />
-              <input className="lives_student" placeholder="Student at" onChange={(e) => {}} />
+              <input
+                className="lives_student"
+                defaultValue={`${about?.studentAt}`}
+                placeholder="Student at"
+                {...register('studentAt', { required: false })}
+              />
               <br />
-              <button className="about_buttton" onClick={saveUserInfo}>
-                Save
-              </button>
-            </div>
+              <button type="submit">Submit</button>
+            </form>
           )}
         </div>
       </div>

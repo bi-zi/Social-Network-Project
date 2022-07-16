@@ -1,14 +1,14 @@
 import React from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Navigate, Link } from 'react-router-dom';
+import {  Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { fetchAuth, selectIsAuth } from '../store/slices/auth';
 
 export const Login = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
-  const data = useSelector((state) => state.auth.data);
+  const data = useSelector((state) => state.auth?.data);
   const {
     register,
     handleSubmit,
@@ -24,7 +24,6 @@ export const Login = () => {
   const onSubmit = async (values) => {
     const data = await dispatch(fetchAuth(values));
 
-    localStorage.setItem('userId', data.payload._id);
 
     if (!data.payload) {
       return alert('Не удалось авторизоваться!');
@@ -34,6 +33,7 @@ export const Login = () => {
       window.localStorage.setItem('token', data.payload.token);
     }
   };
+
   if (isAuth) {
     return <Navigate to={`/Profile/${data?._id}`} />;
   }

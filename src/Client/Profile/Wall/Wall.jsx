@@ -52,7 +52,7 @@ function Wall() {
 
   return (
     <>
-      {[...wallPost].reverse().map((x, index) => (
+      {[...wallPost]?.reverse()?.map((x, index) => (
         <div className={`wall ${index}`} key={index}>
           <img src={state.images.avatarImages} alt="" className="wall_avatar" />
 
@@ -97,7 +97,7 @@ function Wall() {
             {x[2]?.split('/')[4] !== 'undefined' ? (
               <>
                 <iframe
-                  src={x[2]}
+                  src={x?.[2]}
                   title="YouTube video player"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -108,7 +108,7 @@ function Wall() {
               ''
             )}
             <div className="wall_from">
-              Post from {`${state.user.checkAuth[0]} ${state.user.checkAuth[1]}`}
+              Post from {`${state.user?.checkAuth[0]} ${state.user?.checkAuth[1]}`}
             </div>
 
             <FontAwesomeIcon
