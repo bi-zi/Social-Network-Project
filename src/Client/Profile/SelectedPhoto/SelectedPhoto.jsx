@@ -32,14 +32,14 @@ function Photo() {
 
   return (
     <div className="photo_viewing">
-      <Link to="/Profile" style={{ color: '#000000' }} className="cloce">
+      <Link to="/" style={{ color: '#000000' }} className="cloce">
         <FontAwesomeIcon className="close" icon="fa-solid fa-xmark" />
       </Link>
       <img src={readyPhotos[id]} alt="" className="photo" />
       <div className="picture_control_panel">
         <Link
           className="delete_photo"
-          to="/Profile"
+          to="/"
           style={{ color: '#ffffff', textDecoration: 'none' }}
           onClick={onPhotoDelete}>
           Удалить фото

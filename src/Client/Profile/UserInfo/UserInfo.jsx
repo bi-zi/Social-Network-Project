@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAbout, fetchAboutUpdate } from '../../store/slices/about.js';
+import { fetchAboutPost, fetchAbout, fetchAboutUpdate } from '../../store/slices/about.js';
 import { fetchAllUsers } from '../../store/slices/user.js';
 import { Navigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -19,7 +19,10 @@ function UserInfo() {
 
   const onSubmit = async (values, id) => {
     setCloseInfo(0);
-    const data = await dispatch(fetchAboutUpdate(values, id));
+    let data = {};
+    about !== undefined
+      ? (data = await dispatch(fetchAboutUpdate(values, id)))
+      : (data = await dispatch(fetchAboutPost(values)));
 
     dispatch(fetchAbout());
     if (!data.payload) {
@@ -27,6 +30,7 @@ function UserInfo() {
     }
   };
 
+console.log(6)
   const {
     register,
     handleSubmit,
@@ -34,11 +38,8 @@ function UserInfo() {
   } = useForm({
     mode: 'onSubmit',
   });
-                              
-  React.useEffect(() => {
-    dispatch(fetchAbout());
-    dispatch(fetchAllUsers());
-  }, []);
+
+
 
   return (
     <>
@@ -70,7 +71,7 @@ function UserInfo() {
             <form className="about_form" onSubmit={handleSubmit(onSubmit)}>
               <input
                 className="lives_input"
-                defaultValue={`${about?.livesIn}`}
+                defaultValue={about?.livesIn !== undefined ? `${about?.livesIn}` : ''}
                 placeholder="Lives in"
                 {...register('livesIn', { required: true, minLength: 2, maxLength: 25 })}
               />
@@ -87,7 +88,7 @@ function UserInfo() {
               <br />
               <input
                 className="lives_from"
-                defaultValue={`${about?.from}`}
+                defaultValue={about?.from !== undefined ? `${about?.from}` : ''}
                 placeholder="From"
                 {...register('from', { required: true, minLength: 2, maxLength: 25 })}
               />
@@ -104,7 +105,7 @@ function UserInfo() {
               <br />
               <input
                 className="lives_born"
-                defaultValue={`${about?.bornOn}`}
+                defaultValue={about?.bornOn !== undefined ? `${about?.bornOn}` : ''}
                 placeholder="Born on"
                 {...register('bornOn', { required: true, minLength: 2, maxLength: 25 })}
               />
@@ -121,7 +122,7 @@ function UserInfo() {
               <br />
               <input
                 className="lives_profession"
-                defaultValue={`${about?.profession}`}
+                defaultValue={about?.profession !== undefined ? `${about?.profession}` : ''}
                 placeholder="Profession"
                 {...register('profession', { required: true, minLength: 2, maxLength: 25 })}
               />
@@ -138,7 +139,7 @@ function UserInfo() {
               <br />
               <input
                 className="lives_relationship"
-                defaultValue={`${about?.relations}`}
+                defaultValue={about?.relations !== undefined ? `${about?.relations}` : ''}
                 placeholder="In a relationship with"
                 {...register('relations', { required: true, minLength: 2, maxLength: 25 })}
               />
@@ -155,10 +156,15 @@ function UserInfo() {
               <br />
               <input
                 className="lives_student"
-                defaultValue={`${about?.studentAt}`}
+                defaultValue={about?.studentAt !== undefined ? `${about?.studentAt}` : ''}
                 placeholder="Student at"
                 {...register('studentAt', { required: true, minLength: 2, maxLength: 25 })}
               />
+              {errors.studentAt && errors.studentAt.type === 'minLength' && (
+                <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
+                  Minimum length 2 characters
+                </span>
+              )}
               {errors.studentAt && errors.studentAt.type === 'maxLength' && (
                 <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
                   Max length 25 characters

@@ -8,14 +8,17 @@ import './style.css';
 
 import ImageParsing from '../../ImageParsing/ImageParsing';
 import { setInputNumber } from '../../store/images';
+import { useParams } from 'react-router-dom';
 
 function PhotoSlider() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
+  const { id } = useParams();
 
-  localStorage.setItem('sliderImages', JSON.stringify(state.images.sliderImages));
-  let readyPhotos = state.images.sliderImages;
-
+  //let readyPhotos = state.images.sliderImages;
+  let readyPhotos = state.slider?.slider?.find((x) => x.user === id)?.sliderImg;
+  //console.log(state.slider?.slider?.find((x) => x.user === id).sliderImg);
+console.log(3);
   const settings = {
     className: 'center',
     infinite: true,
@@ -27,15 +30,15 @@ function PhotoSlider() {
   return (
     <div className="images">
       <div className="images_backGround">
-        {readyPhotos.length < 2 ? (
+        {readyPhotos?.length < 2 ? (
           <div className="costili1"></div>
-        ) : readyPhotos.length === 2 ? (
+        ) : readyPhotos?.length === 2 ? (
           <div className="costili2"></div>
         ) : (
           ''
         )}
         <Slider {...settings}>
-          {readyPhotos.map((image, index) => {
+          {readyPhotos?.map((image, index) => {
             return (
               <Link to={`/PhotoSlider/${index}`} className="slider_link" key={index}>
                 <div className="image_item" key={index}>

@@ -7,6 +7,7 @@ import  wallSlice  from './wall';
 import { authReducer } from './slices/auth.js';
 import { aboutReducer } from './slices/about.js';
 import { userReducer } from './slices/user.js';
+import { sliderReducer } from './slices/slider.js';
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     auth: authReducer,
     about: aboutReducer,
     user: userReducer,
+    slider: sliderReducer,
   },
 });

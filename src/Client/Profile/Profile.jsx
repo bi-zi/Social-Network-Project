@@ -12,23 +12,24 @@ import Videos from './Videos/Videos';
 import Music from './Music/Music';
 import { Navigate } from 'react-router-dom';
 import { selectIsAuth } from '../store/slices/auth';
-import { fetchAbout } from '../store/slices/about';
+
 
 function Profile() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-
+console.log(2);
   const isAuth = useSelector(selectIsAuth);
   if (isAuth === false) {
     return <Navigate to="/Login" />;
   }
+
+
 
   return (
     <div className="container">
       <UserInfo />
       <PhotoSlider />
       <Post />
-      
 
       <Avatar />
       <Friends />

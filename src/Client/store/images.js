@@ -23,9 +23,9 @@ const initialState = {
     status: 'loading',
   },
   inputNumber: '',
-  avatarImages: [localStorage.avatarImages],
-  sliderImages: [...JSON.parse(localStorage.getItem('sliderImages'))],
-  postImages: [...JSON.parse(localStorage.getItem('postImages'))],
+  avatarImages: [],
+  sliderImages: [],
+  postImages: [],
 }
 
 export const imagesSlice = createSlice({

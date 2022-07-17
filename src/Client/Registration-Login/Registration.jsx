@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Navigate, Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { fetchAuth, fetchRegister, selectIsAuth } from '../store/slices/auth';
 

@@ -5,9 +5,17 @@ import Profile from './Profile/Profile.jsx'
 
 import { Registration } from "./Registration-Login/Registration.jsx"
 import { Login } from "./Registration-Login/Login.jsx"
-
 import Photo from './Profile/SelectedPhoto/SelectedPhoto.jsx'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import './index.css'
+import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchAuthMe, } from './store/slices/auth.js';
+import { fetchAbout } from './store/slices/about.js';
+import { fetchAllUsers } from './store/slices/user.js';
+import { fetchSlider } from './store/slices/slider.js';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import {
   faPager, faUserGroup, faUsers, faFilm,
   faMusic, faAlignJustify, faLocationPin, faFileLines,
@@ -17,13 +25,6 @@ import {
   faCircleUser, faBell, faComment, faImage,
   faThumbsUp, faThumbsDown, faCommentDots
 } from '@fortawesome/free-regular-svg-icons'
-import './index.css'
-import { Routes, Route } from 'react-router-dom';
-
-
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchAuthMe, selectIsAuth } from './store/slices/auth.js';
-
 library.add(
   faPager, faUsers, faUserGroup, faFilm,
   faMusic, faAlignJustify, faLocationPin, faFileLines,
@@ -31,18 +32,30 @@ library.add(
   faComment, faImage, faThumbsUp, faThumbsDown,
   faCommentDots)
 
-function App() {
 
+function App() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(fetchAuthMe());
+    dispatch(fetchAllUsers());
+    dispatch(fetchAbout());
+    dispatch(fetchSlider());
+
   }, []);
+
+  const state = useSelector((state) => state.auth?.data?._id);
+  if (state !== undefined) localStorage.setItem('Link', state)
+  console.log(state)
+  if (window.location.pathname === '/') {
+    return <Navigate to={`Profile/${localStorage.Link}`} />;
+  }
+
 
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/Profile/:id" element={<Profile />} />,
+        <Route path="Profile/:id" element={<Profile />} />,
         <Route path="/:category/:id" element={<Photo />} />,
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Registration />} />

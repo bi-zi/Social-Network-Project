@@ -2,17 +2,21 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Compressor from 'compressorjs';
 import { setPostImages, setSliderImages, setAvatarImages } from '../store/images.js';
+import { useParams } from 'react-router-dom';
+import { fetchUserUpdate, fetchAllUsers } from '../store/slices/user';
+import { fetchSlider, fetchSliderPost, fetchSliderPush } from '../store/slices/slider';
 
 function ImageParsing() {
   const dispatch = useDispatch();
   const parsing = useSelector((state) => state.images);
-
+  const state = useSelector((state) => state);
+  const { id } = useParams();
+  const slider = state.slider?.slider?.find((x) => x.user === id);
   const [images, setImages] = React.useState([]);
-
 
   const handleCompressedUpload = (e) => {
     const image = e.target.files[0];
-    console.log(e.target.files[0]['size']);
+    //console.log(e.target.files[0]['size']);
     new Compressor(image, {
       quality: 0.3, // 0.6 can also be used, but its not recommended to go below.
       success: (compressedResult) => {
@@ -20,22 +24,43 @@ function ImageParsing() {
       },
     });
   };
+console.log(5);
+  const onAvatarAndSlider = async (value) => {
+    if (parsing.inputNumber === '0') await dispatch(fetchUserUpdate({ imageUrl: [value][0] }, id));
+    dispatch(fetchAllUsers());
 
+    if (slider?.sliderImg.length < 1 && parsing.inputNumber === '0') {
+      await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
+    }
+    if (slider?.sliderImg.length > 0 && parsing.inputNumber === '0') {
+      await dispatch(fetchSliderPush({ sliderImg: [value][0] }, id));
+    }
+
+    if (slider?.sliderImg.length < 1 && parsing.inputNumber === '1') {
+      await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
+    }
+
+    if (slider?.sliderImg.length > 0 && parsing.inputNumber === '1') {
+      await dispatch(fetchSliderPush({ sliderImg: [value][0] }, id));
+    }
+    console.log(state.slider?.slider);
+    dispatch(fetchSlider());
+  };
   useEffect(() => {
     if (images.length < 1) return;
 
     let file = images;
-    console.log(images['size']);
+    //console.log(images['size']);
     let reader = new FileReader();
-    reader.onload = (e) => {
+
+    reader.onload = async (e) => {
       parsing.inputNumber === '0'
-        ? dispatch(setAvatarImages(e.target.result)) && dispatch(setSliderImages(e.target.result))
+        ? onAvatarAndSlider(e.target.result) && dispatch(setSliderImages(e.target.result))
         : parsing.inputNumber === '1'
         ? dispatch(setSliderImages(e.target.result))
         : dispatch(setPostImages(e.target.result));
     };
     reader.readAsDataURL(file);
-
     setImages([]);
   }, [images]);
 
