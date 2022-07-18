@@ -54,7 +54,7 @@ function Wall() {
     <>
       {[...wallPost]?.reverse()?.map((x, index) => (
         <div className={`wall ${index}`} key={index}>
-          <img src={state.images.avatarImages} alt="" className="wall_avatar" />
+          <img src={state.user.userOne?.[0].imageUrl} alt="" className="wall_avatar" />
 
           <div className="wall_fullName">Alexey Tsvetkov</div>
           <div className="wall_date">{x[3]}</div>

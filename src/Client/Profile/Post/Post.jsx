@@ -56,7 +56,7 @@ function Post() {
 
   return (
     <div className="post_container">
-      <img src={state.images.avatarImages} alt="" className="post_avatar" />
+      <img src={state.user.userOne?.[0].imageUrl} alt="" className="post_avatar" />
 
       <input
         type="text"

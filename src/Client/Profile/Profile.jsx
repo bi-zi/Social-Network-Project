@@ -17,7 +17,7 @@ import { selectIsAuth } from '../store/slices/auth';
 function Profile() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-console.log(2);
+
   const isAuth = useSelector(selectIsAuth);
   if (isAuth === false) {
     return <Navigate to="/Login" />;

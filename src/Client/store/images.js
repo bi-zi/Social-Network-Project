@@ -3,7 +3,7 @@ import axios from '../tryBack/axios.js'
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   const { data } = await axios.get('/posts');
-  console.log(data)
+
   return data;
 });
 

@@ -3,43 +3,47 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAvatarImageDelete, setSLiderImagesDelete, setPostImagesDelete } from '../../store/images';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fetchUserUpdate, fetchOneUser } from '../../store/slices/user';
 import './style.css';
 
 function Photo() {
   const dispatch = useDispatch();
-  const { category, id } = useParams();
+  const { user, category, id } = useParams();
   const state = useSelector((state) => state);
-
-
-
+  const avatar = state.user?.usersAll?.find((x) => x._id === user);
+  const slider = state.slider.slider?.find((x) => x.user === user);
+  console.log(user);
   let readyPhotos =
     category === 'PhotoAvatar'
-      ? [state.images.avatarImages]
+      ? avatar?.imageUrl
       : category === 'PhotoSlider'
-      ? state.images.sliderImages
+      ? slider?.sliderImg
       : state.images.postImages;
 
-
-  const onPhotoDelete = () => {
+  const onPhotoDelete = async () => {
     category === 'PhotoAvatar'
-      ? dispatch(setAvatarImageDelete('https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png'))
+      ? await dispatch(
+          fetchUserUpdate(
+            { imageUrl: 'https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png' },
+            user,
+          ),
+        )
       : category === 'PhotoSlider'
       ? dispatch(setSLiderImagesDelete(readyPhotos.filter((x, index) => index !== +id)))
       : dispatch(setPostImagesDelete(readyPhotos.filter((x, index) => index !== +id)));
+    dispatch(fetchOneUser(user));
   };
-
-
 
   return (
     <div className="photo_viewing">
-      <Link to="/" style={{ color: '#000000' }} className="cloce">
+      <Link to={`/Profile/${user}`} style={{ color: '#000000' }} className="cloce">
         <FontAwesomeIcon className="close" icon="fa-solid fa-xmark" />
       </Link>
       <img src={readyPhotos[id]} alt="" className="photo" />
       <div className="picture_control_panel">
         <Link
           className="delete_photo"
-          to="/"
+          to={`/Profile/${user}`}
           style={{ color: '#ffffff', textDecoration: 'none' }}
           onClick={onPhotoDelete}>
           Удалить фото

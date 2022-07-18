@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Compressor from 'compressorjs';
 import { setPostImages, setSliderImages, setAvatarImages } from '../store/images.js';
 import { useParams } from 'react-router-dom';
-import { fetchUserUpdate, fetchAllUsers } from '../store/slices/user';
+import { fetchUserUpdate, fetchOneUser } from '../store/slices/user';
 import { fetchSlider, fetchSliderPost, fetchSliderPush } from '../store/slices/slider';
+import { fetchAuthMe } from '../store/slices/auth';
 
 function ImageParsing() {
   const dispatch = useDispatch();
@@ -13,6 +14,33 @@ function ImageParsing() {
   const { id } = useParams();
   const slider = state.slider?.slider?.find((x) => x.user === id);
   const [images, setImages] = React.useState([]);
+  const sliderImgLength = slider?.sliderImg.length;
+
+  // console.log(slider, parsing.inputNumber);
+  const onAvatarAndSlider = async (value) => {
+    if (parsing.inputNumber === '0') {
+      await dispatch(fetchUserUpdate({ imageUrl: [value][0] }, id));
+      dispatch(fetchOneUser(id));
+    }
+
+    if (slider === undefined && parsing.inputNumber === '0') {
+      await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
+    }
+
+    if ((sliderImgLength < 1 || sliderImgLength > 0) && parsing.inputNumber === '0') {
+      await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
+    }
+
+    if (slider === undefined && parsing.inputNumber === '1') {
+      await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
+    }
+
+    if ((sliderImgLength < 1 || sliderImgLength > 0) && parsing.inputNumber === '1') {
+      await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
+    }
+
+    dispatch(fetchSlider());
+  };
 
   const handleCompressedUpload = (e) => {
     const image = e.target.files[0];
@@ -24,28 +52,7 @@ function ImageParsing() {
       },
     });
   };
-console.log(5);
-  const onAvatarAndSlider = async (value) => {
-    if (parsing.inputNumber === '0') await dispatch(fetchUserUpdate({ imageUrl: [value][0] }, id));
-    dispatch(fetchAllUsers());
 
-    if (slider?.sliderImg.length < 1 && parsing.inputNumber === '0') {
-      await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
-    }
-    if (slider?.sliderImg.length > 0 && parsing.inputNumber === '0') {
-      await dispatch(fetchSliderPush({ sliderImg: [value][0] }, id));
-    }
-
-    if (slider?.sliderImg.length < 1 && parsing.inputNumber === '1') {
-      await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
-    }
-
-    if (slider?.sliderImg.length > 0 && parsing.inputNumber === '1') {
-      await dispatch(fetchSliderPush({ sliderImg: [value][0] }, id));
-    }
-    console.log(state.slider?.slider);
-    dispatch(fetchSlider());
-  };
   useEffect(() => {
     if (images.length < 1) return;
 
@@ -53,12 +60,8 @@ console.log(5);
     //console.log(images['size']);
     let reader = new FileReader();
 
-    reader.onload = async (e) => {
-      parsing.inputNumber === '0'
-        ? onAvatarAndSlider(e.target.result) && dispatch(setSliderImages(e.target.result))
-        : parsing.inputNumber === '1'
-        ? dispatch(setSliderImages(e.target.result))
-        : dispatch(setPostImages(e.target.result));
+    reader.onload = (e) => {
+      onAvatarAndSlider(e.target.result);
     };
     reader.readAsDataURL(file);
     setImages([]);
@@ -70,7 +73,7 @@ console.log(5);
       <input
         type="file"
         name="file"
-        accept="image/*"
+        accept="image/jpeg"
         onChange={(e) => handleCompressedUpload(e)}
         className="input_parser"
       />

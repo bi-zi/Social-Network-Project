@@ -2,11 +2,9 @@ import React from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAboutPost, fetchAbout, fetchAboutUpdate } from '../../store/slices/about.js';
-import { fetchAllUsers } from '../../store/slices/user.js';
-import { Navigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { fetchAuthMe } from '../../store/slices/auth';
+import { fetchOneUser } from '../../store/slices/user.js';
 
 function UserInfo() {
   const dispatch = useDispatch();
@@ -15,7 +13,8 @@ function UserInfo() {
 
   const [closeInfo, setCloseInfo] = React.useState(0);
   const about = Array.isArray(state.about?.data) ? state.about.data?.find((x) => x.user === id) : '';
-  const users = state.user.users?.find((x) => x._id === id);
+
+  const user = state.user.userOne?.[0];
 
   const onSubmit = async (values, id) => {
     setCloseInfo(0);
@@ -30,7 +29,6 @@ function UserInfo() {
     }
   };
 
-console.log(6)
   const {
     register,
     handleSubmit,
@@ -39,13 +37,16 @@ console.log(6)
     mode: 'onSubmit',
   });
 
-
+  React.useEffect(() => {
+    dispatch(fetchAbout());
+    dispatch(fetchOneUser(id));
+  }, []);
 
   return (
     <>
       <div className="about">
         <div className="about_backGround">
-          <div className="full_name">{`${users?.fullName}`}</div>
+          <div className="full_name">{`${user?.fullName || ''}`}</div>
           <div className="line"></div>
           {closeInfo === 0 ? (
             <>

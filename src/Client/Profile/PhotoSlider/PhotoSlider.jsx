@@ -9,16 +9,15 @@ import './style.css';
 import ImageParsing from '../../ImageParsing/ImageParsing';
 import { setInputNumber } from '../../store/images';
 import { useParams } from 'react-router-dom';
+import { fetchSlider } from '../../store/slices/slider.js';
+
 
 function PhotoSlider() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const { id } = useParams();
 
-  //let readyPhotos = state.images.sliderImages;
   let readyPhotos = state.slider?.slider?.find((x) => x.user === id)?.sliderImg;
-  //console.log(state.slider?.slider?.find((x) => x.user === id).sliderImg);
-console.log(3);
   const settings = {
     className: 'center',
     infinite: true,
@@ -26,6 +25,11 @@ console.log(3);
     slidesToShow: 3,
     swipeToSlide: true,
   };
+
+  React.useEffect(() => {
+    dispatch(fetchSlider());
+  }, []);
+
 
   return (
     <div className="images">
@@ -40,7 +44,7 @@ console.log(3);
         <Slider {...settings}>
           {readyPhotos?.map((image, index) => {
             return (
-              <Link to={`/PhotoSlider/${index}`} className="slider_link" key={index}>
+              <Link to={`/${id}/PhotoSlider/${index}`} className="slider_link" key={index}>
                 <div className="image_item" key={index}>
                   <img src={image} alt="" className="slider_image" width="290px" height="290px" />
                 </div>

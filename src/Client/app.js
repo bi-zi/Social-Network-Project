@@ -11,9 +11,8 @@ import './index.css'
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchAuthMe, } from './store/slices/auth.js';
-import { fetchAbout } from './store/slices/about.js';
-import { fetchAllUsers } from './store/slices/user.js';
-import { fetchSlider } from './store/slices/slider.js';
+import { fetchAllUsers, } from './store/slices/user.js';
+
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import {
@@ -39,14 +38,11 @@ function App() {
   React.useEffect(() => {
     dispatch(fetchAuthMe());
     dispatch(fetchAllUsers());
-    dispatch(fetchAbout());
-    dispatch(fetchSlider());
-
   }, []);
 
   const state = useSelector((state) => state.auth?.data?._id);
   if (state !== undefined) localStorage.setItem('Link', state)
-  console.log(state)
+
   if (window.location.pathname === '/') {
     return <Navigate to={`Profile/${localStorage.Link}`} />;
   }
@@ -56,7 +52,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="Profile/:id" element={<Profile />} />,
-        <Route path="/:category/:id" element={<Photo />} />,
+        <Route path="/:user/:category/:id" element={<Photo />} />,
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Registration />} />
       </Route>
