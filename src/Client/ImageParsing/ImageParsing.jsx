@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Compressor from 'compressorjs';
-import { setPostImages, setSliderImages, setAvatarImages } from '../store/images.js';
+import { setCreateImg } from '../store/slices/post';
 import { useParams } from 'react-router-dom';
 import { fetchUserUpdate, fetchOneUser } from '../store/slices/user';
 import { fetchSlider, fetchSliderPost, fetchSliderPush } from '../store/slices/slider';
-import { fetchAuthMe } from '../store/slices/auth';
 
 function ImageParsing() {
   const dispatch = useDispatch();
@@ -16,13 +15,11 @@ function ImageParsing() {
   const [images, setImages] = React.useState([]);
   const sliderImgLength = slider?.sliderImg.length;
 
-  // console.log(slider, parsing.inputNumber);
   const onAvatarAndSlider = async (value) => {
     if (parsing.inputNumber === '0') {
       await dispatch(fetchUserUpdate({ imageUrl: [value][0] }, id));
       dispatch(fetchOneUser(id));
     }
-
     if (slider === undefined && parsing.inputNumber === '0') {
       await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
     }
@@ -37,6 +34,10 @@ function ImageParsing() {
 
     if ((sliderImgLength < 1 || sliderImgLength > 0) && parsing.inputNumber === '1') {
       await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
+    }
+
+    if (parsing.inputNumber === '2') {
+      dispatch(setCreateImg(value));
     }
 
     dispatch(fetchSlider());

@@ -12,7 +12,7 @@ function Photo() {
   const state = useSelector((state) => state);
   const avatar = state.user?.usersAll?.find((x) => x._id === user);
   const slider = state.slider.slider?.find((x) => x.user === user);
-  console.log(user);
+  
   let readyPhotos =
     category === 'PhotoAvatar'
       ? avatar?.imageUrl

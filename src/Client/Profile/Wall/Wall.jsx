@@ -1,31 +1,33 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { useParams } from 'react-router-dom';
 import { setWallContent, setWallContentNew, setWallComments, setWallDate } from '../../store/wall';
+import { fetchUserPostsAll, fetchPostLike } from '../../store/slices/post';
 import './style.css';
 
 function Wall() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-  const wall = useSelector((state) => state.wall);
+  const wall = useSelector((state) => state.post.userPosts);
   const [comment, setComment] = React.useState('0');
-
-  localStorage.setItem('wallContent', JSON.stringify(wall.wallContent));
-  let wallPost = wall.wallContent;
+  const { id } = useParams();
+  let wallPost = wall.post?.[0]?.post;
+  const buffer = [];
+  if (wallPost !== undefined) {
+    for (let i = wallPost.length - 1; i !== -1; --i) {
+      buffer.push(wallPost[i]);
+    }
+  }
+  wallPost = buffer;
 
   let date = new Date();
   date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-  const like = (b) => {
-    let mass = [...wallPost].reverse().slice();
-    let arr = [...wallPost].reverse()[b].slice();
-    let sum = arr[4];
-
-    arr.splice(4, 1, sum + 1);
-    mass.splice(b, 1, arr);
-
-    dispatch(setWallContentNew(mass.reverse()));
+  const like = async (b) => {
+    await dispatch(fetchPostLike({ _id: b }, id));
+    dispatch(fetchUserPostsAll(id));
+    console.log(b);
   };
 
   const dislike = (b) => {
@@ -52,19 +54,19 @@ function Wall() {
 
   return (
     <>
-      {[...wallPost]?.reverse()?.map((x, index) => (
+      {wallPost?.map((content, index) => (
         <div className={`wall ${index}`} key={index}>
           <img src={state.user.userOne?.[0].imageUrl} alt="" className="wall_avatar" />
 
           <div className="wall_fullName">Alexey Tsvetkov</div>
-          <div className="wall_date">{x[3]}</div>
+          <div className="wall_date">{content.date}</div>
           <FontAwesomeIcon className="wall_menu" icon="fa-solid fa-ellipsis" />
 
           <div className="wall_content">
-            {x[0]?.length > 0 ? <div className="wall_text">{x[0]}</div> : ''}
-            {x[1]?.length > 0 ? (
+            {content.text?.length > 0 ? <div className="wall_text">{content.text}</div> : ''}
+            {content.imagesPost?.length > 0 ? (
               <div className="wall_images">
-                {x[1].map((image, index) => {
+                {content.imagesPost.map((image, index) => {
                   return (
                     <div key={index}>
                       <img
@@ -78,11 +80,11 @@ function Wall() {
                             ? 'wall_small_right_image'
                             : 'wall_small_down_image'
                         }
-                    ${x[1].length === 1 ? 'wall_one_image' : ''}
+                    ${content.imagesPost.length === 1 ? 'wall_one_image' : ''}
                     ${
-                      x[1].length === 2 && index === 0
+                      content.imagesPost.length === 2 && index === 0
                         ? 'wall_two_image_first'
-                        : x[1].length === 2 && index === 1
+                        : content.imagesPost.length === 2 && index === 1
                         ? 'wall_two_image_second'
                         : ''
                     }`}
@@ -94,10 +96,10 @@ function Wall() {
             ) : (
               ''
             )}
-            {x[2]?.split('/')[4] !== 'undefined' ? (
+            {content.videoPost.length > 0 ? (
               <>
                 <iframe
-                  src={x?.[2]}
+                  src={content.videoPost}
                   title="YouTube video player"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -107,23 +109,21 @@ function Wall() {
             ) : (
               ''
             )}
-            <div className="wall_from">
-              Post from {`${state.user?.checkAuth[0]} ${state.user?.checkAuth[1]}`}
-            </div>
+            <div className="wall_from">Post from {`${9}`}</div>
 
             <FontAwesomeIcon
               className="wall_like_icon"
               icon="fa-regular fa-thumbs-up"
-              onClick={() => like(index)}
+              onClick={() => like(content._id)}
             />
-            <span className="like_number">{x[4]}</span>
+            <span className="like_number">{content.likePost}</span>
 
             <FontAwesomeIcon
               className="wall_dislike_icon"
               icon="fa-regular fa-thumbs-down"
               onClick={() => dislike(index)}
             />
-            <span className="dislike_number">{x[5]}</span>
+            <span className="dislike_number">{content.dislikePost}</span>
 
             <FontAwesomeIcon
               className="wall_comment_icon"
@@ -145,12 +145,12 @@ function Wall() {
                   <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
                 </button>
 
-                {[...x[6]].reverse().map((x, index) => (
+                {[...content[6]].reverse().map((content, index) => (
                   <div className="comment" key={index}>
                     <img src={state.images.avatarImages} alt="" className="comment_avatar" />
                     <div className="comment_fullName">{`${state.user.checkAuth[0]} ${state.user.checkAuth[1]}`}</div>
-                    <div className="comment_time">{x[1]}</div>
-                    <div className="comment_text">{x[0]}</div>
+                    <div className="comment_time">{content[1]}</div>
+                    <div className="comment_text">{content[0]}</div>
                   </div>
                 ))}
               </div>

@@ -13,7 +13,6 @@ import Music from './Music/Music';
 import { Navigate } from 'react-router-dom';
 import { selectIsAuth } from '../store/slices/auth';
 
-
 function Profile() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
@@ -23,14 +22,12 @@ function Profile() {
     return <Navigate to="/Login" />;
   }
 
-
-
   return (
     <div className="container">
       <UserInfo />
       <PhotoSlider />
       <Post />
-
+      <Wall />
       <Avatar />
       <Friends />
       <Groups />

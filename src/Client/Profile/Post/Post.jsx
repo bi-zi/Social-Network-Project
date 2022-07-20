@@ -1,12 +1,21 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPostText, setPostVideo } from '../../store/post';
+import {
+  setCreatText,
+  setCreateImg,
+  setCreateImgDelete,
+  setCreateVid,
+  fetchUserPostsAll,
+  fetchCreatePost,
+  fetchPostPush,
+} from '../../store/slices/post';
+
+import { useParams } from 'react-router-dom';
 import { setPostImagesDelete } from '../../store/images';
 
 import ImageParsing from '../../ImageParsing/ImageParsing';
 import { setInputNumber } from '../../store/images';
-import { setWallText, setWallImages, setWallVideo, setWallDate, setWallContent } from '../../store/wall';
 
 import { Link } from 'react-router-dom';
 import './style.css';
@@ -14,59 +23,74 @@ import './style.css';
 function Post() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
+  const { id } = useParams();
+  const firstRef = React.useRef(null);
   const [postEffect, setPostEffect] = React.useState();
 
-  localStorage.setItem('postImages', JSON.stringify(state.images.postImages));
-  let linkСheck = state.post.postVideo?.split('/');
-  linkСheck = linkСheck?.[0] === 'https:' && linkСheck[2] === 'www.youtube.com';
+  localStorage.setItem('postImages', JSON.stringify(state.post.createImg));
+  localStorage.setItem('postText', state.post.createText);
 
-  let readyPhotos = state.images.postImages;
-  let url = state.post.postVideo;
-  let src = url?.split('/')[3]?.split('=')[1];
-
-  if (src === undefined) src = url?.split('/')[3];
-  if (src === 'embed') src = url?.split('/')[4];
-
-  let local = `https://www.youtube.com/embed/${src}`;
-
-  if (linkСheck) localStorage.setItem('postVideo', local);
-  if (state.post.postVideo?.length === 0) localStorage.setItem('postVideo', url);
-
-  const textLength = state.post.postText.length;
-  const postText = state.post.postText;
+  const readyPhotos = state.post.createImg;
+  const textLength = state.post.createText.length;
+  const postText = state.post.createText;
   const numImg = readyPhotos.length;
 
-  const sendPost = () => {
-    let date = new Date();
-    date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+  let linkСheck = state.post.createVid?.split('/');
+  linkСheck = linkСheck?.[0] === 'https:';
 
-    if (textLength > 0 || numImg > 0 || local.split('/')[4] !== 'undefined') {
-      dispatch(setWallContent([state.post.postText, state.images.postImages, local, date, 0, 0, []]));
-      dispatch(setWallText(state.post.postText));
-      dispatch(setWallImages(state.images.postImages));
-      dispatch(setWallVideo(local));
-      dispatch(setWallDate(date));
+  let url = state.post.createVid;
+  let src = url?.split('/')[3]?.split('=')[1]?.split('&')[0];
+  if (src === undefined) src = url.split('/')[3];
+  if (src === 'embed') src = url?.split('/')[4];
+  let local = src === undefined ? '' : `https://www.youtube.com/embed/${src}`;
+
+  if (linkСheck) localStorage.setItem('postVideo', local);
+  if (state.post.createVid?.length === 0) localStorage.setItem('postVideo', url);
+
+
+  const sendPost = async () => {
+    if (
+      ((textLength > 0 || numImg > 0 || local.length > 0) && state.post.userPosts.post === null) ||
+      state.post.userPosts.post.length === 0
+    ) {
+     await dispatch(
+       fetchCreatePost({ text: postText, videoPost: local, imagesPost: state.post.createImg }),
+     );
     }
 
-    dispatch(setPostImagesDelete([]));
-    dispatch(setPostText(''));
-    dispatch(setPostVideo(''));
-    setPostEffect();
+    if ((textLength > 0 || numImg > 0 || local.length > 0) && state.post.userPosts.post !== null) {
+    await dispatch(
+      fetchPostPush({ text: postText, videoPost: local, imagesPost: state.post.createImg }, id),
+    );
+    }
+    if (textLength > 0 || numImg > 0 || local.length > 0) {
+     await dispatch(fetchUserPostsAll(id));
+      firstRef.current.value = '';
+      dispatch(setCreateImgDelete([]));
+      dispatch(setCreatText(''));
+      dispatch(setCreateVid(''));
+      setPostEffect();
+    }
   };
+
+  React.useEffect(() => {
+    dispatch(fetchUserPostsAll(id));
+  }, []);
 
   return (
     <div className="post_container">
       <img src={state.user.userOne?.[0].imageUrl} alt="" className="post_avatar" />
 
       <input
+        ref={firstRef}
         type="text"
         className="post_text_input"
         placeholder="Post an entry"
         maxLength={180}
-        onChange={(e) => dispatch(setPostText(e.target.value))}
+        defaultValue={postText}
+        onChange={(e) => dispatch(setCreatText(e.target.value))}
       />
-
-      <button className="post_make_button" onClick={() => sendPost()}>
+      <button className="post_make_button" type="submit" onClick={() => sendPost()}>
         <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
       </button>
 
@@ -91,7 +115,7 @@ function Post() {
           type="text"
           className="post_input_video"
           placeholder="Insert YouTube video link"
-          onChange={(e) => dispatch(setPostVideo(e.target.value))}
+          onChange={(e) => dispatch(setCreateVid(e.target.value))}
         />
       ) : (
         ''
@@ -144,7 +168,7 @@ function Post() {
         {/* videoRender */}
         {linkСheck ? (
           <>
-            <button className="video_delete" onClick={() => dispatch(setPostVideo(''))}>
+            <button className="video_delete" onClick={() => dispatch(setCreateVid(''))}>
               Delete video
             </button>
             <iframe
