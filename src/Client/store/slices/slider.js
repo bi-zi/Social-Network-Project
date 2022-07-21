@@ -33,7 +33,6 @@ const sliderSlice = createSlice({
   extraReducers: {
     [fetchSlider.pending]: (state) => {
       state.status = 'loading';
-      state.slider = null;
     },
     [fetchSlider.fulfilled]: (state, action) => {
       state.status = 'loaded';
@@ -41,7 +40,6 @@ const sliderSlice = createSlice({
     },
     [fetchSlider.rejected]: (state) => {
       state.status = 'error';
-      state.slider = null;
     },
 
   }

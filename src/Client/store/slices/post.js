@@ -18,18 +18,32 @@ export const fetchPostPush = createAsyncThunk('/post/PostPush/fetchPostPush', as
   return data;
 });
 
-export const fetchPostLike = createAsyncThunk('/post/like/fetchPostLike', async (params, id) => {
+export const fetchPostLike = createAsyncThunk('/post/like/fetchPostLike', async (params,id) => {
   const { data } = await axios.patch(`/post/like/${id}`, params);
 
   return data;
 });
 
+export const fetchPostDislike = createAsyncThunk('/post/dislike/fetchPostDislike', async (params, id) => {
+  const { data } = await axios.patch(`/post/dislike/${id}`, params);
+
+  return data;
+});
+
+export const fetchCommentPush = createAsyncThunk('/post/commentPush/fetchCommentPush', async (params, id) => {
+  const { data } = await axios.patch(`/post/commentPush/${id}`, params);
+
+  return data;
+});
+
+
 const initialState = {
   createText: localStorage.postText,
   createImg: [...JSON.parse(localStorage.getItem('postImages'))],
   createVid: localStorage.postVideo,
+  createComment: '',
   userPosts: {
-    post: null,
+    post: [],
     status: 'loading',
   }
 };
@@ -49,14 +63,16 @@ const postSlice = createSlice({
     },
     setCreateVid: (state, action) => {
       state.createVid = action.payload
-    }
+    },
+    setCreateComment: (state, action) => {
+      state.createComment = action.payload
+    },
 
   },
 
   extraReducers: {
     [fetchUserPostsAll.pending]: (state) => {
       state.status = 'loading';
-      state.userPosts.post = null;
     },
     [fetchUserPostsAll.fulfilled]: (state, action) => {
       state.userPosts.status = 'loaded';
@@ -64,11 +80,11 @@ const postSlice = createSlice({
     },
     [fetchUserPostsAll.rejected]: (state) => {
       state.userPosts.status = 'error';
-      state.userPosts.post = null;
     },
+
 
   }
 });
 
-export const { setCreatText, setCreateImg, setCreateImgDelete, setCreateVid } = postSlice.actions
+export const { setCreatText, setCreateImg, setCreateImgDelete, setCreateVid, setCreateComment } = postSlice.actions
 export const postReducer = postSlice.reducer;

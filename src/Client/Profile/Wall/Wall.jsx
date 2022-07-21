@@ -3,7 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams } from 'react-router-dom';
 import { setWallContent, setWallContentNew, setWallComments, setWallDate } from '../../store/wall';
-import { fetchUserPostsAll, fetchPostLike } from '../../store/slices/post';
+import {
+  fetchUserPostsAll,
+  fetchPostLike,
+  fetchPostDislike,
+  setCreateComment,
+  fetchCommentPush,
+} from '../../store/slices/post';
 import './style.css';
 
 function Wall() {
@@ -12,6 +18,7 @@ function Wall() {
   const wall = useSelector((state) => state.post.userPosts);
   const [comment, setComment] = React.useState('0');
   const { id } = useParams();
+
   let wallPost = wall.post?.[0]?.post;
   const buffer = [];
   if (wallPost !== undefined) {
@@ -24,32 +31,37 @@ function Wall() {
   let date = new Date();
   date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-  const like = async (b) => {
-    await dispatch(fetchPostLike({ _id: b }, id));
+  console.log(wallPost);
+  const like = async (postId) => {
+    await dispatch(fetchPostLike({ _id: postId }, id));
     dispatch(fetchUserPostsAll(id));
-    console.log(b);
   };
 
-  const dislike = (b) => {
-    let mass = [...wallPost].reverse().slice();
-    let arr = [...wallPost].reverse()[b].slice();
-    let sum = arr[5];
-
-    arr.splice(5, 1, sum + 1);
-    mass.splice(b, 1, arr);
-
-    dispatch(setWallContentNew(mass.reverse()));
+  const dislike = async (postId) => {
+    await dispatch(fetchPostDislike({ _id: postId }, id));
+    dispatch(fetchUserPostsAll(id));
   };
 
-  const addComment = (b) => {
-    let mass = [...wallPost].reverse().slice();
-    let arr = [...wallPost].reverse()[b].slice();
-    let sum = [...arr[6], [wall.wallComments, date]];
+  const addComment = async (postId) => {
+    await dispatch(
+      fetchCommentPush(
+        {
+          _id: postId,
+          text: state.post.createComment,
+        },
+        id,
+      ),
+    );
+    dispatch(fetchUserPostsAll(id));
+    dispatch(setCreateComment(''));
+    // let mass = [...wallPost].reverse().slice();
+    // let arr = [...wallPost].reverse()[b].slice();
+    // let sum = [...arr[6], [wall.wallComments, date]];
 
-    arr.splice(6, 1, sum);
-    mass.splice(b, 1, arr);
+    // arr.splice(6, 1, sum);
+    // mass.splice(b, 1, arr);
 
-    dispatch(setWallContentNew(mass.reverse()));
+    // dispatch(setWallContentNew(mass.reverse()));
   };
 
   return (
@@ -121,7 +133,7 @@ function Wall() {
             <FontAwesomeIcon
               className="wall_dislike_icon"
               icon="fa-regular fa-thumbs-down"
-              onClick={() => dislike(index)}
+              onClick={() => dislike(content._id)}
             />
             <span className="dislike_number">{content.dislikePost}</span>
 
@@ -138,19 +150,19 @@ function Wall() {
                 <textarea
                   className="comment_input"
                   placeholder="Write your comment here"
-                  onChange={(e) => dispatch(setWallComments(e.target.value))}
+                  onChange={(e) => dispatch(setCreateComment(e.target.value))}
                 />
 
-                <button className="input_button" onClick={() => addComment(index)}>
+                <button className="input_button" onClick={() => addComment(content._id)}>
                   <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
                 </button>
 
-                {[...content[6]].reverse().map((content, index) => (
+                {content.commentPost?.map((comment, index) => (
                   <div className="comment" key={index}>
                     <img src={state.images.avatarImages} alt="" className="comment_avatar" />
-                    <div className="comment_fullName">{`${state.user.checkAuth[0]} ${state.user.checkAuth[1]}`}</div>
-                    <div className="comment_time">{content[1]}</div>
-                    <div className="comment_text">{content[0]}</div>
+                    <div className="comment_fullName">{`${state.user.checkAuth?.[0]} ${state.user.checkAuth?.[1]}`}</div>
+                    <div className="comment_time">{comment[1]}</div>
+                    <div className="comment_text">{comment[0]}</div>
                   </div>
                 ))}
               </div>

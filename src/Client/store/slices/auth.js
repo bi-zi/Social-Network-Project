@@ -33,7 +33,6 @@ const authSlice = createSlice({
   extraReducers: {
     [fetchAuth.pending]: (state) => {
       state.status = 'loading';
-      state.data = null;
     },
     [fetchAuth.fulfilled]: (state, action) => {
       state.status = 'loaded';
@@ -41,12 +40,10 @@ const authSlice = createSlice({
     },
     [fetchAuth.rejected]: (state) => {
       state.status = 'error';
-      state.data = null;
     },
 
     [fetchAuthMe.pending]: (state) => {
       state.status = 'loading';
-      state.data = null;
     },
     [fetchAuthMe.fulfilled]: (state, action) => {
       state.status = 'loaded';
@@ -54,12 +51,10 @@ const authSlice = createSlice({
     },
     [fetchAuthMe.rejected]: (state) => {
       state.status = 'error';
-      state.data = null;
     },
 
     [fetchRegister.pending]: (state) => {
       state.status = 'loading';
-      state.data = null;
     },
     [fetchRegister.fulfilled]: (state, action) => {
       state.status = 'loaded';
@@ -67,7 +62,6 @@ const authSlice = createSlice({
     },
     [fetchRegister.rejected]: (state) => {
       state.status = 'error';
-      state.data = null;
     },
   },
 });

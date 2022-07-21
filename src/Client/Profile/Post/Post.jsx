@@ -21,6 +21,7 @@ import { Link } from 'react-router-dom';
 import './style.css';
 
 function Post() {
+
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const { id } = useParams();
@@ -47,24 +48,23 @@ function Post() {
   if (linkСheck) localStorage.setItem('postVideo', local);
   if (state.post.createVid?.length === 0) localStorage.setItem('postVideo', url);
 
-
   const sendPost = async () => {
-    if (
-      ((textLength > 0 || numImg > 0 || local.length > 0) && state.post.userPosts.post === null) ||
-      state.post.userPosts.post.length === 0
-    ) {
-     await dispatch(
-       fetchCreatePost({ text: postText, videoPost: local, imagesPost: state.post.createImg }),
-     );
+
+    if ((textLength > 0 || numImg > 0 || local.length > 0) && state.post.userPosts.post.length === 0) {
+      console.log(1);
+      await dispatch(
+        fetchCreatePost({ text: postText, videoPost: local, imagesPost: state.post.createImg }),
+      );
     }
 
-    if ((textLength > 0 || numImg > 0 || local.length > 0) && state.post.userPosts.post !== null) {
-    await dispatch(
-      fetchPostPush({ text: postText, videoPost: local, imagesPost: state.post.createImg }, id),
-    );
+    if ((textLength > 0 || numImg > 0 || local.length > 0) && state.post.userPosts.post.length > 0) {
+      console.log(2);
+      await dispatch(
+        fetchPostPush({ text: postText, videoPost: local, imagesPost: state.post.createImg }, id),
+      );
     }
     if (textLength > 0 || numImg > 0 || local.length > 0) {
-     await dispatch(fetchUserPostsAll(id));
+      await dispatch(fetchUserPostsAll(id));
       firstRef.current.value = '';
       dispatch(setCreateImgDelete([]));
       dispatch(setCreatText(''));

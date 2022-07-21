@@ -34,7 +34,6 @@ const userSlice = createSlice({
   extraReducers: {
     [fetchAllUsers.pending]: (state) => {
       state.status = 'loading';
-      state.usersAll = null;
     },
     [fetchAllUsers.fulfilled]: (state, action) => {
       state.status = 'loaded';
@@ -42,11 +41,9 @@ const userSlice = createSlice({
     },
     [fetchAllUsers.rejected]: (state) => {
       state.status = 'error';
-      state.usersAll = null;
     },
     [fetchOneUser.pending]: (state) => {
       state.status = 'loading';
-      state.userOne = null;
     },
     [fetchOneUser.fulfilled]: (state, action) => {
       state.status = 'loaded';
@@ -54,7 +51,6 @@ const userSlice = createSlice({
     },
     [fetchOneUser.rejected]: (state) => {
       state.status = 'error';
-      state.userOne = null;
     },
 
   }
