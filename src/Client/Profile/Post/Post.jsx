@@ -79,7 +79,7 @@ function Post() {
 
   return (
     <div className="post_container">
-      <img src={state.user.userOne?.[0].imageUrl} alt="" className="post_avatar" />
+      <img src={state.user.userOne?.imageUrl} alt="" className="post_avatar" />
 
       <input
         ref={firstRef}
@@ -136,7 +136,7 @@ function Post() {
           <div className="post_images_container">
             {readyPhotos.map((image, index) => {
               return (
-                <Link to={`/PhotoPost/${index}`} key={index}>
+                <Link to={`/${id}/CreatePost/${index}`} key={index}>
                   <img
                     key={index}
                     src={image}

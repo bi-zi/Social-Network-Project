@@ -11,7 +11,7 @@ function Avatar() {
   const state = useSelector((state) => state);
   const { id } = useParams();
 
-  const user = state.user.userOne?.[0];
+  const user = state.user.userOne;
 
 
 

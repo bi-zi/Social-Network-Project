@@ -6,7 +6,7 @@ export const fetchAllUsers = createAsyncThunk('user/fetchAllUsers', async () => 
   return data;
 });
 
-export const fetchOneUser = createAsyncThunk('user/one/id/fetchUserUpdate', async (id) => {
+export const fetchOneUser = createAsyncThunk('user/one/id/fetchUserUpdate', async ( id) => {
   const { data } = await axios.get(`/user/one/${id}`);
 
   return data;
@@ -19,8 +19,8 @@ export const fetchUserUpdate = createAsyncThunk('user/id/fetchUserUpdate', async
 });
 
 const initialState = {
-  usersAll: null,
-  userOne: null,
+  usersAll: [],
+  userOne: {},
   status: 'loading',
 };
 

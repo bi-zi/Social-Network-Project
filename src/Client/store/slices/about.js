@@ -19,7 +19,7 @@ export const fetchAboutUpdate = createAsyncThunk('about/id/fetchAboutUpdate', as
 
 
 const initialState = {
-  data: null,
+  data: [],
   status: 'loading',
 };
 

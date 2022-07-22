@@ -17,7 +17,7 @@ export const fetchAuthMe = createAsyncThunk('auth/fetchAuthMe', async () => {
 });
 
 const initialState = {
-  data: null,
+  data: [],
   status: 'loading',
 };
 
@@ -26,7 +26,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.data = null;
+      state.data = [];
     },
   },
 

@@ -18,8 +18,14 @@ export const fetchSliderPush = createAsyncThunk('slider/push/id/fetchSliderPush'
   return data;
 });
 
+export const fetchSliderDelete = createAsyncThunk('slider/delete/id/fetchSliderDelete', async (params, id) => {
+  const { data } = await axios.patch(`/slider/delete/${id}`, params);
+
+  return data;
+});
+
 const initialState = {
-  slider: null,
+  slider: [],
   status: 'loading',
 };
 

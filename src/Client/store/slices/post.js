@@ -36,6 +36,12 @@ export const fetchCommentPush = createAsyncThunk('/post/commentPush/fetchComment
   return data;
 });
 
+export const fetchPostDelete = createAsyncThunk('/post/deletePost/fetchPostDelete', async (params, id) => {
+  const { data } = await axios.patch(`/post/deletePost/${id}`, params);
+
+  return data;
+});
+
 
 const initialState = {
   createText: localStorage.postText,

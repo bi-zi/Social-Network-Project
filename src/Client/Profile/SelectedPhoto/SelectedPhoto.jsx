@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAvatarImageDelete, setSLiderImagesDelete, setPostImagesDelete } from '../../store/images';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchUserUpdate, fetchOneUser } from '../../store/slices/user';
+import { fetchSlider, fetchSliderDelete } from '../../store/slices/slider';
+import { setCreateImgDelete } from '../../store/slices/post';
 import './style.css';
 
 function Photo() {
@@ -12,26 +13,26 @@ function Photo() {
   const state = useSelector((state) => state);
   const avatar = state.user?.usersAll?.find((x) => x._id === user);
   const slider = state.slider.slider?.find((x) => x.user === user);
-  
+
   let readyPhotos =
     category === 'PhotoAvatar'
       ? avatar?.imageUrl
       : category === 'PhotoSlider'
       ? slider?.sliderImg
-      : state.images.postImages;
+      : state.post.createImg;
 
   const onPhotoDelete = async () => {
     category === 'PhotoAvatar'
-      ? await dispatch(
+      ? await (dispatch(
           fetchUserUpdate(
             { imageUrl: 'https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png' },
             user,
           ),
-        )
+        ),
+        dispatch(fetchOneUser(user)))
       : category === 'PhotoSlider'
-      ? dispatch(setSLiderImagesDelete(readyPhotos.filter((x, index) => index !== +id)))
-      : dispatch(setPostImagesDelete(readyPhotos.filter((x, index) => index !== +id)));
-    dispatch(fetchOneUser(user));
+      ? await (dispatch(fetchSliderDelete({ deleteId: id }, user)), dispatch(fetchSlider()))
+      : dispatch(setCreateImgDelete(readyPhotos.filter((x, index) => index !== +id)));
   };
 
   return (

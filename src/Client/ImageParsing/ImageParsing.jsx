@@ -19,6 +19,7 @@ function ImageParsing() {
     if (parsing.inputNumber === '0') {
       await dispatch(fetchUserUpdate({ imageUrl: [value][0] }, id));
       dispatch(fetchOneUser(id));
+      console.log(id)
     }
     if (slider === undefined && parsing.inputNumber === '0') {
       await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
