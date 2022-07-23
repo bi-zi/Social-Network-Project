@@ -11,7 +11,7 @@ function Photo() {
   const dispatch = useDispatch();
   const { user, category, id } = useParams();
   const state = useSelector((state) => state);
-  const avatar = state.user?.usersAll?.find((x) => x._id === user);
+  const avatar = state.user.userOne?.[0];
   const slider = state.slider.slider?.find((x) => x.user === user);
 
   let readyPhotos =
@@ -22,33 +22,43 @@ function Photo() {
       : state.post.createImg;
 
   const onPhotoDelete = async () => {
-    category === 'PhotoAvatar'
-      ? await (dispatch(
-          fetchUserUpdate(
-            { imageUrl: 'https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png' },
-            user,
-          ),
+    if (category === 'PhotoAvatar') {
+      await dispatch(
+        fetchUserUpdate(
+          { imageUrl: 'https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png' },
+          user,
         ),
-        dispatch(fetchOneUser(user)))
-      : category === 'PhotoSlider'
-      ? await (dispatch(fetchSliderDelete({ deleteId: id }, user)), dispatch(fetchSlider()))
-      : dispatch(setCreateImgDelete(readyPhotos.filter((x, index) => index !== +id)));
+      );
+      dispatch(fetchOneUser(user));
+    }
+
+    if (category === 'PhotoSlider') {
+      await dispatch(fetchSliderDelete({ deleteId: id }, user));
+      dispatch(fetchSlider());
+    }
+
+    if (category === 'CreatePost') {
+      dispatch(setCreateImgDelete(readyPhotos.filter((x, index) => index !== +id)));
+    }
   };
+
 
   return (
     <div className="photo_viewing">
       <Link to={`/Profile/${user}`} style={{ color: '#000000' }} className="cloce">
         <FontAwesomeIcon className="close" icon="fa-solid fa-xmark" />
       </Link>
-      <img src={readyPhotos[id]} alt="" className="photo" />
+      <img src={readyPhotos?.[id]} alt="" className="photo" />
       <div className="picture_control_panel">
-        <Link
-          className="delete_photo"
-          to={`/Profile/${user}`}
-          style={{ color: '#ffffff', textDecoration: 'none' }}
-          onClick={onPhotoDelete}>
-          Удалить фото
-        </Link>
+        { state.auth.data?._id === user ?
+          <Link
+            className="delete_photo"
+            to={`/Profile/${user}`}
+            style={{ color: '#ffffff', textDecoration: 'none' }}
+            onClick={() => onPhotoDelete()}>
+            Удалить фото
+          </Link>: ''
+        }
       </div>
     </div>
   );

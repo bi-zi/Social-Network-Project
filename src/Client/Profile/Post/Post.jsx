@@ -79,7 +79,7 @@ function Post() {
 
   return (
     <div className="post_container">
-      <img src={state.user.userOne?.imageUrl} alt="" className="post_avatar" />
+      <img src={state.user.userOne?.[0]?.imageUrl} alt="" className="post_avatar" />
 
       <input
         ref={firstRef}

@@ -14,7 +14,7 @@ function UserInfo() {
   const [closeInfo, setCloseInfo] = React.useState(0);
   const about = Array.isArray(state.about?.data) ? state.about.data?.find((x) => x.user === id) : '';
 
-  const user = state.user.userOne;
+  const user = state.user.userOne?.[0];
 
   const onSubmit = async (values, id) => {
     setCloseInfo(0);

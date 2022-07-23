@@ -5,26 +5,24 @@ import ImageParsing from '../../ImageParsing/ImageParsing';
 import { setInputNumber } from '../../store/images';
 import './style.css';
 import { useParams } from 'react-router-dom';
-import { fetchUserUpdate, fetchAllUsers, fetchOneUser } from '../../store/slices/user';
 function Avatar() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const { id } = useParams();
 
-  const user = state.user.userOne;
-
+  const user = state.user.userOne?.[0];
 
 
   return (
     <div className="avatar">
       <div className="avatar_backGround">
         {
-          <Link to={`/${id}/PhotoAvatar/0`}>
+          <Link to={`/${id}/PhotoAvatar/0`} >
             <img src={user?.imageUrl} alt="" className="avatar_image" />
           </Link>
         }
 
-        <div className="avatar_button">
+        { state.auth.data?._id === id ? <div className="avatar_button">
           <div className="avatar_change">Сhange photo</div>
           <button
             onChange={() => {
@@ -34,6 +32,7 @@ function Avatar() {
             <ImageParsing />
           </button>
         </div>
+        : ''}
       </div>
     </div>
   );

@@ -19,26 +19,31 @@ function ImageParsing() {
     if (parsing.inputNumber === '0') {
       await dispatch(fetchUserUpdate({ imageUrl: [value][0] }, id));
       dispatch(fetchOneUser(id));
-      console.log(id)
+      console.log("ava",parsing.inputNumber);
     }
     if (slider === undefined && parsing.inputNumber === '0') {
       await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
+      console.log("avaSLider", parsing.inputNumber);
     }
 
     if ((sliderImgLength < 1 || sliderImgLength > 0) && parsing.inputNumber === '0') {
       await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
+      console.log('slider',parsing.inputNumber);
     }
 
     if (slider === undefined && parsing.inputNumber === '1') {
       await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
+      console.log(parsing.inputNumber);
     }
 
     if ((sliderImgLength < 1 || sliderImgLength > 0) && parsing.inputNumber === '1') {
       await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
+      console.log(parsing.inputNumber);
     }
 
     if (parsing.inputNumber === '2') {
       dispatch(setCreateImg(value));
+      console.log(parsing.inputNumber);
     }
 
     dispatch(fetchSlider());

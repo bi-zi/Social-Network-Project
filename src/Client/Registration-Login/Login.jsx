@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {  Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { fetchAuth, selectIsAuth } from '../store/slices/auth';
 
@@ -15,7 +15,7 @@ export const Login = () => {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      email: 'thebizi15@gmail.com',
+      email: 'dvushka228@gmail.com',
       password: '12345',
     },
     mode: 'onChange',
@@ -33,10 +33,11 @@ export const Login = () => {
     }
   };
 
+
+
   if (isAuth) {
     return <Navigate to={`/Profile/${data?._id}`} />;
   }
-  
 
   return (
     <>

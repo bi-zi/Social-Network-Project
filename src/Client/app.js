@@ -40,13 +40,13 @@ function App() {
     dispatch(fetchAllUsers());
   }, []);
 
+
   const state = useSelector((state) => state.auth?.data?._id);
   if (state !== undefined) localStorage.setItem('Link', state)
 
   if (window.location.pathname === '/') {
     return <Navigate to={`Profile/${localStorage.Link}`} />;
   }
-
 
   return (
     <Routes>

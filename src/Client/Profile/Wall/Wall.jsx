@@ -19,7 +19,7 @@ function Wall() {
   const [comment, setComment] = React.useState('0');
   const { id } = useParams();
 
-  let wallPost = wall.post?.[0]?.post;
+  let wallPost = wall.post?.find((x) => x.user === id)?.post;
   const buffer = [];
   if (wallPost !== undefined) {
     for (let i = wallPost.length - 1; i !== -1; --i) {
@@ -39,11 +39,17 @@ function Wall() {
   };
 
   const addComment = async (postId) => {
+    let date = new Date();
+    date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
     await dispatch(
       fetchCommentPush(
         {
           _id: postId,
-          text: state.post.createComment,
+          fullName: state.auth.data?.fullName,
+          avatar: state.auth.data?.imageUrl,
+          commentText: state.post.createComment,
+          commentDate: date,
+          userId: id,
         },
         id,
       ),
@@ -53,8 +59,8 @@ function Wall() {
   };
 
   const deletePost = async (index) => {
-    await dispatch(fetchPostDelete({ deleteId: index }, id));
-    console.log(index);
+    const postIndex = wall.post?.[0]?.post.findIndex((x) => x._id === index);
+    await dispatch(fetchPostDelete({ deleteId: postIndex }, id));
     dispatch(fetchUserPostsAll(id));
   };
 
@@ -62,15 +68,21 @@ function Wall() {
     <>
       {wallPost?.map((content, index) => (
         <div className={`wall ${index}`} key={index}>
-          <img src={state.user.userOne?.imageUrl} alt="" className="wall_avatar" />
+          <img src={state.user.userOne?.[0]?.imageUrl} alt="" className="wall_avatar" />
 
-          <div className="wall_fullName">Alexey Tsvetkov</div>
+          <div className="wall_fullName">{state.user?.userOne?.[0].fullName}</div>
           <div className="wall_date">{content.date}</div>
-          <FontAwesomeIcon className="wall_menu" icon="fa-solid fa-ellipsis" />
-          <div className="wall_menu_hover" onClick={() => deletePost(content._id)}>
-            <span>Delete post</span>
-          </div>
 
+          {state.auth.data?._id === id ? (
+            <>
+              <FontAwesomeIcon className="wall_menu" icon="fa-solid fa-ellipsis" />
+              <div className="wall_menu_hover" onClick={() => deletePost(content._id)}>
+                <span>Delete post</span>
+              </div>
+            </>
+          ) : (
+            ''
+          )}
           <div className="wall_content">
             {content.text?.length > 0 ? <div className="wall_text">{content.text}</div> : ''}
             {content.imagesPost?.length > 0 ? (
@@ -118,7 +130,7 @@ function Wall() {
             ) : (
               ''
             )}
-            <div className="wall_from">Post from {`${state.user.userOne.fullName}`}</div>
+            <div className="wall_from">Post from {`${state.user.userOne?.[0].fullName}`}</div>
 
             <FontAwesomeIcon
               className="wall_like_icon"
@@ -157,10 +169,10 @@ function Wall() {
 
                 {content.commentPost?.map((comment, index) => (
                   <div className="comment" key={index}>
-                    <img src={state.user.userOne.imageUrl} alt="" className="comment_avatar" />
-                    <div className="comment_fullName">{`${state.user.userOne.fullName}`}</div>
-                    <div className="comment_time">{comment[1]}</div>
-                    <div className="comment_text">{comment[0]}</div>
+                    <img src={comment.avatar} alt="" className="comment_avatar" />
+                    <div className="comment_fullName">{comment.fullName}</div>
+                    <div className="comment_time">{comment.commentDate}</div>
+                    <div className="comment_text">{comment.commentText}</div>
                   </div>
                 ))}
               </div>

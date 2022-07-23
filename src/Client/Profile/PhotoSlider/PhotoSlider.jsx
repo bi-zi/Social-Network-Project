@@ -30,7 +30,6 @@ function PhotoSlider() {
     dispatch(fetchSlider());
   }, []);
 
-
   return (
     <div className="images">
       <div className="images_backGround">
@@ -53,10 +52,12 @@ function PhotoSlider() {
           })}
         </Slider>
 
-        <div className="images_button" onChange={() => dispatch(setInputNumber('1'))}>
-          <ImageParsing />
-          <div className="add_images">Add photos</div>
-        </div>
+        { state.auth.data?._id === id ?
+          <div className="images_button" onChange={() => dispatch(setInputNumber('1'))}>
+            <ImageParsing />
+            <div className="add_images">Add photos</div>
+          </div>
+        : ''}
       </div>
     </div>
   );

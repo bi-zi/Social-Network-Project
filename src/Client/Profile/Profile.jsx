@@ -12,8 +12,9 @@ import Videos from './Videos/Videos';
 import Music from './Music/Music';
 import { Navigate } from 'react-router-dom';
 import { selectIsAuth } from '../store/slices/auth';
-
+import { useParams } from 'react-router-dom';
 function Profile() {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
@@ -22,11 +23,15 @@ function Profile() {
     return <Navigate to="/Login" />;
   }
 
+console.log(state)
+
   return (
     <div className="container">
       <UserInfo />
       <PhotoSlider />
-      <Post />
+      { state.auth.data?._id === id ?
+        <Post />: ''
+      }
       <Wall />
       <Avatar />
       <Friends />

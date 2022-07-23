@@ -22,12 +22,12 @@ export const Registration = () => {
     mode: 'onChange',
   });
 
+
   const onSubmit = async (values) => {
     const data = await dispatch(fetchRegister(values));
     if (!data.payload) {
       return alert('Не удалось регистрироваться!');
     }
-
     if ('token' in data.payload) {
       window.localStorage.setItem('token', data.payload.token);
     }
