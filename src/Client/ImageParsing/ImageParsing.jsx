@@ -8,7 +8,7 @@ import { fetchSlider, fetchSliderPost, fetchSliderPush } from '../store/slices/s
 
 function ImageParsing() {
   const dispatch = useDispatch();
-  const parsing = useSelector((state) => state.images);
+  const parsing = useSelector((state) => state.user);
   const state = useSelector((state) => state);
   const { id } = useParams();
   const slider = state.slider?.slider?.find((x) => x.user === id);

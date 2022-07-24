@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import './style.css';
 
 import ImageParsing from '../../ImageParsing/ImageParsing';
-import { setInputNumber } from '../../store/images';
+import { setInputNumber } from '../../store/slices/user';
 import { useParams } from 'react-router-dom';
 import { fetchSlider } from '../../store/slices/slider.js';
 

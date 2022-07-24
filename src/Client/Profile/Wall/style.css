@@ -21,7 +21,7 @@
 
 .wall_fullName {
   position: absolute;
-  width: 204px;
+  width: 500px;
   height: 30px;
   left: 152px;
   top: 34px;
@@ -37,7 +37,7 @@
 
 .wall_date {
   position: absolute;
-  width: 194px;
+  width: 500px;
   height: 30px;
   left: 152px;
   top: 70px;

@@ -12,10 +12,9 @@ import {
 } from '../../store/slices/post';
 
 import { useParams } from 'react-router-dom';
-import { setPostImagesDelete } from '../../store/images';
 
 import ImageParsing from '../../ImageParsing/ImageParsing';
-import { setInputNumber } from '../../store/images';
+import { setInputNumber } from '../../store/slices/user';
 
 import { Link } from 'react-router-dom';
 import './style.css';

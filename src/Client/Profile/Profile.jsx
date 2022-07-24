@@ -23,7 +23,7 @@ function Profile() {
     return <Navigate to="/Login" />;
   }
 
-console.log(state)
+
 
   return (
     <div className="container">

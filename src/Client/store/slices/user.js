@@ -21,6 +21,7 @@ export const fetchUserUpdate = createAsyncThunk('user/id/fetchUserUpdate', async
 const initialState = {
   usersAll: [],
   userOne: {},
+  inputNumber: '',
   status: 'loading',
 };
 
@@ -28,7 +29,9 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-
+    setInputNumber: (state, action) => {
+      state.inputNumber = action.payload
+    },
   },
 
   extraReducers: {
@@ -57,4 +60,5 @@ const userSlice = createSlice({
   }
 });
 
+export const { setInputNumber } = userSlice.actions
 export const userReducer = userSlice.reducer;
