@@ -22,7 +22,6 @@ export const Registration = () => {
     mode: 'onChange',
   });
 
-
   const onSubmit = async (values) => {
     const data = await dispatch(fetchRegister(values));
     if (!data.payload) {
@@ -48,6 +47,8 @@ export const Registration = () => {
                 {...register('fullName', { required: 'Укажите полное имя' })}
                 className="firstName"
                 type="text"
+                pattern="^[a-zA-Z0-9 ]+$"
+                title="Only latin characters can be used"
               />
               <input
                 className="lastName"

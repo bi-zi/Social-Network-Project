@@ -24,10 +24,9 @@
 }
 
 .profile_friends_container {
-  width: 340px;
+  width: 360px;
   height: 190px;
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
   margin: 45px auto 0 auto;
 }
@@ -35,6 +34,8 @@
 .profile_friend {
   cursor: pointer;
   margin: 10px 10px 0 10px;
+  width: 70px;
+  height: 80px;
   text-align: center;
 }
 
@@ -50,5 +51,5 @@
   font-family: 'Iceberg';
   font-style: normal;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 14px;
 }

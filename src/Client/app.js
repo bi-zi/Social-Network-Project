@@ -52,7 +52,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="Profile/:id" element={<Profile />} />,
-        <Route path="Friends" element={<Friends />} />,
+        <Route path="Friends/:id" element={<Friends />} />,
         <Route path="/:user/:category/:id" element={<Photo />} />,
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Registration />} />

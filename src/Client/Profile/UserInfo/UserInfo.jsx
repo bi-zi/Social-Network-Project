@@ -74,6 +74,8 @@ function UserInfo() {
                 defaultValue={about?.livesIn !== undefined ? `${about?.livesIn}` : ''}
                 placeholder="Lives in"
                 {...register('livesIn', { required: true, minLength: 2, maxLength: 25 })}
+                pattern="^[a-zA-Z0-9 ]+$"
+                title="Only latin characters can be used"
               />
               {errors.livesIn && errors.livesIn.type === 'minLength' && (
                 <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
@@ -90,6 +92,8 @@ function UserInfo() {
                 className="lives_from"
                 defaultValue={about?.from !== undefined ? `${about?.from}` : ''}
                 placeholder="From"
+                pattern="^[a-zA-Z0-9 ]+$"
+                title="Only latin characters can be used"
                 {...register('from', { required: true, minLength: 2, maxLength: 25 })}
               />
               {errors.from && errors.from.type === 'minLength' && (
@@ -107,6 +111,8 @@ function UserInfo() {
                 className="lives_born"
                 defaultValue={about?.bornOn !== undefined ? `${about?.bornOn}` : ''}
                 placeholder="Born on"
+                pattern="^[a-zA-Z0-9 ]+$"
+                title="Only latin characters can be used"
                 {...register('bornOn', { required: true, minLength: 2, maxLength: 25 })}
               />
               {errors.bornOn && errors.bornOn.type === 'minLength' && (
@@ -124,6 +130,8 @@ function UserInfo() {
                 className="lives_profession"
                 defaultValue={about?.profession !== undefined ? `${about?.profession}` : ''}
                 placeholder="Profession"
+                pattern="^[a-zA-Z0-9 ]+$"
+                title="Only latin characters can be used"
                 {...register('profession', { required: true, minLength: 2, maxLength: 25 })}
               />
               {errors.profession && errors.profession.type === 'minLength' && (
@@ -141,6 +149,8 @@ function UserInfo() {
                 className="lives_relationship"
                 defaultValue={about?.relations !== undefined ? `${about?.relations}` : ''}
                 placeholder="In a relationship with"
+                pattern="^[a-zA-Z0-9 ]+$"
+                title="Only latin characters can be used"
                 {...register('relations', { required: true, minLength: 2, maxLength: 25 })}
               />
               {errors.relations && errors.relations.type === 'minLength' && (
@@ -158,6 +168,8 @@ function UserInfo() {
                 className="lives_student"
                 defaultValue={about?.studentAt !== undefined ? `${about?.studentAt}` : ''}
                 placeholder="Student at"
+                pattern="^[a-zA-Z0-9 ]+$"
+                title="Only latin characters can be used"
                 {...register('studentAt', { required: true, minLength: 2, maxLength: 25 })}
               />
               {errors.studentAt && errors.studentAt.type === 'minLength' && (

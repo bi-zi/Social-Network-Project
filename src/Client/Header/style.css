@@ -30,7 +30,7 @@
 }
 
 /* control_panel */
-.control_panel {
+.header_control_panel {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;

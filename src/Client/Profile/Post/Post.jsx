@@ -85,6 +85,8 @@ function Post() {
         placeholder="Post an entry"
         maxLength={180}
         defaultValue={postText}
+        pattern="^[a-zA-Z0-9 ]+$"
+        title="Only latin characters can be used"
         onChange={(e) => dispatch(setCreatText(e.target.value))}
       />
       <button className="post_make_button" type="submit" onClick={() => sendPost()}>
