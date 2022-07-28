@@ -8,7 +8,7 @@
 }
 
 /* container */
-.container {
+.header_container {
   max-width: 1420px;
   height: 100%;
   margin-left: auto;
@@ -38,56 +38,16 @@
 }
 
 /* profile */
-.profile {
-  width: 40px;
-  height: 40px;
-}
-
-/* bell */
-.bell {
-  width: 40px;
-  height: 40px;
-}
-
-/* news */
-.news {
-  width: 40px;
-  height: 40px;
-}
-
-/* message */
-.message {
-  width: 40px;
-  height: 40px;
-}
-
-/* users */
-.users {
-  width: 40px;
-  height: 40px;
-}
-
-/* community */
-.community {
-  width: 40px;
-  height: 40px;
-}
-
-/* image */
-.image {
-  width: 40px;
-  height: 40px;
-}
-
-/* video */
-.video {
-  width: 40px;
-  height: 40px;
-}
-
-/* music */
+.profile,
+.bell,
+.news,
+.message,
+.users,
+.community,
+.image,
+.video,
 .music {
-  width: 35px;
+  width: 40px;
   height: 40px;
 }
 

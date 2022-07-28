@@ -50,8 +50,8 @@ const initialState = {
   createComment: '',
   userPosts: {
     post: [],
-    status: 'loading',
-  }
+    status: '',
+  },
 };
 
 const postSlice = createSlice({
@@ -78,7 +78,7 @@ const postSlice = createSlice({
 
   extraReducers: {
     [fetchUserPostsAll.pending]: (state) => {
-      state.status = 'loading';
+      state.userPosts.status = 'loading';
     },
     [fetchUserPostsAll.fulfilled]: (state, action) => {
       state.userPosts.status = 'loaded';
@@ -87,7 +87,6 @@ const postSlice = createSlice({
     [fetchUserPostsAll.rejected]: (state) => {
       state.userPosts.status = 'error';
     },
-
 
   }
 });

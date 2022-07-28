@@ -1,4 +1,4 @@
-.friends {
+.profile_friends {
   position: absolute;
   width: 380px;
   height: 249px;
@@ -7,7 +7,7 @@
   top: 570px;
 }
 
-.friends_title {
+.profile_friends_title {
   position: absolute;
   width: 99px;
   height: 30px;
@@ -23,7 +23,7 @@
   color: #ffffff;
 }
 
-.friends_container {
+.profile_friends_container {
   width: 340px;
   height: 190px;
   display: flex;
@@ -32,20 +32,20 @@
   margin: 45px auto 0 auto;
 }
 
-.friend {
+.profile_friend {
   cursor: pointer;
   margin: 10px 10px 0 10px;
   text-align: center;
 }
 
-.friend_avatar {
+.profile_friend_avatar {
   background-color: black;
   width: 60px;
   height: 60px;
   border-radius: 100%;
 }
 
-.friend_name {
+.profile_friend_name {
   color: #ffffff;
   font-family: 'Iceberg';
   font-style: normal;

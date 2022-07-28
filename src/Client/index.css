@@ -25,5 +25,10 @@ h6 {
   margin: 100px auto 0 auto;
 }
 
+.nav-link {
+  color: black
+}
 
-
+.unselected {
+  color: red !important;
+}

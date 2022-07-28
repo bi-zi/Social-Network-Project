@@ -48,7 +48,6 @@ function ImageParsing() {
 
     dispatch(fetchSlider());
   };
-
   const handleCompressedUpload = (e) => {
     const image = e.target.files[0];
     //console.log(e.target.files[0]['size']);

@@ -12,7 +12,6 @@ function Avatar() {
 
   const user = state.user.userOne?.[0];
 
-
   return (
     <div className="avatar">
       <div className="avatar_backGround">

@@ -28,7 +28,6 @@ function UserInfo() {
       return alert('Не удалось авторизоваться!');
     }
   };
-
   const {
     register,
     handleSubmit,

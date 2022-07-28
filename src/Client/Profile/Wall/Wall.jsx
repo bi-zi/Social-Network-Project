@@ -19,7 +19,7 @@ function Wall() {
   const [comment, setComment] = React.useState('0');
   const { id } = useParams();
 
-  let wallPost = wall.post?.find((x) => x.user === id)?.post;
+  let wallPost = wall.post?.[0]?.post;
   const buffer = [];
   if (wallPost !== undefined) {
     for (let i = wallPost.length - 1; i !== -1; --i) {
@@ -49,7 +49,7 @@ function Wall() {
           avatar: state.auth.data?.imageUrl,
           commentText: state.post.createComment,
           commentDate: date,
-          userId: id,
+          userId: state.auth.data._id,
         },
         id,
       ),
@@ -58,11 +58,15 @@ function Wall() {
     dispatch(setCreateComment(''));
   };
 
+
   const deletePost = async (index) => {
     const postIndex = wall.post?.[0]?.post.findIndex((x) => x._id === index);
     await dispatch(fetchPostDelete({ deleteId: postIndex }, id));
     dispatch(fetchUserPostsAll(id));
   };
+  React.useEffect(() => {
+    dispatch(fetchUserPostsAll(id));
+  }, []);
 
   return (
     <>
@@ -70,7 +74,7 @@ function Wall() {
         <div className={`wall ${index}`} key={index}>
           <img src={state.user.userOne?.[0]?.imageUrl} alt="" className="wall_avatar" />
 
-          <div className="wall_fullName">{state.user?.userOne?.[0].fullName}</div>
+          <div className="wall_fullName">{state.user?.userOne?.[0]?.fullName}</div>
           <div className="wall_date">{content.date}</div>
 
           {state.auth.data?._id === id ? (
@@ -87,7 +91,7 @@ function Wall() {
             {content.text?.length > 0 ? <div className="wall_text">{content.text}</div> : ''}
             {content.imagesPost?.length > 0 ? (
               <div className="wall_images">
-                {content.imagesPost.map((image, index) => {
+                {content?.imagesPost.map((image, index) => {
                   return (
                     <div key={index}>
                       <img
@@ -130,7 +134,7 @@ function Wall() {
             ) : (
               ''
             )}
-            <div className="wall_from">Post from {`${state.user.userOne?.[0].fullName}`}</div>
+            <div className="wall_from">Post from {`${state.user.userOne?.[0]?.fullName}`}</div>
 
             <FontAwesomeIcon
               className="wall_like_icon"
@@ -169,7 +173,13 @@ function Wall() {
 
                 {content.commentPost?.map((comment, index) => (
                   <div className="comment" key={index}>
-                    <img src={comment.avatar} alt="" className="comment_avatar" />
+                    <img src={state.user.usersAll.find(x => x._id === comment.userId).imageUrl[0]} alt="" className="comment_avatar" />
+                    {wall.post?.[0]?.user === state.auth.data._id ||
+                    state.auth.data._id === comment.userId ? (
+                      <FontAwesomeIcon className="comment_delete" icon="fa-solid fa-xmark" />
+                    ) : (
+                      ''
+                    )}
                     <div className="comment_fullName">{comment.fullName}</div>
                     <div className="comment_time">{comment.commentDate}</div>
                     <div className="comment_text">{comment.commentText}</div>

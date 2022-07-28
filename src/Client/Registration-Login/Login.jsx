@@ -34,7 +34,6 @@ export const Login = () => {
   };
 
 
-
   if (isAuth) {
     return <Navigate to={`/Profile/${data?._id}`} />;
   }

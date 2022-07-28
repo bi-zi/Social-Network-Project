@@ -242,6 +242,14 @@
   margin-top: 10px;
 }
 
+.comment_delete {
+  position: absolute;
+  cursor: pointer;
+  right: 15px;
+  top: 10px;
+  font-size: 25px;
+}
+
 .comment_fullName,
 .comment_time {
   position: absolute;

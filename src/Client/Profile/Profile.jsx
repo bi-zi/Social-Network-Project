@@ -24,7 +24,6 @@ function Profile() {
   }
 
 
-
   return (
     <div className="container">
       <UserInfo />

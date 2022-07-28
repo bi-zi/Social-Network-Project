@@ -1,0 +1,98 @@
+.friends {
+  max-width: 1375px;
+  height: 100%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  color: #ffffff;
+  font-family: 'Iceberg';
+  font-style: normal;
+}
+
+.friends_result,
+.friends_choice {
+  border-radius: 20px;
+  width: 678px;
+  height: 100%;
+  background: #393939;
+}
+
+.friend {
+  width: 640px;
+  height: 120px;
+  margin-left: 20px;
+  margin-top: 10px;
+  border-bottom: 2px solid black;
+  display: flex;
+}
+
+.friend_avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.friend_name {
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 230px;
+  height: 20px;
+  font-size: 17px;
+  color: white;
+}
+
+.friend_message {
+  position: relative;
+  width: 100px;
+  height: 20px;
+  right: 230px;
+  top: 35px;
+  cursor: pointer;
+}
+
+.friend_menu {
+  position: relative;
+  float: left;
+  left: 165px;
+}
+
+.friend_menu_icon {
+  font-size: 26px !important;
+  cursor: pointer;
+}
+
+.friend_content {
+  display: none;
+  left: -85px;
+  width: 120px;
+  height: 80px;
+  padding-top: 20px;
+  position: absolute;
+}
+
+.friend_menu:active .friend_content {
+  display: block;
+}
+
+.friend_content:hover {
+  display: block;
+}
+
+.friend_delete,
+.friend_blackList {
+  font-size: 16px;
+  width: 110px;
+  color: white;
+  background-color: rgb(0, 0, 0);
+  padding: 3px;
+}
+
+.friend_delete:hover, .friend_blackList:hover {
+   cursor: pointer;
+   color: black;
+  background-color: white
+}

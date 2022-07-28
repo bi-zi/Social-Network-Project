@@ -32,7 +32,6 @@ export const Registration = () => {
       window.localStorage.setItem('token', data.payload.token);
     }
   };
-
   if (isAuth) {
     return <Navigate to={`/Profile/${data?._id}`} />;
   }

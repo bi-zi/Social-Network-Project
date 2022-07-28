@@ -12,6 +12,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchAuthMe, } from './store/slices/auth.js';
 import { fetchAllUsers, } from './store/slices/user.js';
+import Friends from './Friends/Friends.jsx';
 
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
@@ -40,7 +41,6 @@ function App() {
     dispatch(fetchAllUsers());
   }, []);
 
-
   const state = useSelector((state) => state.auth?.data?._id);
   if (state !== undefined) localStorage.setItem('Link', state)
 
@@ -52,6 +52,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="Profile/:id" element={<Profile />} />,
+        <Route path="Friends" element={<Friends />} />,
         <Route path="/:user/:category/:id" element={<Photo />} />,
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Registration />} />
