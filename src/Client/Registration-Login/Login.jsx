@@ -15,7 +15,7 @@ export const Login = () => {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      email: 'dvushka228@gmail.com',
+      email: '@gmail.com',
       password: '12345',
     },
     mode: 'onChange',
@@ -35,6 +35,7 @@ export const Login = () => {
 
 
   if (isAuth) {
+    localStorage.setItem('isAuth', true);
     return <Navigate to={`/Profile/${data?._id}`} />;
   }
 

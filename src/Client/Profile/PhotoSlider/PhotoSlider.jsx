@@ -42,21 +42,24 @@ function PhotoSlider() {
         <Slider {...settings}>
           {readyPhotos?.map((image, index) => {
             return (
+              state.slider.status === 'loaded' ?
               <Link to={`/${id}/PhotoSlider/${index}`} className="slider_link" key={index}>
                 <div className="image_item" key={index}>
                   <img src={image} alt="" className="slider_image" width="290px" height="290px" />
                 </div>
-              </Link>
+              </Link> : ''
             );
           })}
         </Slider>
 
-        { state.auth.data?._id === id ?
+        {state.auth.data?._id === id && state.slider.status === 'loaded' ? (
           <div className="images_button" onChange={() => dispatch(setInputNumber('1'))}>
             <ImageParsing />
             <div className="add_images">Add photos</div>
           </div>
-        : ''}
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

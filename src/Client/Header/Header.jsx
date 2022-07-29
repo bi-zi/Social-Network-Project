@@ -15,13 +15,14 @@ function Header() {
   const onClickLogout = () => {
     if (window.confirm('Вы действительно хотите выйти?')) {
       dispatch(logout());
+      localStorage.removeItem('isAuth');
       window.localStorage.removeItem('token');
     }
   };
 
   return (
     <div className="header">
-      <div className="header_container">
+      <div className="container">
         <div className="wave">Wave</div>
         <div className="header_control_panel">
           <NavLink
@@ -40,7 +41,9 @@ function Header() {
           <FontAwesomeIcon className="news" icon="fa-solid fa-pager" />
           <FontAwesomeIcon className="message" icon="fa-regular fa-comment" />
 
-          <NavLink to={`/Friends/${state?._id}`} className={({ isActive }) => (isActive ? 'active' : 'inactive')}>
+          <NavLink
+            to={`/Friends/${state?._id}`}
+            className={({ isActive }) => (isActive ? 'active' : 'inactive')}>
             <FontAwesomeIcon className="users" icon="fa-solid fa-user-group" />
           </NavLink>
 

@@ -32,7 +32,8 @@
 
 /* button */
 
-.avatar_button {
+.avatar_button,
+.add_friend {
   position: absolute;
   width: 328px;
   height: 51px;
@@ -44,14 +45,14 @@
 }
 
 .avatar_input {
- opacity: 0;
+  opacity: 0;
   position: absolute;
   width: 328px !important;
   height: 51px !important;
   border-radius: 25px;
-  cursor: pointer;
+  cursor: pointer !important;
 
-  z-index:3;
+  z-index: 3;
 }
 
 .input_parser {
@@ -64,7 +65,7 @@
 
 .avatar_change {
   position: absolute;
-  width: 118px;
+  width: 160px;
   height: 28px;
   left: 105px;
   top: 15px;
@@ -74,6 +75,21 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-z-index:0;
+  z-index: 0;
+  color: #ffffff;
+}
+
+.add_friend_text {
+  position: absolute;
+  width: 200px;
+  height: 28px;
+  left: 85px;
+  top: 15px;
+  user-select: none;
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
   color: #ffffff;
 }

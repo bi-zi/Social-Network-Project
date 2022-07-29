@@ -32,6 +32,7 @@ export const Registration = () => {
     }
   };
   if (isAuth) {
+    localStorage.setItem('isAuth', true);
     return <Navigate to={`/Profile/${data?._id}`} />;
   }
 

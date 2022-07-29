@@ -18,19 +18,22 @@ function Profile() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
+  // console.log(
+  // '-----AVATAR-----',state.user.status,
+  // '-----SLIDER-----',state.slider.status,
+  // '-----POST-----',state.post.userPosts.status);
+
   const isAuth = useSelector(selectIsAuth);
-  if (isAuth === false) {
+
+  if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
   }
-
 
   return (
     <div className="container">
       <UserInfo />
       <PhotoSlider />
-      { state.auth.data?._id === id ?
-        <Post />: ''
-      }
+      {state.auth.data?._id === id ? <Post /> : ''}
       <Wall />
       <Avatar />
       <Friends />

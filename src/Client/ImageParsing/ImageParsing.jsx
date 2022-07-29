@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Compressor from 'compressorjs';
 import { setCreateImg } from '../store/slices/post';
 import { useParams } from 'react-router-dom';
-import { fetchUserUpdate, fetchOneUser } from '../store/slices/user';
+import { fetchUserUpdate, fetchAllUsers } from '../store/slices/user';
 import { fetchSlider, fetchSliderPost, fetchSliderPush } from '../store/slices/slider';
 
 function ImageParsing() {
@@ -18,43 +18,47 @@ function ImageParsing() {
   const onAvatarAndSlider = async (value) => {
     if (parsing.inputNumber === '0') {
       await dispatch(fetchUserUpdate({ imageUrl: [value][0] }, id));
-      dispatch(fetchOneUser(id));
-      console.log("ava",parsing.inputNumber);
+      dispatch(fetchAllUsers());
+      // console.log("ava",parsing.inputNumber);
     }
     if (slider === undefined && parsing.inputNumber === '0') {
       await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
-      console.log("avaSLider", parsing.inputNumber);
+      // console.log("avaSLider", parsing.inputNumber);
     }
 
     if ((sliderImgLength < 1 || sliderImgLength > 0) && parsing.inputNumber === '0') {
       await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
-      console.log('slider',parsing.inputNumber);
+      // console.log('slider',parsing.inputNumber);
     }
 
     if (slider === undefined && parsing.inputNumber === '1') {
       await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
-      console.log(parsing.inputNumber);
+      // console.log(parsing.inputNumber);
     }
 
     if ((sliderImgLength < 1 || sliderImgLength > 0) && parsing.inputNumber === '1') {
       await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
-      console.log(parsing.inputNumber);
+      // console.log(parsing.inputNumber);
     }
 
     if (parsing.inputNumber === '2') {
       dispatch(setCreateImg(value));
-      console.log(parsing.inputNumber);
+      // console.log(parsing.inputNumber);
     }
 
     dispatch(fetchSlider());
   };
+
   const handleCompressedUpload = (e) => {
     const image = e.target.files[0];
-    //console.log(e.target.files[0]['size']);
+
+    console.log(image['size']);
+     console.log((image['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
+
     new Compressor(image, {
-      quality: 0.3, // 0.6 can also be used, but its not recommended to go below.
+      quality: 0.6,
       success: (compressedResult) => {
-        setImages(compressedResult);
+        setImages(compressedResult)
       },
     });
   };
@@ -63,7 +67,8 @@ function ImageParsing() {
     if (images.length < 1) return;
 
     let file = images;
-    //console.log(images['size']);
+     console.log((images['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
+
     let reader = new FileReader();
 
     reader.onload = (e) => {

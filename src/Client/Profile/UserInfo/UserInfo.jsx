@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAboutPost, fetchAbout, fetchAboutUpdate } from '../../store/slices/about.js';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { fetchOneUser } from '../../store/slices/user.js';
+import { fetchAllUsers } from '../../store/slices/user.js';
 
 function UserInfo() {
   const dispatch = useDispatch();
@@ -14,8 +14,7 @@ function UserInfo() {
   const [closeInfo, setCloseInfo] = React.useState(0);
   const about = Array.isArray(state.about?.data) ? state.about.data?.find((x) => x.user === id) : '';
 
-  const user = state.user.userOne?.[0];
-
+  const user = state.user.usersAll.find((x) => x._id === id);
   const onSubmit = async (values, id) => {
     setCloseInfo(0);
     let data = {};
@@ -38,7 +37,7 @@ function UserInfo() {
 
   React.useEffect(() => {
     dispatch(fetchAbout());
-    dispatch(fetchOneUser(id));
+    dispatch(fetchAllUsers());
   }, []);
 
   return (
@@ -49,7 +48,7 @@ function UserInfo() {
           <div className="line"></div>
           {closeInfo === 0 ? (
             <>
-              {state.auth?.data._id === id ? (
+              {state.auth?.data?._id === id ? (
                 <div
                   className="about_info"
                   onClick={() => {

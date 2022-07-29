@@ -33,6 +33,7 @@ function Post() {
   const textLength = state.post.createText.length;
   const postText = state.post.createText;
   const numImg = readyPhotos.length;
+  const user = state.user.usersAll.find((x) => x._id === id);
 
   let linkСheck = state.post.createVid?.split('/');
   linkСheck = linkСheck?.[0] === 'https:';
@@ -53,7 +54,7 @@ function Post() {
       await dispatch(
         fetchCreatePost({ text: postText, videoPost: local, imagesPost: state.post.createImg }),
       );
-      console.log()
+      console.log();
     }
 
     if ((textLength > 0 || numImg > 0 || local.length > 0) && state.post.userPosts.post.length > 0) {
@@ -76,7 +77,7 @@ function Post() {
 
   return (
     <div className="post_container">
-      <img src={state.user.userOne?.[0]?.imageUrl} alt="" className="post_avatar" />
+      <img src={user?.imageUrl} alt="" className="post_avatar" />
 
       <input
         ref={firstRef}
@@ -89,10 +90,13 @@ function Post() {
         title="Only latin characters can be used"
         onChange={(e) => dispatch(setCreatText(e.target.value))}
       />
-      <button className="post_make_button" type="submit" onClick={() => sendPost()}>
-        <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
-      </button>
-
+      {state.post.userPosts.status === 'loaded' ? (
+        <button className="post_make_button" type="submit" onClick={() => sendPost()}>
+          <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
+        </button>
+      ) : (
+        ''
+      )}
       {/* imagesInput */}
       <FontAwesomeIcon className="post_image_icon" icon="fa-regular fa-image" />
       {numImg < 3 ? (

@@ -41,16 +41,17 @@ function App() {
     dispatch(fetchAllUsers());
   }, []);
 
-  const state = useSelector((state) => state.auth?.data?._id);
-  if (state !== undefined) localStorage.setItem('Link', state)
+  // const state = useSelector((state) => state.auth?.data?._id);
+  // if (state !== undefined) localStorage.setItem('Link', state)
 
-  if (window.location.pathname === '/') {
-    return <Navigate to={`Profile/${localStorage.Link}`} />;
-  }
+  // if (window.location.pathname === '/') {
+  //   return <Navigate to={`Profile/${localStorage.Link}`} />;
+  // }
 
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
+        
         <Route path="Profile/:id" element={<Profile />} />,
         <Route path="Friends/:id" element={<Friends />} />,
         <Route path="/:user/:category/:id" element={<Photo />} />,

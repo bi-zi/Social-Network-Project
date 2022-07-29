@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fetchUserUpdate, fetchOneUser } from '../../store/slices/user';
+import { fetchUserUpdate, fetchAllUsers } from '../../store/slices/user';
 import { fetchSlider, fetchSliderDelete } from '../../store/slices/slider';
 import { setCreateImgDelete } from '../../store/slices/post';
 import './style.css';
@@ -11,7 +11,7 @@ function Photo() {
   const dispatch = useDispatch();
   const { user, category, id } = useParams();
   const state = useSelector((state) => state);
-  const avatar = state.user.userOne?.[0];
+  const avatar = state.user.usersAll.find((x) => x._id === user);
   const slider = state.slider.slider?.find((x) => x.user === user);
 
   let readyPhotos =
@@ -21,6 +21,7 @@ function Photo() {
       ? slider?.sliderImg
       : state.post.createImg;
 
+
   const onPhotoDelete = async () => {
     if (category === 'PhotoAvatar') {
       await dispatch(
@@ -29,7 +30,7 @@ function Photo() {
           user,
         ),
       );
-      dispatch(fetchOneUser(user));
+      dispatch(fetchAllUsers());
     }
 
     if (category === 'PhotoSlider') {
@@ -42,6 +43,10 @@ function Photo() {
     }
   };
 
+  React.useEffect(() => {
+
+    dispatch(fetchSlider(id));
+  }, []);
 
   return (
     <div className="photo_viewing">
@@ -50,15 +55,17 @@ function Photo() {
       </Link>
       <img src={readyPhotos?.[id]} alt="" className="photo" />
       <div className="picture_control_panel">
-        { state.auth.data?._id === user ?
+        {state.auth.data?._id === user && state.user.status === 'loaded' ? (
           <Link
             className="delete_photo"
             to={`/Profile/${user}`}
             style={{ color: '#ffffff', textDecoration: 'none' }}
             onClick={() => onPhotoDelete()}>
             Удалить фото
-          </Link>: ''
-        }
+          </Link>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

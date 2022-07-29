@@ -18,8 +18,9 @@ function Wall() {
   const wall = useSelector((state) => state.post.userPosts);
   const [comment, setComment] = React.useState('0');
   const { id } = useParams();
+  const user = state.user.usersAll.find((x) => x._id === id);
 
-  let wallPost = wall.post?.[0]?.post;
+  let wallPost = wall.post.find((x) => x.user === id)?.post;
   const buffer = [];
   if (wallPost !== undefined) {
     for (let i = wallPost.length - 1; i !== -1; --i) {
@@ -64,6 +65,7 @@ function Wall() {
     await dispatch(fetchPostDelete({ deleteId: postIndex }, id));
     dispatch(fetchUserPostsAll(id));
   };
+
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));
   }, []);
@@ -72,9 +74,9 @@ function Wall() {
     <>
       {wallPost?.map((content, index) => (
         <div className={`wall ${index}`} key={index}>
-          <img src={state.user.userOne?.[0]?.imageUrl} alt="" className="wall_avatar" />
+          <img src={user?.imageUrl} alt="" className="wall_avatar" />
 
-          <div className="wall_fullName">{state.user?.userOne?.[0]?.fullName}</div>
+          <div className="wall_fullName">{user?.fullName}</div>
           <div className="wall_date">{content.date}</div>
 
           {state.auth.data?._id === id ? (
@@ -173,7 +175,11 @@ function Wall() {
 
                 {content.commentPost?.map((comment, index) => (
                   <div className="comment" key={index}>
-                    <img src={state.user.usersAll.find(x => x._id === comment.userId).imageUrl[0]} alt="" className="comment_avatar" />
+                    <img
+                      src={state.user.usersAll.find((x) => x._id === comment.userId).imageUrl[0]}
+                      alt=""
+                      className="comment_avatar"
+                    />
                     {wall.post?.[0]?.user === state.auth.data._id ||
                     state.auth.data._id === comment.userId ? (
                       <FontAwesomeIcon className="comment_delete" icon="fa-solid fa-xmark" />

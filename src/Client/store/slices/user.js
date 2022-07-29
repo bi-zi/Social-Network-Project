@@ -18,6 +18,12 @@ export const fetchUserUpdate = createAsyncThunk('user/id/fetchUserUpdate', async
   return data;
 });
 
+export const fetchSubscribe = createAsyncThunk('user/subscribe/id/fetchUserUpdate', async (params, id) => {
+  const { data } = await axios.patch(`/user/subscribe/${id}`, params);
+
+  return data;
+});
+
 const initialState = {
   usersAll: [],
   userOne: {},

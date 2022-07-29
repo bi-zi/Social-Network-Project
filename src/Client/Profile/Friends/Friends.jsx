@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchOneUser } from '../../store/slices/user.js';
+import { fetchAllUsers } from '../../store/slices/user.js';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { fetchUserPostsAll } from '../../store/slices/post';
@@ -15,7 +15,7 @@ function Friends() {
 
 
   const fetchData = (id) => {
-    dispatch(fetchOneUser(id));
+    dispatch(fetchAllUsers());
     dispatch(fetchUserPostsAll(id));
   };
 
