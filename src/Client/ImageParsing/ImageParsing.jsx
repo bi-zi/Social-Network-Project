@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Compressor from 'compressorjs';
 import { setCreateImg } from '../store/slices/post';
 import { useParams } from 'react-router-dom';
-import { fetchUserUpdate, fetchAllUsers } from '../store/slices/user';
+import { fetchUserUpdate, fetchOneUser } from '../store/slices/user';
 import { fetchSlider, fetchSliderPost, fetchSliderPush } from '../store/slices/slider';
 
 function ImageParsing() {
@@ -18,26 +18,31 @@ function ImageParsing() {
   const onAvatarAndSlider = async (value) => {
     if (parsing.inputNumber === '0') {
       await dispatch(fetchUserUpdate({ imageUrl: [value][0] }, id));
-      dispatch(fetchAllUsers());
-      // console.log("ava",parsing.inputNumber);
+      dispatch(fetchOneUser(id));
+      dispatch(fetchSlider());
+      console.log("ava",parsing.inputNumber);
     }
     if (slider === undefined && parsing.inputNumber === '0') {
       await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
+      dispatch(fetchSlider());
       // console.log("avaSLider", parsing.inputNumber);
     }
 
     if ((sliderImgLength < 1 || sliderImgLength > 0) && parsing.inputNumber === '0') {
       await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
+      dispatch(fetchSlider());
       // console.log('slider',parsing.inputNumber);
     }
 
     if (slider === undefined && parsing.inputNumber === '1') {
       await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
+      dispatch(fetchSlider());
       // console.log(parsing.inputNumber);
     }
 
     if ((sliderImgLength < 1 || sliderImgLength > 0) && parsing.inputNumber === '1') {
       await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
+      dispatch(fetchSlider());
       // console.log(parsing.inputNumber);
     }
 
@@ -45,20 +50,17 @@ function ImageParsing() {
       dispatch(setCreateImg(value));
       // console.log(parsing.inputNumber);
     }
-
-    dispatch(fetchSlider());
   };
 
   const handleCompressedUpload = (e) => {
     const image = e.target.files[0];
 
-    console.log(image['size']);
-     console.log((image['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
+    console.log((image['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
 
     new Compressor(image, {
-      quality: 0.6,
+      quality: 0.4,
       success: (compressedResult) => {
-        setImages(compressedResult)
+        setImages(compressedResult);
       },
     });
   };
@@ -67,7 +69,7 @@ function ImageParsing() {
     if (images.length < 1) return;
 
     let file = images;
-     console.log((images['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
+    console.log((images['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
 
     let reader = new FileReader();
 

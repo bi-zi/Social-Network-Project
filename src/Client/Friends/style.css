@@ -73,6 +73,15 @@
   right: 20px;
 }
 
+.zero_friends {
+    width: 640px;
+  height: 60px;
+  margin-left: 20px;
+  margin-top: 10px;
+  font-size: 40px;
+  position: relative;
+  display: flex;
+}
 
 .friend_menu_icon {
   font-size: 26px !important;

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fetchUserUpdate, fetchAllUsers } from '../../store/slices/user';
+import { fetchUserUpdate, fetchOneUser } from '../../store/slices/user';
 import { fetchSlider, fetchSliderDelete } from '../../store/slices/slider';
 import { setCreateImgDelete } from '../../store/slices/post';
 import './style.css';
@@ -11,7 +11,7 @@ function Photo() {
   const dispatch = useDispatch();
   const { user, category, id } = useParams();
   const state = useSelector((state) => state);
-  const avatar = state.user.usersAll.find((x) => x._id === user);
+  const avatar = state.user?.userOne?.[0];
   const slider = state.slider.slider?.find((x) => x.user === user);
 
   let readyPhotos =
@@ -30,7 +30,7 @@ function Photo() {
           user,
         ),
       );
-      dispatch(fetchAllUsers());
+      dispatch(fetchOneUser(user));
     }
 
     if (category === 'PhotoSlider') {

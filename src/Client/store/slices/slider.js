@@ -25,7 +25,7 @@ export const fetchSliderDelete = createAsyncThunk('slider/delete/id/fetchSliderD
 });
 
 const initialState = {
-  slider: [],
+  slider: null,
   status: 'loading',
 };
 

@@ -11,13 +11,13 @@ import { setInputNumber } from '../../store/slices/user';
 import { useParams } from 'react-router-dom';
 import { fetchSlider } from '../../store/slices/slider.js';
 
-
 function PhotoSlider() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const { id } = useParams();
 
   let readyPhotos = state.slider?.slider?.find((x) => x.user === id)?.sliderImg;
+
   const settings = {
     className: 'center',
     infinite: true,
@@ -41,20 +41,27 @@ function PhotoSlider() {
         )}
         <Slider {...settings}>
           {readyPhotos?.map((image, index) => {
-            return (
-              state.slider.status === 'loaded' ?
+            return state.slider.status === 'loaded' ? (
               <Link to={`/${id}/PhotoSlider/${index}`} className="slider_link" key={index}>
                 <div className="image_item" key={index}>
                   <img src={image} alt="" className="slider_image" width="290px" height="290px" />
                 </div>
-              </Link> : ''
+              </Link>
+            ) : (
+              <div className="image_item" key={index}>
+                <img src={image} alt="" className="slider_image" width="290px" height="290px" />
+              </div>
             );
           })}
         </Slider>
 
-        {state.auth.data?._id === id && state.slider.status === 'loaded' ? (
+        {state.auth.data?._id === id ? (
           <div className="images_button" onChange={() => dispatch(setInputNumber('1'))}>
-            <ImageParsing />
+            {state.slider.status === 'loaded' && state.user.status === 'loaded' ? (
+              <ImageParsing/>
+            ) : (
+              <div className="input_parser"></div>
+            )}
             <div className="add_images">Add photos</div>
           </div>
         ) : (

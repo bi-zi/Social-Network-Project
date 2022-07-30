@@ -18,7 +18,7 @@ function Wall() {
   const wall = useSelector((state) => state.post.userPosts);
   const [comment, setComment] = React.useState('0');
   const { id } = useParams();
-  const user = state.user.usersAll.find((x) => x._id === id);
+  const user = state.user?.userOne?.[0];
 
   let wallPost = wall.post.find((x) => x.user === id)?.post;
   const buffer = [];
@@ -59,9 +59,8 @@ function Wall() {
     dispatch(setCreateComment(''));
   };
 
-
   const deletePost = async (index) => {
-    const postIndex = wall.post?.[0]?.post.findIndex((x) => x._id === index);
+    const postIndex = wall.post.find(x=> x.user === id).post.findIndex((x) => x._id === index);
     await dispatch(fetchPostDelete({ deleteId: postIndex }, id));
     dispatch(fetchUserPostsAll(id));
   };

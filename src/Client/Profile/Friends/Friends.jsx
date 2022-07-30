@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllUsers } from '../../store/slices/user.js';
+import {  fetchOneUser } from '../../store/slices/user.js';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { fetchUserPostsAll } from '../../store/slices/post';
@@ -10,14 +10,14 @@ function Friends() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const state = useSelector((state) => state);
-  const profileFriend = state.user.usersAll?.filter((x) => x._id === id)?.[0];
-  let arr = state.user?.usersAll.filter((x, i) => profileFriend.friends.includes(x._id)).splice(0, 8);
-
+  const profileFriend = state.user?.userOne?.[0];
+  let arr = state.user?.usersAll.filter((x, i) => profileFriend?.friends.includes(x._id)).splice(0, 8);
 
   const fetchData = (id) => {
-    dispatch(fetchAllUsers());
+    dispatch(fetchOneUser(id));
     dispatch(fetchUserPostsAll(id));
   };
+
 
   return (
     <div className="profile_friends">

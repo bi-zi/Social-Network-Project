@@ -29,11 +29,14 @@ function Post() {
   localStorage.setItem('postImages', JSON.stringify(state.post.createImg));
   localStorage.setItem('postText', state.post.createText);
 
+  const post = state.post.userPosts.post.find((x) => x.user === id);
+  const user = state.user?.userOne?.[0];
+;
+
   const readyPhotos = state.post.createImg;
   const textLength = state.post.createText.length;
   const postText = state.post.createText;
   const numImg = readyPhotos.length;
-  const user = state.user.usersAll.find((x) => x._id === id);
 
   let linkСheck = state.post.createVid?.split('/');
   linkСheck = linkСheck?.[0] === 'https:';
@@ -47,21 +50,25 @@ function Post() {
   if (linkСheck) localStorage.setItem('postVideo', local);
   if (state.post.createVid?.length === 0) localStorage.setItem('postVideo', url);
 
-  // console.log(state.post.userPosts.post);
 
   const sendPost = async () => {
-    if ((textLength > 0 || numImg > 0 || local.length > 0) && state.post.userPosts.post.length === 0) {
+    if ((textLength > 0 || numImg > 0 || local.length > 0) && post === undefined) {
       await dispatch(
         fetchCreatePost({ text: postText, videoPost: local, imagesPost: state.post.createImg }),
       );
-      console.log();
+      console.log(1);
     }
 
-    if ((textLength > 0 || numImg > 0 || local.length > 0) && state.post.userPosts.post.length > 0) {
+    if (
+      ((textLength > 0 || numImg > 0 || local.length > 0) && post?.post?.length === 0) ||
+      post?.post?.length > 0
+    ) {
       await dispatch(
         fetchPostPush({ text: postText, videoPost: local, imagesPost: state.post.createImg }, id),
       );
+      console.log(2);
     }
+
     if (textLength > 0 || numImg > 0 || local.length > 0) {
       await dispatch(fetchUserPostsAll(id));
       firstRef.current.value = '';
@@ -71,6 +78,7 @@ function Post() {
       setPostEffect();
     }
   };
+  
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));
   }, []);
