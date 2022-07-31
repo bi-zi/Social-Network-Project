@@ -36,6 +36,12 @@ export const fetchCommentPush = createAsyncThunk('/post/commentPush/fetchComment
   return data;
 });
 
+export const fetchCommentDelete = createAsyncThunk('/post/deleteComment/fetchCommentDelete', async (params, id) => {
+  const { data } = await axios.patch(`/post/deleteComment/${id}`, params);
+
+  return data;
+});
+
 export const fetchPostDelete = createAsyncThunk('/post/deletePost/fetchPostDelete', async (params, id) => {
   const { data } = await axios.patch(`/post/deletePost/${id}`, params);
 

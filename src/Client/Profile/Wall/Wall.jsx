@@ -8,6 +8,7 @@ import {
   fetchPostDislike,
   setCreateComment,
   fetchCommentPush,
+  fetchCommentDelete,
   fetchPostDelete,
 } from '../../store/slices/post';
 import './style.css';
@@ -16,8 +17,9 @@ function Wall() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const wall = useSelector((state) => state.post.userPosts);
-  const [comment, setComment] = React.useState('0');
+  const [comment, setComment] = React.useState();
   const { id } = useParams();
+  const firstRef = React.useRef(null);
   const user = state.user?.userOne?.[0];
 
   let wallPost = wall.post.find((x) => x.user === id)?.post;
@@ -57,10 +59,16 @@ function Wall() {
     );
     dispatch(fetchUserPostsAll(id));
     dispatch(setCreateComment(''));
+    firstRef.current.value = '';
+  };
+
+  const deleteComment = async (postId, ind) => {
+    await dispatch(fetchCommentDelete({ postId: postId, index: ind }, id));
+    dispatch(fetchUserPostsAll(id));
   };
 
   const deletePost = async (index) => {
-    const postIndex = wall.post.find(x=> x.user === id).post.findIndex((x) => x._id === index);
+    const postIndex = wall.post.find((x) => x.user === id).post.findIndex((x) => x._id === index);
     await dispatch(fetchPostDelete({ deleteId: postIndex }, id));
     dispatch(fetchUserPostsAll(id));
   };
@@ -154,7 +162,8 @@ function Wall() {
             <FontAwesomeIcon
               className="wall_comment_icon"
               icon="fa-regular fa-comment-dots"
-              onClick={() => (comment !== '0' ? setComment('0') : setComment(index))}
+              style={comment === index ? { color: 'black' } : { color: 'white' }}
+              onClick={() => (comment !== index ? setComment(index) : comment === index ? setComment('0')  : setComment(index))}
             />
             <span className="dislike_number">{content.commentPost.length}</span>
 
@@ -163,14 +172,21 @@ function Wall() {
             {comment === index ? (
               <div className="comments">
                 <textarea
+                  ref={firstRef}
                   className="comment_input"
                   placeholder="Write your comment here"
                   onChange={(e) => dispatch(setCreateComment(e.target.value))}
                 />
 
-                <button className="input_button" onClick={() => addComment(content._id)}>
-                  <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
-                </button>
+                {state.post.userPosts.status === 'loaded' && state.post.createComment.length > 0 ? (
+                  <button className="input_button" onClick={() => addComment(content._id)}>
+                    <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
+                  </button>
+                ) : (
+                  <button className="input_button">
+                    <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
+                  </button>
+                )}
 
                 {content.commentPost?.map((comment, index) => (
                   <div className="comment" key={index}>
@@ -179,9 +195,13 @@ function Wall() {
                       alt=""
                       className="comment_avatar"
                     />
-                    {wall.post?.[0]?.user === state.auth.data._id ||
+                    {wall.post.find((x) => x.user === id)?.user === state.auth.data._id ||
                     state.auth.data._id === comment.userId ? (
-                      <FontAwesomeIcon className="comment_delete" icon="fa-solid fa-xmark" />
+                      <FontAwesomeIcon
+                        className="comment_delete"
+                        icon="fa-solid fa-xmark"
+                        onClick={() => deleteComment(content?._id, index)}
+                      />
                     ) : (
                       ''
                     )}

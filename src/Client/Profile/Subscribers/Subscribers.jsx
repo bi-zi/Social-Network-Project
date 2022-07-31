@@ -6,23 +6,29 @@ import { useParams } from 'react-router-dom';
 import { fetchUserPostsAll } from '../../store/slices/post';
 import './style.css';
 
-function Friends() {
+function Subscribers() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const state = useSelector((state) => state);
   const profileFriend = state.user?.userOne?.[0];
-  let arr = state.user?.usersAll.filter((x, i) => profileFriend?.friends.includes(x._id)).splice(0, 8);
+  let arr = state.user?.usersAll
+    .filter((x, i) => profileFriend?.subscribers.includes(x._id))
+    .splice(0, 8);
 
   const fetchData = (id) => {
     dispatch(fetchOneUser(id));
     dispatch(fetchUserPostsAll(id));
   };
 
-
   return (
-    <div className="profile_friends">
-      <Link to={`/Friends/${id}`} className="profile_friends_title" style={{ textDecoration: 'none' }} onClick={() => dispatch(setCatergory('friends'))}>
-        Friends - {state.user?.usersAll.filter((x, i) => profileFriend?.friends.includes(x._id))?.length}
+    <div className="profile_subscribers">
+      <Link
+        to={`/Friends/${id}`}
+        className="profile_friends_title"
+        style={{ textDecoration: 'none' }}
+        onClick={() => dispatch(setCatergory('subscribers'))}>
+        Subscribers -
+        {state.user?.usersAll.filter((x, i) => profileFriend?.subscribers.includes(x._id))?.length}
       </Link>
       <div className="profile_friends_container">
         {arr.map((x, i) => (
@@ -38,4 +44,4 @@ function Friends() {
   );
 }
 
-export default Friends;
+export default Subscribers;

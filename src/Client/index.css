@@ -8,6 +8,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: rgb(0, 0, 0);
   scrollbar-width: thin;
+
 }
 
 *,
@@ -23,6 +24,7 @@ h4,
 h5,
 h6 {
   margin: 100px auto 0 auto;
+
 }
 
 .active {
@@ -31,4 +33,20 @@ h6 {
 
 .inactive {
   color: rgb(255, 255, 255);
+}
+
+/* container */
+.container {
+  max-width: 1400px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.left_container {
+  position: absolute;
+  height: auto;
+  top: 0px;
 }

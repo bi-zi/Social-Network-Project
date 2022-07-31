@@ -78,7 +78,7 @@ function Post() {
       setPostEffect();
     }
   };
-  
+
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));
   }, []);
@@ -103,7 +103,9 @@ function Post() {
           <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
         </button>
       ) : (
-        ''
+        <button className="post_make_button" type="submit" >
+          <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
+        </button>
       )}
       {/* imagesInput */}
       <FontAwesomeIcon className="post_image_icon" icon="fa-regular fa-image" />

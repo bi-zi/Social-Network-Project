@@ -24,8 +24,20 @@ export const fetchSubscribe = createAsyncThunk('user/subscribe/id/fetchUserUpdat
   return data;
 });
 
+export const fetchUnsubscribe = createAsyncThunk('user/unsubscribe/id/fetchUnsubscribe', async (params, id) => {
+  const { data } = await axios.patch(`/user/unsubscribe/${id}`, params);
+
+  return data;
+});
+
 export const fetchAcceptFriend = createAsyncThunk('user/friend/id/fetchAcceptFriend', async (params, id) => {
   const { data } = await axios.patch(`/user/friend/${id}`, params);
+
+  return data;
+});
+
+export const fetchDeleteFriend = createAsyncThunk('user/deleteFriend/id/fetchDeleteFriend', async (params, id) => {
+  const { data } = await axios.patch(`/user/deleteFriend/${id}`, params);
 
   return data;
 });
@@ -34,6 +46,7 @@ const initialState = {
   usersAll: [],
   userOne: {},
   inputNumber: '',
+  catergory: '',
   status: 'loading',
 };
 
@@ -43,6 +56,9 @@ const userSlice = createSlice({
   reducers: {
     setInputNumber: (state, action) => {
       state.inputNumber = action.payload
+    },
+    setCatergory: (state, action) => {
+      state.catergory = action.payload
     },
   },
 
@@ -72,5 +88,5 @@ const userSlice = createSlice({
   }
 });
 
-export const { setInputNumber } = userSlice.actions
+export const { setInputNumber, setCatergory } = userSlice.actions
 export const userReducer = userSlice.reducer;

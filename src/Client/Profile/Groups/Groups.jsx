@@ -5,7 +5,7 @@ function Groups() {
   return (
     <div className="groups">
       <div className="groups_backGround">
-        <div className="groups_title">Subscriptions</div>
+        <div className="groups_title">Groups - in developing</div>
       </div>
     </div>
   );

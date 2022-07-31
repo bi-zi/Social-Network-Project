@@ -13,7 +13,6 @@
   right: 0%;
   top: 0%;
   bottom: 0%;
-
   background: #393939;
   border-radius: 25px;
 }
@@ -72,7 +71,6 @@
   height: 28px;
   left: 105px;
   top: 15px;
-
   font-family: 'Iceberg';
   font-style: normal;
   font-weight: 400;
@@ -95,4 +93,27 @@
   font-size: 20px;
   line-height: 24px;
   color: #ffffff;
+}
+
+.delete_friend,.send_message {
+  position: absolute;
+  width: 155px;
+  height: 60px;
+  left: 26px;
+  top: 402px;
+  background: linear-gradient(88.95deg, #0a0404 -15.87%, #280404 80.66%);
+  border-radius: 25px;
+  font-family: 'Iceberg';
+  font-style: normal;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.delete_friend {
+  left: 200px;
+}
+
+.delete_friend:active, .send_message:active {
+ color:  rgb(100, 100, 100);
 }

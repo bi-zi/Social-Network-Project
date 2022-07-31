@@ -5,7 +5,7 @@ function Videos() {
   return (
     <div className="videos">
       <div className="videos_backGround">
-        <div className="videos_title">Video recordings</div>
+        <div className="videos_title">Video recordings - in developing</div>
       </div>
     </div>
   );

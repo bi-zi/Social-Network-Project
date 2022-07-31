@@ -10,6 +10,7 @@ import Friends from './Friends/Friends';
 import Groups from './Groups/Groups';
 import Videos from './Videos/Videos';
 import Music from './Music/Music';
+import Subscribers from './Subscribers/Subscribers'
 import { Navigate } from 'react-router-dom';
 import { selectIsAuth } from '../store/slices/auth';
 import { useParams } from 'react-router-dom';
@@ -35,11 +36,15 @@ function Profile() {
       <PhotoSlider />
       {state.auth.data?._id === id ? <Post /> : ''}
       <Wall />
-      <Avatar />
-      <Friends />
-      <Groups />
+      <div className='left_container'>
+        <Avatar />
+        <Friends />
+        <Subscribers />
+      </div>
+
+      {/* <Groups />
       <Videos />
-      <Music />
+      <Music /> */}
     </div>
   );
 }

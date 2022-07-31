@@ -5,9 +5,14 @@ import ImageParsing from '../../ImageParsing/ImageParsing';
 import { setInputNumber } from '../../store/slices/user';
 import './style.css';
 import { useParams } from 'react-router-dom';
-import { fetchSubscribe, fetchAcceptFriend, fetchOneUser } from '../../store/slices/user';
+import {
+  fetchSubscribe,
+  fetchUnsubscribe,
+  fetchAcceptFriend,
+  fetchDeleteFriend,
+  fetchOneUser,
+} from '../../store/slices/user';
 import { fetchAuthMe } from '../../store/slices/auth';
-import { useNavigate } from 'react-router-dom';
 
 function Avatar() {
   const dispatch = useDispatch();
@@ -20,6 +25,17 @@ function Avatar() {
     dispatch(fetchAuthMe());
   };
 
+  const unsubscribe = async () => {
+    await dispatch(
+      fetchUnsubscribe(
+        { id: id, index: user?.subscribers.findIndex((x) => x === state.auth.data?._id) },
+        id,
+      ),
+    );
+    dispatch(fetchOneUser(id));
+    dispatch(fetchAuthMe());
+  };
+
   const acceptFriend = async () => {
     await dispatch(
       fetchAcceptFriend({ id: id, index: state.auth.data?.subscribers.findIndex((x) => x === id) }, id),
@@ -28,17 +44,32 @@ function Avatar() {
     dispatch(fetchAuthMe());
   };
 
+  const deleteFriend = async () => {
+    await dispatch(
+      fetchDeleteFriend(
+        {
+          id: id,
+          index: user?.friends.findIndex((x) => x === state.auth.data?._id),
+          index2: state.auth.data?.friends.findIndex((x) => x === id),
+        },
+        id,
+      ),
+    );
+    dispatch(fetchOneUser(id));
+    dispatch(fetchAuthMe());
+  };
+
   const user = state.user?.userOne?.[0];
-  const yourSubscriber = state.auth.data?.subscribers.find((x) => x === id);
-  const youSubscriber = user?.subscribers?.find((x) => x === state.auth?.data?._id);
-  const friend = state.auth.data?.friends.find((x) => x === id);
+  const subscribedToYou = state.auth.data?.subscribers.find((x) => x === id) === undefined ? 0 : 1;
+  const youSubscriber = user?.subscribers?.find((x) => x === state.auth?.data?._id) === undefined ? 0 : 1;
+  const friend = state.auth.data?.friends.find((x) => x === id) === undefined ? 0 : 1;
 
+  window.onpopstate = function (event) {
+    //  console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
+    if (document.location.pathname.split('/')[1] === 'Profile') dispatch(fetchOneUser(id));
+  };
 
-
-    // Нужно сделать отслеживание кнопки назад и вперед 
-
-
-  // console.log('Ysub', yourSubscriber, 'youSub', youSubscriber, 'fri', friend);
+  // console.log('твой подписчик', subscribedToYou, 'ты подписчик', youSubscriber, 'твой друг', friend);
   return (
     <div className="avatar">
       <div className="avatar_backGround">
@@ -50,39 +81,55 @@ function Avatar() {
           <img src={user?.imageUrl} alt="" className="avatar_image" />
         )}
 
-        <div
-          className="avatar_button"
-          onChange={() => {
-            dispatch(setInputNumber('0'));
-          }}>
-          <div className="avatar_change">Сhange photo</div>
-          {state.auth.data?._id === id &&
-          state.user.status === 'loaded' &&
-          state.slider.status === 'loaded' ? (
-            <ImageParsing />
-          ) : (
-            ''
-          )}
-        </div>
+        {state.auth?.data?._id === id ? (
+          <div
+            className="avatar_button"
+            onChange={() => {
+              dispatch(setInputNumber('0'));
+            }}>
+            {state.auth.data === null ? '' : <div className="avatar_change">Сhange photo</div>}
 
-        {state.auth.data?._id === id || state.auth.data === null ? (
+            {state.auth.data?._id === id &&
+            state.user.status === 'loaded' &&
+            state.slider.status === 'loaded' ? (
+              <ImageParsing />
+            ) : (
+              ''
+            )}
+          </div>
+        ) : (
           ''
-        ) : yourSubscriber !== undefined && friend !== id ? (
-          <div className="add_friend" onClick={() => acceptFriend()}>
-            <div className="add_friend_text">Accept friend request</div>
-          </div>
-        ) : friend === id ? (
-          <div className="add_friend">
-            <div className="add_friend_text">In friends</div>
-          </div>
-        ) : youSubscriber !== undefined ? (
-          <div className="add_friend">
-            <div className="add_friend_text">You subscriber</div>
-          </div>
-        ) : youSubscriber === undefined ? (
-          <div className="add_friend" onClick={() => subscribe()}>
-            <div className="add_friend_text">Send friend request</div>
-          </div>
+        )}
+
+        {state.auth.data === null || state.auth?.data?._id === id ? (
+          ''
+        ) : subscribedToYou !== 0 && youSubscriber === 0 && friend !== id ? (
+          <>
+            <button className="send_message">Send a message</button>
+            <button className="delete_friend" onClick={() => acceptFriend()}>
+              Accept friend request
+            </button>
+          </>
+        ) : friend === 1 ? (
+          <>
+            <button className="send_message">Send a message</button>
+            <button className="delete_friend" onClick={() => deleteFriend()}>Delete friend</button>
+            +-
+          </>
+        ) : youSubscriber !== 0 ? (
+          <>
+            <button className="send_message">Send a message</button>
+            <button className="delete_friend" onClick={() => unsubscribe()}>
+              Unsubscribe
+            </button>
+          </>
+        ) : youSubscriber === 0 ? (
+          <>
+            <button className="send_message">Send a message</button>
+            <button className="delete_friend" onClick={() => subscribe()}>
+              Send friend request
+            </button>
+          </>
         ) : (
           ''
         )}

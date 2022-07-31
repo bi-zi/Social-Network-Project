@@ -10,11 +10,12 @@ function Friends() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const { id } = useParams();
-  const [catergory, setCategory] = React.useState('friends');
+  const [catergory, setCategory] = React.useState(
+    state.user.catergory === '' ? 'people' : state.user.catergory,
+  );
   const [sortBy, setSortBy] = React.useState();
 
   const user = state.user?.userOne?.[0];
-
   let arr = [];
   if (catergory === 'friends') {
     arr = state.user.usersAll?.filter((x) => user.friends.includes(x._id));
@@ -118,9 +119,9 @@ function Friends() {
             </div>
           ))
         ) : catergory === 'friends' ? (
-          <div className="zero_friends">You don't have friends :( </div>
+          <div className="zero_friends">No friends 😭</div>
         ) : (
-          <div className="zero_friends">You don't have subscribers :( </div>
+          <div className="zero_friends">No subscribers 😭</div>
         )}
       </div>
 
