@@ -1,38 +1,47 @@
 .friends {
+  display: flex;
+
+  margin: 20px auto 0 auto;
+
   max-width: 1375px;
   height: 100%;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  color: #ffffff;
+
   font-family: 'Iceberg';
   font-style: normal;
+
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  color: #ffffff;
 }
 
 .friends_result,
 .control_panel {
-  border-radius: 20px;
   width: 678px;
   height: 100%;
+
+  border-radius: 20px;
+
   background: #393939;
 }
 
 .friend {
-  width: 640px;
-  height: 120px;
+  display: flex;
+  position: relative;
+
   margin-left: 20px;
   margin-top: 10px;
-  position: relative;
+
+  width: 640px;
+  height: 120px;
+
   border-bottom: 2px solid black;
-  display: flex;
 }
 
 .friend_avatar {
   width: 110px;
   height: 110px;
+
   border-radius: 100%;
   cursor: pointer;
 }
@@ -40,47 +49,58 @@
 .friend_name {
   margin-top: 10px;
   margin-left: 10px;
+
   width: 230px;
   height: 20px;
+
   font-size: 17px;
   color: white;
 }
 
 .friend_message {
   position: relative;
+
   width: 100px;
   height: 20px;
-  right: 230px;
+
   top: 35px;
+  right: 230px;
+
   cursor: pointer;
 }
 
 .friend_menu {
   position: relative;
+
   float: left;
   left: 165px;
 }
 
 .number_friends {
   position: absolute;
+
   top: 100px;
   right: 140px;
 }
 
 .number_subscribers {
   position: absolute;
+
   top: 100px;
   right: 20px;
 }
 
 .zero_friends {
-    width: 640px;
-  height: 60px;
+  display: flex;
+  position: relative;
+
   margin-left: 20px;
   margin-top: 10px;
+
+  width: 640px;
+  height: 60px;
+
   font-size: 40px;
-  position: relative;
-  display: flex;
 }
 
 .friend_menu_icon {
@@ -90,11 +110,14 @@
 
 .friend_content {
   display: none;
-  left: -85px;
+  position: absolute;
+
+  padding-top: 20px;
+
   width: 120px;
   height: 80px;
-  padding-top: 20px;
-  position: absolute;
+
+  left: -85px;
 }
 
 .friend_menu:active .friend_content {
@@ -107,24 +130,28 @@
 
 .friend_delete,
 .friend_blackList {
-  font-size: 16px;
   width: 110px;
-  color: white;
-  background-color: rgb(0, 0, 0);
   padding: 3px;
+
+  font-size: 16px;
+
+  background-color: rgb(0, 0, 0);
+  color: white;
 }
 
 .friend_delete:hover,
 .friend_blackList:hover {
-  cursor: pointer;
-  color: black;
   background-color: white;
+  color: black;
+
+  cursor: pointer;
 }
 
 .control_panel {
-  position: sticky;
-  top: 20px;
   display: block;
+  position: sticky;
+
+  top: 80px;
 }
 
 .all_people,
@@ -132,9 +159,12 @@
 .friend_requests,
 .friend_sort {
   margin: 20px;
+
   width: 640px;
   height: 50px;
+
   font-size: 26px;
+
   cursor: pointer;
   z-index: 10 !important;
 }
@@ -152,10 +182,12 @@
 
 .friend_sort_category {
   display: none;
+  position: absolute;
+
+  padding-top: 40px;
+
   width: 679px;
   height: 270px;
-  padding-top: 40px;
-  position: absolute;
 }
 
 .friend_sort_menu:active .friend_sort_category {
@@ -170,8 +202,9 @@
 .Z-A_sort,
 .friends_sort,
 .subscribers_sort {
-  font-size: 26px;
   padding: 20px 20px;
+
+  font-size: 26px;
   background-color: #393939;
   cursor: pointer;
 }

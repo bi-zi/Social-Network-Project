@@ -1,7 +1,11 @@
 .profile_subscribers {
   position: relative;
+
   width: 380px;
-  background-color: #393939;
-  border-radius: 25px;
+
   top: 592px;
+
+  background-color: #393939;
+  border-radius: 15px;
+
 }

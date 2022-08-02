@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOneUser, setCatergory } from '../../store/slices/user.js';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 import { fetchUserPostsAll } from '../../store/slices/post';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './style.css';
 
 function Subscribers() {

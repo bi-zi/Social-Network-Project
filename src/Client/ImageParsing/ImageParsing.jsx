@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Compressor from 'compressorjs';
 import { setCreateImg } from '../store/slices/post';
-import { useParams } from 'react-router-dom';
 import { fetchUserUpdate, fetchOneUser } from '../store/slices/user';
 import { fetchSlider, fetchSliderPost, fetchSliderPush } from '../store/slices/slider';
+import { useParams } from 'react-router-dom';
+import Compressor from 'compressorjs';
 
 function ImageParsing() {
   const dispatch = useDispatch();

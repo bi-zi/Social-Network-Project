@@ -1,96 +1,100 @@
-/* about */
 .about {
   position: relative;
+
   width: 980px;
   height: 350px;
-  left: 420px;
+
   top: 20px;
-}
+  left: 420px;
 
-/* about_backGround */
-.about_backGround {
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-  background: #393939;
-  border-radius: 25px;
-}
-
-.about_info {
-  position: absolute;
-  top: 100px;
-  left: 23px;
-  width: 935px;
-  height: 225px;
-  text-align: center;
-  padding-top: 90px;
   font-family: 'Iceberg';
   font-style: normal;
   font-weight: 400;
-  font-size: 30px;
-  z-index: 1;
-  color: #fe000000;
+
+  background: #393939;
+  color: #ffffff;
+
+  border-radius: 15px;
+
+  user-select: none;
 }
 
-.about_info:hover {
-  background-color: rgba(22, 22, 22, 0.505);
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-}
-
-/* Alexey Tsvetkov */
-.full_name {
+.fullName {
   position: absolute;
   width: 500px;
   height: 30px;
   left: 21px;
   top: 18px;
 
-  font-family: 'Iceberg';
-  font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 30px;
-  line-height: 37px;
+  line-height: 40px;
+
+  letter-spacing: 2px;
 
   color: #ffffff;
 }
 
-/* Line */
 .line {
   position: absolute;
-  width: 942px;
-  height: 0px;
-  left: 19px;
-  top: 62px;
 
-  border: 10px solid #2d2d2d;
-  transform: rotate(-0.12deg);
+  width: 942px;
+
+  top: 70px;
+  left: 19px;
+
+  border-bottom: 10px solid #222222;
 }
 
-.lives, .from, .born,
- .profession, .relationship, .student  {
+.about_info {
+  position: absolute;
+
+  padding-top: 90px;
+
+  width: 940px;
+  height: 250px;
+
+  top: 90px;
+  left: 20px;
+
+  text-align: center;
+  font-size: 30px;
+
+  z-index: 1;
+  color: #fe000000;
+}
+
+.about_info:hover {
+  background-color: rgba(22, 22, 22, 0.56);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.lives,
+.from,
+.born,
+.profession,
+.relationship,
+.student {
   position: relative;
-  width: 935px;
-  height: 30px;
-  left: 21px;
-  top: 94px;
+
   margin-bottom: 10px;
 
-  font-family: 'Iceberg';
-  font-style: normal;
-  font-weight: 400;
+  width: 935px;
+  height: 30px;
+
+  top: 94px;
+  left: 21px;
+
   font-size: 30px;
   line-height: 37px;
-
-  color: #ffffff;
 }
 
 .about_form {
   position: relative;
-  left: 20px;
+
   top: 100px;
+  left: 20px;
 }
 
 .lives_input,
@@ -99,22 +103,46 @@
 .lives_profession,
 .lives_relationship,
 .lives_student {
+  margin-bottom: 10px;
+
+  padding-left: 10px;
+
   width: 400px;
   height: 25px;
-  font-family: 'Iceberg';
-  font-style: normal;
-  font-weight: 400;
+
   font-size: 19px;
-  margin-bottom: 10px;
+  border-radius: 15px;
 }
 
 .about_buttton {
-  border: 0px solid;
+  width: 400px;
+  height: 30px;
+
+  color: white;
+
+  background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
+  background-size: 200% auto;
+  border: 0;
   border-radius: 15px;
+
+  transition: 0.5s;
+
   font-family: 'Iceberg';
   font-style: normal;
   font-weight: 400;
   font-size: 22px;
-  width: 200px;
-  height: 30px;
+
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+  cursor: pointer;
+}
+
+.about_buttton:hover {
+  background-position: right center;
+}
+
+.about_buttton:active {
+  transform: scale(0.9);
+  transition: 0.2s;
 }

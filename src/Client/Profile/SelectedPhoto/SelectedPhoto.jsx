@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchUserUpdate, fetchOneUser } from '../../store/slices/user';
 import { fetchSlider, fetchSliderDelete } from '../../store/slices/slider';
 import { setCreateImgDelete } from '../../store/slices/post';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
 
 function Photo() {
@@ -20,7 +20,6 @@ function Photo() {
       : category === 'PhotoSlider'
       ? slider?.sliderImg
       : state.post.createImg;
-
 
   const onPhotoDelete = async () => {
     if (category === 'PhotoAvatar') {
@@ -61,7 +60,7 @@ function Photo() {
             to={`/Profile/${user}`}
             style={{ color: '#ffffff', textDecoration: 'none' }}
             onClick={() => onPhotoDelete()}>
-            Удалить фото
+            Delete image
           </Link>
         ) : (
           ''

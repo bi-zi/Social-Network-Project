@@ -1,15 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchSlider } from '../../store/slices/slider.js';
+import { setInputNumber } from '../../store/slices/user';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import ImageParsing from '../../ImageParsing/ImageParsing';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './style.css';
-
-import ImageParsing from '../../ImageParsing/ImageParsing';
-import { setInputNumber } from '../../store/slices/user';
-import { useParams } from 'react-router-dom';
-import { fetchSlider } from '../../store/slices/slider.js';
 
 function PhotoSlider() {
   const dispatch = useDispatch();
@@ -33,9 +32,9 @@ function PhotoSlider() {
     <div className="images">
       <div className="images_backGround">
         {readyPhotos?.length < 2 ? (
-          <div className="costili1"></div>
+          <div className="crutch_1"></div>
         ) : readyPhotos?.length === 2 ? (
-          <div className="costili2"></div>
+          <div className="crutch_2"></div>
         ) : (
           ''
         )}
@@ -58,9 +57,9 @@ function PhotoSlider() {
         {state.auth.data?._id === id ? (
           <div className="images_button" onChange={() => dispatch(setInputNumber('1'))}>
             {state.slider.status === 'loaded' && state.user.status === 'loaded' ? (
-              <ImageParsing/>
+              <ImageParsing />
             ) : (
-              <div className="input_parser"></div>
+              <div className="slider_button"></div>
             )}
             <div className="add_images">Add photos</div>
           </div>

@@ -1,20 +1,27 @@
 .profile_friends {
   position: relative;
+
   width: 380px;
   height: 100%;
-  background: #393939;
-  border-radius: 25px;
-  top: 570px;
-}
 
-.profile_friends_title {
-  position: relative;
-  height: 30px;
-  left: 24px;
+  top: 570px;
 
   font-family: 'Iceberg';
   font-style: normal;
   font-weight: 400;
+
+  background: #393939;
+  color: #ffffff;
+
+  border-radius: 25px;
+}
+
+.profile_friends_title {
+  position: relative;
+
+  height: 30px;
+  left: 24px;
+
   font-size: 30px;
   line-height: 37px;
 
@@ -26,19 +33,24 @@
 }
 
 .profile_friends_container {
+  display: flex;
+
+  margin: 0 auto;
+
   width: 360px;
   height: auto;
-  display: flex;
+
   flex-wrap: wrap;
-  margin: 0 auto;
 }
 
 .profile_friend {
-  cursor: pointer;
   margin: 10px;
+
   width: 70px;
   height: 80px;
+
   text-align: center;
+  cursor: pointer;
 }
 
 .profile_friend:hover .profile_friend_avatar {
@@ -50,16 +62,14 @@
 }
 
 .profile_friend_avatar {
-  background-color: black;
   width: 60px;
   height: 60px;
+
+  background-color: black;
   border-radius: 100%;
 }
 
 .profile_friend_name {
-  color: #ffffff;
-  font-family: 'Iceberg';
-  font-style: normal;
-  font-weight: 400;
   font-size: 15px;
+  color: #ffffff;
 }

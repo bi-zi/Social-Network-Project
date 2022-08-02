@@ -1,9 +1,9 @@
 import React from 'react';
-import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import {fetchRegister, selectIsAuth } from '../store/slices/auth';
 import { useForm } from 'react-hook-form';
-import { fetchAuth, fetchRegister, selectIsAuth } from '../store/slices/auth';
+import { Navigate } from 'react-router-dom';
+import './style.css';
 
 export const Registration = () => {
   const dispatch = useDispatch();

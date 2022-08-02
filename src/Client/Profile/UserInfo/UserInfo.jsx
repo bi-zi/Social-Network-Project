@@ -1,10 +1,10 @@
 import React from 'react';
-import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAboutPost, fetchAbout, fetchAboutUpdate } from '../../store/slices/about.js';
+import { fetchOneUser } from '../../store/slices/user.js';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { fetchOneUser } from '../../store/slices/user.js';
+import './style.css';
 
 function UserInfo() {
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ function UserInfo() {
     <>
       <div className="about">
         <div className="about_backGround">
-          <div className="full_name">{`${user?.fullName || ''}`}</div>
+          <div className="fullName">{`${user?.fullName || ''}`}</div>
           <div className="line"></div>
           {closeInfo === 0 ? (
             <>
@@ -183,7 +183,9 @@ function UserInfo() {
                 </span>
               )}
               <br />
-              <button type="submit">Submit</button>
+              <button className="about_buttton" type="submit">
+                Submit
+              </button>
             </form>
           )}
         </div>

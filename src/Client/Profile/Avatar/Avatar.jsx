@@ -1,10 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ImageParsing from '../../ImageParsing/ImageParsing';
+import { fetchAuthMe } from '../../store/slices/auth';
 import { setInputNumber } from '../../store/slices/user';
-import './style.css';
-import { useParams } from 'react-router-dom';
 import {
   fetchSubscribe,
   fetchUnsubscribe,
@@ -12,7 +9,10 @@ import {
   fetchDeleteFriend,
   fetchOneUser,
 } from '../../store/slices/user';
-import { fetchAuthMe } from '../../store/slices/auth';
+import { useParams } from 'react-router-dom';
+import ImageParsing from '../../ImageParsing/ImageParsing';
+import { Link } from 'react-router-dom';
+import './style.css';
 
 function Avatar() {
   const dispatch = useDispatch();
@@ -61,7 +61,8 @@ function Avatar() {
 
   const user = state.user?.userOne?.[0];
   const subscribedToYou = state.auth.data?.subscribers.find((x) => x === id) === undefined ? 0 : 1;
-  const youSubscriber = user?.subscribers?.find((x) => x === state.auth?.data?._id) === undefined ? 0 : 1;
+  const youSubscriber =
+    user?.subscribers?.find((x) => x === state.auth?.data?._id) === undefined ? 0 : 1;
   const friend = state.auth.data?.friends.find((x) => x === id) === undefined ? 0 : 1;
 
   window.onpopstate = function (event) {
@@ -113,8 +114,9 @@ function Avatar() {
         ) : friend === 1 ? (
           <>
             <button className="send_message">Send a message</button>
-            <button className="delete_friend" onClick={() => deleteFriend()}>Delete friend</button>
-            +-
+            <button className="delete_friend" onClick={() => deleteFriend()}>
+              Delete friend
+            </button>
           </>
         ) : youSubscriber !== 0 ? (
           <>

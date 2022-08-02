@@ -1,7 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useParams } from 'react-router-dom';
 import {
   fetchUserPostsAll,
   fetchPostLike,
@@ -11,6 +9,8 @@ import {
   fetchCommentDelete,
   fetchPostDelete,
 } from '../../store/slices/post';
+import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
 
 function Wall() {
@@ -49,7 +49,6 @@ function Wall() {
         {
           _id: postId,
           fullName: state.auth.data?.fullName,
-          avatar: state.auth.data?.imageUrl,
           commentText: state.post.createComment,
           commentDate: date,
           userId: state.auth.data._id,
@@ -116,8 +115,7 @@ function Wall() {
                         }
                     ${content.imagesPost.length === 1 ? 'wall_one_image' : ''}
                     ${
-                      content.imagesPost.length === 2 && index === 0
-                        ? 'wall_two_image_first'
+                      content.imagesPost.length === 2 && index === 0 ? 'wall_two_image_first'
                         : content.imagesPost.length === 2 && index === 1
                         ? 'wall_two_image_second'
                         : ''
@@ -130,6 +128,7 @@ function Wall() {
             ) : (
               ''
             )}
+
             {content.videoPost.length > 0 ? (
               <>
                 <iframe
@@ -163,7 +162,13 @@ function Wall() {
               className="wall_comment_icon"
               icon="fa-regular fa-comment-dots"
               style={comment === index ? { color: 'black' } : { color: 'white' }}
-              onClick={() => (comment !== index ? setComment(index) : comment === index ? setComment('0')  : setComment(index))}
+              onClick={() =>
+                comment !== index
+                  ? setComment(index)
+                  : comment === index
+                  ? setComment('0')
+                  : setComment(index)
+              }
             />
             <span className="dislike_number">{content.commentPost.length}</span>
 

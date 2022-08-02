@@ -3,20 +3,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setCreatText,
-  setCreateImg,
   setCreateImgDelete,
   setCreateVid,
   fetchUserPostsAll,
   fetchCreatePost,
   fetchPostPush,
 } from '../../store/slices/post';
-
-import { useParams } from 'react-router-dom';
-
-import ImageParsing from '../../ImageParsing/ImageParsing';
 import { setInputNumber } from '../../store/slices/user';
-
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import ImageParsing from '../../ImageParsing/ImageParsing';
 import './style.css';
 
 function Post() {
@@ -31,8 +27,6 @@ function Post() {
 
   const post = state.post.userPosts.post.find((x) => x.user === id);
   const user = state.user?.userOne?.[0];
-;
-
   const readyPhotos = state.post.createImg;
   const textLength = state.post.createText.length;
   const postText = state.post.createText;
@@ -49,7 +43,6 @@ function Post() {
 
   if (linkСheck) localStorage.setItem('postVideo', local);
   if (state.post.createVid?.length === 0) localStorage.setItem('postVideo', url);
-
 
   const sendPost = async () => {
     if ((textLength > 0 || numImg > 0 || local.length > 0) && post === undefined) {
@@ -98,47 +91,6 @@ function Post() {
         title="Only latin characters can be used"
         onChange={(e) => dispatch(setCreatText(e.target.value))}
       />
-      {state.post.userPosts.status === 'loaded' ? (
-        <button className="post_make_button" type="submit" onClick={() => sendPost()}>
-          <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
-        </button>
-      ) : (
-        <button className="post_make_button" type="submit" >
-          <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
-        </button>
-      )}
-      {/* imagesInput */}
-      <FontAwesomeIcon className="post_image_icon" icon="fa-regular fa-image" />
-      {numImg < 3 ? (
-        <button onChange={() => dispatch(setInputNumber('2'))} className="post_image_input">
-          <ImageParsing />
-        </button>
-      ) : (
-        <div className="post_max_image">MAX</div>
-      )}
-
-      {/* videoInput */}
-      <FontAwesomeIcon
-        className="post_video_icon"
-        icon="fa-solid fa-film"
-        onClick={() => (postEffect !== 0 ? setPostEffect(0) : setPostEffect(1))}
-      />
-      {postEffect === 0 && !linkСheck ? (
-        <input
-          type="text"
-          className="post_input_video"
-          placeholder="Insert YouTube video link"
-          onChange={(e) => dispatch(setCreateVid(e.target.value))}
-        />
-      ) : (
-        ''
-      )}
-
-      {/*
-      <FontAwesomeIcon className="post_audio_icon" icon="fa-solid fa-music" />
-      <FontAwesomeIcon className="post_location_icon" icon="fa-solid fa-location-pin" />
-      <FontAwesomeIcon className="post_file_icon" icon="fa-solid fa-file-lines" />
-      */}
 
       <div className="wall_content">
         {/* postText */}
@@ -181,9 +133,6 @@ function Post() {
         {/* videoRender */}
         {linkСheck ? (
           <>
-            <button className="video_delete" onClick={() => dispatch(setCreateVid(''))}>
-              Delete video
-            </button>
             <iframe
               src={`https://www.youtube.com/embed/${src}`}
               title="YouTube video player"
@@ -195,6 +144,51 @@ function Post() {
         ) : (
           ''
         )}
+      </div>
+
+      <div className="wall_control_panel">
+        {state.post.userPosts.status === 'loaded' ? (
+          <button className="post_make_button" type="submit" onClick={() => sendPost()}>
+            <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
+          </button>
+        ) : (
+          <button className="post_make_button" type="submit">
+            <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
+          </button>
+        )}
+
+        <FontAwesomeIcon className="post_image_icon" icon="fa-regular fa-image" />
+        {numImg < 3 ? (
+          <button onChange={() => dispatch(setInputNumber('2'))} className="post_image_input">
+            <ImageParsing />
+          </button>
+        ) : (
+          <div className="post_max_image">MAX</div>
+        )}
+
+        <FontAwesomeIcon
+          className="post_video_icon"
+          icon="fa-solid fa-film"
+          onClick={() => (postEffect !== 0 ? setPostEffect(0) : setPostEffect(1))}
+        />
+
+        {linkСheck ? <button className="video_delete" onClick={() => dispatch(setCreateVid(''))}>
+          Delete video
+        </button> : ''}
+        {postEffect === 0 && !linkСheck ? (
+          <input
+            type="text"
+            className="post_input_video"
+            placeholder="Insert YouTube video link"
+            onChange={(e) => dispatch(setCreateVid(e.target.value))}
+          />
+        ) : (
+          ''
+        )}
+
+        <FontAwesomeIcon className="post_audio_icon" icon="fa-solid fa-music" />
+        <FontAwesomeIcon className="post_location_icon" icon="fa-solid fa-location-pin" />
+        <FontAwesomeIcon className="post_file_icon" icon="fa-solid fa-file-lines" />
       </div>
     </div>
   );

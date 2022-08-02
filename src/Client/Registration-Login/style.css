@@ -1,9 +1,8 @@
 .registration {
+  margin: 200px auto 0 auto;
+
   width: 300px;
   height: 300px;
-  margin-top: 200px;
-  margin-left: auto;
-  margin-right: auto;
 
   border-radius: 20px;
   background-color: #393939;
@@ -11,42 +10,41 @@
 
 .registr_form {
   position: relative;
-  text-align: center;
 
   padding-top: 60px;
+  text-align: center;
 }
 
 .firstName,
 .lastName,
-.password {
+.password,
+.submit {
   width: 220px;
   height: 40px;
-  border: 0px solid white;
-  border-radius: 5px;
+
+  margin-bottom: 10px;
+  padding-left: 10px;
+
   font-size: 20px;
   font-family: 'Iceberg';
-  padding-left: 10px;
-  margin-bottom: 10px;
+
+  border: 0px solid white;
+  border-radius: 5px;
   color: black;
 }
 
 .submit {
-  width: 220px;
   height: 25px;
 
   border: 1px solid rgb(0, 0, 0);
-  border-radius: 5px;
-  font-size: 20px;
-  font-family: 'Iceberg';
-  padding-left: 10px;
-  margin-bottom: 10px;
   background-color: rgb(46, 224, 46);
-  color: black;
 }
 
 .already_register {
   margin-top: 200px;
+
   text-align: center;
   font-size: 30px;
+  
   color: white;
 }

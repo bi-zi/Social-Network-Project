@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fetchOneUser } from '../store/slices/user';
-import './style.css';
 import { logout, selectIsAuth } from '../store/slices/auth';
-import { NavLink } from 'react-router-dom';
+import { fetchOneUser } from '../store/slices/user';
 import { useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './style.css';
 
 function Header() {
   const dispatch = useDispatch();
@@ -21,9 +21,6 @@ function Header() {
     }
   };
   const path = window.location.pathname.split('/')[1];
-
-
-
 
   return (
     <div className="header">
