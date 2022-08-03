@@ -28,7 +28,7 @@ function Post() {
   const post = state.post.userPosts.post.find((x) => x.user === id);
   const user = state.user?.userOne?.[0];
   const readyPhotos = state.post.createImg;
-  const textLength = state.post.createText.length;
+  const textLength = state.post?.createText?.length;
   const postText = state.post.createText;
   const numImg = readyPhotos.length;
 

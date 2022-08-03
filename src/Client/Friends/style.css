@@ -12,6 +12,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
 
+  user-select: none;
   color: #ffffff;
 }
 

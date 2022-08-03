@@ -20,7 +20,9 @@ function Header() {
       window.localStorage.removeItem('token');
     }
   };
+
   const path = window.location.pathname.split('/')[1];
+
 
   return (
     <div className="header">
@@ -28,33 +30,45 @@ function Header() {
         <NavLink
           style={{ textDecoration: 0, color: 'white' }}
           to={`/Profile/${state?._id}`}
-          className="wave">
+          className="wave"
+          onClick={() => dispatch(fetchOneUser(state._id))}>
           Wave
         </NavLink>
-        <div className="header_control_panel">
-          <NavLink
-            to={`/Profile/${state?._id}`}
-            style={id === state?._id && path === 'Profile' ? { color: 'black' } : { color: 'white' }}
-            onClick={() => dispatch(fetchOneUser(state?._id))}>
-            <FontAwesomeIcon className="profile" icon="fa-regular fa-circle-user" />
-          </NavLink>
 
-          <FontAwesomeIcon className="bell" icon="fa-regular fa-bell" />
-          <FontAwesomeIcon className="news" icon="fa-solid fa-pager" />
-          <FontAwesomeIcon className="message" icon="fa-regular fa-comment" />
+        {localStorage.isAuth !== undefined ? (
+          <div className="header_control_panel">
+            <NavLink
+              to={`/Profile/${state?._id}`}
+              style={id === state?._id && path === 'Profile' ? { color: 'black' } : { color: 'white' }}
+              onClick={() => dispatch(fetchOneUser(state._id))}>
+              <FontAwesomeIcon className="profile" icon="fa-regular fa-circle-user" />
+            </NavLink>
 
-          <NavLink
-            to={`/Friends/${state?._id}`}
-            style={id === state?._id && path === 'Profile' ? { color: 'white' } : { color: 'black' }}
-            className={({ isActive }) => (isActive ? 'active' : 'inactive')}>
-            <FontAwesomeIcon className="users" icon="fa-solid fa-user-group" />
-          </NavLink>
+            <FontAwesomeIcon className="bell" icon="fa-regular fa-bell" />
+            <FontAwesomeIcon className="news" icon="fa-solid fa-pager" />
+            <FontAwesomeIcon className="message" icon="fa-regular fa-comment" />
 
-          <FontAwesomeIcon className="community" icon="fa-solid fa-users" />
-          <FontAwesomeIcon className="image" icon="fa-regular fa-image" />
-          <FontAwesomeIcon className="video" icon="fa-solid fa-film" />
-          <FontAwesomeIcon className="music" icon="fa-solid fa-music" />
-        </div>
+            <NavLink
+              to={`/Friends/${state?._id}`}
+              style={
+                (id === state?._id && path === 'Profile') || path === state?._id
+                  ? { color: 'white' }
+                  : { color: 'black' }
+              }
+              className={({ isActive }) => (isActive ? 'active' : 'inactive')}
+              onClick={() => dispatch(fetchOneUser(state?._id))}>
+              <FontAwesomeIcon className="users" icon="fa-solid fa-user-group" />
+            </NavLink>
+
+            <FontAwesomeIcon className="community" icon="fa-solid fa-users" />
+            <FontAwesomeIcon className="image" icon="fa-regular fa-image" />
+            <FontAwesomeIcon className="video" icon="fa-solid fa-film" />
+            <FontAwesomeIcon className="music" icon="fa-solid fa-music" />
+          </div>
+        ) : (
+          ''
+        )}
+
         <FontAwesomeIcon className="menu" icon="fa-solid fa-align-justify" onClick={onClickLogout} />
       </div>
     </div>

@@ -1,8 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchOneUser } from '../store/slices/user';
+import { fetchAuthMe } from '../store/slices/auth';
+import { fetchAllUsers, fetchDeleteFriend, fetchOneUser } from '../store/slices/user';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
 
@@ -10,15 +12,21 @@ function Friends() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const { id } = useParams();
+
   const [catergory, setCategory] = React.useState(
     state.user.catergory === '' ? 'people' : state.user.catergory,
   );
   const [sortBy, setSortBy] = React.useState();
 
-  const user = state.user?.userOne?.[0];
+
+
+  const user =
+    state.user?.userOne?.[0] === undefined
+      ? state.user.usersAll?.find((x) => x._id === id)
+      : state.user?.userOne?.[0];
   let arr = [];
   if (catergory === 'friends') {
-    arr = state.user.usersAll?.filter((x) => user.friends.includes(x._id));
+    arr = state.user.usersAll?.filter((x) => user?.friends.includes(x._id));
   }
 
   if (catergory === 'people') {
@@ -26,7 +34,7 @@ function Friends() {
   }
 
   if (catergory === 'subscribers') {
-    arr = state.user.usersAll?.filter((x) => user.subscribers.includes(x._id));
+    arr = state.user.usersAll?.filter((x) => user?.subscribers.includes(x._id));
   }
 
   if (sortBy === 'a-z') {
@@ -86,9 +94,32 @@ function Friends() {
       });
   }
 
-  React.useEffect(() => {
+  const deleteFriend = async (userId) => {
+    await dispatch(
+      fetchDeleteFriend(
+        {
+          id: userId,
+          index: state.user.usersAll
+            .find((x) => x._id === userId)
+            .friends.findIndex((x) => x === state.auth.data?._id),
+          index2: state.auth.data?.friends.findIndex((x) => x === userId),
+        },
+        id,
+      ),
+    );
     dispatch(fetchOneUser(id));
+    dispatch(fetchAuthMe());
+  };
+
+  React.useEffect(() => {
+    dispatch(fetchAllUsers());
   }, []);
+
+
+
+  if (localStorage.isAuth === undefined) {
+    return <Navigate to="/Login" />;
+  }
 
   return (
     <div className="friends">
@@ -106,14 +137,21 @@ function Friends() {
               <Link to={`/Profile/${x._id}`} className="friend_name" style={{ textDecoration: 'none' }}>
                 {x.fullName}
               </Link>
+
               <span className="friend_message">Send message</span>
-              <div className="friend_menu">
-                <div className="friend_content">
-                  <div className="friend_delete">Delete friend</div>
-                  <div className="friend_blackList">Add to blacklist</div>
+
+              {catergory === 'friends' ? (
+                <div className="friend_menu">
+                  <div className="friend_content">
+                    <div className="friend_delete" onClick={() => deleteFriend(x._id)}>
+                      Delete friend
+                    </div>
+                  </div>
+                  <FontAwesomeIcon className="friend_menu_icon" icon="fa-solid fa-ellipsis" />
                 </div>
-                <FontAwesomeIcon className="friend_menu_icon" icon="fa-solid fa-ellipsis" />
-              </div>
+              ) : (
+                ''
+              )}
               <span className="number_friends">Friends {x.friends?.length}</span>
               <span className="number_subscribers">Subscribers {x.subscribers?.length}</span>
             </div>

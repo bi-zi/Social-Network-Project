@@ -9,11 +9,12 @@ import Profile from './Profile/Profile.jsx'
 import Photo from './Profile/SelectedPhoto/SelectedPhoto.jsx'
 import Friends from './Friends/Friends.jsx';
 import { Routes, Route } from 'react-router-dom';
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faPager, faUserGroup, faUsers, faFilm,
   faMusic, faAlignJustify, faLocationPin, faFileLines,
-  faShareNodes, faEllipsis, faXmark, faPlay
+  faShareNodes, faEllipsis, faXmark, faPlay, faCircleChevronRight, faCircleChevronLeft
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faCircleUser, faBell, faComment, faImage,
@@ -25,7 +26,7 @@ import './index.css'
 library.add(
   faPager, faUsers, faUserGroup, faFilm,
   faMusic, faAlignJustify, faLocationPin, faFileLines,
-  faShareNodes, faEllipsis, faXmark, faPlay, faCircleUser, faBell,
+  faShareNodes, faEllipsis, faXmark, faPlay, faCircleChevronRight, faCircleChevronLeft, faCircleUser, faBell,
   faComment, faImage, faThumbsUp, faThumbsDown,
   faCommentDots)
 

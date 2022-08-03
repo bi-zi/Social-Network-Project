@@ -31,13 +31,37 @@ function Wall() {
   }
   wallPost = buffer;
 
-  const like = async (postId) => {
-    await dispatch(fetchPostLike({ _id: postId }, id));
+  const like = async (postId, check) => {
+    if (check) await dispatch(fetchPostLike({ _id: postId, likeDislike: state.auth?.data?._id, index: 1 }, id));
+
+    if (!check)
+      await dispatch(
+        fetchPostLike(
+          {
+            _id: postId,
+            likeDislike: wallPost?.[0]?.likePost?.findIndex((x) => x === state.auth?.data?._id),
+            index: 0,
+          },
+          id,
+        ),
+      );
     dispatch(fetchUserPostsAll(id));
   };
 
-  const dislike = async (postId) => {
-    await dispatch(fetchPostDislike({ _id: postId }, id));
+  const dislike = async (postId, check) => {
+    if (check) await dispatch(fetchPostDislike({ _id: postId, likeDislike: state.auth?.data?._id, index: 1 }, id));
+    console.log(check);
+    if (!check)
+      await dispatch(
+        fetchPostDislike(
+          {
+            _id: postId,
+            likeDislike: wallPost?.[0]?.dislikePost?.findIndex((x) => x === state.auth?.data?._id),
+            index: 0,
+          },
+          id,
+        ),
+      );
     dispatch(fetchUserPostsAll(id));
   };
 
@@ -115,7 +139,8 @@ function Wall() {
                         }
                     ${content.imagesPost.length === 1 ? 'wall_one_image' : ''}
                     ${
-                      content.imagesPost.length === 2 && index === 0 ? 'wall_two_image_first'
+                      content.imagesPost.length === 2 && index === 0
+                        ? 'wall_two_image_first'
                         : content.imagesPost.length === 2 && index === 1
                         ? 'wall_two_image_second'
                         : ''
@@ -147,16 +172,35 @@ function Wall() {
             <FontAwesomeIcon
               className="wall_like_icon"
               icon="fa-regular fa-thumbs-up"
-              onClick={() => like(content._id)}
+              style={
+                content.likePost.find((x) => x === state.auth?.data?._id)
+                  ? { color: 'red' }
+                  : { color: 'white' }
+              }
+              onClick={() =>
+                content.likePost?.find((x) => x === state.auth?.data?._id)
+                  ? like(content._id, false)
+                  : like(content._id, true)
+              }
             />
-            <span className="like_number">{content.likePost}</span>
+            <span className="like_number">{content.likePost?.length}</span>
 
             <FontAwesomeIcon
               className="wall_dislike_icon"
               icon="fa-regular fa-thumbs-down"
-              onClick={() => dislike(content._id)}
+              style={
+                content.dislikePost.find((x) => x === state.auth?.data?._id)
+                  ? { color: 'red' }
+                  : { color: 'white' }
+              }
+              onClick={() =>
+                content.dislikePost?.find((x) => x === state.auth?.data?._id)
+                  ? dislike(content._id, false)
+                  : dislike(content._id, true)
+              }
             />
-            <span className="dislike_number">{content.dislikePost}</span>
+
+            <span className="dislike_number">{content.dislikePost?.length}</span>
 
             <FontAwesomeIcon
               className="wall_comment_icon"

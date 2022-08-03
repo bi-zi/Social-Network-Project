@@ -51,7 +51,7 @@ export const fetchPostDelete = createAsyncThunk('/post/deletePost/fetchPostDelet
 
 const initialState = {
   createText: localStorage.postText,
-  createImg: [...JSON.parse(localStorage.getItem('postImages'))],
+  createImg: [],
   createVid: localStorage.postVideo,
   createComment: '',
   userPosts: {
@@ -94,6 +94,33 @@ const postSlice = createSlice({
       state.userPosts.status = 'error';
     },
 
+    [fetchCreatePost.pending]: (state) => { state.status = 'loading' },
+    [fetchCreatePost.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchCreatePost.rejected]: (state) => { state.status = 'error' },
+
+    [fetchPostPush.pending]: (state) => { state.status = 'loading' },
+    [fetchPostPush.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchPostPush.rejected]: (state) => { state.status = 'error' },
+
+    [fetchPostLike.pending]: (state) => { state.status = 'loading' },
+    [fetchPostLike.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchPostLike.rejected]: (state) => { state.status = 'error' },
+
+    [fetchPostDislike.pending]: (state) => { state.status = 'loading' },
+    [fetchPostDislike.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchPostDislike.rejected]: (state) => { state.status = 'error' },
+
+    [fetchCommentPush.pending]: (state) => { state.status = 'loading' },
+    [fetchCommentPush.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchCommentPush.rejected]: (state) => { state.status = 'error' },
+
+    [fetchCommentDelete.pending]: (state) => { state.status = 'loading' },
+    [fetchCommentDelete.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchCommentDelete.rejected]: (state) => { state.status = 'error' },
+
+    [fetchPostDelete.pending]: (state) => { state.status = 'loading' },
+    [fetchPostDelete.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchPostDelete.rejected]: (state) => { state.status = 'error' },
   }
 });
 

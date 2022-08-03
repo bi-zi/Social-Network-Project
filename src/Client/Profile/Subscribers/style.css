@@ -5,7 +5,12 @@
 
   top: 592px;
 
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+
   background-color: #393939;
   border-radius: 15px;
-
+  
+  user-select: none;
 }

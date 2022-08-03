@@ -28,6 +28,7 @@ function PhotoSlider() {
   React.useEffect(() => {
     dispatch(fetchSlider());
   }, []);
+
   return (
     <div className="images">
       <div className="images_backGround">

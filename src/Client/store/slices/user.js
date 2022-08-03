@@ -6,7 +6,7 @@ export const fetchAllUsers = createAsyncThunk('user/fetchAllUsers', async () => 
   return data;
 });
 
-export const fetchOneUser = createAsyncThunk('user/one/id/fetchUserUpdate', async ( id) => {
+export const fetchOneUser = createAsyncThunk('user/one/id/fetchUserUpdate', async (id) => {
   const { data } = await axios.get(`/user/one/${id}`);
 
   return data;
@@ -45,9 +45,10 @@ export const fetchDeleteFriend = createAsyncThunk('user/deleteFriend/id/fetchDel
 const initialState = {
   usersAll: [],
   userOne: {},
+  data: {},
   inputNumber: '',
   catergory: '',
-  status: 'loading',
+  status: '',
 };
 
 const userSlice = createSlice({
@@ -85,6 +86,25 @@ const userSlice = createSlice({
       state.status = 'error';
     },
 
+    [fetchUserUpdate.pending]: (state) => { state.status = 'loading' },
+    [fetchUserUpdate.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchUserUpdate.rejected]: (state) => { state.status = 'error' },
+
+    [fetchSubscribe.pending]: (state) => { state.status = 'loading' },
+    [fetchSubscribe.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchSubscribe.rejected]: (state) => { state.status = 'error' },
+
+    [fetchUnsubscribe.pending]: (state) => { state.status = 'loading' },
+    [fetchUnsubscribe.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchUnsubscribe.rejected]: (state) => { state.status = 'error' },
+
+    [fetchAcceptFriend.pending]: (state) => { state.status = 'loading' },
+    [fetchAcceptFriend.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchAcceptFriend.rejected]: (state) => { state.status = 'error' },
+
+    [fetchDeleteFriend.pending]: (state) => { state.status = 'loading' },
+    [fetchDeleteFriend.fulfilled]: (state) => {state.status = 'loaded'},
+    [fetchDeleteFriend.rejected]: (state) => { state.status = 'error' },
   }
 });
 

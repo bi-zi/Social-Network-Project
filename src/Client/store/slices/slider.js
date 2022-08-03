@@ -48,6 +48,17 @@ const sliderSlice = createSlice({
       state.status = 'error';
     },
 
+    [fetchSliderPost.pending]: (state) => { state.status = 'loading' },
+    [fetchSliderPost.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchSliderPost.rejected]: (state) => { state.status = 'error' },
+
+    [fetchSliderPush.pending]: (state) => { state.status = 'loading' },
+    [fetchSliderPush.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchSliderPush.rejected]: (state) => { state.status = 'error' },
+
+    [fetchSliderDelete.pending]: (state) => { state.status = 'loading' },
+    [fetchSliderDelete.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchSliderDelete.rejected]: (state) => { state.status = 'error' },
   }
 });
 

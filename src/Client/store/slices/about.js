@@ -30,7 +30,6 @@ const aboutSlice = createSlice({
   extraReducers: {
     [fetchAboutPost.pending]: (state) => {
       state.status = 'loading';
-      state.data = null;
     },
     [fetchAboutPost.fulfilled]: (state, action) => {
       state.status = 'loaded';
@@ -38,20 +37,16 @@ const aboutSlice = createSlice({
     },
     [fetchAboutPost.rejected]: (state) => {
       state.status = 'error';
-      state.data = null;
     },
-    [fetchAbout.pending]: (state) => {
-      state.data = [];
-      state.status = 'loading';
-    },
-    [fetchAbout.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.status = 'loaded';
-    },
-    [fetchAbout.rejected]: (state) => {
-      state.data = [];
-      state.status = 'error';
-    },
+
+
+    [fetchAbout.pending]: (state) => { state.status = 'loading' },
+    [fetchAbout.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchAbout.rejected]: (state) => { state.status = 'error' },
+
+    [fetchAboutUpdate.pending]: (state) => { state.status = 'loading' },
+    [fetchAboutUpdate.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchAboutUpdate.rejected]: (state) => { state.status = 'error' },
   },
 });
 

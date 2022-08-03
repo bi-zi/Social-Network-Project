@@ -20,8 +20,6 @@ export const fetchAuthMe = createAsyncThunk('auth/fetchAuthMe', async () => {
 
 
 const initialState = {
-
-
   data: null,
   status: 'loading',
 };
@@ -68,6 +66,7 @@ const authSlice = createSlice({
     [fetchRegister.rejected]: (state) => {
       state.status = 'error';
     },
+
   },
 });
 

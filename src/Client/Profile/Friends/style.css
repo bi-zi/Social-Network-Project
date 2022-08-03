@@ -13,6 +13,7 @@
   background: #393939;
   color: #ffffff;
 
+  user-select: none;
   border-radius: 25px;
 }
 
