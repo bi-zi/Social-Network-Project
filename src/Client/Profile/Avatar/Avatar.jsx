@@ -10,6 +10,13 @@ import {
   fetchOneUser,
   fetchAllUsers,
 } from '../../store/slices/user';
+
+import {
+  fetchNotifications,
+  fetchNotificationsPost,
+  fetchNotificationsPush,
+  fetchdDeleteRequest,
+} from '../../store/slices/notifications';
 import { useParams } from 'react-router-dom';
 import ImageParsing from '../../ImageParsing/ImageParsing';
 import { Link } from 'react-router-dom';
@@ -31,26 +38,46 @@ function Avatar() {
     if (document.location.pathname.split('/')[1] === 'Profile') dispatch(fetchOneUser(id));
   };
 
+  const base = !state.note?.notifications?.friendRequest?.find(
+    (x) => x.fromWho === state.auth.data?._id,
+  );
+
+  const friendRequestIndex = state.note?.notifications?.friendRequest?.findIndex(
+    (x) => x.fromWho === state.auth.data?._id,
+  );
+  console.log();
+
   const subscribe = async () => {
     await dispatch(fetchSubscribe({ authUserId: state.auth.data?._id, id: id }, id));
+
+    if (state.note.notifications?.user === id && base) {
+      await dispatch(fetchNotificationsPush({ fromWho: state.auth.data?._id, id: id }));
+    }
+
+    if (state.note.notifications?.user === undefined) {
+      await dispatch(fetchNotificationsPost({ fromWho: state.auth.data?._id, user: id }));
+    }
+
+    dispatch(fetchNotifications(id));
     dispatch(fetchOneUser(id));
     dispatch(fetchAuthMe());
   };
 
   const unsubscribe = async () => {
+    await dispatch(fetchdDeleteRequest({ index: friendRequestIndex, id: id }));
+
     await dispatch(
       fetchUnsubscribe(
         { id: id, index: user?.subscribers.findIndex((x) => x === state.auth.data?._id) },
         id,
       ),
     );
+    dispatch(fetchNotifications(id));
     dispatch(fetchOneUser(id));
     dispatch(fetchAuthMe());
   };
 
   const acceptFriend = async () => {
-    console.log(state.auth.data?.subscribers.findIndex((x) => x === id));
-
     await dispatch(
       fetchAcceptFriend({ id: id, index: state.auth.data?.subscribers.findIndex((x) => x === id) }, id),
     );
@@ -69,10 +96,14 @@ function Avatar() {
         id,
       ),
     );
-    dispatch(fetchOneUser(id));
 
+    dispatch(fetchOneUser(id));
     dispatch(fetchAuthMe());
   };
+
+  React.useEffect(() => {
+   dispatch(fetchNotifications(id));
+  }, []);
 
   return (
     <div className="avatar">

@@ -34,6 +34,7 @@
 }
 
 .profile,
+.bell_icon,
 .bell,
 .news,
 .message,
@@ -44,6 +45,94 @@
 .music {
   width: 40px;
   height: 40px;
+}
+
+.profile:hover,
+.news:hover,
+.bell_icon:hover,
+.message:hover,
+.users:hover,
+.community:hover,
+.image:hover,
+.video:hover,
+.music:hover {
+  color: #9e9b9b;
+  cursor: pointer;
+}
+
+
+
+.notifications_number {
+  position: relative;
+
+  padding-top: 3px;
+
+  width: 25px;
+  height: 25px;
+
+  top: -40px;
+  left: 20px;
+
+  text-align: center;
+  font-size: 14px;
+
+  border-radius: 100%;
+  background-color: red;
+}
+
+
+
+.notifications {
+  display: none;
+  position: relative;
+  width: 60px;
+  height: 110px;
+
+  top: -80px;
+  left: -10px;
+}
+
+.bell:active .notifications {
+  display: block;
+}
+
+.notifications:hover {
+  display: block;
+}
+
+.have_friend,
+.dont_notе {
+  position: absolute;
+
+  padding-top: 5px;
+  padding-left: 5px;
+
+  width: 330px;
+  height: 40px;
+
+  top: 65px;
+  font-size: 20px;
+
+  border: 2px solid white;
+
+  background-color: rgb(0, 0, 0);
+  display: flex;
+}
+
+.note_show,
+.note_hide {
+  text-decoration: none;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.note_show:hover,
+.note_hide:hover {
+  color: #9e9b9b;
+}
+
+.dont_notе {
+  top: 90px;
 }
 
 .menu {
