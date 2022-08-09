@@ -15,6 +15,7 @@ function UserInfo() {
   const about = Array.isArray(state.about?.data) ? state.about.data?.find((x) => x.user === id) : '';
 
   const user = state.user?.userOne?.[0];
+
   const onSubmit = async (values, id) => {
     setCloseInfo(0);
     let data = {};
@@ -28,6 +29,8 @@ function UserInfo() {
     }
   };
 
+  
+
   const {
     register,
     handleSubmit,
@@ -36,10 +39,10 @@ function UserInfo() {
     mode: 'onSubmit',
   });
 
-  React.useEffect(() => {
-    dispatch(fetchAbout());
-    dispatch(fetchOneUser(id));
-  }, []);
+ React.useEffect(() => {
+   dispatch(fetchAbout());
+   dispatch(fetchOneUser(id));
+ }, []);
 
   return (
     <>

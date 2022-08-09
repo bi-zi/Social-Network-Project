@@ -11,7 +11,7 @@ export const fetchAbout = createAsyncThunk('about/fetchAbout', async () => {
   return data;
 });
 
-export const fetchAboutUpdate = createAsyncThunk('about/id/fetchAboutUpdate', async (params,id) => {
+export const fetchAboutUpdate = createAsyncThunk('about/id/fetchAboutUpdate', async (params, id) => {
   const { data } = await axios.patch(`/about/${id}`, params);
   return data;
 });
@@ -31,9 +31,8 @@ const aboutSlice = createSlice({
     [fetchAboutPost.pending]: (state) => {
       state.status = 'loading';
     },
-    [fetchAboutPost.fulfilled]: (state, action) => {
+    [fetchAboutPost.fulfilled]: (state) => {
       state.status = 'loaded';
-      state.data = action.payload;
     },
     [fetchAboutPost.rejected]: (state) => {
       state.status = 'error';
@@ -41,7 +40,10 @@ const aboutSlice = createSlice({
 
 
     [fetchAbout.pending]: (state) => { state.status = 'loading' },
-    [fetchAbout.fulfilled]: (state) => { state.status = 'loaded' },
+    [fetchAbout.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.status = 'loaded'
+    },
     [fetchAbout.rejected]: (state) => { state.status = 'error' },
 
     [fetchAboutUpdate.pending]: (state) => { state.status = 'loading' },
