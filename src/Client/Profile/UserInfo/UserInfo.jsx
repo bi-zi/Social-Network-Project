@@ -4,6 +4,7 @@ import { fetchAboutPost, fetchAbout, fetchAboutUpdate } from '../../store/slices
 import { fetchOneUser } from '../../store/slices/user.js';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { fetchMainMessages, fetchGetMessages } from '../../store/slices/messages.js';
 import './style.css';
 
 function UserInfo() {
@@ -29,8 +30,6 @@ function UserInfo() {
     }
   };
 
-  
-
   const {
     register,
     handleSubmit,
@@ -39,10 +38,10 @@ function UserInfo() {
     mode: 'onSubmit',
   });
 
- React.useEffect(() => {
-   dispatch(fetchAbout());
-   dispatch(fetchOneUser(id));
- }, []);
+  React.useEffect(() => {
+    dispatch(fetchAbout());
+    dispatch(fetchOneUser(id));
+  }, []);
 
   return (
     <>

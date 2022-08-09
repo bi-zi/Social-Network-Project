@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectIsAuth } from '../store/slices/auth';
+
 import Avatar from './Avatar/Avatar';
 import UserInfo from './UserInfo/UserInfo';
 import PhotoSlider from './PhotoSlider/PhotoSlider';
@@ -26,6 +27,7 @@ function Profile() {
 
   const isAuth = useSelector(selectIsAuth);
 
+
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
   }
@@ -36,7 +38,7 @@ function Profile() {
       <PhotoSlider />
       {state.auth.data?._id === id ? <Post /> : ''}
       <Wall />
-      <div className='left_container'>
+      <div className="left_container">
         <Avatar />
         <Friends />
         <Subscribers />

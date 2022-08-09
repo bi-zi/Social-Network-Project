@@ -11,12 +11,15 @@ import {
   fetchAllUsers,
 } from '../../store/slices/user';
 
+import { fetchCreateMessages, fetchGetMessages, fetchPushChat } from '../../store/slices/messages.js';
+
 import {
   fetchNotifications,
   fetchNotificationsPost,
   fetchNotificationsPush,
   fetchdDeleteRequest,
 } from '../../store/slices/notifications';
+
 import { useParams } from 'react-router-dom';
 import ImageParsing from '../../ImageParsing/ImageParsing';
 import { Link } from 'react-router-dom';
@@ -101,8 +104,32 @@ function Avatar() {
     dispatch(fetchAuthMe());
   };
 
+  let you = !state.messages?.data.find((x) => x.user === state.auth.data?._id);
+  let him = !state.messages?.data.find((x) => x.user === id);
+  let checkChat = !state.messages?.data?.find((x) => x?.correspondence?.[0]?.withWho === id);
+
+  console.log(checkChat, you);
+
+  const createMessages = async () => {
+    if (you) {
+      console.log(1);
+      await dispatch(fetchCreateMessages({ withWho: id, user: state.auth?.data?._id }));
+    }
+    if (him) {
+      console.log(2);
+      await dispatch(fetchCreateMessages({ withWho: state.auth?.data?._id, user: id }));
+    }
+    if (checkChat && !you) {
+      console.log(3);
+      await dispatch(fetchPushChat({ withWho: id, user: state.auth?.data?._id }));
+    }
+
+    dispatch(fetchGetMessages());
+  };
+
   React.useEffect(() => {
-   dispatch(fetchNotifications(id));
+    dispatch(fetchNotifications(id));
+    dispatch(fetchGetMessages());
   }, []);
 
   return (
@@ -140,7 +167,10 @@ function Avatar() {
           ''
         ) : subscribedToYou !== 0 && youSubscriber === 0 && friend !== id ? (
           <>
-            <button className="send_message">Send a message</button>
+            <Link to="/Messages" className="send_message" onClick={() => createMessages()}>
+              Send a message
+            </Link>
+
             <button
               className="delete_friend"
               onClick={() =>
@@ -151,7 +181,9 @@ function Avatar() {
           </>
         ) : friend === 1 ? (
           <>
-            <button className="send_message">Send a message</button>
+            <Link to="/Messages" className="send_message" onClick={() => createMessages()}>
+              Send a message
+            </Link>
             <button
               className="delete_friend"
               onClick={() =>
@@ -162,7 +194,9 @@ function Avatar() {
           </>
         ) : youSubscriber !== 0 ? (
           <>
-            <button className="send_message">Send a message</button>
+            <Link to="/Messages" className="send_message" onClick={() => createMessages()}>
+              Send a message
+            </Link>
             <button
               className="delete_friend"
               onClick={() =>
@@ -173,7 +207,9 @@ function Avatar() {
           </>
         ) : youSubscriber === 0 ? (
           <>
-            <button className="send_message">Send a message</button>
+            <Link to="/Messages" className="send_message" onClick={() => createMessages()}>
+              Send a message
+            </Link>
             <button
               className="delete_friend"
               onClick={() =>

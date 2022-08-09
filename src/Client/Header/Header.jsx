@@ -14,7 +14,8 @@ function Header() {
   const state = useSelector((state) => state);
   const { id } = useParams();
 
-  const note = state.note?.notifications?.user === state.auth?.data?._id ? state.note?.notifications : '';
+  const note =
+    state.note?.notifications?.user === state.auth?.data?._id ? state.note?.notifications : '';
   const onClickLogout = () => {
     if (window.confirm('Вы действительно хотите выйти?')) {
       dispatch(logout());
@@ -86,7 +87,10 @@ function Header() {
             </div>
 
             <FontAwesomeIcon className="news" icon="fa-solid fa-pager" />
-            <FontAwesomeIcon className="message" icon="fa-regular fa-comment" />
+
+            <NavLink to="/Messages">
+              <FontAwesomeIcon className="message" icon="fa-regular fa-comment" />
+            </NavLink>
 
             <NavLink
               to={`/Friends/${state.auth?.data?._id}`}

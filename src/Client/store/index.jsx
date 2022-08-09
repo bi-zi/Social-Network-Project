@@ -5,6 +5,7 @@ import { userReducer } from './slices/user.js';
 import { sliderReducer } from './slices/slider.js';
 import { postReducer } from './slices/post.js';
 import { notificationsReducer } from './slices/notifications.js';
+import { messagesReducer} from './slices/messages.js'
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     slider: sliderReducer,
     post: postReducer,
     note: notificationsReducer,
+    messages: messagesReducer
   },
 });
