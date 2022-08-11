@@ -4,7 +4,7 @@ import { logout, selectIsAuth } from '../store/slices/auth';
 import { fetchOneUser, setCatergory } from '../store/slices/user';
 import { fetchNotifications, fetchNotificationsDelete } from '../store/slices/notifications';
 import { useParams } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
 
@@ -14,6 +14,7 @@ function Header() {
   const state = useSelector((state) => state);
   const { id } = useParams();
 
+
   const note =
     state.note?.notifications?.user === state.auth?.data?._id ? state.note?.notifications : '';
   const onClickLogout = () => {
@@ -21,6 +22,7 @@ function Header() {
       dispatch(logout());
       localStorage.removeItem('isAuth');
       window.localStorage.removeItem('token');
+
     }
   };
 
@@ -30,6 +32,7 @@ function Header() {
   };
 
   const path = window.location.pathname.split('/')[1];
+
 
   return (
     <div className="header">
@@ -95,7 +98,9 @@ function Header() {
             <NavLink
               to={`/Friends/${state.auth?.data?._id}`}
               style={
-                (id === state.auth?.data?._id && path === 'Profile') || path === state.auth?.data?._id
+                (id === state.auth?.data?._id && path === 'Profile') ||
+                path === state.auth?.data?._id ||
+                path === 'Messages'
                   ? { color: 'white' }
                   : { color: 'black' }
               }

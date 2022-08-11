@@ -106,9 +106,7 @@ function Avatar() {
 
   let you = !state.messages?.data.find((x) => x.user === state.auth.data?._id);
   let him = !state.messages?.data.find((x) => x.user === id);
-  let checkChat = !state.messages?.data?.find((x) => x?.correspondence?.[0]?.withWho === id);
-
-  console.log(checkChat, you);
+  let checkChat = !state.messages?.data?.find((x) => x?.correspondence?.find((x) => x?.withWho === id));
 
   const createMessages = async () => {
     if (you) {

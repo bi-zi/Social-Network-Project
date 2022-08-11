@@ -24,6 +24,7 @@ function Friends() {
     state.user?.userOne?.[0] === undefined
       ? state.user.usersAll?.find((x) => x._id === id)
       : state.user?.userOne?.[0];
+
   let arr = [];
   if (catergory === 'friends') {
     arr = state.user.usersAll?.filter((x) => user?.friends.includes(x._id));
