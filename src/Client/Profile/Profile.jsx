@@ -20,13 +20,14 @@ function Profile() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
-  // console.log(
-  // '-----AVATAR-----',state.user.status,
-  // '-----SLIDER-----',state.slider.status,
-  // '-----POST-----',state.post.userPosts.status);
+  // console.log([
+  //   `-----AVATAR----- ${state.user.status}`,
+  //   `-----SLIDER----- ${state.slider.status}`,
+  //   `-----POST----- ${state.post.userPosts.status}`,
+  //   `-----NOTE----- ${state.note.status}`,
+  // ]);
 
   const isAuth = useSelector(selectIsAuth);
-
 
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;

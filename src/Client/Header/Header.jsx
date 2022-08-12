@@ -14,25 +14,23 @@ function Header() {
   const state = useSelector((state) => state);
   const { id } = useParams();
 
-
   const note =
     state.note?.notifications?.user === state.auth?.data?._id ? state.note?.notifications : '';
+
   const onClickLogout = () => {
     if (window.confirm('Вы действительно хотите выйти?')) {
       dispatch(logout());
       localStorage.removeItem('isAuth');
       window.localStorage.removeItem('token');
-
     }
   };
 
   const onHideNote = async () => {
-    dispatch(fetchNotificationsDelete({ deleteNotifications: id }));
-    dispatch(fetchNotifications(id));
+    dispatch(fetchNotificationsDelete({ deleteNotifications: localStorage.mainUser }));
+    dispatch(fetchNotifications(localStorage.mainUser));
   };
 
   const path = window.location.pathname.split('/')[1];
-
 
   return (
     <div className="header">
@@ -67,14 +65,17 @@ function Header() {
               )}
 
               <div className="notifications">
-                {note?.friendRequest?.length > 0 ? (
+                {note?.friendRequest?.length !== 0 ? (
                   <>
                     <div className="have_friend">
                       You have friend requests! &nbsp;
                       <NavLink
                         to={`/Friends/${state.auth?.data?._id}`}
                         className="note_show"
-                        onClick={() => dispatch(setCatergory('subscribers'))}>
+                        onClick={() => {
+                          dispatch(setCatergory('subscribers'));
+                          onHideNote();
+                        }}>
                         Show
                       </NavLink>
                       &nbsp;
@@ -91,7 +92,9 @@ function Header() {
 
             <FontAwesomeIcon className="news" icon="fa-solid fa-pager" />
 
-            <NavLink to="/Messages">
+            <NavLink
+              to="/Messages"
+              style={path !== 'Messages' ? { color: 'white' } : { color: 'black' }}>
               <FontAwesomeIcon className="message" icon="fa-regular fa-comment" />
             </NavLink>
 

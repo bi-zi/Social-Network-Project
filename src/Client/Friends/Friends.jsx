@@ -5,6 +5,7 @@ import { fetchAllUsers, fetchDeleteFriend, fetchOneUser } from '../store/slices/
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
+import { fetchNotifications } from '../store/slices/notifications';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
 
@@ -114,7 +115,9 @@ function Friends() {
 
   React.useEffect(() => {
     dispatch(fetchAllUsers());
+    dispatch(fetchNotifications(id));
   }, []);
+
 
 
 

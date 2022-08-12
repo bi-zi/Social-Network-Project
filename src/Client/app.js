@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { fetchAuthMe, } from './store/slices/auth.js';
 import { fetchAllUsers, } from './store/slices/user.js';
 import { Registration } from "./Registration-Login/Registration.jsx"
@@ -36,6 +36,8 @@ library.add(
 
 function App() {
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  if (state.auth.data?._id !== undefined) localStorage.setItem('mainUser', state.auth.data?._id);
 
   React.useEffect(() => {
     dispatch(fetchAuthMe());

@@ -34,10 +34,10 @@ function Avatar() {
   const subscribedToYou = state.auth.data?.subscribers.find((x) => x === id) === undefined ? 0 : 1;
   const youSubscriber =
     user?.subscribers?.find((x) => x === state.auth?.data?._id) === undefined ? 0 : 1;
+
   const friend = state.auth.data?.friends.find((x) => x === id) === undefined ? 0 : 1;
 
   window.onpopstate = function (event) {
-    //  console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
     if (document.location.pathname.split('/')[1] === 'Profile') dispatch(fetchOneUser(id));
   };
 
@@ -48,7 +48,6 @@ function Avatar() {
   const friendRequestIndex = state.note?.notifications?.friendRequest?.findIndex(
     (x) => x.fromWho === state.auth.data?._id,
   );
-  console.log();
 
   const subscribe = async () => {
     await dispatch(fetchSubscribe({ authUserId: state.auth.data?._id, id: id }, id));
@@ -106,7 +105,11 @@ function Avatar() {
 
   let you = !state.messages?.data.find((x) => x.user === state.auth.data?._id);
   let him = !state.messages?.data.find((x) => x.user === id);
-  let checkChat = !state.messages?.data?.find((x) => x?.correspondence?.find((x) => x?.withWho === id));
+  let checkChat = !state.messages?.data
+    .find((x) => x.user === id)
+    ?.correspondence?.find((x) => x?.withWho === state.auth.data?._id);
+
+
 
   const createMessages = async () => {
     if (you) {
@@ -117,7 +120,7 @@ function Avatar() {
       console.log(2);
       await dispatch(fetchCreateMessages({ withWho: state.auth?.data?._id, user: id }));
     }
-    if (checkChat && !you) {
+    if (checkChat) {
       console.log(3);
       await dispatch(fetchPushChat({ withWho: id, user: state.auth?.data?._id }));
     }
@@ -147,7 +150,7 @@ function Avatar() {
             onChange={() => {
               dispatch(setInputNumber('0'));
             }}>
-            {state.auth.data === null ? '' : <div className="avatar_change">Сhange photo</div>}
+            {state.auth.data === null ? '' : <div className="avatar_change">Change photo</div>}
 
             {state.auth.data?._id === id &&
             state.user.status === 'loaded' &&
@@ -198,7 +201,11 @@ function Avatar() {
             <button
               className="delete_friend"
               onClick={() =>
-                state.user.status === 'loaded' && state.auth.status === 'loaded' ? unsubscribe() : ''
+                state.user.status === 'loaded' &&
+                state.auth.status === 'loaded' &&
+                state.note.status === 'loaded'
+                  ? unsubscribe()
+                  : ''
               }>
               Unsubscribe
             </button>
@@ -211,7 +218,11 @@ function Avatar() {
             <button
               className="delete_friend"
               onClick={() =>
-                state.user.status === 'loaded' && state.auth.status === 'loaded' ? subscribe() : ''
+                state.user.status === 'loaded' &&
+                state.auth.status === 'loaded' &&
+                state.note.status === 'loaded'
+                  ? subscribe()
+                  : ''
               }>
               Send friend request
             </button>

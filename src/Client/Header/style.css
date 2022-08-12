@@ -45,6 +45,7 @@
 .music {
   width: 40px;
   height: 40px;
+  text-decoration: none;
 }
 
 .profile:hover,
@@ -59,8 +60,6 @@
   color: #9e9b9b;
   cursor: pointer;
 }
-
-
 
 .notifications_number {
   position: relative;
@@ -79,8 +78,6 @@
   border-radius: 100%;
   background-color: red;
 }
-
-
 
 .notifications {
   display: none;

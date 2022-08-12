@@ -18,7 +18,9 @@ function Messages() {
     .find((x) => x.user === state.auth?.data?._id)
     ?.correspondence.map((x) => x.withWho);
 
-  const friends = state.user?.usersAll.filter((x, i) => findFriends?.includes(x._id));
+  const friends = state.user?.usersAll
+    .filter((x, i) => findFriends?.includes(x._id))
+    .sort((a, b) => b.date - a.date);
 
   const selectedMessage = state.messages.data.find((x) => x.user === state.auth?.data?._id)
     ?.correspondence[select]?.messages;
@@ -50,8 +52,6 @@ function Messages() {
     .find((x) => x.user === state.auth.data?._id)
     ?.correspondence.map((x) => x.messages[x.messages.length - 1]);
 
-    console.log(lastMessage);
-
   React.useEffect(() => {
     dispatch(fetchGetMessages());
   }, []);
@@ -60,76 +60,113 @@ function Messages() {
     return <Navigate to="/Login" />;
   }
 
+  const aaaaa = [];
+
+  let cor = state.messages.data
+    .find((x) => x.user === state.auth?.data?._id)
+    ?.correspondence?.map((x) =>
+      x.messages[x.messages.length - 1] !== undefined
+        ? x.messages[x.messages.length - 1]
+        : { userId: x.withWho },
+    )
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .map((x) => x.message);
+
+  let bigBOn = state.messages.data
+    .find((x) => x.user === state.auth?.data?._id)
+    ?.correspondence?.filter((x, i) =>
+      cor.includes(x.messages[x.messages?.length - 1].message)
+        ? aaaaa.push(x.withWho)
+        : '',
+    );
+
+  console.log(aaaaa);
+
+  //d = `${d.toLocaleDateString()} ${d.toLocaleTimeString().slice(0, -3)}
+
   return (
     <div className="messages_container">
       <div className="messages_friends">
         <div className="messages_left_control_panel">
           <FontAwesomeIcon className="messages_searchIcon" icon="fa-solid fa-magnifying-glass" />
           <input className="messages_find_friend" />
-
-          {friends.map((friend, i) => (
-            <div
-              className="message_left"
-              key={friend._id}
-              onClick={() => {
-                setSelect(i);
-                setTimeout(scrollToBottom, 0);
-              }}>
-              <img src={friend.imageUrl} alt="" className="message_left_avatar" />
-              <div className="message_left_fullName">{friend.fullName}</div>
-              <div className="message_name">
-                {lastMessage[i].userId === friend._id ? friend.fullName.split(' ')[0] + ':': 'You:'}
+          <div className="messages_left_container">
+            {friends.map((friend, i) => (
+              <div
+                className="message_left"
+                key={friend._id}
+                onClick={() => {
+                  setSelect(i);
+                  setTimeout(scrollToBottom, 0);
+                }}>
+                <img src={friend.imageUrl} alt="" className="message_left_avatar" />
+                <div className="message_left_fullName">{friend.fullName}</div>
+                {lastMessage[i] !== undefined ? (
+                  <div className="message_name_box">
+                    <div className="message_name">
+                      {lastMessage[i]?.userId === friend._id
+                        ? friend.fullName.split(' ')[0] + ':'
+                        : 'You:'}
+                    </div>
+                    <div className="messages_left_last">
+                      {lastMessage[i]?.message.slice(0, 40)}
+                      {lastMessage[i]?.message.length > 40 ? '...' : ''}
+                    </div>
+                  </div>
+                ) : (
+                  ''
+                )}
               </div>
-              <div className="messages_left_last">
-                {lastMessage[i].message.slice(0, 40)}
-                {lastMessage[i].message.length > 40 ? '...' : ''}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
       <div className="messages_from_friend">
         {selectedUser[0] === undefined ? (
-          ''
+          <div className="select_chat">Select chat</div>
         ) : (
           <>
             {selectedUser?.map((select, i) => (
               <div className="messages_right_header" key={select?._id}>
-                <img src={select?.imageUrl} alt="" className="messages_right_avatar" />
-                <div className="message_right_fullName">{select?.fullName}</div>
+                <NavLink to={`/Profile/${select._id}`}>
+                  <img src={select?.imageUrl} alt="" className="messages_right_avatar" />
+                  <div className="message_right_fullName">{select?.fullName}</div>
+                </NavLink>
               </div>
             ))}
             <div className="messages_all" ref={divRef}>
-              {selectedMessage?.length === 0
-                ? ''
-                : selectedMessage?.map((message, i) => (
-                    <div className="message_box" key={i}>
-                      {message?.userId !== selectedMessage[i - 1]?.userId ||
-                      message?.date !== selectedMessage[i - 1]?.date ? (
-                        <>
-                          <img
-                            src={
-                              state.user?.usersAll.filter((x, i) => message.userId.includes(x._id))[0]
-                                .imageUrl
-                            }
-                            alt=""
-                            className="messages_all_avatar"
-                          />
-                          <div className="messages_all_fullName">
-                            {
-                              state.user?.usersAll.filter((x, i) => message.userId.includes(x._id))[0]
-                                .fullName
-                            }
-                          </div>
+              {selectedMessage?.length === 0 ? (
+                <div className="meessages_zero">Write the first message in the chat</div>
+              ) : (
+                selectedMessage?.map((message, i) => (
+                  <div className="message_box" key={i}>
+                    {message?.userId !== selectedMessage[i - 1]?.userId ||
+                    message?.date !== selectedMessage[i - 1]?.date ? (
+                      <>
+                        <img
+                          src={
+                            state.user?.usersAll.filter((x, i) => message.userId.includes(x._id))[0]
+                              .imageUrl
+                          }
+                          alt=""
+                          className="messages_all_avatar"
+                        />
+                        <div className="messages_all_fullName">
+                          {
+                            state.user?.usersAll.filter((x, i) => message.userId.includes(x._id))[0]
+                              .fullName
+                          }
+                        </div>
 
-                          <div className="messages_all_date">{message.date}</div>
-                        </>
-                      ) : (
-                        ''
-                      )}
-                      <div className="message_user">{message.message}</div>
-                    </div>
-                  ))}
+                        <div className="messages_all_date">{message.date}</div>
+                      </>
+                    ) : (
+                      ''
+                    )}
+                    <div className="message_user">{message.message}</div>
+                  </div>
+                ))
+              )}
             </div>
 
             <div className="messages_right_control_panel">
