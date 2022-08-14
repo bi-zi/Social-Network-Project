@@ -100,7 +100,8 @@
   border-radius: 100%;
 }
 
-.message_left_fullName {
+.message_left_fullName,
+.message_left_time {
   position: absolute;
 
   width: 300px;
@@ -108,6 +109,12 @@
   left: 80px;
 
   color: white;
+}
+
+.message_left_time {
+  left: 445px;
+
+  font-size: 12px;
 }
 
 .message_name_box {
