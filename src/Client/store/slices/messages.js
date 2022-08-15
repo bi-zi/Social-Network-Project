@@ -23,13 +23,19 @@ export const fetchAddMessage = createAsyncThunk('about/addMessage/fetchAddMessag
 
 const initialState = {
   data: [],
+  sortedId: '',
   status: 'loading',
 };
 
 const messagesSlice = createSlice({
   name: 'message',
   initialState,
-  reducers: {},
+  reducers: {
+    setSortedId: (state, action) => {
+      state.sortedId = action.payload
+    },
+
+  },
   extraReducers: {
 
     [fetchGetMessages.pending]: (state) => {
@@ -57,4 +63,5 @@ const messagesSlice = createSlice({
   },
 });
 
+export const { setSortedId } = messagesSlice.actions
 export const messagesReducer = messagesSlice.reducer;

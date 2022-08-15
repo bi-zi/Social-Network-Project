@@ -20,6 +20,8 @@ import {
   fetchdDeleteRequest,
 } from '../../store/slices/notifications';
 
+import {setSortedId} from '../../store/slices/messages'
+
 import { useParams } from 'react-router-dom';
 import ImageParsing from '../../ImageParsing/ImageParsing';
 import { Link } from 'react-router-dom';
@@ -109,12 +111,15 @@ function Avatar() {
     .find((x) => x.user === id)
     ?.correspondence?.find((x) => x?.withWho === state.auth.data?._id);
 
+  console.log(state.messages);
 
+  let a = state.messages.data.find((x) => x.user === state.auth?.data?._id)?.correspondence.length;
 
   const createMessages = async () => {
     if (you) {
-      console.log(1);
+      console.log(111111);
       await dispatch(fetchCreateMessages({ withWho: id, user: state.auth?.data?._id }));
+
     }
     if (him) {
       console.log(2);
@@ -125,6 +130,7 @@ function Avatar() {
       await dispatch(fetchPushChat({ withWho: id, user: state.auth?.data?._id }));
     }
 
+    dispatch(setSortedId(id));
     dispatch(fetchGetMessages());
   };
 

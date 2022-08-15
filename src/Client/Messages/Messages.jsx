@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchGetMessages, fetchAddMessage } from '../store/slices/messages.js';
+import { fetchGetMessages, fetchAddMessage, setSortedId } from '../store/slices/messages.js';
 import { useForm } from 'react-hook-form';
 import { NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,13 +12,12 @@ function Messages() {
   const divRef = React.useRef(null);
   const firstRef = React.useRef(null);
 
-  const [selectUser, setSelectUser] = React.useState();
-  const [selectChat, setSelectChat] = React.useState();
+  const [selectUser, setSelectUser] = React.useState(
+    state.messages?.sortedId.length !== 0 ? state.messages.sortedId : undefined,
+  );
 
   const [text, setText] = React.useState();
   const [findChat, setFindChat] = React.useState();
-
-
 
   const findFriends = state.messages.data.find((x) => x.user === state.auth?.data?._id);
 
@@ -51,20 +50,26 @@ function Messages() {
   if (findChat?.length > 0) {
     sortedFriends = friends.filter((x) => x.fullName.toLowerCase().includes(findChat?.toLowerCase()));
   }
+
   if (sortedFriends.length === 0) sortedFriends = friends;
 
   let userIndex = state.messages.data
     .find((x) => x.user === state.auth?.data?._id)
     ?.correspondence.findIndex((x) => x.withWho === selectUser);
 
+  if (selectUser !== undefined) localStorage.setItem('userIndex', userIndex);
+
   let chatIndex = sortedFriends.findIndex((x) => x._id === selectUser);
 
+  if (selectUser !== undefined) localStorage.setItem('chatIndex', chatIndex);
+
+  console.log(state.messages.sortedId);
+
+
   const selectedMessage = state.messages.data.find((x) => x.user === state.auth?.data?._id)
-    ?.correspondence[userIndex]?.messages;
+    ?.correspondence[localStorage.userIndex]?.messages;
 
-  const selectedUser = [sortedFriends[chatIndex]];
-
-
+  const selectedUser = [sortedFriends[localStorage.chatIndex]];
 
   const scrollToBottom = () => {
     divRef.current.scrollTop = divRef.current.scrollHeight;
@@ -77,24 +82,34 @@ function Messages() {
         userId: state.auth.data._id,
         withWho: selectedUser?.[0]._id,
         user: state.auth.data._id,
-        yourIndex: userIndex,
+        yourIndex: localStorage.userIndex,
         hisIndex: state.messages.data
           .find((x) => x.user === selectedUser?.[0]?._id)
           ?.correspondence.findIndex((x) => x.withWho === state.auth.data?._id),
       }),
     );
+
     firstRef.current.value = '';
     dispatch(fetchGetMessages());
   };
 
+  // const scrollHandler = (e) => {
+  //   if (e.target.scrollTop < 100) {
+  //     console.log('scroll');
+  //   }
+
+  //     // console.log('scrollHeight', e.target.scrollHeight);
+  //   console.log('scrollHeight', e.target.scrollTop);
+  // };
+
   React.useEffect(() => {
     dispatch(fetchGetMessages());
+    setTimeout(scrollToBottom, 200);
   }, []);
 
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
   }
-
 
   return (
     <div className="messages_container">
@@ -114,6 +129,7 @@ function Messages() {
                 key={friend._id}
                 onClick={() => {
                   setSelectUser(friend._id);
+
                   setTimeout(scrollToBottom, 0);
                 }}>
                 <img src={friend.imageUrl} alt="" className="message_left_avatar" />
@@ -137,7 +153,6 @@ function Messages() {
                         : 'You:'}
                     </div>
                     <div className="messages_left_last">
-                      {console.log(lastMessage[i]?.message,i)}
                       {lastMessage[i]?.message?.slice(0, 40)}
                       {lastMessage[i]?.message?.length > 40 ? '...' : ''}
                     </div>
