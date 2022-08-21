@@ -1,13 +1,11 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectIsAuth } from '../../store/auth/slice';
-
+import { useAppSelector } from '../../store/store';
 import Avatar from './Avatar/Avatar';
 import UserInfo from './UserInfo/UserInfo';
-import PhotoSlider from './PhotoSlider/PhotoSlider';
+import { PhotoSlider } from './PhotoSlider/PhotoSlider';
 import Post from './Post/Post';
 import Wall from './Wall/Wall';
-import Friends from './Friends/Friends';
+import { Friends } from './Friends/Friends';
 import Subscribers from './Subscribers/Subscribers';
 import Groups from './Groups/Groups';
 import Videos from './Videos/Videos';
@@ -15,21 +13,18 @@ import Music from './Music/Music';
 import { useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
-function Profile() {
+export const Profile: React.FC = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const data = useAppSelector((state) => state.auth.data);
 
-  // console.log([
-  //   `-----AVATAR----- ${state.user.status}`,
-  //   `-----SLIDER----- ${state.slider.status}`,
-  //   `-----POST----- ${state.post.userPosts.status}`,
-  //   `-----NOTE----- ${state.note.status}`,
-  // ]);
-
-console.log(state)
-
-  const isAuth = useSelector(selectIsAuth);
+  // console.log(
+  //   [
+  //     `-----USER----- ${state.user.status}`,
+  //     `-----SLIDER----- ${state.slider.status}`,
+  //     `-----POST----- ${state.post.userPosts.status}`,
+  //     `-----NOTE----- ${state.note.status}`,
+  //   ],
+  // );
 
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
@@ -39,7 +34,7 @@ console.log(state)
     <div className="container">
       <UserInfo />
       <PhotoSlider />
-      {state.auth.data?._id === id ? <Post /> : ''}
+      {data?._id === id ? <Post /> : ''}
       <Wall />
       <div className="left_container">
         <Avatar />
@@ -47,11 +42,9 @@ console.log(state)
         <Subscribers />
       </div>
 
-      {/* <Groups />
+      <Groups />
       <Videos />
-      <Music /> */}
+      <Music />
     </div>
   );
-}
-
-export default Profile;
+};

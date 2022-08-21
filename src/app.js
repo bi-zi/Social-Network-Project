@@ -5,7 +5,7 @@ import { fetchAllUsers, } from './store/user/slice';
 import { Registration } from "./Pages/Registration-Login/Registration.jsx"
 import { Login } from "./Pages/Registration-Login/Login.jsx"
 import Layout from './Pages/Layout';
-import Profile from './Pages/Profile/Profile.jsx'
+import {Profile} from './Pages/Profile/Profile.tsx'
 import Photo from './Pages/Profile/SelectedPhoto/SelectedPhoto.jsx'
 import Friends from './Pages/Friends/Friends.jsx';
 import Messages from './Pages/Messages/Messages.jsx'

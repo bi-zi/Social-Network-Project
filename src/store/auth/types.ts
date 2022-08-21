@@ -1,5 +1,6 @@
 export type User = {
   _id: string;
+  fullName: string;
   email: string;
   passwordHash: string;
   friends: string[];
@@ -17,6 +18,6 @@ export enum Status {
 }
 
 export interface AuthSliceState {
-  data: User[];
+  data: User;
   status: Status;
 }

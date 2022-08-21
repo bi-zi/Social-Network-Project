@@ -1,23 +1,26 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch,useAppSelector } from '../../../store/store';
 import { fetchOneUser, setCatergory } from '../../../store/user/slice';
 import { fetchUserPostsAll } from '../../../store/post/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './style.css';
 
-function Friends() {
-  const dispatch = useDispatch();
+export const Friends: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { id } = useParams();
-  const state = useSelector((state) => state);
+  const state = useAppSelector((state) => state);
   const [key, setKey] = React.useState(false);
 
   const profileFriend = state.user?.userOne?.[0];
-  let arr = state.user?.usersAll.filter((x, i) => profileFriend?.friends.includes(x._id)).splice(0, 8);
+  let arr = state.user?.usersAll
+    .filter((x, i) => profileFriend?.friends.includes(x._id))
+    .splice(0, 8);
 
-  const fetchData = (id) => {
-    dispatch(fetchOneUser(id));
-    dispatch(fetchUserPostsAll(id));
+
+  const fetchData = (userId: string) => {
+    dispatch(fetchOneUser(userId));
+    dispatch(fetchUserPostsAll(userId));
   };
 
   document.onkeydown = function (e) {
@@ -56,5 +59,3 @@ function Friends() {
     </div>
   );
 }
-
-export default Friends;

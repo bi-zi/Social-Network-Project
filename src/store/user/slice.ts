@@ -7,8 +7,8 @@ export const fetchAllUsers = createAsyncThunk<User[]>('user/fetchAllUsers', asyn
   return data;
 });
 
-export const fetchOneUser = createAsyncThunk<User[]>('user/one/id/fetchUserUpdate', async (id) => {
-  const { data } = await axios.get(`/user/one/${id}`);
+export const fetchOneUser = createAsyncThunk('user/one/id/fetchUserUpdate', async (id: string) => {
+  const { data } = await axios.get<User[]>(`/user/one/${id}`);
 
   return data;
 });
@@ -60,7 +60,7 @@ export const fetchDeleteFriend = createAsyncThunk<User[]>(
 
 const initialState: UserSliceState = {
   usersAll: [],
-  userOne: {},
+  userOne: [],
   inputNumber: '',
   catergory: '',
   status: Status.LOADING,

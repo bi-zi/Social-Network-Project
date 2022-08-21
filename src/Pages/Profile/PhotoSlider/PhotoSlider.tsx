@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { fetchSlider } from '../../../store/slider/slice';
 import { setInputNumber } from '../../../store/user/slice';
 import { useParams } from 'react-router-dom';
@@ -10,12 +10,13 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './style.css';
 
-function PhotoSlider() {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+
+export const PhotoSlider: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
   const { id } = useParams();
 
-  let readyPhotos = state.slider?.slider?.find((x) => x.user === id)?.sliderImg;
+  const readyPhotos = state.slider?.slider?.find((x) => x.user === id)?.sliderImg
 
   const settings = {
     className: 'center',
@@ -27,12 +28,12 @@ function PhotoSlider() {
 
   React.useEffect(() => {
     dispatch(fetchSlider());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="images">
       <div className="images_backGround">
-        {readyPhotos?.length < 2 ? (
+        {readyPhotos!?.length < 2 ? (
           <div className="crutch_1"></div>
         ) : readyPhotos?.length === 2 ? (
           <div className="crutch_2"></div>

@@ -10,7 +10,6 @@ import './style.css';
 
 function Header() {
   const dispatch = useDispatch();
-  const isAuth = useSelector(selectIsAuth);
   const state = useSelector((state) => state);
   const { id } = useParams();
 

@@ -18,7 +18,12 @@ import {
   fetchdDeleteRequest,
 } from '../../../store/notifications/slice';
 
-import {fetchCreateMessages, fetchGetMessages, fetchPushChat, setSortedId} from '../../../store/messages/slice'
+import {
+  fetchCreateMessages,
+  fetchGetMessages,
+  fetchPushChat,
+  setSortedId,
+} from '../../../store/messages/slice';
 
 import { useParams } from 'react-router-dom';
 import ImageParsing from '../../../ImageParsing/ImageParsing';
@@ -31,10 +36,10 @@ function Avatar() {
   const { id } = useParams();
 
   const user = state.user?.userOne?.[0];
+
   const subscribedToYou = state.auth.data?.subscribers?.find((x) => x === id) === undefined ? 0 : 1;
   const youSubscriber =
     user?.subscribers?.find((x) => x === state.auth?.data?._id) === undefined ? 0 : 1;
-
   const friend = state.auth.data?.friends?.find((x) => x === id) === undefined ? 0 : 1;
 
   window.onpopstate = function (event) {
@@ -98,7 +103,6 @@ function Avatar() {
         id,
       ),
     );
-
     dispatch(fetchOneUser(id));
     dispatch(fetchAuthMe());
   };
@@ -109,13 +113,10 @@ function Avatar() {
     .find((x) => x.user === id)
     ?.correspondence?.find((x) => x?.withWho === state.auth.data?._id);
 
-
-
   const createMessages = async () => {
     if (you) {
       console.log(111111);
       await dispatch(fetchCreateMessages({ withWho: id, user: state.auth?.data?._id }));
-
     }
     if (him) {
       console.log(2);

@@ -3,23 +3,23 @@ import { RootState } from '../store';
 import { User, AuthSliceState, Status } from './types';
 import axios from '../../backend/axios.js';
 
-export const fetchAuth = createAsyncThunk<User[]>('auth/fetchAuth', async (params) => {
+export const fetchAuth = createAsyncThunk<User>('auth/fetchAuth', async (params) => {
   const { data } = await axios.post('/auth/login', params);
   return data;
 });
 
-export const fetchRegister = createAsyncThunk<User[]>('auth/fetchRegister', async (params) => {
+export const fetchRegister = createAsyncThunk<User>('auth/fetchRegister', async (params) => {
   const { data } = await axios.post('/auth/register', params);
   return data;
 });
 
-export const fetchAuthMe = createAsyncThunk<User[]>('auth/fetchAuthMe', async () => {
+export const fetchAuthMe = createAsyncThunk<User>('auth/fetchAuthMe', async () => {
   const { data } = await axios.get('/auth/me');
   return data;
 });
 
 const initialState: AuthSliceState = {
-  data: [],
+  data: {} as User,
   status: Status.LOADING,
 };
 
@@ -28,7 +28,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.data = [];
+      state.data = {} as User;
     },
   },
 
@@ -68,7 +68,7 @@ const authSlice = createSlice({
   },
 });
 
-export const selectIsAuth = (state: RootState) => Boolean(state.auth.data);
+export const selectIsAuth = (state: RootState) => (state.auth.data?._id !== undefined);
 
 export const authReducer = authSlice.reducer;
 

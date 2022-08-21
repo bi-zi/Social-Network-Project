@@ -1,28 +1,14 @@
-export type UserPost = {
+export type Note = {
   _id: string;
-  friendRequest: Post[];
+  friendRequest: friendRequest[];
   user: string;
   createdAt: string;
   updatedAt: string;
   __v: number;
 };
 
-interface Post {
-  text: string;
-  videoPost: string;
-  imagespost: string[];
-  commentPost: Comment[];
-  likePost: string[];
-  dislikePost: string[];
-  date: string;
-  _id: string;
-}
-
-interface Comment {
-  fullname: string
-  commentText: string
-  commentDate: string
-  userId: string
+interface friendRequest {
+  fromWho: string;
 }
 
 export enum Status {
@@ -31,13 +17,7 @@ export enum Status {
   ERROR = 'error',
 }
 
-export interface UserPostSliceState {
-  createText: string;
-  createImg: string[];
-  createVid: string;
-  createComment: string;
-  userPosts: {
-    post: UserPost[];
-    status: Status;
-  };
+export interface NoteSliceState {
+  notifications: Note[];
+  status: Status;
 }

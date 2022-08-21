@@ -1,6 +1,6 @@
 export type Slider = {
   _id: string;
-  sliderImg: string[];
+  sliderImg: string[] ;
   user: string;
   createdAt: string;
   updatedAt: string;

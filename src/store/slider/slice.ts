@@ -3,7 +3,7 @@ import { Slider, SliderSliceState, Status } from './types';
 import axios from '../../backend/axios.js';
 
 export const fetchSlider = createAsyncThunk<Slider[]>('slider/fetchSlider', async () => {
-  const { data } = await axios.get('/slider/all');
+  const { data } = await axios.get<Slider[]>('/slider/all');
   return data;
 });
 
@@ -35,7 +35,7 @@ export const fetchSliderDelete = createAsyncThunk<Slider[]>(
 );
 
 const initialState: SliderSliceState = {
-  slider: [],
+  slider: [] as Slider[],
   status: Status.LOADING,
 };
 
