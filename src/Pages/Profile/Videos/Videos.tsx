@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.css'
 
-function Videos() {
+export const Videos: React.FC = () => {
   return (
     <div className="videos">
       <div className="videos_backGround">
@@ -11,4 +11,3 @@ function Videos() {
   );
 }
 
-export default Videos

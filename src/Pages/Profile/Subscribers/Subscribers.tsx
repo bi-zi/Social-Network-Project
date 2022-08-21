@@ -1,15 +1,15 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { fetchOneUser, setCatergory } from '../../../store/user/slice';
 import { fetchUserPostsAll } from '../../../store/post/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './style.css';
 
-function Subscribers() {
-  const dispatch = useDispatch();
+export const Subscribers: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { id } = useParams();
-  const state = useSelector((state) => state);
+  const state = useAppSelector((state) => state);
   const [key, setKey] = React.useState(false);
 
   const profileFriend = state.user?.userOne?.[0];
@@ -17,15 +17,15 @@ function Subscribers() {
     .filter((x, i) => profileFriend?.subscribers.includes(x._id))
     .splice(0, 8);
 
-  const fetchData = (id) => {
+  const fetchData = (id: string) => {
     dispatch(fetchOneUser(id));
     dispatch(fetchUserPostsAll(id));
   };
 
-    document.onkeydown = function (e) {
-      if (e.ctrlKey) setKey(true);
-      if (!e.ctrlKey) setKey(false);
-    };
+  document.onkeydown = function (e) {
+    if (e.ctrlKey) setKey(true);
+    if (!e.ctrlKey) setKey(false);
+  };
 
   return (
     <div className="profile_subscribers">
@@ -59,6 +59,6 @@ function Subscribers() {
       </div>
     </div>
   );
-}
+};
 
-export default Subscribers;
+

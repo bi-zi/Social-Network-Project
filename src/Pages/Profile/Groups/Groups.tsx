@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-function Groups() {
+export const Groups: React.FC = () => {
   return (
     <div className="groups">
       <div className="groups_backGround">
@@ -11,4 +11,3 @@ function Groups() {
   );
 }
 
-export default Groups;

@@ -6,10 +6,10 @@ import { PhotoSlider } from './PhotoSlider/PhotoSlider';
 import Post from './Post/Post';
 import Wall from './Wall/Wall';
 import { Friends } from './Friends/Friends';
-import Subscribers from './Subscribers/Subscribers';
-import Groups from './Groups/Groups';
-import Videos from './Videos/Videos';
-import Music from './Music/Music';
+import { Subscribers } from './Subscribers/Subscribers';
+import { Groups } from './Groups/Groups';
+import { Videos } from './Videos/Videos';
+import { Music } from './Music/Music';
 import { useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 

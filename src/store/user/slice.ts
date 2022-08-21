@@ -13,10 +13,10 @@ export const fetchOneUser = createAsyncThunk('user/one/id/fetchUserUpdate', asyn
   return data;
 });
 
-export const fetchUserUpdate = createAsyncThunk<User[]>(
+export const fetchUserUpdate = createAsyncThunk<User[], { imageUrl: string, user: string }>(
   'user/id/fetchUserUpdate',
-  async (params, id) => {
-    const { data } = await axios.patch(`/user/${id}`, params);
+  async ({ imageUrl, user }: { imageUrl: string; user: string }) => {
+    const { data } = await axios.patch(`/user/${user}`, {imageUrl});
 
     return data;
   },

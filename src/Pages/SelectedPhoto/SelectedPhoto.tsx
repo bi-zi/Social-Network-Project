@@ -1,45 +1,55 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserUpdate, fetchOneUser } from '../../../store/user/slice';
-import { fetchSlider, fetchSliderDelete } from '../../../store/slider/slice';
-import { setCreateImgDelete } from '../../../store/post/slice';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { fetchUserUpdate, fetchOneUser } from '../../store/user/slice';
+import { fetchSlider, fetchSliderDelete } from '../../store/slider/slice';
+import { setCreateImgDelete } from '../../store/post/slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Navigate } from 'react-router-dom';
 import './style.css';
 
+
+
+export type MyParams = {
+  user: string;
+  category: string;
+  id: string;
+};
+
 function Photo() {
-  const dispatch = useDispatch();
-  const { user, category, id } = useParams();
-  const state = useSelector((state) => state);
+  const dispatch = useAppDispatch();
+  const { user, category, id } = useParams<keyof MyParams>() as MyParams;
+  const state = useAppSelector((state) => state);
   const avatar = state.user?.userOne?.[0];
   const slider = state.slider.slider?.find((x) => x.user === user);
 
-  let readyPhotos =
+  const readyPhotos =
     category === 'PhotoAvatar'
-      ? avatar?.imageUrl
+      ? [avatar?.imageUrl]
       : category === 'PhotoSlider'
       ? slider?.sliderImg
-      : state.post.createImg;
+        : state.post.createImg;
+
+  console.log(category);
 
   const onPhotoDelete = async () => {
     if (category === 'PhotoAvatar') {
       await dispatch(
-        fetchUserUpdate(
-          { imageUrl: 'https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png' },
+        fetchUserUpdate({
+          imageUrl: 'https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png',
           user,
-        ),
+        }),
       );
       dispatch(fetchOneUser(user));
     }
 
     if (category === 'PhotoSlider') {
-      await dispatch(fetchSliderDelete({ deleteId: id }, user));
+      await dispatch(fetchSliderDelete({ deleteId: +id, user }));
       dispatch(fetchSlider());
     }
 
     if (category === 'CreatePost') {
-      dispatch(setCreateImgDelete(readyPhotos.filter((x, index) => index !== +id)));
+      dispatch(setCreateImgDelete(readyPhotos!.filter((x, index) => index !== +id)));
     }
   };
 
@@ -57,18 +67,18 @@ function Photo() {
         <FontAwesomeIcon className="close" icon="fa-solid fa-xmark" />
       </Link>
 
-      <img src={readyPhotos?.[id]} alt="" className="photo" />
+      <img src={readyPhotos?.[+id]} alt="" className="photo" />
 
       {readyPhotos?.length !== 1 ? (
         <>
           <Link
-            to={`/${user}/${category}/${+id === 0 ? readyPhotos?.length - 1 : +id - 1}`}
+            to={`/${user}/${category}/${+id === 0 ? readyPhotos!?.length - 1 : +id - 1}`}
             className="slider_link">
             <FontAwesomeIcon className="swapPhoto_left" icon="fa-solid fa-circle-chevron-left" />
           </Link>
 
           <Link
-            to={`/${user}/${category}/${readyPhotos?.length - 1 === +id ? 0 : +id + 1}`}
+            to={`/${user}/${category}/${readyPhotos!?.length - 1 === +id ? 0 : +id + 1}`}
             className="slider_link">
             <FontAwesomeIcon className="swapPhoto_right" icon="fa-solid fa-circle-chevron-right" />
           </Link>

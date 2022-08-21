@@ -25,10 +25,10 @@ export const fetchSliderPush = createAsyncThunk<Slider[]>(
   },
 );
 
-export const fetchSliderDelete = createAsyncThunk<Slider[]>(
+export const fetchSliderDelete = createAsyncThunk<Slider[], { deleteId: number; user: string }>(
   'slider/delete/id/fetchSliderDelete',
-  async (params, id) => {
-    const { data } = await axios.patch(`/slider/delete/${id}`, params);
+  async ({ deleteId, user }: { deleteId: number; user: string }) => {
+    const { data } = await axios.patch(`/slider/delete/${user}`, { deleteId });
 
     return data;
   },
