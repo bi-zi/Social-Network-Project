@@ -1,14 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { User, AuthSliceState, Status } from './types';
+import { User, AuthSliceState, Status, FormValues } from './types';
 import axios from '../../backend/axios.js';
 
-export const fetchAuth = createAsyncThunk<User>('auth/fetchAuth', async (params) => {
+
+
+export const fetchAuth = createAsyncThunk('auth/fetchAuth', async (params: FormValues) => {
   const { data } = await axios.post('/auth/login', params);
   return data;
 });
 
-export const fetchRegister = createAsyncThunk<User>('auth/fetchRegister', async (params) => {
+export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: FormValues) => {
   const { data } = await axios.post('/auth/register', params);
   return data;
 });

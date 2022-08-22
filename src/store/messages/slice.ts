@@ -2,23 +2,29 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Messages, MessagesSliceState, Status } from './types';
 import axios from '../../backend/axios.js';
 
-export const fetchGetMessages = createAsyncThunk<Messages[]>('messages/all/fetchGetMessages', async () => {
-  const { data } = await axios.get(`/messages/all`);
-  return data;
-});
-
-export const fetchCreateMessages = createAsyncThunk<Messages[]>(
-  'messages/createMessages/fetchCreateMessages',
-  async (params) => {
-    const { data } = await axios.post('/messages/createMessages', params);
+export const fetchGetMessages = createAsyncThunk<Messages[]>(
+  'messages/all/fetchGetMessages',
+  async () => {
+    const { data } = await axios.get(`/messages/all`);
     return data;
   },
 );
 
-export const fetchPushChat = createAsyncThunk<Messages[]>('about/pushChat/fetchPushChat', async (params) => {
-  const { data } = await axios.patch(`/messages/pushChat`, params);
-  return data;
-});
+export const fetchCreateMessages = createAsyncThunk<Messages[], { withWho: string; user: string }>(
+  'messages/createMessages/fetchCreateMessages',
+  async ({ withWho, user }: { withWho: string; user: string }) => {
+    const { data } = await axios.post('/messages/createMessages', { withWho, user });
+    return data;
+  },
+);
+
+export const fetchPushChat = createAsyncThunk<Messages[], { withWho: string; user: string }>(
+  'about/pushChat/fetchPushChat',
+  async ({ withWho, user }: { withWho: string; user: string }) => {
+    const { data } = await axios.patch(`/messages/pushChat`, { withWho, user });
+    return data;
+  },
+);
 
 export const fetchAddMessage = createAsyncThunk<Messages[]>(
   'about/addMessage/fetchAddMessage',

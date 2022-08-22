@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../../store/store';
-import Avatar from './Avatar/Avatar';
+import { Avatar } from './Avatar/Avatar';
 import UserInfo from './UserInfo/UserInfo';
 import { PhotoSlider } from './PhotoSlider/PhotoSlider';
 import Post from './Post/Post';

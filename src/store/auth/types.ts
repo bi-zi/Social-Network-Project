@@ -11,6 +11,11 @@ export type User = {
   __v: number;
 };
 
+export type FormValues = {
+  email: string;
+  password: string;
+};
+
 export enum Status {
   LOADING = 'loading',
   SUCCESS = 'loaded',

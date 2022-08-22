@@ -13,46 +13,49 @@ export const fetchOneUser = createAsyncThunk('user/one/id/fetchUserUpdate', asyn
   return data;
 });
 
-export const fetchUserUpdate = createAsyncThunk<User[], { imageUrl: string, user: string }>(
+export const fetchUserUpdate = createAsyncThunk<User[], { imageUrl: string; user: string }>(
   'user/id/fetchUserUpdate',
   async ({ imageUrl, user }: { imageUrl: string; user: string }) => {
-    const { data } = await axios.patch(`/user/${user}`, {imageUrl});
+    const { data } = await axios.patch(`/user/${user}`, { imageUrl });
 
     return data;
   },
 );
 
-export const fetchSubscribe = createAsyncThunk<User[]>(
+export const fetchSubscribe = createAsyncThunk<User[], { authUserId: string; id: string; user: string }>(
   'user/subscribe/id/fetchUserUpdate',
-  async (params, id) => {
-    const { data } = await axios.patch(`/user/subscribe/${id}`, params);
+  async ({ authUserId, id, user }: { authUserId: string; id: string; user: string }) => {
+    const { data } = await axios.patch(`/user/subscribe/${user}`, { authUserId, id });
 
     return data;
   },
 );
 
-export const fetchUnsubscribe = createAsyncThunk<User[]>(
+export const fetchUnsubscribe = createAsyncThunk<User[], { id: string; index: number; user: string }>(
   'user/unsubscribe/id/fetchUnsubscribe',
-  async (params, id) => {
-    const { data } = await axios.patch(`/user/unsubscribe/${id}`, params);
+  async ({ id, index, user }: { id: string; index: number; user: string }) => {
+    const { data } = await axios.patch(`/user/unsubscribe/${user}`, { id, index });
 
     return data;
   },
 );
 
-export const fetchAcceptFriend = createAsyncThunk<User[]>(
+export const fetchAcceptFriend = createAsyncThunk<User[], { id: string; index: number; user: string }>(
   'user/friend/id/fetchAcceptFriend',
-  async (params, id) => {
-    const { data } = await axios.patch(`/user/friend/${id}`, params);
+  async ({ id, index, user }: { id: string; index: number; user: string }) => {
+    const { data } = await axios.patch(`/user/friend/${user}`, { id, index });
 
     return data;
   },
 );
 
-export const fetchDeleteFriend = createAsyncThunk<User[]>(
+export const fetchDeleteFriend = createAsyncThunk<
+  User[],
+  { id: string; index: number; index2: number; user: string }
+>(
   'user/deleteFriend/id/fetchDeleteFriend',
-  async (params, id) => {
-    const { data } = await axios.patch(`/user/deleteFriend/${id}`, params);
+  async ({ id, index, index2, user }: { id: string; index: number; index2: number; user: string }) => {
+    const { data } = await axios.patch(`/user/deleteFriend/${user}`, { id, index, index2 });
 
     return data;
   },

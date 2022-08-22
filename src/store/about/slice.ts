@@ -2,20 +2,26 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { About, AboutSliceState, Status } from './types';
 import axios from '../../backend/axios.js';
 
-export const fetchAboutPost = createAsyncThunk<About[]>('about/fetchAboutPost', async (params) => {
-  const { data } = await axios.post('/about', params);
-  return data;
-});
+export const fetchAboutPost = createAsyncThunk<About[], { values: About }>(
+  'about/fetchAboutPost',
+  async ({ values }: { values: About }) => {
+    const { data } = await axios.post('/about', values);
+    return data;
+  },
+);
 
 export const fetchAbout = createAsyncThunk<About[]>('about/fetchAbout', async () => {
   const { data } = await axios.get('/about/all');
   return data;
 });
 
-export const fetchAboutUpdate = createAsyncThunk<About[]>('about/id/fetchAboutUpdate', async (params, id) => {
-  const { data } = await axios.patch(`/about/${id}`, params);
-  return data;
-});
+export const fetchAboutUpdate = createAsyncThunk<About[], { values: About; id: string }>(
+  'about/id/fetchAboutUpdate',
+  async ({ values, id }: { values: About; id: string }) => {
+    const { data } = await axios.patch(`/about/${id}`, values);
+    return data;
+  },
+);
 
 const initialState: AboutSliceState = {
   data: [],

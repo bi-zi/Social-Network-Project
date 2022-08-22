@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { fetchAuthMe } from '../../../store/auth/slice';
 import {
   fetchSubscribe,
@@ -7,7 +7,6 @@ import {
   fetchAcceptFriend,
   fetchDeleteFriend,
   fetchOneUser,
-  fetchAllUsers,
   setInputNumber,
 } from '../../../store/user/slice';
 
@@ -15,7 +14,7 @@ import {
   fetchNotifications,
   fetchNotificationsPost,
   fetchNotificationsPush,
-  fetchdDeleteRequest,
+  fetchDeleteRequest,
 } from '../../../store/notifications/slice';
 
 import {
@@ -24,16 +23,19 @@ import {
   fetchPushChat,
   setSortedId,
 } from '../../../store/messages/slice';
-
-import { useParams } from 'react-router-dom';
 import ImageParsing from '../../../ImageParsing/ImageParsing';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './style.css';
 
-function Avatar() {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  const { id } = useParams();
+export type MyParams = {
+  id: string;
+};
+
+export const Avatar: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
+  const { id } = useParams<keyof MyParams>() as MyParams;
 
   const user = state.user?.userOne?.[0];
 
@@ -42,7 +44,7 @@ function Avatar() {
     user?.subscribers?.find((x) => x === state.auth?.data?._id) === undefined ? 0 : 1;
   const friend = state.auth.data?.friends?.find((x) => x === id) === undefined ? 0 : 1;
 
-  window.onpopstate = function (event) {
+  window.onpopstate = function () {
     if (document.location.pathname.split('/')[1] === 'Profile') dispatch(fetchOneUser(id));
   };
 
@@ -55,7 +57,7 @@ function Avatar() {
   );
 
   const subscribe = async () => {
-    await dispatch(fetchSubscribe({ authUserId: state.auth.data?._id, id: id }, id));
+    await dispatch(fetchSubscribe({ authUserId: state.auth.data?._id, id: id, user: id }));
 
     if (state.note.notifications?.user === id && base) {
       await dispatch(fetchNotificationsPush({ fromWho: state.auth.data?._id, id: id }));
@@ -71,13 +73,14 @@ function Avatar() {
   };
 
   const unsubscribe = async () => {
-    await dispatch(fetchdDeleteRequest({ index: friendRequestIndex, id: id }));
+    await dispatch(fetchDeleteRequest({ index: friendRequestIndex, id: id }));
 
     await dispatch(
-      fetchUnsubscribe(
-        { id: id, index: user?.subscribers.findIndex((x) => x === state.auth.data?._id) },
-        id,
-      ),
+      fetchUnsubscribe({
+        id: id,
+        index: user?.subscribers.findIndex((x) => x === state.auth.data?._id),
+        user: id,
+      }),
     );
     dispatch(fetchNotifications(id));
     dispatch(fetchOneUser(id));
@@ -86,7 +89,11 @@ function Avatar() {
 
   const acceptFriend = async () => {
     await dispatch(
-      fetchAcceptFriend({ id: id, index: state.auth.data?.subscribers.findIndex((x) => x === id) }, id),
+      fetchAcceptFriend({
+        id: id,
+        index: state.auth.data?.subscribers.findIndex((x) => x === id),
+        user: id,
+      }),
     );
     dispatch(fetchOneUser(id));
     dispatch(fetchAuthMe());
@@ -94,14 +101,12 @@ function Avatar() {
 
   const deleteFriend = async () => {
     await dispatch(
-      fetchDeleteFriend(
-        {
-          id: id,
-          index: user?.friends.findIndex((x) => x === state.auth.data?._id),
-          index2: state.auth.data?.friends.findIndex((x) => x === id),
-        },
-        id,
-      ),
+      fetchDeleteFriend({
+        id: id,
+        index: user?.friends.findIndex((x) => x === state.auth.data?._id),
+        index2: state.auth.data?.friends.findIndex((x) => x === id),
+        user: id,
+      }),
     );
     dispatch(fetchOneUser(id));
     dispatch(fetchAuthMe());
@@ -115,7 +120,7 @@ function Avatar() {
 
   const createMessages = async () => {
     if (you) {
-      console.log(111111);
+      console.log(1);
       await dispatch(fetchCreateMessages({ withWho: id, user: state.auth?.data?._id }));
     }
     if (him) {
@@ -134,7 +139,7 @@ function Avatar() {
   React.useEffect(() => {
     dispatch(fetchNotifications(id));
     dispatch(fetchGetMessages());
-  }, []);
+  }, [dispatch, id]);
 
   return (
     <div className="avatar">
@@ -169,7 +174,7 @@ function Avatar() {
 
         {state.auth.data === null || state.auth?.data?._id === id ? (
           ''
-        ) : subscribedToYou !== 0 && youSubscriber === 0 && friend !== id ? (
+        ) : subscribedToYou !== 0 && youSubscriber === 0 && friend !== +id ? (
           <>
             <Link to="/Messages" className="send_message" onClick={() => createMessages()}>
               Send a message
@@ -236,6 +241,4 @@ function Avatar() {
       </div>
     </div>
   );
-}
-
-export default Avatar;
+};

@@ -1,39 +1,48 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { fetchAboutPost, fetchAbout, fetchAboutUpdate } from '../../../store/about/slice';
 import { fetchOneUser } from '../../../store/user/slice';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import './style.css';
 
-function UserInfo() {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  const { id } = useParams();
+interface About {
+  livesIn: string;
+  from: string;
+  bornOn: string;
+  profession: string;
+  relations: string;
+  studentAt: string;
+}
+
+export type MyParams = {
+  id: string;
+};
+
+export const UserInfo: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
+  const { id } = useParams<keyof MyParams>() as MyParams;
 
   const [closeInfo, setCloseInfo] = React.useState(0);
-  const about = Array.isArray(state.about?.data) ? state.about.data?.find((x) => x.user === id) : '';
+  const about = Array.isArray(state.about?.data) ? state.about.data?.find((x) => x.user === id) : {} as About ;
 
   const user = state.user?.userOne?.[0];
 
-  const onSubmit = async (values, id) => {
+  const onSubmit = async (values: About, id: string) => {
     setCloseInfo(0);
-    let data = {};
     about !== undefined
-      ? (data = await dispatch(fetchAboutUpdate(values, id)))
-      : (data = await dispatch(fetchAboutPost(values)));
+      ? (await dispatch(fetchAboutUpdate({values, id})))
+      : (await dispatch(fetchAboutPost({ values })));
 
     dispatch(fetchAbout());
-    if (!data.payload) {
-      return alert('Не удалось авторизоваться!');
-    }
   };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<About>({
     mode: 'onSubmit',
   });
 
@@ -69,7 +78,7 @@ function UserInfo() {
               <div className="student">Student at - {about?.studentAt}</div>
             </>
           ) : (
-            <form className="about_form" onSubmit={handleSubmit(onSubmit)}>
+            <form className="about_form" onSubmit={handleSubmit(onSubmit}>
               <input
                 className="lives_input"
                 defaultValue={about?.livesIn !== undefined ? `${about?.livesIn}` : ''}
@@ -102,7 +111,7 @@ function UserInfo() {
                   Minimum length 2 characters
                 </span>
               )}
-              {errors.From && errors.From.type === 'maxLength' && (
+              {errors.from && errors.from.type === 'maxLength' && (
                 <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
                   Max length 25 characters
                 </span>
@@ -194,5 +203,3 @@ function UserInfo() {
     </>
   );
 }
-
-export default UserInfo;

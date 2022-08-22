@@ -2,9 +2,9 @@ import React from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { fetchAuthMe, } from './store/auth/slice';
 import { fetchAllUsers, } from './store/user/slice';
-import { Registration } from "./Pages/Registration-Login/Registration.jsx"
-import { Login } from "./Pages/Registration-Login/Login.jsx"
-import Layout from './Pages/Layout';
+import { Registration } from "./Pages/Registration-Login/Registration.tsx"
+import { Login } from "./Pages/Registration-Login/Login.tsx"
+import {Layout} from './Pages/Layout';
 import {Profile} from './Pages/Profile/Profile.tsx'
 import Photo from './Pages/SelectedPhoto/SelectedPhoto.tsx'
 import Friends from './Pages/Friends/Friends.jsx';

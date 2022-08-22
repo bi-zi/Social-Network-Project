@@ -2,52 +2,52 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Note, NoteSliceState, Status } from './types';
 import axios from '../../backend/axios.js';
 
-export const fetchNotifications = createAsyncThunk<Note[]>(
+export const fetchNotifications = createAsyncThunk(
   'notifications/getUserNotifications/fetchNotifications',
-  async (id) => {
-    const { data } = await axios.get(`/notifications/getUserNotifications/${id}`);
+  async (id: string) => {
+    const { data } = await axios.get<Note>(`/notifications/getUserNotifications/${id}`);
     return data;
   },
 );
 
-export const fetchNotificationsPost = createAsyncThunk<Note[]>(
+export const fetchNotificationsPost = createAsyncThunk<Note, { fromWho: string; user: string }>(
   'notifications/createNotifications/fetchPostNotifications',
-  async (params) => {
-    const { data } = await axios.post(`/notifications/createNotifications`, params);
+  async ({ fromWho, user }: { fromWho: string; user: string }) => {
+    const { data } = await axios.post<Note>(`/notifications/createNotifications`, { fromWho, user });
 
     return data;
   },
 );
 
-export const fetchNotificationsPush = createAsyncThunk<Note[]>(
+export const fetchNotificationsPush = createAsyncThunk<Note, { fromWho: string; id: string }>(
   'notifications/pushNotifications//fetchPushNotifications',
-  async (params) => {
-    const { data } = await axios.patch(`/notifications/pushNotifications`, params);
+  async ({ fromWho, id }: { fromWho: string; id: string }) => {
+    const { data } = await axios.patch<Note>(`/notifications/pushNotifications`, { fromWho ,id});
 
     return data;
   },
 );
 
-export const fetchNotificationsDelete = createAsyncThunk<Note[]>(
+export const fetchNotificationsDelete = createAsyncThunk(
   'notifications/deleteNotifications/fetchNotificationsDelete',
-  async (params) => {
-    const { data } = await axios.patch(`/notifications/deleteNotifications`, params);
+  async (params: {}) => {
+    const { data } = await axios.patch<Note>(`/notifications/deleteNotifications`, params);
 
     return data;
   },
 );
 
-export const fetchdDeleteRequest = createAsyncThunk<Note[]>(
+export const fetchDeleteRequest = createAsyncThunk<Note, { index: number; id: string }>(
   'notifications/deleteRequest/fetchdDeleteRequest',
-  async (params) => {
-    const { data } = await axios.patch(`/notifications/deleteRequest`, params);
+  async ({ index, id }: { index: number; id: string }) => {
+    const { data } = await axios.patch(`/notifications/deleteRequest`,{index,id} );
 
     return data;
   },
 );
 
 const initialState: NoteSliceState = {
-  notifications: [],
+  notifications: {} as Note,
   status: Status.LOADING,
 };
 
@@ -98,16 +98,16 @@ const notificationsSlice = createSlice({
       state.status = Status.ERROR;
     });
 
-    builder.addCase(fetchdDeleteRequest.pending, (state) => {
+    builder.addCase(fetchDeleteRequest.pending, (state) => {
       state.status = Status.LOADING;
     });
-    builder.addCase(fetchdDeleteRequest.fulfilled, (state) => {
+    builder.addCase(fetchDeleteRequest.fulfilled, (state) => {
       state.status = Status.SUCCESS;
     });
-    builder.addCase(fetchdDeleteRequest.rejected, (state) => {
+    builder.addCase(fetchDeleteRequest.rejected, (state) => {
       state.status = Status.ERROR;
     });
   },
 });
 
-export const notificationsReducer = notificationsSlice.reducer;
+export const NoteReducer = notificationsSlice.reducer;

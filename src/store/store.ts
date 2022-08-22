@@ -7,8 +7,7 @@ import { aboutReducer } from './about/slice';
 import { messagesReducer } from './messages/slice';
 import { sliderReducer } from './slider/slice';
 import { postReducer } from './post/slice';
-
-import { notificationsReducer } from './notifications/slice';
+import { NoteReducer } from './notifications/slice';
 
 
 export const store = configureStore({
@@ -18,7 +17,7 @@ export const store = configureStore({
     user: userReducer,
     slider: sliderReducer,
     post: postReducer,
-    note: notificationsReducer,
+    note: NoteReducer,
     messages: messagesReducer,
   },
 });

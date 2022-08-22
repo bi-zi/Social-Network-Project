@@ -1,14 +1,14 @@
 export type Note = {
   _id: string;
-  friendRequest: friendRequest[];
+  friendRequest: Request[];
   user: string;
   createdAt: string;
   updatedAt: string;
   __v: number;
 };
 
-interface friendRequest {
-  fromWho: string;
+interface Request {
+  fromWho: string
 }
 
 export enum Status {
@@ -18,6 +18,6 @@ export enum Status {
 }
 
 export interface NoteSliceState {
-  notifications: Note[];
+  notifications: Note;
   status: Status;
 }

@@ -1,20 +1,23 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout, selectIsAuth } from '../../store/auth/slice';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { logout } from '../../store/auth/slice';
 import { fetchOneUser, setCatergory } from '../../store/user/slice';
 import { fetchNotifications, fetchNotificationsDelete } from '../../store/notifications/slice';
 import { useParams } from 'react-router-dom';
-import { NavLink, Navigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
 
-function Header() {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+export const Header: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
   const { id } = useParams();
 
   const note =
-    state.note?.notifications?.user === state.auth?.data?._id ? state.note?.notifications : '';
+    state.note.notifications?.user === state.auth?.data?._id
+      ? state.note?.notifications
+      : { friendRequest: [] };
 
   const onClickLogout = () => {
     if (window.confirm('Вы действительно хотите выйти?')) {
@@ -57,7 +60,7 @@ function Header() {
 
             <div className="bell">
               <FontAwesomeIcon className="bell_icon" icon="fa-regular fa-bell" />
-              {note?.friendRequest?.length > 0 ? (
+              {note?.friendRequest!?.length > 0 ? (
                 <div className="notifications_number">{note?.friendRequest?.length}</div>
               ) : (
                 ''
@@ -124,6 +127,4 @@ function Header() {
       </div>
     </div>
   );
-}
-
-export default Header;
+};

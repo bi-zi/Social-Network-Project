@@ -12,6 +12,7 @@ export type User = {
   id: string
 };
 
+
 export enum Status {
   LOADING = 'loading',
   SUCCESS = 'loaded',
