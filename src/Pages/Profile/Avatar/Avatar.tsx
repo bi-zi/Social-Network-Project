@@ -23,7 +23,7 @@ import {
   fetchPushChat,
   setSortedId,
 } from '../../../store/messages/slice';
-import ImageParsing from '../../../ImageParsing/ImageParsing';
+import {ImageParsing} from '../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './style.css';

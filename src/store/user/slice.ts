@@ -13,9 +13,9 @@ export const fetchOneUser = createAsyncThunk('user/one/id/fetchUserUpdate', asyn
   return data;
 });
 
-export const fetchUserUpdate = createAsyncThunk<User[], { imageUrl: string; user: string }>(
+export const fetchUserUpdate = createAsyncThunk<User[], { imageUrl: string | string[]; user: string }>(
   'user/id/fetchUserUpdate',
-  async ({ imageUrl, user }: { imageUrl: string; user: string }) => {
+  async ({ imageUrl, user }: { imageUrl: string | string[]; user: string }) => {
     const { data } = await axios.patch(`/user/${user}`, { imageUrl });
 
     return data;

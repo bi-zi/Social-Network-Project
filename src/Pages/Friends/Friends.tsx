@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchAuthMe } from '../../store/auth/slice';
 import { fetchAllUsers, fetchDeleteFriend, fetchOneUser } from '../../store/user/slice';
 import { useParams } from 'react-router-dom';
@@ -9,24 +9,40 @@ import { fetchNotifications } from '../../store/notifications/slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
 
-function Friends() {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  const { id } = useParams();
+interface User {
+  _id: string;
+  fullName: string;
+  email: string;
+  passwordHash: string;
+  friends: string[];
+  subscribers: string[];
+  imageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  id: string;
+}
+
+export type MyParams = {
+  id: string;
+};
+
+export const Friends: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
+  const { id } = useParams<keyof MyParams>() as MyParams;
 
   const [catergory, setCategory] = React.useState(
     state.user.catergory === '' ? 'people' : state.user.catergory,
   );
-  const [sortBy, setSortBy] = React.useState();
-
-
+  const [sortBy, setSortBy] = React.useState('');
 
   const user =
     state.user?.userOne?.[0] === undefined
       ? state.user.usersAll?.find((x) => x._id === id)
       : state.user?.userOne?.[0];
 
-  let arr = [];
+  let arr = [] as User[];
   if (catergory === 'friends') {
     arr = state.user.usersAll?.filter((x) => user?.friends.includes(x._id));
   }
@@ -96,18 +112,14 @@ function Friends() {
       });
   }
 
-  const deleteFriend = async (userId) => {
+  const deleteFriend = async (userId: string) => {
     await dispatch(
-      fetchDeleteFriend(
-        {
-          id: userId,
-          index: state.user.usersAll
-            .find((x) => x._id === userId)
-            .friends.findIndex((x) => x === state.auth.data?._id),
-          index2: state.auth.data?.friends.findIndex((x) => x === userId),
-        },
-        id,
-      ),
+      fetchDeleteFriend({
+        id: userId,
+        index: state.user.usersAll.find((x) => x._id === userId)!.friends.findIndex((x) => x === state.auth.data?._id),
+        index2: state.auth.data?.friends.findIndex((x) => x === userId),
+        user: id,
+      }),
     );
     dispatch(fetchOneUser(id));
     dispatch(fetchAuthMe());
@@ -117,9 +129,6 @@ function Friends() {
     dispatch(fetchAllUsers());
     dispatch(fetchNotifications(id));
   }, []);
-
-
-
 
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
@@ -219,6 +228,4 @@ function Friends() {
       </div>
     </div>
   );
-}
-
-export default Friends;
+};

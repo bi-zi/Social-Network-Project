@@ -7,19 +7,19 @@ export const fetchSlider = createAsyncThunk<Slider[]>('slider/fetchSlider', asyn
   return data;
 });
 
-export const fetchSliderPost = createAsyncThunk<Slider[]>(
+export const fetchSliderPost = createAsyncThunk<Slider[], { sliderImg: string[] }>(
   'slider/id/fetchSliderPost',
-  async (params) => {
-    const { data } = await axios.post(`/slider`, params);
+  async ( {sliderImg}:{ sliderImg: string[] }) => {
+    const { data } = await axios.post(`/slider`, { sliderImg });
 
     return data;
   },
 );
 
-export const fetchSliderPush = createAsyncThunk<Slider[]>(
+export const fetchSliderPush = createAsyncThunk<Slider[], { sliderImg: string[], id?: string}>(
   'slider/push/id/fetchSliderPush',
-  async (params, id) => {
-    const { data } = await axios.patch(`/slider/push/${id}`, params);
+  async({sliderImg, id}:{ sliderImg: string[], id?: string}) => {
+    const { data } = await axios.patch(`/slider/push/${id}`, { sliderImg });
 
     return data;
   },

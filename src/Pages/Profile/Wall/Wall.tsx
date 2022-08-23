@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 import {
   fetchUserPostsAll,
   fetchPostLike,
@@ -13,17 +13,26 @@ import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
 
-function Wall() {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  const wall = useSelector((state) => state.post.userPosts);
-  const [comment, setComment] = React.useState();
-  const { id } = useParams();
-  const firstRef = React.useRef(null);
+
+export type MyParams = {
+  id: string;
+};
+
+export const Wall: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
+  const wall = useAppSelector((state) => state.post.userPosts);
+
+  const { id } = useParams<keyof MyParams>() as MyParams;
+  const firstRef = React.useRef<HTMLTextAreaElement>(null);
+
+  const [comment, setComment] = React.useState(999999);
+
   const user = state.user?.userOne?.[0];
 
   let wallPost = wall.post.find((x) => x.user === id)?.post;
-  const buffer = [];
+  let buffer: any = [];
+
   if (wallPost !== undefined) {
     for (let i = wallPost.length - 1; i !== -1; --i) {
       buffer.push(wallPost[i]);
@@ -31,74 +40,78 @@ function Wall() {
   }
   wallPost = buffer;
 
-  const like = async (postId, check) => {
-    if (check) await dispatch(fetchPostLike({ _id: postId, likeDislike: state.auth?.data?._id, index: 1 }, id));
+
+  const like = async (postId: string, check: boolean) => {
+    if (check)
+      await dispatch(
+        fetchPostLike({ _id: postId, likeDislike: state.auth?.data?._id, index: 1, user: id }),
+      );
 
     if (!check)
       await dispatch(
-        fetchPostLike(
-          {
-            _id: postId,
-            likeDislike: wallPost?.[0]?.likePost?.findIndex((x) => x === state.auth?.data?._id),
-            index: 0,
-          },
-          id,
-        ),
+        fetchPostLike({
+          _id: postId,
+          likeDislike: wallPost?.[0]?.likePost?.findIndex((x) => x === state.auth?.data?._id),
+          index: 0,
+          user: id,
+        }),
       );
     dispatch(fetchUserPostsAll(id));
   };
 
-  const dislike = async (postId, check) => {
-    if (check) await dispatch(fetchPostDislike({ _id: postId, likeDislike: state.auth?.data?._id, index: 1 }, id));
+  const dislike = async (postId: string, check: boolean) => {
+    if (check)
+      await dispatch(
+        fetchPostDislike({ _id: postId, likeDislike: state.auth?.data?._id, index: 1, user: id }),
+      );
     console.log(check);
     if (!check)
       await dispatch(
-        fetchPostDislike(
-          {
-            _id: postId,
-            likeDislike: wallPost?.[0]?.dislikePost?.findIndex((x) => x === state.auth?.data?._id),
-            index: 0,
-          },
-          id,
-        ),
+        fetchPostDislike({
+          _id: postId,
+          likeDislike: wallPost?.[0]?.dislikePost?.findIndex((x) => x === state.auth?.data?._id),
+          index: 0,
+          user: id,
+        }),
       );
     dispatch(fetchUserPostsAll(id));
   };
 
-  const addComment = async (postId) => {
-    let date = new Date();
+  const addComment = async (postId: string) => {
+    let date: any = new Date();
     date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
     await dispatch(
-      fetchCommentPush(
-        {
-          _id: postId,
-          fullName: state.auth.data?.fullName,
-          commentText: state.post.createComment,
-          commentDate: date,
-          userId: state.auth.data._id,
-        },
-        id,
-      ),
+      fetchCommentPush({
+        _id: postId,
+        fullName: state.auth.data?.fullName,
+        commentText: state.post.createComment,
+        commentDate: date,
+        userId: state.auth.data._id,
+        user: id,
+      }),
     );
     dispatch(fetchUserPostsAll(id));
     dispatch(setCreateComment(''));
-    firstRef.current.value = '';
+
+    if (firstRef.current != null) {
+      firstRef.current.value = '';
+    }
   };
 
-  const deleteComment = async (postId, ind) => {
-    await dispatch(fetchCommentDelete({ postId: postId, index: ind }, id));
+  const deleteComment = async (postId: string, ind: number) => {
+    await dispatch(fetchCommentDelete({ postId: postId, index: ind, user: id }));
     dispatch(fetchUserPostsAll(id));
   };
 
-  const deletePost = async (index) => {
-    const postIndex = wall.post.find((x) => x.user === id).post.findIndex((x) => x._id === index);
-    await dispatch(fetchPostDelete({ deleteId: postIndex }, id));
+  const deletePost = async (index: string) => {
+    const postIndex = wall.post.find((x) => x.user === id)!.post.findIndex((x) => x._id === index);
+    await dispatch(fetchPostDelete({ deleteId: postIndex, user: id }));
     dispatch(fetchUserPostsAll(id));
   };
 
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));
-  }, []);
+  }, [dispatch, id]);
 
   return (
     <>
@@ -210,7 +223,7 @@ function Wall() {
                 comment !== index
                   ? setComment(index)
                   : comment === index
-                  ? setComment('0')
+                  ? setComment(999999)
                   : setComment(index)
               }
             />
@@ -240,7 +253,7 @@ function Wall() {
                 {content.commentPost?.map((comment, index) => (
                   <div className="comment" key={index}>
                     <img
-                      src={state.user.usersAll.find((x) => x._id === comment.userId).imageUrl[0]}
+                      src={state.user.usersAll.find((x) => x._id === comment.userId)!.imageUrl[0]}
                       alt=""
                       className="comment_avatar"
                     />
@@ -268,6 +281,4 @@ function Wall() {
       ))}
     </>
   );
-}
-
-export default Wall;
+};

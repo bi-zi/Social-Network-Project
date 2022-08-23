@@ -10,64 +10,144 @@ export const fetchUserPostsAll = createAsyncThunk(
   },
 );
 
-export const fetchCreatePost = createAsyncThunk<UserPost[]>(
+export const fetchCreatePost = createAsyncThunk<
+  UserPost[],
+  { text: string; videoPost: string; imagesPost: string[] }
+>(
   '/post/createPost/fetchCreatePost',
-  async (params) => {
-    const { data } = await axios.post(`/post/createPost`, params);
+  async ({ text, videoPost, imagesPost }: { text: string; videoPost: string; imagesPost: string[] }) => {
+    const { data } = await axios.post(`/post/createPost`, { text, videoPost, imagesPost });
 
     return data;
   },
 );
 
-export const fetchPostPush = createAsyncThunk<UserPost[]>(
+export const fetchPostPush = createAsyncThunk<
+  UserPost[],
+  {
+    text: string;
+    videoPost: string;
+    imagesPost: string[];
+    user: string;
+  }
+>(
   '/post/PostPush/fetchPostPush',
-  async (params, id) => {
-    const { data } = await axios.patch(`/post/PostPush/${id}`, params);
+  async ({
+    text,
+    videoPost,
+    imagesPost,
+    user,
+  }: {
+    text: string;
+    videoPost: string;
+    imagesPost: string[];
+    user: string;
+  }) => {
+    const { data } = await axios.patch(`/post/PostPush/${user}`, { text, videoPost, imagesPost });
 
     return data;
   },
 );
 
-export const fetchPostLike = createAsyncThunk<UserPost[]>(
+export const fetchPostLike = createAsyncThunk<
+  UserPost[],
+  { _id: string; likeDislike: string | undefined | number; index: number; user: string }
+>(
   '/post/like/fetchPostLike',
-  async (params, id) => {
-    const { data } = await axios.patch(`/post/like/${id}`, params);
+  async ({
+    _id,
+    likeDislike,
+    index,
+    user,
+  }: {
+    _id: string;
+    likeDislike: string | undefined | number;
+    index: number;
+    user: string;
+  }) => {
+    const { data } = await axios.patch(`/post/like/${user}`, { _id, likeDislike, index });
 
     return data;
   },
 );
 
-export const fetchPostDislike = createAsyncThunk<UserPost[]>(
+export const fetchPostDislike = createAsyncThunk<
+  UserPost[],
+  { _id: string; likeDislike: string | undefined | number; index: number; user: string }
+>(
   '/post/dislike/fetchPostDislike',
-  async (params, id) => {
-    const { data } = await axios.patch(`/post/dislike/${id}`, params);
+  async ({
+    _id,
+    likeDislike,
+    index,
+    user,
+  }: {
+    _id: string;
+    likeDislike: string | undefined | number;
+    index: number;
+    user: string;
+  }) => {
+    const { data } = await axios.patch(`/post/dislike/${user}`, { _id, likeDislike, index });
 
     return data;
   },
 );
 
-export const fetchCommentPush = createAsyncThunk<UserPost[]>(
+export const fetchCommentPush = createAsyncThunk<
+  UserPost[],
+  {
+    _id: string;
+    fullName: string;
+    commentText: string;
+    commentDate: string;
+    userId: string;
+    user: string;
+  }
+>(
   '/post/commentPush/fetchCommentPush',
-  async (params, id) => {
-    const { data } = await axios.patch(`/post/commentPush/${id}`, params);
+  async ({
+    _id,
+    fullName,
+    commentText,
+    commentDate,
+    userId,
+    user,
+  }: {
+    _id: string;
+    fullName: string;
+    commentText: string;
+    commentDate: string;
+    userId: string;
+    user: string;
+  }) => {
+    const { data } = await axios.patch(`/post/commentPush/${user}`, {
+      _id,
+      fullName,
+      commentText,
+      commentDate,
+      userId,
+    });
 
     return data;
   },
 );
 
-export const fetchCommentDelete = createAsyncThunk<UserPost[]>(
+export const fetchCommentDelete = createAsyncThunk<
+  UserPost[],
+  { postId: string; index: number; user: string }
+>(
   '/post/deleteComment/fetchCommentDelete',
-  async (params, id) => {
-    const { data } = await axios.patch(`/post/deleteComment/${id}`, params);
+  async ({ postId, index, user }: { postId: string; index: number; user: string }) => {
+    const { data } = await axios.patch(`/post/deleteComment/${user}`, { postId, index });
 
     return data;
   },
 );
 
-export const fetchPostDelete = createAsyncThunk<UserPost[]>(
+export const fetchPostDelete = createAsyncThunk<UserPost[], { deleteId: number; user: string }>(
   '/post/deletePost/fetchPostDelete',
-  async (params, id) => {
-    const { data } = await axios.patch(`/post/deletePost/${id}`, params);
+  async({deleteId,user}:{ deleteId: number, user: string }) => {
+    const { data } = await axios.patch(`/post/deletePost/${user}`, { deleteId });
 
     return data;
   },

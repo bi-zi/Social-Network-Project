@@ -4,19 +4,18 @@ import { fetchSlider } from '../../../store/slider/slice';
 import { setInputNumber } from '../../../store/user/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import ImageParsing from '../../../ImageParsing/ImageParsing';
+import { ImageParsing } from '../../../ImageParsing/ImageParsing';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './style.css';
-
 
 export const PhotoSlider: React.FC = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
   const { id } = useParams();
 
-  const readyPhotos = state.slider?.slider?.find((x) => x.user === id)?.sliderImg
+  const readyPhotos = state.slider?.slider?.find((x) => x.user === id)?.sliderImg;
 
   const settings = {
     className: 'center',
@@ -71,6 +70,6 @@ export const PhotoSlider: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default PhotoSlider;

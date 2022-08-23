@@ -1,6 +1,5 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 import {
   setCreatText,
   setCreateImgDelete,
@@ -12,15 +11,22 @@ import {
 import { setInputNumber } from '../../../store/user/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import ImageParsing from '../../../ImageParsing/ImageParsing';
+import {ImageParsing} from '../../../ImageParsing/ImageParsing';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
 
-function Post() {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  const { id } = useParams();
-  const firstRef = React.useRef(null);
-  const [postEffect, setPostEffect] = React.useState();
+export type MyParams = {
+  id: string;
+};
+
+export const Post: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
+  const { id } = useParams<keyof MyParams>() as MyParams;
+
+  const firstRef = React.useRef<HTMLInputElement>(null);
+  const [postEffect, setPostEffect] = React.useState('');
+
 
   localStorage.setItem('postImages', JSON.stringify(state.post.createImg));
   localStorage.setItem('postText', state.post.createText);
@@ -33,7 +39,6 @@ function Post() {
   const numImg = readyPhotos.length;
 
   let linkСheck = state.post.createVid?.split('/');
-  linkСheck = linkСheck?.[0] === 'https:';
 
   let url = state.post.createVid;
   let src = url?.split('/')[3]?.split('=')[1]?.split('&')[0];
@@ -41,8 +46,9 @@ function Post() {
   if (src === 'embed') src = url?.split('/')[4];
   let local = src === undefined ? '' : `https://www.youtube.com/embed/${src}`;
 
-  if (linkСheck) localStorage.setItem('postVideo', local);
+  if (linkСheck?.[0] === 'https:') localStorage.setItem('postVideo', local);
   if (state.post.createVid?.length === 0) localStorage.setItem('postVideo', url);
+
 
   const sendPost = async () => {
     if ((textLength > 0 || numImg > 0 || local.length > 0) && post === undefined) {
@@ -54,27 +60,32 @@ function Post() {
 
     if (
       ((textLength > 0 || numImg > 0 || local.length > 0) && post?.post?.length === 0) ||
-      post?.post?.length > 0
+      post?.post!?.length > 0
     ) {
       await dispatch(
-        fetchPostPush({ text: postText, videoPost: local, imagesPost: state.post.createImg }, id),
+        fetchPostPush({ text: postText, videoPost: local, imagesPost: state.post.createImg, user: id }),
       );
       console.log(2);
     }
 
     if (textLength > 0 || numImg > 0 || local.length > 0) {
       await dispatch(fetchUserPostsAll(id));
-      firstRef.current.value = '';
+
+      if (firstRef.current != null) {
+        firstRef.current.value = '';
+      }
+
       dispatch(setCreateImgDelete([]));
       dispatch(setCreatText(''));
       dispatch(setCreateVid(''));
-      setPostEffect();
+      setPostEffect('');
     }
   };
 
+
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));
-  }, []);
+  }, [dispatch, id]);
 
   return (
     <div className="post_container">
@@ -131,7 +142,7 @@ function Post() {
         )}
 
         {/* videoRender */}
-        {linkСheck ? (
+        {linkСheck?.[0] === 'https:' ? (
           <>
             <iframe
               src={`https://www.youtube.com/embed/${src}`}
@@ -169,13 +180,17 @@ function Post() {
         <FontAwesomeIcon
           className="post_video_icon"
           icon="fa-solid fa-film"
-          onClick={() => (postEffect !== 0 ? setPostEffect(0) : setPostEffect(1))}
+          onClick={() => (postEffect !== '0' ? setPostEffect('0') : setPostEffect('1'))}
         />
 
-        {linkСheck ? <button className="video_delete" onClick={() => dispatch(setCreateVid(''))}>
-          Delete video
-        </button> : ''}
-        {postEffect === 0 && !linkСheck ? (
+        {linkСheck?.[0] === 'https:' ? (
+          <button className="video_delete" onClick={() => dispatch(setCreateVid(''))}>
+            Delete video
+          </button>
+        ) : (
+          ''
+        )}
+        {postEffect === '0' && linkСheck?.[0] !== 'https:' ? (
           <input
             type="text"
             className="post_input_video"
@@ -192,6 +207,4 @@ function Post() {
       </div>
     </div>
   );
-}
-
-export default Post;
+};

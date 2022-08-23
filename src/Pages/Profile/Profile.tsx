@@ -1,10 +1,10 @@
 import React from 'react';
 import { useAppSelector } from '../../store/store';
 import { Avatar } from './Avatar/Avatar';
-import UserInfo from './UserInfo/UserInfo';
+import { UserInfo } from './UserInfo/UserInfo';
 import { PhotoSlider } from './PhotoSlider/PhotoSlider';
-import Post from './Post/Post';
-import Wall from './Wall/Wall';
+import { Post } from './Post/Post';
+import { Wall } from './Wall/Wall';
 import { Friends } from './Friends/Friends';
 import { Subscribers } from './Subscribers/Subscribers';
 import { Groups } from './Groups/Groups';

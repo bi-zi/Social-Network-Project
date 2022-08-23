@@ -7,7 +7,7 @@ import { Login } from "./Pages/Registration-Login/Login.tsx"
 import {Layout} from './Pages/Layout';
 import {Profile} from './Pages/Profile/Profile.tsx'
 import Photo from './Pages/SelectedPhoto/SelectedPhoto.tsx'
-import Friends from './Pages/Friends/Friends.jsx';
+import {Friends} from './Pages/Friends/Friends.tsx';
 import Messages from './Pages/Messages/Messages.jsx'
 import { Routes, Route } from 'react-router-dom';
 import './style.css'

@@ -25,15 +25,18 @@ export const UserInfo: React.FC = () => {
   const { id } = useParams<keyof MyParams>() as MyParams;
 
   const [closeInfo, setCloseInfo] = React.useState(0);
-  const about = Array.isArray(state.about?.data) ? state.about.data?.find((x) => x.user === id) : {} as About ;
+  
+  const about = Array.isArray(state.about?.data)
+    ? state.about.data?.find((x) => x.user === id)
+    : ({} as About);
 
   const user = state.user?.userOne?.[0];
 
-  const onSubmit = async (values: About, id: string) => {
+  const onSubmit = async (values: About) => {
     setCloseInfo(0);
     about !== undefined
-      ? (await dispatch(fetchAboutUpdate({values, id})))
-      : (await dispatch(fetchAboutPost({ values })));
+      ? await dispatch(fetchAboutUpdate({ values, id }))
+      : await dispatch(fetchAboutPost({ values }));
 
     dispatch(fetchAbout());
   };
@@ -49,7 +52,7 @@ export const UserInfo: React.FC = () => {
   React.useEffect(() => {
     dispatch(fetchAbout());
     dispatch(fetchOneUser(id));
-  }, []);
+  }, [dispatch, id]);
 
   return (
     <>
@@ -78,7 +81,7 @@ export const UserInfo: React.FC = () => {
               <div className="student">Student at - {about?.studentAt}</div>
             </>
           ) : (
-            <form className="about_form" onSubmit={handleSubmit(onSubmit}>
+            <form className="about_form" onSubmit={handleSubmit(onSubmit)}>
               <input
                 className="lives_input"
                 defaultValue={about?.livesIn !== undefined ? `${about?.livesIn}` : ''}
@@ -202,4 +205,4 @@ export const UserInfo: React.FC = () => {
       </div>
     </>
   );
-}
+};

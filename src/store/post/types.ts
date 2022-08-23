@@ -10,7 +10,7 @@ export type UserPost = {
 interface Post {
   text: string;
   videoPost: string;
-  imagespost: string[];
+  imagesPost: string[];
   commentPost: Comment[];
   likePost: string[];
   dislikePost: string[];
@@ -19,7 +19,7 @@ interface Post {
 }
 
 interface Comment {
-  fullname: string
+  fullName: string
   commentText: string
   commentDate: string
   userId: string
