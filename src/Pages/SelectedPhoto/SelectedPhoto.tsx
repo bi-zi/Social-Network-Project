@@ -8,15 +8,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Navigate } from 'react-router-dom';
 import './style.css';
 
-
-
 export type MyParams = {
   user: string;
   category: string;
   id: string;
 };
 
-function Photo() {
+export const Photo: React.FC = () => {
   const dispatch = useAppDispatch();
   const { user, category, id } = useParams<keyof MyParams>() as MyParams;
   const state = useAppSelector((state) => state);
@@ -29,8 +27,6 @@ function Photo() {
       : category === 'PhotoSlider'
       ? slider?.sliderImg
         : state.post.createImg;
-
-  console.log(category);
 
   const onPhotoDelete = async () => {
     if (category === 'PhotoAvatar') {
@@ -102,5 +98,3 @@ function Photo() {
     </div>
   );
 }
-
-export default Photo;

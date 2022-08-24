@@ -1,48 +1,43 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchGetMessages, fetchAddMessage, setSortedId } from '../../store/messages/slice';
-import { useForm } from 'react-hook-form';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { fetchGetMessages, fetchAddMessage } from '../../store/messages/slice';
 import { NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
 
-function Messages() {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  const divRef = React.useRef(null);
-  const firstRef = React.useRef(null);
+export const Messages: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
+  const divRef = React.useRef<HTMLDivElement>(null);
+  const firstRef = React.useRef<HTMLInputElement>(null);
 
   const [selectUser, setSelectUser] = React.useState(
     state.messages?.sortedId.length !== 0 ? state.messages.sortedId : undefined,
   );
 
-  const [text, setText] = React.useState();
-  const [findChat, setFindChat] = React.useState();
+  const [text, setText] = React.useState('');
+  const [findChat, setFindChat] = React.useState<any>();
 
   const findFriends = state.messages.data.find((x) => x.user === state.auth?.data?._id);
 
   const lastMessage = findFriends?.correspondence
-    .map((x) => x.messages[x.messages.length - 1])
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
+    .map((x) => x?.messages[x.messages.length - 1])
+    .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)));
 
-  const friends = state.user?.usersAll
-    .filter((x, i) => findFriends?.correspondence.map((x) => x.withWho)?.includes(x._id))
-    .sort((a, b) => b.date - a.date);
+  const friends = state.user?.usersAll.filter((x, i) =>
+    findFriends?.correspondence.map((x) => x?.withWho)?.includes(x._id),
+  );
 
   const friendId = findFriends?.correspondence
-    ?.map((x) =>
-      x.messages[x.messages.length - 1] !== undefined
-        ? x.messages[x.messages.length - 1]
-        : { withWho: x.withWho },
-    )
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    ?.map((x) => x?.messages[x.messages.length - 1])
+    .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
     .map((x) => x.withWho);
 
   let sortedFriends = [];
 
-  for (let i = 0; i < friendId?.length; i++) {
+  for (let i = 0; i < friendId!?.length; i++) {
     for (let j = 0; j < friends?.length; j++)
-      if (friendId[i] === friends[j]?._id) {
+      if (friendId![i] === friends[j]?._id) {
         sortedFriends.push(friends[j]);
       }
   }
@@ -55,13 +50,13 @@ function Messages() {
 
   let userIndex = state.messages.data
     .find((x) => x.user === state.auth?.data?._id)
-    ?.correspondence.findIndex((x) => x.withWho === selectUser);
+    ?.correspondence.findIndex((x) => x?.withWho === selectUser);
 
-  if (selectUser !== undefined) localStorage.setItem('userIndex', userIndex);
+  if (selectUser !== undefined) localStorage.setItem('userIndex', userIndex + '');
 
   let chatIndex = sortedFriends.findIndex((x) => x._id === selectUser);
 
-  if (selectUser !== undefined) localStorage.setItem('chatIndex', chatIndex);
+  if (selectUser !== undefined) localStorage.setItem('chatIndex', chatIndex + '');
 
   const selectedMessage = state.messages.data.find((x) => x.user === state.auth?.data?._id)
     ?.correspondence[localStorage.userIndex]?.messages;
@@ -69,10 +64,10 @@ function Messages() {
   const selectedUser = [sortedFriends[localStorage.chatIndex]];
 
   const scrollToBottom = () => {
-    divRef.current.scrollTop = divRef.current.scrollHeight;
+    divRef.current!.scrollTop = divRef.current!.scrollHeight;
   };
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values: string) => {
     await dispatch(
       fetchAddMessage({
         message: values,
@@ -80,29 +75,21 @@ function Messages() {
         withWho: selectedUser?.[0]._id,
         user: state.auth.data._id,
         yourIndex: localStorage.userIndex,
-        hisIndex: state.messages.data
-          .find((x) => x.user === selectedUser?.[0]?._id)
-          ?.correspondence.findIndex((x) => x.withWho === state.auth.data?._id),
+        hisIndex:
+          state.messages.data
+            .find((x) => x.user === selectedUser?.[0]?._id)
+            ?.correspondence.findIndex((x) => x.withWho === state.auth.data?._id) + '',
       }),
     );
 
-    firstRef.current.value = '';
+    firstRef.current!.value = '';
     dispatch(fetchGetMessages());
   };
-
-  // const scrollHandler = (e) => {
-  //   if (e.target.scrollTop < 100) {
-  //     console.log('scroll');
-  //   }
-
-  //     // console.log('scrollHeight', e.target.scrollHeight);
-  //   console.log('scrollHeight', e.target.scrollTop);
-  // };
 
   React.useEffect(() => {
     dispatch(fetchGetMessages());
     setTimeout(scrollToBottom, 200);
-  }, []);
+  }, [dispatch]);
 
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
@@ -132,26 +119,26 @@ function Messages() {
                 <img src={friend.imageUrl} alt="" className="message_left_avatar" />
                 <div className="message_left_fullName">{friend.fullName}</div>
 
-                {lastMessage[i] !== undefined ? (
+                {lastMessage![i] !== undefined ? (
                   <div className="message_left_time">{`${new Date(
-                    lastMessage[i]?.date,
+                    lastMessage![i]?.date,
                   ).toLocaleTimeString()} - ${new Date(
-                    lastMessage[i]?.date,
+                    lastMessage![i]?.date,
                   ).toLocaleDateString()}`}</div>
                 ) : (
                   ''
                 )}
 
-                {lastMessage[i] !== undefined ? (
+                {lastMessage![i] !== undefined ? (
                   <div className="message_name_box">
                     <div className="message_name">
-                      {lastMessage[i]?.userId === friend._id
+                      {lastMessage![i]?.userId === friend._id
                         ? friend.fullName.split(' ')[0] + ':'
                         : 'You:'}
                     </div>
                     <div className="messages_left_last">
-                      {lastMessage[i]?.message?.slice(0, 40)}
-                      {lastMessage[i]?.message?.length > 40 ? '...' : ''}
+                      {lastMessage![i]?.message?.slice(0, 40)}
+                      {lastMessage![i]?.message?.length > 40 ? '...' : ''}
                     </div>
                   </div>
                 ) : (
@@ -181,21 +168,22 @@ function Messages() {
               ) : (
                 selectedMessage?.map((message, i) => (
                   <div className="message_box" key={i}>
-                    {message?.userId !== selectedMessage[i - 1]?.userId ||
-                    message?.date !== selectedMessage[i - 1]?.date ? (
+                    {(message?.userId !== selectedMessage[i - 1]?.userId ||
+                      message?.date !== selectedMessage[i - 1]?.date) &&
+                    message.userId !== undefined ? (
                       <>
                         <img
                           src={
-                            state.user?.usersAll.filter((x, i) => message.userId.includes(x._id))[0]
-                              .imageUrl
+                            state.user?.usersAll.filter((x, i) => message.userId?.includes(x._id))[0]
+                              ?.imageUrl
                           }
                           alt=""
                           className="messages_all_avatar"
                         />
                         <div className="messages_all_fullName">
                           {
-                            state.user?.usersAll.filter((x, i) => message.userId.includes(x._id))[0]
-                              .fullName
+                            state.user?.usersAll.filter((x, i) => message.userId?.includes(x._id))[0]
+                              ?.fullName
                           }
                         </div>
 
@@ -237,6 +225,4 @@ function Messages() {
       </div>
     </div>
   );
-}
-
-export default Messages;
+};

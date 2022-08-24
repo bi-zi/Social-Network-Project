@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Messages, MessagesSliceState, Status } from './types';
-import axios from '../../backend/axios.js';
+import axios from '../../backend/axios';
 
 export const fetchGetMessages = createAsyncThunk<Messages[]>(
   'messages/all/fetchGetMessages',
@@ -26,10 +26,34 @@ export const fetchPushChat = createAsyncThunk<Messages[], { withWho: string; use
   },
 );
 
-export const fetchAddMessage = createAsyncThunk<Messages[]>(
+export const fetchAddMessage = createAsyncThunk<
+  Messages[],
+  { message: string; userId: string; withWho: string; user: string; yourIndex: string; hisIndex: string }
+>(
   'about/addMessage/fetchAddMessage',
-  async (params) => {
-    const { data } = await axios.patch(`/messages/addMessage`, params);
+  async ({
+    message,
+    userId,
+    withWho,
+    user,
+    yourIndex,
+    hisIndex,
+  }: {
+    message: string;
+    userId: string;
+    withWho: string;
+    user: string;
+    yourIndex: string;
+    hisIndex: string;
+  }) => {
+    const { data } = await axios.patch(`/messages/addMessage`, {
+      message,
+      userId,
+      withWho,
+      user,
+      yourIndex,
+      hisIndex,
+    });
     return data;
   },
 );

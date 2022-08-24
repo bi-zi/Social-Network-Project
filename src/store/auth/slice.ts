@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { User, AuthSliceState, Status, FormValues } from './types';
-import axios from '../../backend/axios.js';
+import axios from '../../backend/axios';
 
 
 

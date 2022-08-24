@@ -5,14 +5,17 @@ import { fetchOneUser, setCatergory } from '../../store/user/slice';
 import { fetchNotifications, fetchNotificationsDelete } from '../../store/notifications/slice';
 import { useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
+
+export type MyParams = {
+  id: string;
+};
 
 export const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
-  const { id } = useParams();
+  const { id } = useParams<keyof MyParams>() as MyParams;
 
   const note =
     state.note.notifications?.user === state.auth?.data?._id
