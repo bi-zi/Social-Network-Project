@@ -214,6 +214,7 @@ export const Messages: React.FC = () => {
               />
               <button
                 type="submit"
+                className="messages_right_button"
                 onClick={() =>
                   text?.length !== 0 ? (onSubmit(text), setTimeout(scrollToBottom, 200)) : ''
                 }>

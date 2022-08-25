@@ -133,8 +133,54 @@
 }
 
 .menu {
+  position: relative;
   margin-top: 10px;
+}
 
+.menu_burger {
   width: 40px;
   height: 40px;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.menu:active .menu_register_login {
+  display: flex;
+}
+
+.menu_register_login:hover {
+  display: flex;
+}
+
+.menu_register_login {
+  position: absolute;
+  display: none;
+  justify-content: space-between;
+
+  width: 220px;
+  height: 40px;
+
+  top: 0px;
+  right: 0px;
+
+  background-color: white;
+}
+
+.menu_login,
+.menu_register {
+  width: 100%;
+  padding-top: 5px;
+
+  font-size: 26px;
+  text-decoration: none;
+  text-align: center;
+
+  color: white;
+  background-color: black;
+}
+
+.menu_login:hover,
+.menu_register:hover {
+  color: black;
+  background-color: white;
 }

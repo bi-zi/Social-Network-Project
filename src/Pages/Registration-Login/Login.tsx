@@ -57,6 +57,7 @@ export const Login = () => {
               className="password"
               type="password"
               {...register('password', { required: 'Укажите пароль' })}
+
             />
           </label>
           <br />

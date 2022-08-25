@@ -260,9 +260,34 @@
 }
 
 .messages_right_input {
-  width: 400px;
+  width: 600px;
   height: 40px;
 
   margin-top: 10px;
   margin-left: 80px;
+
+  padding-left: 10px;
+
+  font-size: 20px;
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.messages_right_button {
+  position: relative;
+  width: 120px;
+  height: 40px;
+
+  margin-left: 10px;
+
+
+  font-size: 20px;
+  font-family: 'Iceberg';
+  font-style: normal;
+}
+
+.messages_right_button:active {
+  background-color: rgb(56, 56, 56);
+  color: #ffffff;
 }

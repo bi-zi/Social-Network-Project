@@ -125,8 +125,23 @@ export const Header: React.FC = () => {
         ) : (
           ''
         )}
-
-        <FontAwesomeIcon className="menu" icon="fa-solid fa-align-justify" onClick={onClickLogout} />
+        <div className="menu">
+          <FontAwesomeIcon className="menu_burger" icon="fa-solid fa-align-justify" />
+          <div className="menu_register_login">
+            <NavLink
+              to="/Login"
+              className="menu_login"
+              onClick={() => (localStorage.isAuth === 'true' ? onClickLogout() : '')}>
+              Login
+            </NavLink>
+            <NavLink
+              to="/Register"
+              className="menu_register"
+              onClick={() => (localStorage.isAuth === 'true' ? onClickLogout() : '')}>
+              Register
+            </NavLink>
+          </div>
+        </div>
       </div>
     </div>
   );

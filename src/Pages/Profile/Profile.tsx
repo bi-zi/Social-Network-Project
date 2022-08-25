@@ -40,11 +40,11 @@ export const Profile: React.FC = () => {
         <Avatar />
         <Friends />
         <Subscribers />
-      </div>
 
-      <Groups />
-      <Videos />
-      <Music />
+        <Groups />
+        <Videos />
+        <Music />
+      </div>
     </div>
   );
 };
