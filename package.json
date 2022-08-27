@@ -27,6 +27,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
+    "serve": "^14.0.1",
     "slick-carousel": "^1.8.1",
     "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
@@ -36,7 +37,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "analyze": "node scripts/analize.cjs"
+    "analyze": "node scripts/analize.cjs",
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": [
