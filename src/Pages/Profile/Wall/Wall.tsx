@@ -11,8 +11,10 @@ import {
 } from '../../../store/post/slice';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './style.css';
+import { faShareNodes, faEllipsis, faXmark, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faThumbsDown, faCommentDots } from '@fortawesome/free-regular-svg-icons';
 
+import './style.css';
 
 export type MyParams = {
   id: string;
@@ -39,7 +41,6 @@ export const Wall: React.FC = () => {
     }
   }
   wallPost = buffer;
-
 
   const like = async (postId: string, check: boolean) => {
     if (check)
@@ -124,7 +125,7 @@ export const Wall: React.FC = () => {
 
           {state.auth.data?._id === id ? (
             <>
-              <FontAwesomeIcon className="wall_menu" icon="fa-solid fa-ellipsis" />
+              <FontAwesomeIcon className="wall_menu" icon={faEllipsis} />
               <div className="wall_menu_hover" onClick={() => deletePost(content._id)}>
                 <span>Delete post</span>
               </div>
@@ -184,7 +185,7 @@ export const Wall: React.FC = () => {
 
             <FontAwesomeIcon
               className="wall_like_icon"
-              icon="fa-regular fa-thumbs-up"
+              icon={faThumbsUp}
               style={
                 content.likePost.find((x) => x === state.auth?.data?._id)
                   ? { color: 'red' }
@@ -200,7 +201,7 @@ export const Wall: React.FC = () => {
 
             <FontAwesomeIcon
               className="wall_dislike_icon"
-              icon="fa-regular fa-thumbs-down"
+              icon={faThumbsDown}
               style={
                 content.dislikePost.find((x) => x === state.auth?.data?._id)
                   ? { color: 'red' }
@@ -217,7 +218,7 @@ export const Wall: React.FC = () => {
 
             <FontAwesomeIcon
               className="wall_comment_icon"
-              icon="fa-regular fa-comment-dots"
+              icon={faCommentDots}
               style={comment === index ? { color: 'black' } : { color: 'white' }}
               onClick={() =>
                 comment !== index
@@ -229,7 +230,7 @@ export const Wall: React.FC = () => {
             />
             <span className="dislike_number">{content.commentPost.length}</span>
 
-            <FontAwesomeIcon className="wall_share_icon" icon="fa-solid fa-share-nodes" />
+            <FontAwesomeIcon className="wall_share_icon" icon={faShareNodes} />
 
             {comment === index ? (
               <div className="comments">
@@ -242,11 +243,11 @@ export const Wall: React.FC = () => {
 
                 {state.post.userPosts.status === 'loaded' && state.post.createComment.length > 0 ? (
                   <button className="input_button" onClick={() => addComment(content._id)}>
-                    <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
+                    <FontAwesomeIcon className="post_make_icon" icon={faPlay} />
                   </button>
                 ) : (
                   <button className="input_button">
-                    <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
+                    <FontAwesomeIcon className="post_make_icon" icon={faPlay} />
                   </button>
                 )}
 
@@ -261,7 +262,7 @@ export const Wall: React.FC = () => {
                     state.auth.data._id === comment.userId ? (
                       <FontAwesomeIcon
                         className="comment_delete"
-                        icon="fa-solid fa-xmark"
+                        icon={faXmark}
                         onClick={() => deleteComment(content?._id, index)}
                       />
                     ) : (

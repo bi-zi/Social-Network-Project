@@ -12,59 +12,6 @@ import { Messages } from './Pages/Messages/Messages';
 import { Routes, Route } from 'react-router-dom';
 import './style.css';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-
-import {
-  faPager,
-  faUserGroup,
-  faUsers,
-  faFilm,
-  faMusic,
-  faAlignJustify,
-  faLocationPin,
-  faFileLines,
-  faShareNodes,
-  faEllipsis,
-  faXmark,
-  faPlay,
-  faCircleChevronRight,
-  faCircleChevronLeft,
-  faMagnifyingGlass,
-} from '@fortawesome/free-solid-svg-icons';
-import {
-  faCircleUser,
-  faBell,
-  faComment,
-  faImage,
-  faThumbsUp,
-  faThumbsDown,
-  faCommentDots,
-} from '@fortawesome/free-regular-svg-icons';
-library.add(
-  faPager,
-  faUsers,
-  faUserGroup,
-  faFilm,
-  faMusic,
-  faAlignJustify,
-  faLocationPin,
-  faFileLines,
-  faShareNodes,
-  faEllipsis,
-  faXmark,
-  faPlay,
-  faCircleChevronRight,
-  faCircleChevronLeft,
-  faMagnifyingGlass,
-  faCircleUser,
-  faBell,
-  faComment,
-  faImage,
-  faThumbsUp,
-  faThumbsDown,
-  faCommentDots,
-);
-
 export const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
@@ -74,9 +21,6 @@ export const App: React.FC = () => {
     dispatch(fetchAuthMe());
     dispatch(fetchAllUsers());
   }, [dispatch]);
-
-
-
 
   return (
     <Routes>
@@ -91,3 +35,55 @@ export const App: React.FC = () => {
     </Routes>
   );
 }
+
+// import { library } from '@fortawesome/fontawesome-svg-core';
+// import {
+//   faPager,
+//   faUserGroup,
+//   faUsers,
+//   faFilm,
+//   faMusic,
+//   faAlignJustify,
+//   faLocationPin,
+//   faFileLines,
+//   faShareNodes,
+//   faEllipsis,
+//   faXmark,
+//   faPlay,
+//   faCircleChevronRight,
+//   faCircleChevronLeft,
+//   faMagnifyingGlass,
+// } from '@fortawesome/free-solid-svg-icons';
+// import {
+//   faCircleUser,
+//   faBell,
+//   faComment,
+//   faImage,
+//   faThumbsUp,
+//   faThumbsDown,
+//   faCommentDots,
+// } from '@fortawesome/free-regular-svg-icons';
+// library.add(
+//   faPager,
+//   faUsers,
+//   faUserGroup,
+//   faFilm,
+//   faMusic,
+//   faAlignJustify,
+//   faLocationPin,
+//   faFileLines,
+//   faShareNodes,
+//   faEllipsis,
+//   faXmark,
+//   faPlay,
+//   faCircleChevronRight,
+//   faCircleChevronLeft,
+//   faMagnifyingGlass,
+//   faCircleUser,
+//   faBell,
+//   faComment,
+//   faImage,
+//   faThumbsUp,
+//   faThumbsDown,
+//   faCommentDots,
+// );

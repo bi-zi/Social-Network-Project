@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { fetchNotifications } from '../../store/notifications/slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
 interface User {
@@ -116,7 +117,9 @@ export const Friends: React.FC = () => {
     await dispatch(
       fetchDeleteFriend({
         id: userId,
-        index: state.user.usersAll.find((x) => x._id === userId)!.friends.findIndex((x) => x === state.auth.data?._id),
+        index: state.user.usersAll
+          .find((x) => x._id === userId)!
+          .friends.findIndex((x) => x === state.auth.data?._id),
         index2: state.auth.data?.friends.findIndex((x) => x === userId),
         user: id,
       }),
@@ -160,7 +163,7 @@ export const Friends: React.FC = () => {
                       Delete friend
                     </div>
                   </div>
-                  <FontAwesomeIcon className="friend_menu_icon" icon="fa-solid fa-ellipsis" />
+                  <FontAwesomeIcon className="friend_menu_icon" icon={faEllipsis} />
                 </div>
               ) : (
                 ''

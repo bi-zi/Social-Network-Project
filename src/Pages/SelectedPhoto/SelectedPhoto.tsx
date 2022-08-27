@@ -4,8 +4,14 @@ import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchUserUpdate, fetchOneUser } from '../../store/user/slice';
 import { fetchSlider, fetchSliderDelete } from '../../store/slider/slice';
 import { setCreateImgDelete } from '../../store/post/slice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Navigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+
+  faXmark,
+  faCircleChevronRight,
+  faCircleChevronLeft,
+} from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
 export type MyParams = {
@@ -60,7 +66,7 @@ export const Photo: React.FC = () => {
   return (
     <div className="photo_viewing">
       <Link to={`/Profile/${user}`} style={{ color: '#000000' }} className="cloce">
-        <FontAwesomeIcon className="close" icon="fa-solid fa-xmark" />
+        <FontAwesomeIcon className="close" icon={faXmark} />
       </Link>
 
       <img src={readyPhotos?.[+id]} alt="" className="photo" />
@@ -70,13 +76,13 @@ export const Photo: React.FC = () => {
           <Link
             to={`/${user}/${category}/${+id === 0 ? readyPhotos!?.length - 1 : +id - 1}`}
             className="slider_link">
-            <FontAwesomeIcon className="swapPhoto_left" icon="fa-solid fa-circle-chevron-left" />
+            <FontAwesomeIcon className="swapPhoto_left" icon={faCircleChevronLeft} />
           </Link>
 
           <Link
             to={`/${user}/${category}/${readyPhotos!?.length - 1 === +id ? 0 : +id + 1}`}
             className="slider_link">
-            <FontAwesomeIcon className="swapPhoto_right" icon="fa-solid fa-circle-chevron-right" />
+            <FontAwesomeIcon className="swapPhoto_right" icon={faCircleChevronRight} />
           </Link>
         </>
       ) : (

@@ -6,6 +6,15 @@ import { fetchNotifications, fetchNotificationsDelete } from '../../store/notifi
 import { useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPager,
+  faUserGroup,
+  faUsers,
+  faFilm,
+  faMusic,
+  faAlignJustify,
+} from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faBell, faComment, faImage } from '@fortawesome/free-regular-svg-icons';
 import './style.css';
 
 export type MyParams = {
@@ -58,11 +67,10 @@ export const Header: React.FC = () => {
                   : { color: 'white' }
               }
               onClick={() => dispatch(fetchOneUser(state.auth?.data?._id))}>
-              <FontAwesomeIcon className="profile" icon="fa-regular fa-circle-user" />
+              <FontAwesomeIcon className="profile" icon={faCircleUser} />
             </NavLink>
-
             <div className="bell">
-              <FontAwesomeIcon className="bell_icon" icon="fa-regular fa-bell" />
+              <FontAwesomeIcon className="bell_icon" icon={faBell} />
               {note?.friendRequest!?.length > 0 ? (
                 <div className="notifications_number">{note?.friendRequest?.length}</div>
               ) : (
@@ -94,15 +102,12 @@ export const Header: React.FC = () => {
                 )}
               </div>
             </div>
-
-            <FontAwesomeIcon className="news" icon="fa-solid fa-pager" />
-
+            <FontAwesomeIcon className="news" icon={faPager} />
             <NavLink
               to="/Messages"
               style={path !== 'Messages' ? { color: 'white' } : { color: 'black' }}>
-              <FontAwesomeIcon className="message" icon="fa-regular fa-comment" />
+              <FontAwesomeIcon className="message" icon={faComment} />
             </NavLink>
-
             <NavLink
               to={`/Friends/${state.auth?.data?._id}`}
               style={
@@ -114,19 +119,18 @@ export const Header: React.FC = () => {
               }
               className={({ isActive }) => (isActive ? 'active' : 'inactive')}
               onClick={() => dispatch(fetchOneUser(state.auth?.data?._id))}>
-              <FontAwesomeIcon className="users" icon="fa-solid fa-user-group" />
+              <FontAwesomeIcon className="users" icon={faUserGroup} />
             </NavLink>
-
-            <FontAwesomeIcon className="community" icon="fa-solid fa-users" />
-            <FontAwesomeIcon className="image" icon="fa-regular fa-image" />
-            <FontAwesomeIcon className="video" icon="fa-solid fa-film" />
-            <FontAwesomeIcon className="music" icon="fa-solid fa-music" />
+            <FontAwesomeIcon className="community" icon={faUsers} />
+            <FontAwesomeIcon className="image" icon={faImage} />
+            <FontAwesomeIcon className="video" icon={faFilm} />
+            <FontAwesomeIcon className="music" icon={faMusic} />
           </div>
         ) : (
           ''
         )}
         <div className="menu">
-          <FontAwesomeIcon className="menu_burger" icon="fa-solid fa-align-justify" />
+          <FontAwesomeIcon className="menu_burger" icon={faAlignJustify} />
           <div className="menu_register_login">
             <NavLink
               to="/Login"

@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchGetMessages, fetchAddMessage } from '../../store/messages/slice';
 import { NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
 export const Messages: React.FC = () => {
@@ -99,7 +100,7 @@ export const Messages: React.FC = () => {
     <div className="messages_container">
       <div className="messages_friends">
         <div className="messages_left_control_panel">
-          <FontAwesomeIcon className="messages_searchIcon" icon="fa-solid fa-magnifying-glass" />
+          <FontAwesomeIcon className="messages_searchIcon" icon={faMagnifyingGlass} />
           <input
             type="text"
             pattern="^[a-zA-Z0-9 ]+$"

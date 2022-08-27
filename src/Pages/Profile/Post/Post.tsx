@@ -13,6 +13,8 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import {ImageParsing} from '../../../ImageParsing/ImageParsing';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faMusic, faLocationPin, faFileLines, faFilm } from '@fortawesome/free-solid-svg-icons';
+import { faImage } from '@fortawesome/free-regular-svg-icons';
 import './style.css';
 
 export type MyParams = {
@@ -160,15 +162,15 @@ export const Post: React.FC = () => {
       <div className="wall_control_panel">
         {state.post.userPosts.status === 'loaded' ? (
           <button className="post_make_button" type="submit" onClick={() => sendPost()}>
-            <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
+            <FontAwesomeIcon className="post_make_icon" icon={faPlay} />
           </button>
         ) : (
           <button className="post_make_button" type="submit">
-            <FontAwesomeIcon className="post_make_icon" icon="fa-solid fa-play" />
+            <FontAwesomeIcon className="post_make_icon" icon={faPlay} />
           </button>
         )}
 
-        <FontAwesomeIcon className="post_image_icon" icon="fa-regular fa-image" />
+        <FontAwesomeIcon className="post_image_icon" icon={faImage} />
         {numImg < 3 ? (
           <button onChange={() => dispatch(setInputNumber('2'))} className="post_image_input">
             <ImageParsing />
@@ -179,7 +181,7 @@ export const Post: React.FC = () => {
 
         <FontAwesomeIcon
           className="post_video_icon"
-          icon="fa-solid fa-film"
+          icon={faFilm}
           onClick={() => (postEffect !== '0' ? setPostEffect('0') : setPostEffect('1'))}
         />
 
@@ -201,9 +203,9 @@ export const Post: React.FC = () => {
           ''
         )}
 
-        <FontAwesomeIcon className="post_audio_icon" icon="fa-solid fa-music" />
-        <FontAwesomeIcon className="post_location_icon" icon="fa-solid fa-location-pin" />
-        <FontAwesomeIcon className="post_file_icon" icon="fa-solid fa-file-lines" />
+        <FontAwesomeIcon className="post_audio_icon" icon={faMusic} />
+        <FontAwesomeIcon className="post_location_icon" icon={faLocationPin} />
+        <FontAwesomeIcon className="post_file_icon" icon={faFileLines} />
       </div>
     </div>
   );
