@@ -13,6 +13,7 @@ import { Routes, Route } from 'react-router-dom';
 import './style.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
+
 import {
   faPager,
   faUserGroup,
