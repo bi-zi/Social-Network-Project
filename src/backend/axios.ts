@@ -6,7 +6,7 @@ const instance = axios.create({
   baseURL: port,
 });
 
-console.log(process.env.REACT_APP_YOURVARIABLE);
+console.log(process.env.BACKEND_PORT);
 
 instance.interceptors.request.use((config: any) => {
   config.headers.Authorization = window.localStorage.getItem('token');
