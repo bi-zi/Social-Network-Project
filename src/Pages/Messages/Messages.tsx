@@ -15,9 +15,10 @@ export const Messages: React.FC = () => {
   const [selectUser, setSelectUser] = React.useState(
     state.messages?.sortedId.length !== 0 ? state.messages.sortedId : undefined,
   );
-
   const [text, setText] = React.useState('');
   const [findChat, setFindChat] = React.useState<any>();
+
+  const [addMessages, setAddMessages] = React.useState<number>(20);
 
   const findFriends = state.messages.data.find((x) => x.user === state.auth?.data?._id);
 
@@ -59,13 +60,21 @@ export const Messages: React.FC = () => {
 
   if (selectUser !== undefined) localStorage.setItem('chatIndex', chatIndex + '');
 
-  const selectedMessage = state.messages.data.find((x) => x.user === state.auth?.data?._id)
-    ?.correspondence[localStorage.userIndex]?.messages;
+  const messagesLength = state.messages.data
+    .find((x) => x.user === state.auth?.data?._id)
+    ?.correspondence[localStorage.userIndex]?.messages.length
+
+  const selectedMessage = state.messages.data
+    .find((x) => x.user === state.auth?.data?._id)
+    ?.correspondence[localStorage.userIndex]?.messages?.slice()
+    ?.reverse()
+    .filter((x, i) => i < addMessages)
+    .reverse();
 
   const selectedUser = [sortedFriends[localStorage.chatIndex]];
 
   const scrollToBottom = () => {
-    divRef.current!.scrollTop = divRef.current!.scrollHeight;
+    if (divRef.current !== null) divRef.current!.scrollTop = divRef.current!.scrollHeight;
   };
 
   const onSubmit = async (values: string) => {
@@ -87,9 +96,11 @@ export const Messages: React.FC = () => {
     dispatch(fetchGetMessages());
   };
 
+  console.log(selectedMessage?.length, messagesLength);
+
   React.useEffect(() => {
     dispatch(fetchGetMessages());
-    setTimeout(scrollToBottom, 200);
+    setTimeout(scrollToBottom, 600);
   }, [dispatch]);
 
   if (localStorage.isAuth === undefined) {
@@ -110,7 +121,7 @@ export const Messages: React.FC = () => {
           <div className="messages_left_container">
             {sortedFriends.map((friend, i) => (
               <div
-                className="message_left"
+                className={`message_left ${selectUser === friend._id ? 'message_color' : ''}`}
                 key={friend._id}
                 onClick={() => {
                   setSelectUser(friend._id);
@@ -164,6 +175,13 @@ export const Messages: React.FC = () => {
               </div>
             ))}
             <div className="messages_all" ref={divRef}>
+              {messagesLength! > addMessages ? (
+                <div className="messages_add_20" onClick={() => setAddMessages(addMessages + 20)}>
+                  Add more messages
+                </div>
+              ) : (
+                ''
+              )}
               {selectedMessage?.length === 0 ? (
                 <div className="meessages_zero">Write the first message in the chat</div>
               ) : (
@@ -217,7 +235,7 @@ export const Messages: React.FC = () => {
                 type="submit"
                 className="messages_right_button"
                 onClick={() =>
-                  text?.length !== 0 ? (onSubmit(text), setTimeout(scrollToBottom, 200)) : ''
+                  text?.length !== 0 ? (onSubmit(text), setTimeout(scrollToBottom, 400)) : ''
                 }>
                 Submit
               </button>

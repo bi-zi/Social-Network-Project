@@ -60,6 +60,7 @@
   },
   "devDependencies": {
     "@types/react-slick": "^0.23.10",
+    "dotenv-webpack": "^8.0.1",
     "webpack-bundle-analyzer": "^4.5.0"
   }
 }
