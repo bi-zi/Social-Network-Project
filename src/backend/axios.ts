@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-const port: string = process.env.BACKEND_PORT || 'http://localhost:4444';
-
 const instance = axios.create({
-  baseURL: port,
+  baseURL: 'http://localhost:4444',
 });
 
-console.log(process.env.BACKEND_PORT);
+console.log(process.env.BACKEND, process.env.REACT_APP_YOURVARIABLE);
+
 
 instance.interceptors.request.use((config: any) => {
   config.headers.Authorization = window.localStorage.getItem('token');
