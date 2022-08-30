@@ -66,6 +66,7 @@ const initialState: UserSliceState = {
   userOne: [],
   inputNumber: '',
   catergory: '',
+  deleteAttention: 0,
   status: Status.LOADING,
 };
 
@@ -78,6 +79,9 @@ const userSlice = createSlice({
     },
     setCatergory: (state, action) => {
       state.catergory = action.payload;
+    },
+    setAttention: (state, action) => {
+      state.deleteAttention = action.payload;
     },
   },
 
@@ -156,5 +160,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setInputNumber, setCatergory } = userSlice.actions;
+export const { setInputNumber, setCatergory, setAttention } = userSlice.actions;
 export const userReducer = userSlice.reducer;

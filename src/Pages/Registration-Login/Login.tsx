@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchAuth, selectIsAuth } from '../../store/auth/slice';
 import { useForm } from 'react-hook-form';
-import { Navigate } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 import './style.css';
 
 type FormValues = {
@@ -20,10 +20,6 @@ export const Login = () => {
     handleSubmit,
     formState: { isValid },
   } = useForm<FormValues>({
-    defaultValues: {
-      email: '@gmail.com',
-      password: '12345',
-    },
     mode: 'onChange',
   });
 
@@ -45,25 +41,34 @@ export const Login = () => {
 
   return (
     <>
+      <div className="attention">
+        Do not provide personal email addresses and passwords. The data is encrypted but available to
+        everyone!
+      </div>
       <div className="registration">
         <form className="registr_form" onSubmit={handleSubmit(onSubmit)}>
           <label>
             <input
               className="lastName"
               type="email"
+              placeholder="Dick@gmail.com"
               {...register('email', { required: 'Укажите почту' })}
             />
             <input
               className="password"
               type="password"
+              placeholder="password"
               {...register('password', { required: 'Укажите пароль' })}
-
             />
           </label>
           <br />
-          <button type="submit" disabled={!isValid}>
+          <button type="submit" className="submit_registr" disabled={!isValid}>
             Submit
           </button>
+          <br />
+          <NavLink to="/Register" className="link_to">
+            Register an account
+          </NavLink>
         </form>
       </div>
     </>

@@ -2,11 +2,11 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchRegister, selectIsAuth } from '../../store/auth/slice';
 import { useForm } from 'react-hook-form';
-import { Navigate } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 import './style.css';
 
 type FormValues = {
-  fullName: string
+  fullName: string;
   email: string;
   password: string;
 };
@@ -20,11 +20,6 @@ export const Registration = () => {
     handleSubmit,
     formState: { isValid },
   } = useForm<FormValues>({
-    defaultValues: {
-      fullName: 'Алексей Романенко',
-      email: 'thebizi15@gmail.com',
-      password: '12345',
-    },
     mode: 'onChange',
   });
 
@@ -45,6 +40,10 @@ export const Registration = () => {
 
   return (
     <>
+      <div className="attention">
+        Do not provide personal email addresses and passwords. The data is encrypted but available to
+        everyone!
+      </div>
       <div className="registration">
         <form className="registr_form" onSubmit={handleSubmit(onSubmit)}>
           <label>
@@ -52,24 +51,31 @@ export const Registration = () => {
               {...register('fullName', { required: 'Укажите полное имя' })}
               className="firstName"
               type="text"
+              placeholder="Dick Dixon"
               pattern="^[a-zA-Z0-9 ]+$"
               title="Only latin characters can be used"
             />
             <input
               className="lastName"
               type="email"
+              placeholder="Dick@gmail.com"
               {...register('email', { required: 'Укажите почту' })}
             />
             <input
               className="password"
               type="password"
+              placeholder="password"
               {...register('password', { required: 'Укажите пароль' })}
             />
           </label>
           <br />
-          <button type="submit" disabled={!isValid}>
+          <button type="submit" className="submit_registr" disabled={!isValid}>
             Submit
           </button>
+          <br />
+          <NavLink to="/Login" className="link_to">
+            Sing in
+          </NavLink>
         </form>
       </div>
     </>

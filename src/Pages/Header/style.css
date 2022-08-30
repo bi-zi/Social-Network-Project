@@ -48,15 +48,19 @@
   text-decoration: none;
 }
 
+.news,
+.community,
+.image,
+.video,
+.music {
+  color: grey
+}
+
 .profile:hover,
-.news:hover,
 .bell_icon:hover,
+.bell:hover,
 .message:hover,
-.users:hover,
-.community:hover,
-.image:hover,
-.video:hover,
-.music:hover {
+.users:hover {
   color: #9e9b9b;
   cursor: pointer;
 }
@@ -137,6 +141,33 @@
   margin-top: 10px;
 }
 
+.loader {
+  position: absolute;
+
+  width: 50px;
+  height: 50px;
+
+  top: -5px;
+  right: 60px;
+
+  border-top: 12px solid rgb(0, 149, 255);
+  border-right: 12px solid rgb(4, 255, 4);
+  border-bottom: 12px solid red;
+  border-left: 12px solid rgb(255, 230, 0);
+  border-radius: 50%;
+
+  animation: spin .6s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .menu_burger {
   width: 40px;
   height: 40px;
@@ -144,8 +175,12 @@
   cursor: pointer;
 }
 
-.menu:active .menu_register_login {
+.menu:hover .menu_register_login {
   display: flex;
+}
+
+.menu:hover .loader {
+  right: 230px;
 }
 
 .menu_register_login:hover {

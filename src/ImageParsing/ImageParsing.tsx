@@ -25,31 +25,31 @@ export const ImageParsing: React.FC = () => {
       await dispatch(fetchUserUpdate({ imageUrl: [value][0], user: id }));
 
       dispatch(fetchOneUser(id));
-      dispatch(fetchSlider());
+      dispatch(fetchSlider(id));
       // console.log('ava', parsing.inputNumber);
     }
 
     if (slider === undefined && parsing.inputNumber === '0') {
       await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
-      dispatch(fetchSlider());
+      dispatch(fetchSlider(id));
       // console.log("avaSLider", parsing.inputNumber);
     }
 
     if ((sliderImgLength! < 1 || sliderImgLength! > 0) && parsing.inputNumber === '0') {
       await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
-      dispatch(fetchSlider());
+      dispatch(fetchSlider(id));
       // console.log('slider',parsing.inputNumber);
     }
 
     if (slider === undefined && parsing.inputNumber === '1') {
       await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
-      dispatch(fetchSlider());
+      dispatch(fetchSlider(id));
       // console.log(parsing.inputNumber);
     }
 
     if ((sliderImgLength! < 1 || sliderImgLength! > 0) && parsing.inputNumber === '1') {
       await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
-      dispatch(fetchSlider());
+      dispatch(fetchSlider(id));
       // console.log(parsing.inputNumber);
     }
 

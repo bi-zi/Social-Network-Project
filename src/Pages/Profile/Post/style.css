@@ -157,6 +157,13 @@
   color: #ffffff;
 }
 
+.post_audio_icon,
+.post_location_icon,
+.post_file_icon {
+  color: grey;
+    cursor: auto;
+}
+
 .post_image_input {
   position: absolute;
 

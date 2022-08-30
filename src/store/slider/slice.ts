@@ -2,23 +2,26 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Slider, SliderSliceState, Status } from './types';
 import axios from '../../backend/axios';
 
-export const fetchSlider = createAsyncThunk<Slider[]>('slider/fetchSlider', async () => {
-  const { data } = await axios.get<Slider[]>('/slider/all');
-  return data;
-});
+export const fetchSlider = createAsyncThunk<Slider[], string>(
+  'slider/user/fetchSlider',
+  async (id: string) => {
+    const { data } = await axios.get(`/slider/${id}`);
+    return data;
+  },
+);
 
 export const fetchSliderPost = createAsyncThunk<Slider[], { sliderImg: string[] }>(
   'slider/id/fetchSliderPost',
-  async ( {sliderImg}:{ sliderImg: string[] }) => {
+  async ({ sliderImg }: { sliderImg: string[] }) => {
     const { data } = await axios.post(`/slider`, { sliderImg });
 
     return data;
   },
 );
 
-export const fetchSliderPush = createAsyncThunk<Slider[], { sliderImg: string[], id?: string}>(
+export const fetchSliderPush = createAsyncThunk<Slider[], { sliderImg: string[]; id?: string }>(
   'slider/push/id/fetchSliderPush',
-  async({sliderImg, id}:{ sliderImg: string[], id?: string}) => {
+  async ({ sliderImg, id }: { sliderImg: string[]; id?: string }) => {
     const { data } = await axios.patch(`/slider/push/${id}`, { sliderImg });
 
     return data;

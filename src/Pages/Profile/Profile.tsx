@@ -16,7 +16,8 @@ import { Navigate } from 'react-router-dom';
 export const Profile: React.FC = () => {
   const { id } = useParams();
   const data = useAppSelector((state) => state.auth.data);
-
+  const state = useAppSelector((state) => state);
+  
   // console.log(
   //   [
   //     `-----USER----- ${state.user.status}`,
@@ -26,12 +27,14 @@ export const Profile: React.FC = () => {
   //   ],
   // );
 
+
+
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
   }
 
   return (
-    <div className="container">
+    <div className="container" >
       <UserInfo />
       <PhotoSlider />
       {data?._id === id ? <Post /> : ''}

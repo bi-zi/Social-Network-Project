@@ -1,5 +1,5 @@
 .registration {
-  margin: 200px auto 0 auto;
+  margin: 20px auto 0 auto;
 
   width: 300px;
   height: 300px;
@@ -33,11 +33,25 @@
   color: black;
 }
 
-.submit {
-  height: 25px;
+.submit_registr {
+  width: 220px;
+  height: 30px;
 
-  border: 1px solid rgb(0, 0, 0);
-  background-color: rgb(46, 224, 46);
+  font-size: 18px;
+  font-family: 'Iceberg';
+
+  border-radius: 5px;
+
+  color: black;
+  background-color: white;
+  cursor: pointer;
+}
+
+.submit_registr:hover {
+  color: white;
+
+  border: 1px solid white;
+  background-color: black;
 }
 
 .already_register {
@@ -45,6 +59,29 @@
 
   text-align: center;
   font-size: 30px;
-  
+
   color: white;
+}
+
+.link_to {
+  position: relative;
+
+  top: 30px;
+  left: -5px;
+
+  font-size: 20px;
+  color: white;
+}
+.attention {
+  margin: 200px auto 0 auto;
+  width: 500px;
+
+  top: 200px;
+  left: 300px;
+
+  font-size: 20px;
+  font-family: 'Iceberg';
+
+  text-align: center;
+  color: rgb(255, 0, 0);
 }

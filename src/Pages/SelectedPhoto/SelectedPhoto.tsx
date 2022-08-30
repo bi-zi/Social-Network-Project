@@ -47,7 +47,7 @@ export const Photo: React.FC = () => {
 
     if (category === 'PhotoSlider') {
       await dispatch(fetchSliderDelete({ deleteId: +id, user }));
-      dispatch(fetchSlider());
+      dispatch(fetchSlider(user));
     }
 
     if (category === 'CreatePost') {

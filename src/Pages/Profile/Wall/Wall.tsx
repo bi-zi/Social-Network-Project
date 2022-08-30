@@ -110,6 +110,9 @@ export const Wall: React.FC = () => {
     dispatch(fetchUserPostsAll(id));
   };
 
+  const postStatus = state.post.userPosts.status === 'loading';
+
+
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));
   }, [dispatch, id]);
@@ -123,7 +126,7 @@ export const Wall: React.FC = () => {
           <div className="wall_fullName">{user?.fullName}</div>
           <div className="wall_date">{content.date}</div>
 
-          {state.auth.data?._id === id ? (
+          {state.auth.data?._id === id && !postStatus ? (
             <>
               <FontAwesomeIcon className="wall_menu" icon={faEllipsis} />
               <div className="wall_menu_hover" onClick={() => deletePost(content._id)}>
@@ -191,11 +194,13 @@ export const Wall: React.FC = () => {
                   ? { color: 'red' }
                   : { color: 'white' }
               }
-              onClick={() =>
-                content.likePost?.find((x) => x === state.auth?.data?._id)
-                  ? like(content._id, false)
-                  : like(content._id, true)
-              }
+              onClick={() => {
+                if (!postStatus) {
+                  content.likePost?.find((x) => x === state.auth?.data?._id)
+                    ? like(content._id, false)
+                    : like(content._id, true);
+                }
+              }}
             />
             <span className="like_number">{content.likePost?.length}</span>
 
@@ -207,11 +212,13 @@ export const Wall: React.FC = () => {
                   ? { color: 'red' }
                   : { color: 'white' }
               }
-              onClick={() =>
-                content.dislikePost?.find((x) => x === state.auth?.data?._id)
-                  ? dislike(content._id, false)
-                  : dislike(content._id, true)
-              }
+              onClick={() => {
+                if (!postStatus) {
+                  content.dislikePost?.find((x) => x === state.auth?.data?._id)
+                    ? dislike(content._id, false)
+                    : dislike(content._id, true);
+                }
+              }}
             />
 
             <span className="dislike_number">{content.dislikePost?.length}</span>
@@ -220,13 +227,15 @@ export const Wall: React.FC = () => {
               className="wall_comment_icon"
               icon={faCommentDots}
               style={comment === index ? { color: 'black' } : { color: 'white' }}
-              onClick={() =>
-                comment !== index
-                  ? setComment(index)
-                  : comment === index
-                  ? setComment(999999)
-                  : setComment(index)
-              }
+              onClick={() => {
+                if (!postStatus) {
+                  comment !== index
+                    ? setComment(index)
+                    : comment === index
+                    ? setComment(999999)
+                    : setComment(index);
+                }
+              }}
             />
             <span className="dislike_number">{content.commentPost.length}</span>
 
@@ -241,7 +250,7 @@ export const Wall: React.FC = () => {
                   onChange={(e) => dispatch(setCreateComment(e.target.value))}
                 />
 
-                {state.post.userPosts.status === 'loaded' && state.post.createComment.length > 0 ? (
+                {!postStatus && state.post.createComment.length > 0 ? (
                   <button className="input_button" onClick={() => addComment(content._id)}>
                     <FontAwesomeIcon className="post_make_icon" icon={faPlay} />
                   </button>
@@ -263,7 +272,7 @@ export const Wall: React.FC = () => {
                       <FontAwesomeIcon
                         className="comment_delete"
                         icon={faXmark}
-                        onClick={() => deleteComment(content?._id, index)}
+                        onClick={() => (!postStatus ? deleteComment(content?._id, index) : '')}
                       />
                     ) : (
                       ''

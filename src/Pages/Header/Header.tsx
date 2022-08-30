@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { logout } from '../../store/auth/slice';
-import { fetchOneUser, setCatergory } from '../../store/user/slice';
+import { fetchOneUser, setCatergory, setAttention } from '../../store/user/slice';
 import { fetchNotifications, fetchNotificationsDelete } from '../../store/notifications/slice';
 import { useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
@@ -46,6 +46,20 @@ export const Header: React.FC = () => {
 
   const path = window.location.pathname.split('/')[1];
 
+  const loading =
+    state.user.status === 'loading' ||
+    state.slider.status === 'loading' ||
+    state.post.userPosts.status === 'loading' ||
+    state.note.status === 'loading' ||
+    state.messages.status === 'loading' ||
+    state.auth.status === 'loading' ||
+    state.about.status === 'loading';
+
+  // state.user.status
+  // state.slider.status
+  // state.post.userPosts.status
+  // state.note.status
+
   return (
     <div className="header">
       <div className="container">
@@ -53,7 +67,10 @@ export const Header: React.FC = () => {
           style={{ textDecoration: 0, color: 'white' }}
           to={`/Profile/${state.auth?.data?._id}`}
           className="wave"
-          onClick={() => dispatch(fetchOneUser(state.auth?.data._id))}>
+          onClick={() => {
+            dispatch(fetchOneUser(state.auth?.data._id));
+            dispatch(setAttention(1));
+          }}>
           Wave
         </NavLink>
 
@@ -102,12 +119,15 @@ export const Header: React.FC = () => {
                 )}
               </div>
             </div>
+
             <FontAwesomeIcon className="news" icon={faPager} />
+
             <NavLink
               to="/Messages"
               style={path !== 'Messages' ? { color: 'white' } : { color: 'black' }}>
               <FontAwesomeIcon className="message" icon={faComment} />
             </NavLink>
+
             <NavLink
               to={`/Friends/${state.auth?.data?._id}`}
               style={
@@ -121,6 +141,7 @@ export const Header: React.FC = () => {
               onClick={() => dispatch(fetchOneUser(state.auth?.data?._id))}>
               <FontAwesomeIcon className="users" icon={faUserGroup} />
             </NavLink>
+            
             <FontAwesomeIcon className="community" icon={faUsers} />
             <FontAwesomeIcon className="image" icon={faImage} />
             <FontAwesomeIcon className="video" icon={faFilm} />
@@ -129,21 +150,28 @@ export const Header: React.FC = () => {
         ) : (
           ''
         )}
+
         <div className="menu">
+          {loading ? <div className="loader"></div> : ''}
           <FontAwesomeIcon className="menu_burger" icon={faAlignJustify} />
           <div className="menu_register_login">
             <NavLink
               to="/Login"
               className="menu_login"
-              onClick={() => (localStorage.isAuth === 'true' ? onClickLogout() : '')}>
+              onClick={() =>
+                localStorage.isAuth === 'true' ? onClickLogout() : dispatch(setAttention(1))
+              }>
               Login
             </NavLink>
             <NavLink
               to="/Register"
               className="menu_register"
-              onClick={() => (localStorage.isAuth === 'true' ? onClickLogout() : '')}>
+              onClick={() =>
+                localStorage.isAuth === 'true' ? onClickLogout() : dispatch(setAttention(1))
+              }>
               Register
             </NavLink>
+
           </div>
         </div>
       </div>

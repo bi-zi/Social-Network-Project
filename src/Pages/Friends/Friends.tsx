@@ -147,7 +147,7 @@ export const Friends: React.FC = () => {
               className="friend"
               key={i}
               style={x === arr[arr.length - 1] ? { borderBottom: 'none' } : { borderBottom: `` }}>
-              <Link to={`/Profile/${x._id}`}>
+              <Link to={`/Profile/${x._id}`} onClick={() =>  window.scrollTo(0, 0)}>
                 <img src={x.imageUrl} alt="" className="friend_avatar" />
               </Link>
               <Link to={`/Profile/${x._id}`} className="friend_name" style={{ textDecoration: 'none' }}>

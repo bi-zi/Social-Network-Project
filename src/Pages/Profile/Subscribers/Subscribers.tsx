@@ -43,7 +43,7 @@ export const Subscribers: React.FC = () => {
           <div key={i}>
             {!key ? (
               <Link to={`/Profile/${x._id}`} key={i} style={{ textDecoration: 'none' }}>
-                <div className="profile_friend" onClick={() => fetchData(x._id)}>
+                <div className="profile_friend" onClick={() => { fetchData(x._id);  window.scrollTo(0, 0);}}>
                   <img src={x.imageUrl} alt="" className="profile_friend_avatar" />
                   <div className="profile_friend_name">{x.fullName?.split(' ')[0]}</div>
                 </div>
@@ -60,5 +60,3 @@ export const Subscribers: React.FC = () => {
     </div>
   );
 };
-
-

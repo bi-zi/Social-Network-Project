@@ -25,7 +25,7 @@ export const UserInfo: React.FC = () => {
   const { id } = useParams<keyof MyParams>() as MyParams;
 
   const [closeInfo, setCloseInfo] = React.useState(0);
-  
+
   const about = Array.isArray(state.about?.data)
     ? state.about.data?.find((x) => x.user === id)
     : ({} as About);
@@ -40,6 +40,9 @@ export const UserInfo: React.FC = () => {
 
     dispatch(fetchAbout());
   };
+
+  const aboutStatus = state.about.status === 'loading';
+  console.log(aboutStatus);
 
   const {
     register,
@@ -196,9 +199,13 @@ export const UserInfo: React.FC = () => {
                 </span>
               )}
               <br />
-              <button className="about_buttton" type="submit">
-                Submit
-              </button>
+              {!aboutStatus ? (
+                <button className="about_buttton" type="submit">
+                  Submit
+                </button>
+              ) : (
+                <button className="about_buttton">Submit</button>
+              )}
             </form>
           )}
         </div>

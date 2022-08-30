@@ -10,10 +10,14 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './style.css';
 
+export type MyParams = {
+  id: string;
+};
+
 export const PhotoSlider: React.FC = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
-  const { id } = useParams();
+  const { id } = useParams<keyof MyParams>() as MyParams;
 
   const readyPhotos = state.slider?.slider?.find((x) => x.user === id)?.sliderImg;
 
@@ -24,10 +28,10 @@ export const PhotoSlider: React.FC = () => {
     slidesToShow: 3,
     swipeToSlide: true,
   };
-
+  
   React.useEffect(() => {
-    dispatch(fetchSlider());
-  }, [dispatch]);
+    dispatch(fetchSlider(id));
+  }, []);
 
   return (
     <div className="images">

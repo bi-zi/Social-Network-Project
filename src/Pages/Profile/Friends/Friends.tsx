@@ -1,26 +1,29 @@
 import React from 'react';
-import { useAppDispatch,useAppSelector } from '../../../store/store';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { fetchOneUser, setCatergory } from '../../../store/user/slice';
 import { fetchUserPostsAll } from '../../../store/post/slice';
+import { fetchSlider } from '../../../store/slider/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './style.css';
 
+export type MyParams = {
+  id: string;
+};
+
 export const Friends: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { id } = useParams();
+  const { id } = useParams<keyof MyParams>() as MyParams;
   const state = useAppSelector((state) => state);
   const [key, setKey] = React.useState(false);
 
   const profileFriend = state.user?.userOne?.[0];
-  let arr = state.user?.usersAll
-    .filter((x, i) => profileFriend?.friends.includes(x._id))
-    .splice(0, 8);
-
+  let arr = state.user?.usersAll.filter((x, i) => profileFriend?.friends.includes(x._id)).splice(0, 8);
 
   const fetchData = (userId: string) => {
     dispatch(fetchOneUser(userId));
     dispatch(fetchUserPostsAll(userId));
+    dispatch(fetchSlider(userId));
   };
 
   document.onkeydown = function (e) {
@@ -42,7 +45,12 @@ export const Friends: React.FC = () => {
           <div key={i}>
             {!key ? (
               <Link to={`/Profile/${x._id}`} key={i} style={{ textDecoration: 'none' }}>
-                <div className="profile_friend" onClick={() => fetchData(x._id)}>
+                <div
+                  className="profile_friend"
+                  onClick={() => {
+                    fetchData(x._id);
+                    window.scrollTo(0, 0);
+                  }}>
                   <img src={x.imageUrl} alt="" className="profile_friend_avatar" />
                   <div className="profile_friend_name">{x.fullName?.split(' ')[0]}</div>
                 </div>
@@ -58,4 +66,4 @@ export const Friends: React.FC = () => {
       </div>
     </div>
   );
-}
+};

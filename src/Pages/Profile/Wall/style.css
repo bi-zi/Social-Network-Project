@@ -195,6 +195,11 @@
   cursor: pointer;
 }
 
+.wall_share_icon {
+  color: grey;
+  cursor: auto;
+}
+
 .like_number,
 .dislike_number {
   position: relative;
