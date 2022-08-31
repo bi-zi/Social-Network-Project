@@ -120,15 +120,15 @@ export const Avatar: React.FC = () => {
 
   const createMessages = async () => {
     if (you) {
-      console.log(1);
+      // console.log(1);
       await dispatch(fetchCreateMessages({ withWho: id, user: state.auth?.data?._id }));
     }
     if (him) {
-      console.log(2);
+      // console.log(2);
       await dispatch(fetchCreateMessages({ withWho: state.auth?.data?._id, user: id }));
     }
     if (checkChat) {
-      console.log(3);
+      // console.log(3);
       await dispatch(fetchPushChat({ withWho: id, user: state.auth?.data?._id }));
     }
 

@@ -1,10 +1,10 @@
 .music_profile {
   position: relative;
 
+  margin-bottom: 20px;
+
   width: 380px;
   height: 215px;
-
-  top: 665px;
 
   font-family: 'Iceberg';
   font-style: normal;

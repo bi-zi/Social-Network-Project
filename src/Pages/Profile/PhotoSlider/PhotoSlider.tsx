@@ -19,7 +19,7 @@ export const PhotoSlider: React.FC = () => {
   const state = useAppSelector((state) => state);
   const { id } = useParams<keyof MyParams>() as MyParams;
 
-  const readyPhotos = state.slider?.slider?.find((x) => x.user === id)?.sliderImg;
+  const readyPhotos = state.slider?.slider?.find((x) => x?.user === id)?.sliderImg;
 
   const settings = {
     className: 'center',
@@ -28,7 +28,7 @@ export const PhotoSlider: React.FC = () => {
     slidesToShow: 3,
     swipeToSlide: true,
   };
-  
+
   React.useEffect(() => {
     dispatch(fetchSlider(id));
   }, []);

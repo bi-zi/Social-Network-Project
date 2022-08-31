@@ -154,7 +154,6 @@ export const Friends: React.FC = () => {
                 {x.fullName}
               </Link>
 
-              <span className="friend_message">Send message</span>
 
               {catergory === 'friends' ? (
                 <div className="friend_menu">

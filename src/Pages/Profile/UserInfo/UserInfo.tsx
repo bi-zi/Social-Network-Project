@@ -42,7 +42,6 @@ export const UserInfo: React.FC = () => {
   };
 
   const aboutStatus = state.about.status === 'loading';
-  console.log(aboutStatus);
 
   const {
     register,

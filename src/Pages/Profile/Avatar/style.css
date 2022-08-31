@@ -53,6 +53,7 @@
 .avatar_change {
   position: relative;
 
+  width: 200px;
   top: 13px;
   left: 90px;
 

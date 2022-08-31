@@ -60,9 +60,8 @@ export const Messages: React.FC = () => {
 
   if (selectUser !== undefined) localStorage.setItem('chatIndex', chatIndex + '');
 
-  const messagesLength = state.messages.data
-    .find((x) => x.user === state.auth?.data?._id)
-    ?.correspondence[localStorage.userIndex]?.messages.length
+  const messagesLength = state.messages.data.find((x) => x.user === state.auth?.data?._id)
+    ?.correspondence[localStorage.userIndex]?.messages.length;
 
   const selectedMessage = state.messages.data
     .find((x) => x.user === state.auth?.data?._id)
@@ -96,8 +95,6 @@ export const Messages: React.FC = () => {
     dispatch(fetchGetMessages());
   };
 
-  console.log(selectedMessage?.length, messagesLength);
-
   React.useEffect(() => {
     dispatch(fetchGetMessages());
     setTimeout(scrollToBottom, 600);
@@ -106,6 +103,7 @@ export const Messages: React.FC = () => {
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
   }
+
 
   return (
     <div className="messages_container">
@@ -118,47 +116,53 @@ export const Messages: React.FC = () => {
             onChange={(e) => setFindChat(e.target.value)}
             className="messages_find_friend"
           />
-          <div className="messages_left_container">
-            {sortedFriends.map((friend, i) => (
-              <div
-                className={`message_left ${selectUser === friend._id ? 'message_color' : ''}`}
-                key={friend._id}
-                onClick={() => {
-                  setSelectUser(friend._id);
+          {sortedFriends.length !== 0 ? (
+            <div className="messages_left_container">
+              {sortedFriends.map((friend, i) => (
+                <div
+                  className={`message_left ${selectUser === friend._id ? 'message_color' : ''}`}
+                  key={friend._id}
+                  onClick={() => {
+                    setSelectUser(friend._id);
 
-                  setTimeout(scrollToBottom, 0);
-                }}>
-                <img src={friend.imageUrl} alt="" className="message_left_avatar" />
-                <div className="message_left_fullName">{friend.fullName}</div>
+                    setTimeout(scrollToBottom, 0);
+                  }}>
+                  <img src={friend.imageUrl} alt="" className="message_left_avatar" />
+                  <div className="message_left_fullName">{friend.fullName}</div>
 
-                {lastMessage![i] !== undefined ? (
-                  <div className="message_left_time">{`${new Date(
-                    lastMessage![i]?.date,
-                  ).toLocaleTimeString()} - ${new Date(
-                    lastMessage![i]?.date,
-                  ).toLocaleDateString()}`}</div>
-                ) : (
-                  ''
-                )}
+                  {lastMessage![i] !== undefined ? (
+                    <div className="message_left_time">{`${new Date(
+                      lastMessage![i]?.date,
+                    ).toLocaleTimeString()} - ${new Date(
+                      lastMessage![i]?.date,
+                    ).toLocaleDateString()}`}</div>
+                  ) : (
+                    ''
+                  )}
 
-                {lastMessage![i] !== undefined ? (
-                  <div className="message_name_box">
-                    <div className="message_name">
-                      {lastMessage![i]?.userId === friend._id
-                        ? friend.fullName.split(' ')[0] + ':'
-                        : 'You:'}
+                  {lastMessage![i] !== undefined ? (
+                    <div className="message_name_box">
+                      <div className="message_name">
+                        {lastMessage![i]?.userId === friend._id
+                          ? friend.fullName.split(' ')[0] + ':'
+                          : 'You:'}
+                      </div>
+                      <div className="messages_left_last">
+                        {lastMessage![i]?.message?.slice(0, 40)}
+                        {lastMessage![i]?.message?.length > 40 ? '...' : ''}
+                      </div>
                     </div>
-                    <div className="messages_left_last">
-                      {lastMessage![i]?.message?.slice(0, 40)}
-                      {lastMessage![i]?.message?.length > 40 ? '...' : ''}
-                    </div>
-                  </div>
-                ) : (
-                  ''
-                )}
-              </div>
-            ))}
-          </div>
+                  ) : (
+                    ''
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <NavLink to={`/Friends/${state.auth?.data?._id}`} className="message_left_linkToFriends">
+              Find friends to chat
+            </NavLink>
+          )}
         </div>
       </div>
       <div className="messages_from_friend">

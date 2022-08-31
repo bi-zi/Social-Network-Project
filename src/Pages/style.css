@@ -1,7 +1,16 @@
+.wrapper {
+  position: relative;
+  min-height: 936px;
+}
+.firstPage_container {
+  height: 836px;
+}
+
 .firstPage_info {
   margin: 40px auto;
   padding: 10px;
   width: 1400px;
+
 
   font-size: 26px;
   font-family: 'Iceberg';

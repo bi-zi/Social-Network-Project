@@ -1,10 +1,10 @@
 .videos {
   position: relative;
 
+  margin-bottom: 20px;
+
   width: 380px;
   height: 397px;
-
-  top:640px;
 
   font-family: 'Iceberg';
   font-style: normal;

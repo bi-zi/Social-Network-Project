@@ -1,10 +1,11 @@
 .groups {
   position: relative;
 
+  margin-bottom: 20px;
+
   width: 380px;
   height: 397px;
 
-  top: 615px;
 
   font-family: 'Iceberg';
   font-style: normal;

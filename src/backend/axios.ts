@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const port = 'https://backend-for-wave.onrender.com/' || 'http://localhost:4444';
+const port = 'http://localhost:4444' || 'https://backend-for-wave.onrender.com/';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:4444',
+  baseURL: port,
 });
 
 instance.interceptors.request.use((config: any) => {

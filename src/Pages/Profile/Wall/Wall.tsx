@@ -32,7 +32,7 @@ export const Wall: React.FC = () => {
 
   const user = state.user?.userOne?.[0];
 
-  let wallPost = wall.post.find((x) => x.user === id)?.post;
+  let wallPost = wall.post.find((x) => x?.user === id)?.post;
   let buffer: any = [];
 
   if (wallPost !== undefined) {
@@ -65,7 +65,7 @@ export const Wall: React.FC = () => {
       await dispatch(
         fetchPostDislike({ _id: postId, likeDislike: state.auth?.data?._id, index: 1, user: id }),
       );
-    console.log(check);
+    // console.log(check);
     if (!check)
       await dispatch(
         fetchPostDislike({
@@ -118,7 +118,7 @@ export const Wall: React.FC = () => {
   }, [dispatch, id]);
 
   return (
-    <>
+    <div className='wall_containter'>
       {wallPost?.map((content, index) => (
         <div className={`wall ${index}`} key={index}>
           <img src={user?.imageUrl} alt="" className="wall_avatar" />
@@ -289,6 +289,6 @@ export const Wall: React.FC = () => {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 };

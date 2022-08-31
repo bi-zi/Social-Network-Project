@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../store/store';
 import { logout } from '../../store/auth/slice';
 import { fetchOneUser, setCatergory, setAttention } from '../../store/user/slice';
 import { fetchNotifications, fetchNotificationsDelete } from '../../store/notifications/slice';
+import { setCreatText, setCreateVid } from '../../store/post/slice';
 import { useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -36,6 +37,10 @@ export const Header: React.FC = () => {
       dispatch(logout());
       localStorage.removeItem('isAuth');
       window.localStorage.removeItem('token');
+      localStorage.removeItem('postText');
+      localStorage.removeItem('postVideo');
+      dispatch(setCreatText(''));
+      dispatch(setCreateVid(''));
     }
   };
 
@@ -141,7 +146,7 @@ export const Header: React.FC = () => {
               onClick={() => dispatch(fetchOneUser(state.auth?.data?._id))}>
               <FontAwesomeIcon className="users" icon={faUserGroup} />
             </NavLink>
-            
+
             <FontAwesomeIcon className="community" icon={faUsers} />
             <FontAwesomeIcon className="image" icon={faImage} />
             <FontAwesomeIcon className="video" icon={faFilm} />
@@ -171,7 +176,6 @@ export const Header: React.FC = () => {
               }>
               Register
             </NavLink>
-
           </div>
         </div>
       </div>

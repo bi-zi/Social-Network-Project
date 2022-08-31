@@ -33,7 +33,7 @@ export const Post: React.FC = () => {
   localStorage.setItem('postImages', JSON.stringify(state.post.createImg));
   localStorage.setItem('postText', state.post.createText);
 
-  const post = state.post.userPosts.post.find((x) => x.user === id);
+  const post = state.post.userPosts.post.find((x) => x?.user === id);
   const user = state.user?.userOne?.[0];
   const readyPhotos = state.post.createImg;
   const textLength = state.post?.createText?.length;
@@ -57,7 +57,7 @@ export const Post: React.FC = () => {
       await dispatch(
         fetchCreatePost({ text: postText, videoPost: local, imagesPost: state.post.createImg }),
       );
-      console.log(1);
+      // console.log(1);
     }
 
     if (
@@ -67,7 +67,7 @@ export const Post: React.FC = () => {
       await dispatch(
         fetchPostPush({ text: postText, videoPost: local, imagesPost: state.post.createImg, user: id }),
       );
-      console.log(2);
+      // console.log(2);
     }
 
     if (textLength > 0 || numImg > 0 || local.length > 0) {

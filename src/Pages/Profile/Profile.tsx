@@ -17,7 +17,7 @@ export const Profile: React.FC = () => {
   const { id } = useParams();
   const data = useAppSelector((state) => state.auth.data);
   const state = useAppSelector((state) => state);
-  
+
   // console.log(
   //   [
   //     `-----USER----- ${state.user.status}`,
@@ -27,26 +27,29 @@ export const Profile: React.FC = () => {
   //   ],
   // );
 
-
+  const postLength = state.post.userPosts.post?.[0]?.post?.length;
 
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
   }
 
   return (
-    <div className="container" >
+    <div
+      className="profile_container"
+      style={postLength === 0 ? { paddingBottom: 0 } : { paddingBottom: 0 }}>
       <UserInfo />
       <PhotoSlider />
       {data?._id === id ? <Post /> : ''}
       <Wall />
       <div className="left_container">
         <Avatar />
-        <Friends />
-        <Subscribers />
-
-        <Groups />
-        <Videos />
-        <Music />
+        <div className="left_mini_container">
+          <Friends />
+          <Subscribers />
+          <Groups />
+          <Videos />
+          <Music />
+        </div>
       </div>
     </div>
   );

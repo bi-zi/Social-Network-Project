@@ -16,7 +16,7 @@ export const ImageParsing: React.FC = () => {
   const state = useAppSelector((state) => state);
   const { id } = useParams<keyof MyParams>() as MyParams;
 
-  const slider = state.slider?.slider?.find((x) => x.user === id);
+  const slider = state.slider?.slider?.find((x) => x?.user === id);
   const [images, setImages] = React.useState<any>([]);
   const sliderImgLength = slider?.sliderImg.length;
 
@@ -62,7 +62,7 @@ export const ImageParsing: React.FC = () => {
   const handleCompressedUpload = (e: any) => {
     const image = e.target.files[0];
 
-    console.log((image['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
+    // console.log((image['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
 
     new Compressor(image, {
       quality: 0.4,
@@ -76,7 +76,7 @@ export const ImageParsing: React.FC = () => {
     if (images.length < 1) return;
 
     let file = images;
-    console.log((images['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
+    // console.log((images['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
 
     let fileReader: FileReader = new FileReader();
 

@@ -64,42 +64,44 @@ export const Photo: React.FC = () => {
   }
 
   return (
-    <div className="photo_viewing">
-      <Link to={`/Profile/${user}`} style={{ color: '#000000' }} className="cloce">
-        <FontAwesomeIcon className="close" icon={faXmark} />
-      </Link>
+    <div className='photo_container'>
+      <div className="photo_viewing">
+        <Link to={`/Profile/${user}`} style={{ color: '#000000' }} className="cloce">
+          <FontAwesomeIcon className="close" icon={faXmark} />
+        </Link>
 
-      <img src={readyPhotos?.[+id]} alt="" className="photo" />
+        <img src={readyPhotos?.[+id]} alt="" className="photo" />
 
-      {readyPhotos?.length !== 1 ? (
-        <>
-          <Link
-            to={`/${user}/${category}/${+id === 0 ? readyPhotos!?.length - 1 : +id - 1}`}
-            className="slider_link">
-            <FontAwesomeIcon className="swapPhoto_left" icon={faCircleChevronLeft} />
-          </Link>
+        {readyPhotos?.length !== 1 ? (
+          <>
+            <Link
+              to={`/${user}/${category}/${+id === 0 ? readyPhotos!?.length - 1 : +id - 1}`}
+              className="slider_link">
+              <FontAwesomeIcon className="swapPhoto_left" icon={faCircleChevronLeft} />
+            </Link>
 
-          <Link
-            to={`/${user}/${category}/${readyPhotos!?.length - 1 === +id ? 0 : +id + 1}`}
-            className="slider_link">
-            <FontAwesomeIcon className="swapPhoto_right" icon={faCircleChevronRight} />
-          </Link>
-        </>
-      ) : (
-        ''
-      )}
-      <div className="picture_control_panel">
-        {state.auth.data?._id === user && state.user.status === 'loaded' ? (
-          <Link
-            className="delete_photo"
-            to={`/Profile/${user}`}
-            style={{ color: '#ffffff', textDecoration: 'none' }}
-            onClick={() => onPhotoDelete()}>
-            Delete image
-          </Link>
+            <Link
+              to={`/${user}/${category}/${readyPhotos!?.length - 1 === +id ? 0 : +id + 1}`}
+              className="slider_link">
+              <FontAwesomeIcon className="swapPhoto_right" icon={faCircleChevronRight} />
+            </Link>
+          </>
         ) : (
           ''
         )}
+        <div className="picture_control_panel">
+          {state.auth.data?._id === user && state.user.status === 'loaded' ? (
+            <Link
+              className="delete_photo"
+              to={`/Profile/${user}`}
+              style={{ color: '#ffffff', textDecoration: 'none' }}
+              onClick={() => onPhotoDelete()}>
+              Delete image
+            </Link>
+          ) : (
+            ''
+          )}
+        </div>
       </div>
     </div>
   );

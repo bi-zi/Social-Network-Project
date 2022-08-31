@@ -2,6 +2,7 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { fetchOneUser, setCatergory } from '../../../store/user/slice';
 import { fetchUserPostsAll } from '../../../store/post/slice';
+import { fetchSlider } from '../../../store/slider/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './style.css';
@@ -20,6 +21,7 @@ export const Subscribers: React.FC = () => {
   const fetchData = (id: string) => {
     dispatch(fetchOneUser(id));
     dispatch(fetchUserPostsAll(id));
+    dispatch(fetchSlider(id));
   };
 
   document.onkeydown = function (e) {

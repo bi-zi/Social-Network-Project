@@ -1,9 +1,9 @@
 .profile_subscribers {
   position: relative;
 
-  width: 380px;
+  margin-bottom: 20px;
 
-  top: 592px;
+  width: 380px;
 
   font-family: 'Iceberg';
   font-style: normal;
@@ -11,6 +11,6 @@
 
   background-color: #393939;
   border-radius: 15px;
-  
+
   user-select: none;
 }

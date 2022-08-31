@@ -1,10 +1,11 @@
 .profile_friends {
   position: relative;
+  
+  margin-bottom: 20px;
 
   width: 380px;
   height: 100%;
 
-  top: 570px;
 
   font-family: 'Iceberg';
   font-style: normal;

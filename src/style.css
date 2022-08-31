@@ -5,7 +5,6 @@ body {
 
   height: 100%;
   width: 100%;
-
   min-height: calc(100vh - 70px);
 
   background-color: rgb(27, 27, 27);
@@ -20,11 +19,9 @@ body {
 ::-webkit-scrollbar {
   width: 10px;
   height: 0px;
-
 }
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
-
 }
 ::-webkit-scrollbar-thumb {
   background: rgb(0, 0, 0);
@@ -33,7 +30,9 @@ body {
   background: #555;
 }
 
-input {outline: 0 !important;}
+input {
+  outline: 0 !important;
+}
 
 h1,
 h2,
@@ -57,8 +56,24 @@ h6 {
   flex-wrap: wrap;
 }
 
+.profile_container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 150px !important;
+  max-width: 1400px;
+  min-height: 1750px;
+}
+
 .left_container {
   position: absolute;
-  height: auto;
-  top: 0px;
+  width: 381px;
+  height: 90%;
+
+  top: 0;
+}
+
+.left_mini_container {
+  position: sticky;
+  margin-top: 570px;
+  top: -245px !important;
 }
