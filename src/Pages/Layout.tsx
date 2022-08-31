@@ -19,7 +19,7 @@ export const Layout: React.FC = () => {
             <p>
               In most cases, after interacting with the site, a spinning ring appears in the upper right
               next to the menu. The server is free, so data is sent or received for a long time.
-              Downloading data is indicated by a ring when it rotates, all data sending actions are
+              Downloading data is indicated by a ring, when it rotates all data sending actions are
               blocked to avoid data writing errors. If the ring didn't appear and the post-submit action
               didn't work, the send control was blocked, most likely the server died :)
               <br />
@@ -31,7 +31,7 @@ export const Layout: React.FC = () => {
             <p>
               В большинстве случаев после взаимодействия с сайтом вверху справа рядом с меню появляется
               вращающееся кольцо. Сервер бесплатный, поэтому данные отправляются или принимаются долго.
-              Загрузка данных обозначается кольцом при его вращении, все действия по отправке данных
+              Загрузка данных обозначается кольцом, при его вращении все действия по отправке данных
               заблокированы во избежание ошибок записи данных. Если кольцо не появилось и действие
               post-submit не сработало, управление отправкой было заблокировано, скорее всего сервер умер
               :)
