@@ -162,11 +162,12 @@ export const Friends: React.FC = () => {
                       Delete friend
                     </div>
                   </div>
-                  <FontAwesomeIcon className="friend_menu_icon" icon={faEllipsis} />
+                  <FontAwesomeIcon className="friend_menu_icon"   icon={faEllipsis} />
                 </div>
               ) : (
                 ''
               )}
+
               <span className="number_friends">Friends {x.friends?.length}</span>
               <span className="number_subscribers">Subscribers {x.subscribers?.length}</span>
             </div>

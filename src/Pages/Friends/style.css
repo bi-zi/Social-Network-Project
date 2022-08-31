@@ -72,10 +72,11 @@
 }
 
 .friend_menu {
-  position: relative;
+  position: absolute;
 
   float: left;
-  left: 165px;
+  left: 590px;
+  top: 10px;
 }
 
 .number_friends {
@@ -130,8 +131,7 @@
   display: block;
 }
 
-.friend_delete,
-.friend_blackList {
+.friend_delete{
   width: 110px;
   padding: 3px;
 
@@ -141,8 +141,7 @@
   color: white;
 }
 
-.friend_delete:hover,
-.friend_blackList:hover {
+.friend_delete:hover {
   background-color: white;
   color: black;
 

@@ -59,9 +59,9 @@ h6 {
 .profile_container {
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 150px !important;
+  padding-bottom: 250px !important;
   max-width: 1400px;
-  min-height: 1750px;
+  min-height: 2100px;
 }
 
 .left_container {
