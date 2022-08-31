@@ -1,4 +1,4 @@
-# Book Shop 📚
+# Social Network 🌐
 
 ![alt text](<./wave.gif>)
 
