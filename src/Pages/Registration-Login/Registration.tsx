@@ -24,7 +24,9 @@ export const Registration = () => {
   });
 
   const onSubmit = async (values: FormValues) => {
-    const data = await dispatch(fetchRegister(values));
+    const val = { email: values.email.toLowerCase(), password: values.password };
+
+    const data = await dispatch(fetchRegister(val));
     if (!data.payload) {
       return alert('Не удалось регистрироваться!');
     }
@@ -51,14 +53,14 @@ export const Registration = () => {
               {...register('fullName', { required: 'Укажите полное имя' })}
               className="firstName"
               type="text"
-              placeholder="Dick Dixon"
+              placeholder="Elon Musk"
               pattern="^[a-zA-Z0-9 ]+$"
               title="Only latin characters can be used"
             />
             <input
               className="lastName"
               type="email"
-              placeholder="Dick@gmail.com"
+              placeholder="@gmail.com"
               {...register('email', { required: 'Укажите почту' })}
             />
             <input

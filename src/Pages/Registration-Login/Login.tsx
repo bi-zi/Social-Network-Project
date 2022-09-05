@@ -14,6 +14,7 @@ export const Login = () => {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(selectIsAuth);
   const data = useAppSelector((state) => state.auth?.data);
+  const state = useAppSelector((state) => state);
 
   const {
     register,
@@ -24,7 +25,9 @@ export const Login = () => {
   });
 
   const onSubmit = async (values: FormValues) => {
-    const data = await dispatch(fetchAuth(values));
+    const val = { email: values.email.toLowerCase(), password: values.password };
+
+    const data = await dispatch(fetchAuth(val));
     if (!data.payload) {
       return alert('Не удалось авторизоваться!');
     }
@@ -51,7 +54,7 @@ export const Login = () => {
             <input
               className="lastName"
               type="email"
-              placeholder="Dick@gmail.com"
+              placeholder="@gmail.com"
               {...register('email', { required: 'Укажите почту' })}
             />
             <input

@@ -11,7 +11,7 @@ import {
 import { setInputNumber } from '../../../store/user/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import {ImageParsing} from '../../../ImageParsing/ImageParsing';
+import { ImageParsing } from '../../../ImageParsing/ImageParsing';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faMusic, faLocationPin, faFileLines, faFilm } from '@fortawesome/free-solid-svg-icons';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
@@ -29,9 +29,8 @@ export const Post: React.FC = () => {
   const firstRef = React.useRef<HTMLInputElement>(null);
   const [postEffect, setPostEffect] = React.useState('');
 
-
   localStorage.setItem('postImages', JSON.stringify(state.post.createImg));
-  localStorage.setItem('postText', state.post.createText);
+  localStorage.setItem('postText', state.post.createText !== 'undefined' ? state.post.createText : '');
 
   const post = state.post.userPosts.post.find((x) => x?.user === id);
   const user = state.user?.userOne?.[0];
@@ -50,7 +49,6 @@ export const Post: React.FC = () => {
 
   if (linkСheck?.[0] === 'https:') localStorage.setItem('postVideo', local);
   if (state.post.createVid?.length === 0) localStorage.setItem('postVideo', url);
-
 
   const sendPost = async () => {
     if ((textLength > 0 || numImg > 0 || local.length > 0) && post === undefined) {
@@ -83,7 +81,6 @@ export const Post: React.FC = () => {
       setPostEffect('');
     }
   };
-
 
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));

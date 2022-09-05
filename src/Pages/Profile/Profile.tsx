@@ -18,15 +18,6 @@ export const Profile: React.FC = () => {
   const data = useAppSelector((state) => state.auth.data);
   const state = useAppSelector((state) => state);
 
-  // console.log(
-  //   [
-  //     `-----USER----- ${state.user.status}`,
-  //     `-----SLIDER----- ${state.slider.status}`,
-  //     `-----POST----- ${state.post.userPosts.status}`,
-  //     `-----NOTE----- ${state.note.status}`,
-  //   ],
-  // );
-
   const postLength = state.post.userPosts.post?.[0]?.post?.length;
 
   if (localStorage.isAuth === undefined) {
