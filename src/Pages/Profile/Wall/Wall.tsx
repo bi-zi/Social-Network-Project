@@ -24,6 +24,7 @@ export const Wall: React.FC = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
   const wall = useAppSelector((state) => state.post.userPosts);
+  const auth = useAppSelector((state) => state.auth?.data);
 
   const { id } = useParams<keyof MyParams>() as MyParams;
   const firstRef = React.useRef<HTMLTextAreaElement>(null);
@@ -32,8 +33,8 @@ export const Wall: React.FC = () => {
 
   const user = state.user?.userOne?.[0];
 
-  let wallPost = wall.post.find((x) => x?.user === id)?.post;
-  let buffer: any = [];
+  let wallPost = wall.post.find((post) => post?.user === id)?.post;
+  let buffer = [];
 
   if (wallPost !== undefined) {
     for (let i = wallPost.length - 1; i !== -1; --i) {
@@ -44,15 +45,13 @@ export const Wall: React.FC = () => {
 
   const like = async (postId: string, check: boolean) => {
     if (check)
-      await dispatch(
-        fetchPostLike({ _id: postId, likeDislike: state.auth?.data?._id, index: 1, user: id }),
-      );
+      await dispatch(fetchPostLike({ _id: postId, likeDislike: auth?._id, index: 1, user: id }));
 
     if (!check)
       await dispatch(
         fetchPostLike({
           _id: postId,
-          likeDislike: wallPost?.[0]?.likePost?.findIndex((x) => x === state.auth?.data?._id),
+          likeDislike: wallPost?.[0]?.likePost?.findIndex((userId) => userId === auth?._id),
           index: 0,
           user: id,
         }),
@@ -62,32 +61,32 @@ export const Wall: React.FC = () => {
 
   const dislike = async (postId: string, check: boolean) => {
     if (check)
-      await dispatch(
-        fetchPostDislike({ _id: postId, likeDislike: state.auth?.data?._id, index: 1, user: id }),
-      );
-    // console.log(check);
+      await dispatch(fetchPostDislike({ _id: postId, likeDislike: auth?._id, index: 1, user: id }));
+
     if (!check)
       await dispatch(
         fetchPostDislike({
           _id: postId,
-          likeDislike: wallPost?.[0]?.dislikePost?.findIndex((x) => x === state.auth?.data?._id),
+          likeDislike: wallPost?.[0]?.dislikePost?.findIndex((userId) => userId === auth?._id),
           index: 0,
           user: id,
         }),
       );
+    
     dispatch(fetchUserPostsAll(id));
   };
 
   const addComment = async (postId: string) => {
     let date: any = new Date();
     date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+
     await dispatch(
       fetchCommentPush({
         _id: postId,
-        fullName: state.auth.data?.fullName,
+        fullName: auth?.fullName,
         commentText: state.post.createComment,
         commentDate: date,
-        userId: state.auth.data._id,
+        userId: auth?._id,
         user: id,
       }),
     );
@@ -104,21 +103,24 @@ export const Wall: React.FC = () => {
     dispatch(fetchUserPostsAll(id));
   };
 
+
   const deletePost = async (index: string) => {
-    const postIndex = wall.post.find((x) => x.user === id)!.post.findIndex((x) => x._id === index);
+    const postIndex = wall.post
+      .find((userPosts) => userPosts.user === id)!
+      .post.findIndex((post) => post._id === index);
+
     await dispatch(fetchPostDelete({ deleteId: postIndex, user: id }));
     dispatch(fetchUserPostsAll(id));
   };
 
-  const postStatus = state.post.userPosts.status === 'loading';
-
+  const postStatus = state.post.userPosts.status === 'loaded';
 
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));
   }, [dispatch, id]);
 
   return (
-    <div className='wall_containter'>
+    <div className="wall_containter">
       {wallPost?.map((content, index) => (
         <div className={`wall ${index}`} key={index}>
           <img src={user?.imageUrl} alt="" className="wall_avatar" />
@@ -126,16 +128,13 @@ export const Wall: React.FC = () => {
           <div className="wall_fullName">{user?.fullName}</div>
           <div className="wall_date">{content.date}</div>
 
-          {state.auth.data?._id === id && !postStatus ? (
-            <>
-              <FontAwesomeIcon className="wall_menu" icon={faEllipsis} />
-              <div className="wall_menu_hover" onClick={() => deletePost(content._id)}>
-                <span>Delete post</span>
-              </div>
-            </>
-          ) : (
-            ''
-          )}
+          <FontAwesomeIcon className="wall_menu" icon={faEllipsis} />
+          <div
+            className="wall_menu_hover"
+            onClick={() => (auth?._id === id && postStatus ? deletePost(content._id) : '')}>
+            <span>Delete post</span>
+          </div>
+
           <div className="wall_content">
             {content.text?.length > 0 ? <div className="wall_text">{content.text}</div> : ''}
             {content.imagesPost?.length > 0 ? (
@@ -170,7 +169,6 @@ export const Wall: React.FC = () => {
             ) : (
               ''
             )}
-
             {content.videoPost.length > 0 ? (
               <>
                 <iframe
@@ -190,13 +188,13 @@ export const Wall: React.FC = () => {
               className="wall_like_icon"
               icon={faThumbsUp}
               style={
-                content.likePost.find((x) => x === state.auth?.data?._id)
+                content.likePost.find((userId) => userId === auth?._id)
                   ? { color: 'red' }
                   : { color: 'white' }
               }
               onClick={() => {
-                if (!postStatus) {
-                  content.likePost?.find((x) => x === state.auth?.data?._id)
+                if (postStatus) {
+                  content.likePost?.find((userId) => userId === auth?._id)
                     ? like(content._id, false)
                     : like(content._id, true);
                 }
@@ -208,13 +206,13 @@ export const Wall: React.FC = () => {
               className="wall_dislike_icon"
               icon={faThumbsDown}
               style={
-                content.dislikePost.find((x) => x === state.auth?.data?._id)
+                content.dislikePost.find((userId) => userId === auth?._id)
                   ? { color: 'red' }
                   : { color: 'white' }
               }
               onClick={() => {
-                if (!postStatus) {
-                  content.dislikePost?.find((x) => x === state.auth?.data?._id)
+                if (postStatus) {
+                  content.dislikePost?.find((userId) => userId === auth?._id)
                     ? dislike(content._id, false)
                     : dislike(content._id, true);
                 }
@@ -228,7 +226,7 @@ export const Wall: React.FC = () => {
               icon={faCommentDots}
               style={comment === index ? { color: 'black' } : { color: 'white' }}
               onClick={() => {
-                if (!postStatus) {
+                if (postStatus) {
                   comment !== index
                     ? setComment(index)
                     : comment === index
@@ -250,25 +248,23 @@ export const Wall: React.FC = () => {
                   onChange={(e) => dispatch(setCreateComment(e.target.value))}
                 />
 
-                {!postStatus && state.post.createComment.length > 0 ? (
-                  <button className="input_button" onClick={() => addComment(content._id)}>
-                    <FontAwesomeIcon className="post_make_icon" icon={faPlay} />
-                  </button>
-                ) : (
-                  <button className="input_button">
-                    <FontAwesomeIcon className="post_make_icon" icon={faPlay} />
-                  </button>
-                )}
+                <button
+                  className="input_button"
+                  onClick={() =>
+                    postStatus && state.post.createComment.length > 0 ? addComment(content._id) : ''
+                  }>
+                  <FontAwesomeIcon className="post_make_icon" icon={faPlay} />
+                </button>
 
                 {content.commentPost?.map((comment, index) => (
                   <div className="comment" key={index}>
                     <img
-                      src={state.user.usersAll.find((x) => x._id === comment.userId)!.imageUrl[0]}
+                      src={state.user.usersAll.find((user) => user._id === comment.userId)!?.imageUrl[0]}
                       alt=""
                       className="comment_avatar"
                     />
-                    {wall.post.find((x) => x.user === id)?.user === state.auth.data._id ||
-                    state.auth.data._id === comment.userId ? (
+                    {wall.post.find((userPost) => userPost.user === id)?.user === auth?._id ||
+                    auth?._id === comment.userId ? (
                       <FontAwesomeIcon
                         className="comment_delete"
                         icon={faXmark}

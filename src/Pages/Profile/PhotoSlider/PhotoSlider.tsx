@@ -20,7 +20,7 @@ export const PhotoSlider: React.FC = () => {
   const { id } = useParams<keyof MyParams>() as MyParams;
 
   const readyPhotos = state.slider?.slider?.find((x) => x?.user === id)?.sliderImg;
-
+  
   const settings = {
     className: 'center',
     infinite: true,

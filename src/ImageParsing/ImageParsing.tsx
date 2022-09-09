@@ -12,12 +12,14 @@ export type MyParams = {
 
 export const ImageParsing: React.FC = () => {
   const dispatch = useAppDispatch();
+
   const parsing = useAppSelector((state) => state.user);
   const state = useAppSelector((state) => state);
+
   const { id } = useParams<keyof MyParams>() as MyParams;
+  const [images, setImages] = React.useState<any>([]);
 
   const slider = state.slider?.slider?.find((x) => x?.user === id);
-  const [images, setImages] = React.useState<any>([]);
   const sliderImgLength = slider?.sliderImg.length;
 
   const onAvatarAndSlider = async (value: string[]) => {
@@ -87,7 +89,7 @@ export const ImageParsing: React.FC = () => {
     };
     fileReader.readAsDataURL(file);
     setImages([]);
-  }, [images]);
+  }, [images, onAvatarAndSlider]);
 
   return (
     <>

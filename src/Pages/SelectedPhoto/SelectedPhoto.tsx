@@ -6,12 +6,7 @@ import { fetchSlider, fetchSliderDelete } from '../../store/slider/slice';
 import { setCreateImgDelete } from '../../store/post/slice';
 import { Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-
-  faXmark,
-  faCircleChevronRight,
-  faCircleChevronLeft,
-} from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faCircleChevronRight, faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
 export type MyParams = {
@@ -25,14 +20,14 @@ export const Photo: React.FC = () => {
   const { user, category, id } = useParams<keyof MyParams>() as MyParams;
   const state = useAppSelector((state) => state);
   const avatar = state.user?.userOne?.[0];
-  const slider = state.slider.slider?.find((x) => x.user === user);
+  const slider = state.slider.slider?.find((userSlider) => userSlider.user === user);
 
   const readyPhotos =
     category === 'PhotoAvatar'
       ? [avatar?.imageUrl]
       : category === 'PhotoSlider'
       ? slider?.sliderImg
-        : state.post.createImg;
+      : state.post.createImg;
 
   const onPhotoDelete = async () => {
     if (category === 'PhotoAvatar') {
@@ -51,7 +46,7 @@ export const Photo: React.FC = () => {
     }
 
     if (category === 'CreatePost') {
-      dispatch(setCreateImgDelete(readyPhotos!.filter((x, index) => index !== +id)));
+      dispatch(setCreateImgDelete(readyPhotos!.filter((image, index) => index !== +id)));
     }
   };
 
@@ -63,8 +58,13 @@ export const Photo: React.FC = () => {
     return <Navigate to="/Login" />;
   }
 
+  const loadStatus =
+    state.user.status === 'loaded' &&
+    state.auth.status === 'loaded' &&
+    state.slider.status === 'loaded';
+
   return (
-    <div className='photo_container'>
+    <div className="photo_container">
       <div className="photo_viewing">
         <Link to={`/Profile/${user}`} style={{ color: '#000000' }} className="cloce">
           <FontAwesomeIcon className="close" icon={faXmark} />
@@ -90,7 +90,7 @@ export const Photo: React.FC = () => {
           ''
         )}
         <div className="picture_control_panel">
-          {state.auth.data?._id === user && state.user.status === 'loaded' ? (
+          {state.auth.data?._id === user && loadStatus ? (
             <Link
               className="delete_photo"
               to={`/Profile/${user}`}
@@ -105,4 +105,4 @@ export const Photo: React.FC = () => {
       </div>
     </div>
   );
-}
+};

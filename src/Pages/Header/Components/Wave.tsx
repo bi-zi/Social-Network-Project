@@ -5,17 +5,17 @@ import { NavLink } from 'react-router-dom';
 
 export const Wave: React.FC = () => {
   const dispatch = useAppDispatch();
-  const state = useAppSelector((state) => state);
+  const auth = useAppSelector((state) => state.auth);
 
   return (
     <>
-      {!(state.auth.status === 'loading') ? (
+      {!(auth.status === 'loading') ? (
         <NavLink
           style={{ textDecoration: 0, color: 'white' }}
-          to={`/Profile/${state.auth?.data?._id}`}
+          to={`/Profile/${auth?.data?._id}`}
           className="wave"
           onClick={() => {
-            dispatch(fetchOneUser(state.auth?.data._id));
+            dispatch(fetchOneUser(auth?.data._id));
             dispatch(setAttention(1));
           }}>
           Wave

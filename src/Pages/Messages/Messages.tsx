@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchGetMessages, fetchAddMessage } from '../../store/messages/slice';
 import { NavLink, Navigate } from 'react-router-dom';
@@ -8,32 +8,35 @@ import './style.css';
 
 export const Messages: React.FC = () => {
   const dispatch = useAppDispatch();
+
   const state = useAppSelector((state) => state);
-  const divRef = React.useRef<HTMLDivElement>(null);
-  const firstRef = React.useRef<HTMLInputElement>(null);
+  const auth = useAppSelector((state) => state.auth?.data);
+  const messages = useAppSelector((state) => state.messages);
 
-  const [selectUser, setSelectUser] = React.useState(
-    state.messages?.sortedId.length !== 0 ? state.messages.sortedId : undefined,
+  const divRef = useRef<HTMLDivElement>(null);
+  const firstRef = useRef<HTMLInputElement>(null);
+
+  const [text, setText] = useState('');
+  const [findChat, setFindChat] = useState<any>();
+  const [addMessages, setAddMessages] = useState<number>(20);
+  const [selectUser, setSelectUser] = useState(
+    messages?.sortedId.length !== 0 ? messages.sortedId : undefined,
   );
-  const [text, setText] = React.useState('');
-  const [findChat, setFindChat] = React.useState<any>();
 
-  const [addMessages, setAddMessages] = React.useState<number>(20);
-
-  const findFriends = state.messages.data.find((x) => x.user === state.auth?.data?._id);
+  const findFriends = messages.data.find((x) => x.user === auth?._id);
 
   const lastMessage = findFriends?.correspondence
     .map((x) => x?.messages[x.messages.length - 1])
     .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)));
 
-  const friends = state.user?.usersAll.filter((x, i) =>
-    findFriends?.correspondence.map((x) => x?.withWho)?.includes(x._id),
+  const friends = state.user?.usersAll.filter((user) =>
+    findFriends?.correspondence.map((chat) => chat?.withWho)?.includes(user._id),
   );
 
   const friendId = findFriends?.correspondence
-    ?.map((x) => x?.messages[x.messages.length - 1])
+    ?.map((chat) => chat?.messages[chat.messages.length - 1])
     .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
-    .map((x) => x.withWho);
+    .map((chat) => chat.withWho);
 
   let sortedFriends = [];
 
@@ -45,29 +48,32 @@ export const Messages: React.FC = () => {
   }
 
   if (findChat?.length > 0) {
-    sortedFriends = friends.filter((x) => x.fullName.toLowerCase().includes(findChat?.toLowerCase()));
+    sortedFriends = friends.filter((user) =>
+      user.fullName.toLowerCase().includes(findChat?.toLowerCase()),
+    );
   }
 
   if (sortedFriends.length === 0) sortedFriends = friends;
 
-  let userIndex = state.messages.data
-    .find((x) => x.user === state.auth?.data?._id)
-    ?.correspondence.findIndex((x) => x?.withWho === selectUser);
+  let userIndex = messages.data
+    .find((userChat) => userChat.user === auth?._id)
+    ?.correspondence.findIndex((chat) => chat?.withWho === selectUser);
 
   if (selectUser !== undefined) localStorage.setItem('userIndex', userIndex + '');
 
-  let chatIndex = sortedFriends.findIndex((x) => x._id === selectUser);
+  let chatIndex = sortedFriends.findIndex((userId) => userId._id === selectUser);
 
   if (selectUser !== undefined) localStorage.setItem('chatIndex', chatIndex + '');
 
-  const messagesLength = state.messages.data.find((x) => x.user === state.auth?.data?._id)
-    ?.correspondence[localStorage.userIndex]?.messages.length;
+  const messagesLength = messages.data.find((userChat) => userChat.user === auth?._id)?.correspondence[
+    localStorage.userIndex
+  ]?.messages.length;
 
-  const selectedMessage = state.messages.data
-    .find((x) => x.user === state.auth?.data?._id)
+  const selectedMessage = messages.data
+    .find((userChat) => userChat.user === auth?._id)
     ?.correspondence[localStorage.userIndex]?.messages?.slice()
     ?.reverse()
-    .filter((x, i) => i < addMessages)
+    .filter((chat, messageIndex) => messageIndex < addMessages)
     .reverse();
 
   const selectedUser = [sortedFriends[localStorage.chatIndex]];
@@ -80,14 +86,14 @@ export const Messages: React.FC = () => {
     await dispatch(
       fetchAddMessage({
         message: values,
-        userId: state.auth.data._id,
+        userId: auth?._id,
         withWho: selectedUser?.[0]._id,
-        user: state.auth.data._id,
+        user: auth?._id,
         yourIndex: localStorage.userIndex,
         hisIndex:
-          state.messages.data
-            .find((x) => x.user === selectedUser?.[0]?._id)
-            ?.correspondence.findIndex((x) => x.withWho === state.auth.data?._id) + '',
+          messages.data
+            .find((userChat) => userChat.user === selectedUser?.[0]?._id)
+            ?.correspondence.findIndex((chat) => chat.withWho === auth?._id) + '',
       }),
     );
 
@@ -95,7 +101,10 @@ export const Messages: React.FC = () => {
     dispatch(fetchGetMessages());
   };
 
-  React.useEffect(() => {
+  const loadStatus =
+    messages.status === 'loaded' && state.user.status === 'loaded' && state.auth.status === 'loaded';
+
+  useEffect(() => {
     dispatch(fetchGetMessages());
     setTimeout(scrollToBottom, 600);
   }, [dispatch]);
@@ -103,7 +112,6 @@ export const Messages: React.FC = () => {
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
   }
-
 
   return (
     <div className="messages_container">
@@ -118,7 +126,7 @@ export const Messages: React.FC = () => {
           />
           {sortedFriends.length !== 0 ? (
             <div className="messages_left_container">
-              {sortedFriends.map((friend, i) => (
+              {sortedFriends.map((friend, index) => (
                 <div
                   className={`message_left ${selectUser === friend._id ? 'message_color' : ''}`}
                   key={friend._id}
@@ -130,26 +138,26 @@ export const Messages: React.FC = () => {
                   <img src={friend.imageUrl} alt="" className="message_left_avatar" />
                   <div className="message_left_fullName">{friend.fullName}</div>
 
-                  {lastMessage![i] !== undefined ? (
+                  {lastMessage![index] !== undefined ? (
                     <div className="message_left_time">{`${new Date(
-                      lastMessage![i]?.date,
+                      lastMessage![index]?.date,
                     ).toLocaleTimeString()} - ${new Date(
-                      lastMessage![i]?.date,
+                      lastMessage![index]?.date,
                     ).toLocaleDateString()}`}</div>
                   ) : (
                     ''
                   )}
 
-                  {lastMessage![i] !== undefined ? (
+                  {lastMessage![index] !== undefined ? (
                     <div className="message_name_box">
                       <div className="message_name">
-                        {lastMessage![i]?.userId === friend._id
+                        {lastMessage![index]?.userId === friend._id
                           ? friend.fullName.split(' ')[0] + ':'
                           : 'You:'}
                       </div>
                       <div className="messages_left_last">
-                        {lastMessage![i]?.message?.slice(0, 40)}
-                        {lastMessage![i]?.message?.length > 40 ? '...' : ''}
+                        {lastMessage![index]?.message?.slice(0, 40)}
+                        {lastMessage![index]?.message?.length > 40 ? '...' : ''}
                       </div>
                     </div>
                   ) : (
@@ -159,7 +167,7 @@ export const Messages: React.FC = () => {
               ))}
             </div>
           ) : (
-            <NavLink to={`/Friends/${state.auth?.data?._id}`} className="message_left_linkToFriends">
+            <NavLink to={`/Friends/${auth?._id}`} className="message_left_linkToFriends">
               Find friends to chat
             </NavLink>
           )}
@@ -170,7 +178,7 @@ export const Messages: React.FC = () => {
           <div className="select_chat">Select chat</div>
         ) : (
           <>
-            {selectedUser?.map((select, i) => (
+            {selectedUser?.map((select, index) => (
               <div className="messages_right_header" key={select?._id}>
                 <NavLink to={`/Profile/${select._id}`}>
                   <img src={select?.imageUrl} alt="" className="messages_right_avatar" />
@@ -179,7 +187,7 @@ export const Messages: React.FC = () => {
               </div>
             ))}
             <div className="messages_all" ref={divRef}>
-              {messagesLength! > addMessages ? (
+              {messagesLength! > addMessages && loadStatus ? (
                 <div className="messages_add_20" onClick={() => setAddMessages(addMessages + 20)}>
                   Add more messages
                 </div>
@@ -189,15 +197,15 @@ export const Messages: React.FC = () => {
               {selectedMessage?.length === 0 ? (
                 <div className="meessages_zero">Write the first message in the chat</div>
               ) : (
-                selectedMessage?.map((message, i) => (
-                  <div className="message_box" key={i}>
-                    {(message?.userId !== selectedMessage[i - 1]?.userId ||
-                      message?.date !== selectedMessage[i - 1]?.date) &&
+                selectedMessage?.map((message, index) => (
+                  <div className="message_box" key={index}>
+                    {(message?.userId !== selectedMessage[index - 1]?.userId ||
+                      message?.date !== selectedMessage[index - 1]?.date) &&
                     message.userId !== undefined ? (
                       <>
                         <img
                           src={
-                            state.user?.usersAll.filter((x, i) => message.userId?.includes(x._id))[0]
+                            state.user?.usersAll.filter((user) => message.userId?.includes(user._id))[0]
                               ?.imageUrl
                           }
                           alt=""
@@ -205,7 +213,7 @@ export const Messages: React.FC = () => {
                         />
                         <div className="messages_all_fullName">
                           {
-                            state.user?.usersAll.filter((x, i) => message.userId?.includes(x._id))[0]
+                            state.user?.usersAll.filter((user) => message.userId?.includes(user._id))[0]
                               ?.fullName
                           }
                         </div>
@@ -239,7 +247,9 @@ export const Messages: React.FC = () => {
                 type="submit"
                 className="messages_right_button"
                 onClick={() =>
-                  text?.length !== 0 ? (onSubmit(text), setTimeout(scrollToBottom, 400)) : ''
+                  text?.length !== 0 && loadStatus
+                    ? (onSubmit(text), setTimeout(scrollToBottom, 400))
+                    : ''
                 }>
                 Submit
               </button>

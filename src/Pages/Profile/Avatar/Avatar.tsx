@@ -23,7 +23,7 @@ import {
   fetchPushChat,
   setSortedId,
 } from '../../../store/messages/slice';
-import {ImageParsing} from '../../../ImageParsing/ImageParsing';
+import { ImageParsing } from '../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './style.css';
@@ -35,36 +35,35 @@ export type MyParams = {
 export const Avatar: React.FC = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
+  const auth = useAppSelector((state) => state.auth?.data);
+  const messages = useAppSelector((state) => state.messages?.data);
   const { id } = useParams<keyof MyParams>() as MyParams;
 
   const user = state.user?.userOne?.[0];
 
-  const subscribedToYou = state.auth.data?.subscribers?.find((x) => x === id) === undefined ? 0 : 1;
-  const youSubscriber =
-    user?.subscribers?.find((x) => x === state.auth?.data?._id) === undefined ? 0 : 1;
-  const friend = state.auth.data?.friends?.find((x) => x === id) === undefined ? 0 : 1;
+  const subscribedToYou = auth?.subscribers?.find((userId) => userId === id) === undefined ? 0 : 1;
+  const youSubscriber = user?.subscribers?.find((userId) => userId === auth?._id) === undefined ? 0 : 1;
+  const friend = auth?.friends?.find((userId) => userId === id) === undefined ? 0 : 1;
 
   window.onpopstate = function () {
     if (document.location.pathname.split('/')[1] === 'Profile') dispatch(fetchOneUser(id));
   };
 
-  const base = !state.note?.notifications?.friendRequest?.find(
-    (x) => x.fromWho === state.auth.data?._id,
-  );
+  const base = !state.note?.notifications?.friendRequest?.find((userId) => userId.fromWho === auth?._id);
 
   const friendRequestIndex = state.note?.notifications?.friendRequest?.findIndex(
-    (x) => x.fromWho === state.auth.data?._id,
+    (x) => x.fromWho === auth?._id,
   );
 
   const subscribe = async () => {
-    await dispatch(fetchSubscribe({ authUserId: state.auth.data?._id, id: id, user: id }));
+    await dispatch(fetchSubscribe({ authUserId: auth?._id, id: id, user: id }));
 
     if (state.note.notifications?.user === id && base) {
-      await dispatch(fetchNotificationsPush({ fromWho: state.auth.data?._id, id: id }));
+      await dispatch(fetchNotificationsPush({ fromWho: auth?._id, id: id }));
     }
 
     if (state.note.notifications?.user === undefined) {
-      await dispatch(fetchNotificationsPost({ fromWho: state.auth.data?._id, user: id }));
+      await dispatch(fetchNotificationsPost({ fromWho: auth?._id, user: id }));
     }
 
     dispatch(fetchNotifications(id));
@@ -78,7 +77,7 @@ export const Avatar: React.FC = () => {
     await dispatch(
       fetchUnsubscribe({
         id: id,
-        index: user?.subscribers.findIndex((x) => x === state.auth.data?._id),
+        index: user?.subscribers.findIndex((userId) => userId === auth?._id),
         user: id,
       }),
     );
@@ -91,7 +90,7 @@ export const Avatar: React.FC = () => {
     await dispatch(
       fetchAcceptFriend({
         id: id,
-        index: state.auth.data?.subscribers.findIndex((x) => x === id),
+        index: auth?.subscribers.findIndex((userId) => userId === id),
         user: id,
       }),
     );
@@ -103,8 +102,8 @@ export const Avatar: React.FC = () => {
     await dispatch(
       fetchDeleteFriend({
         id: id,
-        index: user?.friends.findIndex((x) => x === state.auth.data?._id),
-        index2: state.auth.data?.friends.findIndex((x) => x === id),
+        index: user?.friends.findIndex((userId) => userId === auth?._id),
+        index2: auth?.friends.findIndex((userId) => userId === id),
         user: id,
       }),
     );
@@ -112,29 +111,35 @@ export const Avatar: React.FC = () => {
     dispatch(fetchAuthMe());
   };
 
-  let you = !state.messages?.data.find((x) => x.user === state.auth.data?._id);
-  let him = !state.messages?.data.find((x) => x.user === id);
-  let checkChat = !state.messages?.data
-    .find((x) => x.user === id)
-    ?.correspondence?.find((x) => x?.withWho === state.auth.data?._id);
+  let you = !messages.find((userID) => userID.user === auth?._id);
+  let him = !messages.find((userID) => userID.user === id);
+  let checkChat = !messages
+    .find((userID) => userID.user === id)
+    ?.correspondence?.find((chat) => chat?.withWho === auth?._id);
 
   const createMessages = async () => {
     if (you) {
       // console.log(1);
-      await dispatch(fetchCreateMessages({ withWho: id, user: state.auth?.data?._id }));
+      await dispatch(fetchCreateMessages({ withWho: id, user: auth?._id }));
     }
     if (him) {
       // console.log(2);
-      await dispatch(fetchCreateMessages({ withWho: state.auth?.data?._id, user: id }));
+      await dispatch(fetchCreateMessages({ withWho: auth?._id, user: id }));
     }
     if (checkChat) {
       // console.log(3);
-      await dispatch(fetchPushChat({ withWho: id, user: state.auth?.data?._id }));
+      await dispatch(fetchPushChat({ withWho: id, user: auth?._id }));
     }
 
     dispatch(setSortedId(id));
     dispatch(fetchGetMessages());
   };
+
+  const loadStatus =
+    state.user.status === 'loaded' &&
+    state.auth.status === 'loaded' &&
+    state.note.status === 'loaded' &&
+    state.messages.status === 'loaded';
 
   React.useEffect(() => {
     dispatch(fetchNotifications(id));
@@ -144,7 +149,7 @@ export const Avatar: React.FC = () => {
   return (
     <div className="avatar">
       <div className="avatar_backGround">
-        {state.user.status === 'loaded' ? (
+        {loadStatus ? (
           <Link to={`/${id}/PhotoAvatar/0`}>
             <img src={user?.imageUrl} alt="" className="avatar_image" />
           </Link>
@@ -152,27 +157,21 @@ export const Avatar: React.FC = () => {
           <img src={user?.imageUrl} alt="" className="avatar_image" />
         )}
 
-        {state.auth?.data?._id === id ? (
+        {auth?._id === id ? (
           <div
             className="avatar_button"
             onChange={() => {
               dispatch(setInputNumber('0'));
             }}>
-            {state.auth.data === null ? '' : <div className="avatar_change">Change photo</div>}
+            {auth === null ? '' : <div className="avatar_change">Change photo</div>}
 
-            {state.auth.data?._id === id &&
-            state.user.status === 'loaded' &&
-            state.slider.status === 'loaded' ? (
-              <ImageParsing />
-            ) : (
-              ''
-            )}
+            {auth?._id === id && loadStatus ? <ImageParsing /> : ''}
           </div>
         ) : (
           ''
         )}
 
-        {state.auth.data === null || state.auth?.data?._id === id ? (
+        {auth === null || auth?._id === id ? (
           ''
         ) : subscribedToYou !== 0 && youSubscriber === 0 && friend !== +id ? (
           <>
@@ -180,11 +179,7 @@ export const Avatar: React.FC = () => {
               Send a message
             </Link>
 
-            <button
-              className="delete_friend"
-              onClick={() =>
-                state.user.status === 'loaded' && state.auth.status === 'loaded' ? acceptFriend() : ''
-              }>
+            <button className="delete_friend" onClick={() => (loadStatus ? acceptFriend() : '')}>
               Accept friend request
             </button>
           </>
@@ -193,11 +188,8 @@ export const Avatar: React.FC = () => {
             <Link to="/Messages" className="send_message" onClick={() => createMessages()}>
               Send a message
             </Link>
-            <button
-              className="delete_friend"
-              onClick={() =>
-                state.user.status === 'loaded' && state.auth.status === 'loaded' ? deleteFriend() : ''
-              }>
+
+            <button className="delete_friend" onClick={() => (loadStatus ? deleteFriend() : '')}>
               Delete friend
             </button>
           </>
@@ -206,15 +198,8 @@ export const Avatar: React.FC = () => {
             <Link to="/Messages" className="send_message" onClick={() => createMessages()}>
               Send a message
             </Link>
-            <button
-              className="delete_friend"
-              onClick={() =>
-                state.user.status === 'loaded' &&
-                state.auth.status === 'loaded' &&
-                state.note.status === 'loaded'
-                  ? unsubscribe()
-                  : ''
-              }>
+
+            <button className="delete_friend" onClick={() => (loadStatus ? unsubscribe() : '')}>
               Unsubscribe
             </button>
           </>
@@ -223,15 +208,8 @@ export const Avatar: React.FC = () => {
             <Link to="/Messages" className="send_message" onClick={() => createMessages()}>
               Send a message
             </Link>
-            <button
-              className="delete_friend"
-              onClick={() =>
-                state.user.status === 'loaded' &&
-                state.auth.status === 'loaded' &&
-                state.note.status === 'loaded'
-                  ? subscribe()
-                  : ''
-              }>
+
+            <button className="delete_friend" onClick={() => (loadStatus ? subscribe() : '')}>
               Send friend request
             </button>
           </>

@@ -10,7 +10,7 @@ import { faAlignJustify } from '@fortawesome/free-solid-svg-icons';
 
 export const Menu: React.FC = () => {
   const dispatch = useAppDispatch();
-  const state = useAppSelector((state) => state);
+  const auth = useAppSelector((state) => state.auth);
 
   const onClickLogout = () => {
     if (window.confirm('Вы действительно хотите выйти?')) {
@@ -36,7 +36,7 @@ export const Menu: React.FC = () => {
             to="/Login"
             className="menu_login"
             onClick={() =>
-              !(state.auth.status === 'loading')
+              !(auth.status === 'loading')
                 ? localStorage.isAuth === 'true'
                   ? onClickLogout()
                   : dispatch(setAttention(1))
@@ -49,7 +49,7 @@ export const Menu: React.FC = () => {
             to="/Register"
             className="menu_register"
             onClick={() =>
-              !(state.auth.status === 'loading')
+              !(auth.status === 'loading')
                 ? localStorage.isAuth === 'true'
                   ? onClickLogout()
                   : dispatch(setAttention(1))

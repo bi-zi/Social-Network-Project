@@ -38,6 +38,8 @@ export const Post: React.FC = () => {
   const textLength = state.post?.createText?.length;
   const postText = state.post.createText;
   const numImg = readyPhotos.length;
+  const postStatus = state.post.userPosts.status === 'loaded'&& state.user.status === 'loaded' &&
+    state.auth.status === 'loaded'
 
   let linkСheck = state.post.createVid?.split('/');
 
@@ -157,15 +159,12 @@ export const Post: React.FC = () => {
       </div>
 
       <div className="wall_control_panel">
-        {state.post.userPosts.status === 'loaded' ? (
-          <button className="post_make_button" type="submit" onClick={() => sendPost()}>
-            <FontAwesomeIcon className="post_make_icon" icon={faPlay} />
-          </button>
-        ) : (
-          <button className="post_make_button" type="submit">
-            <FontAwesomeIcon className="post_make_icon" icon={faPlay} />
-          </button>
-        )}
+        <button
+          className="post_make_button"
+          type="submit"
+          onClick={() => (postStatus ? sendPost() : '')}>
+          <FontAwesomeIcon className="post_make_icon" icon={faPlay} />
+        </button>
 
         <FontAwesomeIcon className="post_image_icon" icon={faImage} />
         {numImg < 3 ? (
@@ -183,7 +182,7 @@ export const Post: React.FC = () => {
         />
 
         {linkСheck?.[0] === 'https:' ? (
-          <button className="video_delete" onClick={() => dispatch(setCreateVid(''))}>
+          <button className="video_delete" onClick={() => postStatus ? dispatch(setCreateVid('')) : ''}>
             Delete video
           </button>
         ) : (

@@ -14,11 +14,11 @@ export type MyParams = {
 export const Friends: React.FC = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams<keyof MyParams>() as MyParams;
-  const state = useAppSelector((state) => state);
+  const user = useAppSelector((state) => state.user);
   const [key, setKey] = React.useState(false);
 
-  const profileFriend = state.user?.userOne?.[0];
-  let arr = state.user?.usersAll.filter((x, i) => profileFriend?.friends.includes(x._id)).splice(0, 8);
+  const userProfile = user?.userOne?.[0];
+  const friends = user?.usersAll.filter((user) => userProfile?.friends.includes(user._id)).splice(0, 8);
 
   const fetchData = (userId: string) => {
     dispatch(fetchOneUser(userId));
@@ -26,9 +26,16 @@ export const Friends: React.FC = () => {
     dispatch(fetchSlider(userId));
   };
 
-  document.onkeydown = function (e) {
-    if (e.ctrlKey) setKey(true);
-    if (!e.ctrlKey) setKey(false);
+  document.onkeydown = (e: any) => {
+    if (e.key) {
+      setKey(true);
+    }
+  };
+
+  document.onkeyup = (e: any) => {
+    if (e.key) {
+      setKey(false);
+    }
   };
 
   return (
@@ -38,27 +45,28 @@ export const Friends: React.FC = () => {
         className="profile_friends_title"
         style={{ textDecoration: 'none' }}
         onClick={() => dispatch(setCatergory('friends'))}>
-        Friends - {state.user?.usersAll.filter((x, i) => profileFriend?.friends.includes(x._id))?.length}
+        Friends - {user?.usersAll.filter((user) => userProfile?.friends.includes(user._id))?.length}
       </Link>
+      
       <div className="profile_friends_container">
-        {arr.map((x, i) => (
-          <div key={i}>
+        {friends.map((friend) => (
+          <div key={friend._id}>
             {!key ? (
-              <Link to={`/Profile/${x._id}`} key={i} style={{ textDecoration: 'none' }}>
+              <Link to={`/Profile/${friend._id}`} key={friend._id} style={{ textDecoration: 'none' }}>
                 <div
                   className="profile_friend"
                   onClick={() => {
-                    fetchData(x._id);
+                    fetchData(friend._id);
                     window.scrollTo(0, 0);
                   }}>
-                  <img src={x.imageUrl} alt="" className="profile_friend_avatar" />
-                  <div className="profile_friend_name">{x.fullName?.split(' ')[0]}</div>
+                  <img src={friend.imageUrl} alt="" className="profile_friend_avatar" />
+                  <div className="profile_friend_name">{friend.fullName?.split(' ')[0]}</div>
                 </div>
               </Link>
             ) : (
-              <div className="profile_friend" key={i}>
-                <img src={x.imageUrl} alt="" className="profile_friend_avatar" />
-                <div className="profile_friend_name">{x.fullName?.split(' ')[0]}</div>
+              <div className="profile_friend" key={friend._id}>
+                <img src={friend.imageUrl} alt="" className="profile_friend_avatar" />
+                <div className="profile_friend_name">{friend.fullName?.split(' ')[0]}</div>
               </div>
             )}
           </div>

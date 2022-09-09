@@ -40,40 +40,37 @@ export const Friends: React.FC = () => {
 
   const user =
     state.user?.userOne?.[0] === undefined
-      ? state.user.usersAll?.find((x) => x._id === id)
+      ? state.user.usersAll?.find((user) => user._id === id)
       : state.user?.userOne?.[0];
 
-  let arr = [] as User[];
+  let sortedFriends = [] as User[];
   if (catergory === 'friends') {
-    arr = state.user.usersAll?.filter((x) => user?.friends.includes(x._id));
+    sortedFriends = state.user.usersAll?.filter((userId) => user?.friends.includes(userId._id));
   }
 
   if (catergory === 'people') {
-    arr = state.user.usersAll;
+    sortedFriends = state.user.usersAll;
   }
 
   if (catergory === 'subscribers') {
-    arr = state.user.usersAll?.filter((x) => user?.subscribers.includes(x._id));
+    sortedFriends = state.user.usersAll?.filter((userId) => user?.subscribers.includes(userId._id));
   }
 
   if (sortBy === 'a-z') {
-    arr = arr
-      ?.filter((x) => x)
-      .sort(function (a, b) {
-        if (a.fullName > b.fullName) {
-          return 1;
-        }
-        if (a.fullName < b.fullName) {
-          return -1;
-        }
-        return 0;
-      });
+    sortedFriends = [...sortedFriends]?.sort(function (a, b) {
+      if (a.fullName > b.fullName) {
+        return 1;
+      }
+      if (a.fullName < b.fullName) {
+        return -1;
+      }
+      return 0;
+    });
   }
 
   if (sortBy === 'z-a') {
-    arr = arr
-      ?.filter((x) => x)
-      .sort(function (a, b) {
+    sortedFriends = [...sortedFriends]
+      ?.sort(function (a, b) {
         if (a.fullName > b.fullName) {
           return 1;
         }
@@ -86,23 +83,19 @@ export const Friends: React.FC = () => {
   }
 
   if (sortBy === 'friends') {
-    arr = arr
-      ?.filter((x) => x)
-      .sort(function (a, b) {
-        if (a.friends < b.friends) {
-          return 1;
-        }
-        if (a.friends > b.friends) {
-          return -1;
-        }
-        return 0;
-      });
+    sortedFriends = [...sortedFriends]?.sort(function (a, b) {
+      if (a.friends < b.friends) {
+        return 1;
+      }
+      if (a.friends > b.friends) {
+        return -1;
+      }
+      return 0;
+    });
   }
 
   if (sortBy === 'subscribers') {
-    arr = arr
-      ?.filter((x) => x)
-      .sort(function (a, b) {
+    sortedFriends = [...sortedFriends]?.sort(function (a, b) {
         if (a.subscribers < b.subscribers) {
           return 1;
         }
@@ -118,15 +111,17 @@ export const Friends: React.FC = () => {
       fetchDeleteFriend({
         id: userId,
         index: state.user.usersAll
-          .find((x) => x._id === userId)!
-          .friends.findIndex((x) => x === state.auth.data?._id),
-        index2: state.auth.data?.friends.findIndex((x) => x === userId),
+          .find((user) => user._id === userId)!
+          .friends.findIndex((friendId) => friendId === state.auth.data?._id),
+        index2: state.auth.data?.friends.findIndex((friendId) => friendId === userId),
         user: id,
       }),
     );
     dispatch(fetchOneUser(id));
     dispatch(fetchAuthMe());
   };
+
+  const loadStatus = state.user.status === 'loaded' && state.auth.status === 'loaded';
 
   React.useEffect(() => {
     dispatch(fetchAllUsers());
@@ -141,35 +136,41 @@ export const Friends: React.FC = () => {
     <div className="friends">
       <div className="friends_result">
         <div className="find_friend"></div>
-        {arr.length > 0 ? (
-          arr.map((x, i) => (
+        {sortedFriends.length > 0 ? (
+          sortedFriends.map((friend) => (
             <div
               className="friend"
-              key={i}
-              style={x === arr[arr.length - 1] ? { borderBottom: 'none' } : { borderBottom: `` }}>
-              <Link to={`/Profile/${x._id}`} onClick={() =>  window.scrollTo(0, 0)}>
-                <img src={x.imageUrl} alt="" className="friend_avatar" />
+              key={friend._id}
+              style={
+                friend === sortedFriends[sortedFriends.length - 1]
+                  ? { borderBottom: 'none' }
+                  : { borderBottom: `` }
+              }>
+              <Link to={`/Profile/${friend._id}`} onClick={() => window.scrollTo(0, 0)}>
+                <img src={friend.imageUrl} alt="" className="friend_avatar" />
               </Link>
-              <Link to={`/Profile/${x._id}`} className="friend_name" style={{ textDecoration: 'none' }}>
-                {x.fullName}
+              <Link
+                to={`/Profile/${friend._id}`}
+                className="friend_name"
+                style={{ textDecoration: 'none' }}>
+                {friend.fullName}
               </Link>
-
 
               {catergory === 'friends' ? (
                 <div className="friend_menu">
                   <div className="friend_content">
-                    <div className="friend_delete" onClick={() => deleteFriend(x._id)}>
+                    <div className="friend_delete" onClick={() => deleteFriend(friend._id)}>
                       Delete friend
                     </div>
                   </div>
-                  <FontAwesomeIcon className="friend_menu_icon"   icon={faEllipsis} />
+                  <FontAwesomeIcon className="friend_menu_icon" icon={faEllipsis} />
                 </div>
               ) : (
                 ''
               )}
 
-              <span className="number_friends">Friends {x.friends?.length}</span>
-              <span className="number_subscribers">Subscribers {x.subscribers?.length}</span>
+              <span className="number_friends">Friends {friend.friends?.length}</span>
+              <span className="number_subscribers">Subscribers {friend.subscribers?.length}</span>
             </div>
           ))
         ) : catergory === 'friends' ? (
