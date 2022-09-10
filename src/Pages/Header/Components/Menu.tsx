@@ -26,15 +26,15 @@ export const Menu: React.FC = () => {
 
   return (
     <>
-      <div className="menu">
+      <div className="header_menu">
         <Loading />
 
-        <FontAwesomeIcon className="menu_burger" icon={faAlignJustify} />
+        <FontAwesomeIcon className="header_menu_burger" icon={faAlignJustify} />
 
-        <div className="menu_register_login">
+        <div className="header_menu_block">
           <NavLink
             to="/Login"
-            className="menu_login"
+            className="header_menu_login"
             onClick={() =>
               !(auth.status === 'loading')
                 ? localStorage.isAuth === 'true'
@@ -47,7 +47,7 @@ export const Menu: React.FC = () => {
 
           <NavLink
             to="/Register"
-            className="menu_register"
+            className="header_menu_register"
             onClick={() =>
               !(auth.status === 'loading')
                 ? localStorage.isAuth === 'true'

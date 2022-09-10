@@ -42,10 +42,11 @@ export const ControlPanel: React.FC = () => {
                 : { color: 'white' }
             }
             onClick={() => dispatch(fetchOneUser(state.auth?.data?._id))}>
-            <FontAwesomeIcon className="profile" icon={faCircleUser} />
+            <FontAwesomeIcon className="header_profile_icon" icon={faCircleUser} />
           </NavLink>
-          <div className="bell">
-            <FontAwesomeIcon className="bell_icon" icon={faBell} />
+
+          <div className="header_bell_block">
+            <FontAwesomeIcon className="header_bell_icon" icon={faBell} />
             {note?.friendRequest!?.length > 0 ? (
               <div className="notifications_number">{note?.friendRequest?.length}</div>
             ) : (
@@ -55,11 +56,11 @@ export const ControlPanel: React.FC = () => {
             <div className="notifications">
               {note?.friendRequest?.length !== 0 ? (
                 <>
-                  <div className="have_friend">
+                  <div className="header_friend_requests">
                     You have friend requests! &nbsp;
                     <NavLink
                       to={`/Friends/${state.auth?.data?._id}`}
-                      className="note_show"
+                      className="notifications_show"
                       onClick={() => {
                         dispatch(setCatergory('subscribers'));
                         onHideNote();
@@ -67,21 +68,21 @@ export const ControlPanel: React.FC = () => {
                       Show
                     </NavLink>
                     &nbsp;
-                    <div className="note_hide" onClick={() => onHideNote()}>
+                    <div className="notifications_hide" onClick={() => onHideNote()}>
                       Hide
                     </div>
                   </div>
                 </>
               ) : (
-                <div className="dont_notе">You don't have notifications</div>
+                <div className="no_notifications">You don't have notifications</div>
               )}
             </div>
           </div>
 
-          <FontAwesomeIcon className="news" icon={faPager} />
+          <FontAwesomeIcon className="header_news_icon" icon={faPager} />
 
           <NavLink to="/Messages" style={path !== 'Messages' ? { color: 'white' } : { color: 'black' }}>
-            <FontAwesomeIcon className="message" icon={faComment} />
+            <FontAwesomeIcon className="header_messages_icon" icon={faComment} />
           </NavLink>
 
           <NavLink
@@ -95,13 +96,13 @@ export const ControlPanel: React.FC = () => {
             }
             className={({ isActive }) => (isActive ? 'active' : 'inactive')}
             onClick={() => dispatch(fetchOneUser(state.auth?.data?._id))}>
-            <FontAwesomeIcon className="users" icon={faUserGroup} />
+            <FontAwesomeIcon className="header_users_icon" icon={faUserGroup} />
           </NavLink>
 
-          <FontAwesomeIcon className="community" icon={faUsers} />
-          <FontAwesomeIcon className="image" icon={faImage} />
-          <FontAwesomeIcon className="video" icon={faFilm} />
-          <FontAwesomeIcon className="music" icon={faMusic} />
+          <FontAwesomeIcon className="header_community_icon" icon={faUsers} />
+          <FontAwesomeIcon className="header_image_icon" icon={faImage} />
+          <FontAwesomeIcon className="header_video_icon" icon={faFilm} />
+          <FontAwesomeIcon className="header_music_icon" icon={faMusic} />
         </div>
       ) : (
         ''

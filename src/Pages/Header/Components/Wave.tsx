@@ -13,7 +13,7 @@ export const Wave: React.FC = () => {
         <NavLink
           style={{ textDecoration: 0, color: 'white' }}
           to={`/Profile/${auth?.data?._id}`}
-          className="wave"
+          className="header_wave"
           onClick={() => {
             dispatch(fetchOneUser(auth?.data._id));
             dispatch(setAttention(1));

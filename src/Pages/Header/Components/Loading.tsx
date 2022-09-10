@@ -32,13 +32,13 @@ export const Loading: React.FC = () => {
   return (
     <>
       {profilePage && path === 'Profile' ? (
-        <div className="loader"></div>
+        <div className="header_loader"></div>
       ) : friendPage && path === 'Friends' ? (
-        <div className="loader"></div>
+        <div className="header_loader"></div>
       ) : messagesPage && path === 'Messages' ? (
-        <div className="loader"></div>
+        <div className="header_loader"></div>
       ) : nonePage && path === '' ? (
-        <div className="loader"></div>
+        <div className="header_loader"></div>
       ) : (
         ''
       )}
