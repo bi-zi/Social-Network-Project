@@ -60,13 +60,13 @@
     width: 40px;
     height: 40px;
     text-decoration: none;
+  }
 
-    .header_profile_icon:hover,
-    .header_messages_icon:hover,
-    .header_users_icon:hover {
-      color: #9e9b9b;
-      cursor: pointer;
-    }
+  .header_profile_icon:hover,
+  .header_messages_icon:hover,
+  .header_users_icon:hover {
+    color: #9e9b9b;
+    cursor: pointer;
   }
 
   .header_news_icon,
@@ -84,8 +84,7 @@
   height: 40px;
   text-decoration: none;
 
-  .header_bell_block:hover,
-  .header_bell_icon:hover {
+  &:hover {
     color: #9e9b9b;
     cursor: pointer;
   }
@@ -140,6 +139,7 @@
     font-size: 20px;
 
     border: 2px solid white;
+    color: white;
 
     background-color: rgb(0, 0, 0);
     display: flex;
@@ -150,7 +150,6 @@
     text-decoration: none;
     color: #ffffff;
 
-    &:hover,
     &:hover {
       color: #9e9b9b;
     }
@@ -240,7 +239,6 @@
   color: white;
   background-color: black;
 
-  &:hover,
   &:hover {
     color: black;
     background-color: white;

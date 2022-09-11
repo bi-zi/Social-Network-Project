@@ -15,7 +15,7 @@ import { ImageParsing } from '../../../ImageParsing/ImageParsing';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faMusic, faLocationPin, faFileLines, faFilm } from '@fortawesome/free-solid-svg-icons';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
-import './style.css';
+import './style.scss';
 
 export type MyParams = {
   id: string;
@@ -118,19 +118,19 @@ export const Post: React.FC = () => {
                     key={index}
                     src={image}
                     alt=""
-                    className={`post_image-${index} ${
+                    className={`post_img-${index} ${
                       index === 0
-                        ? 'wall_large_image'
+                        ? 'wall_large_img'
                         : index === 1
-                        ? 'wall_small_right_image'
-                        : 'wall_small_down_image'
+                        ? 'wall_small_right_img'
+                        : 'wall_small_down_img'
                     }
-                    ${numImg === 1 ? 'wall_one_image' : ''}
+                    ${numImg === 1 ? 'wall_1_img' : ''}
                     ${
                       numImg === 2 && index === 0
-                        ? 'wall_two_image_first'
+                        ? 'wall_2_img_1'
                         : numImg === 2 && index === 1
-                        ? 'wall_two_image_second'
+                        ? 'wall_2_img_2'
                         : ''
                     }`}
                   />
@@ -158,7 +158,7 @@ export const Post: React.FC = () => {
         )}
       </div>
 
-      <div className="wall_control_panel">
+      <div className="post_control_panel">
         <button
           className="post_make_button"
           type="submit"
@@ -182,7 +182,9 @@ export const Post: React.FC = () => {
         />
 
         {linkСheck?.[0] === 'https:' ? (
-          <button className="video_delete" onClick={() => postStatus ? dispatch(setCreateVid('')) : ''}>
+          <button
+            className="post_video_delete"
+            onClick={() => (postStatus ? dispatch(setCreateVid('')) : '')}>
             Delete video
           </button>
         ) : (

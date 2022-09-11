@@ -8,7 +8,7 @@ import { Navigate } from 'react-router-dom';
 import { fetchNotifications } from '../../store/notifications/slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
-import './style.css';
+import './style.scss';
 
 interface User {
   _id: string;
@@ -96,14 +96,14 @@ export const Friends: React.FC = () => {
 
   if (sortBy === 'subscribers') {
     sortedFriends = [...sortedFriends]?.sort(function (a, b) {
-        if (a.subscribers < b.subscribers) {
-          return 1;
-        }
-        if (a.subscribers > b.subscribers) {
-          return -1;
-        }
-        return 0;
-      });
+      if (a.subscribers < b.subscribers) {
+        return 1;
+      }
+      if (a.subscribers > b.subscribers) {
+        return -1;
+      }
+      return 0;
+    });
   }
 
   const deleteFriend = async (userId: string) => {
@@ -134,12 +134,11 @@ export const Friends: React.FC = () => {
 
   return (
     <div className="friends">
-      <div className="friends_result">
-        <div className="find_friend"></div>
+      <div className="friends_left_panel">
         {sortedFriends.length > 0 ? (
           sortedFriends.map((friend) => (
             <div
-              className="friend"
+              className="friends_user_block"
               key={friend._id}
               style={
                 friend === sortedFriends[sortedFriends.length - 1]
@@ -147,11 +146,11 @@ export const Friends: React.FC = () => {
                   : { borderBottom: `` }
               }>
               <Link to={`/Profile/${friend._id}`} onClick={() => window.scrollTo(0, 0)}>
-                <img src={friend.imageUrl} alt="" className="friend_avatar" />
+                <img src={friend.imageUrl} alt="" width={100} className="friends_user_avatar" />
               </Link>
               <Link
                 to={`/Profile/${friend._id}`}
-                className="friend_name"
+                className="friends_user_fullname"
                 style={{ textDecoration: 'none' }}>
                 {friend.fullName}
               </Link>
@@ -159,7 +158,9 @@ export const Friends: React.FC = () => {
               {catergory === 'friends' ? (
                 <div className="friend_menu">
                   <div className="friend_content">
-                    <div className="friend_delete" onClick={() => deleteFriend(friend._id)}>
+                    <div
+                      className="friend_delete"
+                      onClick={() => (loadStatus ? deleteFriend(friend._id) : '')}>
                       Delete friend
                     </div>
                   </div>
@@ -169,61 +170,61 @@ export const Friends: React.FC = () => {
                 ''
               )}
 
-              <span className="number_friends">Friends {friend.friends?.length}</span>
-              <span className="number_subscribers">Subscribers {friend.subscribers?.length}</span>
+              <span className="number_of_friends">Friends {friend.friends?.length}</span>
+              <span className="number_of_subscribers">Subscribers {friend.subscribers?.length}</span>
             </div>
           ))
         ) : catergory === 'friends' ? (
-          <div className="zero_friends">No friends 😭</div>
+          <div className="zero_friends_subs">No friends 😭</div>
         ) : (
-          <div className="zero_friends">No subscribers 😭</div>
+          <div className="zero_friends_subs">No subscribers 😭</div>
         )}
       </div>
 
-      <div className="control_panel">
+      <div className="friends_right_panel">
         <div
           className="all_people"
           style={catergory === 'people' ? { color: 'black' } : {}}
-          onClick={() => setCategory('people')}>
+          onClick={() => (loadStatus ? setCategory('people') : '')}>
           All people
         </div>
         <div
           className="all_friends"
           style={catergory === 'friends' ? { color: 'black' } : {}}
-          onClick={() => setCategory('friends')}>
+          onClick={() => (loadStatus ? setCategory('friends') : '')}>
           Friends
         </div>
         <div
-          className="friend_requests"
+          className="friend_subscribers"
           style={catergory === 'subscribers' ? { color: 'black' } : {}}
-          onClick={() => setCategory('subscribers')}>
+          onClick={() => (loadStatus ? setCategory('subscribers') : '')}>
           Subscribers
         </div>
 
-        <div className="friend_sort_menu">
-          <div className="friend_sort_category">
+        <div className="friends_sort_menu">
+          <div className="friends_sort_category">
             <div
               className="A-Z_sort"
               style={sortBy === 'a-z' ? { color: 'black' } : {}}
-              onClick={() => setSortBy('a-z')}>
+              onClick={() => (loadStatus ? setSortBy('a-z') : '')}>
               Sort by A-Z
             </div>
             <div
               className="Z-A_sort"
               style={sortBy === 'z-a' ? { color: 'black' } : {}}
-              onClick={() => setSortBy('z-a')}>
+              onClick={() => (loadStatus ? setSortBy('z-a') : '')}>
               Sort by Z-A
             </div>
             <div
               className="friends_sort"
               style={sortBy === 'friends' ? { color: 'black' } : {}}
-              onClick={() => setSortBy('friends')}>
+              onClick={() => (loadStatus ? setSortBy('friends') : '')}>
               Sort by friends
             </div>
             <div
               className="subscribers_sort"
               style={sortBy === 'subscribers' ? { color: 'black' } : {}}
-              onClick={() => setSortBy('subscribers')}>
+              onClick={() => (loadStatus ? setSortBy('subscribers') : '')}>
               Sort by subscribers
             </div>
           </div>

@@ -3,7 +3,7 @@ import { AboutForm } from './components/AboutForm';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { fetchOneUser } from '../../../store/user/slice';
 import { useParams } from 'react-router-dom';
-import './style.css';
+import './style.scss';
 
 export type MyParams = {
   id: string;
@@ -23,12 +23,10 @@ export const UserInfo: React.FC = () => {
   return (
     <>
       <div className="about">
-        <div className="about_backGround">
-          <div className="fullName">{`${user?.fullName || ''}`}</div>
-          <div className="line"></div>
+        <div className="about_fullName">{`${user?.fullName || ''}`}</div>
+        <div className="about_line"></div>
 
-          <AboutForm />
-        </div>
+        <AboutForm />
       </div>
     </>
   );

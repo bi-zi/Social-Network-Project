@@ -4,7 +4,7 @@ import { fetchGetMessages, fetchAddMessage } from '../../store/messages/slice';
 import { NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import './style.css';
+import './style.scss';
 
 export const Messages: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -115,31 +115,31 @@ export const Messages: React.FC = () => {
 
   return (
     <div className="messages_container">
-      <div className="messages_friends">
-        <div className="messages_left_control_panel">
-          <FontAwesomeIcon className="messages_searchIcon" icon={faMagnifyingGlass} />
+      <div className="messages_chats">
+        <div className="messages_find_chat">
+          <FontAwesomeIcon className="messages_search_icon" icon={faMagnifyingGlass} />
           <input
             type="text"
             pattern="^[a-zA-Z0-9 ]+$"
             onChange={(e) => setFindChat(e.target.value)}
-            className="messages_find_friend"
+            className="messages_find_chat_input"
           />
           {sortedFriends.length !== 0 ? (
-            <div className="messages_left_container">
+            <div className="messages_chats_container">
               {sortedFriends.map((friend, index) => (
                 <div
-                  className={`message_left ${selectUser === friend._id ? 'message_color' : ''}`}
+                  className={`messages_chats_item ${
+                    selectUser === friend._id ? 'message_chats_item_color' : ''
+                  }`}
                   key={friend._id}
                   onClick={() => {
                     setSelectUser(friend._id);
-
                     setTimeout(scrollToBottom, 0);
                   }}>
-                  <img src={friend.imageUrl} alt="" className="message_left_avatar" />
-                  <div className="message_left_fullName">{friend.fullName}</div>
-
+                  <img src={friend.imageUrl} alt="" className="messages_chats_item_avatar" />
+                  <div className="messages_chats_item_fullName">{friend.fullName}</div>
                   {lastMessage![index] !== undefined ? (
-                    <div className="message_left_time">{`${new Date(
+                    <div className="messages_chats_item_time">{`${new Date(
                       lastMessage![index]?.date,
                     ).toLocaleTimeString()} - ${new Date(
                       lastMessage![index]?.date,
@@ -147,15 +147,14 @@ export const Messages: React.FC = () => {
                   ) : (
                     ''
                   )}
-
                   {lastMessage![index] !== undefined ? (
-                    <div className="message_name_box">
-                      <div className="message_name">
+                    <div className="messages_chats_item_message_name_block">
+                      <div className="messages_chats_item_message_name">
                         {lastMessage![index]?.userId === friend._id
                           ? friend.fullName.split(' ')[0] + ':'
                           : 'You:'}
                       </div>
-                      <div className="messages_left_last">
+                      <div className="messages_chats_item_last_message">
                         {lastMessage![index]?.message?.slice(0, 40)}
                         {lastMessage![index]?.message?.length > 40 ? '...' : ''}
                       </div>
@@ -167,38 +166,42 @@ export const Messages: React.FC = () => {
               ))}
             </div>
           ) : (
-            <NavLink to={`/Friends/${auth?._id}`} className="message_left_linkToFriends">
+            <NavLink to={`/Friends/${auth?._id}`} className="messages_chats_empty">
               Find friends to chat
             </NavLink>
           )}
         </div>
       </div>
-      <div className="messages_from_friend">
+
+      <div className="messages_correspondence_container">
         {selectedUser[0] === undefined ? (
-          <div className="select_chat">Select chat</div>
+          <div className="messages_correspondence_select_chat">Select chat</div>
         ) : (
           <>
             {selectedUser?.map((select, index) => (
-              <div className="messages_right_header" key={select?._id}>
+              <div className="messages_correspondence_header" key={select?._id}>
                 <NavLink to={`/Profile/${select._id}`}>
-                  <img src={select?.imageUrl} alt="" className="messages_right_avatar" />
-                  <div className="message_right_fullName">{select?.fullName}</div>
+                  <img src={select?.imageUrl} alt="" className="messages_correspondence_header_avatar" />
+                  <div className="messages_correspondence_header_fullName">{select?.fullName}</div>
                 </NavLink>
               </div>
             ))}
-            <div className="messages_all" ref={divRef}>
+
+            <div className="messages_correspondence" ref={divRef}>
               {messagesLength! > addMessages && loadStatus ? (
-                <div className="messages_add_20" onClick={() => setAddMessages(addMessages + 20)}>
+                <div
+                  className="messages_correspondence_add_20"
+                  onClick={() => setAddMessages(addMessages + 20)}>
                   Add more messages
                 </div>
               ) : (
                 ''
               )}
               {selectedMessage?.length === 0 ? (
-                <div className="meessages_zero">Write the first message in the chat</div>
+                <div className="meessages_correspondence_empty">Write the first message in the chat</div>
               ) : (
                 selectedMessage?.map((message, index) => (
-                  <div className="message_box" key={index}>
+                  <div className="messages_correspondence_message_block" key={index}>
                     {(message?.userId !== selectedMessage[index - 1]?.userId ||
                       message?.date !== selectedMessage[index - 1]?.date) &&
                     message.userId !== undefined ? (
@@ -209,33 +212,33 @@ export const Messages: React.FC = () => {
                               ?.imageUrl
                           }
                           alt=""
-                          className="messages_all_avatar"
+                          className="messages_correspondence_message_avatar"
                         />
-                        <div className="messages_all_fullName">
+                        <div className="messages_correspondence_message_fullName">
                           {
                             state.user?.usersAll.filter((user) => message.userId?.includes(user._id))[0]
                               ?.fullName
                           }
                         </div>
 
-                        <div className="messages_all_date">{`${new Date(
+                        <div className="messages_correspondence_message_date">{`${new Date(
                           message.date,
                         ).toLocaleDateString()} - ${new Date(message.date).toLocaleTimeString()}`}</div>
                       </>
                     ) : (
                       ''
                     )}
-                    <div className="message_user">{message.message}</div>
+                    <div className="message_correspondence_message">{message.message}</div>
                   </div>
                 ))
               )}
             </div>
 
-            <div className="messages_right_control_panel">
+            <div className="messages_correspondence_panel">
               <input
                 type="text"
                 ref={firstRef}
-                className="messages_right_input"
+                className="messages_correspondence_panel_input"
                 required={true}
                 minLength={1}
                 maxLength={300}
@@ -245,7 +248,7 @@ export const Messages: React.FC = () => {
               />
               <button
                 type="submit"
-                className="messages_right_button"
+                className="messages_correspondence_panel_button"
                 onClick={() =>
                   text?.length !== 0 && loadStatus
                     ? (onSubmit(text), setTimeout(scrollToBottom, 400))

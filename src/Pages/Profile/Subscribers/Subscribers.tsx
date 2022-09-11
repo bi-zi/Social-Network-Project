@@ -5,7 +5,7 @@ import { fetchUserPostsAll } from '../../../store/post/slice';
 import { fetchSlider } from '../../../store/slider/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import './style.css';
+import './style.scss';
 
 export const Subscribers: React.FC = () => {
   const dispatch = useAppDispatch();

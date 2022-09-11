@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareNodes, faEllipsis, faXmark, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp, faThumbsDown, faCommentDots } from '@fortawesome/free-regular-svg-icons';
 
-import './style.css';
+import './style.scss';
 
 export type MyParams = {
   id: string;
@@ -72,7 +72,7 @@ export const Wall: React.FC = () => {
           user: id,
         }),
       );
-    
+
     dispatch(fetchUserPostsAll(id));
   };
 
@@ -103,7 +103,6 @@ export const Wall: React.FC = () => {
     dispatch(fetchUserPostsAll(id));
   };
 
-
   const deletePost = async (index: string) => {
     const postIndex = wall.post
       .find((userPosts) => userPosts.user === id)!
@@ -120,7 +119,7 @@ export const Wall: React.FC = () => {
   }, [dispatch, id]);
 
   return (
-    <div className="wall_containter">
+    <>
       {wallPost?.map((content, index) => (
         <div className={`wall ${index}`} key={index}>
           <img src={user?.imageUrl} alt="" className="wall_avatar" />
@@ -138,7 +137,7 @@ export const Wall: React.FC = () => {
           <div className="wall_content">
             {content.text?.length > 0 ? <div className="wall_text">{content.text}</div> : ''}
             {content.imagesPost?.length > 0 ? (
-              <div className="wall_images">
+              <div className="wall_img">
                 {content?.imagesPost.map((image, index) => {
                   return (
                     <div key={index}>
@@ -146,19 +145,19 @@ export const Wall: React.FC = () => {
                         key={index}
                         src={image}
                         alt=""
-                        className={`post_image-${index} ${
+                        className={`post_img-${index} ${
                           index === 0
-                            ? 'wall_large_image'
+                            ? 'wall_big_img'
                             : index === 1
-                            ? 'wall_small_right_image'
-                            : 'wall_small_down_image'
+                            ? 'wall_small_right_img'
+                            : 'wall_small_down_img'
                         }
-                    ${content.imagesPost.length === 1 ? 'wall_one_image' : ''}
+                    ${content.imagesPost.length === 1 ? 'wall_1_img' : ''}
                     ${
                       content.imagesPost.length === 2 && index === 0
-                        ? 'wall_two_image_first'
+                        ? 'wall_2_img_1'
                         : content.imagesPost.length === 2 && index === 1
-                        ? 'wall_two_image_second'
+                        ? 'wall_2_img_2'
                         : ''
                     }`}
                       />
@@ -182,6 +181,7 @@ export const Wall: React.FC = () => {
             ) : (
               ''
             )}
+
             <div className="wall_from">Post from {`${state.user.userOne?.[0]?.fullName}`}</div>
 
             <FontAwesomeIcon
@@ -200,7 +200,7 @@ export const Wall: React.FC = () => {
                 }
               }}
             />
-            <span className="like_number">{content.likePost?.length}</span>
+            <span className="wall_like_number">{content.likePost?.length}</span>
 
             <FontAwesomeIcon
               className="wall_dislike_icon"
@@ -219,7 +219,7 @@ export const Wall: React.FC = () => {
               }}
             />
 
-            <span className="dislike_number">{content.dislikePost?.length}</span>
+            <span className="wall_dislike_number">{content.dislikePost?.length}</span>
 
             <FontAwesomeIcon
               className="wall_comment_icon"
@@ -235,21 +235,21 @@ export const Wall: React.FC = () => {
                 }
               }}
             />
-            <span className="dislike_number">{content.commentPost.length}</span>
+            <span className="wall_dislike_number">{content.commentPost.length}</span>
 
             <FontAwesomeIcon className="wall_share_icon" icon={faShareNodes} />
 
             {comment === index ? (
-              <div className="comments">
+              <div className="wall_comments">
                 <textarea
                   ref={firstRef}
-                  className="comment_input"
+                  className="wall_comment_input"
                   placeholder="Write your comment here"
                   onChange={(e) => dispatch(setCreateComment(e.target.value))}
                 />
 
                 <button
-                  className="input_button"
+                  className="wall_input_button"
                   onClick={() =>
                     postStatus && state.post.createComment.length > 0 ? addComment(content._id) : ''
                   }>
@@ -257,25 +257,25 @@ export const Wall: React.FC = () => {
                 </button>
 
                 {content.commentPost?.map((comment, index) => (
-                  <div className="comment" key={index}>
+                  <div className="wall_comment" key={index}>
                     <img
                       src={state.user.usersAll.find((user) => user._id === comment.userId)!?.imageUrl[0]}
                       alt=""
-                      className="comment_avatar"
+                      className="wall_comment_avatar"
                     />
                     {wall.post.find((userPost) => userPost.user === id)?.user === auth?._id ||
                     auth?._id === comment.userId ? (
                       <FontAwesomeIcon
-                        className="comment_delete"
+                        className="wall_comment_delete"
                         icon={faXmark}
                         onClick={() => (!postStatus ? deleteComment(content?._id, index) : '')}
                       />
                     ) : (
                       ''
                     )}
-                    <div className="comment_fullName">{comment.fullName}</div>
-                    <div className="comment_time">{comment.commentDate}</div>
-                    <div className="comment_text">{comment.commentText}</div>
+                    <div className="wall_comment_fullName">{comment.fullName}</div>
+                    <div className="wall_comment_time">{comment.commentDate}</div>
+                    <div className="wall_comment_text">{comment.commentText}</div>
                   </div>
                 ))}
               </div>
@@ -285,6 +285,6 @@ export const Wall: React.FC = () => {
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };

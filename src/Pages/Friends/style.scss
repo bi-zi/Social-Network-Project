@@ -1,0 +1,207 @@
+.friends {
+  display: flex;
+
+  margin: 20px auto 0 auto;
+  padding-bottom: 80px;
+
+  max-width: 1395px;
+  height: 100%;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  user-select: none;
+  color: #ffffff;
+
+  .friends_left_panel,
+  .friends_right_panel {
+    width: 678px;
+    height: 100%;
+
+    border-radius: 20px;
+
+    background: #393939;
+  }
+}
+
+.friends_left_panel {
+  .friends_user_block {
+    display: flex;
+    position: relative;
+
+    margin-left: 20px;
+    margin-top: 10px;
+
+    width: 640px;
+    height: 120px;
+
+    border-bottom: 2px solid black;
+  }
+
+  .friends_user_avatar {
+    width: 110px;
+    height: 110px;
+
+    border-radius: 100%;
+    cursor: pointer;
+  }
+
+  .friends_user_fullname {
+    margin-top: 10px;
+    margin-left: 10px;
+
+    width: auto;
+    height: 20px;
+
+    font-size: 17px;
+    color: white;
+  }
+
+  .friend_menu {
+    position: absolute;
+
+    float: left;
+    left: 590px;
+    top: 10px;
+
+    &:active .friend_content {
+      display: block;
+    }
+
+    .friend_content {
+      display: none;
+      position: absolute;
+
+      padding-top: 20px;
+
+      width: 120px;
+      height: 80px;
+
+      left: -85px;
+
+      &:hover {
+        display: block;
+      }
+    }
+
+    .friend_delete {
+      width: 110px;
+      padding: 3px;
+
+      font-size: 16px;
+
+      background-color: rgb(0, 0, 0);
+      color: white;
+    }
+
+    .friend_delete:hover {
+      background-color: white;
+      color: black;
+
+      cursor: pointer;
+    }
+
+    .friend_menu_icon {
+      font-size: 26px !important;
+      cursor: pointer;
+    }
+  }
+
+  .number_of_friends {
+    position: absolute;
+
+    top: 100px;
+    right: 140px;
+  }
+
+  .number_of_subscribers {
+    position: absolute;
+
+    top: 100px;
+    right: 20px;
+  }
+
+  .zero_friends_subs {
+    display: flex;
+    position: relative;
+
+    margin-left: 20px;
+    margin-top: 10px;
+
+    width: 640px;
+    height: 60px;
+
+    font-size: 40px;
+  }
+}
+
+.friends_right_panel {
+  display: block;
+  position: sticky;
+
+  top: 80px;
+
+  .all_people,
+  .all_friends,
+  .friend_subscribers,
+  .friend_sort {
+    margin: 20px;
+
+    width: 640px;
+    height: 50px;
+
+    font-size: 26px;
+
+    cursor: pointer;
+    z-index: 10 !important;
+
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+.friends_sort_menu {
+  position: relative;
+
+  &:active .friends_sort_category {
+    display: block;
+  }
+
+  .friends_sort_category {
+    display: none;
+    position: absolute;
+
+    padding-top: 40px;
+
+    width: 679px;
+    height: 270px;
+
+    &:hover {
+      display: block;
+    }
+
+    .A-Z_sort,
+    .Z-A_sort,
+    .friends_sort,
+    .subscribers_sort {
+      padding: 20px 20px;
+
+      font-size: 26px;
+      background-color: #393939;
+      cursor: pointer;
+
+      &:hover {
+        color: black;
+      }
+    }
+
+    .subscribers_sort {
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+  }
+}

@@ -17,76 +17,78 @@
   border-radius: 15px;
 
   user-select: none;
-}
 
-.fullName {
-  position: absolute;
-  height: 30px;
-  left: 21px;
-  top: 18px;
+  .about_fullName {
+    position: absolute;
+    height: 30px;
+    left: 21px;
+    top: 18px;
 
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 40px;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 40px;
 
-  letter-spacing: 2px;
+    letter-spacing: 2px;
 
-  color: #ffffff;
-}
+    color: #ffffff;
+  }
 
-.line {
-  position: absolute;
+  .about_line {
+    position: absolute;
 
-  width: 942px;
+    width: 942px;
 
-  top: 70px;
-  left: 19px;
+    top: 70px;
+    left: 19px;
 
-  border-bottom: 10px solid #222222;
-}
+    border-bottom: 10px solid #222222;
+  }
 
-.about_info {
-  position: absolute;
+  .about_info {
+    position: absolute;
 
-  padding-top: 90px;
+    padding-top: 90px;
 
-  width: 940px;
-  height: 250px;
+    width: 940px;
+    height: 250px;
 
-  top: 90px;
-  left: 20px;
+    top: 90px;
+    left: 20px;
 
-  text-align: center;
-  font-size: 30px;
+    text-align: center;
+    font-size: 30px;
 
-  z-index: 1;
-  color: #fe000000;
-}
+    z-index: 1;
+    color: #fe000000;
 
-.about_info:hover {
-  background-color: rgba(22, 22, 22, 0.56);
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-}
+    &:hover {
+      background-color: rgba(22, 22, 22, 0.56);
+      color: rgb(255, 255, 255);
+      cursor: pointer;
+    }
+  }
 
-.lives,
-.from,
-.born,
-.profession,
-.relationship,
-.student {
-  position: relative;
+  .about_lives,
+  .about_from,
+  .about_born,
+  .about_profession,
+  .about_relationship,
+  .about_student {
+    position: relative;
 
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 
-  width: 935px;
-  height: 30px;
+    width: 935px;
+    height: 30px;
 
-  top: 94px;
-  left: 21px;
+    top: 94px;
+    left: 21px;
 
-  font-size: 30px;
-  line-height: 37px;
+    font-size: 30px;
+    line-height: 37px;
+  }
+
+
 }
 
 .about_form {
@@ -96,12 +98,7 @@
   left: 20px;
 }
 
-.lives_input,
-.lives_from,
-.lives_born,
-.lives_profession,
-.lives_relationship,
-.lives_student {
+.about_input {
   margin-bottom: 10px;
 
   padding-left: 10px;
