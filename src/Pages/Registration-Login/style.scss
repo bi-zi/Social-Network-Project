@@ -1,0 +1,78 @@
+.registration_attention {
+  margin: 200px auto 0 auto;
+  width: 500px;
+
+  top: 200px;
+  left: 300px;
+
+  font-size: 20px;
+  font-family: 'Iceberg';
+
+  text-align: center;
+  color: rgb(255, 0, 0);
+}
+
+.registration {
+  margin: 20px auto 0 auto;
+
+  width: 300px;
+  height: 300px;
+
+  border-radius: 20px;
+  background-color: #393939;
+
+  .registration_form {
+    position: relative;
+
+    padding-top: 60px;
+    text-align: center;
+
+    .registration_form_firstName,
+    .registration_form_lastName,
+    .registration_form_password {
+      width: 220px;
+      height: 40px;
+
+      margin-bottom: 10px;
+      padding-left: 10px;
+
+      font-size: 20px;
+      font-family: 'Iceberg';
+
+      border: 0px solid white;
+      border-radius: 5px;
+      color: black;
+    }
+
+    .registration_form_submit {
+      width: 220px;
+      height: 30px;
+
+      font-size: 18px;
+      font-family: 'Iceberg';
+
+      border-radius: 5px;
+
+      color: black;
+      background-color: white;
+      cursor: pointer;
+
+      &:hover {
+        color: white;
+
+        border: 1px solid white;
+        background-color: black;
+      }
+    }
+
+    .registration_link_to {
+      position: relative;
+
+      top: 30px;
+      left: -5px;
+
+      font-size: 20px;
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,113 @@
+.avatar {
+  position: absolute;
+
+  width: 380px;
+  height: 470px;
+
+  top: 80px;
+
+  font-family: 'Iceberg';
+  font-style: normal;
+  font-weight: 400;
+
+  background: #393939;
+  color: #ffffff;
+
+  border-radius: 15px;
+  user-select: none;
+
+  .avatar_image {
+    position: relative;
+
+    width: 328px;
+    height: 375px;
+
+    top: 18px;
+    left: 26px;
+
+    border-radius: 15px;
+  }
+
+  .avatar_button {
+    position: absolute;
+
+    width: 328px;
+    height: 51px;
+
+    top: 407px;
+    left: 26px;
+
+    background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
+    background-size: 200% auto;
+    border-radius: 15px;
+
+    letter-spacing: 2px;
+
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
+
+    .avatar_change {
+      position: relative;
+
+      width: 200px;
+      top: 13px;
+      left: 90px;
+
+      font-size: 20px;
+      text-transform: uppercase;
+    }
+  }
+
+  .avatar_delete_friend {
+    left: 200px;
+  }
+
+  .avatar_delete_friend,
+  .avatar_send_message {
+    position: absolute;
+
+    width: 155px;
+    height: 60px;
+
+    top: 402px;
+    left: 26px;
+
+    color: #ffffff;
+
+    background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
+    background-size: 200% auto;
+    border: 0;
+    border-radius: 15px;
+
+    transition: 0.5s;
+
+    text-decoration: none;
+
+    font-family: 'Iceberg';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+
+    letter-spacing: 2px;
+    cursor: pointer;
+  }
+
+  .avatar_send_message {
+    padding-top: 5px;
+    padding-left: 10px;
+    text-align: center;
+  }
+
+  .avatar_button:hover,
+  .avatar_delete_friend:hover,
+  .avatar_send_message:hover {
+    background-position: right center;
+  }
+
+  .avatar_button:active,
+  .avatar_delete_friend:active,
+  .avatar_send_message:active {
+    transform: scale(0.9);
+    transition: 0.2s;
+  }
+}

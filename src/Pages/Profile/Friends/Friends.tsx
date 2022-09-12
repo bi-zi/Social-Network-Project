@@ -5,7 +5,7 @@ import { fetchUserPostsAll } from '../../../store/post/slice';
 import { fetchSlider } from '../../../store/slider/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import './style.css';
+import './style.scss';
 
 export type MyParams = {
   id: string;
@@ -47,7 +47,7 @@ export const Friends: React.FC = () => {
         onClick={() => dispatch(setCatergory('friends'))}>
         Friends - {user?.usersAll.filter((user) => userProfile?.friends.includes(user._id))?.length}
       </Link>
-      
+
       <div className="profile_friends_container">
         {friends.map((friend) => (
           <div key={friend._id}>

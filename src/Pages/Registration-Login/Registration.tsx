@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchRegister, selectIsAuth } from '../../store/auth/slice';
 import { useForm } from 'react-hook-form';
 import { NavLink, Navigate } from 'react-router-dom';
-import './style.css';
+import './style.scss';
 
 type FormValues = {
   fullName: string;
@@ -42,40 +42,40 @@ export const Registration = () => {
 
   return (
     <>
-      <div className="attention">
+      <div className="registration_attention">
         Do not provide personal email addresses and passwords. The data is encrypted but available to
         everyone!
       </div>
       <div className="registration">
-        <form className="registr_form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="registration_form" onSubmit={handleSubmit(onSubmit)}>
           <label>
             <input
               {...register('fullName', { required: 'Укажите полное имя' })}
-              className="firstName"
+              className="registration_form_firstName"
               type="text"
               placeholder="Elon Musk"
               pattern="^[a-zA-Z0-9 ]+$"
               title="Only latin characters can be used"
             />
             <input
-              className="lastName"
+              className="registration_form_lastName"
               type="email"
               placeholder="@gmail.com"
               {...register('email', { required: 'Укажите почту' })}
             />
             <input
-              className="password"
+              className="registration_form_password"
               type="password"
               placeholder="password"
               {...register('password', { required: 'Укажите пароль' })}
             />
           </label>
           <br />
-          <button type="submit" className="submit_registr" disabled={!isValid}>
+          <button type="submit" className="registration_form_submit" disabled={!isValid}>
             Submit
           </button>
           <br />
-          <NavLink to="/Login" className="link_to">
+          <NavLink to="/Login" className="registration_link_to">
             Sing in
           </NavLink>
         </form>

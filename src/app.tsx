@@ -10,7 +10,7 @@ import { Photo } from './Pages/SelectedPhoto/SelectedPhoto';
 import { Friends } from './Pages/Friends/Friends';
 import { Messages } from './Pages/Messages/Messages';
 import { Routes, Route } from 'react-router-dom';
-import './style.css';
+import './style.scss';
 
 export const App: React.FC = () => {
   const dispatch = useAppDispatch();

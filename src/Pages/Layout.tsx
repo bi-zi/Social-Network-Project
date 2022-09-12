@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { Header } from './Header/Header';
 import {Footer} from './Footer/Footer'
 import { NavLink } from 'react-router-dom';
-import './style.css';
+import './style.scss';
 
 export const Layout: React.FC = () => {
   const [close, setClose] = React.useState(true);
@@ -25,8 +25,8 @@ export const Layout: React.FC = () => {
     <div className="wrapper">
       <Header />
       {window.location.pathname.split(' ')[0] === '/' && close && user.deleteAttention === 0 ? (
-        <div className="firstPage_container">
-          <div className="firstPage_info">
+        <div className="wrapper_container">
+          <div className="wrapper_info">
             <p>
               In most cases, after interacting with the site, a spinning ring appears in the upper right
               next to the menu. The server is free, so data is sent or received for a long time.
@@ -34,7 +34,7 @@ export const Layout: React.FC = () => {
               blocked to avoid data writing errors. If the ring didn't appear and the post-submit action
               didn't work, the send control was blocked, most likely the server died :)
               <br />
-              <NavLink to="/Register" className="firstPage_link" onClick={() => setClose(false)}>
+              <NavLink to="/Register" className="wrapper_link" onClick={() => setClose(false)}>
                 Go further
               </NavLink>
             </p>
@@ -47,7 +47,7 @@ export const Layout: React.FC = () => {
               post-submit не сработало, управление отправкой было заблокировано, скорее всего сервер умер
               :)
               <br />
-              <NavLink to="/Register" className="firstPage_link" onClick={() => setClose(false)}>
+              <NavLink to="/Register" className="wrapper_link" onClick={() => setClose(false)}>
                 Перейти дальше
               </NavLink>
             </p>

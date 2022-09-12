@@ -26,7 +26,7 @@ import {
 import { ImageParsing } from '../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import './style.css';
+import './style.scss';
 
 export type MyParams = {
   id: string;
@@ -148,75 +148,73 @@ export const Avatar: React.FC = () => {
 
   return (
     <div className="avatar">
-      <div className="avatar_backGround">
-        {loadStatus ? (
-          <Link to={`/${id}/PhotoAvatar/0`}>
-            <img src={user?.imageUrl} alt="" className="avatar_image" />
-          </Link>
-        ) : (
+      {loadStatus ? (
+        <Link to={`/${id}/PhotoAvatar/0`}>
           <img src={user?.imageUrl} alt="" className="avatar_image" />
-        )}
+        </Link>
+      ) : (
+        <img src={user?.imageUrl} alt="" className="avatar_image" />
+      )}
 
-        {auth?._id === id ? (
-          <div
-            className="avatar_button"
-            onChange={() => {
-              dispatch(setInputNumber('0'));
-            }}>
-            {auth === null ? '' : <div className="avatar_change">Change photo</div>}
+      {auth?._id === id ? (
+        <div
+          className="avatar_button"
+          onChange={() => {
+            dispatch(setInputNumber('0'));
+          }}>
+          {auth === null ? '' : <div className="avatar_change">Change photo</div>}
 
-            {auth?._id === id && loadStatus ? <ImageParsing /> : ''}
-          </div>
-        ) : (
-          ''
-        )}
+          {auth?._id === id && loadStatus ? <ImageParsing /> : ''}
+        </div>
+      ) : (
+        ''
+      )}
 
-        {auth === null || auth?._id === id ? (
-          ''
-        ) : subscribedToYou !== 0 && youSubscriber === 0 && friend !== +id ? (
-          <>
-            <Link to="/Messages" className="send_message" onClick={() => createMessages()}>
-              Send a message
-            </Link>
+      {auth === null || auth?._id === id ? (
+        ''
+      ) : subscribedToYou !== 0 && youSubscriber === 0 && friend !== +id ? (
+        <>
+          <Link to="/Messages" className="avatar_send_message" onClick={() => createMessages()}>
+            Send a message
+          </Link>
 
-            <button className="delete_friend" onClick={() => (loadStatus ? acceptFriend() : '')}>
-              Accept friend request
-            </button>
-          </>
-        ) : friend === 1 ? (
-          <>
-            <Link to="/Messages" className="send_message" onClick={() => createMessages()}>
-              Send a message
-            </Link>
+          <button className="avatar_delete_friend" onClick={() => (loadStatus ? acceptFriend() : '')}>
+            Accept friend request
+          </button>
+        </>
+      ) : friend === 1 ? (
+        <>
+          <Link to="/Messages" className="avatar_send_message" onClick={() => createMessages()}>
+            Send a message
+          </Link>
 
-            <button className="delete_friend" onClick={() => (loadStatus ? deleteFriend() : '')}>
-              Delete friend
-            </button>
-          </>
-        ) : youSubscriber !== 0 ? (
-          <>
-            <Link to="/Messages" className="send_message" onClick={() => createMessages()}>
-              Send a message
-            </Link>
+          <button className="delete_friend" onClick={() => (loadStatus ? deleteFriend() : '')}>
+            Delete friend
+          </button>
+        </>
+      ) : youSubscriber !== 0 ? (
+        <>
+          <Link to="/Messages" className="avatar_send_message" onClick={() => createMessages()}>
+            Send a message
+          </Link>
 
-            <button className="delete_friend" onClick={() => (loadStatus ? unsubscribe() : '')}>
-              Unsubscribe
-            </button>
-          </>
-        ) : youSubscriber === 0 ? (
-          <>
-            <Link to="/Messages" className="send_message" onClick={() => createMessages()}>
-              Send a message
-            </Link>
+          <button className="avatar_delete_friend" onClick={() => (loadStatus ? unsubscribe() : '')}>
+            Unsubscribe
+          </button>
+        </>
+      ) : youSubscriber === 0 ? (
+        <>
+          <Link to="/Messages" className="avatar_send_message" onClick={() => createMessages()}>
+            Send a message
+          </Link>
 
-            <button className="delete_friend" onClick={() => (loadStatus ? subscribe() : '')}>
-              Send friend request
-            </button>
-          </>
-        ) : (
-          ''
-        )}
-      </div>
+          <button className="avatar_delete_friend" onClick={() => (loadStatus ? subscribe() : '')}>
+            Send friend request
+          </button>
+        </>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

@@ -152,8 +152,11 @@ export const Messages: React.FC = () => {
                       <div className="messages_chats_item_message_name">
                         {lastMessage![index]?.userId === friend._id
                           ? friend.fullName.split(' ')[0] + ':'
+                          : lastMessage![index].message === undefined
+                          ? 'Write the first message'
                           : 'You:'}
                       </div>
+
                       <div className="messages_chats_item_last_message">
                         {lastMessage![index]?.message?.slice(0, 40)}
                         {lastMessage![index]?.message?.length > 40 ? '...' : ''}
