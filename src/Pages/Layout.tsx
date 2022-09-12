@@ -11,15 +11,15 @@ export const Layout: React.FC = () => {
   const user = useAppSelector((state) => state.user);
   const state = useAppSelector((state) => state);
 
-  // console.log([
-  //   `-AUTH- ${state.auth.status}`,
-  //   `-USER- ${state.user.status}`,
-  //   `-NOTE- ${state.note.status}`,
-  //   `-MESSAGES- ${state.messages.status}`,
-  //   `-ABOUT- ${state.about.status}`,
-  //   `-SLIDER- ${state.slider.status}`,
-  //   `-POST- ${state.post.userPosts.status}`,
-  // ]);
+  console.log([
+    `-AUTH- ${state.auth.status}`,
+    `-USER- ${state.user.status}`,
+    `-NOTE- ${state.note.status}`,
+    `-MESSAGES- ${state.messages.status}`,
+    `-ABOUT- ${state.about.status}`,
+    `-SLIDER- ${state.slider.status}`,
+    `-POST- ${state.post.userPosts.status}`,
+  ]);
 
   return (
     <div className="wrapper">

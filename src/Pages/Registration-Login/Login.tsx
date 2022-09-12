@@ -49,7 +49,7 @@ export const Login = () => {
         everyone!
       </div>
       <div className="registration">
-        <form className="registr_form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="registration_form" onSubmit={handleSubmit(onSubmit)}>
           <label>
             <input
               className="registration_form_lastName"

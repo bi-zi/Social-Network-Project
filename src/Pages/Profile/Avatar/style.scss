@@ -59,7 +59,7 @@
   }
 
   .avatar_delete_friend {
-    left: 200px;
+    left: 200px !important;
   }
 
   .avatar_delete_friend,
@@ -98,16 +98,18 @@
     text-align: center;
   }
 
-  .avatar_button:hover,
-  .avatar_delete_friend:hover,
-  .avatar_send_message:hover {
-    background-position: right center;
-  }
 
-  .avatar_button:active,
-  .avatar_delete_friend:active,
-  .avatar_send_message:active {
-    transform: scale(0.9);
-    transition: 0.2s;
-  }
+.avatar_button:hover,
+.avatar_delete_friend:hover,
+.avatar_send_message:hover {
+  background-position: right center;
+}
+
+.avatar_button:active,
+.avatar_delete_friend:active,
+.avatar_send_message:active {
+  transform: scale(0.9);
+  transition: 0.2s;
+}
+
 }

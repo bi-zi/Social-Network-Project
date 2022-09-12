@@ -2,6 +2,7 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { fetchOneUser, setCatergory } from '../../../store/user/slice';
 import { fetchNotifications, fetchNotificationsDelete } from '../../../store/notifications/slice';
+import { fetchSlider } from '../../../store/slider/slice';
 import { useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
@@ -41,7 +42,10 @@ export const ControlPanel: React.FC = () => {
                 ? { color: 'black' }
                 : { color: 'white' }
             }
-            onClick={() => dispatch(fetchOneUser(state.auth?.data?._id))}>
+            onClick={() => {
+              dispatch(fetchOneUser(state.auth?.data?._id));
+              dispatch(fetchSlider(state.auth?.data?._id));
+            }}>
             <FontAwesomeIcon className="header_profile_icon" icon={faCircleUser} />
           </NavLink>
 

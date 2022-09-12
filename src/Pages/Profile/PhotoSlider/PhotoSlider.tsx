@@ -29,6 +29,8 @@ export const PhotoSlider: React.FC = () => {
     swipeToSlide: true,
   };
 
+  console.log(state.slider);
+
   React.useEffect(() => {
     dispatch(fetchSlider(id));
   }, []);

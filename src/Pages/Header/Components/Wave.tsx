@@ -11,7 +11,7 @@ export const Wave: React.FC = () => {
     <>
       {!(auth.status === 'loading') ? (
         <NavLink
-          style={{ textDecoration: 0, color: 'white' }}
+          style={{ textDecoration: 0}}
           to={`/Profile/${auth?.data?._id}`}
           className="header_wave"
           onClick={() => {

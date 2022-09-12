@@ -253,7 +253,7 @@ export const Wall: React.FC = () => {
                   onClick={() =>
                     postStatus && state.post.createComment.length > 0 ? addComment(content._id) : ''
                   }>
-                  <FontAwesomeIcon className="post_make_icon" icon={faPlay} />
+                  <FontAwesomeIcon className="wall_comment_icon" icon={faPlay} />
                 </button>
 
                 {content.commentPost?.map((comment, index) => (

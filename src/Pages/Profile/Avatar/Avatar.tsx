@@ -188,7 +188,7 @@ export const Avatar: React.FC = () => {
             Send a message
           </Link>
 
-          <button className="delete_friend" onClick={() => (loadStatus ? deleteFriend() : '')}>
+          <button className="avatar_delete_friend" onClick={() => (loadStatus ? deleteFriend() : '')}>
             Delete friend
           </button>
         </>
