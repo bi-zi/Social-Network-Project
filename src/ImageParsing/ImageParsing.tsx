@@ -28,36 +28,36 @@ export const ImageParsing: React.FC = () => {
 
       dispatch(fetchOneUser(id));
       dispatch(fetchSlider(id));
-      console.log('ava1', parsing.inputNumber);
+      // console.log('ava', parsing.inputNumber);
     }
 
     if (slider === undefined && parsing.inputNumber === '0') {
       await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
       dispatch(fetchSlider(id));
-      console.log("avaSLider", parsing.inputNumber);
+      // console.log("avaSLider", parsing.inputNumber);
     }
 
     if ((sliderImgLength! < 1 || sliderImgLength! > 0) && parsing.inputNumber === '0') {
       await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
       dispatch(fetchSlider(id));
-      console.log('slider',parsing.inputNumber);
+      // console.log('slider',parsing.inputNumber);
     }
 
     if (slider === undefined && parsing.inputNumber === '1') {
       await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
       dispatch(fetchSlider(id));
-      console.log(parsing.inputNumber);
+      // console.log(parsing.inputNumber);
     }
 
     if ((sliderImgLength! < 1 || sliderImgLength! > 0) && parsing.inputNumber === '1') {
       await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
       dispatch(fetchSlider(id));
-      console.log(parsing.inputNumber);
+      // console.log(parsing.inputNumber);
     }
 
     if (parsing.inputNumber === '2') {
       dispatch(setCreateImg(value));
-      console.log(parsing.inputNumber);
+      // console.log(parsing.inputNumber);
     }
   };
 
@@ -89,7 +89,7 @@ export const ImageParsing: React.FC = () => {
     };
     fileReader.readAsDataURL(file);
     setImages([]);
-  }, []);
+  }, [images, onAvatarAndSlider]);
 
   return (
     <>

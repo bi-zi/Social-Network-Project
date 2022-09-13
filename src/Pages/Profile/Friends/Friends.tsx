@@ -18,7 +18,7 @@ export const Friends: React.FC = () => {
   const [key, setKey] = React.useState(false);
 
   const userProfile = user?.userOne?.[0];
-  const friends = user?.usersAll.filter((user) => userProfile?.friends.includes(user._id)).splice(0, 8);
+  const friends = user?.usersAll.filter((user) => userProfile?.friends.includes(user._id)).splice(0, 10);
 
   const fetchData = (userId: string) => {
     dispatch(fetchOneUser(userId));

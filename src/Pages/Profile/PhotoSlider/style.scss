@@ -1,11 +1,11 @@
 .slider_images {
   position: relative;
 
-  width: 980px;
-  height: 370px;
+  width: 920px;
+  height: 270px;
 
   top: 40px;
-  left: 420px;
+  left: 360px;
 
   font-family: 'Iceberg';
   font-style: normal;
@@ -19,21 +19,26 @@
   user-select: none;
 
   .slider_image_closed_1,
-  .slider_image_closed_2 {
+  .slider_image_closed_2,
+  .slider_image_closed_3 {
     position: absolute;
 
-    width: 293px;
-    height: 293px;
+    width: 202px;
+    height: 202px;
 
-    left: 345px;
-    top: 19px;
+    left: 250px;
+    top: 18px;
 
     background-color: #393939;
     z-index: 10;
   }
 
   .slider_image_closed_2 {
-    left: 660px !important;
+    left: 470px !important;
+  }
+
+  .slider_image_closed_3 {
+    left: 690px !important;
   }
 
   .slider_image_link {
@@ -51,10 +56,10 @@
 
   .slick-prev,
   .slick-next {
-    margin-top: 10px;
+    margin-top: 5px;
 
-    height: 310px !important;
-    width: 50px !important;
+    width: 40px !important;
+    height: 220px !important;
 
     background-color: #393939 !important;
     z-index: 289;
@@ -65,7 +70,7 @@
   }
 
   .slick-arrow:before {
-    font-size: 35px;
+    font-size: 25px;
     color: rgb(250, 249, 249);
   }
 
@@ -78,32 +83,31 @@
   }
 
   .slick-slider {
-    width: 951px;
+    width: 890px;
   }
 
   .slick-list {
-    margin-left: 32px !important;
+    margin-left: 30px !important;
 
-    width: 940px;
-    height: 310px;
-    max-height: 333px;
+    width: 880px;
+    height: 225px;
   }
 
   .slick-track {
     margin-top: 20px;
 
-    min-width: 1100px;
-    max-height: 270px;
+    min-width: 900px;
+    max-height: 225px;
   }
 
   .slider_images_button {
-    position: absolute;
+    margin: 5px auto;
 
-    width: 600px;
-    height: 38px;
+    width: 400px;
+    height: 30px;
 
-    left: 185px;
-    top: 320px;
+    left: 150px;
+    top: 230px;
 
     background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
     background-size: 200% auto;
@@ -124,13 +128,12 @@
     }
 
     .slider_add_image {
-      position: absolute;
-
-      top: 7px;
-      left: 250px;
+      text-align: center;
+      margin: 0 auto;
+      padding-top: 4px;
 
       text-transform: uppercase;
-      font-size: 20px;
+      font-size: 18px;
     }
   }
 }

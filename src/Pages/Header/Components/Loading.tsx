@@ -25,9 +25,11 @@ export const Loading: React.FC = () => {
 
   const nonePage = state.auth.status === 'loading' || state.user.status === 'loading';
 
-  const path = window.location.pathname.split('/')[1];
 
-  // console.log(profilePage, path);
+  const path = window.location.pathname.split('/')[1];
+  // console.log(nonePage);
+
+  // console.log(state.auth.status);
 
   return (
     <>
@@ -37,7 +39,7 @@ export const Loading: React.FC = () => {
         <div className="header_loader"></div>
       ) : messagesPage && path === 'Messages' ? (
         <div className="header_loader"></div>
-      ) : nonePage && path === '' ? (
+      ) : nonePage && (path === 'Login' || path === 'Register' || path === '') ? (
         <div className="header_loader"></div>
       ) : (
         ''

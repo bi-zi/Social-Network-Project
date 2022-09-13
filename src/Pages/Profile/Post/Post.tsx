@@ -38,8 +38,10 @@ export const Post: React.FC = () => {
   const textLength = state.post?.createText?.length;
   const postText = state.post.createText;
   const numImg = readyPhotos.length;
-  const postStatus = state.post.userPosts.status === 'loaded'&& state.user.status === 'loaded' &&
-    state.auth.status === 'loaded'
+  const postStatus =
+    state.post.userPosts.status === 'loaded' &&
+    state.user.status === 'loaded' &&
+    state.auth.status === 'loaded';
 
   let linkСheck = state.post.createVid?.split('/');
 
@@ -113,28 +115,25 @@ export const Post: React.FC = () => {
           <div className="post_images_container">
             {readyPhotos.map((image, index) => {
               return (
-                <Link to={`/${id}/CreatePost/${index}`} key={index}>
-                  <img
-                    key={index}
-                    src={image}
-                    alt=""
-                    className={`post_img-${index} ${
-                      index === 0
-                        ? 'wall_large_img'
-                        : index === 1
-                        ? 'wall_small_right_img'
-                        : 'wall_small_down_img'
-                    }
-                    ${numImg === 1 ? 'wall_1_img' : ''}
+                <>
+                  <Link to={`/${id}/CreatePost/${index}`} style={{ textDecoration: 0 }} key={index}>
+                    <img
+                      key={index}
+                      src={image}
+                      alt=""
+                      className={`
                     ${
-                      numImg === 2 && index === 0
-                        ? 'wall_2_img_1'
-                        : numImg === 2 && index === 1
-                        ? 'wall_2_img_2'
+                      index === 0
+                        ? 'wall_first_img'
+                        : index === 1
+                        ? 'wall_secong_img'
+                        : index === 2
+                        ? 'wall_third_img'
                         : ''
                     }`}
-                  />
-                </Link>
+                    />
+                  </Link>
+                </>
               );
             })}
           </div>

@@ -1,10 +1,10 @@
 .avatar {
   position: absolute;
 
-  width: 380px;
-  height: 470px;
+  width: 340px;
+  height: 395px;
 
-  top: 80px;
+  top: 70px;
 
   font-family: 'Iceberg';
   font-style: normal;
@@ -19,11 +19,11 @@
   .avatar_image {
     position: relative;
 
-    width: 328px;
-    height: 375px;
+    width: 308px;
+    height: 325px;
 
-    top: 18px;
-    left: 26px;
+    top: 10px;
+    left: 15px;
 
     border-radius: 15px;
   }
@@ -31,11 +31,11 @@
   .avatar_button {
     position: absolute;
 
-    width: 328px;
-    height: 51px;
+    width: 310px;
+    height: 40px;
 
-    top: 407px;
-    left: 26px;
+    top: 345px;
+    left: 15px;
 
     background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
     background-size: 200% auto;
@@ -50,27 +50,27 @@
       position: relative;
 
       width: 200px;
-      top: 13px;
+      top: 10px;
       left: 90px;
 
-      font-size: 20px;
+      font-size: 18px;
       text-transform: uppercase;
     }
   }
 
   .avatar_delete_friend {
-    left: 200px !important;
+    left: 175px !important;
   }
 
   .avatar_delete_friend,
   .avatar_send_message {
     position: absolute;
 
-    width: 155px;
-    height: 60px;
+    width: 145px;
+    height: 40px;
 
-    top: 402px;
-    left: 26px;
+    top: 345px;
+    left: 15px;
 
     color: #ffffff;
 
@@ -86,14 +86,14 @@
     font-family: 'Iceberg';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 14px;
 
     letter-spacing: 2px;
     cursor: pointer;
   }
 
   .avatar_send_message {
-    padding-top: 5px;
+    padding-top: 10px;
     padding-left: 10px;
     text-align: center;
   }

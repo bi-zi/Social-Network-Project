@@ -25,11 +25,9 @@ export const PhotoSlider: React.FC = () => {
     className: 'center',
     infinite: true,
     centerPadding: '0px',
-    slidesToShow: 3,
+    slidesToShow: 4,
     swipeToSlide: true,
   };
-
-  console.log(state.slider);
 
   React.useEffect(() => {
     dispatch(fetchSlider(id));
@@ -40,7 +38,12 @@ export const PhotoSlider: React.FC = () => {
       {readyPhotos!?.length < 2 ? (
         <div className="slider_image_closed_1"></div>
       ) : readyPhotos?.length === 2 ? (
-        <div className="slider_image_closed_2"></div>
+        <>
+          <div className="slider_image_closed_2"></div>
+          <div className="slider_image_closed_3"></div>
+        </>
+      ) : readyPhotos?.length === 3 ? (
+        <div className="slider_image_closed_3"></div>
       ) : (
         ''
       )}
@@ -49,12 +52,12 @@ export const PhotoSlider: React.FC = () => {
           return state.slider.status === 'loaded' ? (
             <Link to={`/${id}/PhotoSlider/${index}`} className="slider_image_link" key={index}>
               <div className="slider_image_item" key={index}>
-                <img src={image} alt="" className="slider_image" width="290px" height="290px" />
+                <img src={image} alt="" className="slider_image" width="200px" height="200px" />
               </div>
             </Link>
           ) : (
             <div className="slider_image_item" key={index}>
-              <img src={image} alt="" className="slider_image" width="290px" height="290px" />
+              <img src={image} alt="" className="slider_image" width="200px" height="200px" />
             </div>
           );
         })}
@@ -62,11 +65,7 @@ export const PhotoSlider: React.FC = () => {
 
       {state.auth.data?._id === id ? (
         <div className="slider_images_button" onChange={() => dispatch(setInputNumber('1'))}>
-          {state.slider.status === 'loaded' && state.user.status === 'loaded' ? (
-            <ImageParsing />
-          ) : (
-            <div className="slider_images_button"></div>
-          )}
+          {state.slider.status === 'loaded' && state.user.status === 'loaded' ? <ImageParsing /> : ''}
           <div className="slider_add_image">Add photos</div>
         </div>
       ) : (

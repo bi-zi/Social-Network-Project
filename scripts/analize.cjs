@@ -8,6 +8,6 @@ webpackConfigProd.plugins.push(new BundleAnalyzerPlugin())
 
 webpack(webpackConfigProd, (err, stats) => {
   if (err || stats.hasErrors()) {
-    console.log(err)
+    // console.log(err)
   }
 })

@@ -9,7 +9,7 @@ import {
   fetchCommentDelete,
   fetchPostDelete,
 } from '../../../store/post/slice';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareNodes, faEllipsis, faXmark, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp, faThumbsDown, faCommentDots } from '@fortawesome/free-regular-svg-icons';
@@ -99,11 +99,13 @@ export const Wall: React.FC = () => {
   };
 
   const deleteComment = async (postId: string, ind: number) => {
+      // console.log(postId, ind)
     await dispatch(fetchCommentDelete({ postId: postId, index: ind, user: id }));
     dispatch(fetchUserPostsAll(id));
   };
 
   const deletePost = async (index: string) => {
+
     const postIndex = wall.post
       .find((userPosts) => userPosts.user === id)!
       .post.findIndex((post) => post._id === index);
@@ -116,14 +118,13 @@ export const Wall: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));
-  }, [dispatch, id]);
+  }, []);
 
   return (
     <>
       {wallPost?.map((content, index) => (
-        <div className={`wall ${index}`} key={index}>
+        <div className={`wall ${index}`} key={content._id}>
           <img src={user?.imageUrl} alt="" className="wall_avatar" />
-
           <div className="wall_fullName">{user?.fullName}</div>
           <div className="wall_date">{content.date}</div>
 
@@ -137,31 +138,27 @@ export const Wall: React.FC = () => {
           <div className="wall_content">
             {content.text?.length > 0 ? <div className="wall_text">{content.text}</div> : ''}
             {content.imagesPost?.length > 0 ? (
-              <div className="wall_img">
+              <div className="post_images_container">
                 {content?.imagesPost.map((image, index) => {
                   return (
-                    <div key={index}>
-                      <img
-                        key={index}
-                        src={image}
-                        alt=""
-                        className={`post_img-${index} ${
-                          index === 0
-                            ? 'wall_big_img'
-                            : index === 1
-                            ? 'wall_small_right_img'
-                            : 'wall_small_down_img'
-                        }
-                    ${content.imagesPost.length === 1 ? 'wall_1_img' : ''}
+                    <span key={index}>
+                      <Link to={`/${id}/CreatePost/${index}`} style={{ textDecoration: 0 }}>
+                        <img
+                          src={image}
+                          alt=""
+                          className={`
                     ${
-                      content.imagesPost.length === 2 && index === 0
-                        ? 'wall_2_img_1'
-                        : content.imagesPost.length === 2 && index === 1
-                        ? 'wall_2_img_2'
+                      index === 0
+                        ? 'wall_first_img'
+                        : index === 1
+                        ? 'wall_secong_img'
+                        : index === 2
+                        ? 'wall_third_img'
                         : ''
                     }`}
-                      />
-                    </div>
+                        />
+                      </Link>
+                    </span>
                   );
                 })}
               </div>
@@ -245,6 +242,7 @@ export const Wall: React.FC = () => {
                   ref={firstRef}
                   className="wall_comment_input"
                   placeholder="Write your comment here"
+                  maxLength={280}
                   onChange={(e) => dispatch(setCreateComment(e.target.value))}
                 />
 
@@ -268,7 +266,7 @@ export const Wall: React.FC = () => {
                       <FontAwesomeIcon
                         className="wall_comment_delete"
                         icon={faXmark}
-                        onClick={() => (!postStatus ? deleteComment(content?._id, index) : '')}
+                        onClick={() => (postStatus ? deleteComment(content?._id, index) : '')}
                       />
                     ) : (
                       ''

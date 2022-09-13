@@ -95,6 +95,7 @@ export const Avatar: React.FC = () => {
       }),
     );
     dispatch(fetchOneUser(id));
+
     dispatch(fetchAuthMe());
   };
 

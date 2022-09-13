@@ -3,7 +3,7 @@
 
   margin-bottom: 20px;
 
-  width: 380px;
+  width: 340px;
   height: 100%;
 
   font-family: 'Iceberg';
@@ -20,9 +20,9 @@
     position: relative;
 
     height: 30px;
-    left: 24px;
+    left: 25px;
 
-    font-size: 30px;
+    font-size: 22px;
     line-height: 37px;
 
     color: #ffffff !important;
@@ -38,16 +38,16 @@
 
   margin: 0 auto;
 
-  width: 360px;
+  width: 300px;
   height: auto;
 
   flex-wrap: wrap;
 
   .profile_friend {
-    margin: 10px;
+    margin: 0 5px 25px 5px;
 
-    width: 70px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
 
     text-align: center;
     cursor: pointer;
@@ -61,15 +61,15 @@
     }
 
     .profile_friend_avatar {
-      width: 60px;
-      height: 60px;
+      width: 45px;
+      height: 45px;
 
       background-color: black;
       border-radius: 100%;
     }
 
     .profile_friend_name {
-      font-size: 15px;
+      font-size: 14px;
       color: #ffffff;
     }
   }

@@ -29,6 +29,10 @@ export const ControlPanel: React.FC = () => {
     dispatch(fetchNotifications(localStorage.mainUser));
   };
 
+  const loading = state.auth.status === 'loading' || state.user.status === 'loading';
+
+  const error = state.auth.status === 'error' || state.user.status === 'error';
+
   const path = window.location.pathname.split('/')[1];
 
   return (
@@ -108,6 +112,10 @@ export const ControlPanel: React.FC = () => {
           <FontAwesomeIcon className="header_video_icon" icon={faFilm} />
           <FontAwesomeIcon className="header_music_icon" icon={faMusic} />
         </div>
+      ) : error ? (
+        <div className="header_error">You need to register or login</div>
+      ) : loading ? (
+        <div className="header_error">Please wait for loading</div>
       ) : (
         ''
       )}

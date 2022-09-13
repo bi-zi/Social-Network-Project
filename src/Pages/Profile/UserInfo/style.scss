@@ -1,11 +1,11 @@
 .about {
   position: relative;
 
-  width: 980px;
-  height: 350px;
+  width: 920px;
+  height: 280px;
 
   top: 20px;
-  left: 420px;
+  left: 360px;
 
   font-family: 'Iceberg';
   font-style: normal;
@@ -20,12 +20,14 @@
 
   .about_fullName {
     position: absolute;
+
     height: 30px;
+
     left: 21px;
-    top: 18px;
+    top: 10px;
 
     font-weight: 600;
-    font-size: 30px;
+    font-size: 27px;
     line-height: 40px;
 
     letter-spacing: 2px;
@@ -36,12 +38,12 @@
   .about_line {
     position: absolute;
 
-    width: 942px;
+    width: 880px;
 
-    top: 70px;
+    top: 50px;
     left: 19px;
 
-    border-bottom: 10px solid #222222;
+    border-bottom: 6px solid #222222;
   }
 
   .about_info {
@@ -49,10 +51,10 @@
 
     padding-top: 90px;
 
-    width: 940px;
-    height: 250px;
+    width: 880px;
+    height: 210px;
 
-    top: 90px;
+    top: 60px;
     left: 20px;
 
     text-align: center;
@@ -76,40 +78,43 @@
   .about_student {
     position: relative;
 
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 
-    width: 935px;
+    width: 100%;
     height: 30px;
 
-    top: 94px;
+    top: 64px;
     left: 21px;
 
-    font-size: 30px;
-    line-height: 37px;
+    font-size: 24px;
+    line-height: 30px;
   }
 }
 
 .about_form {
   position: relative;
 
-  top: 100px;
+  top: 60px;
   left: 20px;
 
   .about_input {
-    margin-bottom: 10px;
+    margin-bottom: 7px;
 
     padding-left: 10px;
 
     width: 400px;
     height: 25px;
 
-    font-size: 19px;
-    border-radius: 15px;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 10px;
   }
 
   .about_buttton {
     width: 400px;
-    height: 30px;
+    height: 22px;
+
+    padding-top: 2px;
 
     color: white;
 
@@ -123,7 +128,7 @@
     font-family: 'Iceberg';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
+    font-size: 16px;
 
     text-transform: uppercase;
     letter-spacing: 2px;
