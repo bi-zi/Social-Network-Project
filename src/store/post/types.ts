@@ -36,6 +36,7 @@ export interface UserPostSliceState {
   createImg: string[];
   createVid: string;
   createComment: string;
+  postIndex: string;
   userPosts: {
     post: UserPost[];
     status: Status;

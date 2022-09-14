@@ -158,15 +158,20 @@ export const Avatar: React.FC = () => {
       )}
 
       {auth?._id === id ? (
-        <div
-          className="avatar_button"
-          onChange={() => {
-            dispatch(setInputNumber('0'));
-          }}>
-          {auth === null ? '' : <div className="avatar_change">Change photo</div>}
-
-          {auth?._id === id && loadStatus ? <ImageParsing /> : ''}
-        </div>
+        <>
+          <div
+            className="avatar_button"
+            onChange={() => {
+              dispatch(setInputNumber('0'));
+            }}>
+            {auth?._id === id && loadStatus ? (
+              <ImageParsing />
+            ) : (
+              <div className="image_input_parser"></div>
+            )}
+            {auth === null ? '' : <div className="avatar_change">Change photo</div>}
+          </div>
+        </>
       ) : (
         ''
       )}

@@ -13,7 +13,14 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { ImageParsing } from '../../../ImageParsing/ImageParsing';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faMusic, faLocationPin, faFileLines, faFilm } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlay,
+  faMusic,
+  faLocationPin,
+  faFileLines,
+  faFilm,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
 import './style.scss';
 
@@ -115,8 +122,8 @@ export const Post: React.FC = () => {
           <div className="post_images_container">
             {readyPhotos.map((image, index) => {
               return (
-                <>
-                  <Link to={`/${id}/CreatePost/${index}`} style={{ textDecoration: 0 }} key={index}>
+                <span key={index}>
+                  <Link to={`/${id}/CreatePost/${index}`} style={{ textDecoration: 0 }} className="post_image_link">
                     <img
                       key={index}
                       src={image}
@@ -133,7 +140,7 @@ export const Post: React.FC = () => {
                     }`}
                     />
                   </Link>
-                </>
+                </span>
               );
             })}
           </div>

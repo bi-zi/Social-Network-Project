@@ -47,11 +47,8 @@
     transition: 0.5s;
 
     .avatar_change {
-      position: relative;
-
-      width: 200px;
-      top: 10px;
-      left: 90px;
+      margin-top: -30px;
+      margin-left: 85px;
 
       font-size: 18px;
       text-transform: uppercase;
@@ -98,18 +95,16 @@
     text-align: center;
   }
 
+  .avatar_button:hover,
+  .avatar_delete_friend:hover,
+  .avatar_send_message:hover {
+    background-position: right center;
+  }
 
-.avatar_button:hover,
-.avatar_delete_friend:hover,
-.avatar_send_message:hover {
-  background-position: right center;
-}
-
-.avatar_button:active,
-.avatar_delete_friend:active,
-.avatar_send_message:active {
-  transform: scale(0.9);
-  transition: 0.2s;
-}
-
+  .avatar_button:active,
+  .avatar_delete_friend:active,
+  .avatar_send_message:active {
+    transform: scale(0.9);
+    transition: 0.2s;
+  }
 }

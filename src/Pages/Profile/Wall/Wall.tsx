@@ -8,6 +8,7 @@ import {
   fetchCommentPush,
   fetchCommentDelete,
   fetchPostDelete,
+  setPostIndex,
 } from '../../../store/post/slice';
 import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -99,13 +100,12 @@ export const Wall: React.FC = () => {
   };
 
   const deleteComment = async (postId: string, ind: number) => {
-      // console.log(postId, ind)
+    // console.log(postId, ind)
     await dispatch(fetchCommentDelete({ postId: postId, index: ind, user: id }));
     dispatch(fetchUserPostsAll(id));
   };
 
   const deletePost = async (index: string) => {
-
     const postIndex = wall.post
       .find((userPosts) => userPosts.user === id)!
       .post.findIndex((post) => post._id === index);
@@ -122,8 +122,8 @@ export const Wall: React.FC = () => {
 
   return (
     <>
-      {wallPost?.map((content, index) => (
-        <div className={`wall ${index}`} key={content._id}>
+      {wallPost?.map((content, postIndex) => (
+        <div className={`wall ${postIndex}`} key={content._id}>
           <img src={user?.imageUrl} alt="" className="wall_avatar" />
           <div className="wall_fullName">{user?.fullName}</div>
           <div className="wall_date">{content.date}</div>
@@ -142,7 +142,14 @@ export const Wall: React.FC = () => {
                 {content?.imagesPost.map((image, index) => {
                   return (
                     <span key={index}>
-                      <Link to={`/${id}/CreatePost/${index}`} style={{ textDecoration: 0 }}>
+                      <Link
+                        to={`/${id}/WallPost/${index}`}
+                        style={{ textDecoration: 0 }}
+                        onClick={() =>
+                          dispatch(
+                            setPostIndex(((wallPost!?.length - postIndex - 1)).toString()),
+                          )
+                        }>
                         <img
                           src={image}
                           alt=""
@@ -221,14 +228,14 @@ export const Wall: React.FC = () => {
             <FontAwesomeIcon
               className="wall_comment_icon"
               icon={faCommentDots}
-              style={comment === index ? { color: 'black' } : { color: 'white' }}
+              style={comment === postIndex ? { color: 'black' } : { color: 'white' }}
               onClick={() => {
                 if (postStatus) {
-                  comment !== index
-                    ? setComment(index)
-                    : comment === index
+                  comment !== postIndex
+                    ? setComment(postIndex)
+                    : comment === postIndex
                     ? setComment(999999)
-                    : setComment(index);
+                    : setComment(postIndex);
                 }
               }}
             />
@@ -236,7 +243,7 @@ export const Wall: React.FC = () => {
 
             <FontAwesomeIcon className="wall_share_icon" icon={faShareNodes} />
 
-            {comment === index ? (
+            {comment === postIndex ? (
               <div className="wall_comments">
                 <textarea
                   ref={firstRef}

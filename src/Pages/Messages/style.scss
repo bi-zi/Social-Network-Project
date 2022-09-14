@@ -6,7 +6,7 @@
   padding-top: 20px;
   padding-bottom: 55px;
 
-  width: 1440px;
+  width: 1280px;
   height: 100%;
 
   font-family: 'Iceberg';
@@ -16,15 +16,15 @@
   user-select: none;
 
   .messages_chats {
-    width: 560px;
-    max-height: 800px;
+    width: 500px;
+    max-height: 100%;
 
     border-radius: 15px;
     background: #2e2e2e;
 
     .messages_chats_container {
       position: relative;
-      width: 560px;
+      width: 500px;
       height: 740px;
       top: 14px;
       overflow: auto;
@@ -77,7 +77,7 @@
       }
 
       .messages_chats_item_time {
-        left: 435px;
+        left: 380px;
 
         font-size: 12px;
       }
@@ -93,10 +93,12 @@
       .messages_chats_item_message_name {
         position: relative;
 
+        margin-top: 5px;
+
         max-width: 450px;
         max-height: 35px;
 
-        font-size: 14px;
+        font-size: 12px;
         word-wrap: break-word;
         color: white;
       }
@@ -163,8 +165,8 @@
 
 .messages_correspondence_container {
   position: relative;
-  width: 850px;
-  height: 800px;
+  width: 760px;
+  height: 100%;
 
   border-radius: 15px;
   background: #2e2e2e;
@@ -191,7 +193,9 @@
 
   .messages_correspondence {
     width: 100%;
-    height: 700px !important;
+    min-height: 500px;
+    max-height: 1200px;
+    margin-bottom: 45px;
     overflow: auto;
   }
 
@@ -216,8 +220,8 @@
   .meessages_correspondence_empty {
     margin-top: 180px;
 
-    text-align: center;
     width: 600px;
+    text-align: center;
   }
 
   .messages_correspondence_select_chat,
@@ -238,10 +242,10 @@
     width: 100%;
 
     .messages_correspondence_message_avatar {
-      width: 60px;
-      height: 60px;
+      width: 45px;
+      height: 45px;
 
-      margin-left: 20px;
+      margin-left: 10px;
 
       border-radius: 100%;
     }
@@ -249,29 +253,29 @@
     .messages_correspondence_message_fullName {
       position: absolute;
 
-      top: 10px;
-      left: 90px;
+      top: 5px;
+      left: 60px;
 
-      font-size: 20px;
+      font-size: 18px;
       color: white;
     }
 
     .messages_correspondence_message_date {
       position: absolute;
 
-      top: 35px;
-      left: 90px;
+      top: 28px;
+      left: 60px;
 
-      font-size: 14px;
+      font-size: 13px;
 
       color: white;
     }
 
     .message_correspondence_message {
       margin: 0 auto;
-      width: 780px;
+      width: 720px;
 
-      font-size: 24px;
+      font-size: 20px;
       font-family: 'Iceberg';
       font-style: normal;
       font-weight: 400;
@@ -296,7 +300,7 @@
     background-color: #000000;
 
     .messages_correspondence_panel_input {
-      width: 600px;
+      width: 480px;
       height: 40px;
 
       margin-top: 10px;

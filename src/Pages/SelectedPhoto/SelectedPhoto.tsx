@@ -27,7 +27,11 @@ export const Photo: React.FC = () => {
       ? [avatar?.imageUrl]
       : category === 'PhotoSlider'
       ? slider?.sliderImg
-      : state.post.createImg;
+      : category === 'WallPost'
+      ? state?.post?.userPosts?.post?.[0]?.post.filter((x, i) => i === +state?.post?.postIndex)?.[0]
+          ?.imagesPost
+          : state.post.createImg;
+
 
   const onPhotoDelete = async () => {
     if (category === 'PhotoAvatar') {
@@ -51,6 +55,7 @@ export const Photo: React.FC = () => {
   };
 
   React.useEffect(() => {
+    dispatch(fetchSlider(user));
     dispatch(fetchOneUser(user));
   }, []);
 
@@ -84,7 +89,7 @@ export const Photo: React.FC = () => {
           ''
         )}
         <>
-          {state.auth.data?._id === user && loadStatus ? (
+          {state.auth.data?._id === user && loadStatus && category !== 'WallPost' ? (
             <Link
               className="selectedImg_delete_img"
               to={`/Profile/${user}`}

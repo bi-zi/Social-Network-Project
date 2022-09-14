@@ -1,10 +1,23 @@
+$breakpoints: (
+  desktop: 1280,
+  ipad: 1024,
+  tablet: 768,
+  mobile: 640,
+);
+
+@mixin max-bp($breakpoint) {
+  @media (max-width: map.get($breakpoints,$breakpoint)) {
+    @content;
+  }
+}
+
 .friends {
   display: flex;
 
   margin: 20px auto 0 auto;
   padding-bottom: 80px;
 
-  max-width: 1395px;
+  max-width: 1280px;
   height: 100%;
 
   font-family: 'Iceberg';
@@ -18,7 +31,7 @@
 
   .friends_left_panel,
   .friends_right_panel {
-    width: 678px;
+    width: 630px;
     height: 100%;
 
     border-radius: 20px;
@@ -35,15 +48,15 @@
     margin-left: 20px;
     margin-top: 10px;
 
-    width: 640px;
-    height: 120px;
+    width: 590px;
+    height: 90px;
 
     border-bottom: 2px solid black;
   }
 
   .friends_user_avatar {
-    width: 110px;
-    height: 110px;
+    width: 80px;
+    height: 80px;
 
     border-radius: 100%;
     cursor: pointer;
@@ -64,8 +77,8 @@
     position: absolute;
 
     float: left;
-    left: 590px;
-    top: 10px;
+    left: 550px;
+    top: 0px;
 
     &:active .friend_content {
       display: block;
@@ -113,14 +126,14 @@
   .number_of_friends {
     position: absolute;
 
-    top: 100px;
+    top: 70px;
     right: 140px;
   }
 
   .number_of_subscribers {
     position: absolute;
 
-    top: 100px;
+    top: 70px;
     right: 20px;
   }
 
@@ -142,7 +155,7 @@
   display: block;
   position: sticky;
 
-  top: 80px;
+  top: 60px;
 
   .all_people,
   .all_friends,

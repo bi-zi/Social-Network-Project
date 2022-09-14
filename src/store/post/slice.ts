@@ -158,6 +158,7 @@ const initialState: UserPostSliceState = {
   createImg: [],
   createVid: localStorage.postVideo,
   createComment: '',
+  postIndex: '',
   userPosts: {
     post: [],
     status: Status.LOADING,
@@ -182,6 +183,9 @@ const postSlice = createSlice({
     },
     setCreateComment: (state, action) => {
       state.createComment = action.payload;
+    },
+    setPostIndex: (state, action) => {
+      state.postIndex = action.payload;
     },
   },
 
@@ -269,6 +273,6 @@ const postSlice = createSlice({
   },
 });
 
-export const { setCreatText, setCreateImg, setCreateImgDelete, setCreateVid, setCreateComment } =
+export const { setCreatText, setCreateImg, setCreateImgDelete, setCreateVid, setCreateComment, setPostIndex } =
   postSlice.actions;
 export const postReducer = postSlice.reducer;

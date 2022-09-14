@@ -44,6 +44,7 @@ export const Friends: React.FC = () => {
       : state.user?.userOne?.[0];
 
   let sortedFriends = [] as User[];
+
   if (catergory === 'friends') {
     sortedFriends = state.user.usersAll?.filter((userId) => user?.friends.includes(userId._id));
   }
@@ -58,10 +59,10 @@ export const Friends: React.FC = () => {
 
   if (sortBy === 'a-z') {
     sortedFriends = [...sortedFriends]?.sort(function (a, b) {
-      if (a.fullName > b.fullName) {
+      if (a.fullName.toLowerCase() > b.fullName.toLowerCase()) {
         return 1;
       }
-      if (a.fullName < b.fullName) {
+      if (a.fullName.toLowerCase() < b.fullName.toLowerCase()) {
         return -1;
       }
       return 0;
@@ -71,10 +72,10 @@ export const Friends: React.FC = () => {
   if (sortBy === 'z-a') {
     sortedFriends = [...sortedFriends]
       ?.sort(function (a, b) {
-        if (a.fullName > b.fullName) {
+        if (a.fullName.toLowerCase() > b.fullName.toLowerCase()) {
           return 1;
         }
-        if (a.fullName < b.fullName) {
+        if (a.fullName.toLowerCase() < b.fullName.toLowerCase()) {
           return -1;
         }
         return 0;
@@ -84,10 +85,10 @@ export const Friends: React.FC = () => {
 
   if (sortBy === 'friends') {
     sortedFriends = [...sortedFriends]?.sort(function (a, b) {
-      if (a.friends < b.friends) {
+      if (a.friends.length < b.friends.length) {
         return 1;
       }
-      if (a.friends > b.friends) {
+      if (a.friends.length > b.friends.length) {
         return -1;
       }
       return 0;
@@ -96,10 +97,10 @@ export const Friends: React.FC = () => {
 
   if (sortBy === 'subscribers') {
     sortedFriends = [...sortedFriends]?.sort(function (a, b) {
-      if (a.subscribers < b.subscribers) {
+      if (a.subscribers.length < b.subscribers.length) {
         return 1;
       }
-      if (a.subscribers > b.subscribers) {
+      if (a.subscribers.length > b.subscribers.length) {
         return -1;
       }
       return 0;
@@ -222,10 +223,16 @@ export const Friends: React.FC = () => {
               Sort by friends
             </div>
             <div
-              className="subscribers_sort"
+              className="friends_sort"
               style={sortBy === 'subscribers' ? { color: 'black' } : {}}
               onClick={() => (loadStatus ? setSortBy('subscribers') : '')}>
               Sort by subscribers
+            </div>
+            <div
+              className="subscribers_sort"
+              style={sortBy !== 'people' ? { color: 'red' } : {}}
+              onClick={() => (loadStatus ? setSortBy('people') : '')}>
+              Do not sort
             </div>
           </div>
           <div className="friend_sort">Sort by</div>

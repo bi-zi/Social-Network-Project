@@ -1,11 +1,13 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchSlider } from '../../../store/slider/slice';
+import { fetchSlider, fetchSliderDelete } from '../../../store/slider/slice';
 import { setInputNumber } from '../../../store/user/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { ImageParsing } from '../../../ImageParsing/ImageParsing';
 import Slider from 'react-slick';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './style.scss';
@@ -29,6 +31,11 @@ export const PhotoSlider: React.FC = () => {
     swipeToSlide: true,
   };
 
+  const onPhotoDelete = async (index: number) => {
+    await dispatch(fetchSliderDelete({ deleteId: index, user: id }));
+    dispatch(fetchSlider(id));
+  };
+
   React.useEffect(() => {
     dispatch(fetchSlider(id));
   }, []);
@@ -50,11 +57,22 @@ export const PhotoSlider: React.FC = () => {
       <Slider {...settings}>
         {readyPhotos?.map((image, index) => {
           return state.slider.status === 'loaded' ? (
-            <Link to={`/${id}/PhotoSlider/${index}`} className="slider_image_link" key={index}>
-              <div className="slider_image_item" key={index}>
-                <img src={image} alt="" className="slider_image" width="200px" height="200px" />
-              </div>
-            </Link>
+            <span key={index}>
+              {state.auth.data?._id === id ? (
+                <FontAwesomeIcon
+                  className="slider_delete_img"
+                  icon={faXmark}
+                  onClick={() => onPhotoDelete(index)}
+                />
+              ) : (
+                ''
+              )}
+              <Link to={`/${id}/PhotoSlider/${index}`} className="slider_image_link" key={index}>
+                <div className="slider_image_item">
+                  <img src={image} alt="" className="slider_image" width="200px" height="200px" />
+                </div>
+              </Link>
+            </span>
           ) : (
             <div className="slider_image_item" key={index}>
               <img src={image} alt="" className="slider_image" width="200px" height="200px" />
@@ -65,7 +83,11 @@ export const PhotoSlider: React.FC = () => {
 
       {state.auth.data?._id === id ? (
         <div className="slider_images_button" onChange={() => dispatch(setInputNumber('1'))}>
-          {state.slider.status === 'loaded' && state.user.status === 'loaded' ? <ImageParsing /> : ''}
+          {state.slider.status === 'loaded' && state.user.status === 'loaded' ? (
+            <ImageParsing />
+          ) : (
+            <div className="image_input_parser"></div>
+          )}
           <div className="slider_add_image">Add photos</div>
         </div>
       ) : (

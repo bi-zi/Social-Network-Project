@@ -42,7 +42,7 @@ export const Subscribers: React.FC = () => {
         className="profile_friends_title"
         style={{ textDecoration: 'none' }}
         onClick={() => dispatch(setCatergory('subscribers'))}>
-        Subscribers -
+        Subscribers -&nbsp;
         {user?.usersAll.filter((user) => userProfile?.subscribers.includes(user._id))?.length}
       </Link>
 

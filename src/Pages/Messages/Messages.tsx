@@ -16,12 +16,20 @@ export const Messages: React.FC = () => {
   const divRef = useRef<HTMLDivElement>(null);
   const firstRef = useRef<HTMLInputElement>(null);
 
+
+
   const [text, setText] = useState('');
   const [findChat, setFindChat] = useState<any>();
   const [addMessages, setAddMessages] = useState<number>(20);
   const [selectUser, setSelectUser] = useState(
     messages?.sortedId.length !== 0 ? messages.sortedId : undefined,
   );
+
+  const [windowSize, setWindowSize] = useState(1);
+
+ window.addEventListener('resize', function () {
+   setWindowSize(window.innerHeight);
+ });
 
   const findFriends = messages.data.find((x) => x.user === auth?._id);
 
@@ -158,8 +166,8 @@ export const Messages: React.FC = () => {
                       </div>
 
                       <div className="messages_chats_item_last_message">
-                        {lastMessage![index]?.message?.slice(0, 40)}
-                        {lastMessage![index]?.message?.length > 40 ? '...' : ''}
+                        {lastMessage![index]?.message?.slice(0, 30)}
+                        {lastMessage![index]?.message?.length > 30 ? '...' : ''}
                       </div>
                     </div>
                   ) : (
@@ -190,7 +198,7 @@ export const Messages: React.FC = () => {
               </div>
             ))}
 
-            <div className="messages_correspondence" ref={divRef}>
+            <div className="messages_correspondence" style={{ height: windowSize - 200 }} ref={divRef}>
               {messagesLength! > addMessages && loadStatus ? (
                 <div
                   className="messages_correspondence_add_20"
