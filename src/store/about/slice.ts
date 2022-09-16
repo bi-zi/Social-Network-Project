@@ -10,8 +10,8 @@ export const fetchAboutPost = createAsyncThunk<About[], { values: About }>(
   },
 );
 
-export const fetchAbout = createAsyncThunk<About[]>('about/fetchAbout', async () => {
-  const { data } = await axios.get('/about/all');
+export const fetchAbout = createAsyncThunk('about/fetchAbout', async (id: string) => {
+  const { data } = await axios.get(`/about/${id}}`);
   return data;
 });
 
@@ -47,7 +47,7 @@ const aboutSlice = createSlice({
       state.status = Status.LOADING;
     });
     builder.addCase(fetchAbout.fulfilled, (state, action) => {
-      state.data = action.payload;
+      state.data = [action.payload];
       state.status = Status.SUCCESS;
     });
     builder.addCase(fetchAbout.rejected, (state) => {

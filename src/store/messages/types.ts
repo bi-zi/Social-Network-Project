@@ -29,6 +29,7 @@ export enum Status {
 
 export interface MessagesSliceState {
   data: Messages[];
+  data2: Messages[];
   sortedId: string;
   status: Status;
 }

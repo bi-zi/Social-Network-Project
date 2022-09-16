@@ -36,7 +36,7 @@ export const AboutForm: React.FC = () => {
   const [closeInfo, setCloseInfo] = React.useState(0);
 
   const about = Array.isArray(state.about?.data)
-    ? state.about.data?.find((x) => x.user === id)
+    ? state.about.data[0]
     : ({} as About);
 
   const onSubmit = async (values: About) => {
@@ -45,10 +45,11 @@ export const AboutForm: React.FC = () => {
       ? await dispatch(fetchAboutUpdate({ values, id }))
       : await dispatch(fetchAboutPost({ values }));
 
-    dispatch(fetchAbout());
+    dispatch(fetchAbout(id));
   };
 
   const aboutStatus = state.about.status === 'loading';
+
 
   const {
     register,
@@ -59,7 +60,7 @@ export const AboutForm: React.FC = () => {
   });
 
   React.useEffect(() => {
-    dispatch(fetchAbout());
+    dispatch(fetchAbout(id));
     dispatch(fetchOneUser(id));
   }, [dispatch, id]);
 

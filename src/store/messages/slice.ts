@@ -2,13 +2,18 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Messages, MessagesSliceState, Status } from './types';
 import axios from '../../backend/axios';
 
-export const fetchGetMessages = createAsyncThunk<Messages[]>(
-  'messages/all/fetchGetMessages',
-  async () => {
-    const { data } = await axios.get(`/messages/all`);
+export const fetchGetMessages = createAsyncThunk(
+  'messages/id/fetchGetMessages',
+  async (id: string) => {
+    const { data } = await axios.get(`/messages/${id}`);
     return data;
   },
 );
+
+export const fetchChatUser = createAsyncThunk('messages/i1/fetchGetMessages', async (id: string) => {
+  const { data } = await axios.get(`/messages/${id}`);
+  return data;
+});
 
 export const fetchCreateMessages = createAsyncThunk<Messages[], { withWho: string; user: string }>(
   'messages/createMessages/fetchCreateMessages',
@@ -60,6 +65,7 @@ export const fetchAddMessage = createAsyncThunk<
 
 const initialState: MessagesSliceState = {
   data: [],
+  data2: [],
   sortedId: '',
   status: Status.LOADING,
 };
@@ -83,6 +89,18 @@ const messagesSlice = createSlice({
     builder.addCase(fetchGetMessages.rejected, (state) => {
       state.status = Status.ERROR;
     });
+
+    builder.addCase(fetchChatUser.pending, (state) => {
+      state.status = Status.LOADING;
+    });
+    builder.addCase(fetchChatUser.fulfilled, (state, action) => {
+      state.data2 = action.payload;
+      state.status = Status.SUCCESS;
+    });
+    builder.addCase(fetchChatUser.rejected, (state) => {
+      state.status = Status.ERROR;
+    });
+
 
     builder.addCase(fetchCreateMessages.pending, (state) => {
       state.status = Status.LOADING;

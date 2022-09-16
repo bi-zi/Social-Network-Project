@@ -20,6 +20,7 @@ import {
 import {
   fetchCreateMessages,
   fetchGetMessages,
+  fetchChatUser,
   fetchPushChat,
   setSortedId,
 } from '../../../store/messages/slice';
@@ -36,7 +37,7 @@ export const Avatar: React.FC = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
   const auth = useAppSelector((state) => state.auth?.data);
-  const messages = useAppSelector((state) => state.messages?.data);
+  const messages = useAppSelector((state) => state.messages);
   const { id } = useParams<keyof MyParams>() as MyParams;
 
   const user = state.user?.userOne?.[0];
@@ -112,10 +113,10 @@ export const Avatar: React.FC = () => {
     dispatch(fetchAuthMe());
   };
 
-  let you = !messages.find((userID) => userID.user === auth?._id);
-  let him = !messages.find((userID) => userID.user === id);
-  let checkChat = !messages
-    .find((userID) => userID.user === id)
+  let you = !messages.data.find((userID) => userID?.user === auth?._id);
+  let him = !messages.data2.find((userID) => userID?.user === id);
+  let checkChat = !messages.data2
+    .find((userID) => userID?.user === id)
     ?.correspondence?.find((chat) => chat?.withWho === auth?._id);
 
   const createMessages = async () => {
@@ -133,7 +134,9 @@ export const Avatar: React.FC = () => {
     }
 
     dispatch(setSortedId(id));
-    dispatch(fetchGetMessages());
+
+    dispatch(fetchChatUser(id));
+    dispatch(fetchGetMessages(auth?._id));
   };
 
   const loadStatus =
@@ -144,8 +147,9 @@ export const Avatar: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(fetchNotifications(id));
-    dispatch(fetchGetMessages());
-  }, [dispatch, id]);
+    dispatch(fetchChatUser(id));
+    dispatch(fetchGetMessages(auth?._id));
+  }, [auth?._id, dispatch, id]);
 
   return (
     <div className="avatar">

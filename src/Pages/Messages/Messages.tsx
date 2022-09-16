@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { fetchGetMessages, fetchAddMessage } from '../../store/messages/slice';
+import { fetchGetMessages, fetchChatUser, fetchAddMessage } from '../../store/messages/slice';
 import { NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -16,8 +16,6 @@ export const Messages: React.FC = () => {
   const divRef = useRef<HTMLDivElement>(null);
   const firstRef = useRef<HTMLInputElement>(null);
 
-
-
   const [text, setText] = useState('');
   const [findChat, setFindChat] = useState<any>();
   const [addMessages, setAddMessages] = useState<number>(20);
@@ -25,13 +23,13 @@ export const Messages: React.FC = () => {
     messages?.sortedId.length !== 0 ? messages.sortedId : undefined,
   );
 
-  const [windowSize, setWindowSize] = useState(1);
+  const [windowSize, setWindowSize] = useState(window.innerHeight);
 
- window.addEventListener('resize', function () {
-   setWindowSize(window.innerHeight);
- });
+  window.addEventListener('resize', function () {
+    setWindowSize(window.innerHeight);
+  });
 
-  const findFriends = messages.data.find((x) => x.user === auth?._id);
+  const findFriends = messages.data.find((x) => x?.user === auth?._id);
 
   const lastMessage = findFriends?.correspondence
     .map((x) => x?.messages[x.messages.length - 1])
@@ -64,7 +62,7 @@ export const Messages: React.FC = () => {
   if (sortedFriends.length === 0) sortedFriends = friends;
 
   let userIndex = messages.data
-    .find((userChat) => userChat.user === auth?._id)
+    .find((userChat) => userChat?.user === auth?._id)
     ?.correspondence.findIndex((chat) => chat?.withWho === selectUser);
 
   if (selectUser !== undefined) localStorage.setItem('userIndex', userIndex + '');
@@ -73,12 +71,12 @@ export const Messages: React.FC = () => {
 
   if (selectUser !== undefined) localStorage.setItem('chatIndex', chatIndex + '');
 
-  const messagesLength = messages.data.find((userChat) => userChat.user === auth?._id)?.correspondence[
+  const messagesLength = messages.data.find((userChat) => userChat?.user === auth?._id)?.correspondence[
     localStorage.userIndex
   ]?.messages.length;
 
   const selectedMessage = messages.data
-    .find((userChat) => userChat.user === auth?._id)
+    .find((userChat) => userChat?.user === auth?._id)
     ?.correspondence[localStorage.userIndex]?.messages?.slice()
     ?.reverse()
     .filter((chat, messageIndex) => messageIndex < addMessages)
@@ -99,23 +97,25 @@ export const Messages: React.FC = () => {
         user: auth?._id,
         yourIndex: localStorage.userIndex,
         hisIndex:
-          messages.data
+          messages.data2
             .find((userChat) => userChat.user === selectedUser?.[0]?._id)
             ?.correspondence.findIndex((chat) => chat.withWho === auth?._id) + '',
       }),
     );
 
     firstRef.current!.value = '';
-    dispatch(fetchGetMessages());
+    dispatch(fetchGetMessages(auth?._id));
+    dispatch(fetchChatUser(selectedUser?.[0]?._id));
   };
+
 
   const loadStatus =
     messages.status === 'loaded' && state.user.status === 'loaded' && state.auth.status === 'loaded';
 
   useEffect(() => {
-    dispatch(fetchGetMessages());
-    setTimeout(scrollToBottom, 600);
-  }, [dispatch]);
+    dispatch(fetchGetMessages(auth?._id));
+    dispatch(fetchChatUser(selectedUser?.[0]?._id));
+  }, [auth?._id, dispatch, selectedUser?.[0]?._id]);
 
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
@@ -142,6 +142,7 @@ export const Messages: React.FC = () => {
                   key={friend._id}
                   onClick={() => {
                     setSelectUser(friend._id);
+                    dispatch(fetchChatUser(selectedUser?.[0]?._id));
                     setTimeout(scrollToBottom, 0);
                   }}>
                   <img src={friend.imageUrl} alt="" className="messages_chats_item_avatar" />
@@ -184,7 +185,7 @@ export const Messages: React.FC = () => {
         </div>
       </div>
 
-      <div className="messages_correspondence_container">
+      <div className="messages_correspondence_container" onLoad={() => setTimeout(scrollToBottom, 10)}>
         {selectedUser[0] === undefined ? (
           <div className="messages_correspondence_select_chat">Select chat</div>
         ) : (
@@ -198,7 +199,7 @@ export const Messages: React.FC = () => {
               </div>
             ))}
 
-            <div className="messages_correspondence" style={{ height: windowSize - 200 }} ref={divRef}>
+            <div className="messages_correspondence" style={{ height: windowSize - 250 }} ref={divRef}>
               {messagesLength! > addMessages && loadStatus ? (
                 <div
                   className="messages_correspondence_add_20"
