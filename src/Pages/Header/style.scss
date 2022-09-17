@@ -34,7 +34,7 @@
   }
 
   .header_wave {
-    font-size: 36px !important;
+    font-size: 36px;
     line-height: 49px;
     color: #ffffff;
   }
@@ -42,13 +42,13 @@
   .header_error {
     padding-top: 10px;
 
-    font-size: 24px;
+    font-size: 26px;
     animation: header_error 1s linear infinite;
   }
 
   @keyframes header_error {
     50% {
-      opacity: 0;
+      opacity: .3;
     }
   }
 

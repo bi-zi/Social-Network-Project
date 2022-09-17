@@ -113,9 +113,13 @@ export const ControlPanel: React.FC = () => {
           <FontAwesomeIcon className="header_music_icon" icon={faMusic} />
         </div>
       ) : error ? (
-        <div className="header_error">You need to register or login</div>
+        <div className="header_error" style={{ color: 'green' }}>
+          You need to register or login
+        </div>
       ) : loading ? (
-        <div className="header_error">Please wait for loading</div>
+        <div className="header_error" style={{ color: 'red' }}>
+          Please wait for loading
+        </div>
       ) : (
         ''
       )}
