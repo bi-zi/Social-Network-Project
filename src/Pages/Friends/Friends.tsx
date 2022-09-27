@@ -171,8 +171,10 @@ export const Friends: React.FC = () => {
                 ''
               )}
 
-              <span className="number_of_friends">Friends {friend.friends?.length}</span>
-              <span className="number_of_subscribers">Subscribers {friend.subscribers?.length}</span>
+              <div className='number_of_friends_subs'>
+                <span>Friends {friend.friends?.length}</span>
+                <span>Subscribers {friend.subscribers?.length}</span>
+              </div>
             </div>
           ))
         ) : catergory === 'friends' ? (

@@ -1,23 +1,10 @@
-$breakpoints: (
-  desktop: 1280,
-  ipad: 1024,
-  tablet: 768,
-  mobile: 640,
-);
-
-@mixin max-bp($breakpoint) {
-  @media (max-width: map.get($breakpoints,$breakpoint)) {
-    @content;
-  }
-}
-
 .friends {
   display: flex;
 
   margin: 20px auto 0 auto;
-  padding-bottom: 80px;
+  padding: 0 20px 80px 20px;
 
-  max-width: 1280px;
+  max-width: 1320px;
   height: 100%;
 
   font-family: 'Iceberg';
@@ -31,12 +18,20 @@ $breakpoints: (
 
   .friends_left_panel,
   .friends_right_panel {
-    width: 630px;
+    width: 63%;
     height: 100%;
 
     border-radius: 20px;
 
     background: #393939;
+  }
+
+  .friends_right_panel {
+    width: 35%;
+  }
+
+  @media screen and (width < 770px) {
+    padding: 0 10px 80px 10px;
   }
 }
 
@@ -45,10 +40,11 @@ $breakpoints: (
     display: flex;
     position: relative;
 
-    margin-left: 20px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 10px;
 
-    width: 590px;
+    width: 95%;
     height: 90px;
 
     border-bottom: 2px solid black;
@@ -69,7 +65,7 @@ $breakpoints: (
     width: auto;
     height: 20px;
 
-    font-size: 17px;
+    font-size: calc(8px + 10 * (100vw / 1280));
     color: white;
   }
 
@@ -123,18 +119,17 @@ $breakpoints: (
     }
   }
 
-  .number_of_friends {
+  .number_of_friends_subs {
     position: absolute;
 
-    top: 70px;
-    right: 140px;
-  }
+    top: 65px;
+    right: 5px;
 
-  .number_of_subscribers {
-    position: absolute;
+    font-size: calc(8px + 8 * (100vw / 1320));
 
-    top: 70px;
-    right: 20px;
+    span:first-child {
+      margin-right: 10px !important;
+    }
   }
 
   .zero_friends_subs {
@@ -147,7 +142,7 @@ $breakpoints: (
     width: 640px;
     height: 60px;
 
-    font-size: 40px;
+    font-size: calc(20px + 10 * (100vw / 1280));
   }
 }
 
@@ -161,12 +156,9 @@ $breakpoints: (
   .all_friends,
   .friend_subscribers,
   .friend_sort {
-    margin: 20px;
+    margin: 20px 15px;
 
-    width: 640px;
-    height: 50px;
-
-    font-size: 26px;
+    font-size: calc(8px + 16 * (100vw / 1280));
 
     cursor: pointer;
     z-index: 10 !important;
@@ -185,12 +177,20 @@ $breakpoints: (
   }
 
   .friends_sort_category {
-    display: none;
+    display: block;
     position: absolute;
 
-    padding-top: 40px;
+    padding-top: 37px;
 
-    width: 630px;
+    @media screen and (width < 1150px) {
+      padding-top: 27.5px;
+    }
+
+    @media screen and (width < 830px) {
+      padding-top: 20px;
+    }
+
+    width: 100%;
     height: 270px;
 
     &:hover {
@@ -201,9 +201,9 @@ $breakpoints: (
     .Z-A_sort,
     .friends_sort,
     .subscribers_sort {
-      padding: 20px 20px;
+      padding: 12px 15px;
 
-      font-size: 26px;
+      font-size: calc(8px + 16 * (100vw / 1280));
       background-color: #393939;
       cursor: pointer;
 

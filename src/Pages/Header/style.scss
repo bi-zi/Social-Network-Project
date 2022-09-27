@@ -26,15 +26,23 @@
       right: auto;
     }
 
-    max-width: 1280px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    max-width: 1320px;
     height: 100%;
 
     justify-content: space-between;
     flex-wrap: wrap;
+
+    @media screen and (width < 770px) {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
 
   .header_wave {
-    font-size: 36px;
+    font-size: calc(20px + 16 * (100vw / 1280));
     line-height: 49px;
     color: #ffffff;
   }
@@ -48,19 +56,16 @@
 
   @keyframes header_error {
     50% {
-      opacity: .3;
+      opacity: 0.3;
     }
   }
-
-
 }
 
 .header_control_panel {
   display: flex;
 
-  margin-top: 10px;
-
-  width: 600px;
+  margin: auto 0;
+  width: 60%;
   justify-content: space-between;
 
   .header_profile_icon,
@@ -71,8 +76,8 @@
   .header_image_icon,
   .header_video_icon,
   .header_music_icon {
-    width: 30px;
-    height: 30px;
+    width: calc(15px + 10 * (100vw / 1280));
+    height: calc(15px + 10 * (100vw / 1280));
     text-decoration: none;
   }
 
@@ -94,8 +99,8 @@
 
 .header_bell_block,
 .header_bell_icon {
-  width: 30px;
-  height: 30px;
+  width: calc(15px + 10 * (100vw / 1280));
+  height: calc(15px + 10 * (100vw / 1280));
   text-decoration: none;
 
   &:hover {
@@ -176,13 +181,13 @@
 
 .header_menu {
   position: relative;
-  margin-top: 10px;
+  margin: auto 0;
 
   .header_loader {
     position: absolute;
 
-    width: 40px;
-    height: 40px;
+    width: calc(20px + 20 * (100vw / 1280));
+    height: calc(20px + 20 * (100vw / 1280));
 
     top: -5px;
     right: 60px;
@@ -216,8 +221,8 @@
   }
 
   .header_menu_burger {
-    width: 30px;
-    height: 30px;
+    width: calc(20px + 10 * (100vw / 1280));
+    height: calc(20px + 10 * (100vw / 1280));
     z-index: 999;
     cursor: pointer;
   }
@@ -228,8 +233,8 @@
   display: none;
   justify-content: space-between;
 
-  width: 200px;
-  height: 30px;
+  width: calc(100px + 45 * (100vw / 1280));
+  height: calc(20px + 10 * (100vw / 1280));
 
   top: 0px;
   right: 0px;
@@ -243,9 +248,12 @@
 
 .header_menu_login,
 .header_menu_register {
+  padding: 2px 1px 0 0;
+
   width: 100%;
 
-  font-size: 22px;
+  font-size: calc(12px + 7 * (100vw / 1320));
+
   text-decoration: none;
   text-align: center;
 

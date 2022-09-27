@@ -108,7 +108,6 @@ export const Messages: React.FC = () => {
     dispatch(fetchChatUser(selectedUser?.[0]?._id));
   };
 
-
   const loadStatus =
     messages.status === 'loaded' && state.user.status === 'loaded' && state.auth.status === 'loaded';
 
