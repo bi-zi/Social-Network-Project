@@ -171,7 +171,7 @@ export const Friends: React.FC = () => {
                 ''
               )}
 
-              <div className='number_of_friends_subs'>
+              <div className="number_of_friends_subs">
                 <span>Friends {friend.friends?.length}</span>
                 <span>Subscribers {friend.subscribers?.length}</span>
               </div>
@@ -205,6 +205,7 @@ export const Friends: React.FC = () => {
         </div>
 
         <div className="friends_sort_menu">
+          <div className="friend_sort">Sort by</div>
           <div className="friends_sort_category">
             <div
               className="A-Z_sort"
@@ -237,7 +238,6 @@ export const Friends: React.FC = () => {
               Do not sort
             </div>
           </div>
-          <div className="friend_sort">Sort by</div>
         </div>
       </div>
     </div>

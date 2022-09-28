@@ -144,7 +144,7 @@ export const Messages: React.FC = () => {
                     dispatch(fetchChatUser(selectedUser?.[0]?._id));
                     setTimeout(scrollToBottom, 0);
                   }}>
-                  <img src={friend.imageUrl} alt="" className="messages_chats_item_avatar" />
+                  <img src={friend.imageUrl} width="100" alt="" className="messages_chats_item_avatar" />
                   <div className="messages_chats_item_fullName">{friend.fullName}</div>
                   {lastMessage![index] !== undefined ? (
                     <div className="messages_chats_item_time">{`${new Date(
@@ -192,7 +192,12 @@ export const Messages: React.FC = () => {
             {selectedUser?.map((select, index) => (
               <div className="messages_correspondence_header" key={select?._id}>
                 <NavLink to={`/Profile/${select._id}`}>
-                  <img src={select?.imageUrl} alt="" className="messages_correspondence_header_avatar" />
+                  <img
+                    src={select?.imageUrl}
+                    width="100"
+                    alt=""
+                    className="messages_correspondence_header_avatar"
+                  />
                   <div className="messages_correspondence_header_fullName">{select?.fullName}</div>
                 </NavLink>
               </div>
@@ -223,6 +228,7 @@ export const Messages: React.FC = () => {
                               ?.imageUrl
                           }
                           alt=""
+                          width="100"
                           className="messages_correspondence_message_avatar"
                         />
                         <div className="messages_correspondence_message_fullName">

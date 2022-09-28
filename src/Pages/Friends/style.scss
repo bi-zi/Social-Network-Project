@@ -1,220 +1,225 @@
-.friends {
-  display: flex;
+@media screen and (width > 460px) {
+  .friends {
+    display: flex;
 
-  margin: 20px auto 0 auto;
-  padding: 0 20px 80px 20px;
+    margin: 20px auto 0 auto;
+    padding: 0 20px 80px 20px;
 
-  max-width: 1320px;
-  height: 100%;
-
-  font-family: 'Iceberg';
-  font-style: normal;
-
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-  user-select: none;
-  color: #ffffff;
-
-  .friends_left_panel,
-  .friends_right_panel {
-    width: 63%;
+    max-width: 1320px;
     height: 100%;
 
-    border-radius: 20px;
+    font-family: 'Iceberg';
+    font-style: normal;
 
-    background: #393939;
-  }
+    justify-content: space-between;
+    flex-wrap: wrap;
 
-  .friends_right_panel {
-    width: 35%;
-  }
+    user-select: none;
+    color: #ffffff;
 
-  @media screen and (width < 770px) {
-    padding: 0 10px 80px 10px;
-  }
-}
-
-.friends_left_panel {
-  .friends_user_block {
-    display: flex;
-    position: relative;
-
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-
-    width: 95%;
-    height: 90px;
-
-    border-bottom: 2px solid black;
-  }
-
-  .friends_user_avatar {
-    width: 80px;
-    height: 80px;
-
-    border-radius: 100%;
-    cursor: pointer;
-  }
-
-  .friends_user_fullname {
-    margin-top: 10px;
-    margin-left: 10px;
-
-    width: auto;
-    height: 20px;
-
-    font-size: calc(8px + 10 * (100vw / 1280));
-    color: white;
-  }
-
-  .friend_menu {
-    position: absolute;
-
-    float: left;
-    left: 550px;
-    top: 0px;
-
-    &:active .friend_content {
-      display: block;
+    .friends_left_panel {
+      border-radius: 20px;
     }
 
-    .friend_content {
-      display: none;
-      position: absolute;
+    .friends_left_panel,
+    .friends_right_panel {
+      width: 63%;
+      height: 100%;
 
-      padding-top: 20px;
+      background: #393939;
+    }
 
-      width: 120px;
+    .friends_right_panel {
+      border-radius: 20px;
+    }
+
+    .friends_right_panel {
+      width: 35%;
+    }
+
+    @media screen and (width < 770px) {
+      padding: 0 10px 80px 10px;
+    }
+  }
+
+  .friends_left_panel {
+    .friends_user_block {
+      display: flex;
+      position: relative;
+
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 10px;
+
+      width: 95%;
+      height: 90px;
+
+      border-bottom: 2px solid black;
+    }
+
+    .friends_user_avatar {
+      width: 80px;
       height: 80px;
 
-      left: -85px;
-
-      &:hover {
-        display: block;
-      }
+      border-radius: 100%;
+      cursor: pointer;
     }
 
-    .friend_delete {
-      width: 110px;
-      padding: 3px;
+    .friends_user_fullname {
+      margin-top: 10px;
+      margin-left: 10px;
 
-      font-size: 16px;
+      width: auto;
+      height: 20px;
 
-      background-color: rgb(0, 0, 0);
+      font-size: calc(8px + 10 * (100vw / 1280));
       color: white;
     }
 
-    .friend_delete:hover {
-      background-color: white;
-      color: black;
+    .friend_menu {
+      position: absolute;
 
-      cursor: pointer;
+      float: left;
+      right: 10px;
+      top: 0px;
+
+      &:active .friend_content {
+        display: block;
+      }
+
+      .friend_content {
+        display: none;
+        position: absolute;
+
+        padding-top: 25px;
+
+        width: 100px;
+        height: 80px;
+
+        left: -55px;
+
+        &:hover {
+          display: block;
+        }
+      }
+
+      .friend_delete {
+        width: 85px;
+        padding: 2px;
+
+        font-size: 14px;
+
+        background-color: rgb(0, 0, 0);
+        color: white;
+      }
+
+      .friend_delete:hover {
+        background-color: white;
+        color: black;
+
+        cursor: pointer;
+      }
+
+      .friend_menu_icon {
+        font-size: calc(16px + 10 * (100vw / 1280)) !important;
+        cursor: pointer;
+      }
     }
 
-    .friend_menu_icon {
-      font-size: 26px !important;
-      cursor: pointer;
+    .number_of_friends_subs {
+      position: absolute;
+
+      top: 65px;
+      right: 5px;
+
+      font-size: calc(8px + 8 * (100vw / 1320));
+
+      span:first-child {
+        margin-right: 10px !important;
+      }
+    }
+
+    .zero_friends_subs {
+      display: flex;
+      position: relative;
+
+      margin-left: 20px;
+      margin-top: 10px;
+
+      width: 640px;
+      height: 60px;
+
+      font-size: calc(20px + 10 * (100vw / 1280));
     }
   }
 
-  .number_of_friends_subs {
-    position: absolute;
-
-    top: 65px;
-    right: 5px;
-
-    font-size: calc(8px + 8 * (100vw / 1320));
-
-    span:first-child {
-      margin-right: 10px !important;
-    }
-  }
-
-  .zero_friends_subs {
-    display: flex;
-    position: relative;
-
-    margin-left: 20px;
-    margin-top: 10px;
-
-    width: 640px;
-    height: 60px;
-
-    font-size: calc(20px + 10 * (100vw / 1280));
-  }
-}
-
-.friends_right_panel {
-  display: block;
-  position: sticky;
-
-  top: 60px;
-
-  .all_people,
-  .all_friends,
-  .friend_subscribers,
-  .friend_sort {
-    margin: 20px 15px;
-
-    font-size: calc(8px + 16 * (100vw / 1280));
-
-    cursor: pointer;
-    z-index: 10 !important;
-
-    &:hover {
-      color: black;
-    }
-  }
-}
-
-.friends_sort_menu {
-  position: relative;
-
-  &:active .friends_sort_category {
+  .friends_right_panel {
     display: block;
-  }
+    position: sticky;
 
-  .friends_sort_category {
-    display: block;
-    position: absolute;
+    top: 60px;
 
-    padding-top: 37px;
-
-    @media screen and (width < 1150px) {
-      padding-top: 27.5px;
-    }
-
-    @media screen and (width < 830px) {
-      padding-top: 20px;
-    }
-
-    width: 100%;
-    height: 270px;
-
-    &:hover {
-      display: block;
-    }
-
-    .A-Z_sort,
-    .Z-A_sort,
-    .friends_sort,
-    .subscribers_sort {
-      padding: 12px 15px;
+    .all_people,
+    .all_friends,
+    .friend_subscribers,
+    .friend_sort {
+      padding: 10px 15px;
 
       font-size: calc(8px + 16 * (100vw / 1280));
-      background-color: #393939;
-      cursor: pointer;
 
+      cursor: pointer;
       &:hover {
         color: black;
       }
     }
+  }
 
-    .subscribers_sort {
+  .friends_sort_menu {
+    position: relative;
+
+    &:hover .friends_sort_category {
+      display: block;
+    }
+
+    &:hover .friend_sort {
+      color: black;
+    }
+
+    .friends_sort_category {
+      display: none;
+      position: relative;
+
+      width: 100%;
+      height: 100%;
+
+      top: -10px;
+
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
+
+      .A-Z_sort {
+        padding-top: 15px !important;
+      }
+
+      .A-Z_sort,
+      .Z-A_sort,
+      .friends_sort,
+      .subscribers_sort {
+        padding: 0 0 20px 15px;
+
+        font-size: calc(8px + 16 * (100vw / 1280));
+        background-color: #393939;
+        cursor: pointer;
+
+        &:hover {
+          color: black;
+        }
+      }
+
+      .subscribers_sort {
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
     }
   }
 }
