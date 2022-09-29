@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchGetMessages, fetchChatUser, fetchAddMessage } from '../../store/messages/slice';
 import { NavLink, Navigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+
 import './style.scss';
 
 export const Messages: React.FC = () => {
@@ -131,57 +133,57 @@ export const Messages: React.FC = () => {
             onChange={(e) => setFindChat(e.target.value)}
             className="messages_find_chat_input"
           />
-          {sortedFriends.length !== 0 ? (
-            <div className="messages_chats_container">
-              {sortedFriends.map((friend, index) => (
-                <div
-                  className={`messages_chats_item ${
-                    selectUser === friend._id ? 'message_chats_item_color' : ''
-                  }`}
-                  key={friend._id}
-                  onClick={() => {
-                    setSelectUser(friend._id);
-                    dispatch(fetchChatUser(selectedUser?.[0]?._id));
-                    setTimeout(scrollToBottom, 0);
-                  }}>
-                  <img src={friend.imageUrl} width="100" alt="" className="messages_chats_item_avatar" />
-                  <div className="messages_chats_item_fullName">{friend.fullName}</div>
-                  {lastMessage![index] !== undefined ? (
-                    <div className="messages_chats_item_time">{`${new Date(
-                      lastMessage![index]?.date,
-                    ).toLocaleTimeString()} - ${new Date(
-                      lastMessage![index]?.date,
-                    ).toLocaleDateString()}`}</div>
-                  ) : (
-                    ''
-                  )}
-                  {lastMessage![index] !== undefined ? (
-                    <div className="messages_chats_item_message_name_block">
-                      <div className="messages_chats_item_message_name">
-                        {lastMessage![index]?.userId === friend._id
-                          ? friend.fullName.split(' ')[0] + ':'
-                          : lastMessage![index].message === undefined
-                          ? 'Write the first message'
-                          : 'You:'}
-                      </div>
-
-                      <div className="messages_chats_item_last_message">
-                        {lastMessage![index]?.message?.slice(0, 30)}
-                        {lastMessage![index]?.message?.length > 30 ? '...' : ''}
-                      </div>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <NavLink to={`/Friends/${auth?._id}`} className="messages_chats_empty">
-              Find friends to chat
-            </NavLink>
-          )}
         </div>
+        {sortedFriends.length !== 0 ? (
+          <div className="messages_chats_container">
+            {sortedFriends.map((friend, index) => (
+              <div
+                className={`messages_chats_item ${
+                  selectUser === friend._id ? 'message_chats_item_color' : ''
+                }`}
+                key={friend._id}
+                onClick={() => {
+                  setSelectUser(friend._id);
+                  dispatch(fetchChatUser(selectedUser?.[0]?._id));
+                  setTimeout(scrollToBottom, 0);
+                }}>
+                <img src={friend.imageUrl} width="100" alt="" className="messages_chats_item_avatar" />
+                <div className="messages_chats_item_fullName">{friend.fullName}</div>
+                {lastMessage![index] !== undefined ? (
+                  <div className="messages_chats_item_time">{`${new Date(
+                    lastMessage![index]?.date,
+                  ).toLocaleTimeString()} - ${new Date(
+                    lastMessage![index]?.date,
+                  ).toLocaleDateString()}`}</div>
+                ) : (
+                  ''
+                )}
+                {lastMessage![index] !== undefined ? (
+                  <div className="messages_chats_item_message_name_block">
+                    <div className="messages_chats_item_message_name">
+                      {lastMessage![index]?.userId === friend._id
+                        ? friend.fullName.split(' ')[0] + ':'
+                        : lastMessage![index].message === undefined
+                        ? 'Write the first message'
+                        : 'You:'}
+                    </div>
+
+                    <div className="messages_chats_item_last_message">
+                      {lastMessage![index]?.message?.slice(0, 25)}
+                      {lastMessage![index]?.message?.length > 25 ? '...' : ''}
+                    </div>
+                  </div>
+                ) : (
+                  ''
+                )}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <NavLink to={`/Friends/${auth?._id}`} className="messages_chats_empty">
+            Find friends to chat
+          </NavLink>
+        )}
       </div>
 
       <div className="messages_correspondence_container" onLoad={() => setTimeout(scrollToBottom, 10)}>
@@ -252,27 +254,28 @@ export const Messages: React.FC = () => {
             </div>
 
             <div className="messages_correspondence_panel">
-              <input
-                type="text"
-                ref={firstRef}
-                className="messages_correspondence_panel_input"
-                required={true}
-                minLength={1}
-                maxLength={300}
-                title="Only latin characters can be used"
-                pattern="^[a-zA-Z0-9 ]+$"
-                onChange={(e) => setText(e.target.value)}
-              />
-              <button
-                type="submit"
-                className="messages_correspondence_panel_button"
-                onClick={() =>
+              <form
+                onSubmit={() =>
                   text?.length !== 0 && loadStatus
                     ? (onSubmit(text), setTimeout(scrollToBottom, 400))
                     : ''
                 }>
-                Submit
-              </button>
+                <label>
+                  <input
+                    type="text"
+                    ref={firstRef}
+                    className="messages_correspondence_panel_input"
+                    required={true}
+                    minLength={1}
+                    maxLength={300}
+                    title="Only latin characters can be used"
+                    onChange={(e) => setText(e.target.value)}
+                  />
+                </label>
+                <button type="submit" className="messages_correspondence_panel_button">
+                  Submit
+                </button>
+              </form>
             </div>
           </>
         )}

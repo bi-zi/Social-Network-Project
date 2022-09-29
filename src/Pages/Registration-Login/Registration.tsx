@@ -15,6 +15,7 @@ export const Registration = () => {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(selectIsAuth);
   const data = useAppSelector((state) => state.auth.data);
+
   const {
     register,
     handleSubmit,
@@ -24,9 +25,11 @@ export const Registration = () => {
   });
 
   const onSubmit = async (values: FormValues) => {
-    const val = { email: values.email.toLowerCase(), password: values.password };
+    console.log(values)
+    const val = { email: values.email.toLowerCase(), password: values.password, fullName: values.fullName };
 
     const data = await dispatch(fetchRegister(val));
+    console.log(data)
     if (!data.payload) {
       return alert('Не удалось регистрироваться!');
     }
@@ -54,7 +57,6 @@ export const Registration = () => {
               className="registration_form_firstName"
               type="text"
               placeholder="Elon Musk"
-              pattern="^[a-zA-Z0-9 ]+$"
               title="Only latin characters can be used"
             />
             <input
