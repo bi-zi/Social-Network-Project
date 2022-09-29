@@ -5,10 +5,10 @@
 
     margin: 0 auto;
 
-    padding: 20px 20px 80px 20px;
+    padding: 20px 20px 0 20px;
 
     @media screen and (width < 770px) {
-      padding: 20px 10px 80px 10px;
+      padding: 20px 10px 0 10px;
     }
 
     max-width: 1320px;
@@ -21,8 +21,7 @@
     user-select: none;
 
     .messages_chats {
-      width: 39%;
-      max-height: 100%;
+      width: 35%;
 
       border-radius: 15px;
       background: #2e2e2e;
@@ -31,7 +30,8 @@
         position: relative;
 
         width: 100%;
-        height: 740px;
+        min-height: 395px;
+
         overflow: auto;
 
         &::-webkit-scrollbar-track {
@@ -72,10 +72,11 @@
         .messages_chats_item_fullName {
           position: absolute;
 
-          top: calc(10px + 5 * (100vw / 1920));
+          top: calc(12px + 5 * (100vw / 1920));
           left: calc(50px + 30 * (100vw / 1920));
 
-          font-size: calc(10px + 5 * (100vw / 1280));
+          font-size: calc(8px + 6 * (100vw / 1280));
+          line-height: 10px;
 
           color: white;
         }
@@ -83,21 +84,16 @@
         .messages_chats_item_time {
           position: absolute;
 
-          top: 18px;
-          right: 10px;
+          top: 3px;
+          right: 5px;
 
-          font-size: calc(6px + 5 * (100vw / 1280));
+          font-size: calc(6px + 6 * (100vw / 1920));
           color: white;
-
-          @media screen and (width < 850px) {
-            width: 60px;
-          }
         }
 
         .messages_chats_item_message_name_block {
           position: absolute;
           display: flex;
-          width: 100%;
 
           top: calc(30px + 20 * (100vw / 1920));
           left: calc(50px + 30 * (100vw / 1920));
@@ -106,19 +102,18 @@
         .messages_chats_item_last_message,
         .messages_chats_item_message_name {
           position: relative;
-
           font-size: calc(6px + 6 * (100vw / 1920));
-          word-wrap: break-word;
           color: white;
         }
 
         .messages_chats_item_last_message {
-          width: calc(50px + 200 * (100vw / 1920));
+          margin-right: 5px;
+          word-break: break-all;
         }
 
         .messages_chats_item_message_name {
           position: relative;
-          margin-right: 5px;
+          margin-right: 2px;
         }
       }
 
@@ -137,7 +132,7 @@
   .messages_correspondence_header {
     position: relative;
     width: 100%;
-    height: 60px;
+    height: 40px;
 
     padding-right: 10px;
 
@@ -147,7 +142,7 @@
     background-color: rgb(0, 0, 0);
 
     .messages_search_icon {
-      padding: 18px;
+      padding: 10px;
       font-size: 24px;
       z-index: 2;
 
@@ -157,17 +152,17 @@
     .messages_find_chat_input {
       position: absolute;
 
-      padding-left: 50px;
+      padding-left: 45px;
 
       width: 97%;
-      height: 60px;
+      height: 40px;
 
       left: 0;
 
       font-family: 'Iceberg';
       font-style: normal;
       font-weight: 400;
-      font-size: calc(10px + 10 * (100vw / 1280));
+      font-size: calc(8px + 10 * (100vw / 1280));
 
       border: 0;
 
@@ -179,7 +174,7 @@
   .messages_correspondence_container {
     opacity: 1;
     position: relative;
-    width: 59%;
+    width: 63.5%;
     height: 100%;
 
     border-radius: 15px;
@@ -191,24 +186,23 @@
       margin-top: 5px;
       margin-right: 20px;
 
-      width: 50px;
-      height: 50px;
+      width: 30px;
+      height: 30px;
 
       border-radius: 100%;
     }
 
     .messages_correspondence_header_fullName {
       position: absolute;
-      padding-top: 14px;
+      padding-top: 8px;
       padding-left: 20px;
-      font-size: 26px;
+      font-size: calc(14px + 10 * (100vw / 1920));
       color: white;
     }
 
     .messages_correspondence {
       width: 100%;
       min-height: 350px;
-      max-height: 1000px;
       margin-bottom: 45px;
       overflow: auto;
     }
@@ -286,10 +280,9 @@
       }
 
       .message_correspondence_message {
-        margin: 0 auto;
-        width: 720px;
+        margin: 0 10px;
 
-        font-size: 20px;
+        font-size: calc(10px + 10 * (100vw / 1920));
         font-family: 'Iceberg';
         font-style: normal;
         font-weight: 400;
@@ -304,9 +297,10 @@
       position: absolute;
 
       width: 100%;
-      height: 60px;
+      height: 50px;
 
       bottom: 0px;
+      padding: 10px 20px;
 
       border-bottom-left-radius: 15px;
       border-bottom-right-radius: 15px;
@@ -314,28 +308,24 @@
       background-color: #000000;
 
       .messages_correspondence_panel_input {
-        width: 480px;
-        height: 40px;
+        width: 75%;
+        height: 30px;
 
-        margin-top: 10px;
-        margin-left: 80px;
-
-        padding-left: 10px;
-
-        font-size: 20px;
+        font-size: calc(10px + 10 * (100vw / 1920));
         font-family: 'Iceberg';
         font-style: normal;
         font-weight: 400;
       }
 
       .messages_correspondence_panel_button {
-        position: relative;
-        width: 120px;
-        height: 40px;
+        position: absolute;
 
-        margin-left: 10px;
+        width: 20%;
+        height: 30px;
 
-        font-size: 20px;
+        right: 20px;
+
+        font-size: calc(10px + 10 * (100vw / 1920));
         font-family: 'Iceberg';
         font-style: normal;
 

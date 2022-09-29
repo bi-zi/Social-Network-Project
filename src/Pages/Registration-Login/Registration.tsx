@@ -25,11 +25,9 @@ export const Registration = () => {
   });
 
   const onSubmit = async (values: FormValues) => {
-    console.log(values)
     const val = { email: values.email.toLowerCase(), password: values.password, fullName: values.fullName };
 
     const data = await dispatch(fetchRegister(val));
-    console.log(data)
     if (!data.payload) {
       return alert('Не удалось регистрироваться!');
     }

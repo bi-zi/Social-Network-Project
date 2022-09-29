@@ -25,10 +25,12 @@ export const Messages: React.FC = () => {
     messages?.sortedId.length !== 0 ? messages.sortedId : undefined,
   );
 
-  const [windowSize, setWindowSize] = useState(window.innerHeight);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   window.addEventListener('resize', function () {
-    setWindowSize(window.innerHeight);
+    setWindowHeight(window.innerHeight);
+    // setWindowWidth(window.innerWidth);
   });
 
   const findFriends = messages.data.find((x) => x?.user === auth?._id);
@@ -87,10 +89,20 @@ export const Messages: React.FC = () => {
   const selectedUser = [sortedFriends[localStorage.chatIndex]];
 
   const scrollToBottom = () => {
-    if (divRef.current !== null) divRef.current!.scrollTop = divRef.current!.scrollHeight;
+    if (divRef.current !== null) {
+      divRef.current!.scrollTop = divRef.current!.scrollHeight;
+      console.log(divRef.current!.scrollHeight);
+    }
   };
 
-  const onSubmit = async (values: string) => {
+  const scrollToTop = () => {
+    if (divRef.current !== null) {
+      divRef.current!.scrollTop = 0;
+    }
+  };
+
+  const onSubmit = async (e: any, values: string) => {
+    e.preventDefault();
     await dispatch(
       fetchAddMessage({
         message: values,
@@ -104,7 +116,7 @@ export const Messages: React.FC = () => {
             ?.correspondence.findIndex((chat) => chat.withWho === auth?._id) + '',
       }),
     );
-
+    setTimeout(scrollToBottom, 400);
     firstRef.current!.value = '';
     dispatch(fetchGetMessages(auth?._id));
     dispatch(fetchChatUser(selectedUser?.[0]?._id));
@@ -135,7 +147,7 @@ export const Messages: React.FC = () => {
           />
         </div>
         {sortedFriends.length !== 0 ? (
-          <div className="messages_chats_container">
+          <div className="messages_chats_container" style={{ height: windowHeight - 132 }}>
             {sortedFriends.map((friend, index) => (
               <div
                 className={`messages_chats_item ${
@@ -152,12 +164,11 @@ export const Messages: React.FC = () => {
                 {lastMessage![index] !== undefined ? (
                   <div className="messages_chats_item_time">{`${new Date(
                     lastMessage![index]?.date,
-                  ).toLocaleTimeString()} - ${new Date(
-                    lastMessage![index]?.date,
-                  ).toLocaleDateString()}`}</div>
+                  ).toLocaleTimeString()}`}</div>
                 ) : (
                   ''
                 )}
+
                 {lastMessage![index] !== undefined ? (
                   <div className="messages_chats_item_message_name_block">
                     <div className="messages_chats_item_message_name">
@@ -169,8 +180,11 @@ export const Messages: React.FC = () => {
                     </div>
 
                     <div className="messages_chats_item_last_message">
-                      {lastMessage![index]?.message?.slice(0, 25)}
-                      {lastMessage![index]?.message?.length > 25 ? '...' : ''}
+                      {lastMessage![index]?.message?.split(' ').filter((x) => x.length >= 20).length ===
+                      1
+                        ? 'The message is too big'
+                        : lastMessage![index]?.message?.slice(0, 40)}
+                      {lastMessage![index]?.message?.length > 40 ? '...' : ''}
                     </div>
                   </div>
                 ) : (
@@ -186,7 +200,7 @@ export const Messages: React.FC = () => {
         )}
       </div>
 
-      <div className="messages_correspondence_container" onLoad={() => setTimeout(scrollToBottom, 10)}>
+      <div className="messages_correspondence_container" onLoad={() => setTimeout(scrollToTop, 10)}>
         {selectedUser[0] === undefined ? (
           <div className="messages_correspondence_select_chat">Select chat</div>
         ) : (
@@ -205,11 +219,14 @@ export const Messages: React.FC = () => {
               </div>
             ))}
 
-            <div className="messages_correspondence" style={{ height: windowSize - 250 }} ref={divRef}>
+            <div className="messages_correspondence" style={{ height: windowHeight - 175 }} ref={divRef}>
               {messagesLength! > addMessages && loadStatus ? (
                 <div
                   className="messages_correspondence_add_20"
-                  onClick={() => setAddMessages(addMessages + 20)}>
+                  onClick={() => {
+                    setAddMessages(addMessages + 20);
+                    setTimeout(scrollToBottom, 10);
+                  }}>
                   Add more messages
                 </div>
               ) : (
@@ -253,30 +270,26 @@ export const Messages: React.FC = () => {
               )}
             </div>
 
-            <div className="messages_correspondence_panel">
-              <form
-                onSubmit={() =>
-                  text?.length !== 0 && loadStatus
-                    ? (onSubmit(text), setTimeout(scrollToBottom, 400))
-                    : ''
-                }>
-                <label>
-                  <input
-                    type="text"
-                    ref={firstRef}
-                    className="messages_correspondence_panel_input"
-                    required={true}
-                    minLength={1}
-                    maxLength={300}
-                    title="Only latin characters can be used"
-                    onChange={(e) => setText(e.target.value)}
-                  />
-                </label>
-                <button type="submit" className="messages_correspondence_panel_button">
-                  Submit
-                </button>
-              </form>
-            </div>
+            <form
+              className="messages_correspondence_panel"
+              onSubmit={(e) => (text?.length !== 0 && loadStatus ? onSubmit(e, text) : '')}>
+              <label className="pupa">
+                <input
+                  type="text"
+                  ref={firstRef}
+                  className="messages_correspondence_panel_input"
+                  required={true}
+                  minLength={1}
+                  maxLength={300}
+                  pattern="^[a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
+                  title="Only these characters can be used a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~"
+                  onChange={(e) => setText(e.target.value)}
+                />
+              </label>
+              <button type="submit" className="messages_correspondence_panel_button">
+                Submit
+              </button>
+            </form>
           </>
         )}
       </div>

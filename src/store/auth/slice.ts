@@ -12,7 +12,6 @@ export const fetchAuth = createAsyncThunk('auth/fetchAuth', async (params: FormV
 
 export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: FormValues) => {
   const { data } = await axios.post('/auth/register', params);
-  console.log(data)
   return data;
 });
 
