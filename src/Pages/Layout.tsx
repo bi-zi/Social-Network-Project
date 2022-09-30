@@ -102,7 +102,7 @@ export const Layout: React.FC = () => {
         ''
       )}
       <Outlet></Outlet>
-      {window.location.pathname.split(' ')[0] === '/Messages' ? '' : ''}
+      {window.location.pathname.split(' ')[0] === '/Messages' ? <Footer /> : ''}
     </div>
   );
 };

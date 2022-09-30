@@ -20,7 +20,7 @@ export const Photo: React.FC = () => {
   const { user, category, id } = useParams<keyof MyParams>() as MyParams;
   const state = useAppSelector((state) => state);
   const avatar = state.user?.userOne?.[0];
-  const slider = state.slider.slider?.find((userSlider) => userSlider.user === user);
+  const slider = state.slider.slider?.find((userSlider) => userSlider?.user === user);
 
   const readyPhotos =
     category === 'PhotoAvatar'

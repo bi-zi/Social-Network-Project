@@ -91,7 +91,6 @@ export const Messages: React.FC = () => {
   const scrollToBottom = () => {
     if (divRef.current !== null) {
       divRef.current!.scrollTop = divRef.current!.scrollHeight;
-      console.log(divRef.current!.scrollHeight);
     }
   };
 
@@ -116,6 +115,7 @@ export const Messages: React.FC = () => {
             ?.correspondence.findIndex((chat) => chat.withWho === auth?._id) + '',
       }),
     );
+
     setTimeout(scrollToBottom, 400);
     firstRef.current!.value = '';
     dispatch(fetchGetMessages(auth?._id));
@@ -135,23 +135,24 @@ export const Messages: React.FC = () => {
   }
 
   return (
-    <div className="messages_container">
-      <div className="messages_chats">
-        <div className="messages_find_chat">
-          <FontAwesomeIcon className="messages_search_icon" icon={faMagnifyingGlass} />
+    <div className="messages__container">
+      <div className="messages__chats-container">
+        <form className="messages__find-chat">
+          <FontAwesomeIcon className="messages__search-icon" icon={faMagnifyingGlass} />
           <input
             type="text"
             pattern="^[a-zA-Z0-9 ]+$"
             onChange={(e) => setFindChat(e.target.value)}
-            className="messages_find_chat_input"
+            className="messages__find-chat-input"
           />
-        </div>
+        </form>
+
         {sortedFriends.length !== 0 ? (
-          <div className="messages_chats_container" style={{ height: windowHeight - 132 }}>
+          <div className="messages__chats">
             {sortedFriends.map((friend, index) => (
               <div
-                className={`messages_chats_item ${
-                  selectUser === friend._id ? 'message_chats_item_color' : ''
+                className={`messages__chats-item ${
+                  selectUser === friend._id ? 'messages__chats-item-color' : ''
                 }`}
                 key={friend._id}
                 onClick={() => {
@@ -159,10 +160,10 @@ export const Messages: React.FC = () => {
                   dispatch(fetchChatUser(selectedUser?.[0]?._id));
                   setTimeout(scrollToBottom, 0);
                 }}>
-                <img src={friend.imageUrl} width="100" alt="" className="messages_chats_item_avatar" />
-                <div className="messages_chats_item_fullName">{friend.fullName}</div>
+                <img src={friend.imageUrl} width="100" alt="" className="messages__chats-item-avatar" />
+                <div className="messages__chats-item-fullName">{friend.fullName}</div>
                 {lastMessage![index] !== undefined ? (
-                  <div className="messages_chats_item_time">{`${new Date(
+                  <div className="messages__chats-item-time">{`${new Date(
                     lastMessage![index]?.date,
                   ).toLocaleTimeString()}`}</div>
                 ) : (
@@ -170,8 +171,8 @@ export const Messages: React.FC = () => {
                 )}
 
                 {lastMessage![index] !== undefined ? (
-                  <div className="messages_chats_item_message_name_block">
-                    <div className="messages_chats_item_message_name">
+                  <div className="messages__chats-item-message__name-block">
+                    <div className="messages__chats-item-message-name">
                       {lastMessage![index]?.userId === friend._id
                         ? friend.fullName.split(' ')[0] + ':'
                         : lastMessage![index].message === undefined
@@ -179,7 +180,7 @@ export const Messages: React.FC = () => {
                         : 'You:'}
                     </div>
 
-                    <div className="messages_chats_item_last_message">
+                    <div className="messages__chats-item-last-message">
                       {lastMessage![index]?.message?.split(' ').filter((x) => x.length >= 20).length ===
                       1
                         ? 'The message is too big'
@@ -194,38 +195,41 @@ export const Messages: React.FC = () => {
             ))}
           </div>
         ) : (
-          <NavLink to={`/Friends/${auth?._id}`} className="messages_chats_empty">
-            Find friends to chat
-          </NavLink>
+          <div className="messages__chats-empty">
+            <NavLink to={`/Friends/${auth?._id}`}>Find friends to chat</NavLink>
+          </div>
         )}
       </div>
 
-      <div className="messages_correspondence_container" onLoad={() => setTimeout(scrollToTop, 10)}>
+      <div className="messages__correspondence-container" onLoad={() => setTimeout(scrollToBottom, 0)}>
         {selectedUser[0] === undefined ? (
-          <div className="messages_correspondence_select_chat">Select chat</div>
+          <div className="messages__correspondence-select-chat">Select chat</div>
         ) : (
           <>
             {selectedUser?.map((select, index) => (
-              <div className="messages_correspondence_header" key={select?._id}>
+              <div className="messages__correspondence-header" key={select?._id}>
+                <NavLink to={`/Profile/${select._id}`}>
+                  <div className="messages__correspondence-header-fullName">{select?.fullName}</div>
+                </NavLink>
+
                 <NavLink to={`/Profile/${select._id}`}>
                   <img
                     src={select?.imageUrl}
                     width="100"
                     alt=""
-                    className="messages_correspondence_header_avatar"
+                    className="messages__correspondence-header-avatar"
                   />
-                  <div className="messages_correspondence_header_fullName">{select?.fullName}</div>
                 </NavLink>
               </div>
             ))}
 
-            <div className="messages_correspondence" style={{ height: windowHeight - 175 }} ref={divRef}>
+            <div className="messages__correspondence" ref={divRef}>
               {messagesLength! > addMessages && loadStatus ? (
                 <div
-                  className="messages_correspondence_add_20"
+                  className="messages__correspondence-add-20"
                   onClick={() => {
                     setAddMessages(addMessages + 20);
-                    setTimeout(scrollToBottom, 10);
+                    setTimeout(scrollToTop, 20);
                   }}>
                   Add more messages
                 </div>
@@ -233,10 +237,10 @@ export const Messages: React.FC = () => {
                 ''
               )}
               {selectedMessage?.length === 0 ? (
-                <div className="meessages_correspondence_empty">Write the first message in the chat</div>
+                <div className="messages__correspondence-empty">Write the first message in the chat</div>
               ) : (
                 selectedMessage?.map((message, index) => (
-                  <div className="messages_correspondence_message_block" key={index}>
+                  <div className="messages__correspondence-message-block" key={index}>
                     {(message?.userId !== selectedMessage[index - 1]?.userId ||
                       message?.date !== selectedMessage[index - 1]?.date) &&
                     message.userId !== undefined ? (
@@ -248,36 +252,36 @@ export const Messages: React.FC = () => {
                           }
                           alt=""
                           width="100"
-                          className="messages_correspondence_message_avatar"
+                          className="messages__correspondence-message-avatar"
                         />
-                        <div className="messages_correspondence_message_fullName">
+                        <div className="messages__correspondence-message-fullName">
                           {
                             state.user?.usersAll.filter((user) => message.userId?.includes(user._id))[0]
                               ?.fullName
                           }
                         </div>
 
-                        <div className="messages_correspondence_message_date">{`${new Date(
+                        <div className="messages__correspondence-message-date">{`${new Date(
                           message.date,
                         ).toLocaleDateString()} - ${new Date(message.date).toLocaleTimeString()}`}</div>
                       </>
                     ) : (
                       ''
                     )}
-                    <div className="message_correspondence_message">{message.message}</div>
+                    <div className="messages_correspondence-message">{message.message}</div>
                   </div>
                 ))
               )}
             </div>
 
             <form
-              className="messages_correspondence_panel"
+              className="messages__correspondence-panel"
               onSubmit={(e) => (text?.length !== 0 && loadStatus ? onSubmit(e, text) : '')}>
-              <label className="pupa">
+              <label>
                 <input
                   type="text"
                   ref={firstRef}
-                  className="messages_correspondence_panel_input"
+                  className="messages__correspondence-panel-input"
                   required={true}
                   minLength={1}
                   maxLength={300}
@@ -286,7 +290,7 @@ export const Messages: React.FC = () => {
                   onChange={(e) => setText(e.target.value)}
                 />
               </label>
-              <button type="submit" className="messages_correspondence_panel_button">
+              <button type="submit" className="messages__correspondence-panel-button">
                 Submit
               </button>
             </form>
