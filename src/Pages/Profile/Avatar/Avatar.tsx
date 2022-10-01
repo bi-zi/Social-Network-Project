@@ -22,7 +22,7 @@ import {
   fetchGetMessages,
   fetchChatUser,
   fetchPushChat,
-  setSortedId,
+  setSelectedUser,
 } from '../../../store/messages/slice';
 import { ImageParsing } from '../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
@@ -133,7 +133,7 @@ export const Avatar: React.FC = () => {
       await dispatch(fetchPushChat({ withWho: id, user: auth?._id }));
     }
 
-    dispatch(setSortedId(id));
+    dispatch(setSelectedUser(id));
 
     dispatch(fetchChatUser(id));
     dispatch(fetchGetMessages(auth?._id));

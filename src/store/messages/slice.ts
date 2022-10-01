@@ -2,13 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Messages, MessagesSliceState, Status } from './types';
 import axios from '../../backend/axios';
 
-export const fetchGetMessages = createAsyncThunk(
-  'messages/id/fetchGetMessages',
-  async (id: string) => {
-    const { data } = await axios.get(`/messages/${id}`);
-    return data;
-  },
-);
+export const fetchGetMessages = createAsyncThunk('messages/id/fetchGetMessages', async (id: string) => {
+  const { data } = await axios.get(`/messages/${id}`);
+  return data;
+});
 
 export const fetchChatUser = createAsyncThunk('messages/i1/fetchGetMessages', async (id: string) => {
   const { data } = await axios.get(`/messages/${id}`);
@@ -66,7 +63,10 @@ export const fetchAddMessage = createAsyncThunk<
 const initialState: MessagesSliceState = {
   data: [],
   data2: [],
-  sortedId: '',
+  selectedUser: '',
+  addMessages: 20,
+  findChat: '',
+  sortedChats: [],
   status: Status.LOADING,
 };
 
@@ -74,10 +74,20 @@ const messagesSlice = createSlice({
   name: 'message',
   initialState,
   reducers: {
-    setSortedId: (state, action) => {
-      state.sortedId = action.payload;
+    setSelectedUser: (state, action) => {
+      state.selectedUser = action.payload;
+    },
+    setAddMessages: (state, action) => {
+      state.addMessages = action.payload;
+    },
+    setFindChat: (state, action) => {
+      state.findChat = action.payload;
+    },
+    setSortedChats: (state, action) => {
+      state.sortedChats = action.payload;
     },
   },
+
   extraReducers: (builder) => {
     builder.addCase(fetchGetMessages.pending, (state) => {
       state.status = Status.LOADING;
@@ -100,7 +110,6 @@ const messagesSlice = createSlice({
     builder.addCase(fetchChatUser.rejected, (state) => {
       state.status = Status.ERROR;
     });
-
 
     builder.addCase(fetchCreateMessages.pending, (state) => {
       state.status = Status.LOADING;
@@ -134,5 +143,5 @@ const messagesSlice = createSlice({
   },
 });
 
-export const { setSortedId } = messagesSlice.actions;
+export const { setSelectedUser, setAddMessages, setFindChat, setSortedChats } = messagesSlice.actions;
 export const messagesReducer = messagesSlice.reducer;

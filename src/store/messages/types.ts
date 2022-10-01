@@ -30,6 +30,9 @@ export enum Status {
 export interface MessagesSliceState {
   data: Messages[];
   data2: Messages[];
-  sortedId: string;
+  selectedUser: string;
+  addMessages: number;
+  findChat: string;
+  sortedChats: Messages[];
   status: Status;
 }

@@ -1,12 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Chats } from './components/Chats';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { fetchGetMessages, fetchChatUser, fetchAddMessage } from '../../store/messages/slice';
+import {
+  fetchGetMessages,
+  fetchChatUser,
+  fetchAddMessage,
+  setSelectedUser,
+  setAddMessages,
+  setFindChat,
+} from '../../store/messages/slice';
 import { NavLink, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 import './style.scss';
+
+import { useSort } from './useSort';
 
 export const Messages: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -19,11 +29,6 @@ export const Messages: React.FC = () => {
   const firstRef = useRef<HTMLInputElement>(null);
 
   const [text, setText] = useState('');
-  const [findChat, setFindChat] = useState<any>();
-  const [addMessages, setAddMessages] = useState<number>(20);
-  const [selectUser, setSelectUser] = useState(
-    messages?.sortedId.length !== 0 ? messages.sortedId : undefined,
-  );
 
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -33,60 +38,24 @@ export const Messages: React.FC = () => {
     // setWindowWidth(window.innerWidth);
   });
 
-  const findFriends = messages.data.find((x) => x?.user === auth?._id);
+  const {sortedChats, chatIndexWithoutSort, chatIndexWithSort, selectedChat } =
+    useSort(messages.data);
 
-  const lastMessage = findFriends?.correspondence
-    .map((x) => x?.messages[x.messages.length - 1])
-    .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)));
+  const chats = sortedChats();
 
-  const friends = state.user?.usersAll.filter((user) =>
-    findFriends?.correspondence.map((chat) => chat?.withWho)?.includes(user._id),
-  );
 
-  const friendId = findFriends?.correspondence
-    ?.map((chat) => chat?.messages[chat.messages.length - 1])
-    .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
-    .map((chat) => chat.withWho);
 
-  let sortedFriends = [];
+  const chatIndex1 = chatIndexWithoutSort();
+  const chatIndex2 = chatIndexWithSort();
 
-  for (let i = 0; i < friendId!?.length; i++) {
-    for (let j = 0; j < friends?.length; j++)
-      if (friendId![i] === friends[j]?._id) {
-        sortedFriends.push(friends[j]);
-      }
-  }
 
-  if (findChat?.length > 0) {
-    sortedFriends = friends.filter((user) =>
-      user.fullName.toLowerCase().includes(findChat?.toLowerCase()),
-    );
-  }
+  const selectedMessage = selectedChat();
 
-  if (sortedFriends.length === 0) sortedFriends = friends;
 
-  let userIndex = messages.data
-    .find((userChat) => userChat?.user === auth?._id)
-    ?.correspondence.findIndex((chat) => chat?.withWho === selectUser);
+  const messagesLength =
+    messages.data?.[0]?.correspondence[localStorage.chatIndexWithoutSort]?.messages.length;
 
-  if (selectUser !== undefined) localStorage.setItem('userIndex', userIndex + '');
-
-  let chatIndex = sortedFriends.findIndex((userId) => userId._id === selectUser);
-
-  if (selectUser !== undefined) localStorage.setItem('chatIndex', chatIndex + '');
-
-  const messagesLength = messages.data.find((userChat) => userChat?.user === auth?._id)?.correspondence[
-    localStorage.userIndex
-  ]?.messages.length;
-
-  const selectedMessage = messages.data
-    .find((userChat) => userChat?.user === auth?._id)
-    ?.correspondence[localStorage.userIndex]?.messages?.slice()
-    ?.reverse()
-    .filter((chat, messageIndex) => messageIndex < addMessages)
-    .reverse();
-
-  const selectedUser = [sortedFriends[localStorage.chatIndex]];
+  const selectedUser = chats?.[localStorage.chatIndexWithSort];
 
   const scrollToBottom = () => {
     if (divRef.current !== null) {
@@ -100,18 +69,18 @@ export const Messages: React.FC = () => {
     }
   };
 
-  const onSubmit = async (e: any, values: string) => {
+  const onSendMessage = async (e: any, values: string) => {
     e.preventDefault();
     await dispatch(
       fetchAddMessage({
         message: values,
         userId: auth?._id,
-        withWho: selectedUser?.[0]._id,
+        withWho: selectedUser?._id,
         user: auth?._id,
-        yourIndex: localStorage.userIndex,
+        yourIndex: localStorage.chatIndexWithoutSort,
         hisIndex:
           messages.data2
-            .find((userChat) => userChat.user === selectedUser?.[0]?._id)
+            .find((userChat) => userChat.user === selectedUser?._id)
             ?.correspondence.findIndex((chat) => chat.withWho === auth?._id) + '',
       }),
     );
@@ -119,7 +88,7 @@ export const Messages: React.FC = () => {
     setTimeout(scrollToBottom, 400);
     firstRef.current!.value = '';
     dispatch(fetchGetMessages(auth?._id));
-    dispatch(fetchChatUser(selectedUser?.[0]?._id));
+    dispatch(fetchChatUser(selectedUser?._id));
   };
 
   const loadStatus =
@@ -127,8 +96,8 @@ export const Messages: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchGetMessages(auth?._id));
-    dispatch(fetchChatUser(selectedUser?.[0]?._id));
-  }, [auth?._id, dispatch, selectedUser?.[0]?._id]);
+    dispatch(fetchChatUser(selectedUser?._id));
+  }, [auth?._id, dispatch, selectedUser?._id]);
 
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
@@ -136,99 +105,34 @@ export const Messages: React.FC = () => {
 
   return (
     <div className="messages__container">
-      <div className="messages__chats-container">
-        <form className="messages__find-chat">
-          <FontAwesomeIcon className="messages__search-icon" icon={faMagnifyingGlass} />
-          <input
-            type="text"
-            pattern="^[a-zA-Z0-9 ]+$"
-            onChange={(e) => setFindChat(e.target.value)}
-            className="messages__find-chat-input"
-          />
-        </form>
-
-        {sortedFriends.length !== 0 ? (
-          <div className="messages__chats">
-            {sortedFriends.map((friend, index) => (
-              <div
-                className={`messages__chats-item ${
-                  selectUser === friend._id ? 'messages__chats-item-color' : ''
-                }`}
-                key={friend._id}
-                onClick={() => {
-                  setSelectUser(friend._id);
-                  dispatch(fetchChatUser(selectedUser?.[0]?._id));
-                  setTimeout(scrollToBottom, 0);
-                }}>
-                <img src={friend.imageUrl} width="100" alt="" className="messages__chats-item-avatar" />
-                <div className="messages__chats-item-fullName">{friend.fullName}</div>
-                {lastMessage![index] !== undefined ? (
-                  <div className="messages__chats-item-time">{`${new Date(
-                    lastMessage![index]?.date,
-                  ).toLocaleTimeString()}`}</div>
-                ) : (
-                  ''
-                )}
-
-                {lastMessage![index] !== undefined ? (
-                  <div className="messages__chats-item-message__name-block">
-                    <div className="messages__chats-item-message-name">
-                      {lastMessage![index]?.userId === friend._id
-                        ? friend.fullName.split(' ')[0] + ':'
-                        : lastMessage![index].message === undefined
-                        ? 'Write the first message'
-                        : 'You:'}
-                    </div>
-
-                    <div className="messages__chats-item-last-message">
-                      {lastMessage![index]?.message?.split(' ').filter((x) => x.length >= 20).length ===
-                      1
-                        ? 'The message is too big'
-                        : lastMessage![index]?.message?.slice(0, 40)}
-                      {lastMessage![index]?.message?.length > 40 ? '...' : ''}
-                    </div>
-                  </div>
-                ) : (
-                  ''
-                )}
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="messages__chats-empty">
-            <NavLink to={`/Friends/${auth?._id}`}>Find friends to chat</NavLink>
-          </div>
-        )}
-      </div>
+      <Chats />
 
       <div className="messages__correspondence-container" onLoad={() => setTimeout(scrollToBottom, 0)}>
-        {selectedUser[0] === undefined ? (
+        {selectedUser === undefined ? (
           <div className="messages__correspondence-select-chat">Select chat</div>
         ) : (
           <>
-            {selectedUser?.map((select, index) => (
-              <div className="messages__correspondence-header" key={select?._id}>
-                <NavLink to={`/Profile/${select._id}`}>
-                  <div className="messages__correspondence-header-fullName">{select?.fullName}</div>
-                </NavLink>
+            <div className="messages__correspondence-header">
+              <NavLink to={`/Profile/${selectedUser?._id}`}>
+                <div className="messages__correspondence-header-fullName">{selectedUser?.fullName}</div>
+              </NavLink>
 
-                <NavLink to={`/Profile/${select._id}`}>
-                  <img
-                    src={select?.imageUrl}
-                    width="100"
-                    alt=""
-                    className="messages__correspondence-header-avatar"
-                  />
-                </NavLink>
-              </div>
-            ))}
+              <NavLink to={`/Profile/${selectedUser?._id}`}>
+                <img
+                  src={selectedUser?.imageUrl}
+                  width="100"
+                  alt=""
+                  className="messages__correspondence-header-avatar"
+                />
+              </NavLink>
+            </div>
 
             <div className="messages__correspondence" ref={divRef}>
-              {messagesLength! > addMessages && loadStatus ? (
+              {messagesLength! > messages?.addMessages && loadStatus ? (
                 <div
                   className="messages__correspondence-add-20"
                   onClick={() => {
-                    setAddMessages(addMessages + 20);
+                    dispatch(setAddMessages(messages?.addMessages + 20));
                     setTimeout(scrollToTop, 20);
                   }}>
                   Add more messages
@@ -276,7 +180,7 @@ export const Messages: React.FC = () => {
 
             <form
               className="messages__correspondence-panel"
-              onSubmit={(e) => (text?.length !== 0 && loadStatus ? onSubmit(e, text) : '')}>
+              onSubmit={(e) => (text?.length !== 0 && loadStatus ? onSendMessage(e, text) : '')}>
               <label>
                 <input
                   type="text"
