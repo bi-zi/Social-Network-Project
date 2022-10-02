@@ -1,4 +1,3 @@
-
 export type Messages = {
   _id: string;
   correspondence: UserCorrespondence[];
@@ -7,6 +6,7 @@ export type Messages = {
   updatedAt: string;
   __v: number;
 };
+
 
 interface UserCorrespondence {
   messages: UserMessage[];
@@ -20,7 +20,6 @@ interface UserMessage {
   withWho: string;
 }
 
-
 export enum Status {
   LOADING = 'loading',
   SUCCESS = 'loaded',
@@ -28,7 +27,7 @@ export enum Status {
 }
 
 export interface MessagesSliceState {
-  data: Messages[];
+  userMessages: Messages[];
   data2: Messages[];
   selectedUser: string;
   addMessages: number;

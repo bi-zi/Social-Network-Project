@@ -12,7 +12,7 @@ export const fetchChatUser = createAsyncThunk('messages/i1/fetchGetMessages', as
   return data;
 });
 
-export const fetchCreateMessages = createAsyncThunk<Messages[], { withWho: string; user: string }>(
+export const fetchCreateMessages = createAsyncThunk<Messages, { withWho: string; user: string }>(
   'messages/createMessages/fetchCreateMessages',
   async ({ withWho, user }: { withWho: string; user: string }) => {
     const { data } = await axios.post('/messages/createMessages', { withWho, user });
@@ -20,7 +20,7 @@ export const fetchCreateMessages = createAsyncThunk<Messages[], { withWho: strin
   },
 );
 
-export const fetchPushChat = createAsyncThunk<Messages[], { withWho: string; user: string }>(
+export const fetchPushChat = createAsyncThunk<Messages, { withWho: string; user: string }>(
   'about/pushChat/fetchPushChat',
   async ({ withWho, user }: { withWho: string; user: string }) => {
     const { data } = await axios.patch(`/messages/pushChat`, { withWho, user });
@@ -61,7 +61,7 @@ export const fetchAddMessage = createAsyncThunk<
 );
 
 const initialState: MessagesSliceState = {
-  data: [],
+  userMessages: [],
   data2: [],
   selectedUser: '',
   addMessages: 20,
@@ -93,7 +93,7 @@ const messagesSlice = createSlice({
       state.status = Status.LOADING;
     });
     builder.addCase(fetchGetMessages.fulfilled, (state, action) => {
-      state.data = action.payload;
+      state.userMessages = action.payload;
       state.status = Status.SUCCESS;
     });
     builder.addCase(fetchGetMessages.rejected, (state) => {

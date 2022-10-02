@@ -113,7 +113,7 @@ export const Avatar: React.FC = () => {
     dispatch(fetchAuthMe());
   };
 
-  let you = !messages.data.find((userID) => userID?.user === auth?._id);
+  let you = !messages.userMessages?.[0];
   let him = !messages.data2.find((userID) => userID?.user === id);
   let checkChat = !messages.data2
     .find((userID) => userID?.user === id)

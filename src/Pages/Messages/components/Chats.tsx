@@ -5,7 +5,7 @@ import {
   setSelectedUser,
   setFindChat,
 } from '../../../store/messages/slice';
-import { NavLink, Navigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useSort } from '../useSort';
@@ -14,16 +14,16 @@ export const Chats: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const auth = useAppSelector((state) => state.auth?.data);
-  const messages = useAppSelector((state) => state.messages);
+  const messages = useAppSelector((state) => state?.messages);
 
   const divRef = useRef<HTMLDivElement>(null);
 
-  const { evryChatLastMessage, sortedChats } = useSort(messages.data);
+  const { evryChatLastMessage, sortedUsers } = useSort(messages.userMessages?.[0]);
 
   const lastMessage = evryChatLastMessage();
-  const chats = sortedChats();
+  const users = sortedUsers();
 
-  const selectedUser = chats?.[localStorage.chatIndexWithSort];
+  const selectedUser = users?.[localStorage.chatIndexWithSort];
 
   const scrollToBottom = () => {
     if (divRef.current !== null) {
@@ -31,9 +31,6 @@ export const Chats: React.FC = () => {
     }
   };
 
-  if (localStorage.isAuth === undefined) {
-    return <Navigate to="/Login" />;
-  }
 
   return (
     <div className="messages__chats-container">
@@ -47,9 +44,9 @@ export const Chats: React.FC = () => {
         />
       </form>
 
-      {chats.length !== 0 ? (
+      {users.length !== 0 ? (
         <div className="messages__chats">
-          {chats.map((friend, index) => (
+          {users.map((friend, index) => (
             <div
               className={`messages__chats-item ${
                 messages?.selectedUser === friend._id ? 'messages__chats-item-color' : ''
@@ -60,7 +57,9 @@ export const Chats: React.FC = () => {
                 dispatch(fetchChatUser(selectedUser?._id));
                 setTimeout(scrollToBottom, 0);
               }}>
+
               <img src={friend.imageUrl} width="100" alt="" className="messages__chats-item-avatar" />
+
               <div className="messages__chats-item-fullName">{friend.fullName}</div>
               {lastMessage![index] !== undefined ? (
                 <div className="messages__chats-item-time">{`${new Date(
@@ -86,6 +85,7 @@ export const Chats: React.FC = () => {
                       : lastMessage![index]?.message?.slice(0, 40)}
                     {lastMessage![index]?.message?.length > 40 ? '...' : ''}
                   </div>
+
                 </div>
               ) : (
                 ''

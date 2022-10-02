@@ -3,6 +3,8 @@ import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchRegister, selectIsAuth } from '../../store/auth/slice';
 import { useForm } from 'react-hook-form';
 import { NavLink, Navigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
 import './style.scss';
 
 type FormValues = {
@@ -16,6 +18,12 @@ export const Registration = () => {
   const isAuth = useAppSelector(selectIsAuth);
   const data = useAppSelector((state) => state.auth.data);
 
+  const [passwordShown, setPasswordShown] = React.useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
   const {
     register,
     handleSubmit,
@@ -25,7 +33,11 @@ export const Registration = () => {
   });
 
   const onSubmit = async (values: FormValues) => {
-    const val = { email: values.email.toLowerCase(), password: values.password, fullName: values.fullName };
+    const val = {
+      email: values.email.toLowerCase(),
+      password: values.password,
+      fullName: values.fullName,
+    };
 
     const data = await dispatch(fetchRegister(val));
     if (!data.payload) {
@@ -65,10 +77,23 @@ export const Registration = () => {
             />
             <input
               className="registration_form_password"
-              type="password"
+              type={passwordShown ? 'text' : 'password'}
               placeholder="password"
               {...register('password', { required: 'Укажите пароль' })}
             />
+            {passwordShown ? (
+              <FontAwesomeIcon
+                icon={faLockOpen}
+                className="register__password--icon"
+                onClick={togglePassword}
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={faLock}
+                className="register__password--icon"
+                onClick={togglePassword}
+              />
+            )}
           </label>
           <br />
           <button type="submit" className="registration_form_submit" disabled={!isValid}>

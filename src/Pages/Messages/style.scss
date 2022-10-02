@@ -227,12 +227,14 @@
 
     .messages__correspondence-select-chat,
     .messages__correspondence-empty {
-      position: relative;
-      width: 275px;
-      margin: 370px auto;
+       position: relative;
+        margin: 0 auto;
+        top: 50%;
 
-      font-size: 60px;
-      color: white;
+        width: calc(120px + 140 * (100vw / 1920));
+        font-size: calc(20px + 20 * (100vw / 1920));
+        text-align: center;
+        color: white;
     }
 
     .messages__correspondence-message-block {
@@ -307,7 +309,8 @@
         font-size: calc(10px + 10 * (100vw / 1920));
         font-family: 'Iceberg';
         font-style: normal;
-        font-weight: 400;
+        border: none;
+        border-radius: 5px;
       }
 
       .messages__correspondence-panel-button {
