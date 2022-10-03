@@ -3,6 +3,8 @@ import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchAuth, selectIsAuth } from '../../store/auth/slice';
 import { useForm } from 'react-hook-form';
 import { NavLink, Navigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
 import './style.scss';
 
 type FormValues = {
@@ -15,6 +17,12 @@ export const Login = () => {
   const isAuth = useAppSelector(selectIsAuth);
   const data = useAppSelector((state) => state.auth?.data);
   const state = useAppSelector((state) => state);
+
+  const [passwordShown, setPasswordShown] = React.useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const {
     register,
@@ -43,12 +51,13 @@ export const Login = () => {
   }
 
   return (
-    <>
+    <div className="registration_container">
       <div className="registration_attention">
         Do not provide personal email addresses and passwords. The data is encrypted but available to
         everyone!
       </div>
       <div className="registration">
+        Authorization
         <form className="registration_form" onSubmit={handleSubmit(onSubmit)}>
           <label>
             <input
@@ -57,23 +66,36 @@ export const Login = () => {
               placeholder="@gmail.com"
               {...register('email', { required: 'Укажите почту' })}
             />
-            <input
-              className="registration_form_password"
-              type="password"
-              placeholder="password"
-              {...register('password', { required: 'Укажите пароль' })}
-            />
+              <input
+                className="registration_form_password"
+                type={passwordShown ? 'text' : 'password'}
+                placeholder="password"
+                {...register('password', { required: 'Укажите пароль' })}
+              />
+              {passwordShown ? (
+                <FontAwesomeIcon
+                  icon={faLockOpen}
+                  className="register__password--icon--unlock"
+                  onClick={togglePassword}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faLock}
+                  className="register__password--icon--lock"
+                  onClick={togglePassword}
+                />
+              )}
           </label>
           <br />
           <button type="submit" className="registration_form_submit" disabled={!isValid}>
             Submit
           </button>
-          <br />
-          <NavLink to="/Register" className="registration_link_to">
-            Register an account
-          </NavLink>
+
+          <div className="registration_link_to">
+            <NavLink to="/Register">Register an account</NavLink>
+          </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };

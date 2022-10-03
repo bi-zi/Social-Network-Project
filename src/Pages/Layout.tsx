@@ -67,11 +67,11 @@ export const Layout: React.FC = () => {
   // }
 
   return (
-    <div className="wrapper">
+    <>
       <Header />
       {window.location.pathname.split(' ')[0] === '/' && close && user.deleteAttention === 0 ? (
-        <div className="wrapper_container">
-          <div className="wrapper_info">
+        <div >
+          <div >
             <p>
               In most cases, after interacting with the site, a spinning ring appears in the upper right
               next to the menu. The server is free, so data is sent or received for a long time.
@@ -79,7 +79,7 @@ export const Layout: React.FC = () => {
               blocked to avoid data writing errors. If the ring didn't appear and the post-submit action
               didn't work, the send control was blocked, most likely the server died :)
               <br />
-              <NavLink to="/Register" className="wrapper_link" onClick={() => setClose(false)}>
+              <NavLink to="/Register"  onClick={() => setClose(false)}>
                 Go further
               </NavLink>
             </p>
@@ -92,7 +92,7 @@ export const Layout: React.FC = () => {
               post-submit не сработало, управление отправкой было заблокировано, скорее всего сервер умер
               :)
               <br />
-              <NavLink to="/Register" className="wrapper_link" onClick={() => setClose(false)}>
+              <NavLink to="/Register" onClick={() => setClose(false)}>
                 Перейти дальше
               </NavLink>
             </p>
@@ -103,6 +103,6 @@ export const Layout: React.FC = () => {
       )}
       <Outlet></Outlet>
       {window.location.pathname.split(' ')[0] === '/Messages' ? <Footer /> : ''}
-    </div>
+    </>
   );
 };

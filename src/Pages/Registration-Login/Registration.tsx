@@ -54,57 +54,69 @@ export const Registration = () => {
   }
 
   return (
-    <>
+    <div className="registration_container">
       <div className="registration_attention">
         Do not provide personal email addresses and passwords. The data is encrypted but available to
         everyone!
       </div>
       <div className="registration">
+        Registration
         <form className="registration_form" onSubmit={handleSubmit(onSubmit)}>
           <label>
             <input
               {...register('fullName', { required: 'Укажите полное имя' })}
               className="registration_form_firstName"
               type="text"
-              placeholder="Elon Musk"
+              placeholder="First Name"
               title="Only latin characters can be used"
+              maxLength={30}
+            />
+            <input
+              {...register('fullName', { required: 'Укажите полное имя' })}
+              className="registration_form_firstName"
+              type="text"
+              placeholder="Last Name"
+              title="Only latin characters can be used"
+              maxLength={30}
             />
             <input
               className="registration_form_lastName"
               type="email"
               placeholder="@gmail.com"
               {...register('email', { required: 'Укажите почту' })}
+              maxLength={60}
             />
-            <input
-              className="registration_form_password"
-              type={passwordShown ? 'text' : 'password'}
-              placeholder="password"
-              {...register('password', { required: 'Укажите пароль' })}
-            />
-            {passwordShown ? (
-              <FontAwesomeIcon
-                icon={faLockOpen}
-                className="register__password--icon"
-                onClick={togglePassword}
+
+              <input
+                className="registration_form_password"
+                type={passwordShown ? 'text' : 'password'}
+                placeholder="password"
+                {...register('password', { required: 'Укажите пароль' })}
+                maxLength={32}
               />
-            ) : (
-              <FontAwesomeIcon
-                icon={faLock}
-                className="register__password--icon"
-                onClick={togglePassword}
-              />
-            )}
+              {passwordShown ? (
+                <FontAwesomeIcon
+                  icon={faLockOpen}
+                  className="register__password--icon--unlock"
+                  onClick={togglePassword}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faLock}
+                  className="register__password--icon--lock"
+                  onClick={togglePassword}
+                />
+              )}
           </label>
-          <br />
           <button type="submit" className="registration_form_submit" disabled={!isValid}>
             Submit
           </button>
-          <br />
-          <NavLink to="/Login" className="registration_link_to">
-            Sing in
-          </NavLink>
+
+          <div className="registration_link_to">
+            <NavLink to="/Login">Sing in</NavLink>
+          </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };

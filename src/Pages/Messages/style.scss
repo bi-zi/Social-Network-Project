@@ -7,7 +7,11 @@
 
     padding: calc(5px + 15 * (100vw / 1920));
 
-    max-width: 1320px;
+    max-width: 75vw;
+
+    @media (width < 1320px) {
+      max-width: 100%;
+    }
 
     min-height: 330px;
     height: calc(100vh - 70px);
@@ -29,7 +33,7 @@
       .messages__chats {
         width: 100%;
         height: calc(100% - 7vh);
-        overflow-y: scroll;
+        overflow: auto;
 
         .messages__chats-item {
           position: relative;
@@ -227,14 +231,14 @@
 
     .messages__correspondence-select-chat,
     .messages__correspondence-empty {
-       position: relative;
-        margin: 0 auto;
-        top: 50%;
+      position: relative;
+      margin: 0 auto;
+      top: 50%;
 
-        width: calc(120px + 140 * (100vw / 1920));
-        font-size: calc(20px + 20 * (100vw / 1920));
-        text-align: center;
-        color: white;
+      width: calc(120px + 140 * (100vw / 1920));
+      font-size: calc(20px + 20 * (100vw / 1920));
+      text-align: center;
+      color: white;
     }
 
     .messages__correspondence-message-block {
