@@ -1,6 +1,7 @@
 export type User = {
   _id: string;
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   passwordHash: string;
   friends: string[];

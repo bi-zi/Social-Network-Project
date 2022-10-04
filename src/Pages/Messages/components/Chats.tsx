@@ -57,10 +57,11 @@ export const Chats: React.FC = () => {
                 dispatch(fetchChatUser(selectedUser?._id));
                 setTimeout(scrollToBottom, 0);
               }}>
-
               <img src={friend.imageUrl} width="100" alt="" className="messages__chats-item-avatar" />
 
-              <div className="messages__chats-item-fullName">{friend.fullName}</div>
+              <div className="messages__chats-item-fullName">
+                {friend.firstName + ' ' + friend.lastName}
+              </div>
               {lastMessage![index] !== undefined ? (
                 <div className="messages__chats-item-time">{`${new Date(
                   lastMessage![index]?.date,
@@ -73,7 +74,7 @@ export const Chats: React.FC = () => {
                 <div className="messages__chats-item-message__name-block">
                   <div className="messages__chats-item-message-name">
                     {lastMessage![index]?.userId === friend._id
-                      ? friend.fullName.split(' ')[0] + ':'
+                      ? friend.firstName + ':'
                       : lastMessage![index].message === undefined
                       ? 'Write the first message'
                       : 'You:'}
@@ -85,7 +86,6 @@ export const Chats: React.FC = () => {
                       : lastMessage![index]?.message?.slice(0, 40)}
                     {lastMessage![index]?.message?.length > 40 ? '...' : ''}
                   </div>
-
                 </div>
               ) : (
                 ''

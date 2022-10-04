@@ -23,7 +23,6 @@ export const Menu: React.FC = () => {
       dispatch(setCreateVid(''));
     }
   };
-  
 
   return (
     <>
@@ -35,7 +34,6 @@ export const Menu: React.FC = () => {
         <div className="header_menu_block">
           <NavLink
             to="/Login"
-            className="header_menu_login"
             onClick={() =>
               !(auth.status === 'loading')
                 ? localStorage.isAuth === 'true'
@@ -43,12 +41,11 @@ export const Menu: React.FC = () => {
                   : dispatch(setAttention(1))
                 : 'Loading, please wait'
             }>
-            Login
+            <div className="header_menu_login">Login</div>
           </NavLink>
 
           <NavLink
             to="/Register"
-            className="header_menu_register"
             onClick={() =>
               !(auth.status === 'loading')
                 ? localStorage.isAuth === 'true'
@@ -56,7 +53,7 @@ export const Menu: React.FC = () => {
                   : dispatch(setAttention(1))
                 : 'Loading, please wait'
             }>
-            Register
+            <div className="header_menu_register">Register</div>
           </NavLink>
         </div>
       </div>

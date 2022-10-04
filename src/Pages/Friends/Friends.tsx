@@ -12,7 +12,8 @@ import './style.scss';
 
 interface User {
   _id: string;
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   passwordHash: string;
   friends: string[];
@@ -59,10 +60,10 @@ export const Friends: React.FC = () => {
 
   if (sortBy === 'a-z') {
     sortedFriends = [...sortedFriends]?.sort(function (a, b) {
-      if (a.fullName.toLowerCase() > b.fullName.toLowerCase()) {
+      if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
         return 1;
       }
-      if (a.fullName.toLowerCase() < b.fullName.toLowerCase()) {
+      if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
         return -1;
       }
       return 0;
@@ -72,10 +73,10 @@ export const Friends: React.FC = () => {
   if (sortBy === 'z-a') {
     sortedFriends = [...sortedFriends]
       ?.sort(function (a, b) {
-        if (a.fullName.toLowerCase() > b.fullName.toLowerCase()) {
+        if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
           return 1;
         }
-        if (a.fullName.toLowerCase() < b.fullName.toLowerCase()) {
+        if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
           return -1;
         }
         return 0;
@@ -153,7 +154,7 @@ export const Friends: React.FC = () => {
                 to={`/Profile/${friend._id}`}
                 className="friends_user_fullname"
                 style={{ textDecoration: 'none' }}>
-                {friend.fullName}
+                {friend.firstName + ' ' + friend.lastName}
               </Link>
 
               {catergory === 'friends' ? (

@@ -60,13 +60,13 @@ export const Friends: React.FC = () => {
                     window.scrollTo(0, 0);
                   }}>
                   <img src={friend.imageUrl} alt="" className="profile_friend_avatar" />
-                  <div className="profile_friend_name">{friend.fullName?.split(' ')[0]}</div>
+                  <div className="profile_friend_name">{friend.firstName}</div>
                 </div>
               </Link>
             ) : (
               <div className="profile_friend" key={friend._id}>
                 <img src={friend.imageUrl} alt="" className="profile_friend_avatar" />
-                <div className="profile_friend_name">{friend.fullName?.split(' ')[0]}</div>
+                <div className="profile_friend_name">{friend.firstName}</div>
               </div>
             )}
           </div>

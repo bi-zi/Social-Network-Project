@@ -1,22 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { User, AuthSliceState, Status, FormValues } from './types';
+import { User, AuthSliceState, Status, FormValuesLogin, FormValuesRegistr } from './types';
 import axios from '../../backend/axios';
 
-
-
-export const fetchAuth = createAsyncThunk('auth/fetchAuth', async (params: FormValues) => {
+export const fetchAuth = createAsyncThunk('auth/fetchAuth', async (params: FormValuesLogin) => {
   const { data } = await axios.post('/auth/login', params);
   return data;
 });
 
-export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: FormValues) => {
-  const { data } = await axios.post('/auth/register', params);
-  return data;
-});
+export const fetchRegister = createAsyncThunk(
+  'auth/fetchRegister',
+  async (params: FormValuesRegistr) => {
+    const { data } = await axios.post('/auth/register', params);
+    return data;
+  },
+);
 
 export const fetchAuthMe = createAsyncThunk<User>('auth/fetchAuthMe', async () => {
   const { data } = await axios.get('/auth/me');
+
   return data;
 });
 
@@ -42,7 +44,7 @@ const authSlice = createSlice({
       state.status = Status.SUCCESS;
       state.data = action.payload;
     });
-    builder.addCase(fetchAuth.rejected, (state) => {
+    builder.addCase(fetchAuth.rejected, (state, action) => {
       state.status = Status.ERROR;
     });
 
@@ -70,7 +72,7 @@ const authSlice = createSlice({
   },
 });
 
-export const selectIsAuth = (state: RootState) => (state.auth.data?._id !== undefined);
+export const selectIsAuth = (state: RootState) => state.auth.data?._id !== undefined;
 
 export const authReducer = authSlice.reducer;
 

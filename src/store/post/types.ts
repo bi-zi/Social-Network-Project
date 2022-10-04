@@ -19,10 +19,11 @@ interface Post {
 }
 
 interface Comment {
-  fullName: string
-  commentText: string
-  commentDate: string
-  userId: string
+  firstName: string;
+  lastName: string;
+  commentText: string;
+  commentDate: string;
+  userId: string;
 }
 
 export enum Status {

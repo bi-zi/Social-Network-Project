@@ -8,7 +8,8 @@ import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
 import './style.scss';
 
 type FormValues = {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 };
@@ -34,14 +35,16 @@ export const Registration = () => {
 
   const onSubmit = async (values: FormValues) => {
     const val = {
+      firstName: values.firstName[0].toUpperCase() + values.firstName.slice(1).toLowerCase(),
+      lastName: values.lastName[0].toUpperCase() + values.lastName.slice(1).toLowerCase(),
       email: values.email.toLowerCase(),
       password: values.password,
-      fullName: values.fullName,
     };
 
     const data = await dispatch(fetchRegister(val));
     if (!data.payload) {
-      return alert('Не удалось регистрироваться!');
+      console.log(data.payload);
+      return alert('Не удалось зарегистрироваться!');
     }
     if ('token' in data.payload) {
       window.localStorage.setItem('token', data.payload.token);
@@ -64,33 +67,41 @@ export const Registration = () => {
         <form className="registration_form" onSubmit={handleSubmit(onSubmit)}>
           <label>
             <input
-              {...register('fullName', { required: 'Укажите полное имя' })}
+              {...register('firstName', { required: 'Укажите полное имя' })}
               className="registration_form_firstName"
               type="text"
               placeholder="First Name"
+              pattern="^[a-zA-Z]*$"
               title="Only latin characters can be used"
+              minLength={2}
               maxLength={30}
             />
             <input
-              {...register('fullName', { required: 'Укажите полное имя' })}
-              className="registration_form_firstName"
+              {...register('lastName', { required: 'Укажите полное имя' })}
+              className="registration_form_lastName"
               type="text"
+              pattern="^[a-zA-Z]*$"
               placeholder="Last Name"
               title="Only latin characters can be used"
+              minLength={2}
               maxLength={30}
             />
             <input
               className="registration_form_lastName"
               type="email"
               placeholder="@gmail.com"
+              pattern="^[a-zA-Z0-9-.@_]*$"
+              title="Only these characters can be used a-z A-Z 0-9 - . @ _"
               {...register('email', { required: 'Укажите почту' })}
               maxLength={60}
             />
-
+            <div className="registration_form_password_block">
               <input
                 className="registration_form_password"
                 type={passwordShown ? 'text' : 'password'}
                 placeholder="password"
+                pattern="^[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
+                title="Only these characters can be used a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~"
                 {...register('password', { required: 'Укажите пароль' })}
                 maxLength={32}
               />
@@ -107,6 +118,7 @@ export const Registration = () => {
                   onClick={togglePassword}
                 />
               )}
+            </div>
           </label>
           <button type="submit" className="registration_form_submit" disabled={!isValid}>
             Submit

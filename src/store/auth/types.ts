@@ -1,6 +1,7 @@
 export type User = {
   _id: string;
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   passwordHash: string;
   friends: string[];
@@ -11,7 +12,15 @@ export type User = {
   __v: number;
 };
 
-export type FormValues = {
+export type FormValuesLogin = {
+  email: string;
+  password: string;
+};
+
+
+export type FormValuesRegistr = {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 };

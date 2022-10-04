@@ -84,7 +84,8 @@ export const Wall: React.FC = () => {
     await dispatch(
       fetchCommentPush({
         _id: postId,
-        fullName: auth?.fullName,
+        firstName: auth?.firstName,
+        lastName: auth?.lastName,
         commentText: state.post.createComment,
         commentDate: date,
         userId: auth?._id,
@@ -125,7 +126,7 @@ export const Wall: React.FC = () => {
       {wallPost?.map((content, postIndex) => (
         <div className={`wall ${postIndex}`} key={content._id}>
           <img src={user?.imageUrl} alt="" className="wall_avatar" />
-          <div className="wall_fullName">{user?.fullName}</div>
+          <div className="wall_fullName">{user?.firstName + ' ' + user?.lastName}</div>
           <div className="wall_date">{content.date}</div>
 
           <FontAwesomeIcon className="wall_menu" icon={faEllipsis} />
@@ -146,9 +147,7 @@ export const Wall: React.FC = () => {
                         to={`/${id}/WallPost/${index}`}
                         style={{ textDecoration: 0 }}
                         onClick={() =>
-                          dispatch(
-                            setPostIndex(((wallPost!?.length - postIndex - 1)).toString()),
-                          )
+                          dispatch(setPostIndex((wallPost!?.length - postIndex - 1).toString()))
                         }>
                         <img
                           src={image}
@@ -186,7 +185,10 @@ export const Wall: React.FC = () => {
               ''
             )}
 
-            <div className="wall_from">Post from {`${state.user.userOne?.[0]?.fullName}`}</div>
+            <div className="wall_from">
+              Post from{' '}
+              {`${state.user.userOne?.[0]?.firstName + ' ' + state.user.userOne?.[0]?.lastName}`}
+            </div>
 
             <FontAwesomeIcon
               className="wall_like_icon"
@@ -278,7 +280,7 @@ export const Wall: React.FC = () => {
                     ) : (
                       ''
                     )}
-                    <div className="wall_comment_fullName">{comment.fullName}</div>
+                    <div className="wall_comment_fullName">{comment.firstName + ' ' +  comment.lastName}</div>
                     <div className="wall_comment_time">{comment.commentDate}</div>
                     <div className="wall_comment_text">{comment.commentText}</div>
                   </div>

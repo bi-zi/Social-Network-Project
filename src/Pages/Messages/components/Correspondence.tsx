@@ -95,7 +95,9 @@ export const Correspondence: React.FC = () => {
         <>
           <div className="messages__correspondence-header">
             <NavLink to={`/Profile/${selectedUser?._id}`}>
-              <div className="messages__correspondence-header-fullName">{selectedUser?.fullName}</div>
+              <div className="messages__correspondence-header-fullName">
+                {selectedUser?.firstName + ' ' + selectedUser?.lastName}
+              </div>
             </NavLink>
 
             <NavLink to={`/Profile/${selectedUser?._id}`}>
@@ -142,8 +144,8 @@ export const Correspondence: React.FC = () => {
                       />
                       <div className="messages__correspondence-message-fullName">
                         {
-                          state.user?.usersAll.filter((user) => message.userId?.includes(user._id))[0]
-                            ?.fullName
+                            state.user?.usersAll.filter((user) =>
+                              message.userId?.includes(user._id))[0].firstName
                         }
                       </div>
                       <div className="messages__correspondence-message-date">{`${new Date(

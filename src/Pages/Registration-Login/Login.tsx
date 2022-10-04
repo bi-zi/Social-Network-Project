@@ -36,6 +36,7 @@ export const Login = () => {
     const val = { email: values.email.toLowerCase(), password: values.password };
 
     const data = await dispatch(fetchAuth(val));
+
     if (!data.payload) {
       return alert('Не удалось авторизоваться!');
     }
@@ -63,13 +64,22 @@ export const Login = () => {
             <input
               className="registration_form_lastName"
               type="email"
+              pattern="^[a-zA-Z0-9-.@_]*$"
+              title="Only these characters can be used a-z A-Z 0-9 - . @ _"
+              minLength={5}
+              maxLength={64}
               placeholder="@gmail.com"
               {...register('email', { required: 'Укажите почту' })}
             />
+            <div className="registration_form_password_block">
               <input
                 className="registration_form_password"
                 type={passwordShown ? 'text' : 'password'}
                 placeholder="password"
+                pattern="^[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
+                title="Only these characters can be used a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~"
+                minLength={8}
+                maxLength={32}
                 {...register('password', { required: 'Укажите пароль' })}
               />
               {passwordShown ? (
@@ -85,6 +95,7 @@ export const Login = () => {
                   onClick={togglePassword}
                 />
               )}
+            </div>
           </label>
           <br />
           <button type="submit" className="registration_form_submit" disabled={!isValid}>

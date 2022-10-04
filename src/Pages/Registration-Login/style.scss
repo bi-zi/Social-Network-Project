@@ -3,8 +3,8 @@
     position: relative;
     margin: 0 auto;
 
+    max-width: 75vw;
     height: 90vh;
-    max-width: 1320px;
 
     user-select: none;
   }
@@ -17,14 +17,13 @@
     padding-top: 8vh;
     padding-bottom: 5px;
 
-    width: calc(200px + 300 * (100vw / 1920));
-    max-width: 420px;
+    width: 70%;
 
-    font-size:  calm(10px,2vw, 30px);
-
+    font-size: calc(10px + 20 * (100vw / 1920));
     font-family: 'Iceberg';
 
     text-align: center;
+
     color: rgb(255, 0, 0);
   }
 
@@ -32,10 +31,9 @@
     position: relative;
     margin: 0 auto;
 
-    width: calc(200px + 300 * (100vw / 1920));
-    max-width: 430px;
-    max-height: 320px;
-    border-radius: 20px;
+    width: 70%;
+    height: auto;
+    border-radius: 2vh;
     background-color: #393939;
 
     text-align: center;
@@ -43,40 +41,51 @@
 
     color: white;
 
-    font-size: 24px;
+    font-size: 3vw;
 
     .registration_form {
       padding-top: 2vh;
-      max-width: 430px;
-      max-height: 320px;
+      width: 100%;
+      height: 100%;
       text-align: center;
 
       .registration_form_firstName,
       .registration_form_lastName,
       .registration_form_password {
-        width: calc(150px + 250 * (100vw / 1920));
-        height: 30px;
+        width: 60%;
+        height: 6vh;
 
-        margin-bottom: 10px;
+        margin-bottom: 0.5vh;
 
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 1vw;
+        padding-right: 1vw;
 
-        font-size: calc(15px + 10 * (100vw / 1920));
+        font-size: calc(10px + 25 * (100vw / 1920));
         font-family: 'Iceberg';
 
-        border: 0px solid white;
-        border-radius: 5px;
+        border: 0px;
+        border-radius: 1vh;
 
         color: black;
+      }
+
+      .registration_form_password {
+        margin-bottom: 1vh;
+        padding-right: 5vw;
+      }
+
+      .registration_form_password_block {
+        position: relative;
       }
 
       .register__password--icon--lock,
       .register__password--icon--unlock {
         position: absolute;
-        right: 50px;
-        bottom: 94px;
-        font-size: 20px;
+
+        font-size: 3vh;
+
+        right: 11.5vw;
+        bottom: 2.5vh;
 
         z-index: 100;
 
@@ -85,21 +94,21 @@
       }
 
       .register__password--icon--unlock {
-        right: 45px;
+        right: 11.1vw;
       }
 
       .registration_form_submit {
         position: relative;
 
-        margin-bottom: 50px;
+        margin-bottom: 10vh;
 
-        width: 80%;
-        height: 30px;
+        width: 60%;
+        height: auto;
 
-        font-size: 18px;
+        font-size: 2vw;
         font-family: 'Iceberg';
 
-        border-radius: 5px;
+        border-radius: 1vh;
 
         color: black;
         background-color: white;
@@ -108,7 +117,7 @@
         &:hover {
           color: white;
 
-          border: 1px solid white;
+          border: 0.2vh solid white;
           background-color: black;
         }
       }
@@ -116,10 +125,10 @@
       .registration_link_to {
         position: absolute;
 
-        width: 330px;
+        width: 100%;
         bottom: 5px;
 
-        font-size: 25px;
+        font-size: 3vh;
 
         text-align: center;
         text-decoration: underline;

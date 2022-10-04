@@ -23,7 +23,7 @@ export const UserInfo: React.FC = () => {
   return (
     <>
       <div className="about">
-        <div className="about_fullName">{`${user?.fullName || ''}`}</div>
+        <div className="about_fullName">{`${(user?.firstName + ' ' + user?.lastName) || ''}`}</div>
         <div className="about_line"></div>
 
         <AboutForm />

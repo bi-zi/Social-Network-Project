@@ -14,7 +14,20 @@
     }
 
     min-height: 330px;
-    height: calc(100vh - 70px);
+    height: 92vh;
+
+    @media (height < 2500px) {
+      height: 91vh;
+      @media (height < 2100px) {
+        height: 90vh;
+      }
+      @media (height < 1000px) {
+        height: 88vh;
+      }
+      @media (height < 600px) {
+        height: 86vh;
+      }
+    }
 
     font-family: 'Iceberg';
     font-style: normal;
@@ -27,7 +40,7 @@
       width: 35%;
       height: auto;
 
-      border-radius: 15px;
+      border-radius: 1.5vh;
       background: #2e2e2e;
 
       .messages__chats {
@@ -39,7 +52,6 @@
           position: relative;
 
           width: 100%;
-          height: calc(50px + 35 * (100vw / 1920));
 
           border-top: 2px solid black;
           cursor: pointer;
@@ -53,10 +65,9 @@
           }
 
           .messages__chats-item-avatar {
-            margin: calc(5px + 5 * (100vw / 1920));
-
-            width: calc(40px + 20 * (100vw / 1920));
-            height: calc(40px + 20 * (100vw / 1920));
+            margin: .5vh;
+            width: calc(35px + 50 * (100vh / 1080));
+            height: calc(35px + 50 * (100vh / 1080));
 
             border-radius: 100%;
           }
@@ -139,8 +150,8 @@
     align-items: center;
     align-content: center;
 
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-top-left-radius: 1.5vh;
+    border-top-right-radius: 1.5vh;
 
     background-color: rgb(0, 0, 0);
   }
@@ -195,7 +206,7 @@
     position: relative;
     width: 63.5%;
 
-    border-radius: 15px;
+    border-radius: 1.5vh;
     background: #2e2e2e;
 
     .messages__correspondence {
@@ -301,8 +312,8 @@
       bottom: 0px;
       padding: 10px 20px;
 
-      border-bottom-left-radius: 15px;
-      border-bottom-right-radius: 15px;
+      border-bottom-left-radius: 1.5vh;
+      border-bottom-right-radius: 1.5vh;
 
       background-color: #000000;
 
@@ -314,7 +325,7 @@
         font-family: 'Iceberg';
         font-style: normal;
         border: none;
-        border-radius: 5px;
+        border-radius: 0.5vh;
       }
 
       .messages__correspondence-panel-button {

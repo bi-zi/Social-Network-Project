@@ -97,7 +97,8 @@ export const fetchCommentPush = createAsyncThunk<
   UserPost[],
   {
     _id: string;
-    fullName: string;
+    firstName: string;
+    lastName: string;
     commentText: string;
     commentDate: string;
     userId: string;
@@ -107,14 +108,16 @@ export const fetchCommentPush = createAsyncThunk<
   '/post/commentPush/fetchCommentPush',
   async ({
     _id,
-    fullName,
+    firstName,
+    lastName,
     commentText,
     commentDate,
     userId,
     user,
   }: {
     _id: string;
-    fullName: string;
+    firstName: string;
+    lastName: string;
     commentText: string;
     commentDate: string;
     userId: string;
@@ -122,7 +125,8 @@ export const fetchCommentPush = createAsyncThunk<
   }) => {
     const { data } = await axios.patch(`/post/commentPush/${user}`, {
       _id,
-      fullName,
+      firstName,
+      lastName,
       commentText,
       commentDate,
       userId,

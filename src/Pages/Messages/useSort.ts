@@ -42,8 +42,8 @@ export function useSort(data: Messages) {
     if (messages?.findChat?.length > 0) {
       users = users.filter(
         (user) =>
-          user.fullName[0].toLowerCase().includes(messages?.findChat[0]?.toLowerCase()) &&
-          user.fullName.toLowerCase().includes(messages?.findChat?.toLowerCase()),
+          user.firstName[0].toLowerCase().includes(messages?.findChat[0]?.toLowerCase()) &&
+          user.firstName.toLowerCase().includes(messages?.findChat?.toLowerCase()),
       );
     }
 
