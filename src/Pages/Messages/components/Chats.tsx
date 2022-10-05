@@ -1,10 +1,6 @@
 import React, { useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import {
-  fetchChatUser,
-  setSelectedUser,
-  setFindChat,
-} from '../../../store/messages/slice';
+import { fetchChatUser, setSelectedUser, setFindChat } from '../../../store/messages/slice';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -30,7 +26,6 @@ export const Chats: React.FC = () => {
       divRef.current!.scrollTop = divRef.current!.scrollHeight;
     }
   };
-
 
   return (
     <div className="messages__chats-container">
@@ -59,34 +54,37 @@ export const Chats: React.FC = () => {
               }}>
               <img src={friend.imageUrl} width="100" alt="" className="messages__chats-item-avatar" />
 
-              <div className="messages__chats-item-fullName">
-                {friend.firstName + ' ' + friend.lastName}
+              <div className='messages_name_lastMessages_block'>
+                <div className="messages__chats-item-fullName">
+                  {friend.firstName + ' ' + friend.lastName}
+                </div>
+
+                {lastMessage![index] !== undefined ? (
+                  <div className="messages__chats-item-message__name-block">
+                    <div className="messages__chats-item-message-name">
+                      {lastMessage![index]?.userId === friend._id
+                        ? friend.firstName + ':'
+                        : lastMessage![index].message === undefined
+                        ? 'Write the first message'
+                        : 'You:'}
+                    </div>
+
+                    <div className="messages__chats-item-last-message">
+                      {lastMessage![index]?.message?.split(' ').filter((x) => x.length >= 20).length ===
+                      1
+                        ? 'The message is too big'
+                        : lastMessage![index]?.message?.slice(0, 40)}
+                      {lastMessage![index]?.message?.length > 40 ? '...' : ''}
+                    </div>
+                  </div>
+                ) : (
+                  ''
+                )}
               </div>
               {lastMessage![index] !== undefined ? (
                 <div className="messages__chats-item-time">{`${new Date(
                   lastMessage![index]?.date,
                 ).toLocaleTimeString()}`}</div>
-              ) : (
-                ''
-              )}
-
-              {lastMessage![index] !== undefined ? (
-                <div className="messages__chats-item-message__name-block">
-                  <div className="messages__chats-item-message-name">
-                    {lastMessage![index]?.userId === friend._id
-                      ? friend.firstName + ':'
-                      : lastMessage![index].message === undefined
-                      ? 'Write the first message'
-                      : 'You:'}
-                  </div>
-
-                  <div className="messages__chats-item-last-message">
-                    {lastMessage![index]?.message?.split(' ').filter((x) => x.length >= 20).length === 1
-                      ? 'The message is too big'
-                      : lastMessage![index]?.message?.slice(0, 40)}
-                    {lastMessage![index]?.message?.length > 40 ? '...' : ''}
-                  </div>
-                </div>
               ) : (
                 ''
               )}

@@ -70,32 +70,34 @@ export const Layout: React.FC = () => {
     <>
       <Header />
       {window.location.pathname.split(' ')[0] === '/' && close && user.deleteAttention === 0 ? (
-        <div >
-          <div >
-            <p>
-              In most cases, after interacting with the site, a spinning ring appears in the upper right
-              next to the menu. The server is free, so data is sent or received for a long time.
-              Downloading data is indicated by a ring, when it rotates all data sending actions are
-              blocked to avoid data writing errors. If the ring didn't appear and the post-submit action
-              didn't work, the send control was blocked, most likely the server died :)
-              <br />
-              <NavLink to="/Register"  onClick={() => setClose(false)}>
-                Go further
-              </NavLink>
-            </p>
+        <div className="layout">
+          <p>
+            In most cases, after interacting with the site, a spinning ring appears in the upper right
+            next to the menu. The server is free, so data is sent or received for a long time.
+            Downloading data is indicated by a ring, when it rotates all data sending actions are blocked
+            to avoid data writing errors. If the ring didn't appear and the post-submit action didn't
+            work, the send control was blocked, most likely the server died :)
+          </p>
 
-            <p>
-              В большинстве случаев после взаимодействия с сайтом вверху справа рядом с меню появляется
-              вращающееся кольцо. Сервер бесплатный, поэтому данные отправляются или принимаются долго.
-              Загрузка данных обозначается кольцом, при его вращении все действия по отправке данных
-              заблокированы во избежание ошибок записи данных. Если кольцо не появилось и действие
-              post-submit не сработало, управление отправкой было заблокировано, скорее всего сервер умер
-              :)
-              <br />
-              <NavLink to="/Register" onClick={() => setClose(false)}>
-                Перейти дальше
-              </NavLink>
-            </p>
+          <div className="layout_link">
+            <NavLink to="/Register" onClick={() => setClose(false)}>
+              Go further
+            </NavLink>
+          </div>
+
+          <p>
+            В большинстве случаев после взаимодействия с сайтом вверху справа рядом с меню появляется
+            вращающееся кольцо. Сервер бесплатный, поэтому данные отправляются или принимаются долго.
+            Загрузка данных обозначается кольцом, при его вращении все действия по отправке данных
+            заблокированы во избежание ошибок записи данных. Если кольцо не появилось и действие
+            post-submit не сработало, управление отправкой было заблокировано, скорее всего сервер умер
+            :)
+          </p>
+
+          <div className="layout_link">
+            <NavLink to="/Register" onClick={() => setClose(false)}>
+              Перейти дальше
+            </NavLink>
           </div>
         </div>
       ) : (

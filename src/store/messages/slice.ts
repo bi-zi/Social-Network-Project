@@ -64,7 +64,7 @@ const initialState: MessagesSliceState = {
   userMessages: [],
   data2: [],
   selectedUser: '',
-  addMessages: 20,
+  addMessages: 40,
   findChat: '',
   sortedChats: [],
   status: Status.LOADING,

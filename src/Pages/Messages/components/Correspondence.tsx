@@ -115,8 +115,8 @@ export const Correspondence: React.FC = () => {
               <div
                 className="messages__correspondence-add-20"
                 onClick={() => {
-                  dispatch(setAddMessages(messages?.addMessages + 20));
-                  setTimeout(scrollToTop, 20);
+                  dispatch(setAddMessages(messages?.addMessages + 40));
+                  setTimeout(scrollToTop, 200);
                 }}>
                 Add more messages
               </div>
@@ -142,15 +142,18 @@ export const Correspondence: React.FC = () => {
                         width="100"
                         className="messages__correspondence-message-avatar"
                       />
-                      <div className="messages__correspondence-message-fullName">
-                        {
-                            state.user?.usersAll.filter((user) =>
-                              message.userId?.includes(user._id))[0].firstName
-                        }
+
+                      <div className="messages__correspondence_date_fullName">
+                        <div className="messages__correspondence-message-fullName">
+                          {
+                            state.user?.usersAll.filter((user) => message.userId?.includes(user._id))[0]
+                              .firstName
+                          }
+                        </div>
+                        <div className="messages__correspondence-message-date">{`${new Date(
+                          message.date,
+                        ).toLocaleDateString()} - ${new Date(message.date).toLocaleTimeString()}`}</div>
                       </div>
-                      <div className="messages__correspondence-message-date">{`${new Date(
-                        message.date,
-                      ).toLocaleDateString()} - ${new Date(message.date).toLocaleTimeString()}`}</div>
                     </>
                   ) : (
                     ''
@@ -177,9 +180,13 @@ export const Correspondence: React.FC = () => {
                 onChange={(e) => setText(e.target.value)}
               />
             </label>
-            <button type="submit" className="messages__correspondence-panel-button">
-              Submit
-            </button>
+            {messages.status !== 'loading' ? (
+              <button type="submit" className="messages__correspondence-panel-button">
+                Submit
+              </button>
+            ) : (
+              <div className="messages__correspondence-wait">Wait</div>
+            )}
           </form>
         </>
       )}

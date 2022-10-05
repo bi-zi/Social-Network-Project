@@ -1,1 +1,33 @@
+@media (width > 460px) and (height > 420px) {
+  .layout {
+    margin: 0 auto;
 
+    padding-left: 2vw;
+    padding-right: 2vw;
+
+    @media (width < 770px) {
+      padding-left: 1vw;
+      padding-right: 1vw;
+    }
+
+    max-width: 71vw;
+
+    border-radius: 2vh;
+
+    font-size: calc(10px + 14 * (100vw / 1920));
+
+    background-color: #393939;
+    color: white;
+
+    text-align: center;
+
+    .layout_link {
+      text-decoration: underline;
+      padding-bottom: 1vh;
+    }
+
+    .layout_link a {
+      color: rgb(56, 169, 250);
+    }
+  }
+}

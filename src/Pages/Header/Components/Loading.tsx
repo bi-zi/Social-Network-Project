@@ -30,7 +30,6 @@ export const Loading: React.FC = () => {
   // console.log(nonePage);
 
   // console.log(state.auth.status);
-
   return (
     <>
       {profilePage && path === 'Profile' ? (
