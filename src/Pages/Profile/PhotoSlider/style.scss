@@ -1,20 +1,19 @@
 .slider_images {
   position: relative;
 
-  width: 920px;
-  height: 270px;
+  width: 100%;
+  height: auto;
 
-  top: 40px;
-  left: 360px;
+  margin: 2vh 0;
 
   font-family: 'Iceberg';
   font-style: normal;
   font-weight: 400;
 
-  border-radius: 15px;
+  border-radius: 2vh;
 
   color: #ffffff;
-  background: #393939;
+  background: #50bf05;
 
   user-select: none;
 
@@ -26,19 +25,19 @@
     width: 202px;
     height: 202px;
 
-    left: 250px;
-    top: 18px;
+    left: 274px;
+    top: 10px;
 
-    background-color: #393939;
+    background-color: #cbcbcb;
     z-index: 10;
   }
 
   .slider_image_closed_2 {
-    left: 470px !important;
+    left: 504px !important;
   }
 
   .slider_image_closed_3 {
-    left: 690px !important;
+    left: 720px !important;
   }
 
   .slider_image_link {
@@ -46,8 +45,15 @@
   }
 
   .slider_image {
-    margin-bottom: 10px;
-    border-radius: 15px;
+    width: calc(100px + 100 * (100vw / 1920));
+    height: calc(100px + 100 * (100vw / 1920));
+
+    margin-bottom: 1vh;
+    border-radius: 2vh;
+
+    &:hover {
+      border: 0.2vw dashed white;
+    }
   }
 
   .slider_image_item {
@@ -56,10 +62,10 @@
 
   .slider_delete_img {
     position: absolute;
-    margin-left: 165px;
-    font-size: 40px;
+    margin-left: calc(60px + 105 * (100vw / 1920));
+    font-size: calc(20px + 20 * (100vw / 1920));
 
-    filter: drop-shadow(0px 0px 2px rgb(0, 0, 0));
+    filter: drop-shadow(0px 0px 0.2vh rgb(0, 0, 0));
     color: white;
 
     cursor: pointer;
@@ -72,21 +78,21 @@
 
   .slick-prev,
   .slick-next {
-    margin-top: 5px;
+    width: calc(25px + 25 * (100vw / 1920)) !important;
+    height: calc(100px + 125 * (100vh / 1080)) !important;
 
-    width: 40px !important;
-    height: 220px !important;
+    border-radius: 2vh;
 
-    background-color: #393939 !important;
+    background-color: #666666 !important;
     z-index: 289;
   }
 
   .slick-prev {
-    margin-left: 30px;
+    margin-left: 1.3vw;
   }
 
   .slick-arrow:before {
-    font-size: 25px;
+    font-size: calc(10px + 15 * (100vw / 1920));
     color: rgb(250, 249, 249);
   }
 
@@ -95,25 +101,24 @@
   }
 
   .slick-arrow:active:before {
-    font-size: 30px;
+    font-size: calc(10px + 25 * (100vw / 1920));
   }
 
   .slick-slider {
-    width: 890px;
+    width: 97.5%;
   }
 
   .slick-list {
-    margin-left: 30px !important;
+    margin-left: 2vw !important;
 
-    width: 880px;
-    height: 225px;
+    width: 97%;
+    height: calc(100px + 125 * (100vh / 1080));
   }
 
   .slick-track {
-    margin-top: 20px;
+    margin-top: 1vh;
 
-    min-width: 900px;
-    max-height: 225px;
+    max-height: calc(100px + 125 * (100vh / 1080));
   }
 
   .slider_images_button {

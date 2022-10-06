@@ -154,7 +154,7 @@ export const Avatar: React.FC = () => {
   return (
     <div className="avatar">
       {loadStatus ? (
-        <Link to={`/${id}/PhotoAvatar/0`}>
+        <Link to={`/${id}/PhotoAvatar/0`} >
           <img src={user?.imageUrl} alt="" className="avatar_image" />
         </Link>
       ) : (
@@ -183,7 +183,7 @@ export const Avatar: React.FC = () => {
       {auth === null || auth?._id === id ? (
         ''
       ) : subscribedToYou !== 0 && youSubscriber === 0 && friend !== +id ? (
-        <>
+        <div className='avatar_send_delete'>
           <Link to="/Messages" className="avatar_send_message" onClick={() => createMessages()}>
             Send a message
           </Link>
@@ -191,9 +191,9 @@ export const Avatar: React.FC = () => {
           <button className="avatar_delete_friend" onClick={() => (loadStatus ? acceptFriend() : '')}>
             Accept friend request
           </button>
-        </>
+        </div>
       ) : friend === 1 ? (
-        <>
+        <div className='avatar_send_delete'>
           <Link to="/Messages" className="avatar_send_message" onClick={() => createMessages()}>
             Send a message
           </Link>
@@ -201,9 +201,9 @@ export const Avatar: React.FC = () => {
           <button className="avatar_delete_friend" onClick={() => (loadStatus ? deleteFriend() : '')}>
             Delete friend
           </button>
-        </>
+        </div>
       ) : youSubscriber !== 0 ? (
-        <>
+        <div className='avatar_send_delete'>
           <Link to="/Messages" className="avatar_send_message" onClick={() => createMessages()}>
             Send a message
           </Link>
@@ -211,9 +211,9 @@ export const Avatar: React.FC = () => {
           <button className="avatar_delete_friend" onClick={() => (loadStatus ? unsubscribe() : '')}>
             Unsubscribe
           </button>
-        </>
+        </div>
       ) : youSubscriber === 0 ? (
-        <>
+        <div className='avatar_send_delete'>
           <Link to="/Messages" className="avatar_send_message" onClick={() => createMessages()}>
             Send a message
           </Link>
@@ -221,7 +221,7 @@ export const Avatar: React.FC = () => {
           <button className="avatar_delete_friend" onClick={() => (loadStatus ? subscribe() : '')}>
             Send friend request
           </button>
-        </>
+        </div>
       ) : (
         ''
       )}

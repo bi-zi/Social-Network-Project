@@ -28,20 +28,20 @@ export const Profile: React.FC = () => {
     <div
       className="profile_container"
       style={postLength === 0 ? { paddingBottom: 0 } : { paddingBottom: 0 }}>
-      
-      <UserInfo />
-      <PhotoSlider />
-      {data?._id === id ? <Post /> : ''}
-      <Wall />
       <div className="left_container">
         <Avatar />
-        <div className="left_mini_container">
-          <Friends />
-          <Subscribers />
-          <Groups />
-          <Videos />
-          <Music />
-        </div>
+        <Friends />
+        <Subscribers />
+        <Groups />
+        <Videos />
+        <Music />
+      </div>
+
+      <div className="profile_rightContainer">
+        <UserInfo />
+        <PhotoSlider />
+        {/* {data?._id === id ? <Post /> : ''}
+        <Wall /> */}
       </div>
     </div>
   );

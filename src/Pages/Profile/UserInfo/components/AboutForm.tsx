@@ -35,21 +35,19 @@ export const AboutForm: React.FC = () => {
 
   const [closeInfo, setCloseInfo] = React.useState(0);
 
-  const about = Array.isArray(state.about?.data)
-    ? state.about.data[0]
-    : ({} as About);
+  const about = Array.isArray(state.about?.data) ? state.about.data[0] : ({} as About);
 
   const onSubmit = async (values: About) => {
     setCloseInfo(0);
-    about !== undefined
+    about !== null
       ? await dispatch(fetchAboutUpdate({ values, id }))
       : await dispatch(fetchAboutPost({ values }));
 
+    console.log();
     dispatch(fetchAbout(id));
   };
 
   const aboutStatus = state.about.status === 'loading';
-
 
   const {
     register,
@@ -107,24 +105,24 @@ export const AboutForm: React.FC = () => {
     <>
       {closeInfo === 0 ? (
         <>
-          {state.auth?.data?._id === id ? (
-            <div
-              className="about_info"
-              onClick={() => {
-                setCloseInfo(1);
-              }}>
-              Edit Information
-            </div>
-          ) : (
-            ''
-          )}
+            {state.auth?.data?._id === id ? (
+              <div
+                className="about_info"
+                onClick={() => {
+                  setCloseInfo(1);
+                }}>
+                Edit Information
+              </div>
+            ) : (
+              ''
+            )}
 
-          <div className="about_lives">Lives in - {about?.livesIn}</div>
-          <div className="about_from">From - {about?.from}</div>
-          <div className="about_born">Born on - {about?.bornOn}</div>
-          <div className="about_profession">Profession - {about?.profession}</div>
-          <div className="about_relationship">In a relationship with - {about?.relations}</div>
-          <div className="about_student">Student at - {about?.studentAt}</div>
+            <div className="about_lives">Lives in - {about?.livesIn}</div>
+            <div className="about_from">From - {about?.from}</div>
+            <div className="about_born">Born on - {about?.bornOn}</div>
+            <div className="about_profession">Profession - {about?.profession}</div>
+            <div className="about_relationship">In a relationship with - {about?.relations}</div>
+            <div className="about_student">Student at - {about?.studentAt}</div>
         </>
       ) : (
         <form className="about_form" onSubmit={handleSubmit(onSubmit)}>
@@ -133,6 +131,7 @@ export const AboutForm: React.FC = () => {
               <input
                 className="about_input"
                 defaultValue={aboutInfo.default !== undefined ? `${aboutInfo.default}` : ''}
+                maxLength={25}
                 placeholder={aboutInfo.place}
                 {...register(
                   aboutInfo.var3 === 'livesIn'

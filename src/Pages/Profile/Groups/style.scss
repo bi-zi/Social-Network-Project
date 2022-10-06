@@ -1,28 +1,26 @@
 .groups {
   position: relative;
 
-  margin-bottom: 20px;
+  margin-bottom: 2vh;
 
-  width: 340px;
-  height: 250px;
+  width: 100%;
+  height: 20vh;
 
   font-family: 'Iceberg';
   font-style: normal;
   font-weight: 400;
 
   background: #393939;
-  border-radius: 15px;
+  border-radius: 2vh;
 
   .groups_title {
     position: absolute;
 
-    height: 30px;
+    height: calc(10px + 20 * (100vw / 1080));
+    left: calc(2px + 30 * (100vw / 1920));
 
-    top: 5px;
-    left: 22px;
-
-    font-size: 22px;
-    line-height: 37px;
+    font-size: calc(6px + 18 * (100vw / 1920));
+    line-height: calc(15px + 25 * (100vw / 1920));
 
     color: #ffffff;
   }

@@ -6,7 +6,7 @@ body {
   height: 100%;
   width: 100%;
 
-  background-color: rgb(27, 27, 27);
+  background-color: rgb(68, 67, 67);
 }
 
 *,
@@ -15,7 +15,10 @@ body {
   box-sizing: border-box;
 }
 
-a { text-decoration: none; color: white; }
+a {
+  text-decoration: none;
+  color: white;
+}
 
 ::-webkit-scrollbar {
   width: calc(5px + 5 * (100vw / 1920));
@@ -44,25 +47,32 @@ h6 {
 }
 
 .profile_container {
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 250px !important;
-  max-width: 1280px;
-  min-height: 2100px;
-}
+  display: flex;
+  justify-content: space-between;
 
-.left_container {
-  position: absolute;
-  width: 340px;
-  height: 90%;
+  margin: 2vh auto;
 
-  top: 0;
-}
+  max-width: 75vw;
+  height: 100%;
 
-.left_mini_container {
-  position: sticky;
-  margin-top: 485px;
-  top: -245px !important;
+  padding-left: 2vw;
+  padding-right: 2vw;
+
+  @media (width < 1320px) {
+    max-width: 100%;
+  }
+
+  @media (width < 770px) {
+    padding-left: 1vw;
+    padding-right: 1vw;
+  }
+
+  .left_container {
+    width: 27%;
+  }
+  .profile_rightContainer {
+    width: 71%;
+  }
 }
 
 .image_input_parser {

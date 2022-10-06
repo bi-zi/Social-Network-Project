@@ -69,13 +69,13 @@ export const PhotoSlider: React.FC = () => {
               )}
               <Link to={`/${id}/PhotoSlider/${index}`} className="slider_image_link" key={index}>
                 <div className="slider_image_item">
-                  <img src={image} alt="" className="slider_image" width="200px" height="200px" />
+                  <img src={image} alt="" className="slider_image" width="10px" height="10px" />
                 </div>
               </Link>
             </span>
           ) : (
             <div className="slider_image_item" key={index}>
-              <img src={image} alt="" className="slider_image" width="200px" height="200px" />
+              <img src={image} alt="" className="slider_image" width="10px" height="10px" />
             </div>
           );
         })}

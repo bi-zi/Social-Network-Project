@@ -1,10 +1,8 @@
 .profile_friends {
-  position: relative;
+  margin: 2vh 0;
 
-  margin-bottom: 20px;
-
-  width: 340px;
-  height: 100%;
+  width: 100%;
+  height: calc(50px + 100 * (100vw / 1080));
 
   font-family: 'Iceberg';
   font-style: normal;
@@ -14,16 +12,16 @@
   color: #ffffff;
 
   user-select: none;
-  border-radius: 25px;
+  border-radius: 2vh;
 
   .profile_friends_title {
     position: relative;
 
-    height: 30px;
-    left: 25px;
+    height: calc(10px + 20 * (100vw / 1080));
+    left: calc(2px + 30 * (100vw / 1920));
 
-    font-size: 22px;
-    line-height: 37px;
+    font-size: calc(6px + 20 * (100vw / 1920));
+    line-height: calc(15px + 25 * (100vw / 1920));
 
     color: #ffffff !important;
 
@@ -38,22 +36,22 @@
 
   margin: 0 auto;
 
-  width: 300px;
+  width: calc(40px + 277 * (100vw / 1920));
   height: auto;
 
   flex-wrap: wrap;
 
   .profile_friend {
-    margin: 0 5px 25px 5px;
+    margin: 0 0.3vw 2.5vh 0.3vw;
 
-    width: 50px;
-    height: 50px;
+    width: calc(7.5px + 44 * (100vw / 1920));
+    height: calc(7.5px + 55 * (100vh / 1080));
 
     text-align: center;
     cursor: pointer;
 
     &:hover .profile_friend_avatar {
-      border: 2px solid white;
+      border: 0.2vh dashed white;
     }
 
     &:hover .profile_friend_name {
@@ -61,15 +59,15 @@
     }
 
     .profile_friend_avatar {
-      width: 45px;
-      height: 45px;
+      width: calc(8px + 43 * (100vw / 1920));
+      height: calc(8px + 43 * (100vw / 1920));
 
       background-color: black;
       border-radius: 100%;
     }
 
     .profile_friend_name {
-      font-size: 14px;
+      font-size: calc(2px + 12 * (100vw / 1920));
       color: #ffffff;
     }
   }
