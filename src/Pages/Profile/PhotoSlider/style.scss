@@ -13,7 +13,7 @@
   border-radius: 2vh;
 
   color: #ffffff;
-  background: #50bf05;
+  background: #393939;
 
   user-select: none;
 
@@ -45,8 +45,8 @@
   }
 
   .slider_image {
-    width: calc(100px + 100 * (100vw / 1920));
-    height: calc(100px + 100 * (100vw / 1920));
+    width: calc(20px + 185 * (100vw / 1920));
+    height: calc(20px + 185 * (100vw / 1920));
 
     margin-bottom: 1vh;
     border-radius: 2vh;
@@ -62,8 +62,8 @@
 
   .slider_delete_img {
     position: absolute;
-    margin-left: calc(60px + 105 * (100vw / 1920));
-    font-size: calc(20px + 20 * (100vw / 1920));
+    margin-left: calc(12px + 146 * (100vw / 1920));
+    font-size: calc(15px + 25 * (100vw / 1920));
 
     filter: drop-shadow(0px 0px 0.2vh rgb(0, 0, 0));
     color: white;
@@ -78,8 +78,8 @@
 
   .slick-prev,
   .slick-next {
-    width: calc(25px + 25 * (100vw / 1920)) !important;
-    height: calc(100px + 125 * (100vh / 1080)) !important;
+    width: calc(15px + 35 * (100vw / 1920)) !important;
+    height: calc(-10px + 225 * (100vh / 1080)) !important;
 
     border-radius: 2vh;
 
@@ -88,7 +88,7 @@
   }
 
   .slick-prev {
-    margin-left: 1.3vw;
+    margin-left: calc(24px + 1 * (100vw / 1920));
   }
 
   .slick-arrow:before {
@@ -105,39 +105,36 @@
   }
 
   .slick-slider {
-    width: 97.5%;
+    width: calc(85px + 860 * (100vw / 1920));
   }
 
   .slick-list {
-    margin-left: 2vw !important;
+    margin-left: calc(9px + 21 * (100vw / 1920))!important;
 
-    width: 97%;
-    height: calc(100px + 125 * (100vh / 1080));
+    width: calc(90px + 845 * (100vw / 1920));
+    height: calc(-10px + 225 * (100vh / 1080));
   }
 
   .slick-track {
-    margin-top: 1vh;
+    margin-top: calc(4px + 3 * (100vh / 1080));
 
     max-height: calc(100px + 125 * (100vh / 1080));
   }
 
   .slider_images_button {
-    margin: 5px auto;
+    margin: 0.5vh auto;
 
-    width: 400px;
-    height: 30px;
-
-    left: 150px;
-    top: 230px;
+    width: 40%;
+    height: calc(20px + 25 * (100vh / 1080));
 
     background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
     background-size: 200% auto;
     border: 0;
-    border-radius: 15px;
+    border-radius: 2vh;
 
     transition: 0.5s;
 
-    letter-spacing: 2px;
+    letter-spacing: 0.2vw;
 
     &:hover {
       background-position: right center;
@@ -149,14 +146,11 @@
     }
 
     .slider_add_image {
-      margin-top: -25px;
-      margin-left: 145px;
-
-      width: 120px;
+      margin-top: -2vh;
 
       text-align: center;
       text-transform: uppercase;
-      font-size: 18px;
+      font-size: calc(8px + 10 * (100vw / 1920));
 
       z-index: 0 !important;
 
