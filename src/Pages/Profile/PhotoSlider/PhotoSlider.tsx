@@ -5,9 +5,11 @@ import { setInputNumber } from '../../../store/user/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { ImageParsing } from '../../../ImageParsing/ImageParsing';
-import Slider from 'react-slick';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+
+import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './style.scss';
@@ -31,29 +33,18 @@ export const PhotoSlider: React.FC = () => {
     swipeToSlide: true,
   };
 
-  const onPhotoDelete = async (index: number) => {
+
+  async function onPhotoDelete(index: number) {
     await dispatch(fetchSliderDelete({ deleteId: index, user: id }));
     dispatch(fetchSlider(id));
-  };
-
+  }
   React.useEffect(() => {
     dispatch(fetchSlider(id));
-  }, []);
+  }, [dispatch, id]);
 
   return (
     <div className="slider_images">
-      {readyPhotos!?.length < 2 ? (
-        <div className="slider_image_closed_1"></div>
-      ) : readyPhotos?.length === 2 ? (
-        <>
-          <div className="slider_image_closed_2"></div>
-          <div className="slider_image_closed_3"></div>
-        </>
-      ) : readyPhotos?.length === 3 ? (
-        <div className="slider_image_closed_3"></div>
-      ) : (
-        ''
-      )}
+
       <Slider {...settings}>
         {readyPhotos?.map((image, index) => {
           return state.slider.status === 'loaded' ? (

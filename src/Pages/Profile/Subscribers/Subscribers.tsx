@@ -60,7 +60,7 @@ export const Subscribers: React.FC = () => {
                     fetchData(subscriber._id);
                     window.scrollTo(0, 0);
                   }}>
-                  <img src={subscriber.imageUrl} alt="" className="profile_friend_avatar" />
+                  <img src={subscriber.imageUrl} width={10} alt="" className="profile_friend_avatar" />
                   <div className="profile_friend_name">{subscriber.firstName}</div>
                 </div>
               </Link>

@@ -20,6 +20,7 @@ import {
   faFileLines,
   faFilm,
   faXmark,
+  faCircleExclamation
 } from '@fortawesome/free-solid-svg-icons';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
 import './style.scss';
@@ -99,7 +100,7 @@ export const Post: React.FC = () => {
 
   return (
     <div className="post_container">
-      <img src={user?.imageUrl} alt="" className="post_avatar" />
+      <img src={user?.imageUrl} width={10} alt="" className="post_avatar" />
 
       <input
         ref={firstRef}
@@ -123,10 +124,14 @@ export const Post: React.FC = () => {
             {readyPhotos.map((image, index) => {
               return (
                 <span key={index}>
-                  <Link to={`/${id}/CreatePost/${index}`} style={{ textDecoration: 0 }} className="post_image_link">
+                  <Link
+                    to={`/${id}/CreatePost/${index}`}
+                    style={{ textDecoration: 0 }}
+                    className="post_image_link">
                     <img
                       key={index}
                       src={image}
+                      width={10}
                       alt=""
                       className={`
                     ${
@@ -172,13 +177,15 @@ export const Post: React.FC = () => {
           <FontAwesomeIcon className="post_make_icon" icon={faPlay} />
         </button>
 
-        <FontAwesomeIcon className="post_image_icon" icon={faImage} />
         {numImg < 3 ? (
-          <button onChange={() => dispatch(setInputNumber('2'))} className="post_image_input">
-            <ImageParsing />
-          </button>
+          <>
+            <FontAwesomeIcon className="post_image_icon" icon={faImage} />
+            <button onChange={() => dispatch(setInputNumber('2'))} className="post_image_input">
+              <ImageParsing />
+            </button>
+          </>
         ) : (
-          <div className="post_max_image">MAX</div>
+          <FontAwesomeIcon className="post_image_icon" icon={faCircleExclamation} />
         )}
 
         <FontAwesomeIcon

@@ -1,27 +1,30 @@
-.music_profile {
-  position: relative;
+@media (width > 460px) and (height > 420px) {
+  .music_profile {
+    position: relative;
 
-  margin-bottom: 2vh;
+    margin-bottom: 2vh;
 
-  width: 100%;
-  height: 20vh;
+    width: 100%;
+    height: 20vh;
 
-  font-family: 'Iceberg';
-  font-style: normal;
-  font-weight: 400;
+    font-family: 'Iceberg';
+    font-style: normal;
+    font-weight: 400;
 
-  background: #393939;
-  border-radius: 2vh;
+    border-radius: 2vh;
+    box-shadow: var(--box-shadow);
 
-  .music_title {
-    position: absolute;
+    background: var(--interface-color);
+    color: var(--text-color);
 
-    height: calc(10px + 20 * (100vw / 1080));
-    left: calc(2px + 30 * (100vw / 1920));
+    .music_title {
+      position: absolute;
 
-    font-size: calc(6px + 20 * (100vw / 1920));
-    line-height: calc(15px + 25 * (100vw / 1920));
+      height: calc(10px + 20 * (100vw / 1080));
+      left: calc(2px + 30 * (100vw / 1920));
 
-    color: #ffffff;
+      font-size: calc(6px + 20 * (100vw / 1920));
+      line-height: calc(15px + 25 * (100vw / 1920));
+    }
   }
 }

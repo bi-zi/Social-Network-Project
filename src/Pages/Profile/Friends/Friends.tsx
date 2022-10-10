@@ -59,7 +59,7 @@ export const Friends: React.FC = () => {
                     fetchData(friend._id);
                     window.scrollTo(0, 0);
                   }}>
-                  <img src={friend.imageUrl} alt="" className="profile_friend_avatar" />
+                  <img src={friend.imageUrl} width={10} alt="" className="profile_friend_avatar" />
                   <div className="profile_friend_name">{friend.firstName}</div>
                 </div>
               </Link>

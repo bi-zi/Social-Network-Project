@@ -1,126 +1,129 @@
-.about {
-  width: 100%;
-  height: calc(100px + 220 * (100vh / 1080));
-
-  padding: 1.5vh 1vw;
-
-  font-family: 'Iceberg';
-  font-style: normal;
-  font-weight: 400;
-
-  background: #acacac;
-  color: #ffffff;
-
-  border-radius: 2vh;
-
-  user-select: none;
-
-  .about_fullName {
-    position: relative;
-    width: 96%;
-
-    height: calc(10px + 30 * (100vh / 1080));
-
-    font-weight: 600;
-    font-size: calc(12px + 20 * (100vw / 1920));
-    line-height: 40px;
-
-    letter-spacing: 0.2vw;
-
-    line-height: calc(5px + 30 * (100vh / 1080));
-
-    border-bottom: 0.5vh solid black;
-
-    color: #ffffff;
-  }
-
-  .about_info {
-    position: absolute;
-
-    padding-top: calc(30px + 70 * (100vh / 1080));
-
-    width: calc(100px + 800 * (100vw / 1920));
-    height: calc(80px + 175 * (100vh / 1080));
-
-    text-align: center;
-    font-size: calc(15px + 20 * (100vw / 1920));
-    background-color: rgba(22, 22, 22, 0.56);
-
-    z-index: 1;
-    color: #fe000000;
-
-    &:hover {
-      background-color: rgba(22, 22, 22, 0.56);
-      color: rgb(255, 255, 255);
-      cursor: pointer;
-    }
-  }
-
-  .about_lives,
-  .about_from,
-  .about_born,
-  .about_profession,
-  .about_relationship,
-  .about_student {
-    position: relative;
-
+@media (width > 460px) and (height > 420px) {
+  .about {
     width: 100%;
-    height: calc(15px + 28 * (100vh / 1080));
+    height: calc(100px + 220 * (100vh / 1080));
 
-    font-size: calc(8px + 14 * (100vw / 1920));
-    line-height: calc(5px + 20 * (100vh / 1080));
-  }
-}
-
-.about_form {
-  position: relative;
-
-  top: .2vh;
-
-  .about_input {
-    margin-bottom: 0.5vh;
-
-    padding-left: 1vw;
-    padding-right: 1vw;
-
-    width: 96%;
-    height: calc(10px + 20 * (100vh / 1080));
-
-    font-weight: 600;
-    font-size: calc(6px + 16 * (100vw / 1920));
-    border-radius: 0.5vh;
-  }
-
-  .about_buttton {
-    width: 96%;
-    height: calc(10px + 20 * (100vh / 1080));
-
-    color: white;
-
-    background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
-    background-size: 200% auto;
-    border: 0;
-    border-radius: 2vh;
-
-    transition: 0.5s;
+    padding: 1.5vh 1vw;
 
     font-family: 'Iceberg';
     font-style: normal;
     font-weight: 400;
-    font-size: calc(8px + 10 * (100vw / 1920));
 
-    text-transform: uppercase;
-    letter-spacing: 0.2vw;
+    border-radius: 2vh;
+    box-shadow: var(--box-shadow);
 
-    cursor: pointer;
+    background: var(--interface-color);
+    color: var(--text-color);
 
-    &:hover {
-      background-position: right center;
+    user-select: none;
+
+    .about_fullName {
+      position: relative;
+      width: 96%;
+
+      height: calc(10px + 30 * (100vh / 1080));
+
+      font-weight: 600;
+      font-size: calc(12px + 20 * (100vw / 1920));
+      line-height: 40px;
+
+      letter-spacing: 0.2vw;
+
+      line-height: calc(5px + 30 * (100vh / 1080));
+
+      border-bottom: 0.5vh solid black;
+
+      color: #ffffff;
     }
 
-    &:active {
-      transform: scale(0.9);
-      transition: 0.2s;
+    .about_info {
+      position: absolute;
+
+      padding-top: calc(30px + 70 * (100vh / 1080));
+
+      width: calc(100px + 800 * (100vw / 1920));
+      height: calc(80px + 175 * (100vh / 1080));
+
+      text-align: right;
+
+      font-size: calc(15px + 20 * (100vw / 1920));
+
+      z-index: 1;
+      color: white;
+
+      &:hover {
+
+        background-color: rgba(164, 164, 164, 0.56);
+        cursor: pointer;
+      }
+    }
+
+    .about_lives,
+    .about_from,
+    .about_born,
+    .about_profession,
+    .about_relationship,
+    .about_student {
+      position: relative;
+
+      width: 100%;
+      height: calc(15px + 28 * (100vh / 1080));
+
+      font-size: calc(8px + 14 * (100vw / 1920));
+      line-height: calc(5px + 20 * (100vh / 1080));
+    }
+  }
+
+  .about_form {
+    position: relative;
+
+    top: 0.2vh;
+
+    .about_input {
+      margin-bottom: 0.5vh;
+
+      padding-left: 1vw;
+      padding-right: 1vw;
+
+      width: 96%;
+      height: calc(10px + 20 * (100vh / 1080));
+
+      font-weight: 600;
+      font-size: calc(6px + 16 * (100vw / 1920));
+      border-radius: 0.5vh;
+    }
+
+    .about_buttton {
+      width: 96%;
+      height: calc(10px + 20 * (100vh / 1080));
+
+      color: white;
+
+      background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
+      background-size: 200% auto;
+      border: 0;
+      border-radius: 2vh;
+
+      transition: 0.5s;
+
+      font-family: 'Iceberg';
+      font-style: normal;
+      font-weight: 400;
+      font-size: calc(8px + 10 * (100vw / 1920));
+
+      text-transform: uppercase;
+      letter-spacing: 0.2vw;
+
+      cursor: pointer;
+
+      &:hover {
+        background-position: right center;
+      }
+
+      &:active {
+        transform: scale(0.9);
+        transition: 0.2s;
+      }
     }
   }
 }

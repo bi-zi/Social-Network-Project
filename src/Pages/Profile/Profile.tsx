@@ -29,19 +29,21 @@ export const Profile: React.FC = () => {
       className="profile_container"
       style={postLength === 0 ? { paddingBottom: 0 } : { paddingBottom: 0 }}>
       <div className="left_container">
-        <Avatar />
-        <Friends />
-        <Subscribers />
-        <Groups />
-        <Videos />
-        <Music />
+        <div className='left_container_sticky'>
+          <Avatar />
+          <Friends />
+          <Subscribers />
+          <Groups />
+          <Videos />
+          <Music />
+        </div>
       </div>
 
       <div className="profile_rightContainer">
         <UserInfo />
         <PhotoSlider />
-        {/* {data?._id === id ? <Post /> : ''}
-        <Wall /> */}
+        {data?._id === id ? <Post /> : ''}
+        <Wall />
       </div>
     </div>
   );

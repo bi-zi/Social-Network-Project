@@ -154,11 +154,11 @@ export const Avatar: React.FC = () => {
   return (
     <div className="avatar">
       {loadStatus ? (
-        <Link to={`/${id}/PhotoAvatar/0`} >
-          <img src={user?.imageUrl} alt="" className="avatar_image" />
+        <Link to={`/${id}/PhotoAvatar/0`}>
+          <img src={user?.imageUrl} width={10} alt="" className="avatar_image" />
         </Link>
       ) : (
-        <img src={user?.imageUrl} alt="" className="avatar_image" />
+        <img src={user?.imageUrl} width={10} alt="" className="avatar_image" />
       )}
 
       {auth?._id === id ? (
@@ -183,7 +183,7 @@ export const Avatar: React.FC = () => {
       {auth === null || auth?._id === id ? (
         ''
       ) : subscribedToYou !== 0 && youSubscriber === 0 && friend !== +id ? (
-        <div className='avatar_send_delete'>
+        <div className="avatar_send_delete">
           <Link to="/Messages" className="avatar_send_message" onClick={() => createMessages()}>
             Send a message
           </Link>
@@ -193,7 +193,7 @@ export const Avatar: React.FC = () => {
           </button>
         </div>
       ) : friend === 1 ? (
-        <div className='avatar_send_delete'>
+        <div className="avatar_send_delete">
           <Link to="/Messages" className="avatar_send_message" onClick={() => createMessages()}>
             Send a message
           </Link>
@@ -203,7 +203,7 @@ export const Avatar: React.FC = () => {
           </button>
         </div>
       ) : youSubscriber !== 0 ? (
-        <div className='avatar_send_delete'>
+        <div className="avatar_send_delete">
           <Link to="/Messages" className="avatar_send_message" onClick={() => createMessages()}>
             Send a message
           </Link>
@@ -213,7 +213,7 @@ export const Avatar: React.FC = () => {
           </button>
         </div>
       ) : youSubscriber === 0 ? (
-        <div className='avatar_send_delete'>
+        <div className="avatar_send_delete">
           <Link to="/Messages" className="avatar_send_message" onClick={() => createMessages()}>
             Send a message
           </Link>

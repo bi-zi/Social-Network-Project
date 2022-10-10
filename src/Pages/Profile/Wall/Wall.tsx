@@ -119,15 +119,19 @@ export const Wall: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));
-  }, []);
+  }, [dispatch, id]);
 
   return (
     <>
       {wallPost?.map((content, postIndex) => (
         <div className={`wall ${postIndex}`} key={content._id}>
           <img src={user?.imageUrl} alt="" className="wall_avatar" />
-          <div className="wall_fullName">{user?.firstName + ' ' + user?.lastName}</div>
-          <div className="wall_date">{content.date}</div>
+
+          <div className="wall_fullName_date">
+            <span className="wall_fullName">{user?.firstName + ' ' + user?.lastName}</span>
+            <br />
+            <span className="wall_date">{content.date}</span>
+          </div>
 
           <FontAwesomeIcon className="wall_menu" icon={faEllipsis} />
           <div
@@ -176,8 +180,8 @@ export const Wall: React.FC = () => {
                 <iframe
                   src={content.videoPost}
                   title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write;
+                   encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   className="wall_iframe"></iframe>
               </>
@@ -260,16 +264,25 @@ export const Wall: React.FC = () => {
                   onClick={() =>
                     postStatus && state.post.createComment.length > 0 ? addComment(content._id) : ''
                   }>
-                  <FontAwesomeIcon className="wall_comment_icon" icon={faPlay} />
+                  <FontAwesomeIcon className="wall_post_icon" icon={faPlay} />
                 </button>
 
                 {content.commentPost?.map((comment, index) => (
                   <div className="wall_comment" key={index}>
-                    <img
-                      src={state.user.usersAll.find((user) => user._id === comment.userId)!?.imageUrl[0]}
-                      alt=""
-                      className="wall_comment_avatar"
-                    />
+                    <Link
+                      to={`/Profile/${comment.userId}`}
+                      onClick={() => {
+                        window.scrollTo(0, 0);
+                        setComment(999999);
+                      }}>
+                      <img
+                        src={
+                          state.user.usersAll.find((user) => user._id === comment.userId)!?.imageUrl[0]
+                        }
+                        alt=""
+                        className="wall_comment_avatar"
+                      />
+                    </Link>
                     {wall.post.find((userPost) => userPost.user === id)?.user === auth?._id ||
                     auth?._id === comment.userId ? (
                       <FontAwesomeIcon
@@ -280,7 +293,9 @@ export const Wall: React.FC = () => {
                     ) : (
                       ''
                     )}
-                    <div className="wall_comment_fullName">{comment.firstName + ' ' +  comment.lastName}</div>
+                    <div className="wall_comment_fullName">
+                      {comment.firstName + ' ' + comment.lastName}
+                    </div>
                     <div className="wall_comment_time">{comment.commentDate}</div>
                     <div className="wall_comment_text">{comment.commentText}</div>
                   </div>

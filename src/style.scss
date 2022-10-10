@@ -6,7 +6,19 @@ body {
   height: 100%;
   width: 100%;
 
-  background-color: rgb(68, 67, 67);
+  background-color: var(--background-color);
+}
+
+:root {
+  --background-color-darkTheme: #141414;
+  --interface-color-darkTheme: #222222;
+  --text-color-darkTheme: white;
+  --box-shadow-darkTheme: 0 0 0 0.08vh #424242;
+
+  --background-color: var(--background-color-darkTheme);
+  --interface-color: var(--interface-color-darkTheme);
+  --text-color: var(--text-color-darkTheme);
+--box-shadow: var(--box-shadow-darkTheme);
 }
 
 *,
@@ -21,10 +33,10 @@ a {
 }
 
 ::-webkit-scrollbar {
-  width: calc(5px + 5 * (100vw / 1920));
+  width: calc(2px + 10 * (100vw / 1920));
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f100;
+  background: var(--interface-color);;
 }
 ::-webkit-scrollbar-thumb {
   background: rgb(0, 0, 0);
@@ -69,6 +81,11 @@ h6 {
 
   .left_container {
     width: 27%;
+
+    .left_container_sticky {
+      position: sticky;
+      top: calc(-130px - 465 * (100vh / 1080));
+    }
   }
   .profile_rightContainer {
     width: 71%;
