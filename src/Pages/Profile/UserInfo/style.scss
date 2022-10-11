@@ -5,17 +5,11 @@
 
     padding: 1.5vh 1vw;
 
-    font-family: 'Iceberg';
-    font-style: normal;
-    font-weight: 400;
-
-    border-radius: 2vh;
+    border-radius: var(--borderRadius-interface);
     box-shadow: var(--box-shadow);
 
-    background: var(--interface-color);
+    background-color: var(--interface-color);
     color: var(--text-color);
-
-    user-select: none;
 
     .about_fullName {
       position: relative;
@@ -23,17 +17,13 @@
 
       height: calc(10px + 30 * (100vh / 1080));
 
-      font-weight: 600;
-      font-size: calc(12px + 20 * (100vw / 1920));
-      line-height: 40px;
+      font: normal 600 calc(12px + 20 * (100vw / 1920)) / calc(5px + 30 * (100vh / 1080)) 'Iceberg';
 
       letter-spacing: 0.2vw;
 
-      line-height: calc(5px + 30 * (100vh / 1080));
-
       border-bottom: 0.5vh solid black;
 
-      color: #ffffff;
+      color: var(--text-color);
     }
 
     .about_info {
@@ -46,14 +36,13 @@
 
       text-align: right;
 
-      font-size: calc(15px + 20 * (100vw / 1920));
+      font: normal 400 calc(15px + 20 * (100vw / 1920)) 'Iceberg';
 
       z-index: 1;
-      color: white;
+      color: var(--text-color);
 
       &:hover {
-
-        background-color: rgba(164, 164, 164, 0.56);
+        background-color: rgba(124, 122, 122, 0.56);
         cursor: pointer;
       }
     }
@@ -69,8 +58,7 @@
       width: 100%;
       height: calc(15px + 28 * (100vh / 1080));
 
-      font-size: calc(8px + 14 * (100vw / 1920));
-      line-height: calc(5px + 20 * (100vh / 1080));
+      font: normal 400 calc(8px + 14 * (100vw / 1920)) / calc(5px + 22 * (100vh / 1080)) 'Iceberg';
     }
   }
 
@@ -88,31 +76,33 @@
       width: 96%;
       height: calc(10px + 20 * (100vh / 1080));
 
-      font-weight: 600;
-      font-size: calc(6px + 16 * (100vw / 1920));
-      border-radius: 0.5vh;
+      border-radius: var(--borderRadius-interface);
+      box-shadow: var(--box-shadow);
+
+      font: normal 400 calc(6px + 16 * (100vw / 1920)) 'Iceberg';
+
+      background-color: var(--backgroundInput-color);
+      color: var(--text-color);
     }
 
     .about_buttton {
       width: 96%;
       height: calc(10px + 20 * (100vh / 1080));
 
-      color: white;
+      border: 0;
+      border-radius: var(--borderRadius-interface);
 
       background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
       background-size: 200% auto;
-      border: 0;
-      border-radius: 2vh;
 
       transition: 0.5s;
 
-      font-family: 'Iceberg';
-      font-style: normal;
-      font-weight: 400;
-      font-size: calc(8px + 10 * (100vw / 1920));
-
       text-transform: uppercase;
+      font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
+
       letter-spacing: 0.2vw;
+
+      color: var(--text-color);
 
       cursor: pointer;
 

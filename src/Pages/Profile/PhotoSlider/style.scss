@@ -2,26 +2,21 @@
   .slider_images {
     position: relative;
 
-    padding-bottom: 0.5vh;
+    padding-bottom: 2vh;
+    padding-top: 2vh;
 
     width: 100%;
     height: auto;
 
     margin: 2vh 0;
 
-    font-family: 'Iceberg';
-    font-style: normal;
-    font-weight: 400;
-
-    overflow: hidden;
-
-    border-radius: 2vh;
+    border-radius: var(--borderRadius-interface);
     box-shadow: var(--box-shadow);
 
-    background: var(--interface-color);
+    background-color: var(--interface-color);
     color: var(--text-color);
 
-    user-select: none;
+    overflow: hidden;
 
     .slider_image_link {
       pointer-events: visiblePainted;
@@ -31,11 +26,10 @@
       width: calc(20px + 185 * (100vw / 1920));
       height: calc(20px + 185 * (100vw / 1920));
 
-      margin-bottom: 1vh;
-      border-radius: 1vh;
+      border-radius: var(--borderRadius-interface);
 
       &:hover {
-        border: 0.2vw dashed white;
+        border: var(--borderImages);
       }
     }
 
@@ -46,44 +40,43 @@
     .slider_delete_img {
       position: absolute;
       margin-left: calc(10px + 160 * (100vw / 1920));
-      font-size: calc(12px + 28 * (100vw / 1920));
+
+      font: normal 400 calc(12px + 28 * (100vw / 1920)) 'Iceberg';
 
       filter: drop-shadow(0px 0px 0.2vh rgb(0, 0, 0));
-      color: white;
+
+      color: var(--text-color);
 
       cursor: pointer;
       z-index: 10;
 
       &:hover {
-        color: black;
+        color: var(--text-color-hover);
       }
     }
 
     .slick-prev,
     .slick-next {
       width: calc(15px + 35 * (100vw / 1920)) !important;
-      height: calc(20px + 240 * (100vw / 1920)) !important;
+      height: calc(22px + 207 * (100vw / 1920)) !important;
 
-    background: var(--interface-color);
+      box-shadow: var(--box-shadow);
+      background-color: var(--interface-color);
+
       z-index: 289;
-      border-radius: 2vh;
 
       &:hover {
-        background-color: #2f2f2f;
+        background-color: var(--interface-color-hover);
       }
     }
 
     .slick-prev {
-      margin-left: calc(25px + 1 * (100vw / 1920));
+      margin-left: calc(24px + 1 * (100vw / 1920));
     }
 
     .slick-arrow:before {
       font-size: calc(10px + 15 * (100vw / 1920));
-      color: rgb(250, 249, 249);
-    }
-
-    .slick-arrow:hover:before {
-      color: rgb(0, 0, 0);
+      color: var(--text-color);
     }
 
     .slick-arrow:active:before {
@@ -95,27 +88,35 @@
     }
 
     .slick-list {
-      margin-left: calc(10px + 21 * (100vw / 1920)) !important;
+      margin-left: calc(10px + 9 * (100vw / 1920)) !important;
+      padding-left: .6vw;
+
+      width: 99%;
+      height: calc(22px + 206 * (100vw / 1920));
+
+      border-radius: var(--borderRadius-interface) !important;
+      box-shadow: var(--box-shadow);
 
       text-align: left !important;
-      width: 99%;
-      height: calc(22px + 195 * (100vw / 1920));
+
+      background-color: rgb(19, 19, 19);
     }
 
     .slick-track {
-      margin: 0.8vh 0;
+      margin: 1vh 0;
     }
 
     .slider_images_button {
-      margin: 1vh auto;
+      margin: 2vh auto 0 auto;
 
       width: 40%;
       height: calc(8px + 30 * (100vh / 1080));
 
+      border: 0;
+      border-radius: var(--borderRadius-interface);
+
       background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
       background-size: 200% auto;
-      border: 0;
-      border-radius: 2vh;
 
       transition: 0.5s;
 
@@ -135,7 +136,8 @@
 
         text-align: center;
         text-transform: uppercase;
-        font-size: calc(8px + 10 * (100vw / 1920));
+
+        font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
 
         z-index: 0 !important;
 

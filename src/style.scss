@@ -9,16 +9,48 @@ body {
   background-color: var(--background-color);
 }
 
+// font-style
+// font-variant
+// font-weight
+// font-size
+// line-height
+// font-family
+
 :root {
   --background-color-darkTheme: #141414;
+
   --interface-color-darkTheme: #222222;
+  --interface-color-hover-darkTheme: #2f2f2f;
+  --interface-color-active-darkTheme: #171717;
+
+  --miniInterface-color-darkTheme: black;
+  --miniInterface-color-hover-darkTheme: rgb(255, 255, 255);
+
+  --backgroundInput-color-darkTheme: #3c3c3c;
+
   --text-color-darkTheme: white;
+  --text-color-hover-darkTheme: #929292;
+
   --box-shadow-darkTheme: 0 0 0 0.08vh #424242;
+  --borderImages-darkTheme: 0.3vh dashed white;
 
   --background-color: var(--background-color-darkTheme);
+
   --interface-color: var(--interface-color-darkTheme);
+  --interface-color-hover: var(--interface-color-hover-darkTheme);
+  --interface-color-active: var(--interface-color-active-darkTheme);
+
+  --miniInterface-color: var(--miniInterface-color-darkTheme);
+  --miniInterface-color-hover: var(--miniInterface-color-hover-darkTheme);
+
+  --backgroundInput-color: var(--backgroundInput-color-darkTheme);
+
   --text-color: var(--text-color-darkTheme);
---box-shadow: var(--box-shadow-darkTheme);
+  --text-color-hover: var(--text-color-hover-darkTheme);
+
+  --box-shadow: var(--box-shadow-darkTheme);
+  --borderImages: var(--borderImages-darkTheme);
+  --borderRadius-interface: 2vh;
 }
 
 *,
@@ -36,7 +68,7 @@ a {
   width: calc(2px + 10 * (100vw / 1920));
 }
 ::-webkit-scrollbar-track {
-  background: var(--interface-color);;
+  background: var(--interface-color);
 }
 ::-webkit-scrollbar-thumb {
   background: rgb(0, 0, 0);
@@ -69,6 +101,8 @@ h6 {
 
   padding-left: 2vw;
   padding-right: 2vw;
+
+  user-select: none;
 
   @media (width < 1320px) {
     max-width: 100%;

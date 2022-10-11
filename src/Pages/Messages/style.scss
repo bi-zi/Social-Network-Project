@@ -12,12 +12,12 @@
 
     max-width: 75vw;
 
+    height: 92vh;
+    min-height: 330px;
+
     @media (width < 1320px) {
       max-width: 100%;
     }
-
-    min-height: 330px;
-    height: 92vh;
 
     @media (height < 2500px) {
       height: 90vh;
@@ -32,23 +32,24 @@
       }
     }
 
-    font-family: 'Iceberg';
-    font-style: normal;
-    font-weight: 400;
-
     user-select: none;
 
     .messages__chats-container {
       position: relative;
+
       width: 35%;
       height: auto;
 
-      border-radius: 1.5vh;
-      background: #2e2e2e;
+      border-radius: var(--borderRadius-interface);
+      box-shadow: var(--box-shadow);
+
+      background-color: var(--interface-color);
+      color: var(--text-color);
 
       .messages__chats {
         width: 100%;
         height: calc(100% - 8.2vh);
+
         overflow: auto;
         overflow-x: hidden;
 
@@ -57,15 +58,15 @@
 
           width: 100%;
 
-          border-top: 0.2vh solid black;
+          border-top: 0.2vh solid var(--text-color);
           cursor: pointer;
 
           &:hover {
-            background-color: #525151;
+            background-color: var(--interface-color-hover);
           }
 
           &:active {
-            background-color: rgb(31, 30, 30);
+            background-color: var(--interface-color-active);
           }
 
           .messages__chats-item-avatar {
@@ -77,7 +78,7 @@
             border-radius: 50%;
 
             &:hover {
-              border: 0.3vh dashed rgb(255, 255, 255);
+              border: var(--borderImages);
             }
           }
         }
@@ -98,10 +99,8 @@
           .messages__chats-item-fullName {
             margin-bottom: calc(2px + 15 * (100vw / 1920));
 
-            font-size: calc(5px + 20 * (100vw / 1920));
-            line-height: 10px;
-
-            color: white;
+            font: normal 400 calc(5px + 20 * (100vw / 1920)) / 1vh 'Iceberg';
+            color: var(--text-color);
           }
 
           .messages__chats-item-message__name-block {
@@ -110,8 +109,8 @@
 
           .messages__chats-item-last-message,
           .messages__chats-item-message-name {
-            font-size: calc(3px + 15 * (100vw / 1920));
-            color: white;
+            font: normal 400 calc(3px + 15 * (100vw / 1920)) 'Iceberg';
+            color: var(--text-color);
           }
 
           .messages__chats-item-last-message {
@@ -131,42 +130,46 @@
           top: 0.3vh;
           right: 0.5vw;
 
-          font-size: calc(6px + 9 * (100vh / 1080));
-          color: white;
+          font: normal 400 calc(6px + 9 * (100vh / 1080)) 'Iceberg';
+          color: var(--text-color);
         }
       }
 
       .messages__chats-empty {
         position: relative;
         margin: 0 auto;
-        top: 40%;
 
         width: calc(120px + 140 * (100vw / 1920));
-        font-size: calc(20px + 20 * (100vw / 1920));
+
+        top: 40%;
 
         text-decoration: underline;
         text-align: center;
-        color: white;
+
+        font: normal 400 calc(20px + 20 * (100vw / 1920)) 'Iceberg';
+        color: var(--text-color);
       }
     }
   }
 
   .messages__find-chat,
   .messages__correspondence-header {
+    display: flex;
     position: relative;
+
     width: 100%;
     height: calc(16px + 42 * (100vh / 1080));
 
     top: 0;
     left: 0;
-    display: flex;
+
     align-items: center;
     align-content: center;
 
-    border-top-left-radius: 1.5vh;
-    border-top-right-radius: 1.5vh;
+    border-top-left-radius: var(--borderRadius-interface);
+    border-top-right-radius: var(--borderRadius-interface);
 
-    background-color: rgb(0, 0, 0);
+    background-color: var(--miniInterface-color);
   }
 
   .messages__find-chat {
@@ -174,8 +177,12 @@
       margin: 0 1vw;
 
       font-size: calc(4px + 25 * (100vh / 1080));
-      color: white;
+
+      color: var(--text-color);
+
       cursor: pointer;
+
+      z-index: 999;
     }
 
     .messages__find-chat-input {
@@ -187,12 +194,16 @@
       width: 100%;
       height: 100%;
 
-      font-size: calc(2px + 22 * (100vh / 1080));
-      caret-color: rgb(255, 255, 255);
+      border-top-left-radius: var(--borderRadius-interface);
+      border-top-right-radius: var(--borderRadius-interface);
+      box-shadow: var(--box-shadow);
+
+      font: normal 400 calc(2px + 22 * (100vh / 1080)) 'Iceberg';
+
       border: 0;
 
-      color: white;
-      background-color: rgba(255, 255, 255, 0);
+      background-color: var(--miniInterface-color);
+      color: var(--text-color);
     }
   }
 
@@ -201,17 +212,18 @@
 
     .messages__correspondence-header-fullName {
       margin-left: 1.5vw;
-      font-size: calc(4px + 30 * (100vh / 1080));
-      color: white;
+
+      font: normal 400 calc(4px + 30 * (100vh / 1080)) 'Iceberg';
+      color: var(--text-color);
 
       @media (height > 718px) and (height < 1370px) {
         @media (width > 475px) and (width < 1300px) {
-          font-size: calc(4px + 20 * (100vh / 1080));
+          font: normal 400 calc(4px + 20 * (100vh / 1080)) 'Iceberg';
         }
       }
 
       &:hover {
-        color: rgb(122, 120, 120);
+        color: var(--interface-color-hover);
       }
     }
 
@@ -219,13 +231,13 @@
       margin-top: calc(2px + 4 * (100vh / 1080));
       margin-right: 1.5vw;
 
-      width: auto;
-      height: calc(15px + 25 * (100vh / 1080));
+      width: calc(14px + 30 * (100vw / 1920));
+      height: calc(14px + 30 * (100vw / 1920));
 
       border-radius: 100%;
 
       &:hover {
-        border: 0.2vh dashed rgb(255, 255, 255);
+        border: var(--borderImages);
       }
     }
   }
@@ -235,12 +247,17 @@
     position: relative;
     width: 63.5%;
 
-    border-radius: 1.5vh;
-    background: #2e2e2e;
+    border-radius: var(--borderRadius-interface);
+    box-shadow: var(--box-shadow);
+
+    background-color: var(--interface-color);
+    color: var(--text-color);
 
     .messages__correspondence {
       width: 100%;
       height: 81%;
+
+      overflow-y: auto;
 
       @media (height > 520px) {
         height: 85%;
@@ -255,22 +272,21 @@
           }
         }
       }
-      overflow-y: auto;
     }
 
     .messages__correspondence-add-20 {
       height: calc(15px + 20 * (100vh / 1080));
 
-      font-size: calc(10px + 20 * (100vh / 1080));
       text-align: center;
+      font: normal 400 calc(10px + 20 * (100vh / 1080)) 'Iceberg';
 
-      color: white;
-      background-color: #43434394;
+      color: var(--text-color);
+      background-color: var(--interface-color-hover);
 
       cursor: pointer;
 
       &:hover {
-        color: black;
+        color: var(--text-color-hover);
       }
     }
 
@@ -285,12 +301,15 @@
     .messages__correspondence-empty {
       position: relative;
       margin: 0 auto;
-      top: 50%;
 
       width: calc(120px + 140 * (100vw / 1920));
-      font-size: calc(20px + 20 * (100vw / 1920));
+
+      top: 50%;
+
       text-align: center;
-      color: white;
+      font: normal 400 calc(20px + 20 * (100vw / 1920)) 'Iceberg';
+
+      color: var(--text-color);
     }
 
     .messages__correspondence-message-block {
@@ -322,56 +341,57 @@
         }
 
         .messages__correspondence-message-fullName {
-          font-size: calc(4px + 25 * (100vw / 1920));
-          color: white;
+          font: normal 400 calc(4px + 25 * (100vw / 1920)) 'Iceberg';
+          color: var(--text-color);
         }
 
         .messages__correspondence-message-date {
-          font-size: calc(4px + 18 * (100vw / 1920));
-
-          color: white;
+          font: normal 400 calc(4px + 18 * (100vw / 1920)) 'Iceberg';
+          color: var(--text-color);
         }
       }
 
       .messages_correspondence-message {
         margin: 1vh 1vw;
 
-        font-size: calc(4px + 24 * (100vw / 1920));
-        font-family: 'Iceberg';
-        font-style: normal;
-        font-weight: 400;
-
         word-wrap: break-word;
 
-        color: white;
+        font: normal 400 calc(4px + 24 * (100vw / 1920)) 'Iceberg';
+        color: var(--text-color);
       }
     }
 
     .messages__correspondence-panel {
       position: absolute;
 
-      width: 100%;
-      height: calc(16px + 42 * (100vh / 1080));
-
-      bottom: 0px;
       padding-top: calc(5px + 8 * (100vh / 1080));
       padding-left: 2vw;
       padding-right: 2vw;
 
-      border-bottom-left-radius: 1.5vh;
-      border-bottom-right-radius: 1.5vh;
+      width: 100%;
+      height: calc(16px + 42 * (100vh / 1080));
 
-      background-color: rgb(0, 0, 0);
+      bottom: 0px;
+
+      border-bottom-left-radius: var(--borderRadius-interface);
+      border-bottom-right-radius: var(--borderRadius-interface);
+
+      background-color: var(--miniInterface-color);
 
       .messages__correspondence-panel-input {
         width: 75%;
+
+        padding: 0 1vw;
+
         height: calc(7px + 25 * (100vh / 1080));
 
-        font-size: calc(10px + 10 * (100vw / 1920));
-        font-family: 'Iceberg';
-        font-style: normal;
-        border: none;
-        border-radius: 0.5vh;
+        border-radius: var(--borderRadius-interface);
+        box-shadow: var(--box-shadow);
+
+        font: normal 400 calc(10px + 10 * (100vw / 1920)) 'Iceberg';
+
+        background-color: var(--backgroundInput-color);
+        color: var(--text-color);
       }
 
       .messages__correspondence-panel-button {
@@ -382,24 +402,28 @@
 
         right: 2vw;
 
-        font-size: calc(3px + 15 * (100vh / 1080));
-        font-family: 'Iceberg';
-        font-style: normal;
+        border-radius: var(--borderRadius-interface);
 
-        border-radius: 0.5vh;
-        &:active {
-          background-color: rgb(56, 56, 56);
-          color: #ffffff;
+        font: normal 400 calc(3px + 15 * (100vh / 1080)) 'Iceberg';
+
+        background-color: var(--backgroundInput-color);
+        color: var(--text-color);
+
+        cursor: pointer;
+        &:hover {
+          background-color: var(--interface-color-hover);
+          color: var(--text-color-hover);
         }
       }
 
       .messages__correspondence-wait {
         position: absolute;
 
-        top:calc(6px + 9 * (100vh / 1080));
+        top: calc(6px + 9 * (100vh / 1080));
         right: 4.5vw;
-        font-size: calc(6px + 25 * (100vw / 1920));
-        color: white;
+
+        font: normal 400 calc(6px + 25 * (100vw / 1920)) 'Iceberg';
+        color: var(--text-color);
       }
     }
   }

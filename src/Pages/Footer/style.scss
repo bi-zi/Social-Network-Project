@@ -8,19 +8,19 @@
   bottom: 0;
 
   text-align: center;
-  background: #2e2e2e;
+
+  box-shadow: var(--box-shadow);
+
+  background-color: var(--interface-color);
+  color: var(--text-color);
 
   .footer_url {
     position: relative;
 
-    bottom: -.3vh;
+    bottom: -0.3vh;
 
-    font: {
-      size: calc(10px + 10 * (100vw / 1080));
-      family: 'Iceberg';
-      style: normal;
-      decoration: none;
-    }
-    color: white;
+    font: normal 400 calc(10px + 10 * (100vw / 1080)) 'Iceberg';
+
+    color: var(--text-color);
   }
 }

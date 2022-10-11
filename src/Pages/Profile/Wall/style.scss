@@ -6,17 +6,11 @@
 
     width: 100%;
 
-    font-family: 'Iceberg';
-    font-style: normal;
-    font-weight: 400;
-
-    border-radius: 2vh;
+    border-radius: var(--borderRadius-interface);
     box-shadow: var(--box-shadow);
 
     background: var(--interface-color);
     color: var(--text-color);
-
-    user-select: none;
 
     .wall_avatar {
       position: relative;
@@ -31,29 +25,33 @@
 
     .wall_fullName_date {
       position: absolute;
+
       top: calc(-7px + 26 * (100vh / 1080));
       left: calc(18px + 74 * (100vw / 1920));
     }
 
     .wall_fullName {
-      font-size: calc(6px + 16 * (100vw / 1920));
+      font: normal 400 calc(6px + 16 * (100vw / 1920)) 'Iceberg';
     }
 
     .wall_date {
       position: absolute;
+
       width: calc(50px + 120 * (100vw / 1920));
-      font-size: calc(4px + 12 * (100vw / 1920));
+
+      font: normal 400 calc(4px + 12 * (100vw / 1920)) 'Iceberg';
     }
 
     .wall_menu {
       position: absolute;
-      cursor: pointer;
 
       width: calc(10px + 30 * (100vw / 1920));
       height: calc(10px + 30 * (100vw / 1920));
 
       top: 2vh;
       right: 2vw;
+
+      cursor: pointer;
     }
 
     .wall_menu_hover {
@@ -62,9 +60,10 @@
       width: calc(20px + 30 * (100vw / 1920));
       height: calc(20px + 30 * (100vw / 1920));
 
-      font-size: 0;
       top: 1.5vh;
       right: 2vw !important;
+
+      font-size: 0;
 
       z-index: 10;
       opacity: 0;
@@ -76,12 +75,12 @@
 
         width: calc(40px + 50 * (100vw / 1920));
         height: calc(20px + 25 * (100vw / 1920));
-        font-size: calc(6px + 10 * (100vw / 1920));
 
         top: 1.8vh;
         right: 1vw !important;
 
         text-align: center;
+        font: normal 400 calc(6px + 10 * (100vw / 1920)) 'Iceberg';
 
         opacity: 1;
         cursor: pointer;
@@ -99,12 +98,12 @@
       margin-bottom: 1vh;
 
       word-wrap: break-word;
-      font-size: calc(4px + 14 * (100vw / 1920));
+      font: normal 400 calc(4px + 14 * (100vw / 1920)) 'Iceberg';
     }
 
     .wall_img {
-      position: relative;
       display: block;
+      position: relative;
     }
 
     .wall_first_img,
@@ -117,7 +116,7 @@
       border: 0.5vh solid black;
 
       &:hover {
-        border: 0.4vh dashed white;
+        border: var(--borderImages);
       }
     }
 
@@ -132,14 +131,16 @@
       border: 0.5vh solid black;
 
       &:hover {
-        border: 0.4vh dashed white;
+        border: var(--borderImages);
       }
     }
 
     .wall_iframe {
       margin-top: 1vh;
+
       width: 100%;
       height: calc(60px + 360 * (100vh / 1080));
+
       border: 0;
     }
 
@@ -150,7 +151,7 @@
 
       width: 100%;
 
-      font-size: calc(4px + 14 * (100vw / 1920));
+      font: normal 400 calc(4px + 14 * (100vw / 1920)) 'Iceberg';
     }
 
     .wall_like_icon,
@@ -184,12 +185,13 @@
 
       top: -1vh;
 
-      font-size: calc(6px + 14 * (100vw / 1920));
+      font: normal 400 calc(6px + 14 * (100vw / 1920)) 'Iceberg';
     }
 
     .wall_share_icon {
       color: grey;
       cursor: auto;
+
       &:hover {
         color: grey !important;
       }
@@ -208,25 +210,29 @@
 
       width: 84%;
       min-height: 7vh;
+
       left: 0;
 
-      font-family: 'Iceberg';
-      font-style: normal;
-      font-weight: 400;
-      font-size: calc(5px + 15 * (100vw / 1920));
+      border-radius: var(--borderRadius-interface);
+      box-shadow: var(--box-shadow);
+
+      font: normal 400 calc(5px + 15 * (100vw / 1920)) 'Iceberg';
+
+      background-color: var(--backgroundInput-color);
+      color: var(--text-color);
 
       resize: none;
-      border-radius: 1vh;
 
       &::-webkit-scrollbar-track {
         opacity: 0 !important;
-        background: #f5000000;
+        background-color: #f5000000;
       }
 
       &::-webkit-scrollbar-thumb {
         height: 30px;
-        border-top-right-radius: 1vh;
-        border-bottom-right-radius: 1vh;
+
+        border-top-right-radius: var(--borderRadius-interface);
+        border-bottom-right-radius: var(--borderRadius-interface);
       }
     }
 
@@ -236,10 +242,11 @@
       width: 14%;
       height: calc(16px + 60 * (100vw / 1920));
 
+      border: 0;
+      border-radius: var(--borderRadius-interface);
+
       background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
       background-size: 200% auto;
-      border: 0;
-      border-radius: 1vh;
 
       transition: 0.5s;
 
@@ -256,15 +263,13 @@
 
       top: 1vh;
       right: 0px;
-
-      background-color: black;
     }
 
     .wall_post_icon {
       position: relative;
 
       font-size: calc(10px + 20 * (100vw / 1920));
-      color: white;
+      color: var(--text-color);
     }
 
     .wall_comment {
@@ -275,8 +280,11 @@
       width: 100%;
       min-height: 10vh;
 
-      border-radius: 1vh;
-      background-color: rgb(255, 255, 255);
+      border-radius: var(--borderRadius-interface);
+      box-shadow: var(--box-shadow);
+
+      background-color: var(--background-color);
+      color: var(--text-color);
 
       .wall_comment_avatar {
         margin-left: 0.5vw;
@@ -288,7 +296,7 @@
         border-radius: 100%;
 
         &:hover {
-          border: 0.3vh dashed rgb(5, 5, 5);
+          border: var(--borderImages);
           cursor: pointer;
         }
       }
@@ -301,16 +309,15 @@
 
         font-size: calc(10px + 22 * (100vw / 1920));
 
-        cursor: pointer;
+        color: var(--text-color);
 
         filter: drop-shadow(0px 0px 0.2vh rgb(5, 5, 5));
-        color: rgb(5, 5, 5);
-
         cursor: pointer;
+
         z-index: 10;
 
         &:hover {
-          color: rgb(255, 255, 255);
+          color: var(--text-color-hover);
         }
       }
 
@@ -321,26 +328,24 @@
         top: calc(2px + 12 * (100vh / 1080));
         left: calc(16px + 42 * (100vw / 1920));
 
-        font-weight: 600;
-        font-size: calc(6px + 14 * (100vw / 1920));
+        font: normal 400 calc(6px + 14 * (100vw / 1920)) 'Iceberg';
 
-        color: black;
+        color: var(--text-color);
       }
 
       .wall_comment_time {
-        top: calc(8px + 26 * (100vh / 1080)) !important;
-        font-size: calc(4px + 12 * (100vw / 1920));
-        font-weight: 400;
+        top: calc(8px + 27 * (100vh / 1080)) !important;
+
+        font: normal 400 calc(4px + 12 * (100vw / 1920)) 'Iceberg';
       }
 
       .wall_comment_text {
         padding: 1vh 1vw;
 
         overflow-wrap: break-word;
+        font: normal 400 calc(4px + 14 * (100vw / 1920)) 'Iceberg';
 
-        font-size: calc(4px + 14 * (100vw / 1920));
-        font-weight: 400;
-        color: black;
+        color: var(--text-color);
       }
     }
   }

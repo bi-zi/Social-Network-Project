@@ -7,12 +7,6 @@
 
     top: 0px;
 
-    font: {
-      family: 'Iceberg';
-      style: normal;
-      weight: 400;
-    }
-
     box-shadow: var(--box-shadow);
 
     background: var(--interface-color);
@@ -29,32 +23,33 @@
       padding-left: 2vw;
       padding-right: 2vw;
 
-      @media (width < 770px) {
-        padding-left: 1vw;
-        padding-right: 1vw;
-      }
-
       max-width: 75vw;
       height: 100%;
 
-      @media (width < 1320px) {
-        max-width: 100%;
-      }
-
       justify-content: space-between;
       flex-wrap: wrap;
+
+      @media (width < 1320px) {
+        max-width: 100%;
+        @media (width < 770px) {
+          padding-left: 1vw;
+          padding-right: 1vw;
+        }
+      }
     }
 
     .header_wave {
       position: relative;
 
       bottom: -10%;
-      font-size: calc(20px + 25 * (100vw / 1920));
+
       height: 90%;
-      color: #ffffff;
+
+      font: normal 400 calc(20px + 25 * (100vw / 1920)) 'Iceberg';
+      color: var(--text-color);
 
       &:hover {
-        color: #9e9b9b;
+        color: var(--text-color-hover);
       }
     }
 
@@ -77,6 +72,7 @@
 
     margin: auto 0;
     width: 65%;
+
     justify-content: space-between;
 
     .header_profile_icon,
@@ -89,13 +85,14 @@
     .header_music_icon {
       width: calc(15px + 20 * (100vw / 1920));
       height: calc(15px + 20 * (100vw / 1920));
+
       text-decoration: none;
     }
 
     .header_profile_icon:hover,
     .header_messages_icon:hover,
     .header_users_icon:hover {
-      color: #9e9b9b;
+      color: var(--text-color-hover);
       cursor: pointer;
     }
 
@@ -104,7 +101,7 @@
     .header_image_icon,
     .header_video_icon,
     .header_music_icon {
-      color: grey;
+      color: var(--text-color-hover);
     }
   }
 
@@ -112,10 +109,11 @@
   .header_bell_icon {
     width: calc(15px + 20 * (100vw / 1920));
     height: calc(15px + 20 * (100vw / 1920));
+
     text-decoration: none;
 
     &:hover {
-      color: #9e9b9b;
+      color: var(--text-color-hover);
       cursor: pointer;
     }
 
@@ -135,7 +133,7 @@
       left: 20px;
 
       text-align: center;
-      font-size: 14px;
+      font: normal 400 14px 'Iceberg';
 
       border-radius: 100%;
       background-color: red;
@@ -145,6 +143,7 @@
   .notifications {
     display: none;
     position: relative;
+
     width: 60px;
     height: 110px;
 
@@ -157,6 +156,7 @@
 
     .header_friend_requests,
     .no_notifications {
+      display: flex;
       position: absolute;
 
       padding-top: 5px;
@@ -166,13 +166,14 @@
       height: 40px;
 
       top: 65px;
-      font-size: 20px;
 
       border: 2px solid white;
+
+      font: normal 400 20px 'Iceberg';
+
       color: white;
 
       background-color: rgb(0, 0, 0);
-      display: flex;
     }
 
     .notifications_show,
@@ -208,6 +209,7 @@
         right: 0.5vw solid rgb(4, 255, 4);
         bottom: 0.5vw solid red;
         left: 0.5vw solid rgb(255, 230, 0);
+
         radius: 100%;
       }
 
@@ -226,8 +228,9 @@
     .header_menu_burger {
       width: calc(20px + 20 * (100vw / 1920));
       height: calc(20px + 20 * (100vw / 1920));
-      z-index: 999;
+
       cursor: pointer;
+      z-index: 999;
     }
 
     &:active .header_menu_block {
@@ -236,16 +239,16 @@
   }
 
   .header_menu_block {
-    position: absolute;
     display: none;
+    position: absolute;
 
     padding-top: calc(27px + 28 * (100vw / 1920));
 
     width: calc(100px + 200 * (100vw / 1920));
     height: calc(100px + 200 * (100vw / 1920));
 
-    right: 0;
     top: 0;
+    right: 0;
 
     &:hover {
       display: block;
@@ -259,15 +262,20 @@
     padding: 1vh 0 1vh 0;
 
     width: 100%;
-    font-size: calc(20px + 20 * (100vw / 1920));
 
     text-align: center;
+    font: normal 400 calc(20px + 20 * (100vw / 1920)) 'Iceberg';
 
-    background-color: #070707;
-    border: 0.1vh solid white;
+    border: 0.1vh solid var(--miniInterface-color-hover);
+
+    background-color: var(--miniInterface-color);
+    color: var(--miniInterface-color-hover);
 
     &:hover {
-      background-color: #393939;
+      border: 0.2vh solid var(--miniInterface-color);
+
+      background-color: var(--miniInterface-color-hover);
+      color: var(--miniInterface-color);
     }
   }
 }

@@ -5,17 +5,11 @@
     width: 100%;
     height: calc(50px + 100 * (100vw / 1080));
 
-    font-family: 'Iceberg';
-    font-style: normal;
-    font-weight: 400;
-
-    border-radius: 2vh;
+    border-radius: var(--borderRadius-interface);
     box-shadow: var(--box-shadow);
 
     background: var(--interface-color);
     color: var(--text-color);
-    
-    user-select: none;
 
     .profile_friends_title {
       position: relative;
@@ -23,13 +17,12 @@
       height: calc(10px + 20 * (100vw / 1080));
       left: calc(2px + 30 * (100vw / 1920));
 
-      font-size: calc(6px + 20 * (100vw / 1920));
-      line-height: calc(15px + 25 * (100vw / 1920));
+      font: normal 400 calc(6px + 20 * (100vw / 1920)) / calc(15px + 25 * (100vw / 1920)) 'Iceberg';
 
-      color: #ffffff !important;
+      color: var(--text-color);
 
       &:hover {
-        color: black;
+        color: var(--text-color-hover);
       }
     }
   }
@@ -54,24 +47,23 @@
       cursor: pointer;
 
       &:hover .profile_friend_avatar {
-        border: 0.2vh dashed white;
+        border: var(--borderImages);
       }
 
       &:hover .profile_friend_name {
-        color: rgb(174, 173, 173);
+        color: var(--text-color-hover);
       }
 
       .profile_friend_avatar {
         width: calc(8px + 43 * (100vw / 1920));
         height: calc(8px + 43 * (100vw / 1920));
 
-        background-color: black;
         border-radius: 100%;
       }
 
       .profile_friend_name {
-        font-size: calc(2px + 12 * (100vw / 1920));
-        color: #ffffff;
+        font: normal 400 calc(2px + 12 * (100vw / 1920)) 'Iceberg';
+        color: var(--text-color);
       }
     }
   }

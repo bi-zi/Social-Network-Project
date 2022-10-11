@@ -30,8 +30,7 @@ export const Photo: React.FC = () => {
       : category === 'WallPost'
       ? state?.post?.userPosts?.post?.[0]?.post.filter((x, i) => i === +state?.post?.postIndex)?.[0]
           ?.imagesPost
-          : state.post.createImg;
-
+      : state.post.createImg;
 
   const onPhotoDelete = async () => {
     if (category === 'PhotoAvatar') {
@@ -90,13 +89,14 @@ export const Photo: React.FC = () => {
         )}
         <>
           {state.auth.data?._id === user && loadStatus && category !== 'WallPost' ? (
-            <Link
-              className="selectedImg_delete_img"
-              to={`/Profile/${user}`}
-              style={{ color: '#ffffff', textDecoration: 'none' }}
-              onClick={() => onPhotoDelete()}>
-              Delete image
-            </Link>
+            <button className="selectedImg_delete_img">
+              <Link
+                to={`/Profile/${user}`}
+                style={{ color: '#ffffff', textDecoration: 'none' }}
+                onClick={() => onPhotoDelete()}>
+                Delete image
+              </Link>
+            </button>
           ) : (
             ''
           )}
