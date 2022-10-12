@@ -84,6 +84,8 @@ export function useSort(data: Messages) {
       .filter((chat, messageIndex) => messageIndex < messages?.addMessages)
       .reverse();
 
+  
+
     return chat;
   };
 

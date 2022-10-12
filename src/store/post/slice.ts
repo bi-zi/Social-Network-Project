@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { UserPost, UserPostSliceState, Status } from './types';
-import axios from '../../backend/axios';
+import axios from '../../Backend/axios';
 
 export const fetchUserPostsAll = createAsyncThunk(
   '/post/userPostsAll/:id/fetchUserPostAll',
@@ -150,7 +150,7 @@ export const fetchCommentDelete = createAsyncThunk<
 
 export const fetchPostDelete = createAsyncThunk<UserPost[], { deleteId: number; user: string }>(
   '/post/deletePost/fetchPostDelete',
-  async({deleteId,user}:{ deleteId: number, user: string }) => {
+  async ({ deleteId, user }: { deleteId: number; user: string }) => {
     const { data } = await axios.patch(`/post/deletePost/${user}`, { deleteId });
 
     return data;
@@ -277,6 +277,12 @@ const postSlice = createSlice({
   },
 });
 
-export const { setCreatText, setCreateImg, setCreateImgDelete, setCreateVid, setCreateComment, setPostIndex } =
-  postSlice.actions;
+export const {
+  setCreatText,
+  setCreateImg,
+  setCreateImgDelete,
+  setCreateVid,
+  setCreateComment,
+  setPostIndex,
+} = postSlice.actions;
 export const postReducer = postSlice.reducer;

@@ -5,9 +5,12 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useSort } from '../useSort';
+import './style.scss';
 
 export const Chats: React.FC = () => {
   const dispatch = useAppDispatch();
+
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   const auth = useAppSelector((state) => state.auth?.data);
   const messages = useAppSelector((state) => state?.messages);
@@ -27,41 +30,48 @@ export const Chats: React.FC = () => {
     }
   };
 
+  const selectUser = (friendId: string) => {
+    dispatch(setSelectedUser(friendId));
+    dispatch(fetchChatUser(selectedUser?._id));
+    dispatch(setFindChat(''));
+
+    if (inputRef.current != null) {
+      inputRef.current.value = '';
+    }
+    setTimeout(scrollToBottom, 0);
+  };
+
   return (
-    <div className="messages__chats-container">
-      <form className="messages__find-chat">
-        <FontAwesomeIcon className="messages__search-icon" icon={faMagnifyingGlass} />
+    <div className="chats-container">
+      <form className="chats-form__find-chat">
+        <FontAwesomeIcon className="chats-form__search-icon" icon={faMagnifyingGlass} />
         <input
+          ref={inputRef}
           type="text"
           pattern="^[a-zA-Z0-9 ]+$"
           onChange={(e) => dispatch(setFindChat(e.target.value))}
-          className="messages__find-chat-input"
+          className="chats-form__input"
         />
       </form>
 
       {users.length !== 0 ? (
-        <div className="messages__chats">
+        <div className="chats-users">
           {users.map((friend, index) => (
             <div
-              className={`messages__chats-item ${
-                messages?.selectedUser === friend._id ? 'messages__chats-item-color' : ''
-              }`}
+              className={`chats-users__item${friend?._id === messages?.selectedUser ? '--selected' : ''}`}
               key={friend._id}
               onClick={() => {
-                dispatch(setSelectedUser(friend._id));
-                dispatch(fetchChatUser(selectedUser?._id));
-                setTimeout(scrollToBottom, 0);
+                selectUser(friend._id);
               }}>
-              <img src={friend.imageUrl} width="100" alt="" className="messages__chats-item-avatar" />
-
-              <div className='messages_name_lastMessages_block'>
-                <div className="messages__chats-item-fullName">
+              <img src={friend.imageUrl} width="100" alt="" className="chats-users__item__avatar" />
+              <div className="chats-users__item__full-name-last-message">
+                <div className="chats-users__item__full-name-last-message__full-name">
                   {friend.firstName + ' ' + friend.lastName}
                 </div>
 
                 {lastMessage![index] !== undefined ? (
-                  <div className="messages__chats-item-message__name-block">
-                    <div className="messages__chats-item-message-name">
+                  <div className="chats-users__item__full-name-last-message__message">
+                    <div className="chats-users__item__full-name-last-message__message__name">
                       {lastMessage![index]?.userId === friend._id
                         ? friend.firstName + ':'
                         : lastMessage![index].message === undefined
@@ -69,7 +79,7 @@ export const Chats: React.FC = () => {
                         : 'You:'}
                     </div>
 
-                    <div className="messages__chats-item-last-message">
+                    <div className="chats-users__item__full-name-last-message__message_last-message">
                       {lastMessage![index]?.message?.split(' ').filter((x) => x.length >= 20).length ===
                       1
                         ? 'The message is too big'
@@ -82,7 +92,7 @@ export const Chats: React.FC = () => {
                 )}
               </div>
               {lastMessage![index] !== undefined ? (
-                <div className="messages__chats-item-time">{`${new Date(
+                <div className="chats-users__item__time">{`${new Date(
                   lastMessage![index]?.date,
                 ).toLocaleTimeString()}`}</div>
               ) : (
@@ -92,7 +102,7 @@ export const Chats: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div className="messages__chats-empty">
+        <div className="chats-empty">
           <NavLink to={`/Friends/${auth?._id}`}>Find friends to chat</NavLink>
         </div>
       )}

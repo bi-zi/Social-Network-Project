@@ -3,7 +3,7 @@
     margin: 2vh 0;
 
     width: 100%;
-    height: calc(50px + 100 * (100vw / 1080));
+    height: auto;
 
     border-radius: var(--borderRadius-interface);
     box-shadow: var(--box-shadow);
@@ -11,11 +11,12 @@
     background: var(--interface-color);
     color: var(--text-color);
 
+
     .profile_friends_title {
       position: relative;
 
       height: calc(10px + 20 * (100vw / 1080));
-      left: calc(2px + 30 * (100vw / 1920));
+      left: calc(2px + 22 * (100vw / 1920));
 
       font: normal 400 calc(6px + 20 * (100vw / 1920)) / calc(15px + 25 * (100vw / 1920)) 'Iceberg';
 
@@ -29,19 +30,25 @@
 
   .profile_friends_container {
     display: flex;
+    justify-content: space-between;
 
     margin: 0 auto;
+    padding-bottom: 1vw;
 
-    width: calc(40px + 277 * (100vw / 1920));
+    width: 90%;
     height: auto;
 
     flex-wrap: wrap;
 
     .profile_friend {
-      margin: 0 0.3vw 2.5vh 0.3vw;
+      width: calc(4px + 60 * (100vw / 1920));
+      height: calc(16px + 80 * (100vw / 1920));
 
-      width: calc(7.5px + 44 * (100vw / 1920));
-      height: calc(7.5px + 55 * (100vh / 1080));
+      @media (height > 599px) and (height < 1370px) {
+        @media (width > 475px) and (width < 1300px) {
+          width: calc(4px + 69 * (100vw / 1920));
+        }
+      }
 
       text-align: center;
       cursor: pointer;
@@ -55,8 +62,8 @@
       }
 
       .profile_friend_avatar {
-        width: calc(8px + 43 * (100vw / 1920));
-        height: calc(8px + 43 * (100vw / 1920));
+        width: calc(8px + 42 * (100vw / 1920));
+        height: calc(8px + 42 * (100vw / 1920));
 
         border-radius: 100%;
       }

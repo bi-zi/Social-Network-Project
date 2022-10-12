@@ -77,6 +77,10 @@ a {
   background: rgb(255, 255, 255);
 }
 
+::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.835);
+}
+
 input {
   outline: 0 !important;
 }
@@ -115,7 +119,6 @@ h6 {
 
   .left_container {
     width: 27%;
-
     .left_container_sticky {
       position: sticky;
       top: calc(-130px - 465 * (100vh / 1080));

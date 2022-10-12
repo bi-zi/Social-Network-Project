@@ -1,6 +1,7 @@
 import React from 'react';
-import { Chats } from './components/Chats';
-import { Correspondence } from './components/Correspondence';
+
+import { Chats, Correspondence } from '../../Components/Messages/index';
+
 import { Navigate } from 'react-router-dom';
 
 import './style.scss';

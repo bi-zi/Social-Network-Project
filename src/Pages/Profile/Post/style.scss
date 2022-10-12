@@ -6,7 +6,6 @@
 
     width: 100%;
 
-
     border-radius: var(--borderRadius-interface);
     box-shadow: var(--box-shadow);
 
@@ -14,18 +13,14 @@
     color: var(--text-color);
 
     .post_avatar {
-      position: relative;
-
       width: calc(20px + 50 * (100vw / 1920));
       height: calc(20px + 50 * (100vw / 1920));
-
       margin: 1vh 1vw;
-
       border-radius: 100%;
     }
 
     .post_text_input {
-      position: relative;
+      position: absolute;
 
       padding-left: 1vw;
       padding-right: 1vw;
@@ -33,7 +28,7 @@
       width: calc(88px + 710 * (100vw / 1920));
       height: calc(15px + 30 * (100vh / 1080));
 
-      top: -3.5vh;
+      top: calc(-2px + 24 * (100vh / 1080));
 
       border-radius: var(--borderRadius-interface);
       box-shadow: var(--box-shadow);

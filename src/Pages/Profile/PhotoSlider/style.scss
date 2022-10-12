@@ -26,8 +26,9 @@
       width: calc(20px + 185 * (100vw / 1920));
       height: calc(20px + 185 * (100vw / 1920));
 
-      border-radius: var(--borderRadius-interface);
+      margin-bottom: 4vh;
 
+      border-radius: var(--borderRadius-interface);
       &:hover {
         border: var(--borderImages);
       }
@@ -49,7 +50,6 @@
 
       cursor: pointer;
       z-index: 10;
-
       &:hover {
         color: var(--text-color-hover);
       }
@@ -58,13 +58,12 @@
     .slick-prev,
     .slick-next {
       width: calc(15px + 35 * (100vw / 1920)) !important;
-      height: calc(22px + 207 * (100vw / 1920)) !important;
+      height: calc(22.1px + 205 * (100vw / 1920)) !important;
 
       box-shadow: var(--box-shadow);
       background-color: var(--interface-color);
 
       z-index: 289;
-
       &:hover {
         background-color: var(--interface-color-hover);
       }
@@ -85,12 +84,12 @@
 
     .slick-slider {
       width: calc(100% - 25px);
+
     }
 
     .slick-list {
       margin-left: calc(10px + 9 * (100vw / 1920)) !important;
-      padding-left: .6vw;
-
+      padding-left: 0.6vw;
       width: 99%;
       height: calc(22px + 206 * (100vw / 1920));
 
@@ -100,10 +99,11 @@
       text-align: left !important;
 
       background-color: rgb(19, 19, 19);
+
     }
 
     .slick-track {
-      margin: 1vh 0;
+      margin: 1.1% 0;
     }
 
     .slider_images_button {
@@ -121,7 +121,6 @@
       transition: 0.5s;
 
       letter-spacing: 0.2vw;
-
       &:hover {
         background-position: right center;
       }

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Messages, MessagesSliceState, Status } from './types';
-import axios from '../../backend/axios';
+import axios from '../../Backend/axios';
 
 export const fetchGetMessages = createAsyncThunk('messages/id/fetchGetMessages', async (id: string) => {
   const { data } = await axios.get(`/messages/${id}`);
@@ -63,7 +63,7 @@ export const fetchAddMessage = createAsyncThunk<
 const initialState: MessagesSliceState = {
   userMessages: [],
   data2: [],
-  selectedUser: '',
+  selectedUser: localStorage.selectedUser === undefined ? '' : localStorage.selectedUser,
   addMessages: 40,
   findChat: '',
   sortedChats: [],

@@ -20,7 +20,7 @@ import {
   faFileLines,
   faFilm,
   faXmark,
-  faCircleExclamation
+  faCircleExclamation,
 } from '@fortawesome/free-solid-svg-icons';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
 import './style.scss';

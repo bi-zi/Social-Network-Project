@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Note, NoteSliceState, Status } from './types';
-import axios from '../../backend/axios';
+import axios from '../../Backend/axios';
 
 export const fetchNotifications = createAsyncThunk(
   'notifications/getUserNotifications/fetchNotifications',
@@ -22,7 +22,7 @@ export const fetchNotificationsPost = createAsyncThunk<Note, { fromWho: string; 
 export const fetchNotificationsPush = createAsyncThunk<Note, { fromWho: string; id: string }>(
   'notifications/pushNotifications//fetchPushNotifications',
   async ({ fromWho, id }: { fromWho: string; id: string }) => {
-    const { data } = await axios.patch<Note>(`/notifications/pushNotifications`, { fromWho ,id});
+    const { data } = await axios.patch<Note>(`/notifications/pushNotifications`, { fromWho, id });
 
     return data;
   },
@@ -40,7 +40,7 @@ export const fetchNotificationsDelete = createAsyncThunk(
 export const fetchDeleteRequest = createAsyncThunk<Note, { index: number; id: string }>(
   'notifications/deleteRequest/fetchdDeleteRequest',
   async ({ index, id }: { index: number; id: string }) => {
-    const { data } = await axios.patch(`/notifications/deleteRequest`,{index,id} );
+    const { data } = await axios.patch(`/notifications/deleteRequest`, { index, id });
 
     return data;
   },

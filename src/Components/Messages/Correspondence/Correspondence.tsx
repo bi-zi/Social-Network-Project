@@ -9,6 +9,8 @@ import {
 import { NavLink } from 'react-router-dom';
 import { useSort } from '../useSort';
 
+import './style.scss';
+
 export const Correspondence: React.FC = () => {
   const dispatch = useAppDispatch();
 
@@ -26,7 +28,7 @@ export const Correspondence: React.FC = () => {
   const users = sortedUsers();
   const chat = selectedChat();
 
-  const selectedUser = users?.[localStorage.chatIndexWithSort];
+  const selectedUser = users?.[+localStorage.chatIndexWithSort];
 
   // Index чата в массиве без сортировки чтобы правильно отправлять данные
   const chatIndexUnSort = userMessages?.correspondence.findIndex(
@@ -37,10 +39,17 @@ export const Correspondence: React.FC = () => {
   const chatIndexSort = users.findIndex((userId) => userId._id === messages?.selectedUser);
 
   // Сохранение индексов чтобы на случай перезагрузки страницы открывался последний чат
-  if (messages?.selectedUser !== '') {
+  if (
+    messages?.selectedUser !== '' ||
+    (chatIndexSort !== localStorage.chatIndexWithSort &&
+      chatIndexUnSort !== localStorage.chatIndexUnSort &&
+      chatIndexSort !== -1)
+  ) {
     localStorage.setItem('chatIndexWithSort', chatIndexSort + '');
     localStorage.setItem('chatIndexWithoutSort', chatIndexUnSort + '');
+    localStorage.setItem('selectedUser', messages?.selectedUser);
   }
+
 
   const messagesLength =
     userMessages?.correspondence[localStorage.chatIndexWithoutSort]?.messages.length;
@@ -85,17 +94,15 @@ export const Correspondence: React.FC = () => {
   useEffect(() => {
     dispatch(fetchGetMessages(auth?._id));
     dispatch(fetchChatUser(selectedUser?._id));
-  }, [auth?._id, dispatch, selectedUser?._id]);
+  }, [auth?._id, dispatch, selectedUser?._id,chatIndexSort]);
 
   return (
-    <div className="messages__correspondence-container" onLoad={() => setTimeout(scrollToBottom, 0)}>
-      {selectedUser === undefined ? (
-        <div className="messages__correspondence-select-chat">Select chat</div>
-      ) : (
+    <div className="correspondence-container" onLoad={() => setTimeout(scrollToBottom, 0)}>
+      {selectedUser !== undefined ? (
         <>
-          <div className="messages__correspondence-header">
+          <div className="correspondence-header">
             <NavLink to={`/Profile/${selectedUser?._id}`}>
-              <div className="messages__correspondence-header-fullName">
+              <div className="correspondence-header__full-name">
                 {selectedUser?.firstName + ' ' + selectedUser?.lastName}
               </div>
             </NavLink>
@@ -105,15 +112,15 @@ export const Correspondence: React.FC = () => {
                 src={selectedUser?.imageUrl}
                 width="100"
                 alt=""
-                className="messages__correspondence-header-avatar"
+                className="correspondence-header__avatar"
               />
             </NavLink>
           </div>
 
-          <div className="messages__correspondence" ref={divRef}>
+          <div className="correspondence" ref={divRef}>
             {messagesLength! > messages?.addMessages && loadStatus ? (
               <div
-                className="messages__correspondence-add-20"
+                className="correspondence__add-20"
                 onClick={() => {
                   dispatch(setAddMessages(messages?.addMessages + 40));
                   setTimeout(scrollToTop, 200);
@@ -124,10 +131,10 @@ export const Correspondence: React.FC = () => {
               ''
             )}
             {chat?.length === 0 ? (
-              <div className="messages__correspondence-empty">Write the first message in the chat</div>
+              <div className="correspondence-empty">Write the first message in the chat</div>
             ) : (
               chat?.map((message, index) => (
-                <div className="messages__correspondence-message-block" key={index}>
+                <div className="correspondence-message" key={index}>
                   {(message?.userId !== chat[index - 1]?.userId ||
                     Number(new Date(message?.date)) >
                       Number(new Date(chat[index - 1]?.date)) + 60000 * 3) &&
@@ -140,17 +147,17 @@ export const Correspondence: React.FC = () => {
                         }
                         alt=""
                         width="100"
-                        className="messages__correspondence-message-avatar"
+                        className="correspondence-message__avatar"
                       />
 
-                      <div className="messages__correspondence_date_fullName">
-                        <div className="messages__correspondence-message-fullName">
+                      <div className="correspondence-message__full-name-date">
+                        <div className="correspondence-message__full-name-date__full-name">
                           {
                             state.user?.usersAll.filter((user) => message.userId?.includes(user._id))[0]
                               .firstName
                           }
                         </div>
-                        <div className="messages__correspondence-message-date">{`${new Date(
+                        <div className="correspondence-message__full-name-date__date">{`${new Date(
                           message.date,
                         ).toLocaleDateString()} - ${new Date(message.date).toLocaleTimeString()}`}</div>
                       </div>
@@ -158,37 +165,40 @@ export const Correspondence: React.FC = () => {
                   ) : (
                     ''
                   )}
-                  <div className="messages_correspondence-message">{message.message}</div>
+                  <div className="correspondence-message__message">{message.message}</div>
                 </div>
               ))
             )}
           </div>
 
           <form
-            className="messages__correspondence-panel"
+            className="correspondence-sending-message"
             onSubmit={(e) => (text?.length !== 0 && loadStatus ? onSendMessage(e, text) : '')}>
             <label>
               <input
                 type="text"
                 ref={firstRef}
-                className="messages__correspondence-panel-input"
+                className="correspondence-sending-message__input"
                 required={true}
                 minLength={1}
                 maxLength={300}
+                placeholder="Write your message here"
                 pattern="^[a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
                 title="Only these characters can be used a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~"
                 onChange={(e) => setText(e.target.value)}
               />
             </label>
             {messages.status !== 'loading' ? (
-              <button type="submit" className="messages__correspondence-panel-button">
+              <button type="submit" className="correspondence-sending-message__button">
                 Submit
               </button>
             ) : (
-              <div className="messages__correspondence-wait">Wait</div>
+              <div className="correspondence-sending-message__wait">Wait</div>
             )}
           </form>
         </>
+      ) : (
+        <div className="correspondence-select-chat">Select chat</div>
       )}
     </div>
   );
