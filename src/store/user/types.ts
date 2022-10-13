@@ -10,9 +10,8 @@ export type User = {
   createdAt: string;
   updatedAt: string;
   __v: number;
-  id: string
+  id: string;
 };
-
 
 export enum Status {
   LOADING = 'loading',
@@ -21,10 +20,12 @@ export enum Status {
 }
 
 export interface UserSliceState {
+  usersAll: User[];
   userOne: User[];
+  findUserFriends: User[];
+  findUserSubscribers: User[];
   inputNumber: string;
   catergory: string;
   deleteAttention: number;
-  usersAll: User[];
   status: Status;
 }

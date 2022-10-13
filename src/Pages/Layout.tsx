@@ -21,8 +21,7 @@ export const Layout: React.FC = () => {
   //   `-POST- ${state.post.userPosts.status}`,
   // ]);
 
-  // console.log(state.user.usersAll);
-  // roughSizeOfObject(state.messages);
+  // roughSizeOfObject(state.post.userPosts.post);
 
   // function roughSizeOfObject(object: any) {
   //   var objectList = [];
@@ -70,7 +69,8 @@ export const Layout: React.FC = () => {
     <>
       {0 ? (
         <div className="fast_style">
-          С 7.10 по 10.10 проект отключен из за масштабных изменений стилей которые ломают отоброжение сайта. Простите :)
+          С 7.10 по 10.10 проект отключен из за масштабных изменений стилей которые ломают отоброжение
+          сайта. Простите :)
         </div>
       ) : (
         <>

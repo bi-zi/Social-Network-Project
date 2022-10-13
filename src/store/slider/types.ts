@@ -15,5 +15,6 @@ export enum Status {
 
 export interface SliderSliceState {
   slider: Slider[];
+  allSliders: Slider[];
   status: Status;
 }

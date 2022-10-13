@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchOneUser, setCatergory } from '../../../store/user/slice';
+import { fetchOneUser, fetchUserFriends,fetchUserSubscribers, setCatergory } from '../../../store/user/slice';
 import { fetchUserPostsAll } from '../../../store/post/slice';
 import { fetchSlider } from '../../../store/slider/slice';
 import { useParams } from 'react-router-dom';
@@ -18,13 +18,14 @@ export const Friends: React.FC = () => {
   const [key, setKey] = React.useState(false);
 
   const userProfile = user?.userOne?.[0];
-  const friends = user?.usersAll.filter((user) => userProfile?.friends.includes(user._id)).splice(0, 10);
+  const userFriends = user?.findUserFriends;
 
-  const fetchData = (userId: string) => {
+  const fetchData = async (userId: string) => {
     dispatch(fetchOneUser(userId));
     dispatch(fetchUserPostsAll(userId));
     dispatch(fetchSlider(userId));
   };
+
 
   document.onkeydown = (e: any) => {
     if (e.key) {
@@ -38,6 +39,11 @@ export const Friends: React.FC = () => {
     }
   };
 
+  React.useEffect(() => {
+    dispatch(fetchUserFriends(id));
+    dispatch(fetchUserSubscribers(id));
+  }, [dispatch, id]);
+
   return (
     <div className="profile_friends">
       <Link
@@ -49,7 +55,7 @@ export const Friends: React.FC = () => {
       </Link>
 
       <div className="profile_friends_container">
-        {friends.map((friend) => (
+        {userFriends.map((friend) => (
           <div key={friend._id}>
             {!key ? (
               <Link to={`/Profile/${friend._id}`} key={friend._id} style={{ textDecoration: 'none' }}>

@@ -13,9 +13,8 @@ export const Subscribers: React.FC = () => {
   const [key, setKey] = React.useState(false);
 
   const userProfile = user?.userOne?.[0];
-  const subscribers = user?.usersAll
-    .filter((user) => userProfile?.subscribers.includes(user._id))
-    .splice(0, 10);
+  const subscribers = user?.findUserSubscribers
+
 
   const fetchData = (id: string) => {
     dispatch(fetchOneUser(id));

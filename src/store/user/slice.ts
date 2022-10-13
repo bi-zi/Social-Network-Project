@@ -13,6 +13,24 @@ export const fetchOneUser = createAsyncThunk('user/one/id/fetchUserUpdate', asyn
   return data;
 });
 
+export const fetchUserFriends = createAsyncThunk(
+  'user/findFriends/fetchUserFriends',
+  async (id: string) => {
+    const { data } = await axios.get<User[]>(`/user/findFriends/${id}`);
+
+    return data;
+  },
+);
+
+export const fetchUserSubscribers = createAsyncThunk(
+  'user/findSubscribers/fetchUserSubscribers',
+  async (id: string) => {
+    const { data } = await axios.get<User[]>(`/user/findSubscribers/${id}`);
+
+    return data;
+  },
+);
+
 export const fetchUserUpdate = createAsyncThunk<User[], { imageUrl: string | string[]; user: string }>(
   'user/id/fetchUserUpdate',
   async ({ imageUrl, user }: { imageUrl: string | string[]; user: string }) => {
@@ -64,6 +82,8 @@ export const fetchDeleteFriend = createAsyncThunk<
 const initialState: UserSliceState = {
   usersAll: [],
   userOne: [],
+  findUserFriends: [],
+  findUserSubscribers: [],
   inputNumber: '',
   catergory: '',
   deleteAttention: 0,
@@ -105,6 +125,28 @@ const userSlice = createSlice({
       state.userOne = action.payload;
     });
     builder.addCase(fetchOneUser.rejected, (state) => {
+      state.status = Status.ERROR;
+    });
+
+    builder.addCase(fetchUserFriends.pending, (state) => {
+      state.status = Status.LOADING;
+    });
+    builder.addCase(fetchUserFriends.fulfilled, (state, action) => {
+      state.status = Status.SUCCESS;
+      state.findUserFriends = action.payload;
+    });
+    builder.addCase(fetchUserFriends.rejected, (state) => {
+      state.status = Status.ERROR;
+    });
+
+    builder.addCase(fetchUserSubscribers.pending, (state) => {
+      state.status = Status.LOADING;
+    });
+    builder.addCase(fetchUserSubscribers.fulfilled, (state, action) => {
+      state.status = Status.SUCCESS;
+      state.findUserSubscribers = action.payload;
+    });
+    builder.addCase(fetchUserSubscribers.rejected, (state) => {
       state.status = Status.ERROR;
     });
 

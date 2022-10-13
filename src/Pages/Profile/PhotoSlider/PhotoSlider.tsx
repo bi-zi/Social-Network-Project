@@ -33,7 +33,6 @@ export const PhotoSlider: React.FC = () => {
     swipeToSlide: true,
   };
 
-
   async function onPhotoDelete(index: number) {
     await dispatch(fetchSliderDelete({ deleteId: index, user: id }));
     dispatch(fetchSlider(id));
@@ -44,7 +43,6 @@ export const PhotoSlider: React.FC = () => {
 
   return (
     <div className="slider_images">
-
       <Slider {...settings}>
         {readyPhotos?.map((image, index) => {
           return state.slider.status === 'loaded' ? (

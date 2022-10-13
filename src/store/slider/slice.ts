@@ -10,6 +10,14 @@ export const fetchSlider = createAsyncThunk<Slider[], string>(
   },
 );
 
+// export const fetchAllSlider = createAsyncThunk(
+//   'slider/getAll/fetchSlider',
+//   async () => {
+//     const { data } = await axios.get(`/slider/all`);
+//     return data;
+//   },
+// );
+
 export const fetchSliderPost = createAsyncThunk<Slider[], { sliderImg: string[] }>(
   'slider/id/fetchSliderPost',
   async ({ sliderImg }: { sliderImg: string[] }) => {
@@ -39,6 +47,7 @@ export const fetchSliderDelete = createAsyncThunk<Slider[], { deleteId: number; 
 
 const initialState: SliderSliceState = {
   slider: [] as Slider[],
+  allSliders: [] as Slider[],
   status: Status.LOADING,
 };
 
@@ -58,6 +67,17 @@ const sliderSlice = createSlice({
     builder.addCase(fetchSlider.rejected, (state) => {
       state.status = Status.ERROR;
     });
+
+    // builder.addCase(fetchAllSlider.pending, (state) => {
+    //   state.status = Status.LOADING;
+    // });
+    // builder.addCase(fetchAllSlider.fulfilled, (state, action) => {
+    //   state.status = Status.SUCCESS;
+    //   state.allSliders = action.payload;
+    // });
+    // builder.addCase(fetchAllSlider.rejected, (state) => {
+    //   state.status = Status.ERROR;
+    // });
 
     builder.addCase(fetchSliderPost.pending, (state) => {
       state.status = Status.LOADING;

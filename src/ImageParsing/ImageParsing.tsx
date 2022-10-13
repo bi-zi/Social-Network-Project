@@ -4,8 +4,8 @@ import { setCreateImg } from '../store/post/slice';
 import { fetchUserUpdate, fetchOneUser } from '../store/user/slice';
 import { fetchSlider, fetchSliderPost, fetchSliderPush } from '../store/slider/slice';
 import { useParams } from 'react-router-dom';
-import Compressor from 'compressorjs';
-
+// import Compressor from 'compressorjs';
+import imageCompression from 'browser-image-compression';
 export type MyParams = {
   id: string;
 };
@@ -61,24 +61,36 @@ export const ImageParsing: React.FC = () => {
     }
   };
 
-  const handleCompressedUpload = (e: any) => {
-    const image = e.target.files[0];
+  async function handleImageUpload(e: any) {
+    const imageFile = e.target.files[0];
 
-    // console.log((image['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
+    let a = (
+      +(imageFile['size'] / (1024 * 1024)).toFixed(2) -
+      (+(imageFile['size'] / (1024 * 1024)).toFixed(2) * 90) / 100
+    ).toFixed(2);
 
-    new Compressor(image, {
-      quality: 0.4,
-      success: (compressedResult) => {
-        setImages(compressedResult);
-      },
-    });
-  };
+    // console.log('до', +(imageFile['size'] / (1024 * 1024)).toFixed(2));
+
+    const options = {
+      maxSizeMB: +a,
+      useWebWorker: true,
+    };
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      
+      //  console.log(+(compressedFile['size'] / (1024 * 1024)).toFixed(2));
+
+      setImages(compressedFile);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     if (images.length < 1) return;
 
     let file = images;
-    // console.log((images['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
+    // console.log('после', (images['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
 
     let fileReader: FileReader = new FileReader();
 
@@ -88,6 +100,8 @@ export const ImageParsing: React.FC = () => {
       }
     };
     fileReader.readAsDataURL(file);
+
+    console.log('срабатывание');
     setImages([]);
   }, [images, onAvatarAndSlider]);
 
@@ -96,8 +110,8 @@ export const ImageParsing: React.FC = () => {
       <input
         type="file"
         name="file"
-        accept="image/jpeg"
-        onChange={(e) => handleCompressedUpload(e)}
+        accept="image/*"
+        onChange={(e) => handleImageUpload(e)}
         className="image_input_parser"
       />
     </>
