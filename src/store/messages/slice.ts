@@ -7,8 +7,8 @@ export const fetchGetMessages = createAsyncThunk('messages/id/fetchGetMessages',
   return data;
 });
 
-export const fetchChatUser = createAsyncThunk('messages/i1/fetchGetMessages', async (id: string) => {
-  const { data } = await axios.get(`/messages/${id}`);
+export const fetchChatUser = createAsyncThunk('messages/user/fetchGetMessages', async (id: string) => {
+  const { data } = await axios.get(`/messages/user/${id}`);
   return data;
 });
 

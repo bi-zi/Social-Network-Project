@@ -5,7 +5,6 @@ export function useSort(data: Messages) {
   const state = useAppSelector((state) => state);
   const messages = useAppSelector((state) => state.messages);
 
-
   // Все чаты пользователя отсортированные по времени последнего сообщения каждого чата чем новее тем выше
   const sortedChatsByLastMessageTime = () => {
     const sortedChats = data?.correspondence
@@ -21,14 +20,14 @@ export function useSort(data: Messages) {
   const sortedUsers = () => {
     let users = []; // Массив для отсортированных пользователей
 
+
     // Поиск участников чатов
-    const chatsUsers = state.user?.usersAll.filter((user) =>
+    const chatsUsers = state.user?.chatUsers.filter((user) =>
       data?.correspondence.map((chat) => chat?.withWho)?.includes(user._id),
     );
 
     // Массив id отсортированных участников чата
     const usersId = sortedChatsByLastMessageTime()?.map((chat) => chat.withWho);
-
 
     // Сортировка участников по времени написания последнего сообщения методом сравнения двух массивов
     for (let i = 0; i < usersId!?.length; i++) {
@@ -76,7 +75,7 @@ export function useSort(data: Messages) {
     return lastMessage;
   };
 
-// Выбранный чат
+  // Выбранный чат
   const selectedChat = () => {
     const chat = data?.correspondence[localStorage.chatIndexWithoutSort]?.messages
       ?.slice()
@@ -84,7 +83,7 @@ export function useSort(data: Messages) {
       .filter((chat, messageIndex) => messageIndex < messages?.addMessages)
       .reverse();
 
-  
+    // console.log(data?.correspondence);
 
     return chat;
   };

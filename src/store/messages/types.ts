@@ -29,6 +29,7 @@ export enum Status {
 export interface MessagesSliceState {
   userMessages: Messages[];
   data2: Messages[];
+
   selectedUser: string;
   addMessages: number;
   findChat: string;

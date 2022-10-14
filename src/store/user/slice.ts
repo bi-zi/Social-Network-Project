@@ -7,6 +7,14 @@ export const fetchAllUsers = createAsyncThunk<User[]>('user/fetchAllUsers', asyn
   return data;
 });
 
+export const fetchUsersPagination = createAsyncThunk(
+  'user/pagination/fetchUsersPagination',
+  async (pagination: number) => {
+    const { data } = await axios.get(`/user/pagination/${pagination}`);
+    return data;
+  },
+);
+
 export const fetchOneUser = createAsyncThunk('user/one/id/fetchUserUpdate', async (id: string) => {
   const { data } = await axios.get<User[]>(`/user/one/${id}`);
 
@@ -26,6 +34,21 @@ export const fetchUserSubscribers = createAsyncThunk(
   'user/findSubscribers/fetchUserSubscribers',
   async (id: string) => {
     const { data } = await axios.get<User[]>(`/user/findSubscribers/${id}`);
+
+    return data;
+  },
+);
+
+export const fetchChatsForUser = createAsyncThunk('user/fetchChatsForUser', async (users: string) => {
+  const { data } = await axios.get(`/user/findChats/${users}}`);
+
+  return data;
+});
+
+export const fetchCommentators = createAsyncThunk(
+  'user/findCommentators/fetchCommentators',
+  async (users: string | undefined) => {
+    const { data } = await axios.get(`/user/findCommentators/${users}}`);
 
     return data;
   },
@@ -82,8 +105,15 @@ export const fetchDeleteFriend = createAsyncThunk<
 const initialState: UserSliceState = {
   usersAll: [],
   userOne: [],
+
   findUserFriends: [],
   findUserSubscribers: [],
+
+  usersPagination: [0, 0, [] as User[]],
+  chatUsers: [],
+
+  commentators: [],
+
   inputNumber: '',
   catergory: '',
   deleteAttention: 0,
@@ -103,17 +133,38 @@ const userSlice = createSlice({
     setAttention: (state, action) => {
       state.deleteAttention = action.payload;
     },
+
+    setClearFindUserFriends: (state) => {
+      state.findUserFriends = [];
+    },
+    setClearFindUserSubscribers: (state) => {
+      state.findUserSubscribers = [];
+    },
+    setClearCommentators: (state) => {
+      state.commentators = [];
+    },
   },
 
   extraReducers: (builder) => {
-    builder.addCase(fetchAllUsers.pending, (state) => {
+    // builder.addCase(fetchAllUsers.pending, (state) => {
+    //   state.status = Status.LOADING;
+    // });
+    // builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
+    //   state.status = Status.SUCCESS;
+    //   state.usersAll = action.payload;
+    // });
+    // builder.addCase(fetchAllUsers.rejected, (state) => {
+    //   state.status = Status.ERROR;
+    // });
+
+    builder.addCase(fetchUsersPagination.pending, (state) => {
       state.status = Status.LOADING;
     });
-    builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
+    builder.addCase(fetchUsersPagination.fulfilled, (state, action) => {
       state.status = Status.SUCCESS;
-      state.usersAll = action.payload;
+      state.usersPagination = action.payload;
     });
-    builder.addCase(fetchAllUsers.rejected, (state) => {
+    builder.addCase(fetchUsersPagination.rejected, (state) => {
       state.status = Status.ERROR;
     });
 
@@ -147,6 +198,29 @@ const userSlice = createSlice({
       state.findUserSubscribers = action.payload;
     });
     builder.addCase(fetchUserSubscribers.rejected, (state) => {
+      state.status = Status.ERROR;
+    });
+
+    builder.addCase(fetchChatsForUser.pending, (state) => {
+      state.status = Status.LOADING;
+    });
+    builder.addCase(fetchChatsForUser.fulfilled, (state, action) => {
+      state.status = Status.SUCCESS;
+      state.chatUsers = action.payload;
+    });
+    builder.addCase(fetchChatsForUser.rejected, (state) => {
+      state.status = Status.ERROR;
+    });
+    //
+
+    builder.addCase(fetchCommentators.pending, (state) => {
+      state.status = Status.LOADING;
+    });
+    builder.addCase(fetchCommentators.fulfilled, (state, action) => {
+      state.status = Status.SUCCESS;
+      state.commentators = action.payload;
+    });
+    builder.addCase(fetchCommentators.rejected, (state) => {
       state.status = Status.ERROR;
     });
 
@@ -202,5 +276,12 @@ const userSlice = createSlice({
   },
 });
 
-export const { setInputNumber, setCatergory, setAttention } = userSlice.actions;
+export const {
+  setInputNumber,
+  setCatergory,
+  setAttention,
+  setClearFindUserFriends,
+  setClearFindUserSubscribers,
+  setClearCommentators,
+} = userSlice.actions;
 export const userReducer = userSlice.reducer;

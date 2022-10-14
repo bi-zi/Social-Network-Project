@@ -58,7 +58,9 @@ export const Chats: React.FC = () => {
         <div className="chats-users">
           {users.map((friend, index) => (
             <div
-              className={`chats-users__item${friend?._id === messages?.selectedUser ? '--selected' : ''}`}
+              className={`chats-users__item${
+                friend?._id === messages?.selectedUser ? '--selected' : ''
+              }`}
               key={friend._id}
               onClick={() => {
                 selectUser(friend._id);

@@ -1,20 +1,23 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchOneUser, setCatergory } from '../../../store/user/slice';
+import { fetchOneUser, fetchUserSubscribers, setCatergory } from '../../../store/user/slice';
 import { fetchUserPostsAll } from '../../../store/post/slice';
 import { fetchSlider } from '../../../store/slider/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
+export type MyParams = {
+  id: string;
+};
+
 export const Subscribers: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { id } = useParams();
+  const { id } = useParams<keyof MyParams>() as MyParams;
   const user = useAppSelector((state) => state.user);
   const [key, setKey] = React.useState(false);
 
   const userProfile = user?.userOne?.[0];
-  const subscribers = user?.findUserSubscribers
-
+  const subscribers = user?.findUserSubscribers;
 
   const fetchData = (id: string) => {
     dispatch(fetchOneUser(id));
@@ -34,6 +37,10 @@ export const Subscribers: React.FC = () => {
     }
   };
 
+  React.useEffect(() => {
+    dispatch(fetchUserSubscribers(id));
+  }, [dispatch, id]);
+
   return (
     <div className="profile_friends">
       <Link
@@ -42,7 +49,7 @@ export const Subscribers: React.FC = () => {
         style={{ textDecoration: 'none' }}
         onClick={() => dispatch(setCatergory('subscribers'))}>
         Subscribers -&nbsp;
-        {user?.usersAll.filter((user) => userProfile?.subscribers.includes(user._id))?.length}
+        {subscribers.length}
       </Link>
 
       <div className="profile_friends_container">

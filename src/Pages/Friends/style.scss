@@ -160,6 +160,25 @@
 
       font: normal 400 calc(10px + 40 * (100vw / 1920)) 'Iceberg';
     }
+
+    .add_friends_to_table {
+      margin-top: 2vh;
+      width: 100%;
+
+      border-bottom-left-radius: var(--borderRadius-interface);
+      border-bottom-right-radius: var(--borderRadius-interface);
+      box-shadow: var(--box-shadow);
+
+      text-align: center;
+      font: normal 400 calc(10px + 40 * (100vw / 1920)) 'Iceberg';
+      cursor: pointer;
+
+      color: var(--text-color);
+      background-color: var(--interface-color);
+      &:hover {
+        background-color: var(--interface-color-hover);
+      }
+    }
   }
 
   .friends_right_panel {

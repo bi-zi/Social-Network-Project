@@ -10,6 +10,7 @@ import {
   fetchPostDelete,
   setPostIndex,
 } from '../../../store/post/slice';
+import { fetchCommentators, setClearCommentators } from '../../../store/user/slice';
 import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareNodes, faEllipsis, faXmark, faPlay } from '@fortawesome/free-solid-svg-icons';
@@ -117,6 +118,21 @@ export const Wall: React.FC = () => {
 
   const postStatus = state.post.userPosts.status === 'loaded';
 
+
+  const openCloseComment = (postIndex: number) => {
+    const commentators = wallPost?.[postIndex].commentPost.map((x) => x.userId).join(',');
+
+    if (postStatus) {
+      if (comment !== postIndex) {
+        dispatch(fetchCommentators(commentators));
+        setComment(postIndex);
+      } else {
+        setComment(999999);
+        dispatch(setClearCommentators());
+      }
+    }
+  };
+
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));
   }, [dispatch, id]);
@@ -139,7 +155,6 @@ export const Wall: React.FC = () => {
             onClick={() => (auth?._id === id && postStatus ? deletePost(content._id) : '')}>
             <span>Delete post</span>
           </div>
-
           <div className="wall_content">
             {content.text?.length > 0 ? <div className="wall_text">{content.text}</div> : ''}
             {content.imagesPost?.length > 0 ? (
@@ -236,13 +251,7 @@ export const Wall: React.FC = () => {
               icon={faCommentDots}
               style={comment === postIndex ? { color: 'black' } : { color: 'white' }}
               onClick={() => {
-                if (postStatus) {
-                  comment !== postIndex
-                    ? setComment(postIndex)
-                    : comment === postIndex
-                    ? setComment(999999)
-                    : setComment(postIndex);
-                }
+                openCloseComment(postIndex);
               }}
             />
             <span className="wall_dislike_number">{content.commentPost.length}</span>
@@ -277,7 +286,8 @@ export const Wall: React.FC = () => {
                       }}>
                       <img
                         src={
-                          state.user.usersAll.find((user) => user._id === comment.userId)!?.imageUrl[0]
+                          state.user.commentators.find((user) => user._id === comment.userId)!
+                            ?.imageUrl[0]
                         }
                         alt=""
                         className="wall_comment_avatar"

@@ -1,7 +1,8 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from './store/store';
+import { setClearFindUserFriends } from './store/user/slice';
 import { fetchAuthMe } from './store/auth/slice';
-import { fetchAllUsers } from './store/user/slice';
+// import { fetchAllUsers } from './store/user/slice';
 import { Registration } from './Pages/Registration-Login/Registration';
 import { Login } from './Pages/Registration-Login/Login';
 import { Layout } from './Pages/Layout';
@@ -11,14 +12,27 @@ import { Friends } from './Pages/Friends/Friends';
 import { Messages } from './Pages/Messages/Messages';
 import { Routes, Route } from 'react-router-dom';
 import './style.scss';
+
 export const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
-  if (state.auth.data?._id !== undefined) localStorage.setItem('mainUser', state.auth.data?._id);
+  const user = useAppSelector((state) => state.user);
+
+  // if (state.auth.data?._id !== undefined) localStorage.setItem('mainUser', state.auth.data?._id);
+
+  // let profile = window.location.pathname.split('/')[1] === 'Profile';
+
+  // console.log(
+  //   !profile && user.findUserFriends.length > 0,
+  //   user.findUserFriends,
+  //   window.location.pathname.split('/')[1],
+  // );
+
+  // if (!profile && user.findUserFriends.length > 0) dispatch(setClearFindUserFriends());
+
 
   React.useEffect(() => {
     dispatch(fetchAuthMe());
-    dispatch(fetchAllUsers());
   }, [dispatch]);
 
   return (
@@ -33,7 +47,7 @@ export const App: React.FC = () => {
       </Route>
     </Routes>
   );
-}
+};
 
 // import { library } from '@fortawesome/fontawesome-svg-core';
 // import {

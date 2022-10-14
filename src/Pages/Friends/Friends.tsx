@@ -1,7 +1,12 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchAuthMe } from '../../store/auth/slice';
-import { fetchAllUsers, fetchDeleteFriend, fetchOneUser } from '../../store/user/slice';
+import {
+  fetchDeleteFriend,
+  fetchUsersPagination,
+  fetchOneUser,
+  fetchUserFriends,
+} from '../../store/user/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
@@ -41,21 +46,25 @@ export const Friends: React.FC = () => {
 
   const user =
     state.user?.userOne?.[0] === undefined
-      ? state.user.usersAll?.find((user) => user._id === id)
+      ? state.user?.usersPagination[2]?.find((user) => user?._id === id)
       : state.user?.userOne?.[0];
 
   let sortedFriends = [] as User[];
 
   if (catergory === 'friends') {
-    sortedFriends = state.user.usersAll?.filter((userId) => user?.friends.includes(userId._id));
+    sortedFriends = state.user.usersPagination[2]?.filter((userId) =>
+      user?.friends.includes(userId._id),
+    );
   }
 
   if (catergory === 'people') {
-    sortedFriends = state.user.usersAll;
+    sortedFriends = state.user.usersPagination[2];
   }
 
   if (catergory === 'subscribers') {
-    sortedFriends = state.user.usersAll?.filter((userId) => user?.subscribers.includes(userId._id));
+    sortedFriends = state.user.usersPagination[2]?.filter((userId) =>
+      user?.subscribers.includes(userId._id),
+    );
   }
 
   if (sortBy === 'a-z') {
@@ -112,13 +121,14 @@ export const Friends: React.FC = () => {
     await dispatch(
       fetchDeleteFriend({
         id: userId,
-        index: state.user.usersAll
+        index: state.user.findUserFriends
           .find((user) => user._id === userId)!
           .friends.findIndex((friendId) => friendId === state.auth.data?._id),
         index2: state.auth.data?.friends.findIndex((friendId) => friendId === userId),
         user: id,
       }),
     );
+    dispatch(fetchUserFriends(id));
     dispatch(fetchOneUser(id));
     dispatch(fetchAuthMe());
   };
@@ -126,9 +136,10 @@ export const Friends: React.FC = () => {
   const loadStatus = state.user.status === 'loaded' && state.auth.status === 'loaded';
 
   React.useEffect(() => {
-    dispatch(fetchAllUsers());
+    dispatch(fetchUsersPagination(10));
     dispatch(fetchNotifications(id));
-  }, []);
+    dispatch(fetchUserFriends(id));
+  }, [dispatch, id]);
 
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
@@ -141,20 +152,20 @@ export const Friends: React.FC = () => {
           sortedFriends.map((friend) => (
             <div
               className="friends_user_block"
-              key={friend._id}
+              key={friend?._id}
               style={
                 friend === sortedFriends[sortedFriends.length - 1]
                   ? { borderBottom: 'none' }
                   : { borderBottom: `` }
               }>
-              <Link to={`/Profile/${friend._id}`} onClick={() => window.scrollTo(0, 0)}>
-                <img src={friend.imageUrl} alt="" width={100} className="friends_user_avatar" />
+              <Link to={`/Profile/${friend?._id}`} onClick={() => window.scrollTo(0, 0)}>
+                <img src={friend?.imageUrl} alt="" width={100} className="friends_user_avatar" />
               </Link>
               <Link
-                to={`/Profile/${friend._id}`}
+                to={`/Profile/${friend?._id}`}
                 className="friends_user_fullname"
                 style={{ textDecoration: 'none' }}>
-                {friend.firstName + ' ' + friend.lastName}
+                {friend?.firstName + ' ' + friend?.lastName}
               </Link>
 
               {catergory === 'friends' ? (
@@ -162,7 +173,7 @@ export const Friends: React.FC = () => {
                   <div className="friend_content">
                     <div
                       className="friend_delete"
-                      onClick={() => (loadStatus ? deleteFriend(friend._id) : '')}>
+                      onClick={() => (loadStatus ? deleteFriend(friend?._id) : '')}>
                       Delete friend
                     </div>
                   </div>
@@ -173,8 +184,8 @@ export const Friends: React.FC = () => {
               )}
 
               <div className="number_of_friends_subs">
-                <span>Friends {friend.friends?.length}</span>
-                <span>Subscribers {friend.subscribers?.length}</span>
+                <span>Friends {friend?.friends?.length}</span>
+                <span>Subscribers {friend?.subscribers?.length}</span>
               </div>
             </div>
           ))
@@ -182,6 +193,15 @@ export const Friends: React.FC = () => {
           <div className="zero_friends_subs">No friends 😭</div>
         ) : (
           <div className="zero_friends_subs">No subscribers 😭</div>
+        )}
+        {state.user.usersPagination[1] >= state.user.usersPagination[0] ? (
+          <div
+            className="add_friends_to_table"
+            onClick={() => dispatch(fetchUsersPagination(state.user.usersPagination[0] + 10))}>
+            Show more users
+          </div>
+        ) : (
+          ''
         )}
       </div>
 

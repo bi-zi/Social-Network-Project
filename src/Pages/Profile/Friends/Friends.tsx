@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchOneUser, fetchUserFriends,fetchUserSubscribers, setCatergory } from '../../../store/user/slice';
+import { fetchOneUser, fetchUserFriends, setCatergory } from '../../../store/user/slice';
 import { fetchUserPostsAll } from '../../../store/post/slice';
 import { fetchSlider } from '../../../store/slider/slice';
 import { useParams } from 'react-router-dom';
@@ -26,7 +26,6 @@ export const Friends: React.FC = () => {
     dispatch(fetchSlider(userId));
   };
 
-
   document.onkeydown = (e: any) => {
     if (e.key) {
       setKey(true);
@@ -41,7 +40,6 @@ export const Friends: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(fetchUserFriends(id));
-    dispatch(fetchUserSubscribers(id));
   }, [dispatch, id]);
 
   return (
@@ -51,7 +49,7 @@ export const Friends: React.FC = () => {
         className="profile_friends_title"
         style={{ textDecoration: 'none' }}
         onClick={() => dispatch(setCatergory('friends'))}>
-        Friends - {user?.usersAll.filter((user) => userProfile?.friends.includes(user._id))?.length}
+        Friends - {userFriends?.length}
       </Link>
 
       <div className="profile_friends_container">

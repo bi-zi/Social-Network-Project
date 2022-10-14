@@ -9,7 +9,6 @@ import { sliderReducer } from './slider/slice';
 import { postReducer } from './post/slice';
 import { NoteReducer } from './notifications/slice';
 
-
 export const store = configureStore({
   reducer: {
     auth: authReducer,

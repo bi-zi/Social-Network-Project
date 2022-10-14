@@ -21,9 +21,14 @@ export enum Status {
 
 export interface UserSliceState {
   usersAll: User[];
+  usersPagination: [number, number, User[]];
   userOne: User[];
   findUserFriends: User[];
   findUserSubscribers: User[];
+
+  chatUsers: User[];
+  commentators: User[];
+
   inputNumber: string;
   catergory: string;
   deleteAttention: number;

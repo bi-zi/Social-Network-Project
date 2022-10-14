@@ -1,5 +1,6 @@
 import React from 'react';
-import { useAppSelector } from '../store/store';
+import { useAppDispatch, useAppSelector } from '../store/store';
+
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
@@ -7,9 +8,11 @@ import { NavLink } from 'react-router-dom';
 import './style.scss';
 
 export const Layout: React.FC = () => {
-  const [close, setClose] = React.useState(true);
+  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   const state = useAppSelector((state) => state);
+
+  const [close, setClose] = React.useState(true);
 
   // console.log([
   //   `-AUTH- ${state.auth.status}`,
@@ -21,49 +24,49 @@ export const Layout: React.FC = () => {
   //   `-POST- ${state.post.userPosts.status}`,
   // ]);
 
-  // roughSizeOfObject(state.post.userPosts.post);
+  // roughSizeOfObject(state.user);
 
-  // function roughSizeOfObject(object: any) {
-  //   var objectList = [];
-  //   var stack = [object];
-  //   var bytes = 0;
+  function roughSizeOfObject(object: any) {
+    var objectList = [];
+    var stack = [object];
+    var bytes = 0;
 
-  //   while (stack.length) {
-  //     var value = stack.pop();
+    while (stack.length) {
+      var value = stack.pop();
 
-  //     if (typeof value === 'boolean') {
-  //       bytes += 4;
-  //     } else if (typeof value === 'string') {
-  //       bytes += value.length * 2;
-  //     } else if (typeof value === 'number') {
-  //       bytes += 8;
-  //     } else if (typeof value === 'object' && objectList.indexOf(value) === -1) {
-  //       objectList.push(value);
+      if (typeof value === 'boolean') {
+        bytes += 4;
+      } else if (typeof value === 'string') {
+        bytes += value.length * 2;
+      } else if (typeof value === 'number') {
+        bytes += 8;
+      } else if (typeof value === 'object' && objectList.indexOf(value) === -1) {
+        objectList.push(value);
 
-  //       for (var i in value) {
-  //         stack.push(value[i]);
-  //       }
-  //     }
-  //   }
+        for (var i in value) {
+          stack.push(value[i]);
+        }
+      }
+    }
 
-  //   let fsizekb = bytes / 1024;
-  //   let fsizemb = fsizekb / 1024;
-  //   let fsizegb = fsizemb / 1024;
-  //   let fsizetb = fsizegb / 1024;
-  //   let fsize = '';
+    let fsizekb = bytes / 1024;
+    let fsizemb = fsizekb / 1024;
+    let fsizegb = fsizemb / 1024;
+    let fsizetb = fsizegb / 1024;
+    let fsize = '';
 
-  //   if (fsizekb <= 1024) {
-  //     fsize = fsizekb.toFixed(3) + ' кб';
-  //   } else if (fsizekb >= 1024 && fsizemb <= 1024) {
-  //     fsize = fsizemb.toFixed(3) + ' мб';
-  //   } else if (fsizemb >= 1024 && fsizegb <= 1024) {
-  //     fsize = fsizegb.toFixed(3) + ' гб';
-  //   } else {
-  //     fsize = fsizetb.toFixed(3) + ' тб';
-  //   }
+    if (fsizekb <= 1024) {
+      fsize = fsizekb.toFixed(3) + ' кб';
+    } else if (fsizekb >= 1024 && fsizemb <= 1024) {
+      fsize = fsizemb.toFixed(3) + ' мб';
+    } else if (fsizemb >= 1024 && fsizegb <= 1024) {
+      fsize = fsizegb.toFixed(3) + ' гб';
+    } else {
+      fsize = fsizetb.toFixed(3) + ' тб';
+    }
 
-  //   return console.log(fsize);
-  // }
+    return console.log(fsize);
+  }
 
   return (
     <>

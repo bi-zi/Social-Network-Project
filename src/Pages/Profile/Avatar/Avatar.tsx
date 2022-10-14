@@ -8,6 +8,7 @@ import {
   fetchDeleteFriend,
   fetchOneUser,
   setInputNumber,
+  fetchChatsForUser,
 } from '../../../store/user/slice';
 
 import {
@@ -134,7 +135,7 @@ export const Avatar: React.FC = () => {
     }
 
     dispatch(setSelectedUser(id));
-
+    dispatch(fetchChatsForUser(id));
     dispatch(fetchChatUser(id));
     dispatch(fetchGetMessages(auth?._id));
   };

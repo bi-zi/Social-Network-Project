@@ -77,7 +77,7 @@ export const ImageParsing: React.FC = () => {
     };
     try {
       const compressedFile = await imageCompression(imageFile, options);
-      
+
       //  console.log(+(compressedFile['size'] / (1024 * 1024)).toFixed(2));
 
       setImages(compressedFile);

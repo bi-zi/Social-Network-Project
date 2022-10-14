@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { fetchChatsForUser } from '../../../store/user/slice';
 import {
   fetchGetMessages,
   fetchChatUser,
@@ -39,17 +40,11 @@ export const Correspondence: React.FC = () => {
   const chatIndexSort = users.findIndex((userId) => userId._id === messages?.selectedUser);
 
   // Сохранение индексов чтобы на случай перезагрузки страницы открывался последний чат
-  if (
-    messages?.selectedUser !== '' ||
-    (chatIndexSort !== localStorage.chatIndexWithSort &&
-      chatIndexUnSort !== localStorage.chatIndexUnSort &&
-      chatIndexSort !== -1)
-  ) {
+  if (messages?.selectedUser !== '' || chatIndexSort !== -1) {
     localStorage.setItem('chatIndexWithSort', chatIndexSort + '');
     localStorage.setItem('chatIndexWithoutSort', chatIndexUnSort + '');
     localStorage.setItem('selectedUser', messages?.selectedUser);
   }
-
 
   const messagesLength =
     userMessages?.correspondence[localStorage.chatIndexWithoutSort]?.messages.length;
@@ -93,8 +88,9 @@ export const Correspondence: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchGetMessages(auth?._id));
+    dispatch(fetchChatsForUser(auth?._id));
     dispatch(fetchChatUser(selectedUser?._id));
-  }, [auth?._id, dispatch, selectedUser?._id,chatIndexSort]);
+  }, [dispatch, auth?._id, selectedUser?._id, chatIndexSort]);
 
   return (
     <div className="correspondence-container" onLoad={() => setTimeout(scrollToBottom, 0)}>
@@ -142,7 +138,7 @@ export const Correspondence: React.FC = () => {
                     <>
                       <img
                         src={
-                          state.user?.usersAll.filter((user) => message.userId?.includes(user._id))[0]
+                          state.user?.chatUsers.filter((user) => message.userId?.includes(user._id))[0]
                             ?.imageUrl
                         }
                         alt=""
@@ -153,8 +149,9 @@ export const Correspondence: React.FC = () => {
                       <div className="correspondence-message__full-name-date">
                         <div className="correspondence-message__full-name-date__full-name">
                           {
-                            state.user?.usersAll.filter((user) => message.userId?.includes(user._id))[0]
-                              .firstName
+                            state.user?.chatUsers?.filter((user) =>
+                              message?.userId?.includes(user._id),
+                            )[0]?.firstName
                           }
                         </div>
                         <div className="correspondence-message__full-name-date__date">{`${new Date(

@@ -15,10 +15,11 @@ export const Menu: React.FC = () => {
   const onClickLogout = () => {
     if (window.confirm('Вы действительно хотите выйти?')) {
       dispatch(logout());
-      localStorage.removeItem('isAuth');
-      window.localStorage.removeItem('token');
-      localStorage.removeItem('postText');
-      localStorage.removeItem('postVideo');
+      // localStorage.removeItem('isAuth');
+      // window.localStorage.removeItem('token');
+      // localStorage.removeItem('postText');
+      // localStorage.removeItem('postVideo');
+      localStorage.clear();
       dispatch(setCreatText(''));
       dispatch(setCreateVid(''));
     }
