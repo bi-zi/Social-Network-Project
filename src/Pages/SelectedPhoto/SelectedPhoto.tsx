@@ -72,7 +72,7 @@ export const Photo: React.FC = () => {
           <FontAwesomeIcon className="selectedImg_close" icon={faXmark} />
         </Link>
 
-        <img src={readyPhotos?.[+id]} alt="" className="selectedImg_img" />
+        <img src={readyPhotos?.[+id]} width={10} alt="" className="selectedImg_img" />
 
         {readyPhotos?.length !== 1 ? (
           <>

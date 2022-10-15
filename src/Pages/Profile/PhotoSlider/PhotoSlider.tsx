@@ -29,7 +29,7 @@ export const PhotoSlider: React.FC = () => {
     className: 'center',
     infinite: true,
     centerPadding: '0px',
-    slidesToShow: 4,
+    slidesToShow: 3,
     swipeToSlide: true,
   };
 
@@ -47,17 +47,18 @@ export const PhotoSlider: React.FC = () => {
         {readyPhotos?.map((image, index) => {
           return state.slider.status === 'loaded' ? (
             <span key={index}>
-              {state.auth.data?._id === id ? (
-                <FontAwesomeIcon
-                  className="slider_delete_img"
-                  icon={faXmark}
-                  onClick={() => onPhotoDelete(index)}
-                />
-              ) : (
-                ''
-              )}
-              <Link to={`/${id}/PhotoSlider/${index}`} className="slider_image_link" key={index}>
+              <Link to={`/${id}/PhotoSlider/${index}`} key={index}>
+
                 <div className="slider_image_item">
+                  {state.auth.data?._id === id ? (
+                    <FontAwesomeIcon
+                      className="slider_delete_img"
+                      icon={faXmark}
+                      onClick={() => onPhotoDelete(index)}
+                    />
+                  ) : (
+                    ''
+                  )}
                   <img src={image} alt="" className="slider_image" width="10px" height="10px" />
                 </div>
               </Link>
@@ -71,14 +72,15 @@ export const PhotoSlider: React.FC = () => {
       </Slider>
 
       {state.auth.data?._id === id ? (
-        <div className="slider_images_button" onChange={() => dispatch(setInputNumber('1'))}>
+
+        <button className="slider_images_button" onChange={() => dispatch(setInputNumber('1'))}>
           {state.slider.status === 'loaded' && state.user.status === 'loaded' ? (
             <ImageParsing />
           ) : (
             <div className="image_input_parser"></div>
           )}
-          <div className="slider_add_image">Add photos</div>
-        </div>
+          Add photos
+        </button>
       ) : (
         ''
       )}

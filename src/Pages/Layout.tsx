@@ -1,6 +1,10 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../store/store';
-
+import {
+  setClearFindUserFriends,
+  setClearFindUserSubscribers,
+  setClearUsersPagination,
+} from '../store/user/slice';
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
@@ -14,6 +18,12 @@ export const Layout: React.FC = () => {
 
   const [close, setClose] = React.useState(true);
 
+  if (state.auth.data?._id !== undefined) localStorage.setItem('mainUser', state.auth.data?._id);
+
+  let profile = window.location.pathname.split('/')[1] === 'Profile';
+
+  let friends = window.location.pathname.split('/')[1] === 'Friends';
+
   // console.log([
   //   `-AUTH- ${state.auth.status}`,
   //   `-USER- ${state.user.status}`,
@@ -24,7 +34,7 @@ export const Layout: React.FC = () => {
   //   `-POST- ${state.post.userPosts.status}`,
   // ]);
 
-  // roughSizeOfObject(state.user);
+  // roughSizeOfObject(state);
 
   function roughSizeOfObject(object: any) {
     var objectList = [];
@@ -67,6 +77,19 @@ export const Layout: React.FC = () => {
 
     return console.log(fsize);
   }
+
+  React.useEffect(() => {
+    if (!profile && user.findUserFriends.length > 0) dispatch(setClearFindUserFriends());
+    if (!profile && user.findUserSubscribers.length > 0) dispatch(setClearFindUserSubscribers());
+    if (!friends && user.usersPagination?.[2].length > 0) dispatch(setClearUsersPagination());
+  }, [
+    dispatch,
+    friends,
+    profile,
+    user.findUserFriends.length,
+    user.findUserSubscribers.length,
+    user.usersPagination,
+  ]);
 
   return (
     <>

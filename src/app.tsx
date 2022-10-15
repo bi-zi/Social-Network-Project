@@ -1,8 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from './store/store';
-import { setClearFindUserFriends } from './store/user/slice';
 import { fetchAuthMe } from './store/auth/slice';
-// import { fetchAllUsers } from './store/user/slice';
 import { Registration } from './Pages/Registration-Login/Registration';
 import { Login } from './Pages/Registration-Login/Login';
 import { Layout } from './Pages/Layout';
@@ -18,18 +16,7 @@ export const App: React.FC = () => {
   const state = useAppSelector((state) => state);
   const user = useAppSelector((state) => state.user);
 
-  // if (state.auth.data?._id !== undefined) localStorage.setItem('mainUser', state.auth.data?._id);
-
-  // let profile = window.location.pathname.split('/')[1] === 'Profile';
-
-  // console.log(
-  //   !profile && user.findUserFriends.length > 0,
-  //   user.findUserFriends,
-  //   window.location.pathname.split('/')[1],
-  // );
-
-  // if (!profile && user.findUserFriends.length > 0) dispatch(setClearFindUserFriends());
-
+  if (state.auth.data?._id !== undefined) localStorage.setItem('mainUser', state.auth.data?._id);
 
   React.useEffect(() => {
     dispatch(fetchAuthMe());
@@ -49,54 +36,3 @@ export const App: React.FC = () => {
   );
 };
 
-// import { library } from '@fortawesome/fontawesome-svg-core';
-// import {
-//   faPager,
-//   faUserGroup,
-//   faUsers,
-//   faFilm,
-//   faMusic,
-//   faAlignJustify,
-//   faLocationPin,
-//   faFileLines,
-//   faShareNodes,
-//   faEllipsis,
-//   faXmark,
-//   faPlay,
-//   faCircleChevronRight,
-//   faCircleChevronLeft,
-//   faMagnifyingGlass,
-// } from '@fortawesome/free-solid-svg-icons';
-// import {
-//   faCircleUser,
-//   faBell,
-//   faComment,
-//   faImage,
-//   faThumbsUp,
-//   faThumbsDown,
-//   faCommentDots,
-// } from '@fortawesome/free-regular-svg-icons';
-// library.add(
-//   faPager,
-//   faUsers,
-//   faUserGroup,
-//   faFilm,
-//   faMusic,
-//   faAlignJustify,
-//   faLocationPin,
-//   faFileLines,
-//   faShareNodes,
-//   faEllipsis,
-//   faXmark,
-//   faPlay,
-//   faCircleChevronRight,
-//   faCircleChevronLeft,
-//   faMagnifyingGlass,
-//   faCircleUser,
-//   faBell,
-//   faComment,
-//   faImage,
-//   faThumbsUp,
-//   faThumbsDown,
-//   faCommentDots,
-// );

@@ -159,7 +159,7 @@ export const Friends: React.FC = () => {
                   : { borderBottom: `` }
               }>
               <Link to={`/Profile/${friend?._id}`} onClick={() => window.scrollTo(0, 0)}>
-                <img src={friend?.imageUrl} alt="" width={100} className="friends_user_avatar" />
+                <img src={friend?.imageUrl} alt="" width={10} className="friends_user_avatar" />
               </Link>
               <Link
                 to={`/Profile/${friend?._id}`}

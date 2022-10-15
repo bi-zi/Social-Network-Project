@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchChatUser, setSelectedUser, setFindChat } from '../../../store/messages/slice';
+import { useAppDispatch, useAppSelector } from '../../../../store/store';
+import { fetchChatUser, setSelectedUser, setFindChat } from '../../../../store/messages/slice';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -65,7 +65,7 @@ export const Chats: React.FC = () => {
               onClick={() => {
                 selectUser(friend._id);
               }}>
-              <img src={friend.imageUrl} width="100" alt="" className="chats-users__item__avatar" />
+              <img src={friend.imageUrl} width="10" alt="" className="chats-users__item__avatar" />
               <div className="chats-users__item__full-name-last-message">
                 <div className="chats-users__item__full-name-last-message__full-name">
                   {friend.firstName + ' ' + friend.lastName}

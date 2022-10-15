@@ -23,8 +23,8 @@
     }
 
     .slider_image {
-      width: calc(20px + 185 * (100vw / 1920));
-      height: calc(20px + 185 * (100vw / 1920));
+      width: 98%;
+      height: calc(20px + 225 * (100vw / 1920));
 
       margin-bottom: 4vh;
 
@@ -35,12 +35,15 @@
     }
 
     .slider_image_item {
+      position: relative;
       text-align: right;
     }
 
     .slider_delete_img {
       position: absolute;
-      margin-left: calc(10px + 160 * (100vw / 1920));
+
+      top: 1vh;
+      right: 1.5vw;
 
       font: normal 400 calc(12px + 28 * (100vw / 1920)) 'Iceberg';
 
@@ -58,7 +61,7 @@
     .slick-prev,
     .slick-next {
       width: calc(15px + 35 * (100vw / 1920)) !important;
-      height: calc(22.1px + 205 * (100vw / 1920)) !important;
+      height: calc(22.1px + 245 * (100vw / 1920)) !important;
 
       box-shadow: var(--box-shadow);
       background-color: var(--interface-color);
@@ -84,14 +87,13 @@
 
     .slick-slider {
       width: calc(100% - 25px);
-
     }
 
     .slick-list {
       margin-left: calc(10px + 9 * (100vw / 1920)) !important;
       padding-left: 0.6vw;
       width: 99%;
-      height: calc(22px + 206 * (100vw / 1920));
+      height: calc(22px + 246 * (100vw / 1920));
 
       border-radius: var(--borderRadius-interface) !important;
       box-shadow: var(--box-shadow);
@@ -99,7 +101,6 @@
       text-align: left !important;
 
       background-color: rgb(19, 19, 19);
-
     }
 
     .slick-track {
@@ -107,10 +108,13 @@
     }
 
     .slider_images_button {
-      margin: 2vh auto 0 auto;
+      position: relative;
+      margin: 2vh auto 0 auto !important;
 
       width: 40%;
-      height: calc(8px + 30 * (100vh / 1080));
+      height: calc(10px + 31 * (100vh / 1080));
+
+      left: 28%;
 
       border: 0;
       border-radius: var(--borderRadius-interface);
@@ -118,9 +122,16 @@
       background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
       background-size: 200% auto;
 
+      box-shadow: 0 0 .5vh rgb(162, 162, 162);
+
+      text-transform: uppercase;
+
+      font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
+
       transition: 0.5s;
 
       letter-spacing: 0.2vw;
+      color: var(--text-color);
       &:hover {
         background-position: right center;
       }
@@ -128,19 +139,6 @@
       &:active {
         transform: scale(0.9);
         transition: 0.2s;
-      }
-
-      .slider_add_image {
-        margin-top: calc(-8px + -21 * (100vh / 1080));
-
-        text-align: center;
-        text-transform: uppercase;
-
-        font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
-
-        z-index: 0 !important;
-
-        cursor: pointer;
       }
     }
   }

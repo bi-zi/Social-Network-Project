@@ -141,7 +141,7 @@ export const Wall: React.FC = () => {
     <>
       {wallPost?.map((content, postIndex) => (
         <div className={`wall ${postIndex}`} key={content._id}>
-          <img src={user?.imageUrl} alt="" className="wall_avatar" />
+          <img src={user?.imageUrl} width={10} alt="" className="wall_avatar" />
 
           <div className="wall_fullName_date">
             <span className="wall_fullName">{user?.firstName + ' ' + user?.lastName}</span>
@@ -171,6 +171,7 @@ export const Wall: React.FC = () => {
                         <img
                           src={image}
                           alt=""
+                          width={10}
                           className={`
                     ${
                       index === 0
@@ -289,6 +290,7 @@ export const Wall: React.FC = () => {
                           state.user.commentators.find((user) => user._id === comment.userId)!
                             ?.imageUrl[0]
                         }
+                        width={10}
                         alt=""
                         className="wall_comment_avatar"
                       />

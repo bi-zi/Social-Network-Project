@@ -140,6 +140,9 @@ const userSlice = createSlice({
     setClearFindUserSubscribers: (state) => {
       state.findUserSubscribers = [];
     },
+    setClearUsersPagination: (state) => {
+      state.usersPagination = [0, 0, []];
+    },
     setClearCommentators: (state) => {
       state.commentators = [];
     },
@@ -282,6 +285,7 @@ export const {
   setAttention,
   setClearFindUserFriends,
   setClearFindUserSubscribers,
+  setClearUsersPagination,
   setClearCommentators,
 } = userSlice.actions;
 export const userReducer = userSlice.reducer;

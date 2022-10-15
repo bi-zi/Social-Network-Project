@@ -1,5 +1,5 @@
-import { Messages, MessagesSliceState } from '../../store/messages/types';
-import { useAppDispatch, useAppSelector } from '../../store/store';
+import { Messages, MessagesSliceState } from '../../../store/messages/types';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 
 export function useSort(data: Messages) {
   const state = useAppSelector((state) => state);
@@ -19,7 +19,6 @@ export function useSort(data: Messages) {
   // они так же отсортированы по последнему сообщению
   const sortedUsers = () => {
     let users = []; // Массив для отсортированных пользователей
-
 
     // Поиск участников чатов
     const chatsUsers = state.user?.chatUsers.filter((user) =>

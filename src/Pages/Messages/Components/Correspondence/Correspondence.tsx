@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchChatsForUser } from '../../../store/user/slice';
+import { useAppDispatch, useAppSelector } from '../../../../store/store';
+import { fetchChatsForUser } from '../../../../store/user/slice';
 import {
   fetchGetMessages,
   fetchChatUser,
   fetchAddMessage,
   setAddMessages,
-} from '../../../store/messages/slice';
+} from '../../../../store/messages/slice';
 import { NavLink } from 'react-router-dom';
 import { useSort } from '../useSort';
 
@@ -106,7 +106,7 @@ export const Correspondence: React.FC = () => {
             <NavLink to={`/Profile/${selectedUser?._id}`}>
               <img
                 src={selectedUser?.imageUrl}
-                width="100"
+                width="10"
                 alt=""
                 className="correspondence-header__avatar"
               />
@@ -142,7 +142,7 @@ export const Correspondence: React.FC = () => {
                             ?.imageUrl
                         }
                         alt=""
-                        width="100"
+                        width="10"
                         className="correspondence-message__avatar"
                       />
 
