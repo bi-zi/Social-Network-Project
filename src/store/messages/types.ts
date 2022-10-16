@@ -27,8 +27,8 @@ export enum Status {
 }
 
 export interface MessagesSliceState {
-  userMessages: Messages[];
-  data2: Messages[];
+  mainUserMessages: Messages[];
+  secondUserMessages: Messages[];
 
   selectedUser: string;
   addMessages: number;

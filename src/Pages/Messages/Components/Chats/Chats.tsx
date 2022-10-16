@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
-import { fetchChatUser, setSelectedUser, setFindChat } from '../../../../store/messages/slice';
+import { fetchSecondUserMessages, setSelectedUser, setFindChat } from '../../../../store/messages/slice';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +17,7 @@ export const Chats: React.FC = () => {
 
   const divRef = useRef<HTMLDivElement>(null);
 
-  const { evryChatLastMessage, sortedUsers } = useSort(messages.userMessages?.[0]);
+  const { evryChatLastMessage, sortedUsers } = useSort(messages.mainUserMessages?.[0]);
 
   const lastMessage = evryChatLastMessage();
   const users = sortedUsers();
@@ -32,7 +32,7 @@ export const Chats: React.FC = () => {
 
   const selectUser = (friendId: string) => {
     dispatch(setSelectedUser(friendId));
-    dispatch(fetchChatUser(selectedUser?._id));
+    dispatch(fetchSecondUserMessages(selectedUser?._id));
     dispatch(setFindChat(''));
 
     if (inputRef.current != null) {

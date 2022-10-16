@@ -39,7 +39,7 @@ export const fetchUserSubscribers = createAsyncThunk(
   },
 );
 
-export const fetchChatsForUser = createAsyncThunk('user/fetchChatsForUser', async (users: string) => {
+export const fetchUsersForChats = createAsyncThunk('user/fetchUsersForChats', async (users: string) => {
   const { data } = await axios.get(`/user/findChats/${users}}`);
 
   return data;
@@ -204,14 +204,14 @@ const userSlice = createSlice({
       state.status = Status.ERROR;
     });
 
-    builder.addCase(fetchChatsForUser.pending, (state) => {
+    builder.addCase(fetchUsersForChats.pending, (state) => {
       state.status = Status.LOADING;
     });
-    builder.addCase(fetchChatsForUser.fulfilled, (state, action) => {
+    builder.addCase(fetchUsersForChats.fulfilled, (state, action) => {
       state.status = Status.SUCCESS;
       state.chatUsers = action.payload;
     });
-    builder.addCase(fetchChatsForUser.rejected, (state) => {
+    builder.addCase(fetchUsersForChats.rejected, (state) => {
       state.status = Status.ERROR;
     });
     //

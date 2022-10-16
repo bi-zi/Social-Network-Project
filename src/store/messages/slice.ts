@@ -2,15 +2,21 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Messages, MessagesSliceState, Status } from './types';
 import axios from '../../Backend/axios';
 
-export const fetchGetMessages = createAsyncThunk('messages/id/fetchGetMessages', async (id: string) => {
-  const { data } = await axios.get(`/messages/${id}`);
-  return data;
-});
+export const fetchMainUserMessages = createAsyncThunk(
+  'messages/id/fetchMainUserMessages',
+  async (id: string) => {
+    const { data } = await axios.get(`/messages/${id}`);
+    return data;
+  },
+);
 
-export const fetchChatUser = createAsyncThunk('messages/user/fetchGetMessages', async (id: string) => {
-  const { data } = await axios.get(`/messages/user/${id}`);
-  return data;
-});
+export const fetchSecondUserMessages = createAsyncThunk(
+  'messages/user/fetchSecondUserMessages',
+  async (id: string) => {
+    const { data } = await axios.get(`/messages/user/${id}`);
+    return data;
+  },
+);
 
 export const fetchCreateMessages = createAsyncThunk<Messages, { withWho: string; user: string }>(
   'messages/createMessages/fetchCreateMessages',
@@ -20,8 +26,8 @@ export const fetchCreateMessages = createAsyncThunk<Messages, { withWho: string;
   },
 );
 
-export const fetchPushChat = createAsyncThunk<Messages, { withWho: string; user: string }>(
-  'about/pushChat/fetchPushChat',
+export const fetchCreateChat = createAsyncThunk<Messages, { withWho: string; user: string }>(
+  'about/pushChat/fetchCreateChat',
   async ({ withWho, user }: { withWho: string; user: string }) => {
     const { data } = await axios.patch(`/messages/pushChat`, { withWho, user });
     return data;
@@ -61,8 +67,8 @@ export const fetchAddMessage = createAsyncThunk<
 );
 
 const initialState: MessagesSliceState = {
-  userMessages: [],
-  data2: [],
+  mainUserMessages: [],
+  secondUserMessages: [],
   selectedUser: localStorage.selectedUser === undefined ? '' : localStorage.selectedUser,
   addMessages: 40,
   findChat: '',
@@ -89,25 +95,25 @@ const messagesSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(fetchGetMessages.pending, (state) => {
+    builder.addCase(fetchMainUserMessages.pending, (state) => {
       state.status = Status.LOADING;
     });
-    builder.addCase(fetchGetMessages.fulfilled, (state, action) => {
-      state.userMessages = action.payload;
+    builder.addCase(fetchMainUserMessages.fulfilled, (state, action) => {
+      state.mainUserMessages = action.payload;
       state.status = Status.SUCCESS;
     });
-    builder.addCase(fetchGetMessages.rejected, (state) => {
+    builder.addCase(fetchMainUserMessages.rejected, (state) => {
       state.status = Status.ERROR;
     });
 
-    builder.addCase(fetchChatUser.pending, (state) => {
+    builder.addCase(fetchSecondUserMessages.pending, (state) => {
       state.status = Status.LOADING;
     });
-    builder.addCase(fetchChatUser.fulfilled, (state, action) => {
-      state.data2 = action.payload;
+    builder.addCase(fetchSecondUserMessages.fulfilled, (state, action) => {
+      state.secondUserMessages = action.payload;
       state.status = Status.SUCCESS;
     });
-    builder.addCase(fetchChatUser.rejected, (state) => {
+    builder.addCase(fetchSecondUserMessages.rejected, (state) => {
       state.status = Status.ERROR;
     });
 
@@ -121,13 +127,13 @@ const messagesSlice = createSlice({
       state.status = Status.ERROR;
     });
 
-    builder.addCase(fetchPushChat.pending, (state) => {
+    builder.addCase(fetchCreateChat.pending, (state) => {
       state.status = Status.LOADING;
     });
-    builder.addCase(fetchPushChat.fulfilled, (state) => {
+    builder.addCase(fetchCreateChat.fulfilled, (state) => {
       state.status = Status.SUCCESS;
     });
-    builder.addCase(fetchPushChat.rejected, (state) => {
+    builder.addCase(fetchCreateChat.rejected, (state) => {
       state.status = Status.ERROR;
     });
 

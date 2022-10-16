@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
-import { fetchChatsForUser } from '../../../../store/user/slice';
+import { fetchUsersForChats } from '../../../../store/user/slice';
 import {
-  fetchGetMessages,
-  fetchChatUser,
+  fetchMainUserMessages,
+  fetchSecondUserMessages,
   fetchAddMessage,
   setAddMessages,
 } from '../../../../store/messages/slice';
@@ -18,21 +18,21 @@ export const Correspondence: React.FC = () => {
   const state = useAppSelector((state) => state);
   const auth = useAppSelector((state) => state.auth?.data);
   const messages = useAppSelector((state) => state.messages);
-  const userMessages = useAppSelector((state) => state.messages?.userMessages?.[0]);
+  const mainUserMessages = useAppSelector((state) => state.messages?.mainUserMessages?.[0]);
 
   const divRef = useRef<HTMLDivElement>(null);
   const firstRef = useRef<HTMLInputElement>(null);
 
   const [text, setText] = useState('');
 
-  const { sortedUsers, selectedChat } = useSort(userMessages);
+  const { sortedUsers, selectedChat } = useSort(mainUserMessages);
   const users = sortedUsers();
   const chat = selectedChat();
 
   const selectedUser = users?.[+localStorage.chatIndexWithSort];
 
   // Index чата в массиве без сортировки чтобы правильно отправлять данные
-  const chatIndexUnSort = userMessages?.correspondence.findIndex(
+  const chatIndexUnSort = mainUserMessages?.correspondence.findIndex(
     (chat) => chat?.withWho === messages?.selectedUser,
   );
 
@@ -47,7 +47,7 @@ export const Correspondence: React.FC = () => {
   }
 
   const messagesLength =
-    userMessages?.correspondence[localStorage.chatIndexWithoutSort]?.messages.length;
+    mainUserMessages?.correspondence[localStorage.chatIndexWithoutSort]?.messages.length;
 
   const loadStatus =
     messages.status === 'loaded' && state.user.status === 'loaded' && state.auth.status === 'loaded';
@@ -75,21 +75,23 @@ export const Correspondence: React.FC = () => {
         user: auth?._id,
         yourIndex: localStorage.chatIndexWithoutSort,
         hisIndex:
-          messages.data2?.[0]?.correspondence.findIndex((chat) => chat.withWho === auth?._id) + '',
+          messages.secondUserMessages?.[0]?.correspondence.findIndex(
+            (chat) => chat.withWho === auth?._id,
+          ) + '',
       }),
     );
 
     firstRef.current!.value = '';
-    dispatch(fetchGetMessages(auth?._id));
-    dispatch(fetchChatUser(selectedUser?._id));
+    dispatch(fetchMainUserMessages(auth?._id));
+    dispatch(fetchSecondUserMessages(selectedUser?._id));
 
     setTimeout(scrollToBottom, 400);
   };
 
   useEffect(() => {
-    dispatch(fetchGetMessages(auth?._id));
-    dispatch(fetchChatsForUser(auth?._id));
-    dispatch(fetchChatUser(selectedUser?._id));
+    dispatch(fetchMainUserMessages(auth?._id));
+    dispatch(fetchUsersForChats(auth?._id));
+    dispatch(fetchSecondUserMessages(selectedUser?._id));
   }, [dispatch, auth?._id, selectedUser?._id, chatIndexSort]);
 
   return (

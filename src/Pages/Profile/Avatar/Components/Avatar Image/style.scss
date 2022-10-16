@@ -1,0 +1,14 @@
+.avatar__image {
+  position: relative;
+
+  margin-bottom: 0.5vh;
+
+  width: 100%;
+  height: 90%;
+
+  border-radius: var(--borderRadius-interface);
+
+  &:hover {
+    border: var(--borderImages);
+  }
+}
