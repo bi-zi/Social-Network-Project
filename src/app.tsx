@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from './store/store';
 import { fetchAuthMe } from './store/auth/slice';
+import { fetchMainUser } from './store/user/slice';
 import { Registration } from './Pages/Registration-Login/Registration';
 import { Login } from './Pages/Registration-Login/Login';
 import { Layout } from './Pages/Layout';
@@ -13,14 +14,15 @@ import './style.scss';
 
 export const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  const state = useAppSelector((state) => state);
-  const user = useAppSelector((state) => state.user);
+  const auth = useAppSelector((state) => state.auth.data);
 
-  if (state.auth.data?._id !== undefined) localStorage.setItem('mainUser', state.auth.data?._id);
+  if (auth?._id !== undefined) localStorage.setItem('mainUser', auth?._id);
+
 
   React.useEffect(() => {
     dispatch(fetchAuthMe());
-  }, [dispatch]);
+    dispatch(fetchMainUser(auth?._id));
+  }, [dispatch, auth?._id]);
 
   return (
     <Routes>
@@ -35,4 +37,3 @@ export const App: React.FC = () => {
     </Routes>
   );
 };
-

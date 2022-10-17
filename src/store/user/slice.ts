@@ -21,6 +21,12 @@ export const fetchOneUser = createAsyncThunk('user/one/id/fetchUserUpdate', asyn
   return data;
 });
 
+export const fetchMainUser = createAsyncThunk('user/main/id/fetchMainUser', async (id: string) => {
+  const { data } = await axios.get<User[]>(`/user/main/${id}`);
+
+  return data;
+});
+
 export const fetchUserFriends = createAsyncThunk(
   'user/findFriends/fetchUserFriends',
   async (id: string) => {
@@ -105,6 +111,7 @@ export const fetchDeleteFriend = createAsyncThunk<
 const initialState: UserSliceState = {
   usersAll: [],
   userOne: [],
+  mainUser: {} as User,
 
   findUserFriends: [],
   findUserSubscribers: [],
@@ -179,6 +186,18 @@ const userSlice = createSlice({
       state.userOne = action.payload;
     });
     builder.addCase(fetchOneUser.rejected, (state) => {
+      state.status = Status.ERROR;
+    });
+
+
+    builder.addCase(fetchMainUser.pending, (state) => {
+      state.status = Status.LOADING;
+    });
+    builder.addCase(fetchMainUser.fulfilled, (state, action) => {
+      state.status = Status.SUCCESS;
+      state.mainUser = action.payload[0];
+    });
+    builder.addCase(fetchMainUser.rejected, (state) => {
       state.status = Status.ERROR;
     });
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchOneUser, fetchUserSubscribers, setCatergory } from '../../../store/user/slice';
-import { fetchUserPostsAll } from '../../../store/post/slice';
-import { fetchSlider } from '../../../store/slider/slice';
+import { fetchUserSubscribers, setCatergory } from '../../../store/user/slice';
+
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -12,70 +11,48 @@ export type MyParams = {
 
 export const Subscribers: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { id } = useParams<keyof MyParams>() as MyParams;
   const user = useAppSelector((state) => state.user);
-  const [key, setKey] = React.useState(false);
 
-  const userProfile = user?.userOne?.[0];
+  const { id } = useParams<keyof MyParams>() as MyParams;
+
   const subscribers = user?.findUserSubscribers;
-
-  const fetchData = (id: string) => {
-    dispatch(fetchOneUser(id));
-    dispatch(fetchUserPostsAll(id));
-    dispatch(fetchSlider(id));
-  };
-
-  document.onkeydown = (e: any) => {
-    if (e.key) {
-      setKey(true);
-    }
-  };
-
-  document.onkeyup = (e: any) => {
-    if (e.key) {
-      setKey(false);
-    }
-  };
 
   React.useEffect(() => {
     dispatch(fetchUserSubscribers(id));
   }, [dispatch, id]);
 
   return (
-    <div className="profile_friends">
+    <div className="profile-friends">
       <Link
         to={`/Friends/${id}`}
-        className="profile_friends_title"
+        className="profile-friends__title"
         style={{ textDecoration: 'none' }}
         onClick={() => dispatch(setCatergory('subscribers'))}>
         Subscribers -&nbsp;
         {subscribers.length}
       </Link>
 
-      <div className="profile_friends_container">
+      <div className="profile-friends__container">
         {subscribers.map((subscriber) => (
           <div key={subscriber._id}>
-            {!key ? (
-              <Link
-                to={`/Profile/${subscriber._id}`}
-                key={subscriber._id}
-                style={{ textDecoration: 'none' }}>
-                <div
-                  className="profile_friend"
-                  onClick={() => {
-                    fetchData(subscriber._id);
-                    window.scrollTo(0, 0);
-                  }}>
-                  <img src={subscriber.imageUrl} width={10} alt="" className="profile_friend_avatar" />
-                  <div className="profile_friend_name">{subscriber.firstName}</div>
-                </div>
-              </Link>
-            ) : (
-              <div className="profile_friend" key={subscriber._id}>
-                <img src={subscriber.imageUrl} alt="" className="profile_friend_avatar" />
-                <div className="profile_friend_name">{subscriber.firstName}</div>
+            <Link
+              to={`/Profile/${subscriber._id}`}
+              key={subscriber._id}
+              style={{ textDecoration: 'none' }}>
+              <div
+                className="profile-friends__container__friend"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}>
+                <img
+                  src={subscriber.imageUrl}
+                  width={10}
+                  alt=""
+                  className="profile-friends__container__friend__avatar"
+                />
+                <div className="profile-friends__container__friend__name ">{subscriber.firstName}</div>
               </div>
-            )}
+            </Link>
           </div>
         ))}
       </div>

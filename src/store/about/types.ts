@@ -19,6 +19,7 @@ export enum Status {
 }
 
 export interface AboutSliceState {
-  data: About[];
+  data: About;
+  closeInfo: number;
   status: Status;
 }

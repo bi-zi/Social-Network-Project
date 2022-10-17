@@ -1,5 +1,5 @@
 @media (width > 460px) and (height > 420px) {
-  .videos {
+  .profile__videos {
     position: relative;
 
     margin-bottom: 2vh;
@@ -14,7 +14,7 @@
     color: var(--text-color);
 
 
-    .videos_title {
+    .profile__videos__title {
       position: absolute;
 
       height: calc(10px + 20 * (100vw / 1080));

@@ -1,5 +1,5 @@
 @media (width > 460px) and (height > 420px) {
-  .groups {
+  .profile__groups {
     position: relative;
 
     margin-bottom: 2vh;
@@ -13,7 +13,7 @@
     background: var(--interface-color);
     color: var(--text-color);
 
-    .groups_title {
+    .profile__groups__title {
       position: absolute;
 
       height: calc(10px + 20 * (100vw / 1080));

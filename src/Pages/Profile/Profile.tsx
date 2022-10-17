@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchNotifications } from '../../store/notifications/slice';
+import { fetchOneUser } from '../../store/user/slice';
 import { Avatar } from './Avatar/Avatar';
 import { UserInfo } from './UserInfo/UserInfo';
 import { PhotoSlider } from './PhotoSlider/PhotoSlider';
@@ -29,6 +30,7 @@ export const Profile: React.FC = () => {
   const postLength = state.post.userPosts.post?.[0]?.post?.length;
 
   React.useEffect(() => {
+    dispatch(fetchOneUser(id))
     dispatch(fetchNotifications(id));
   }, [dispatch, id]);
 

@@ -1,5 +1,5 @@
 @media (width > 460px) and (height > 420px) {
-  .profile_friends {
+  .profile-friends {
     margin: 2vh 0;
 
     width: 100%;
@@ -12,7 +12,7 @@
     color: var(--text-color);
 
 
-    .profile_friends_title {
+    .profile-friends__title {
       position: relative;
 
       height: calc(10px + 20 * (100vw / 1080));
@@ -28,7 +28,7 @@
     }
   }
 
-  .profile_friends_container {
+  .profile-friends__container {
     display: flex;
     justify-content: space-between;
 
@@ -40,7 +40,7 @@
 
     flex-wrap: wrap;
 
-    .profile_friend {
+    .profile-friends__container__friend {
       width: calc(4px + 60 * (100vw / 1920));
       height: calc(16px + 80 * (100vw / 1920));
 
@@ -53,22 +53,22 @@
       text-align: center;
       cursor: pointer;
 
-      &:hover .profile_friend_avatar {
+      &:hover .profile-friends__container__friend__avatar {
         border: var(--borderImages);
       }
 
-      &:hover .profile_friend_name {
+      &:hover .profile-friends__container__friend__name {
         color: var(--text-color-hover);
       }
 
-      .profile_friend_avatar {
+      .profile-friends__container__friend__avatar {
         width: 90%;
         height: 60%;
 
         border-radius: 100%;
       }
 
-      .profile_friend_name {
+      .friends__container__friend__name {
         font: normal 400 calc(2px + 12 * (100vw / 1920)) 'Iceberg';
         color: var(--text-color);
       }

@@ -24,14 +24,19 @@ export const fetchAboutUpdate = createAsyncThunk<About[], { values: About; id: s
 );
 
 const initialState: AboutSliceState = {
-  data: [],
+  data: {} as About,
+  closeInfo: 0,
   status: Status.LOADING,
 };
 
 const aboutSlice = createSlice({
   name: 'about',
   initialState,
-  reducers: {},
+  reducers: {
+    setCloseInfo: (state, action) => {
+      state.closeInfo = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchAboutPost.pending, (state) => {
       state.status = Status.LOADING;
@@ -47,7 +52,7 @@ const aboutSlice = createSlice({
       state.status = Status.LOADING;
     });
     builder.addCase(fetchAbout.fulfilled, (state, action) => {
-      state.data = [action.payload];
+      state.data = action.payload;
       state.status = Status.SUCCESS;
     });
     builder.addCase(fetchAbout.rejected, (state) => {
@@ -65,5 +70,5 @@ const aboutSlice = createSlice({
     });
   },
 });
-
+export const { setCloseInfo } = aboutSlice.actions;
 export const aboutReducer = aboutSlice.reducer;

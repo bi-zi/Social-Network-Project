@@ -3,8 +3,8 @@ import './style.scss';
 
 export const Videos: React.FC = () => {
   return (
-    <div className="videos">
-      <div className="videos_title">Video recordings - in developing</div>
+    <div className="profile__videos">
+      <div className="profile__videos__title">Video recordings - in developing</div>
     </div>
   );
 };

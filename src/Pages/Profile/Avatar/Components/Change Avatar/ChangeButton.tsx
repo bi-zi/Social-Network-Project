@@ -28,6 +28,7 @@ export const ChangeButton: React.FC = () => {
             onChange={() => {
               dispatch(setInputNumber('0'));
             }}>
+            
             {auth === null ? '' : 'Change photo'}
 
             {auth?._id === id && loadStatus ? (

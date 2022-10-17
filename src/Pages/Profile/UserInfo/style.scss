@@ -11,7 +11,7 @@
     background-color: var(--interface-color);
     color: var(--text-color);
 
-    .about_fullName {
+    .about__fullName {
       position: relative;
       width: 96%;
 
@@ -26,94 +26,7 @@
       color: var(--text-color);
     }
 
-    .about_info {
-      position: absolute;
 
-      padding-top: calc(30px + 70 * (100vh / 1080));
-
-      width: calc(100px + 800 * (100vw / 1920));
-      height: calc(80px + 175 * (100vh / 1080));
-
-      text-align: right;
-
-      font: normal 400 calc(15px + 20 * (100vw / 1920)) 'Iceberg';
-
-      z-index: 1;
-      color: var(--text-color);
-
-      &:hover {
-        background-color: rgba(124, 122, 122, 0.56);
-        cursor: pointer;
-      }
-    }
-
-    .about_lives,
-    .about_from,
-    .about_born,
-    .about_profession,
-    .about_relationship,
-    .about_student {
-      position: relative;
-
-      width: 100%;
-      height: calc(15px + 28 * (100vh / 1080));
-
-      font: normal 400 calc(8px + 14 * (100vw / 1920)) / calc(5px + 22 * (100vh / 1080)) 'Iceberg';
-    }
   }
 
-  .about_form {
-    position: relative;
-
-    top: 0.2vh;
-
-    .about_input {
-      margin-bottom: 0.5vh;
-
-      padding-left: 1vw;
-      padding-right: 1vw;
-
-      width: 96%;
-      height: calc(10px + 20 * (100vh / 1080));
-
-      border-radius: var(--borderRadius-interface);
-      box-shadow: var(--box-shadow);
-
-      font: normal 400 calc(6px + 16 * (100vw / 1920)) 'Iceberg';
-
-      background-color: var(--backgroundInput-color);
-      color: var(--text-color);
-    }
-
-    .about_buttton {
-      width: 96%;
-      height: calc(10px + 20 * (100vh / 1080));
-
-      border: 0;
-      border-radius: var(--borderRadius-interface);
-
-      background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
-      background-size: 200% auto;
-
-      transition: 0.5s;
-
-      text-transform: uppercase;
-      font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
-
-      letter-spacing: 0.2vw;
-
-      color: var(--text-color);
-
-      cursor: pointer;
-
-      &:hover {
-        background-position: right center;
-      }
-
-      &:active {
-        transform: scale(0.9);
-        transition: 0.2s;
-      }
-    }
-  }
 }

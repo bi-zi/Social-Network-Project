@@ -1,8 +1,7 @@
 import React from 'react';
-import { AboutForm } from './components/AboutForm';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchOneUser } from '../../../store/user/slice';
-import { useParams } from 'react-router-dom';
+import { AboutInfo } from './components/About Info/AboutInfo';
+import { EditInfo } from './components/Edit Info/EditInfo';
+import { useAppSelector } from '../../../store/store';
 import './style.scss';
 
 export type MyParams = {
@@ -10,22 +9,16 @@ export type MyParams = {
 };
 
 export const UserInfo: React.FC = () => {
-  const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
-  const { id } = useParams<keyof MyParams>() as MyParams;
 
   const user = state.user?.userOne?.[0];
-
-  React.useEffect(() => {
-    dispatch(fetchOneUser(id));
-  }, [dispatch, id]);
 
   return (
     <>
       <div className="about">
-        <div className="about_fullName">{`${(user?.firstName + ' ' + user?.lastName) || ''}`}</div>
+        <div className="about__fullName">{`${user?.firstName + ' ' + user?.lastName || ''}`}</div>
 
-        <AboutForm />
+        {state.about?.closeInfo === 0 ? <AboutInfo /> : <EditInfo />}
       </div>
     </>
   );
