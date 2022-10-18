@@ -51,6 +51,7 @@ export const Friends: React.FC = () => {
             </Link>
           </div>
         ))}
+        <div style={{ clear: 'both' }}> </div>
       </div>
     </div>
   );

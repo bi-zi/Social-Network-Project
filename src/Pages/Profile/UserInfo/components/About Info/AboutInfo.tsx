@@ -20,14 +20,14 @@ export const AboutInfo: React.FC = () => {
   }, [dispatch, id]);
 
   return (
-    <>
+    <div className="about__container">
       {state.user?.mainUser?._id === id ? (
         <div
           className="about__info"
           onClick={() => {
             dispatch(setCloseInfo(1));
           }}>
-          Edit Information
+          <span className='about__info__text'>Edit Information</span>
         </div>
       ) : (
         ''
@@ -39,6 +39,6 @@ export const AboutInfo: React.FC = () => {
       <div className="about__info-profession">Profession - {about?.profession}</div>
       <div className="about__info-relationship">In a relationship with - {about?.relations}</div>
       <div className="about__info-student">Student at - {about?.studentAt}</div>
-    </>
+    </div>
   );
 };

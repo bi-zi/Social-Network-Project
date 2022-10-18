@@ -155,10 +155,15 @@ export const Wall: React.FC = () => {
             onClick={() => (auth?._id === id && postStatus ? deletePost(content._id) : '')}>
             <span>Delete post</span>
           </div>
-          <div className="wall_content">
-            {content.text?.length > 0 ? <div className="wall_text">{content.text}</div> : ''}
+
+          <div className="wall__content-container">
+            {content.text?.length > 0 ? (
+              <div className="wall_content-container__text">{content.text}</div>
+            ) : (
+              ''
+            )}
             {content.imagesPost?.length > 0 ? (
-              <div className="post_images_container">
+              <div className="wall__content-container__images">
                 {content?.imagesPost.map((image, index) => {
                   return (
                     <span key={index}>
@@ -175,11 +180,11 @@ export const Wall: React.FC = () => {
                           className={`
                     ${
                       index === 0
-                        ? 'wall_first_img'
+                        ? 'wall__content-container__images-first'
                         : index === 1
-                        ? 'wall_secong_img'
+                        ? 'wall__content-container__images-second'
                         : index === 2
-                        ? 'wall_third_img'
+                        ? 'wall__content-container__images-third'
                         : ''
                     }`}
                         />
@@ -199,7 +204,7 @@ export const Wall: React.FC = () => {
                   allow="accelerometer; autoplay; clipboard-write;
                    encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
-                  className="wall_iframe"></iframe>
+                  className="wall__content-container__iframe"></iframe>
               </>
             ) : (
               ''

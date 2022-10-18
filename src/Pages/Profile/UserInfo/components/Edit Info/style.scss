@@ -1,54 +1,56 @@
- .about__form {
-    position: relative;
+.about__form {
+  position: relative;
 
-    top: 0.2vh;
+  top: 0.2vh;
 
-    .about__form__input {
-      margin-bottom: 0.5vh;
+  .about__form__input {
+    margin-bottom: 0.7vh;
 
-      padding-left: 1vw;
-      padding-right: 1vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
 
-      width: 96%;
-      height: calc(10px + 20 * (100vh / 1080));
+    width: 100%;
+    height: calc(10px + 18 * (100vh / 1080));
 
-      border-radius: var(--borderRadius-interface);
-      box-shadow: var(--box-shadow);
+    font: normal 400 calc(6px + 16 * (100vw / 1920)) 'Iceberg';
 
-      font: normal 400 calc(6px + 16 * (100vw / 1920)) 'Iceberg';
+    background-color: var(--backgroundInput-color);
+    color: var(--text-color);
+  }
 
-      background-color: var(--backgroundInput-color);
-      color: var(--text-color);
+  .about__form__buttton {
+    position: absolute;
+
+    width: 100%;
+    height: calc(10px + 20 * (100vh / 1080));
+
+
+    border: 0;
+    border-radius: var(--borderRadius-interface);
+
+    background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
+    background-size: 200% auto;
+
+    box-shadow: 0 0 0.5vh rgb(162, 162, 162);
+
+    transition: 0.5s;
+
+    text-transform: uppercase;
+    font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
+
+    letter-spacing: 0.2vw;
+
+    color: var(--text-color);
+
+    cursor: pointer;
+
+    &:hover {
+      background-position: right center;
     }
 
-    .about__form__buttton {
-      width: 96%;
-      height: calc(10px + 20 * (100vh / 1080));
-
-      border: 0;
-      border-radius: var(--borderRadius-interface);
-
-      background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
-      background-size: 200% auto;
-
-      transition: 0.5s;
-
-      text-transform: uppercase;
-      font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
-
-      letter-spacing: 0.2vw;
-
-      color: var(--text-color);
-
-      cursor: pointer;
-
-      &:hover {
-        background-position: right center;
-      }
-
-      &:active {
-        transform: scale(0.9);
-        transition: 0.2s;
-      }
+    &:active {
+      transform: scale(0.9);
+      transition: 0.2s;
     }
   }
+}

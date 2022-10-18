@@ -88,26 +88,30 @@
     }
   }
 
-  .wall_content {
+  .wall__content-container {
     margin: 0 auto 0 auto;
 
     width: 94% !important;
     height: 100%;
 
-    .wall_text {
+    .wall_content-container__text {
       margin-bottom: 1vh;
 
       word-wrap: break-word;
       font: normal 400 calc(4px + 14 * (100vw / 1920)) 'Iceberg';
     }
 
-    .wall_img {
-      display: block;
+    .wall__content-container__images {
       position: relative;
+      display: block;
+
+      margin: 1vh auto;
+
+      width: 100% !important;
     }
 
-    .wall_first_img,
-    .wall_secong_img {
+    .wall__content-container__images-first,
+    .wall__content-container__images-second {
       margin: 0 auto;
 
       width: 50% !important;
@@ -120,7 +124,7 @@
       }
     }
 
-    .wall_third_img {
+    .wall__content-container__images-third {
       position: relative;
 
       width: 100% !important;
@@ -135,7 +139,7 @@
       }
     }
 
-    .wall_iframe {
+    .wall__content-container__iframe {
       margin-top: 1vh;
 
       width: 100%;

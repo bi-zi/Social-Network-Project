@@ -23,7 +23,7 @@ export const PhotoSlider: React.FC = () => {
   const state = useAppSelector((state) => state);
   const { id } = useParams<keyof MyParams>() as MyParams;
 
-  const readyPhotos = state.slider?.slider?.find((x) => x?.user === id)?.sliderImg;
+  const readyPhotos = state.slider?.slider?.[0]?.sliderImg;
 
   const settings = {
     className: 'center',
@@ -37,43 +37,54 @@ export const PhotoSlider: React.FC = () => {
     await dispatch(fetchSliderDelete({ deleteId: index, user: id }));
     dispatch(fetchSlider(id));
   }
+
   React.useEffect(() => {
     dispatch(fetchSlider(id));
   }, [dispatch, id]);
 
   return (
-    <div className="slider_images">
+    <div className="profile__slider">
       <Slider {...settings}>
         {readyPhotos?.map((image, index) => {
           return state.slider.status === 'loaded' ? (
             <span key={index}>
               <Link to={`/${id}/PhotoSlider/${index}`} key={index}>
-
-                <div className="slider_image_item">
+                <div className="profile__slider__image">
                   {state.auth.data?._id === id ? (
                     <FontAwesomeIcon
-                      className="slider_delete_img"
+                      className="profile__slider__image-delete"
                       icon={faXmark}
                       onClick={() => onPhotoDelete(index)}
                     />
                   ) : (
                     ''
                   )}
-                  <img src={image} alt="" className="slider_image" width="10px" height="10px" />
+                  <img
+                    src={image}
+                    alt=""
+                    className="profile__slider__image-img"
+                    width="10px"
+                    height="10px"
+                  />
                 </div>
               </Link>
             </span>
           ) : (
-            <div className="slider_image_item" key={index}>
-              <img src={image} alt="" className="slider_image" width="10px" height="10px" />
+            <div className="profile__slider__image" key={index}>
+              <img
+                src={image}
+                alt=""
+                className="profile__slider__image-img"
+                width="10px"
+                height="10px"
+              />
             </div>
           );
         })}
       </Slider>
 
       {state.auth.data?._id === id ? (
-
-        <button className="slider_images_button" onChange={() => dispatch(setInputNumber('1'))}>
+        <button className="profile__slider__button" onChange={() => dispatch(setInputNumber('1'))}>
           {state.slider.status === 'loaded' && state.user.status === 'loaded' ? (
             <ImageParsing />
           ) : (

@@ -1,8 +1,8 @@
 @media (width > 460px) and (height > 420px) {
-  .slider_images {
+  .profile__slider {
     position: relative;
 
-    padding-bottom: 2vh;
+    padding-bottom: 1vh;
     padding-top: 2vh;
 
     width: 100%;
@@ -22,7 +22,7 @@
       pointer-events: visiblePainted;
     }
 
-    .slider_image {
+    .profile__slider__image-img {
       width: 98%;
       height: calc(20px + 225 * (100vw / 1920));
 
@@ -34,12 +34,12 @@
       }
     }
 
-    .slider_image_item {
+    .profile__slider__image {
       position: relative;
       text-align: right;
     }
 
-    .slider_delete_img {
+    .profile__slider__image-delete {
       position: absolute;
 
       top: 1vh;
@@ -107,9 +107,9 @@
       margin: 1.1% 0;
     }
 
-    .slider_images_button {
+    .profile__slider__button {
       position: relative;
-      margin: 2vh auto 0 auto !important;
+      margin: 1vh auto 0 auto !important;
 
       width: 40%;
       height: calc(10px + 31 * (100vh / 1080));

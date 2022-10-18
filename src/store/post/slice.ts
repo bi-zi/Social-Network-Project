@@ -159,8 +159,12 @@ export const fetchPostDelete = createAsyncThunk<UserPost[], { deleteId: number; 
 
 const initialState: UserPostSliceState = {
   createText: localStorage.postText,
-  createImg: [],
+  createImg:
+    localStorage.postImages !== undefined
+      ? [...JSON.parse(localStorage.getItem('postImages') || '')].map((x) => x)
+      : [],
   createVid: localStorage.postVideo,
+ 
   createComment: '',
   postIndex: '',
   userPosts: {
@@ -191,6 +195,8 @@ const postSlice = createSlice({
     setPostIndex: (state, action) => {
       state.postIndex = action.payload;
     },
+
+
   },
 
   extraReducers: (builder) => {
@@ -284,5 +290,6 @@ export const {
   setCreateVid,
   setCreateComment,
   setPostIndex,
+
 } = postSlice.actions;
 export const postReducer = postSlice.reducer;

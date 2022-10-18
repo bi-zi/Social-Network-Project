@@ -135,7 +135,7 @@ export const EditInfo: React.FC = () => {
 
         {!aboutStatus ? (
           <button className="about__form__buttton" type="submit">
-            Submit
+            Save
           </button>
         ) : (
           <button className="about__form__buttton">Submit</button>

@@ -22,7 +22,7 @@ export const Subscribers: React.FC = () => {
   }, [dispatch, id]);
 
   return (
-    <div className="profile-friends">
+    <div className="profile-friends subscribers">
       <Link
         to={`/Friends/${id}`}
         className="profile-friends__title"
@@ -55,6 +55,7 @@ export const Subscribers: React.FC = () => {
             </Link>
           </div>
         ))}
+        <div style={{ clear: 'both' }}> </div>
       </div>
     </div>
   );

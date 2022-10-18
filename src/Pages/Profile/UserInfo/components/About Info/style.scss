@@ -1,34 +1,48 @@
- .about__info {
+.about__container {
+  position: relative;
+  .about__info {
+    position: absolute;
+
+    padding-top: calc(30px + 70 * (100vh / 1080));
+
+    width: 100%;
+    height: 98%;
+
+    text-align: right;
+
+    font: normal 400 calc(15px + 16 * (100vw / 1920)) 'Iceberg';
+
+    z-index: 1;
+
+    &:hover {
+      background-color: rgba(124, 122, 122, 0.56);
+      cursor: pointer;
+    }
+
+    .about__info__text {
       position: absolute;
+      
+      bottom: 0;
+      right: 0;
 
-      padding-top: calc(30px + 70 * (100vh / 1080));
-
-      width: calc(100px + 800 * (100vw / 1920));
-      height: calc(80px + 175 * (100vh / 1080));
-
-      text-align: right;
-
-      font: normal 400 calc(15px + 20 * (100vw / 1920)) 'Iceberg';
-
-      z-index: 1;
+      font: normal 400 calc(6px + 14 * (100vw / 1920)) 'Iceberg';
       color: var(--text-color);
-
-      &:hover {
-        background-color: rgba(124, 122, 122, 0.56);
-        cursor: pointer;
-      }
     }
+  }
 
-    .about__info-lives,
-    .about__info-from,
-    .about__info-born,
-    .about__info-profession,
-    .about__info-relationship,
-    .about__info-student {
-      position: relative;
+  .about__info-lives,
+  .about__info-from,
+  .about__info-born,
+  .about__info-profession,
+  .about__info-relationship,
+  .about__info-student {
+    position: relative;
 
-      width: 100%;
-      height: calc(15px + 28 * (100vh / 1080));
+    width: 100%;
+    height: calc(15px + 28 * (100vh / 1080));
 
-      font: normal 400 calc(8px + 14 * (100vw / 1920)) / calc(5px + 22 * (100vh / 1080)) 'Iceberg';
-    }
+    top: 0.5vh;
+
+    font: normal 400 calc(8px + 14 * (100vw / 1920)) / calc(5px + 22 * (100vh / 1080)) 'Iceberg';
+  }
+}

@@ -101,7 +101,6 @@ export const ImageParsing: React.FC = () => {
     };
     fileReader.readAsDataURL(file);
 
-    console.log('срабатывание');
     setImages([]);
   }, [images, onAvatarAndSlider]);
 
