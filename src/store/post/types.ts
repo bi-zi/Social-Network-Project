@@ -7,7 +7,7 @@ export type UserPost = {
   __v: number;
 };
 
-interface Post {
+export type Post = {
   text: string;
   videoPost: string;
   imagesPost: string[];
@@ -37,7 +37,7 @@ export interface UserPostSliceState {
   createImg: string[];
   createVid: string;
   createComment: string;
-
+  comments: number;
   postIndex: string;
   userPosts: {
     post: UserPost[];

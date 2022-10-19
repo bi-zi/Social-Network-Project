@@ -47,18 +47,18 @@ export const PhotoSlider: React.FC = () => {
       <Slider {...settings}>
         {readyPhotos?.map((image, index) => {
           return state.slider.status === 'loaded' ? (
-            <span key={index}>
+            <span key={index} className="profile__slider__image">
+              {state.auth.data?._id === id ? (
+                <FontAwesomeIcon
+                  className="profile__slider__image-delete"
+                  icon={faXmark}
+                  onClick={() => onPhotoDelete(index)}
+                />
+              ) : (
+                ''
+              )}
               <Link to={`/${id}/PhotoSlider/${index}`} key={index}>
-                <div className="profile__slider__image">
-                  {state.auth.data?._id === id ? (
-                    <FontAwesomeIcon
-                      className="profile__slider__image-delete"
-                      icon={faXmark}
-                      onClick={() => onPhotoDelete(index)}
-                    />
-                  ) : (
-                    ''
-                  )}
+                <div>
                   <img
                     src={image}
                     alt=""

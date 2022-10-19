@@ -19,27 +19,27 @@ export const AvatarInput: React.FC = () => {
       textRef.current.value = '';
   }
 
+
   return (
     <div className="post__avatar-input-container">
       <img
-        src={state.user?.mainUser?.imageUrl}
+        src={state.user?.userOne?.[0].imageUrl}
         width={10}
         alt=""
         className="post__avatar-input-container__avatar"
         onClick={() => window.scrollTo(0, 0)}
       />
-
-      <input
-        ref={textRef}
-        type="text"
-        className="post__avatar-input-container__text-input"
-        placeholder="Post an entry"
-        maxLength={180}
-        defaultValue={state.post?.createText}
-        pattern="^[a-zA-Z0-9 ]+$"
-        title="Only latin characters can be used"
-        onChange={(e) => dispatch(setCreatText(e.target.value))}
-      />
+        <input
+          ref={textRef}
+          type="text"
+          className="post__avatar-input-container__text-input"
+          placeholder="Post an entry"
+          maxLength={180}
+          defaultValue={state.post?.createText}
+          pattern="^[a-zA-Z0-9 ]+$"
+          title="Only latin characters can be used"
+          onChange={(e) => dispatch(setCreatText(e.target.value))}
+        />
     </div>
   );
 };

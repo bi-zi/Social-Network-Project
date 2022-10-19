@@ -42,11 +42,11 @@ export const ControlPanel: React.FC = () => {
 
   const sendPost = async () => {
     const createPostBool =
-      (textLength > 0 || numImg > 0 || localStorage.postVideo?.split('/').length > 0) &&
+      (textLength > 0 || numImg > 0 || localStorage.postVideo?.split('/').length > 1) &&
       post === undefined;
 
     const postPushBool =
-      ((textLength > 0 || numImg > 0 || localStorage.postVideo?.split('/').length > 0) &&
+      ((textLength > 0 || numImg > 0 || localStorage.postVideo?.split('/').length > 1) &&
         post?.post?.length === 0) ||
       post?.post!?.length > 0;
 
@@ -71,7 +71,7 @@ export const ControlPanel: React.FC = () => {
       );
     }
 
-    if (textLength > 0 || numImg > 0 || localStorage.postVideo?.split('/').length > 0) {
+    if (textLength > 0 || numImg > 0 || localStorage.postVideo?.split('/').length > 1) {
       await dispatch(fetchUserPostsAll(id));
 
       dispatch(setCreateImgDelete([]));

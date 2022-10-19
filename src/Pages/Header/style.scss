@@ -15,7 +15,6 @@
     user-select: none;
     z-index: 999;
 
-
     .header_container {
       display: flex;
 
@@ -196,6 +195,10 @@
     position: relative;
     margin: auto 0;
 
+    &:active .header_menu_block {
+      display: block;
+    }
+
     .header_loader {
       position: absolute;
 
@@ -232,10 +235,6 @@
 
       cursor: pointer;
       z-index: 999;
-    }
-
-    &:active .header_menu_block {
-      display: block;
     }
   }
 

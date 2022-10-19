@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { UserPost, UserPostSliceState, Status } from './types';
 import axios from '../../Backend/axios';
+import { act } from 'react-dom/test-utils';
 
 export const fetchUserPostsAll = createAsyncThunk(
   '/post/userPostsAll/:id/fetchUserPostAll',
@@ -164,7 +165,7 @@ const initialState: UserPostSliceState = {
       ? [...JSON.parse(localStorage.getItem('postImages') || '')].map((x) => x)
       : [],
   createVid: localStorage.postVideo,
- 
+  comments: 9999999,
   createComment: '',
   postIndex: '',
   userPosts: {
@@ -195,8 +196,9 @@ const postSlice = createSlice({
     setPostIndex: (state, action) => {
       state.postIndex = action.payload;
     },
-
-
+    setComments: (state, action) => {
+      state.comments = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -288,8 +290,8 @@ export const {
   setCreateImg,
   setCreateImgDelete,
   setCreateVid,
+  setComments,
   setCreateComment,
   setPostIndex,
-
 } = postSlice.actions;
 export const postReducer = postSlice.reducer;
