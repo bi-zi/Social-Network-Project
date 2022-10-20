@@ -1,34 +1,16 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { fetchAuthMe } from '../../store/auth/slice';
-import {
-  fetchDeleteFriend,
-  fetchUsersPagination,
-  fetchOneUser,
-  fetchUserFriends,
-} from '../../store/user/slice';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { fetchUsersPagination } from '../../store/friends/slice';
+import { fetchOneUser, fetchUserFriends, fetchUserSubscribers } from '../../store/user/slice';
 import { fetchNotifications } from '../../store/notifications/slice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+
+import { useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+
 import './style.scss';
 
-interface User {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  passwordHash: string;
-  friends: string[];
-  subscribers: string[];
-  imageUrl: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-  id: string;
-}
+import { FriendsControlPanel } from './Components/Friends control panel/FriendsControlPanel';
+import { FriendsLeftPanel } from './Components/Friends left panel/FriendsLeftPanel';
 
 export type MyParams = {
   id: string;
@@ -39,35 +21,21 @@ export const Friends: React.FC = () => {
   const state = useAppSelector((state) => state);
   const { id } = useParams<keyof MyParams>() as MyParams;
 
-  const [catergory, setCategory] = React.useState(
-    state.user.catergory === '' ? 'people' : state.user.catergory,
-  );
-  const [sortBy, setSortBy] = React.useState('');
+  let sortedFriends = state.friendsPage.users[2];
 
-  const user =
-    state.user?.userOne?.[0] === undefined
-      ? state.user?.usersPagination[2]?.find((user) => user?._id === id)
-      : state.user?.userOne?.[0];
-
-  let sortedFriends = [] as User[];
-
-  if (catergory === 'friends') {
-    sortedFriends = state.user.usersPagination[2]?.filter((userId) =>
-      user?.friends.includes(userId._id),
-    );
+  if (state.friendsPage.categorySort === 'people') {
+    sortedFriends = state.friendsPage.users[2];
   }
 
-  if (catergory === 'people') {
-    sortedFriends = state.user.usersPagination[2];
+  if (state.friendsPage.categorySort === 'friends') {
+    sortedFriends = state.user.findUserFriends;
   }
 
-  if (catergory === 'subscribers') {
-    sortedFriends = state.user.usersPagination[2]?.filter((userId) =>
-      user?.subscribers.includes(userId._id),
-    );
+  if (state.friendsPage.categorySort === 'subscribers') {
+    sortedFriends = state.user.findUserSubscribers;
   }
 
-  if (sortBy === 'a-z') {
+  if (state.friendsPage.sortBy === 'a-z') {
     sortedFriends = [...sortedFriends]?.sort(function (a, b) {
       if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
         return 1;
@@ -79,7 +47,7 @@ export const Friends: React.FC = () => {
     });
   }
 
-  if (sortBy === 'z-a') {
+  if (state.friendsPage.sortBy === 'z-a') {
     sortedFriends = [...sortedFriends]
       ?.sort(function (a, b) {
         if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
@@ -93,7 +61,7 @@ export const Friends: React.FC = () => {
       .reverse();
   }
 
-  if (sortBy === 'friends') {
+  if (state.friendsPage.sortBy === 'friends') {
     sortedFriends = [...sortedFriends]?.sort(function (a, b) {
       if (a.friends.length < b.friends.length) {
         return 1;
@@ -105,7 +73,7 @@ export const Friends: React.FC = () => {
     });
   }
 
-  if (sortBy === 'subscribers') {
+  if (state.friendsPage.sortBy === 'subscribers') {
     sortedFriends = [...sortedFriends]?.sort(function (a, b) {
       if (a.subscribers.length < b.subscribers.length) {
         return 1;
@@ -117,28 +85,19 @@ export const Friends: React.FC = () => {
     });
   }
 
-  const deleteFriend = async (userId: string) => {
-    await dispatch(
-      fetchDeleteFriend({
-        id: userId,
-        index: state.user.findUserFriends
-          .find((user) => user._id === userId)!
-          .friends.findIndex((friendId) => friendId === state.auth.data?._id),
-        index2: state.auth.data?.friends.findIndex((friendId) => friendId === userId),
-        user: id,
-      }),
-    );
-    dispatch(fetchUserFriends(id));
-    dispatch(fetchOneUser(id));
-    dispatch(fetchAuthMe());
-  };
 
-  const loadStatus = state.user.status === 'loaded' && state.auth.status === 'loaded';
+  const checkPagination =
+    state.friendsPage.users[1] >= state.friendsPage.users[0] &&
+    state.friendsPage.categorySort === 'people';
 
   React.useEffect(() => {
+    dispatch(fetchOneUser(id));
     dispatch(fetchUsersPagination(10));
-    dispatch(fetchNotifications(id));
+
     dispatch(fetchUserFriends(id));
+    dispatch(fetchUserSubscribers(id));
+
+    dispatch(fetchNotifications(id));
   }, [dispatch, id]);
 
   if (localStorage.isAuth === undefined) {
@@ -146,58 +105,26 @@ export const Friends: React.FC = () => {
   }
 
   return (
-    <div className="friends">
-      <div className="friends_left_panel">
-        {sortedFriends.length > 0 ? (
-          sortedFriends.map((friend) => (
-            <div
-              className="friends_user_block"
+    <div className="users">
+      <div className="users__left-panel">
+        {sortedFriends!.length > 0 ? (
+          sortedFriends!.map((friend) => (
+            <FriendsLeftPanel
+              data={friend}
+              lastFriend={sortedFriends?.[sortedFriends!.length - 1]}
               key={friend?._id}
-              style={
-                friend === sortedFriends[sortedFriends.length - 1]
-                  ? { borderBottom: 'none' }
-                  : { borderBottom: `` }
-              }>
-              <Link to={`/Profile/${friend?._id}`} onClick={() => window.scrollTo(0, 0)}>
-                <img src={friend?.imageUrl} alt="" width={10} className="friends_user_avatar" />
-              </Link>
-              <Link
-                to={`/Profile/${friend?._id}`}
-                className="friends_user_fullname"
-                style={{ textDecoration: 'none' }}>
-                {friend?.firstName + ' ' + friend?.lastName}
-              </Link>
-
-              {catergory === 'friends' ? (
-                <div className="friend_menu">
-                  <div className="friend_content">
-                    <div
-                      className="friend_delete"
-                      onClick={() => (loadStatus ? deleteFriend(friend?._id) : '')}>
-                      Delete friend
-                    </div>
-                  </div>
-                  <FontAwesomeIcon className="friend_menu_icon" icon={faEllipsis} />
-                </div>
-              ) : (
-                ''
-              )}
-
-              <div className="number_of_friends_subs">
-                <span>Friends {friend?.friends?.length}</span>
-                <span>Subscribers {friend?.subscribers?.length}</span>
-              </div>
-            </div>
+            />
           ))
-        ) : catergory === 'friends' ? (
-          <div className="zero_friends_subs">No friends 😭</div>
+        ) : state.friendsPage.categorySort === 'friends' ? (
+          <div className="users__left-panel__zero-friends-subs">No friends 😭</div>
         ) : (
-          <div className="zero_friends_subs">No subscribers 😭</div>
+          <div className="users__left-panel__zero-friends-subs">No subscribers 😭</div>
         )}
-        {state.user.usersPagination[1] >= state.user.usersPagination[0] ? (
+
+        {checkPagination ? (
           <div
-            className="add_friends_to_table"
-            onClick={() => dispatch(fetchUsersPagination(state.user.usersPagination[0] + 10))}>
+            className="users__left-panel__show-more-people"
+            onClick={() => dispatch(fetchUsersPagination(state.friendsPage.users[0] + 10))}>
             Show more users
           </div>
         ) : (
@@ -205,62 +132,7 @@ export const Friends: React.FC = () => {
         )}
       </div>
 
-      <div className="friends_right_panel">
-        <div
-          className="all_people"
-          style={catergory === 'people' ? { color: 'black' } : {}}
-          onClick={() => (loadStatus ? setCategory('people') : '')}>
-          All people
-        </div>
-        <div
-          className="all_friends"
-          style={catergory === 'friends' ? { color: 'black' } : {}}
-          onClick={() => (loadStatus ? setCategory('friends') : '')}>
-          Friends
-        </div>
-        <div
-          className="friend_subscribers"
-          style={catergory === 'subscribers' ? { color: 'black' } : {}}
-          onClick={() => (loadStatus ? setCategory('subscribers') : '')}>
-          Subscribers
-        </div>
-
-        <div className="friends_sort_menu">
-          <div className="friend_sort">Sort by</div>
-          <div className="friends_sort_category">
-            <div
-              className="A-Z_sort"
-              style={sortBy === 'a-z' ? { color: 'black' } : {}}
-              onClick={() => (loadStatus ? setSortBy('a-z') : '')}>
-              Sort by A-Z
-            </div>
-            <div
-              className="Z-A_sort"
-              style={sortBy === 'z-a' ? { color: 'black' } : {}}
-              onClick={() => (loadStatus ? setSortBy('z-a') : '')}>
-              Sort by Z-A
-            </div>
-            <div
-              className="friends_sort"
-              style={sortBy === 'friends' ? { color: 'black' } : {}}
-              onClick={() => (loadStatus ? setSortBy('friends') : '')}>
-              Sort by friends
-            </div>
-            <div
-              className="friends_sort"
-              style={sortBy === 'subscribers' ? { color: 'black' } : {}}
-              onClick={() => (loadStatus ? setSortBy('subscribers') : '')}>
-              Sort by subscribers
-            </div>
-            <div
-              className="subscribers_sort"
-              style={sortBy !== 'people' ? { color: 'red' } : {}}
-              onClick={() => (loadStatus ? setSortBy('people') : '')}>
-              Do not sort
-            </div>
-          </div>
-        </div>
-      </div>
+      <FriendsControlPanel data={id} />
     </div>
   );
 };

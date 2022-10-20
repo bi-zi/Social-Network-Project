@@ -1,5 +1,5 @@
 @media (width > 460px) and (height > 420px) {
-  .friends {
+  .users {
     display: flex;
     justify-content: space-between;
 
@@ -19,12 +19,42 @@
       max-width: 100%;
     }
 
-    .friends_left_panel {
+    .users__left-panel {
       border-radius: var(--borderRadius-interface);
+
+      .users__left-panel__zero-friends-subs {
+        display: flex;
+        position: relative;
+
+        margin: 1vh 1vw;
+
+        width: 100%;
+
+        font: normal 400 calc(10px + 40 * (100vw / 1920)) 'Iceberg';
+      }
+
+      .users__left-panel__show-more-people {
+        margin-top: 2vh;
+        width: 100%;
+
+        border-bottom-left-radius: var(--borderRadius-interface);
+        border-bottom-right-radius: var(--borderRadius-interface);
+        box-shadow: var(--box-shadow);
+
+        text-align: center;
+        font: normal 400 calc(10px + 40 * (100vw / 1920)) 'Iceberg';
+        cursor: pointer;
+
+        color: var(--text-color);
+        background-color: var(--interface-color);
+        &:hover {
+          background-color: var(--interface-color-hover);
+        }
+      }
     }
 
-    .friends_left_panel,
-    .friends_right_panel {
+    .users__left-panel,
+    .users__right-panel {
       width: 63%;
       height: 100%;
 
@@ -34,7 +64,7 @@
       background-color: var(--interface-color);
     }
 
-    .friends_right_panel {
+    .users__right-panel {
       width: 35%;
       border-radius: var(--borderRadius-interface);
     }
@@ -42,217 +72,6 @@
     @media (width < 770px) {
       margin: 1vh auto 0 auto;
       padding: 0 1vw 8vh 1vw;
-    }
-  }
-
-  .friends_left_panel {
-    .friends_user_block {
-      display: flex;
-      position: relative;
-
-      margin-left: auto;
-      margin-right: auto;
-
-      width: 95%;
-      height: 100%;
-
-      border-bottom: 0.2vh solid var(--miniInterface-color);
-    }
-
-    .friends_user_avatar {
-      width: calc(40px + 40 * (100vw / 1920));
-      height: calc(40px + 40 * (100vw / 1920));
-
-      margin: 1vh 0;
-
-      border-radius: 100%;
-      cursor: pointer;
-    }
-
-    .friends_user_fullname {
-      margin-top: 1.5vh;
-      margin-left: 1vw;
-
-      width: auto;
-      height: 2vh;
-
-      font: normal 400 calc(8px + 14 * (100vw / 1920)) 'Iceberg';
-      color: var(--text-color);
-    }
-
-    .friend_menu {
-      position: absolute;
-
-      float: left;
-      right: 1vw;
-      top: 0px;
-
-      &:active .friend_content {
-        display: block;
-      }
-
-      .friend_content {
-        display: none;
-        position: absolute;
-
-        padding-top: 3vh;
-
-        width: 9vw;
-        height: 6vh;
-
-        right: -2vw;
-
-        text-align: center;
-
-        @media (height < 888px) {
-          padding-top: 4.5vh;
-        }
-
-        &:hover {
-          display: block;
-        }
-      }
-
-      .friend_delete {
-        width: 100%;
-
-        font-size: calc(10px + 10 * (100vw / 1920));
-
-        font: normal 400 calc(10px + 10 * (100vw / 1920)) 'Iceberg';
-
-        background-color: var(--miniInterface-color);
-        color: var(--text-color);
-      }
-
-      .friend_delete:hover {
-        background-color: var(--miniInterface-color-hover);
-        color: var(--miniInterface-color);
-
-        cursor: pointer;
-      }
-
-      .friend_menu_icon {
-        font-size: calc(20px + 20 * (100vw / 1920));
-        cursor: pointer;
-      }
-    }
-
-    .number_of_friends_subs {
-      position: absolute;
-
-      bottom: 0;
-      right: 0;
-
-      font: normal 400 calc(8px + 14 * (100vw / 1920)) 'Iceberg';
-
-      span:first-child {
-        margin-right: 1vw;
-      }
-    }
-
-    .zero_friends_subs {
-      display: flex;
-      position: relative;
-
-      margin: 1vh 1vw;
-
-      width: 100%;
-
-      font: normal 400 calc(10px + 40 * (100vw / 1920)) 'Iceberg';
-    }
-
-    .add_friends_to_table {
-      margin-top: 2vh;
-      width: 100%;
-
-      border-bottom-left-radius: var(--borderRadius-interface);
-      border-bottom-right-radius: var(--borderRadius-interface);
-      box-shadow: var(--box-shadow);
-
-      text-align: center;
-      font: normal 400 calc(10px + 40 * (100vw / 1920)) 'Iceberg';
-      cursor: pointer;
-
-      color: var(--text-color);
-      background-color: var(--interface-color);
-      &:hover {
-        background-color: var(--interface-color-hover);
-      }
-    }
-  }
-
-  .friends_right_panel {
-    display: block;
-    position: sticky;
-
-    top: calc(39px + 40 * (100vw / 1920));
-
-    .all_people,
-    .all_friends,
-    .friend_subscribers,
-    .friend_sort {
-      padding: 1vh 1.5vw;
-
-      font: normal 400 calc(10px + 18 * (100vw / 1920)) 'Iceberg';
-
-      color: var(--text-color);
-      cursor: pointer;
-
-      &:hover {
-        color: var(--text-color-hover);
-      }
-    }
-  }
-
-  .friends_sort_menu {
-    position: relative;
-
-    &:hover .friends_sort_category {
-      display: block;
-    }
-
-    &:hover .friend_sort {
-      color: var(--text-color-hover);
-    }
-
-    .friends_sort_category {
-      display: none;
-      position: relative;
-
-      width: 100%;
-      height: 100%;
-
-      top: -1vh;
-
-      border-bottom-left-radius: var(--borderRadius-interface);
-      border-bottom-right-radius: var(--borderRadius-interface);
-
-      .A-Z_sort {
-        padding-top: 15px !important;
-      }
-
-      .A-Z_sort,
-      .Z-A_sort,
-      .friends_sort,
-      .subscribers_sort {
-        padding: 1.5vh 1.5vw;
-
-        font: normal 400 calc(10px + 18 * (100vw / 1920)) 'Iceberg';
-
-        background-color: var(--interface-color);
-        color: var(--text-color);
-
-        cursor: pointer;
-
-        &:hover {
-          color: var(--text-color-hover);
-        }
-      }
-
-      .subscribers_sort {
-        border-bottom-left-radius: var(--borderRadius-interface);
-        border-bottom-right-radius: var(--borderRadius-interface);
-      }
     }
   }
 }

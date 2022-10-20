@@ -13,7 +13,7 @@ import { faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp, faThumbsDown, faCommentDots } from '@fortawesome/free-regular-svg-icons';
 import { Post } from '../../../../../store/post/types';
 
-import { useWall } from '../../useWall';
+import { useWall } from '../useWall';
 import './style.scss';
 
 export type MyParams = {
@@ -76,7 +76,7 @@ export const WallControlPanel: React.FC<MyProps> = ({ data, index }: MyProps) =>
 
   const openCloseComment = async (postIndex: number) => {
     const commentators = wallPost?.[postIndex].commentPost.map((x) => x.userId).join(',');
-    
+
     if (postStatus) {
       if (state.post.comments !== postIndex) {
         await dispatch(fetchCommentators(commentators));

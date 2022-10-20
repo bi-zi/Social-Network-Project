@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../../../../../store/store';
-import { useWall } from '../../useWall';
+import { useWall } from '../useWall';
 import { Post } from '../../../../../store/post/types';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

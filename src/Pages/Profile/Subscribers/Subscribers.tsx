@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchUserSubscribers, setCatergory } from '../../../store/user/slice';
-
+import { fetchUserSubscribers } from '../../../store/user/slice';
+import { setCatergorySort } from '../../../store/friends/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ export const Subscribers: React.FC = () => {
         to={`/Friends/${id}`}
         className="profile-friends__title"
         style={{ textDecoration: 'none' }}
-        onClick={() => dispatch(setCatergory('subscribers'))}>
+        onClick={() => dispatch(setCatergorySort('subscribers'))}>
         Subscribers -&nbsp;
         {subscribers.length}
       </Link>

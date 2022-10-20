@@ -1,0 +1,106 @@
+.users__left-panel {
+    .users__left-panel__user-block {
+      display: flex;
+      position: relative;
+
+      margin-left: auto;
+      margin-right: auto;
+
+      width: 95%;
+      height: 100%;
+
+      border-bottom: 0.2vh solid var(--miniInterface-color);
+    }
+
+    .users__left-panel__user-block__avatar {
+      width: calc(40px + 40 * (100vw / 1920));
+      height: calc(40px + 40 * (100vw / 1920));
+
+      margin: 1vh 0;
+
+      border-radius: 100%;
+      cursor: pointer;
+    }
+
+    .users__left-panel__user-block__avatar__full-name {
+      margin-top: 1.5vh;
+      margin-left: 1vw;
+
+      width: auto;
+      height: 2vh;
+
+      font: normal 400 calc(8px + 14 * (100vw / 1920)) 'Iceberg';
+      color: var(--text-color);
+    }
+
+    .users__left-panel__user-block__menu {
+      position: absolute;
+
+      float: left;
+      right: 1vw;
+      top: 0px;
+
+      &:active .users__left-panel__user-block__menu-content {
+        display: block;
+      }
+
+      .users__left-panel__user-block__menu-content {
+        display: none;
+        position: absolute;
+
+        padding-top: 3vh;
+
+        width: 9vw;
+        height: 6vh;
+
+        right: -2vw;
+
+        text-align: center;
+
+        @media (height < 888px) {
+          padding-top: 4.5vh;
+        }
+
+        &:hover {
+          display: block;
+        }
+      }
+
+      .users__left-panel__user-block__menu-content-delete {
+        width: 100%;
+
+        font-size: calc(10px + 10 * (100vw / 1920));
+
+        font: normal 400 calc(10px + 10 * (100vw / 1920)) 'Iceberg';
+
+        background-color: var(--miniInterface-color);
+        color: var(--text-color);
+      }
+
+      .users__left-panel__user-block__menu-content-delete:hover {
+        background-color: var(--miniInterface-color-hover);
+        color: var(--miniInterface-color);
+
+        cursor: pointer;
+      }
+
+      .users__left-panel__user-block__menu-icon {
+        font-size: calc(20px + 20 * (100vw / 1920));
+        cursor: pointer;
+      }
+    }
+
+    .users__left-panel__user-block__number-friends-subs {
+      position: absolute;
+
+      bottom: 0;
+      right: 0;
+
+      font: normal 400 calc(8px + 14 * (100vw / 1920)) 'Iceberg';
+
+      span:first-child {
+        margin-right: 1vw;
+      }
+    }
+
+  }

@@ -7,6 +7,8 @@ import {
   fetchUnsubscribe,
   fetchAcceptFriend,
   fetchDeleteFriend,
+  fetchUserFriends,
+  fetchUserSubscribers,
 } from '../../../../../store/user/slice';
 
 import {
@@ -49,6 +51,7 @@ export const UserInteraction: React.FC = () => {
 
     dispatch(fetchMainUser(state.auth?.data?._id));
     dispatch(fetchOneUser(id));
+    dispatch(fetchUserSubscribers(id));
     dispatch(fetchNotifications(id));
   };
 
@@ -69,6 +72,7 @@ export const UserInteraction: React.FC = () => {
     );
     dispatch(fetchNotifications(id));
     dispatch(fetchMainUser(state.auth?.data?._id));
+    dispatch(fetchUserSubscribers(id));
     dispatch(fetchOneUser(id));
   };
 
@@ -82,6 +86,7 @@ export const UserInteraction: React.FC = () => {
       }),
     );
     dispatch(fetchMainUser(state.auth?.data?._id));
+    dispatch(fetchUserFriends(id));
     dispatch(fetchOneUser(id));
   };
 
@@ -96,6 +101,7 @@ export const UserInteraction: React.FC = () => {
       }),
     );
     dispatch(fetchMainUser(state.auth?.data?._id));
+    dispatch(fetchUserFriends(id));
     dispatch(fetchOneUser(id));
   };
 

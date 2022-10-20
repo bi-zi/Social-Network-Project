@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchUserPostsAll, fetchPostDelete } from '../../../store/post/slice';
-import { UserPost } from '../../../store/post/types';
+import { useAppDispatch, useAppSelector } from '../../../../store/store';
+import { fetchUserPostsAll, fetchPostDelete } from '../../../../store/post/slice';
+import { UserPost } from '../../../../store/post/types';
 
 export function useWall(wall: UserPost) {
   const dispatch = useAppDispatch();

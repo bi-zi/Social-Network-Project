@@ -1,10 +1,9 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../store/store';
-import {
-  setClearFindUserFriends,
-  setClearFindUserSubscribers,
-  setClearUsersPagination,
-} from '../store/user/slice';
+import { setClearFindUserFriends, setClearFindUserSubscribers } from '../store/user/slice';
+
+import { setClearUsers } from '../store/friends/slice';
+
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
@@ -79,16 +78,16 @@ export const Layout: React.FC = () => {
   }
 
   React.useEffect(() => {
-    if (!profile && user.findUserFriends.length > 0) dispatch(setClearFindUserFriends());
-    if (!profile && user.findUserSubscribers.length > 0) dispatch(setClearFindUserSubscribers());
-    if (!friends && user.usersPagination?.[2].length > 0) dispatch(setClearUsersPagination());
+    if (!profile && !friends && user.findUserFriends.length > 0) dispatch(setClearFindUserFriends());
+    if (!profile && !friends && user.findUserSubscribers.length > 0) dispatch(setClearFindUserSubscribers());
+    if (!friends && state.friendsPage.users?.[2].length > 0) dispatch(setClearUsers());
   }, [
     dispatch,
     friends,
     profile,
+    state.friendsPage.users,
     user.findUserFriends.length,
-    user.findUserSubscribers.length,
-    user.usersPagination,
+    user.findUserSubscribers.length
   ]);
 
   return (

@@ -4,7 +4,7 @@ import { fetchUserPostsAll } from '../../../store/post/slice';
 
 import { useParams } from 'react-router-dom';
 
-import { useWall } from './useWall';
+import { useWall } from './Components/useWall';
 import './style.scss';
 
 import { WallHeader } from './Components/Wall header/WallHeader';

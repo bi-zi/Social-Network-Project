@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchOneUser, setCatergory } from '../../../store/user/slice';
+import { fetchOneUser } from '../../../store/user/slice';
+import { setCatergorySort } from '../../../store/friends/slice';
 import { fetchNotifications, fetchNotificationsDelete } from '../../../store/notifications/slice';
 import { fetchSlider } from '../../../store/slider/slice';
 import { useParams } from 'react-router-dom';
@@ -70,7 +71,7 @@ export const ControlPanel: React.FC = () => {
                       to={`/Friends/${state.auth?.data?._id}`}
                       className="notifications_show"
                       onClick={() => {
-                        dispatch(setCatergory('subscribers'));
+                        dispatch(setCatergorySort('subscribers'));
                         onHideNote();
                       }}>
                       Show

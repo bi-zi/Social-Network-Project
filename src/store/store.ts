@@ -9,11 +9,16 @@ import { sliderReducer } from './slider/slice';
 import { postReducer } from './post/slice';
 import { NoteReducer } from './notifications/slice';
 
+import { friendsPageReducer } from './friends/slice';
+
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     about: aboutReducer,
     user: userReducer,
+
+    friendsPage: friendsPageReducer,
+
     slider: sliderReducer,
     post: postReducer,
     note: NoteReducer,

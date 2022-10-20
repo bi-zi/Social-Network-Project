@@ -1,4 +1,4 @@
-export type User = {
+export type FriendsPageUser = {
   _id: string;
   firstName: string;
   lastName: string;
@@ -20,19 +20,9 @@ export enum Status {
 }
 
 export interface UserSliceState {
-  usersAll: User[];
-
-  userOne: User[];
-  mainUser: User;
-
-  findUserFriends: User[];
-  findUserSubscribers: User[];
-
-  chatUsers: User[];
-  commentators: User[];
-
-  inputNumber: string;
-
-  deleteAttention: number;
+  users: [number, number, FriendsPageUser[]];
+  sortedUsers: FriendsPageUser[];
+  categorySort: string;
+  sortBy: string;
   status: Status;
 }

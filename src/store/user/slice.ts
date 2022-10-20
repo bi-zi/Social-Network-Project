@@ -7,14 +7,6 @@ export const fetchAllUsers = createAsyncThunk<User[]>('user/fetchAllUsers', asyn
   return data;
 });
 
-export const fetchUsersPagination = createAsyncThunk(
-  'user/pagination/fetchUsersPagination',
-  async (pagination: number) => {
-    const { data } = await axios.get(`/user/pagination/${pagination}`);
-    return data;
-  },
-);
-
 export const fetchOneUser = createAsyncThunk('user/one/id/fetchUserUpdate', async (id: string) => {
   const { data } = await axios.get<User[]>(`/user/one/${id}`);
 
@@ -116,13 +108,11 @@ const initialState: UserSliceState = {
   findUserFriends: [],
   findUserSubscribers: [],
 
-  usersPagination: [0, 0, [] as User[]],
   chatUsers: [],
 
   commentators: [],
 
   inputNumber: '',
-  catergory: '',
   deleteAttention: 0,
   status: Status.LOADING,
 };
@@ -134,9 +124,7 @@ const userSlice = createSlice({
     setInputNumber: (state, action) => {
       state.inputNumber = action.payload;
     },
-    setCatergory: (state, action) => {
-      state.catergory = action.payload;
-    },
+
     setAttention: (state, action) => {
       state.deleteAttention = action.payload;
     },
@@ -147,9 +135,7 @@ const userSlice = createSlice({
     setClearFindUserSubscribers: (state) => {
       state.findUserSubscribers = [];
     },
-    setClearUsersPagination: (state) => {
-      state.usersPagination = [0, 0, []];
-    },
+
     setClearCommentators: (state) => {
       state.commentators = [];
     },
@@ -167,17 +153,6 @@ const userSlice = createSlice({
     //   state.status = Status.ERROR;
     // });
 
-    builder.addCase(fetchUsersPagination.pending, (state) => {
-      state.status = Status.LOADING;
-    });
-    builder.addCase(fetchUsersPagination.fulfilled, (state, action) => {
-      state.status = Status.SUCCESS;
-      state.usersPagination = action.payload;
-    });
-    builder.addCase(fetchUsersPagination.rejected, (state) => {
-      state.status = Status.ERROR;
-    });
-
     builder.addCase(fetchOneUser.pending, (state) => {
       state.status = Status.LOADING;
     });
@@ -188,7 +163,6 @@ const userSlice = createSlice({
     builder.addCase(fetchOneUser.rejected, (state) => {
       state.status = Status.ERROR;
     });
-
 
     builder.addCase(fetchMainUser.pending, (state) => {
       state.status = Status.LOADING;
@@ -300,11 +274,9 @@ const userSlice = createSlice({
 
 export const {
   setInputNumber,
-  setCatergory,
   setAttention,
   setClearFindUserFriends,
   setClearFindUserSubscribers,
-  setClearUsersPagination,
   setClearCommentators,
 } = userSlice.actions;
 export const userReducer = userSlice.reducer;
