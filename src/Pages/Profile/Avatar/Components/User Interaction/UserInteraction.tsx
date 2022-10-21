@@ -10,19 +10,17 @@ import {
   fetchUserFriends,
   fetchUserSubscribers,
 } from '../../../../../store/user/slice';
-
 import {
   fetchNotifications,
   fetchNotificationsPost,
   fetchNotificationsPush,
   fetchDeleteRequest,
 } from '../../../../../store/notifications/slice';
-
 import { useParams } from 'react-router-dom';
 
-export type MyParams = {
+interface MyParams {
   id: string;
-};
+}
 
 export const UserInteraction: React.FC = () => {
   const dispatch = useAppDispatch();

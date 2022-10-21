@@ -1,12 +1,7 @@
 import React from 'react';
-import { AboutInfo } from './components/About Info/AboutInfo';
-import { EditInfo } from './components/Edit Info/EditInfo';
 import { useAppSelector } from '../../../store/store';
+import { AboutInfo, EditInfo } from './components/index';
 import './style.scss';
-
-export type MyParams = {
-  id: string;
-};
 
 export const UserInfo: React.FC = () => {
   const state = useAppSelector((state) => state);

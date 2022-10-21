@@ -21,7 +21,7 @@ export const App: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(fetchAuthMe());
-    dispatch(fetchMainUser(auth?._id));
+   if (auth?._id !== undefined) dispatch(fetchMainUser(auth?._id));
   }, [dispatch, auth?._id]);
 
   return (

@@ -7,7 +7,7 @@ import './style.scss';
 export const Header: React.FC = () => {
   return (
     <div className="header">
-      <div className="header_container">
+      <div className="header__container">
         <Wave />
         <ControlPanel />
         <Menu />

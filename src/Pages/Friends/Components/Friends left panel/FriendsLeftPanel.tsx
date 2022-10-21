@@ -34,13 +34,17 @@ export const FriendsLeftPanel: React.FC<MyProps> = ({ data, lastFriend }: MyProp
   const friend = data;
 
   const deleteFriend = async (userId: string) => {
+    const mainUserIndex = state.user.findUserFriends
+      .find((user) => user._id === userId)!
+      .friends.findIndex((friendId) => friendId === state.user.mainUser?._id);
+
+    const secondUserIndex = state.user.mainUser?.friends.findIndex((friendId) => friendId === userId);
+
     await dispatch(
       fetchDeleteFriend({
         id: userId,
-        index: state.user.findUserFriends
-          .find((user) => user._id === userId)!
-          .friends.findIndex((friendId) => friendId === state.user.mainUser?._id),
-        index2: state.user.mainUser?.friends.findIndex((friendId) => friendId === userId),
+        index: mainUserIndex,
+        index2: secondUserIndex,
         user: id,
       }),
     );

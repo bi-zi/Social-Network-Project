@@ -1,26 +1,28 @@
-.footer {
-  position: absolute;
+@media (width > 460px) and (height > 420px) {
+  .footer {
+    position: absolute;
 
-  width: 100%;
-  height: calc(10px + 30 * (100vh / 1080));
+    width: 100%;
+    height: calc(10px + 30 * (100vh / 1080));
 
-  left: 0;
-  bottom: 0;
+    left: 0;
+    bottom: 0;
 
-  text-align: center;
+    text-align: center;
 
-  box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
 
-  background-color: var(--interface-color);
-  color: var(--text-color);
-
-  .footer_url {
-    position: relative;
-
-    bottom: -0.3vh;
-
-    font: normal 400 calc(10px + 10 * (100vw / 1080)) 'Iceberg';
-
+    background-color: var(--interface-color);
     color: var(--text-color);
+
+    .footer__url {
+      position: relative;
+
+      bottom: -0.3vh;
+
+      font: normal 400 calc(10px + 10 * (100vw / 1080)) 'Iceberg';
+
+      color: var(--text-color);
+    }
   }
 }

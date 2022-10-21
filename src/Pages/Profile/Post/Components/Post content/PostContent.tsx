@@ -1,12 +1,11 @@
 import React from 'react';
 import { useAppSelector } from '../../../../../store/store';
-
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-export type MyParams = {
+interface MyParams {
   id: string;
-};
+}
 
 export const PostContent: React.FC = () => {
   const state = useAppSelector((state) => state);

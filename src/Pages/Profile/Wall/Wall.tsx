@@ -1,20 +1,13 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { fetchUserPostsAll } from '../../../store/post/slice';
-
+import { WallHeader, WallContent, WallControlPanel, WallComments } from './Components/index';
 import { useParams } from 'react-router-dom';
-
 import { useWall } from './Components/useWall';
 import './style.scss';
-
-import { WallHeader } from './Components/Wall header/WallHeader';
-import { WallContent } from './Components/Wall content/WallContent';
-import { WallControlPanel } from './Components/Wall control panel/WallControlPanel';
-import { WallComments } from './Components/Wall comments/WallComments';
-
-export type MyParams = {
+interface MyParams {
   id: string;
-};
+}
 
 export const Wall: React.FC = () => {
   const dispatch = useAppDispatch();

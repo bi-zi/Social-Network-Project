@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
-import { setCatergorySort, setSortedUsers, setSortBy } from '../../../../store/friends/slice';
+import { setCatergorySort, setSortBy } from '../../../../store/friends/slice';
 import './style.scss';
 
 
@@ -12,8 +12,6 @@ export type MyProps = {
 export const FriendsControlPanel: React.FC<MyProps> = ({ data }: MyProps) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
-
-
   const category = state.friendsPage.categorySort;
   const sortBy = state.friendsPage.sortBy;
 

@@ -2,15 +2,12 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/store';
 import { setPostIndex } from '../../../../../store/post/slice';
 import { Post } from '../../../../../store/post/types';
-
 import { useParams, Link } from 'react-router-dom';
+import './style.scss';
 
- import './style.scss';
-
-export type MyParams = {
+interface MyParams {
   id: string;
 };
-
 interface MyProps {
   data: Post;
   index: number;
@@ -22,15 +19,14 @@ export const WallContent: React.FC<MyProps> = ({ data, index, postLength }: MyPr
   const state = useAppSelector((state) => state);
 
   const { id } = useParams<keyof MyParams>() as MyParams;
-
   const postIndex = index;
 
   return (
     <>
       <div className="wall__content-container">
-        {data.text?.length > 0 ? <div className="wall_content-container__text">{data.text}</div> : ''}
+        {data?.text?.length > 0 ? <div className="wall_content-container__text">{data?.text}</div> : ''}
 
-        {data.imagesPost?.length > 0 ? (
+        {data?.imagesPost?.length > 0 ? (
           <div className="wall__content-container__images">
             {data?.imagesPost.map((image, index) => {
               return (
@@ -63,7 +59,7 @@ export const WallContent: React.FC<MyProps> = ({ data, index, postLength }: MyPr
           ''
         )}
 
-        {data.videoPost.length > 0 ? (
+        {data?.videoPost?.length > 0 ? (
           <>
             <iframe
               src={data.videoPost}

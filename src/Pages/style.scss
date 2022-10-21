@@ -21,19 +21,13 @@
 
     text-align: center;
 
-    .layout_link {
+    .layout__link {
       text-decoration: underline;
       padding-bottom: 1vh;
     }
 
-    .layout_link a {
+    .layout__link a {
       color: rgb(56, 169, 250);
     }
   }
-}
-
-.fast_style {
-  margin: 5vh 5vw;
-  font-size: 5vw;
-  color: white;
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/store';
-
 import {
   fetchMainUserMessages,
   fetchSecondUserMessages,
@@ -11,7 +10,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-export type MyParams = {
+interface MyParams {
   id: string;
 };
 
@@ -47,11 +46,9 @@ export const SendMessage: React.FC = () => {
     // выбор пользователя при переходе на страницу чатов
     dispatch(setSelectedUser(id));
 
-
     dispatch(fetchMainUserMessages(auth?._id));
     dispatch(fetchSecondUserMessages(id));
   };
-
 
   const loadStatus =
     state.user.status === 'loaded' &&
@@ -59,7 +56,7 @@ export const SendMessage: React.FC = () => {
     state.messages.status === 'loaded';
 
   React.useEffect(() => {
-    dispatch(fetchMainUserMessages(auth?._id));
+    if (auth?._id !== undefined) dispatch(fetchMainUserMessages(auth?._id));
 
     if (auth._id !== undefined && auth._id !== id) dispatch(fetchSecondUserMessages(id));
   }, [dispatch, auth?._id, id]);

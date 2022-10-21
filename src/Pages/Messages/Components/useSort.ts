@@ -1,5 +1,5 @@
-import { Messages, MessagesSliceState } from '../../../store/messages/types';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { Messages } from '../../../store/messages/types';
+import { useAppSelector } from '../../../store/store';
 
 export function useSort(data: Messages) {
   const state = useAppSelector((state) => state);

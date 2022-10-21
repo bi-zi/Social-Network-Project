@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchUserUpdate, fetchOneUser } from '../../store/user/slice';
 import { fetchSlider, fetchSliderDelete } from '../../store/slider/slice';
 import { setCreateImgDelete } from '../../store/post/slice';
-import { Navigate } from 'react-router-dom';
+import { Link, useParams, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCircleChevronRight, faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import './style.scss';
@@ -56,7 +55,7 @@ export const Photo: React.FC = () => {
   React.useEffect(() => {
     dispatch(fetchSlider(user));
     dispatch(fetchOneUser(user));
-  }, []);
+  }, [dispatch, user]);
 
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
@@ -66,22 +65,31 @@ export const Photo: React.FC = () => {
     state.user.status === 'loaded' && state.auth.status === 'loaded' && state.slider.status === 'loaded';
 
   return (
-    <div className="selectedImg">
-      <div className="selectedImg_viewing">
-        <Link to={`/Profile/${user}`} style={{ color: '#000000' }} className="selectedImg_cloce">
-          <FontAwesomeIcon className="selectedImg_close" icon={faXmark} />
+    <div className="selected-image">
+      <div className="selected-image__container">
+        <Link
+          to={`/Profile/${user}`}
+          style={{ color: '#000000' }}
+          className="selected-image__container-close">
+          <FontAwesomeIcon icon={faXmark} />
         </Link>
 
-        <img src={readyPhotos?.[+id]} width={10} alt="" className="selectedImg_img" />
+        <img src={readyPhotos?.[+id]} width={10} alt="" className="selected-image__container-img" />
 
         {readyPhotos?.length !== 1 ? (
           <>
             <Link to={`/${user}/${category}/${+id === 0 ? readyPhotos!?.length - 1 : +id - 1}`}>
-              <FontAwesomeIcon className="selectedImg_swap_left" icon={faCircleChevronLeft} />
+              <FontAwesomeIcon
+                className="selected-image__container__swap-left"
+                icon={faCircleChevronLeft}
+              />
             </Link>
 
             <Link to={`/${user}/${category}/${readyPhotos!?.length - 1 === +id ? 0 : +id + 1}`}>
-              <FontAwesomeIcon className="selectedImg_swap_right" icon={faCircleChevronRight} />
+              <FontAwesomeIcon
+                className="selected-image__container__swap-right"
+                icon={faCircleChevronRight}
+              />
             </Link>
           </>
         ) : (
@@ -89,7 +97,7 @@ export const Photo: React.FC = () => {
         )}
         <>
           {state.auth.data?._id === user && loadStatus && category !== 'WallPost' ? (
-            <button className="selectedImg_delete_img">
+            <button className="selected-image__container__delete-img">
               <Link
                 to={`/Profile/${user}`}
                 style={{ color: '#ffffff', textDecoration: 'none' }}

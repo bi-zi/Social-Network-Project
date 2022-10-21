@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { UserPost, UserPostSliceState, Status } from './types';
 import axios from '../../Backend/axios';
-import { act } from 'react-dom/test-utils';
 
 export const fetchUserPostsAll = createAsyncThunk(
   '/post/userPostsAll/:id/fetchUserPostAll',

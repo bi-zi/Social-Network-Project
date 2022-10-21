@@ -1,22 +1,20 @@
 import React from 'react';
+import Slider from 'react-slick';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { fetchSlider, fetchSliderDelete } from '../../../store/slider/slice';
 import { setInputNumber } from '../../../store/user/slice';
+import { ImageParsing } from '../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { ImageParsing } from '../../../ImageParsing/ImageParsing';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-
-import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './style.scss';
 
-export type MyParams = {
+interface MyParams {
   id: string;
-};
+}
 
 export const PhotoSlider: React.FC = () => {
   const dispatch = useAppDispatch();

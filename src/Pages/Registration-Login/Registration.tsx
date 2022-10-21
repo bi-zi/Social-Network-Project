@@ -57,18 +57,18 @@ export const Registration = () => {
   }
 
   return (
-    <div className="registration_container">
-      <div className="registration_attention">
+    <div className="registration">
+      <div className="registration__attention">
         Do not provide personal email addresses and passwords. The data is encrypted but available to
         everyone!
       </div>
-      <div className="registration">
+      <div className="registration__block">
         Registration
-        <form className="registration_form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="registration__block__form" onSubmit={handleSubmit(onSubmit)}>
           <label>
             <input
               {...register('firstName', { required: 'Укажите полное имя' })}
-              className="registration_form_firstName"
+              className="registration__block__form-first-name"
               type="text"
               placeholder="First Name"
               pattern="^[a-zA-Z]*$"
@@ -78,7 +78,7 @@ export const Registration = () => {
             />
             <input
               {...register('lastName', { required: 'Укажите полное имя' })}
-              className="registration_form_lastName"
+              className="registration__block__form-last-name"
               type="text"
               pattern="^[a-zA-Z]*$"
               placeholder="Last Name"
@@ -87,7 +87,7 @@ export const Registration = () => {
               maxLength={30}
             />
             <input
-              className="registration_form_lastName"
+              className="registration__block__form-last-name"
               type="email"
               placeholder="@gmail.com"
               pattern="^[a-zA-Z0-9-.@_]*$"
@@ -95,9 +95,9 @@ export const Registration = () => {
               {...register('email', { required: 'Укажите почту' })}
               maxLength={60}
             />
-            <div className="registration_form_password_block">
+            <div className="registration__block__form-pass-block">
               <input
-                className="registration_form_password"
+                className="registration__block__form-pass-block__password"
                 type={passwordShown ? 'text' : 'password'}
                 placeholder="password"
                 pattern="^[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
@@ -108,23 +108,23 @@ export const Registration = () => {
               {passwordShown ? (
                 <FontAwesomeIcon
                   icon={faLockOpen}
-                  className="register__password--icon--unlock"
+                  className="registration__block__form-pass-block__password-icon-lock"
                   onClick={togglePassword}
                 />
               ) : (
                 <FontAwesomeIcon
                   icon={faLock}
-                  className="register__password--icon--lock"
+                  className="registration__block__form-pass-block__password-icon-unlock"
                   onClick={togglePassword}
                 />
               )}
             </div>
           </label>
-          <button type="submit" className="registration_form_submit" disabled={!isValid}>
+          <button type="submit" className="registration__block__form-submit" disabled={!isValid}>
             Submit
           </button>
 
-          <div className="registration_link_to">
+          <div className="registration__block__form-link-to">
             <NavLink to="/Login">Sing in</NavLink>
           </div>
         </form>

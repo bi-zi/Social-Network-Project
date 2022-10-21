@@ -1,12 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/store';
 import { setCreatText } from '../../../../../store/post/slice';
-
 import './style.scss';
-
-export type MyParams = {
-  id: string;
-};
 
 export const AvatarInput: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +13,6 @@ export const AvatarInput: React.FC = () => {
     if (state.post?.createText?.length === 0 && textRef.current?.value.length > 0)
       textRef.current.value = '';
   }
-
 
   return (
     <div className="post__avatar-input-container">

@@ -7,17 +7,15 @@ import {
   fetchCommentDelete,
   setComments,
 } from '../../../../../store/post/slice';
-
+import { Post } from '../../../../../store/post/types';
 import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faPlay } from '@fortawesome/free-solid-svg-icons';
-import { Post } from '../../../../../store/post/types';
 import './style.scss';
 
-export type MyParams = {
+interface MyParams {
   id: string;
-};
-
+}
 interface MyProps {
   data: Post;
   index: number;
@@ -68,23 +66,23 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
     <>
       {state.post.comments === postIndex ? (
         <div className="wall__comments">
-            <input
-              className="wall__comments__input"
-              placeholder="Write your comment here"
-              maxLength={280}
-              pattern="^[a-zA-Z0-9 ]+$"
-              title="Only latin characters can be used"
-              onChange={(e) => dispatch(setCreateComment(e.target.value))}
-              ref={firstRef}
-            />
+          <input
+            className="wall__comments__input"
+            placeholder="Write your comment here"
+            maxLength={280}
+            pattern="^[a-zA-Z0-9 ]+$"
+            title="Only latin characters can be used"
+            onChange={(e) => dispatch(setCreateComment(e.target.value))}
+            ref={firstRef}
+          />
 
-            <button
-              className="wall__comments__submit-button"
-              onClick={() =>
-                postStatus && state.post.createComment.length > 0 ? addComment(data._id) : ''
-              }>
-              <FontAwesomeIcon className="wall__comments__submit-button-icon" icon={faPlay} />
-            </button>
+          <button
+            className="wall__comments__submit-button"
+            onClick={() =>
+              postStatus && state.post.createComment.length > 0 ? addComment(data._id) : ''
+            }>
+            <FontAwesomeIcon className="wall__comments__submit-button-icon" icon={faPlay} />
+          </button>
 
           {data.commentPost?.map((comment, index) => (
             <div className="wall__comments__comment" key={index}>

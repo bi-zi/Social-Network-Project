@@ -9,8 +9,8 @@ import {
   fetchPostPush,
 } from '../../../../../store/post/slice';
 import { setInputNumber } from '../../../../../store/user/slice';
-import { useParams } from 'react-router-dom';
 import { ImageParsing } from '../../../../../ImageParsing/ImageParsing';
+import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlay,
@@ -23,9 +23,9 @@ import {
 import { faImage } from '@fortawesome/free-regular-svg-icons';
 import './style.scss';
 
-export type MyParams = {
+interface MyParams {
   id: string;
-};
+}
 
 export const ControlPanel: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -40,6 +40,9 @@ export const ControlPanel: React.FC = () => {
   const postText = state.post.createText;
   const numImg = readyPhotos.length;
 
+  // отправка поста если поле текста или количество видео или картинок больше 0
+  // так же идет проверка есть ли вообще у пользователя база данных на сервере если нет она создается
+  // возможно эту проверку нужно делать на сервере ну я думаю тут нет разницы особо
   const sendPost = async () => {
     const createPostBool =
       (textLength > 0 || numImg > 0 || localStorage.postVideo?.split('/').length > 1) &&
@@ -85,7 +88,6 @@ export const ControlPanel: React.FC = () => {
     state.post.userPosts.status === 'loaded' &&
     state.user.status === 'loaded' &&
     state.auth.status === 'loaded';
-
 
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));

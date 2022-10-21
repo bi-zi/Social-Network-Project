@@ -35,6 +35,8 @@ export const Friends: React.FC = () => {
     sortedFriends = state.user.findUserSubscribers;
   }
 
+  // все эти if else я пытался выносить в функции но у меня не получалось достичь нужного результата поэтому
+  // я решил оставть так тут нет ничего сложного просто сортировки
   if (state.friendsPage.sortBy === 'a-z') {
     sortedFriends = [...sortedFriends]?.sort(function (a, b) {
       if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
@@ -85,7 +87,6 @@ export const Friends: React.FC = () => {
     });
   }
 
-
   const checkPagination =
     state.friendsPage.users[1] >= state.friendsPage.users[0] &&
     state.friendsPage.categorySort === 'people';
@@ -124,7 +125,11 @@ export const Friends: React.FC = () => {
         {checkPagination ? (
           <div
             className="users__left-panel__show-more-people"
-            onClick={() => dispatch(fetchUsersPagination(state.friendsPage.users[0] + 10))}>
+            onClick={() =>
+              state.friendsPage.status === 'loaded'
+                ? dispatch(fetchUsersPagination(state.friendsPage.users[0] + 10))
+                : ''
+            }>
             Show more users
           </div>
         ) : (

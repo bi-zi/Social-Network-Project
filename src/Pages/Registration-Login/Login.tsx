@@ -16,9 +16,6 @@ export const Login = () => {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(selectIsAuth);
   const data = useAppSelector((state) => state.auth?.data);
-  const state = useAppSelector((state) => state);
-
-
 
   const [passwordShown, setPasswordShown] = React.useState(false);
 
@@ -54,17 +51,18 @@ export const Login = () => {
   }
 
   return (
-    <div className="registration_container">
-      <div className="registration_attention">
+    <div className="registration">
+      <div className="registration__attention">
         Do not provide personal email addresses and passwords. The data is encrypted but available to
         everyone!
       </div>
-      <div className="registration">
+
+      <div className="registration__block">
         Authorization
-        <form className="registration_form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="registration__block__form" onSubmit={handleSubmit(onSubmit)}>
           <label>
             <input
-              className="registration_form_lastName"
+              className="registration__block__form-last-name"
               type="email"
               pattern="^[a-zA-Z0-9-.@_]*$"
               title="Only these characters can be used a-z A-Z 0-9 - . @ _"
@@ -73,9 +71,10 @@ export const Login = () => {
               placeholder="@gmail.com"
               {...register('email', { required: 'Укажите почту' })}
             />
-            <div className="registration_form_password_block">
+
+            <div className="registration__block__form-pass-block">
               <input
-                className="registration_form_password"
+                className="registration__block__form-pass-block__password"
                 type={passwordShown ? 'text' : 'password'}
                 placeholder="password"
                 pattern="^[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
@@ -87,24 +86,24 @@ export const Login = () => {
               {passwordShown ? (
                 <FontAwesomeIcon
                   icon={faLockOpen}
-                  className="register__password--icon--unlock"
+                  className="registration__block__form-pass-block__password-icon-lock"
                   onClick={togglePassword}
                 />
               ) : (
                 <FontAwesomeIcon
                   icon={faLock}
-                  className="register__password--icon--lock"
+                  className="registration__block__form-pass-block__password-icon-unlock"
                   onClick={togglePassword}
                 />
               )}
             </div>
           </label>
           <br />
-          <button type="submit" className="registration_form_submit" disabled={!isValid}>
+          <button type="submit" className="registration__block__form-submit" disabled={!isValid}>
             Submit
           </button>
 
-          <div className="registration_link_to">
+          <div className="registration__block__form-link-to">
             <NavLink to="/Register">Register an account</NavLink>
           </div>
         </form>

@@ -4,6 +4,7 @@ import { fetchOneUser } from '../../../store/user/slice';
 import { setCatergorySort } from '../../../store/friends/slice';
 import { fetchNotifications, fetchNotificationsDelete } from '../../../store/notifications/slice';
 import { fetchSlider } from '../../../store/slider/slice';
+
 import { useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
@@ -39,7 +40,7 @@ export const ControlPanel: React.FC = () => {
   return (
     <>
       {localStorage.isAuth !== undefined && state.auth.status === 'loaded' ? (
-        <div className="header_control_panel">
+        <div className="header__control-panel">
           <NavLink
             to={`/Profile/${state.auth?.data?._id}`}
             style={
@@ -51,25 +52,25 @@ export const ControlPanel: React.FC = () => {
               dispatch(fetchOneUser(state.auth?.data?._id));
               dispatch(fetchSlider(state.auth?.data?._id));
             }}>
-            <FontAwesomeIcon className="header_profile_icon" icon={faCircleUser} />
+            <FontAwesomeIcon className="header__control-panel__icons" icon={faCircleUser} />
           </NavLink>
 
-          <div className="header_bell_block">
-            <FontAwesomeIcon className="header_bell_icon" icon={faBell} />
+          <div className="header__control-panel__profile-icon__bell-block">
+            <FontAwesomeIcon className="header__control-panel__icons" icon={faBell} />
             {note?.friendRequest!?.length > 0 ? (
-              <div className="notifications_number">{note?.friendRequest?.length}</div>
+              <div className="header__notifications-number">{note?.friendRequest?.length}</div>
             ) : (
               ''
             )}
 
-            <div className="notifications">
+            <div className="header__notifications">
               {note?.friendRequest?.length !== 0 ? (
                 <>
-                  <div className="header_friend_requests">
+                  <div className="header__notifications__friend-requests">
                     You have friend requests! &nbsp;
                     <NavLink
                       to={`/Friends/${state.auth?.data?._id}`}
-                      className="notifications_show"
+                      className="header__notifications-show"
                       onClick={() => {
                         dispatch(setCatergorySort('subscribers'));
                         onHideNote();
@@ -77,21 +78,21 @@ export const ControlPanel: React.FC = () => {
                       Show
                     </NavLink>
                     &nbsp;
-                    <div className="notifications_hide" onClick={() => onHideNote()}>
+                    <div className="header__notifications-hide" onClick={() => onHideNote()}>
                       Hide
                     </div>
                   </div>
                 </>
               ) : (
-                <div className="no_notifications">You don't have notifications</div>
+                <div className="header__notifications__no-note">You don't have notifications</div>
               )}
             </div>
           </div>
 
-          <FontAwesomeIcon className="header_news_icon" icon={faPager} />
+          <FontAwesomeIcon className="header__control-panel__icons" icon={faPager} />
 
           <NavLink to="/Messages" style={path !== 'Messages' ? { color: 'white' } : { color: 'black' }}>
-            <FontAwesomeIcon className="header_messages_icon" icon={faComment} />
+            <FontAwesomeIcon className="header__control-panel__icons" icon={faComment} />
           </NavLink>
 
           <NavLink
@@ -105,20 +106,20 @@ export const ControlPanel: React.FC = () => {
             }
             className={({ isActive }) => (isActive ? 'active' : 'inactive')}
             onClick={() => dispatch(fetchOneUser(state.auth?.data?._id))}>
-            <FontAwesomeIcon className="header_users_icon" icon={faUserGroup} />
+            <FontAwesomeIcon className="header__control-panel__icons" icon={faUserGroup} />
           </NavLink>
 
-          <FontAwesomeIcon className="header_community_icon" icon={faUsers} />
-          <FontAwesomeIcon className="header_image_icon" icon={faImage} />
-          <FontAwesomeIcon className="header_video_icon" icon={faFilm} />
-          <FontAwesomeIcon className="header_music_icon" icon={faMusic} />
+          <FontAwesomeIcon className="header__control-panel__icons header-closed-icon" icon={faUsers} />
+          <FontAwesomeIcon className="header__control-panel__icons header-closed-icon" icon={faImage} />
+          <FontAwesomeIcon className="header__control-panel__icons header-closed-icon" icon={faFilm} />
+          <FontAwesomeIcon className="header__control-panel__icons header-closed-icon" icon={faMusic} />
         </div>
       ) : error ? (
-        <div className="header_error" style={{ color: 'green' }}>
+        <div className="header__error" style={{ color: 'green' }}>
           You need to register or login
         </div>
       ) : loading ? (
-        <div className="header_error" style={{ color: 'red' }}>
+        <div className="header__error" style={{ color: 'red' }}>
           Please wait for loading
         </div>
       ) : (

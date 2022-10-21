@@ -15,10 +15,6 @@ export const Menu: React.FC = () => {
   const onClickLogout = () => {
     if (window.confirm('Вы действительно хотите выйти?')) {
       dispatch(logout());
-      // localStorage.removeItem('isAuth');
-      // window.localStorage.removeItem('token');
-      // localStorage.removeItem('postText');
-      // localStorage.removeItem('postVideo');
       localStorage.clear();
       dispatch(setCreatText(''));
       dispatch(setCreateVid(''));
@@ -27,12 +23,12 @@ export const Menu: React.FC = () => {
 
   return (
     <>
-      <div className="header_menu">
+      <div className="header__menu">
         <Loading />
 
-        <FontAwesomeIcon className="header_menu_burger" icon={faAlignJustify} />
+        <FontAwesomeIcon className="header__menu-burger" icon={faAlignJustify} />
 
-        <div className="header_menu_block">
+        <div className="header__menu-burger__block">
           <NavLink
             to="/Login"
             onClick={() =>
@@ -42,7 +38,7 @@ export const Menu: React.FC = () => {
                   : dispatch(setAttention(1))
                 : 'Loading, please wait'
             }>
-            <div className="header_menu_login">Login</div>
+            <div className="header__menu-burger__block-login">Login</div>
           </NavLink>
 
           <NavLink
@@ -54,7 +50,7 @@ export const Menu: React.FC = () => {
                   : dispatch(setAttention(1))
                 : 'Loading, please wait'
             }>
-            <div className="header_menu_register">Register</div>
+            <div className="header__menu-burger__block-register">Register</div>
           </NavLink>
         </div>
       </div>

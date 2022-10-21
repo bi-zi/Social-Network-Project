@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
 import { fetchSecondUserMessages, setSelectedUser, setFindChat } from '../../../../store/messages/slice';
+import { useSort } from '../useSort';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { useSort } from '../useSort';
 import './style.scss';
 
 export const Chats: React.FC = () => {
@@ -30,6 +30,7 @@ export const Chats: React.FC = () => {
     }
   };
 
+  // при выборе чата подгружаются данные переписки и обнуляются данные input
   const selectUser = (friendId: string) => {
     dispatch(setSelectedUser(friendId));
     dispatch(fetchSecondUserMessages(selectedUser?._id));

@@ -1,9 +1,5 @@
 import React from 'react';
-
-import { AvatarImage } from './Components/Avatar Image/AvatarImage';
-import { ChangeButton } from './Components/Change Avatar/ChangeButton';
-import { SendMessage } from './Components/Send Message/SendMessage';
-import { UserInteraction } from './Components/User Interaction/UserInteraction';
+import { AvatarImage, ChangeButton, SendMessage, UserInteraction } from './Components/index';
 import './style.scss';
 
 export const Avatar: React.FC = () => {

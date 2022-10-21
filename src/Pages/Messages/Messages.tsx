@@ -1,9 +1,6 @@
 import React from 'react';
-
 import { Chats, Correspondence } from './Components/index';
-
 import { Navigate } from 'react-router-dom';
-
 import './style.scss';
 
 export const Messages: React.FC = () => {

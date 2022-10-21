@@ -5,7 +5,7 @@ import { setCatergorySort } from '../../../store/friends/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-export type MyParams = {
+interface MyParams {
   id: string;
 };
 

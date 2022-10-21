@@ -14,6 +14,7 @@ import { Videos } from './Videos/Videos';
 import { Music } from './Music/Music';
 import { useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
+import './style.scss';
 
 export type MyParams = {
   id: string;
@@ -38,11 +39,9 @@ export const Profile: React.FC = () => {
     return <Navigate to="/Login" />;
   }
   return (
-    <div
-      className="profile_container"
-      style={postLength === 0 ? { paddingBottom: 0 } : { paddingBottom: 0 }}>
-      <div className="left_container">
-        <div className="left_container_sticky">
+    <div className="profile" style={postLength === 0 ? { paddingBottom: 0 } : { paddingBottom: 0 }}>
+      <div className="profile__left-container">
+        <div className="profile__left-container-sticky">
           <Avatar />
           <Friends />
           <Subscribers />
@@ -52,7 +51,7 @@ export const Profile: React.FC = () => {
         </div>
       </div>
 
-      <div className="profile_rightContainer">
+      <div className="profile__right-container">
         <UserInfo />
         <PhotoSlider />
         {data?._id === id ? <Post /> : ''}

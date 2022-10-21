@@ -9,9 +9,9 @@ import {
 import { About } from '../../../../../store/about/types';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-
 import './style.scss';
-export type MyParams = {
+
+interface MyParams {
   id: string;
 };
 

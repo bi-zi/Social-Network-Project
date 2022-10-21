@@ -1,14 +1,16 @@
-.avatar__image {
-  position: relative;
+@media (width > 460px) and (height > 420px) {
+  .avatar__image {
+    position: relative;
 
-  margin-bottom: 0.5vh;
+    margin-bottom: 0.5vh;
 
-  width: 100%;
-  height: 90%;
+    width: 100%;
+    height: 90%;
 
-  border-radius: var(--borderRadius-interface);
+    border-radius: var(--borderRadius-interface);
 
-  &:hover {
-    border: var(--borderImages);
+    &:hover {
+      border: var(--borderImages);
+    }
   }
 }

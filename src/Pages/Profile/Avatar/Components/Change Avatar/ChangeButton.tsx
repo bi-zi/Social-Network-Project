@@ -5,7 +5,7 @@ import { ImageParsing } from '../../../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
 import './style.scss';
 
-export type MyParams = {
+interface MyParams {
   id: string;
 };
 
@@ -28,7 +28,7 @@ export const ChangeButton: React.FC = () => {
             onChange={() => {
               dispatch(setInputNumber('0'));
             }}>
-            
+
             {auth === null ? '' : 'Change photo'}
 
             {auth?._id === id && loadStatus ? (

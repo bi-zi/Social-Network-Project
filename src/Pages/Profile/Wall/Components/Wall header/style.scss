@@ -1,84 +1,86 @@
-.wall__header {
-  display: flex;
-
-  margin-bottom: 1vh;
-
-  height: auto;
-  justify-content: space-between;
-
-  .wall__header-left {
+@media (width > 460px) and (height > 420px) {
+  .wall__header {
     display: flex;
 
-    width: 100%;
+    margin-bottom: 1vh;
 
-    .wall__header-left__avatar {
-      position: relative;
-      width: calc(15px + 50 * (100vh / 1080));
-      height: calc(15px + 50 * (100vh / 1080));
+    height: auto;
+    justify-content: space-between;
 
-      border-radius: 100%;
-    }
-
-    .wall__header-left__header-left__full-name-date {
-      position: relative;
-      padding: 0.5vh 0 0 0.5vw;
-
-      .wall__header-left__full-name-date__full-name {
-        font: normal 400 calc(8px + 16 * (100vw / 1920)) 'Iceberg';
-      }
-
-      .wall__header-left__full-name-date__date {
-        width: calc(50px + 120 * (100vw / 1920));
-        font: normal 400 calc(6px + 12 * (100vw / 1920)) 'Iceberg';
-      }
-    }
-  }
-
-  .wall__header-right {
-    position: relative;
-
-    width: 24%;
-
-    text-align: right;
-
-    z-index: 0;
-
-    .wall__header-right__menu {
-      padding: 0.5vh 0.5vw;
-
-      width: calc(10px + 30 * (100vw / 1920));
-      height: calc(10px + 30 * (100vw / 1920));
-
-      cursor: pointer;
-    }
-
-    &:active .wall__header-right__menu-block {
-      display: block !important;
-    }
-
-    .wall__header-right__menu-block {
-      display: none;
-      position: absolute;
-      padding-top: 5vh;
+    .wall__header-left {
+      display: flex;
 
       width: 100%;
-      height: 200%;
 
-      top: 0;
+      .wall__header-left__avatar {
+        position: relative;
+        width: calc(15px + 50 * (100vh / 1080));
+        height: calc(15px + 50 * (100vh / 1080));
 
-      font: normal 400 calc(6px + 20 * (100vw / 1920)) 'Iceberg';
-
-      cursor: pointer;
-
-      z-index: 999;
-      &:hover {
-        display: block;
+        border-radius: 100%;
       }
 
-      .wall__header-right__menu-block__delete-post {
+      .wall__header-left__header-left__full-name-date {
+        position: relative;
+        padding: 0.5vh 0 0 0.5vw;
+
+        .wall__header-left__full-name-date__full-name {
+          font: normal 400 calc(8px + 16 * (100vw / 1920)) 'Iceberg';
+        }
+
+        .wall__header-left__full-name-date__date {
+          width: calc(50px + 120 * (100vw / 1920));
+          font: normal 400 calc(6px + 12 * (100vw / 1920)) 'Iceberg';
+        }
+      }
+    }
+
+    .wall__header-right {
+      position: relative;
+
+      width: 24%;
+
+      text-align: right;
+
+      z-index: 0;
+
+      .wall__header-right__menu {
         padding: 0.5vh 0.5vw;
-        border: 0.3vh solid white;
-        background-color: black;
+
+        width: calc(10px + 30 * (100vw / 1920));
+        height: calc(10px + 30 * (100vw / 1920));
+
+        cursor: pointer;
+      }
+
+      &:active .wall__header-right__menu-block {
+        display: block !important;
+      }
+
+      .wall__header-right__menu-block {
+        display: none;
+        position: absolute;
+        padding-top: 5vh;
+
+        width: 100%;
+        height: 200%;
+
+        top: 0;
+
+        font: normal 400 calc(6px + 20 * (100vw / 1920)) 'Iceberg';
+
+        cursor: pointer;
+
+        z-index: 999;
+        &:hover {
+          display: block;
+        }
+
+        .wall__header-right__menu-block__delete-post {
+          padding: 0.5vh 0.5vw;
+          border: 0.3vh solid white;
+          background-color: black;
+        }
       }
     }
   }

@@ -7,9 +7,8 @@ import {
   fetchAddMessage,
   setAddMessages,
 } from '../../../../store/messages/slice';
-import { NavLink } from 'react-router-dom';
 import { useSort } from '../useSort';
-
+import { NavLink } from 'react-router-dom';
 import './style.scss';
 
 export const Correspondence: React.FC = () => {
@@ -89,9 +88,11 @@ export const Correspondence: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchMainUserMessages(auth?._id));
-    dispatch(fetchUsersForChats(auth?._id));
-    dispatch(fetchSecondUserMessages(selectedUser?._id));
+    if (auth?._id !== undefined) {
+      dispatch(fetchMainUserMessages(auth?._id));
+      dispatch(fetchUsersForChats(auth?._id));
+      dispatch(fetchSecondUserMessages(selectedUser?._id));
+    }
   }, [dispatch, auth?._id, selectedUser?._id, chatIndexSort]);
 
   return (

@@ -1,25 +1,27 @@
-    .change__avatar-button {
-      position: relative;
+@media (width > 460px) and (height > 420px) {
+  .change__avatar-button {
+    position: relative;
 
-      width: 100%;
+    width: 100%;
 
-      height: calc(10px + 31 * (100vw / 1920));
+    height: calc(10px + 31 * (100vw / 1920));
 
-      border: 0;
-      border-radius: var(--borderRadius-interface);
+    border: 0;
+    border-radius: var(--borderRadius-interface);
 
-      background-image: linear-gradient(to right, #000000 0%, #0164f8 50%, #000000 105%);
-      background-size: 200% auto;
+    background-image: linear-gradient(to right, #000000 0%, #0164f8 50%, #000000 105%);
+    background-size: 200% auto;
 
-      box-shadow: 0 0 .5vh rgb(162, 162, 162);
+    box-shadow: 0 0 0.5vh rgb(162, 162, 162);
 
-      text-transform: uppercase;
-      font: normal 400 calc(2px + 16 * (100vw / 1920)) 'Iceberg';
-      letter-spacing: calc(2px + 2 * (100vw / 1920));
+    text-transform: uppercase;
+    font: normal 400 calc(2px + 16 * (100vw / 1920)) 'Iceberg';
+    letter-spacing: calc(2px + 2 * (100vw / 1920));
 
-      transition: 0.5s;
+    transition: 0.5s;
 
-      z-index: 10;
+    z-index: 10;
 
-      color: var(--text-color);
-    }
+    color: var(--text-color);
+  }
+}

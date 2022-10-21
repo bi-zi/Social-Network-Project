@@ -1,5 +1,5 @@
 @media (width > 460px) and (height > 420px) {
-  .registration_container {
+  .registration {
     position: relative;
     margin: 0 auto;
 
@@ -9,7 +9,7 @@
     user-select: none;
   }
 
-  .registration_attention {
+  .registration__attention {
     position: relative;
 
     margin: 0 auto;
@@ -25,7 +25,7 @@
     color: rgb(255, 0, 0);
   }
 
-  .registration {
+  .registration__block {
     position: relative;
     margin: 0 auto;
 
@@ -43,7 +43,7 @@
     background-color: var(--interface-color);
     color: var(--text-color);
 
-    .registration_form {
+    .registration__block__form {
       padding-top: 2vh;
 
       width: 100%;
@@ -51,9 +51,9 @@
 
       text-align: center;
 
-      .registration_form_firstName,
-      .registration_form_lastName,
-      .registration_form_password {
+      .registration__block__form-first-name,
+      .registration__block__form-last-name,
+      .registration__block__form-pass-block__password {
         width: 60%;
         height: 6vh;
 
@@ -71,22 +71,22 @@
         color: var(--text-color);
       }
 
-      .registration_form_password {
+      .registration__block__form-pass-block__password {
         margin-bottom: 1vh;
         padding-right: 5vw;
       }
 
-      .registration_form_password_block {
+      .registration__block__form-pass-block {
         position: relative;
       }
 
-      .register__password--icon--lock,
-      .register__password--icon--unlock {
+      .registration__block__form-pass-block__password-icon-lock,
+      .registration__block__form-pass-block__password-icon-unlock {
         position: absolute;
 
         font-size: 3vh;
 
-        right: 11.5vw;
+        right: 11.6vw;
         bottom: 2.5vh;
 
         color: var(--text-color);
@@ -95,11 +95,11 @@
         z-index: 100;
       }
 
-      .register__password--icon--unlock {
-        right: 11.1vw;
+      .registration__block__form-pass-block__password-icon-unlock {
+        right: 11.2vw;
       }
 
-      .registration_form_submit {
+      .registration__block__form-submit {
         position: relative;
 
         margin-bottom: 10vh;
@@ -125,7 +125,7 @@
         }
       }
 
-      .registration_link_to {
+      .registration__block__form-link-to {
         position: absolute;
 
         width: 100%;

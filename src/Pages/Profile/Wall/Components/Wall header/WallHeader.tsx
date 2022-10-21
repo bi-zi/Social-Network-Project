@@ -5,13 +5,11 @@ import { Post } from '../../../../../store/post/types';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
-
 import './style.scss';
 
-export type MyParams = {
+interface MyParams  {
   id: string;
 };
-
 interface MyProps {
   data: Post;
 }

@@ -7,19 +7,16 @@ import {
   setComments,
 } from '../../../../../store/post/slice';
 import { fetchCommentators, setClearCommentators } from '../../../../../store/user/slice';
+import { useWall } from '../useWall';
 import { useParams } from 'react-router-dom';
+import { Post } from '../../../../../store/post/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp, faThumbsDown, faCommentDots } from '@fortawesome/free-regular-svg-icons';
-import { Post } from '../../../../../store/post/types';
-
-import { useWall } from '../useWall';
 import './style.scss';
-
-export type MyParams = {
+interface MyParams {
   id: string;
-};
-
+}
 interface MyProps {
   data: Post;
   index: number;

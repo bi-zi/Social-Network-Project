@@ -1,153 +1,155 @@
-.wall__comments {
-  position: relative;
-
-  width: 100%;
-
-  .wall__comments__input {
-    margin: 1vh 0;
-    padding: 1vh 1vw;
-
-    width: 84%;
-    min-height: 7vh;
-
-    left: 0;
-
-    border-radius: var(--borderRadius-interface);
-    box-shadow: var(--box-shadow);
-
-    font: normal 400 calc(5px + 15 * (100vw / 1920)) 'Iceberg';
-
-    background-color: var(--backgroundInput-color);
-    color: var(--text-color);
-
-    resize: none;
-
-    &::-webkit-scrollbar-track {
-      opacity: 0 !important;
-      background-color: #f5000000;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      height: 30px;
-
-      border-top-right-radius: var(--borderRadius-interface);
-      border-bottom-right-radius: var(--borderRadius-interface);
-    }
-  }
-
-  .wall__comments__submit-button {
-    position: absolute;
-
-    width: 14%;
-    height: calc(16px + 60 * (100vw / 1920));
-
-    border: 0;
-    border-radius: var(--borderRadius-interface);
-
-    background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
-    background-size: 200% auto;
-
-    transition: 0.5s;
-
-    cursor: pointer;
-
-    &:hover {
-      background-position: right center;
-    }
-
-    &:active {
-      transform: scale(0.9);
-      transition: 0.2s;
-    }
-
-    top: 1vh;
-    right: 0px;
-  }
-
-  .wall__comments__submit-button-icon {
+@media (width > 460px) and (height > 420px) {
+  .wall__comments {
     position: relative;
-
-    font-size: calc(10px + 20 * (100vw / 1920));
-    color: var(--text-color);
-  }
-
-  .wall__comments__comment {
-    position: relative;
-
-    margin: 0 auto 1vh auto;
-
-    padding: 0.5vh 0.5vw;
 
     width: 100%;
 
-    border-radius: var(--borderRadius-interface);
-    box-shadow: var(--box-shadow);
+    .wall__comments__input {
+      margin: 1vh 0;
+      padding: 1vh 1vw;
 
-    background-color: rgb(14, 14, 14);
-    color: var(--text-color);
+      width: 84%;
+      min-height: 7vh;
 
-    .wall__comments__comment__block {
-      display: flex;
-      justify-content: space-between;
+      left: 0;
 
-      .wall__comments__comment__left-block {
-        display: flex;
-        .wall__comments__comment-avatar {
-          width: calc(4px + 50 * (100vh / 1080));
-          height: calc(4px + 50 * (100vh / 1080));
+      border-radius: var(--borderRadius-interface);
+      box-shadow: var(--box-shadow);
 
-          border-radius: 100%;
+      font: normal 400 calc(5px + 15 * (100vw / 1920)) 'Iceberg';
 
-          &:hover {
-            border: var(--borderImages);
-            cursor: pointer;
-          }
-        }
+      background-color: var(--backgroundInput-color);
+      color: var(--text-color);
 
-        .wall__comments__comment-full-name-time {
-          margin-top: .5vh;
-          margin-left: .5vw;
+      resize: none;
 
-          .wall__comments__comment-full-name-time__full-name,
-          .wall__comments__comment-full-name-time__time {
-            font: normal 400 calc(6px + 16 * (100vw / 1920)) 'Iceberg';
-
-            color: var(--text-color);
-          }
-
-          .wall__comments__comment-full-name-time__time {
-            top: calc(8px + 27 * (100vh / 1080)) !important;
-
-            font: normal 400 calc(4px + 12 * (100vw / 1920)) 'Iceberg';
-          }
-        }
+      &::-webkit-scrollbar-track {
+        opacity: 0 !important;
+        background-color: #f5000000;
       }
 
-      .wall__comments__comment__right-block {
-        .wall__comments__comment-delete {
-          margin-right: 0.5vw;
-          font-size: calc(10px + 22 * (100vw / 1920));
+      &::-webkit-scrollbar-thumb {
+        height: 30px;
 
-          color: var(--text-color);
-
-          filter: drop-shadow(0px 0px 0.2vh rgb(5, 5, 5));
-          cursor: pointer;
-
-          z-index: 10;
-
-          &:hover {
-            color: var(--text-color-hover);
-          }
-        }
+        border-top-right-radius: var(--borderRadius-interface);
+        border-bottom-right-radius: var(--borderRadius-interface);
       }
     }
-    .wall__comments__comment-text {
+
+    .wall__comments__submit-button {
+      position: absolute;
+
+      width: 14%;
+      height: calc(16px + 60 * (100vw / 1920));
+
+      border: 0;
+      border-radius: var(--borderRadius-interface);
+
+      background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
+      background-size: 200% auto;
+
+      transition: 0.5s;
+
+      cursor: pointer;
+
+      &:hover {
+        background-position: right center;
+      }
+
+      &:active {
+        transform: scale(0.9);
+        transition: 0.2s;
+      }
+
+      top: 1vh;
+      right: 0px;
+    }
+
+    .wall__comments__submit-button-icon {
+      position: relative;
+
+      font-size: calc(10px + 20 * (100vw / 1920));
+      color: var(--text-color);
+    }
+
+    .wall__comments__comment {
+      position: relative;
+
+      margin: 0 auto 1vh auto;
+
       padding: 0.5vh 0.5vw;
 
-      overflow-wrap: break-word;
-      font: normal 400 calc(4px + 14 * (100vw / 1920)) 'Iceberg';
+      width: 100%;
 
+      border-radius: var(--borderRadius-interface);
+      box-shadow: var(--box-shadow);
+
+      background-color: rgb(14, 14, 14);
       color: var(--text-color);
+
+      .wall__comments__comment__block {
+        display: flex;
+        justify-content: space-between;
+
+        .wall__comments__comment__left-block {
+          display: flex;
+          .wall__comments__comment-avatar {
+            width: calc(4px + 50 * (100vh / 1080));
+            height: calc(4px + 50 * (100vh / 1080));
+
+            border-radius: 100%;
+
+            &:hover {
+              border: var(--borderImages);
+              cursor: pointer;
+            }
+          }
+
+          .wall__comments__comment-full-name-time {
+            margin-top: 0.5vh;
+            margin-left: 0.5vw;
+
+            .wall__comments__comment-full-name-time__full-name,
+            .wall__comments__comment-full-name-time__time {
+              font: normal 400 calc(6px + 16 * (100vw / 1920)) 'Iceberg';
+
+              color: var(--text-color);
+            }
+
+            .wall__comments__comment-full-name-time__time {
+              top: calc(8px + 27 * (100vh / 1080)) !important;
+
+              font: normal 400 calc(4px + 12 * (100vw / 1920)) 'Iceberg';
+            }
+          }
+        }
+
+        .wall__comments__comment__right-block {
+          .wall__comments__comment-delete {
+            margin-right: 0.5vw;
+            font-size: calc(10px + 22 * (100vw / 1920));
+
+            color: var(--text-color);
+
+            filter: drop-shadow(0px 0px 0.2vh rgb(5, 5, 5));
+            cursor: pointer;
+
+            z-index: 10;
+
+            &:hover {
+              color: var(--text-color-hover);
+            }
+          }
+        }
+      }
+      .wall__comments__comment-text {
+        padding: 0.5vh 0.5vw;
+
+        overflow-wrap: break-word;
+        font: normal 400 calc(4px + 14 * (100vw / 1920)) 'Iceberg';
+
+        color: var(--text-color);
+      }
     }
   }
 }

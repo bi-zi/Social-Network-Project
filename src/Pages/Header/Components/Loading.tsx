@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { useAppSelector } from '../../../store/store';
 
 export const Loading: React.FC = () => {
   const state = useAppSelector((state) => state);
@@ -33,13 +33,13 @@ export const Loading: React.FC = () => {
   return (
     <>
       {profilePage && path === 'Profile' ? (
-        <div className="header_loader"></div>
+        <div className="header__menu-loader"></div>
       ) : friendPage && path === 'Friends' ? (
-        <div className="header_loader"></div>
+        <div className="header__menu-loader"></div>
       ) : messagesPage && path === 'Messages' ? (
-        <div className="header_loader"></div>
+        <div className="header__menu-loader"></div>
       ) : nonePage && (path === 'Login' || path === 'Register' || path === '') ? (
-        <div className="header_loader"></div>
+        <div className="header__menu-loader"></div>
       ) : (
         ''
       )}

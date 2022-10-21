@@ -4,8 +4,9 @@ import { setCreateImg } from '../store/post/slice';
 import { fetchUserUpdate, fetchOneUser } from '../store/user/slice';
 import { fetchSlider, fetchSliderPost, fetchSliderPush } from '../store/slider/slice';
 import { useParams } from 'react-router-dom';
-// import Compressor from 'compressorjs';
 import imageCompression from 'browser-image-compression';
+import './style.scss';
+
 export type MyParams = {
   id: string;
 };
@@ -22,49 +23,50 @@ export const ImageParsing: React.FC = () => {
   const slider = state.slider?.slider?.find((x) => x?.user === id);
   const sliderImgLength = slider?.sliderImg.length;
 
-  const onAvatarAndSlider = async (value: string[]) => {
-    if (parsing.inputNumber === '0') {
-      await dispatch(fetchUserUpdate({ imageUrl: [value][0], user: id }));
+  // Эта функция отправляет картинку на бэк в 3 направлениях все зависит от места загрузки их 3(аватар,слайдер и пост)
+  // Если аватар тогда картинка отправится еще и в слайдер в остальных случаях обычное поведение
+  const onSendingPicture = React.useCallback(
+    async (value: string[]) => {
+      if (parsing.inputNumber === '0') {
+        await dispatch(fetchUserUpdate({ imageUrl: [value][0], user: id }));
 
-      dispatch(fetchOneUser(id));
-      dispatch(fetchSlider(id));
-      // console.log('ava', parsing.inputNumber);
-    }
+        dispatch(fetchOneUser(id));
+        dispatch(fetchSlider(id));
+      }
 
-    if (slider === undefined && parsing.inputNumber === '0') {
-      await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
-      dispatch(fetchSlider(id));
-      // console.log("avaSLider", parsing.inputNumber);
-    }
+      if (slider === undefined && parsing.inputNumber === '0') {
+        await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
+        dispatch(fetchSlider(id));
+      }
 
-    if ((sliderImgLength! < 1 || sliderImgLength! > 0) && parsing.inputNumber === '0') {
-      await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
-      dispatch(fetchSlider(id));
-      // console.log('slider',parsing.inputNumber);
-    }
+      if ((sliderImgLength! < 1 || sliderImgLength! > 0) && parsing.inputNumber === '0') {
+        await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
+        dispatch(fetchSlider(id));
+      }
 
-    if (slider === undefined && parsing.inputNumber === '1') {
-      await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
-      dispatch(fetchSlider(id));
-      // console.log(parsing.inputNumber);
-    }
+      if (slider === undefined && parsing.inputNumber === '1') {
+        await dispatch(fetchSliderPost({ sliderImg: [value][0] }));
+        dispatch(fetchSlider(id));
+      }
 
-    if ((sliderImgLength! < 1 || sliderImgLength! > 0) && parsing.inputNumber === '1') {
-      await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
-      dispatch(fetchSlider(id));
-      // console.log(parsing.inputNumber);
-    }
+      if ((sliderImgLength! < 1 || sliderImgLength! > 0) && parsing.inputNumber === '1') {
+        await dispatch(fetchSliderPush({ sliderImg: [value][0] }));
+        dispatch(fetchSlider(id));
+      }
 
-    if (parsing.inputNumber === '2') {
-      dispatch(setCreateImg(value));
-      // console.log(parsing.inputNumber);
-    }
-  };
+      if (parsing.inputNumber === '2') {
+        dispatch(setCreateImg(value));
+      }
+    },
+    [dispatch, id, parsing.inputNumber, slider, sliderImgLength],
+  );
 
+// Сюда картинка попадает после загрукзки и сжимается на 90% от изначального размера
+// После сжатия она уходит в useState на 85строке на это реагирует useEffect
   async function handleImageUpload(e: any) {
     const imageFile = e.target.files[0];
 
-    let a = (
+    let size = (
       +(imageFile['size'] / (1024 * 1024)).toFixed(2) -
       (+(imageFile['size'] / (1024 * 1024)).toFixed(2) * 90) / 100
     ).toFixed(2);
@@ -72,7 +74,7 @@ export const ImageParsing: React.FC = () => {
     // console.log('до', +(imageFile['size'] / (1024 * 1024)).toFixed(2));
 
     const options = {
-      maxSizeMB: +a,
+      maxSizeMB: +size,
       useWebWorker: true,
     };
     try {
@@ -86,23 +88,23 @@ export const ImageParsing: React.FC = () => {
     }
   }
 
+// useEffect просто превращет картинку в нужный формат и вызывает функции отправки на бэк
   useEffect(() => {
     if (images.length < 1) return;
 
     let file = images;
-    // console.log('после', (images['size'] / (1024 * 1024)).toFixed(2) + 'Mb');
 
     let fileReader: FileReader = new FileReader();
 
-    fileReader.onload = (e: Event) => {
+    fileReader.onload = () => {
       if (typeof fileReader.result === 'string') {
-        onAvatarAndSlider([fileReader.result]);
+        onSendingPicture([fileReader.result]);
       }
     };
     fileReader.readAsDataURL(file);
 
     setImages([]);
-  }, [images, onAvatarAndSlider]);
+  }, [images, onSendingPicture]);
 
   return (
     <>
