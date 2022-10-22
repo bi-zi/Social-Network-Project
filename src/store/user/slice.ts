@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { User, UserSliceState, Status } from './types';
-import axios from '../../Backend/axios';
+import axios from '../../backend/axios';
 
 export const fetchAllUsers = createAsyncThunk<User[]>('user/fetchAllUsers', async () => {
   const { data } = await axios.get('/user/all');

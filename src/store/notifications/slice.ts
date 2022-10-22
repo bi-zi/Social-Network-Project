@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Note, NoteSliceState, Status } from './types';
-import axios from '../../Backend/axios';
+import axios from '../../backend/axios';
 
 export const fetchNotifications = createAsyncThunk(
   'notifications/getUserNotifications/fetchNotifications',

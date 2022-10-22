@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { About, AboutSliceState, Status } from './types';
-import axios from '../../Backend/axios';
+import axios from '../../backend/axios';
 
 export const fetchAboutPost = createAsyncThunk<About[], { values: About }>(
   'about/fetchAboutPost',

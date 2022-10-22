@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { FriendsPageUser, UserSliceState, Status } from './types';
-import axios from '../../Backend/axios';
+import axios from '../../backend/axios';
 
 export const fetchUsersPagination = createAsyncThunk(
   'user/pagination/fetchUsersPagination',
