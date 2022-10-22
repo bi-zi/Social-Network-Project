@@ -1,33 +1,33 @@
-@media (width > 460px) and (height > 420px) {
-  .layout {
-    margin: 0 auto;
+.layout {
+  margin: 2vh auto;
 
-    padding-left: 2vw;
-    padding-right: 2vw;
+  padding: 0.2vh 2vw;
 
-    @media (width < 770px) {
-      padding-left: 1vw;
-      padding-right: 1vw;
+  max-width: 71vw;
+
+  border-radius: 2vh;
+
+  font-size: calc(10px + 14 * (100vw / 1920));
+
+  background-color: #393939;
+  color: white;
+
+  text-align: center;
+
+  @media (width < 770px) {
+    padding: 0.2vh 1vw;
+    @media (width < 460px) {
+      max-width: 98vw;
+      font-size: calc(4px + 8 * (100vw / 460));
     }
+  }
 
-    max-width: 71vw;
+  .layout__link {
+    text-decoration: underline;
+    padding-bottom: 1vh;
+  }
 
-    border-radius: 2vh;
-
-    font-size: calc(10px + 14 * (100vw / 1920));
-
-    background-color: #393939;
-    color: white;
-
-    text-align: center;
-
-    .layout__link {
-      text-decoration: underline;
-      padding-bottom: 1vh;
-    }
-
-    .layout__link a {
-      color: rgb(56, 169, 250);
-    }
+  .layout__link a {
+    color: rgb(56, 169, 250);
   }
 }

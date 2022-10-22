@@ -1,16 +1,20 @@
-@media (width > 460px) and (height > 420px) {
-  .wall {
-    position: relative;
+.wall {
+  position: relative;
 
-    margin-bottom: 2vh;
-    padding: 1vh 1vw;
+  margin-bottom: 2vh;
+  padding: 1vh 1vw;
 
-    width: 100%;
+  width: 100%;
 
-    border-radius: var(--borderRadius-interface);
-    box-shadow: var(--box-shadow);
+  border-radius: var(--borderRadius-interface);
+  box-shadow: var(--box-shadow);
 
-    background: var(--interface-color);
-    color: var(--text-color);
+  background: var(--interface-color);
+  color: var(--text-color);
+
+  @media (width < 460px) {
+    margin-bottom: 1vh;
+
+    padding-bottom: .1vh;
   }
 }

@@ -1,32 +1,39 @@
-@media (width > 460px) and (height > 420px) {
-  .about {
-    width: 100%;
-    height: calc(100px + 220 * (100vh / 1080));
+.about {
+  width: 100%;
+  height: calc(100px + 220 * (100vh / 1080));
 
-    padding: 1.5vh 1vw;
+  padding: 1.5vh 1vw;
 
-    border-radius: var(--borderRadius-interface);
-    box-shadow: var(--box-shadow);
+  border-radius: var(--borderRadius-interface);
+  box-shadow: var(--box-shadow);
 
-    background-color: var(--interface-color);
-    color: var(--text-color);
+  background-color: var(--interface-color);
+  color: var(--text-color);
 
-    .about__fullName {
-      position: relative;
-      width: 100%;
-
-      height: calc(10px + 30 * (100vh / 1080));
-
-      font: normal 600 calc(12px + 20 * (100vw / 1920)) / calc(5px + 30 * (100vh / 1080)) 'Iceberg';
-
-      letter-spacing: 0.2vw;
-
-      border-bottom: 0.5vh solid black;
-
-      color: var(--text-color);
-    }
-
-
+  @media (width < 460px) {
+    height: calc(50px + 120 * (100vh / 1080));
   }
 
+  .about__fullName {
+    position: relative;
+    width: 100%;
+
+    height: calc(10px + 30 * (100vh / 1080));
+
+    font: normal 600 calc(12px + 20 * (100vw / 1920)) / calc(5px + 30 * (100vh / 1080)) 'Iceberg';
+
+    letter-spacing: 0.2vw;
+
+    border-bottom: 0.5vh solid black;
+
+    color: var(--text-color);
+
+    @media (width < 460px) {
+      height: calc(6px + 10 * (100vh / 1080));
+
+      font: normal 600 calc(6px + 8 * (100vw / 460)) / calc(2px + 6 * (100vh / 1080)) 'Iceberg';
+
+       border-bottom: 0.3vh solid black;
+    }
+  }
 }

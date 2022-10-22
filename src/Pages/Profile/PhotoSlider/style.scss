@@ -1,145 +1,165 @@
-@media (width > 460px) and (height > 420px) {
-  .profile__slider {
-    position: relative;
+.profile__slider {
+  position: relative;
 
-    padding-bottom: 1vh;
-    padding-top: 2vh;
+  margin: 2vh 0;
 
-    width: 100%;
-    height: auto;
+  padding-bottom: 1vh;
+  padding-top: 2vh;
 
-    margin: 2vh 0;
+  width: 100%;
+  height: auto;
+
+  border-radius: var(--borderRadius-interface);
+  box-shadow: var(--box-shadow);
+
+  background-color: var(--interface-color);
+  color: var(--text-color);
+
+  overflow: hidden;
+
+  @media (width < 460px) {
+    margin: 1vh 0;
+    padding-bottom: 0.5vh;
+    padding-top: 1vh;
+  }
+
+  .slider_image_link {
+    pointer-events: visiblePainted;
+  }
+
+  .profile__slider__image-img {
+    width: 98%;
+    height: calc(20px + 225 * (100vw / 1920));
+
+    margin-bottom: 4vh;
 
     border-radius: var(--borderRadius-interface);
-    box-shadow: var(--box-shadow);
+    &:hover {
+      border: var(--borderImages);
+    }
+  }
 
-    background-color: var(--interface-color);
+  .profile__slider__image {
+    position: relative;
+    text-align: right;
+  }
+
+  .profile__slider__image-delete {
+    position: absolute;
+
+    top: 1vh;
+    right: 1.5vw;
+
+    font: normal 400 calc(12px + 28 * (100vw / 1920)) 'Iceberg';
+
+    filter: drop-shadow(0px 0px 0.2vh rgb(0, 0, 0));
+
     color: var(--text-color);
 
-    overflow: hidden;
+    cursor: pointer;
+    z-index: 999;
 
-    .slider_image_link {
-      pointer-events: visiblePainted;
+    @media (width < 460px) {
+      top: 0.2vh;
+    }
+    &:hover {
+      color: var(--text-color-hover);
+    }
+  }
+
+  .slick-prev,
+  .slick-next {
+    width: calc(15px + 35 * (100vw / 1920)) !important;
+    height: calc(22.1px + 245 * (100vw / 1920)) !important;
+
+    box-shadow: var(--box-shadow);
+    background-color: var(--interface-color);
+
+    z-index: 289;
+
+    @media (width < 460px) {
+      height: calc(22.1px + 248 * (100vw / 1920)) !important;
+    }
+    &:hover {
+      background-color: var(--interface-color-hover);
+    }
+  }
+
+  .slick-prev {
+    margin-left: calc(24px + 1 * (100vw / 1920));
+  }
+
+  .slick-arrow:before {
+    font-size: calc(10px + 15 * (100vw / 1920));
+    color: var(--text-color);
+  }
+
+  .slick-arrow:active:before {
+    font-size: calc(10px + 25 * (100vw / 1920));
+  }
+
+  .slick-slider {
+    width: calc(100% - 25px);
+  }
+
+  .slick-list {
+    margin-left: calc(10px + 9 * (100vw / 1920)) !important;
+    padding-left: 0.6vw;
+    width: 99%;
+    height: calc(22px + 246 * (100vw / 1920));
+
+    border-radius: var(--borderRadius-interface) !important;
+    box-shadow: var(--box-shadow);
+
+    text-align: left !important;
+
+    background-color: rgb(19, 19, 19);
+  }
+
+  .slick-track {
+    margin: 1.1% 0;
+  }
+
+  .profile__slider__button {
+    position: relative;
+    margin: 1vh auto 0 auto !important;
+
+    width: 40%;
+    height: calc(10px + 31 * (100vh / 1080));
+
+    left: 28%;
+
+    border: 0;
+    border-radius: var(--borderRadius-interface);
+
+    background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
+    background-size: 200% auto;
+
+    box-shadow: 0 0 0.5vh rgb(162, 162, 162);
+
+    text-transform: uppercase;
+
+    font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
+
+    transition: 0.5s;
+
+    letter-spacing: 0.2vw;
+    color: var(--text-color);
+
+    @media (width < 460px) {
+      margin: 0.5vh auto 0 auto !important;
+
+      height: calc(4px + 16 * (100vh / 1080));
+      font: normal 400 calc(2px + 6 * (100vw / 460)) 'Iceberg';
     }
 
-    .profile__slider__image-img {
-      width: 98%;
-      height: calc(20px + 225 * (100vw / 1920));
-
-      margin-bottom: 4vh;
-
-      border-radius: var(--borderRadius-interface);
-      &:hover {
-        border: var(--borderImages);
-      }
+    &:hover {
+      background-position: right center;
     }
 
-    .profile__slider__image {
-      position: relative;
-      text-align: right;
-    }
-
-    .profile__slider__image-delete {
-      position: absolute;
-
-      top: 1vh;
-      right: 1.5vw;
-
-      font: normal 400 calc(12px + 28 * (100vw / 1920)) 'Iceberg';
-
-      filter: drop-shadow(0px 0px 0.2vh rgb(0, 0, 0));
-
-      color: var(--text-color);
-
-      cursor: pointer;
-      z-index: 999;
-      &:hover {
-        color: var(--text-color-hover);
-      }
-    }
-
-    .slick-prev,
-    .slick-next {
-      width: calc(15px + 35 * (100vw / 1920)) !important;
-      height: calc(22.1px + 245 * (100vw / 1920)) !important;
-
-      box-shadow: var(--box-shadow);
-      background-color: var(--interface-color);
-
-      z-index: 289;
-      &:hover {
-        background-color: var(--interface-color-hover);
-      }
-    }
-
-    .slick-prev {
-      margin-left: calc(24px + 1 * (100vw / 1920));
-    }
-
-    .slick-arrow:before {
-      font-size: calc(10px + 15 * (100vw / 1920));
-      color: var(--text-color);
-    }
-
-    .slick-arrow:active:before {
-      font-size: calc(10px + 25 * (100vw / 1920));
-    }
-
-    .slick-slider {
-      width: calc(100% - 25px);
-    }
-
-    .slick-list {
-      margin-left: calc(10px + 9 * (100vw / 1920)) !important;
-      padding-left: 0.6vw;
-      width: 99%;
-      height: calc(22px + 246 * (100vw / 1920));
-
-      border-radius: var(--borderRadius-interface) !important;
-      box-shadow: var(--box-shadow);
-
-      text-align: left !important;
-
-      background-color: rgb(19, 19, 19);
-    }
-
-    .slick-track {
-      margin: 1.1% 0;
-    }
-
-    .profile__slider__button {
-      position: relative;
-      margin: 1vh auto 0 auto !important;
-
-      width: 40%;
-      height: calc(10px + 31 * (100vh / 1080));
-
-      left: 28%;
-
-      border: 0;
-      border-radius: var(--borderRadius-interface);
-
-      background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
-      background-size: 200% auto;
-
-      box-shadow: 0 0 .5vh rgb(162, 162, 162);
-
-      text-transform: uppercase;
-
-      font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
-
-      transition: 0.5s;
-
-      letter-spacing: 0.2vw;
-      color: var(--text-color);
-      &:hover {
-        background-position: right center;
-      }
-
-      &:active {
-        transform: scale(0.9);
-        transition: 0.2s;
-      }
+    &:active {
+      transform: scale(0.9);
+      transition: 0.2s;
     }
   }
 }

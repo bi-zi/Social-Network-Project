@@ -1,65 +1,75 @@
-@media (width > 460px) and (height > 420px) {
-  .profile-friends {
-    position: relative;
-    margin: 2vh 0;
+.profile-friends {
+  position: relative;
+  margin: 2vh 0;
 
-    width: 100%;
+  width: 100%;
 
-    border-radius: var(--borderRadius-interface);
-    box-shadow: var(--box-shadow);
+  border-radius: var(--borderRadius-interface);
+  box-shadow: var(--box-shadow);
 
-    background: var(--interface-color);
-    color: var(--text-color);
+  background: var(--interface-color);
+  color: var(--text-color);
 
-    .profile-friends__title {
-      position: relative;
-
-      height: calc(10px + 20 * (100vw / 1080));
-      left: calc(2px + 12 * (100vw / 1920));
-
-      font: normal 400 calc(6px + 20 * (100vw / 1920)) / calc(15px + 25 * (100vw / 1920)) 'Iceberg';
-
-      color: var(--text-color);
-
-      &:hover {
-        color: var(--text-color-hover);
-      }
-    }
+  @media (width < 460px) {
+    margin: 1vh 0;
   }
 
-  .profile-friends__container {
-    margin: 0 auto;
-    padding-bottom: .5vh;
+  .profile-friends__title {
+    position: relative;
 
-    width: 94%;
-    height: auto;
+    height: calc(10px + 20 * (100vw / 1080));
+    left: calc(2px + 12 * (100vw / 1920));
 
-    .profile-friends__container__friend {
-      width: 20%;
-      float: left;
-      margin-bottom: 1vh;
+    font: normal 400 calc(6px + 20 * (100vw / 1920)) / calc(15px + 25 * (100vw / 1920)) 'Iceberg';
 
-      text-align: center;
-      cursor: pointer;
+    color: var(--text-color);
 
-      &:hover .profile-friends__container__friend__avatar {
-        border: var(--borderImages);
+    &:hover {
+      color: var(--text-color-hover);
+    }
+  }
+}
+
+.profile-friends__container {
+  margin: 0 auto;
+  padding-bottom: 0.5vh;
+
+  width: 94%;
+  height: auto;
+
+  @media (width < 460px) {
+    padding-bottom: 0;
+  }
+
+  .profile-friends__container__friend {
+    width: 20%;
+    float: left;
+    margin-bottom: 1vh;
+
+    text-align: center;
+    cursor: pointer;
+
+    &:hover .profile-friends__container__friend__avatar {
+      border: var(--borderImages);
+    }
+
+    &:hover .profile-friends__container__friend__name {
+      color: var(--text-color-hover);
+    }
+
+    .profile-friends__container__friend__avatar {
+      width: 90%;
+      height: calc(4px + 54 * (100vh / 1080));
+      border-radius: 100%;
+
+      @media (width < 460px) {
+        height: calc(4px + 24 * (100vh / 1080));
       }
+    }
 
-      &:hover .profile-friends__container__friend__name {
-        color: var(--text-color-hover);
-      }
-
-      .profile-friends__container__friend__avatar {
-        width: 90%;
-        height: calc(4px + 54 * (100vh / 1080));
-        border-radius: 100%;
-      }
-
-      .profile-friends__container__friend__name {
-        font: normal 400 calc(2px + 12 * (100vw / 1920)) 'Iceberg';
-        color: var(--text-color);
-      }
+    .profile-friends__container__friend__name {
+      font: normal 400 calc(2px + 12 * (100vw / 1920)) 'Iceberg';
+      color: var(--text-color);
     }
   }
 }

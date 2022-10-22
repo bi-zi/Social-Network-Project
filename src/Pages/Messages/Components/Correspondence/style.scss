@@ -1,215 +1,236 @@
-@media (width > 460px) and (height > 420px) {
-  .correspondence-container {
-    opacity: 1;
-    position: relative;
-    width: 63.5%;
+.correspondence-container {
+  opacity: 1;
+  position: relative;
+  width: 63.5%;
 
-    border-radius: var(--borderRadius-interface);
-    box-shadow: var(--box-shadow);
+  border-radius: var(--borderRadius-interface);
+  box-shadow: var(--box-shadow);
 
-    background-color: var(--interface-color);
-    color: var(--text-color);
+  background-color: var(--interface-color);
+  color: var(--text-color);
 
-    .correspondence-header {
-      justify-content: space-between;
+  .correspondence-header {
+    justify-content: space-between;
 
-      .correspondence-header__full-name {
-        margin-left: 1.5vw;
+    .correspondence-header__full-name {
+      margin-left: 1.5vw;
 
-        font: normal 400 calc(4px + 30 * (100vh / 1080)) 'Iceberg';
-        color: var(--text-color);
-
-        @media (height > 718px) and (height < 1370px) {
-          @media (width > 475px) and (width < 1300px) {
-            font: normal 400 calc(4px + 20 * (100vh / 1080)) 'Iceberg';
-          }
-        }
-
-        &:hover {
-          color: var(--interface-color-hover);
-        }
-      }
-
-      .correspondence-header__avatar {
-        margin-top: calc(2px + 4 * (100vh / 1080));
-        margin-right: 1.5vw;
-
-        width: calc(14px + 30 * (100vw / 1920));
-        height: calc(14px + 30 * (100vw / 1920));
-
-        border-radius: 100%;
-
-        &:hover {
-          border: var(--borderImages);
-        }
-      }
-    }
-
-    .correspondence {
-      width: 100%;
-      height: 81%;
-
-      overflow-y: auto;
-
-      @media (height > 520px) {
-        height: 85%;
-        @media (height > 780px) {
-          height: 87%;
-
-          @media (height > 1200px) {
-            height: 89%;
-            @media (height > 1500px) {
-              height: 90%;
-            }
-          }
-        }
-      }
-    }
-
-    .correspondence__add-20 {
-      height: calc(15px + 20 * (100vh / 1080));
-
-      text-align: center;
-      font: normal 400 calc(10px + 20 * (100vh / 1080)) 'Iceberg';
-
+      font: normal 400 calc(4px + 30 * (100vh / 1080)) 'Iceberg';
       color: var(--text-color);
-      background-color: var(--interface-color-hover);
+
+      @media (height > 718px) and (height < 1370px) {
+        @media (width > 475px) and (width < 1300px) {
+          font: normal 400 calc(4px + 20 * (100vh / 1080)) 'Iceberg';
+        }
+      }
+
+      @media (width < 460px) {
+        font: normal 400 calc(4px + 14 * (100vh / 1080)) 'Iceberg';
+      }
+
+      &:hover {
+        color: var(--interface-color-hover);
+      }
+    }
+
+    .correspondence-header__avatar {
+      margin-top: calc(2px + 4 * (100vh / 1080));
+      margin-right: 1.5vw;
+
+      width: calc(14px + 30 * (100vw / 1920));
+      height: calc(14px + 30 * (100vw / 1920));
+
+      border-radius: 100%;
+
+      @media (width < 460px) {
+        width: calc(10px + 18 * (100vw / 460));
+        height: calc(10px + 18 * (100vw / 460));
+      }
+
+      &:hover {
+        border: var(--borderImages);
+      }
+    }
+  }
+
+  .correspondence {
+    width: 100%;
+    height: 81%;
+
+    overflow-y: auto;
+
+    @media (height > 520px) {
+      height: 85%;
+      @media (height > 780px) {
+        height: 87%;
+
+        @media (height > 1200px) {
+          height: 89%;
+          @media (height > 1500px) {
+            height: 90%;
+          }
+        }
+      }
+    }
+
+    @media (width < 460px) {
+      height: 88%;
+    }
+  }
+
+  .correspondence__add-20 {
+    height: calc(15px + 20 * (100vh / 1080));
+
+    text-align: center;
+    font: normal 400 calc(10px + 20 * (100vh / 1080)) 'Iceberg';
+
+    color: var(--text-color);
+    background-color: var(--interface-color-hover);
+
+    cursor: pointer;
+
+    @media (width < 460px) {
+      height: calc(10px + 20 * (100vh / 1080));
+      font: normal 400 calc(10px + 10 * (100vh / 1080)) 'Iceberg';
+    }
+
+    &:hover {
+      color: var(--text-color-hover);
+    }
+  }
+
+  .correspondence-empty,
+  .correspondence-select-chat {
+    position: relative;
+    margin: 0 auto;
+
+    width: calc(120px + 140 * (100vw / 1920));
+
+    top: 50%;
+
+    text-align: center;
+    font: normal 400 calc(20px + 20 * (100vw / 1920)) 'Iceberg';
+
+    color: var(--text-color);
+  }
+
+  .correspondence-message {
+    position: relative;
+
+    margin: 1vh 0;
+
+    width: 100%;
+
+    .correspondence-message__avatar {
+      width: calc(16px + 45 * (100vw / 1920));
+      height: calc(16px + 45 * (100vw / 1920));
+
+      margin-left: 1vw;
+
+      border-radius: 100%;
+    }
+
+    .correspondence-message__full-name-date {
+      position: absolute;
+
+      top: 0.3vh;
+      left: calc(18px + 70 * (100vw / 1920));
+
+      @media (height > 718px) and (height < 1370px) {
+        @media (width > 475px) and (width < 1300px) {
+          top: 0.3vh;
+        }
+      }
+
+      .correspondence-message__full-name-date__full-name {
+        font: normal 400 calc(4px + 25 * (100vw / 1920)) 'Iceberg';
+        color: var(--text-color);
+      }
+
+      .correspondence-message__full-name-date__date {
+        font: normal 400 calc(4px + 18 * (100vw / 1920)) 'Iceberg';
+        color: var(--text-color);
+      }
+    }
+
+    .correspondence-message__message {
+      margin: 1vh 1vw;
+
+      word-wrap: break-word;
+
+      font: normal 400 calc(4px + 24 * (100vw / 1920)) 'Iceberg';
+      color: var(--text-color);
+    }
+  }
+
+  .correspondence-sending-message {
+    position: absolute;
+
+    padding-top: calc(5px + 8 * (100vh / 1080));
+    padding-left: 2vw;
+    padding-right: 2vw;
+
+    width: 100%;
+    height: calc(16px + 42 * (100vh / 1080));
+
+    bottom: 0px;
+
+    border-bottom-left-radius: var(--borderRadius-interface);
+    border-bottom-right-radius: var(--borderRadius-interface);
+
+    background-color: var(--miniInterface-color);
+
+    .correspondence-sending-message__input {
+      width: 75%;
+
+      padding: 0 1vw;
+
+      height: calc(7px + 25 * (100vh / 1080));
+
+      border-radius: var(--borderRadius-interface);
+      box-shadow: var(--box-shadow);
+
+      font: normal 400 calc(10px + 10 * (100vw / 1920)) 'Iceberg';
+
+      background-color: var(--backgroundInput-color);
+      color: var(--text-color);
+    }
+
+    .correspondence-sending-message__button {
+      position: absolute;
+
+      width: 20%;
+      height: calc(8px + 26 * (100vh / 1080));
+
+      right: 2vw;
+
+      border-radius: var(--borderRadius-interface);
+
+      font: normal 400 calc(3px + 15 * (100vh / 1080)) 'Iceberg';
+
+      background-color: var(--backgroundInput-color);
+      color: var(--text-color);
 
       cursor: pointer;
 
+      @media (width < 460px) {
+        font: normal 400 calc(3px + 8 * (100vh / 1080)) 'Iceberg';
+      }
+
       &:hover {
+        background-color: var(--interface-color-hover);
         color: var(--text-color-hover);
       }
     }
 
-    .correspondence-empty,
-    .correspondence-select-chat {
-      position: relative;
-      margin: 0 auto;
-
-      width: calc(120px + 140 * (100vw / 1920));
-
-      top: 50%;
-
-      text-align: center;
-      font: normal 400 calc(20px + 20 * (100vw / 1920)) 'Iceberg';
-
-      color: var(--text-color);
-    }
-
-    .correspondence-message {
-      position: relative;
-
-      margin: 1vh 0;
-
-      width: 100%;
-
-      .correspondence-message__avatar {
-        width: calc(16px + 45 * (100vw / 1920));
-        height: calc(16px + 45 * (100vw / 1920));
-
-        margin-left: 1vw;
-
-        border-radius: 100%;
-      }
-
-      .correspondence-message__full-name-date {
-        position: absolute;
-
-        top: 0.3vh;
-        left: calc(18px + 70 * (100vw / 1920));
-
-        @media (height > 718px) and (height < 1370px) {
-          @media (width > 475px) and (width < 1300px) {
-            top: 0.3vh;
-          }
-        }
-
-        .correspondence-message__full-name-date__full-name {
-          font: normal 400 calc(4px + 25 * (100vw / 1920)) 'Iceberg';
-          color: var(--text-color);
-        }
-
-        .correspondence-message__full-name-date__date {
-          font: normal 400 calc(4px + 18 * (100vw / 1920)) 'Iceberg';
-          color: var(--text-color);
-        }
-      }
-
-      .correspondence-message__message {
-        margin: 1vh 1vw;
-
-        word-wrap: break-word;
-
-        font: normal 400 calc(4px + 24 * (100vw / 1920)) 'Iceberg';
-        color: var(--text-color);
-      }
-    }
-
-    .correspondence-sending-message {
+    .correspondence-sending-message__wait {
       position: absolute;
 
-      padding-top: calc(5px + 8 * (100vh / 1080));
-      padding-left: 2vw;
-      padding-right: 2vw;
+      top: calc(6px + 9 * (100vh / 1080));
+      right: 4.5vw;
 
-      width: 100%;
-      height: calc(16px + 42 * (100vh / 1080));
-
-      bottom: 0px;
-
-      border-bottom-left-radius: var(--borderRadius-interface);
-      border-bottom-right-radius: var(--borderRadius-interface);
-
-      background-color: var(--miniInterface-color);
-
-      .correspondence-sending-message__input {
-        width: 75%;
-
-        padding: 0 1vw;
-
-        height: calc(7px + 25 * (100vh / 1080));
-
-        border-radius: var(--borderRadius-interface);
-        box-shadow: var(--box-shadow);
-
-        font: normal 400 calc(10px + 10 * (100vw / 1920)) 'Iceberg';
-
-        background-color: var(--backgroundInput-color);
-        color: var(--text-color);
-      }
-
-      .correspondence-sending-message__button {
-        position: absolute;
-
-        width: 20%;
-        height: calc(8px + 26 * (100vh / 1080));
-
-        right: 2vw;
-
-        border-radius: var(--borderRadius-interface);
-
-        font: normal 400 calc(3px + 15 * (100vh / 1080)) 'Iceberg';
-
-        background-color: var(--backgroundInput-color);
-        color: var(--text-color);
-
-        cursor: pointer;
-        &:hover {
-          background-color: var(--interface-color-hover);
-          color: var(--text-color-hover);
-        }
-      }
-
-      .correspondence-sending-message__wait {
-        position: absolute;
-
-        top: calc(6px + 9 * (100vh / 1080));
-        right: 4.5vw;
-
-        font: normal 400 calc(6px + 25 * (100vw / 1920)) 'Iceberg';
-        color: var(--text-color);
-      }
+      font: normal 400 calc(6px + 25 * (100vw / 1920)) 'Iceberg';
+      color: var(--text-color);
     }
   }
 }

@@ -1,57 +1,77 @@
-@media (width > 460px) and (height > 420px) {
-  .about__form {
+.about__form {
+  position: relative;
+
+  top: 0.2vh;
+
+  @media (width < 460px) {
+    top: -5px;
+  }
+
+  @media (width < 460px) {
+    .about__div {
+      height: calc(7px + 12 * (100vh / 1080));
+    }
+  }
+
+  .about__form__input {
     position: relative;
+    margin-bottom: 0.7vh;
 
-    top: 0.2vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
 
-    .about__form__input {
-      margin-bottom: 0.7vh;
+    width: 100%;
+    height: calc(10px + 18 * (100vh / 1080));
 
-      padding-left: 1vw;
-      padding-right: 1vw;
+    font: normal 400 calc(6px + 16 * (100vw / 1920)) 'Iceberg';
 
-      width: 100%;
-      height: calc(10px + 18 * (100vh / 1080));
+    background-color: var(--backgroundInput-color);
+    color: var(--text-color);
 
-      font: normal 400 calc(6px + 16 * (100vw / 1920)) 'Iceberg';
+    @media (width < 460px) {
+      height: calc(6px + 8 * (100vh / 1080));
+      border: 0;
+      font: normal 400 calc(2px + 6 * (100vw / 460)) 'Iceberg';
+    }
+  }
 
-      background-color: var(--backgroundInput-color);
-      color: var(--text-color);
+  .about__form__buttton {
+    position: absolute;
+
+    width: 100%;
+    height: calc(10px + 20 * (100vh / 1080));
+
+    border: 0;
+    border-radius: var(--borderRadius-interface);
+
+    background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
+    background-size: 200% auto;
+
+    box-shadow: 0 0 0.5vh rgb(162, 162, 162);
+
+    transition: 0.5s;
+
+    text-transform: uppercase;
+    font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
+
+    letter-spacing: 0.2vw;
+
+    color: var(--text-color);
+
+    cursor: pointer;
+
+    @media (width < 460px) {
+      margin-top: 1vh;
+      height: calc(4px + 10 * (100vh / 1080));
+      font: normal 400 calc(4px + 6 * (100vw / 460)) 'Iceberg';
+    }
+    &:hover {
+      background-position: right center;
     }
 
-    .about__form__buttton {
-      position: absolute;
-
-      width: 100%;
-      height: calc(10px + 20 * (100vh / 1080));
-
-      border: 0;
-      border-radius: var(--borderRadius-interface);
-
-      background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
-      background-size: 200% auto;
-
-      box-shadow: 0 0 0.5vh rgb(162, 162, 162);
-
-      transition: 0.5s;
-
-      text-transform: uppercase;
-      font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
-
-      letter-spacing: 0.2vw;
-
-      color: var(--text-color);
-
-      cursor: pointer;
-
-      &:hover {
-        background-position: right center;
-      }
-
-      &:active {
-        transform: scale(0.9);
-        transition: 0.2s;
-      }
+    &:active {
+      transform: scale(0.9);
+      transition: 0.2s;
     }
   }
 }

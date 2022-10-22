@@ -1,46 +1,62 @@
-@media (width > 460px) and (height > 420px) {
-  .wall__control-panel {
-    .wall__control-panel__like-icon,
-    .wall__control-panel__dislike-icon,
-    .wall__control-panel__comment-icon,
-    .wall__control-panel__share-icon {
-      position: relative;
+.wall__control-panel {
+  .wall__control-panel__like-icon,
+  .wall__control-panel__dislike-icon,
+  .wall__control-panel__comment-icon,
+  .wall__control-panel__share-icon {
+    position: relative;
 
-      padding: 1vh 0.5vw 1vh 0;
+    padding: 1vh 0.5vw 1vh 0;
 
-      width: calc(10px + 20 * (100vw / 1920));
-      height: calc(10px + 20 * (100vw / 1920));
+    width: calc(10px + 20 * (100vw / 1920));
+    height: calc(10px + 20 * (100vw / 1920));
 
-      cursor: pointer;
+    cursor: pointer;
 
-      &:hover {
-        color: red !important;
-      }
-
-      &:active {
-        transform: scale(0.8);
-        transition: 0.1s;
-      }
+    @media (width < 460px) {
+      padding: 0.5vh 0.5vw 1vh 0;
     }
 
-    .wall__control-panel__like-number,
-    .wall__control-panel__dislike-number {
-      position: relative;
-
-      margin-right: 1vw;
-
-      top: -1vh;
-
-      font: normal 400 calc(6px + 14 * (100vw / 1920)) 'Iceberg';
+    &:hover {
+      color: red !important;
     }
 
-    .wall__control-panel__share-icon {
-      color: grey;
-      cursor: auto;
+    &:active {
+      transform: scale(0.8);
+      transition: 0.1s;
+    }
+  }
 
-      &:hover {
-        color: grey !important;
-      }
+  .wall__control-panel__comment-icon {
+    &:hover {
+      color: black !important;
+    }
+
+    &:active {
+      color: white;
+    }
+  }
+
+  .wall__control-panel__like-number,
+  .wall__control-panel__dislike-number {
+    position: relative;
+
+    margin-right: 1vw;
+
+    top: -1vh;
+
+    font: normal 400 calc(6px + 14 * (100vw / 1920)) 'Iceberg';
+  }
+
+  .wall__control-panel__share-icon {
+    color: grey;
+    cursor: auto;
+
+    &:hover {
+      color: grey !important;
+    }
+
+    &:active {
+      color: grey !important;
     }
   }
 }

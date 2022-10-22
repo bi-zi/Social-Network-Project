@@ -1,142 +1,172 @@
-@media (width > 460px) and (height > 420px) {
-  .registration {
-    position: relative;
-    margin: 0 auto;
+.registration {
+  position: relative;
+  margin: 0 auto;
 
-    max-width: 75vw;
-    height: 90vh;
+  max-width: 75vw;
+  height: 90vh;
 
-    user-select: none;
+  user-select: none;
+
+  @media (width < 460px) {
+    max-width: 90vw;
+  }
+}
+
+.registration__attention {
+  position: relative;
+
+  margin: 0 auto;
+
+  padding-top: 8vh;
+  padding-bottom: 5px;
+
+  width: 70%;
+
+  text-align: center;
+  font: normal 400 calc(10px + 20 * (100vw / 1920)) 'Iceberg';
+
+  color: rgb(255, 0, 0);
+}
+
+.registration__block {
+  position: relative;
+  margin: 0 auto;
+
+  padding-top: 2vh;
+
+  width: 70%;
+  height: auto;
+
+  border-radius: var(--borderRadius-interface);
+  box-shadow: var(--box-shadow);
+
+  text-align: center;
+  font: normal 400 3vw 'Iceberg';
+
+  background-color: var(--interface-color);
+  color: var(--text-color);
+
+  @media (width < 460px) {
+    width: 90%;
   }
 
-  .registration__attention {
-    position: relative;
-
-    margin: 0 auto;
-
-    padding-top: 8vh;
-    padding-bottom: 5px;
-
-    width: 70%;
-
-    text-align: center;
-    font: normal 400 calc(10px + 20 * (100vw / 1920)) 'Iceberg';
-
-    color: rgb(255, 0, 0);
-  }
-
-  .registration__block {
-    position: relative;
-    margin: 0 auto;
-
+  .registration__block__form {
     padding-top: 2vh;
 
-    width: 70%;
-    height: auto;
-
-    border-radius: var(--borderRadius-interface);
-    box-shadow: var(--box-shadow);
+    width: 100%;
+    height: 100%;
 
     text-align: center;
-    font: normal 400 3vw 'Iceberg';
 
-    background-color: var(--interface-color);
-    color: var(--text-color);
+    .registration__block__form-first-name,
+    .registration__block__form-last-name,
+    .registration__block__form-pass-block__password {
+      width: 60%;
+      height: 6vh;
 
-    .registration__block__form {
-      padding-top: 2vh;
+      margin-bottom: 0.5vh;
+
+      padding-left: 1vw;
+      padding-right: 1vw;
+
+      font: normal 400 calc(10px + 25 * (100vw / 1920)) 'Iceberg';
+
+      border-radius: var(--borderRadius-interface);
+      box-shadow: var(--box-shadow);
+
+      background-color: var(--backgroundInput-color);
+      color: var(--text-color);
+
+      @media (width < 460px) {
+        height: 4vh;
+         font: normal 400 calc(6px + 18 * (100vw / 1920)) 'Iceberg';
+      }
+    }
+
+    .registration__block__form-pass-block__password {
+      margin-bottom: 1vh;
+      padding-right: 5vw;
+    }
+
+    .registration__block__form-pass-block {
+      position: relative;
+    }
+
+    .registration__block__form-pass-block__password-icon-lock,
+    .registration__block__form-pass-block__password-icon-unlock {
+      position: absolute;
+
+      font-size: 3vh;
+
+      right: 11.6vw;
+      bottom: 2.5vh;
+
+      color: var(--text-color);
+
+      cursor: pointer;
+      z-index: 100;
+
+      @media (width < 460px) {
+        right: 18vw !important;
+        bottom: 2vh !important;
+        font-size: 2vh;
+      }
+    }
+
+    .registration__block__form-pass-block__password-icon-unlock {
+      right: 11.2vw;
+
+      @media (width < 460px) {
+        right: 18vw;
+      }
+    }
+
+    .registration__block__form-submit {
+      position: relative;
+
+      margin-bottom: 10vh;
+
+      width: 60%;
+      height: auto;
+
+      font: normal 400 2vw 'Iceberg';
+
+      border-radius: var(--borderRadius-interface);
+
+      color: var(--text-color);
+      background-color: var(--backgroundInput-color);
+
+      cursor: pointer;
+      border: 0.3vh solid black;
+
+      @media (width < 460px) {
+        margin-bottom: 5vh;
+        font: normal 400 4vw 'Iceberg';
+      }
+
+      &:hover {
+        color: white;
+
+        border: 0.2vh solid white;
+        background-color: black;
+      }
+    }
+
+    .registration__block__form-link-to {
+      position: absolute;
 
       width: 100%;
-      height: 100%;
+      bottom: 5px;
 
       text-align: center;
+      text-decoration: underline;
 
-      .registration__block__form-first-name,
-      .registration__block__form-last-name,
-      .registration__block__form-pass-block__password {
-        width: 60%;
-        height: 6vh;
+      font: normal 400 2vw 'Iceberg';
 
-        margin-bottom: 0.5vh;
+      color: var(--text-color);
 
-        padding-left: 1vw;
-        padding-right: 1vw;
-
-        font: normal 400 calc(10px + 25 * (100vw / 1920)) 'Iceberg';
-
-        border-radius: var(--borderRadius-interface);
-        box-shadow: var(--box-shadow);
-
-        background-color: var(--backgroundInput-color);
-        color: var(--text-color);
-      }
-
-      .registration__block__form-pass-block__password {
-        margin-bottom: 1vh;
-        padding-right: 5vw;
-      }
-
-      .registration__block__form-pass-block {
-        position: relative;
-      }
-
-      .registration__block__form-pass-block__password-icon-lock,
-      .registration__block__form-pass-block__password-icon-unlock {
-        position: absolute;
-
-        font-size: 3vh;
-
-        right: 11.6vw;
-        bottom: 2.5vh;
-
-        color: var(--text-color);
-
-        cursor: pointer;
-        z-index: 100;
-      }
-
-      .registration__block__form-pass-block__password-icon-unlock {
-        right: 11.2vw;
-      }
-
-      .registration__block__form-submit {
-        position: relative;
-
-        margin-bottom: 10vh;
-
-        width: 60%;
-        height: auto;
-
-        font: normal 400 2vw 'Iceberg';
-
-        border-radius: var(--borderRadius-interface);
-
-        color: var(--text-color);
-        background-color: var(--backgroundInput-color);
-
-        cursor: pointer;
-        border: 0.3vh solid black;
-
-        &:hover {
-          color: white;
-
-          border: 0.2vh solid white;
-          background-color: black;
-        }
-      }
-
-      .registration__block__form-link-to {
-        position: absolute;
-
-        width: 100%;
-        bottom: 5px;
-
-        text-align: center;
-        text-decoration: underline;
-
-        font: normal 400 2vw 'Iceberg';
-
-        color: var(--text-color);
+      @media (width < 460px) {
+        font-size: 2vh;
       }
     }
   }

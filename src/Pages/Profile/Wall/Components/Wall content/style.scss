@@ -1,64 +1,80 @@
-@media (width > 460px) and (height > 420px) {
-  .wall__content-container {
+.wall__content-container {
+  width: 100% !important;
+  height: 100%;
+
+  .wall_content-container__text {
+    margin-bottom: 1vh;
+
+    word-wrap: break-word;
+    font: normal 400 calc(4px + 14 * (100vw / 1920)) 'Iceberg';
+  }
+
+  .wall__content-container__images {
+    position: relative;
+    display: block;
+
+    margin: 1vh auto;
+
     width: 100% !important;
-    height: 100%;
 
-    .wall_content-container__text {
-      margin-bottom: 1vh;
+    @media (width < 460px) {
+      margin: 0vh auto;
+    }
+  }
 
-      word-wrap: break-word;
-      font: normal 400 calc(4px + 14 * (100vw / 1920)) 'Iceberg';
+  .wall__content-container__images-first,
+  .wall__content-container__images-second {
+    margin: 0 auto;
+
+    width: 50% !important;
+    height: calc(40px + 260 * (100vh / 1080));
+
+    border: 0.5vh solid black;
+
+    @media (width < 460px) {
+      height: calc(40px + 120 * (100vh / 1080));
     }
 
-    .wall__content-container__images {
-      position: relative;
-      display: block;
+    &:hover {
+      border: var(--borderImages);
+    }
+  }
 
-      margin: 1vh auto;
+  .wall__content-container__images-third {
+    position: relative;
 
-      width: 100% !important;
+    width: 100% !important;
+    max-height: calc(40px + 190 * (100vh / 1080)) !important;
+
+    top: calc(-4px - 0 * (100vh / 1080)) !important;
+
+    border: 0.5vh solid black;
+
+    @media (width < 460px) {
+      max-height: calc(40px + 100 * (100vh / 1080)) !important;
     }
 
-    .wall__content-container__images-first,
-    .wall__content-container__images-second {
-      margin: 0 auto;
-
-      width: 50% !important;
-      height: calc(40px + 260 * (100vh / 1080));
-
-      border: 0.5vh solid black;
-
-      &:hover {
-        border: var(--borderImages);
-      }
+    &:hover {
+      border: var(--borderImages);
     }
+  }
 
-    .wall__content-container__images-third {
-      position: relative;
+  .wall__content-container__iframe {
+    margin-top: 1vh;
 
-      width: 100% !important;
-      max-height: calc(40px + 190 * (100vh / 1080)) !important;
+    width: 100%;
+    height: calc(60px + 360 * (100vh / 1080));
 
-      top: calc(-4px - 0 * (100vh / 1080)) !important;
+    border: 0;
 
-      border: 0.5vh solid black;
+    @media (width < 460px) {
+      margin-top: 0vh;
 
-      &:hover {
-        border: var(--borderImages);
-      }
+      height: calc(60px + 160 * (100vh / 1080));
     }
+  }
 
-    .wall__content-container__iframe {
-      margin-top: 1vh;
-
-      width: 100%;
-      height: calc(60px + 360 * (100vh / 1080));
-
-      border: 0;
-    }
-
-    .wall_from {
-      font: normal 400 calc(4px + 14 * (100vw / 1920)) 'Iceberg';
-    }
+  .wall_from {
+    font: normal 400 calc(4px + 14 * (100vw / 1920)) 'Iceberg';
   }
 }

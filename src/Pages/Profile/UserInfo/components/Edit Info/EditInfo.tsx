@@ -91,7 +91,7 @@ export const EditInfo: React.FC = () => {
     <>
       <form className="about__form" onSubmit={handleSubmit(onSubmit)}>
         {data.map((aboutInfo, index) => (
-          <div key={index}>
+          <div key={index} className="about__div">
             <input
               className="about__form__input"
               defaultValue={aboutInfo.default !== undefined ? `${aboutInfo.default}` : ''}

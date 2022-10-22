@@ -1,16 +1,18 @@
-@media (width > 460px) and (height > 420px) {
-  .post__container {
-    position: relative;
+.post__container {
+  position: relative;
 
-    margin: 2vh 0;
-    padding: 1vh 1vw;
+  margin: 2vh 0;
+  padding: 1vh 1vw;
 
-    width: 100%;
+  width: 100%;
 
-    border-radius: var(--borderRadius-interface);
-    box-shadow: var(--box-shadow);
+  border-radius: var(--borderRadius-interface);
+  box-shadow: var(--box-shadow);
 
-    background-color: var(--interface-color);
-    color: var(--text-color);
+  background-color: var(--interface-color);
+  color: var(--text-color);
+
+  @media (width < 460px) {
+     margin: 1vh 0;
   }
 }

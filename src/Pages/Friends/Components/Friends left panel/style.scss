@@ -1,107 +1,136 @@
-@media (width > 460px) and (height > 420px) {
-  .users__left-panel {
-    .users__left-panel__user-block {
-      display: flex;
-      position: relative;
+.users__left-panel {
+  .users__left-panel__user-block {
+    display: flex;
+    position: relative;
 
-      margin-left: auto;
-      margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 
-      width: 95%;
-      height: 100%;
+    width: 95%;
+    height: 100%;
 
-      border-bottom: 0.2vh solid var(--miniInterface-color);
+    border-bottom: 0.2vh solid var(--miniInterface-color);
+  }
+
+  .users__left-panel__user-block__avatar {
+    width: calc(40px + 40 * (100vw / 1920));
+    height: calc(40px + 40 * (100vw / 1920));
+
+    margin: 1vh 0;
+
+    border-radius: 100%;
+    cursor: pointer;
+
+    @media (width < 460px) {
+      margin: 0.5vh 0 0.25vh 0;
+
+      width: calc(20px + 20 * (100vw / 460));
+      height: calc(20px + 20 * (100vw / 460));
+    }
+  }
+
+  .users__left-panel__user-block__avatar__full-name {
+    margin-top: 1.5vh;
+    margin-left: 1vw;
+
+    width: auto;
+    height: 2vh;
+
+    font: normal 400 calc(8px + 14 * (100vw / 1920)) 'Iceberg';
+    color: var(--text-color);
+
+    @media (width < 460px) {
+      margin-top: 1vh;
+      font: normal 400 calc(2px + 10 * (100vw / 460)) 'Iceberg';
+    }
+  }
+
+  .users__left-panel__user-block__menu {
+    position: absolute;
+
+    float: left;
+    right: 1vw;
+    top: 0px;
+
+    &:active .users__left-panel__user-block__menu-content {
+      display: block;
     }
 
-    .users__left-panel__user-block__avatar {
-      width: calc(40px + 40 * (100vw / 1920));
-      height: calc(40px + 40 * (100vw / 1920));
+    .users__left-panel__user-block__menu-content {
+      display: none;
+      position: absolute;
 
-      margin: 1vh 0;
+      padding-top: 3vh;
 
-      border-radius: 100%;
+      width: 9vw;
+      height: 6vh;
+
+      right: -2vw;
+
+      text-align: center;
+
+      @media (height < 888px) {
+        padding-top: 4.5vh;
+
+        @media (width < 460px) {
+          padding-top: 2vh;
+
+          width: 9vw;
+          height: auto;
+
+          right: -1vw;
+        }
+      }
+
+      &:hover {
+        display: block;
+      }
+    }
+
+    .users__left-panel__user-block__menu-content-delete {
+      width: 100%;
+
+      font: normal 400 calc(10px + 10 * (100vw / 1920)) 'Iceberg';
+
+      background-color: var(--miniInterface-color);
+      color: var(--text-color);
+
+      @media (width < 460px) {
+        font: normal 400 calc(4px + 6 * (100vw / 460)) 'Iceberg';
+      }
+    }
+
+    .users__left-panel__user-block__menu-content-delete:hover {
+      background-color: var(--miniInterface-color-hover);
+      color: var(--miniInterface-color);
+
       cursor: pointer;
     }
 
-    .users__left-panel__user-block__avatar__full-name {
-      margin-top: 1.5vh;
-      margin-left: 1vw;
+    .users__left-panel__user-block__menu-icon {
+      font-size: calc(20px + 20 * (100vw / 1920));
+      cursor: pointer;
 
-      width: auto;
-      height: 2vh;
-
-      font: normal 400 calc(8px + 14 * (100vw / 1920)) 'Iceberg';
-      color: var(--text-color);
-    }
-
-    .users__left-panel__user-block__menu {
-      position: absolute;
-
-      float: left;
-      right: 1vw;
-      top: 0px;
-
-      &:active .users__left-panel__user-block__menu-content {
-        display: block;
-      }
-
-      .users__left-panel__user-block__menu-content {
-        display: none;
-        position: absolute;
-
-        padding-top: 3vh;
-
-        width: 9vw;
-        height: 6vh;
-
-        right: -2vw;
-
-        text-align: center;
-
-        @media (height < 888px) {
-          padding-top: 4.5vh;
-        }
-
-        &:hover {
-          display: block;
-        }
-      }
-
-      .users__left-panel__user-block__menu-content-delete {
-        width: 100%;
-
-        font-size: calc(10px + 10 * (100vw / 1920));
-
-        font: normal 400 calc(10px + 10 * (100vw / 1920)) 'Iceberg';
-
-        background-color: var(--miniInterface-color);
-        color: var(--text-color);
-      }
-
-      .users__left-panel__user-block__menu-content-delete:hover {
-        background-color: var(--miniInterface-color-hover);
-        color: var(--miniInterface-color);
-
-        cursor: pointer;
-      }
-
-      .users__left-panel__user-block__menu-icon {
-        font-size: calc(20px + 20 * (100vw / 1920));
-        cursor: pointer;
+      @media (width < 460px) {
+        font: normal 400 calc(10px + 10 * (100vw / 460)) 'Iceberg';
       }
     }
+  }
 
-    .users__left-panel__user-block__number-friends-subs {
-      position: absolute;
+  .users__left-panel__user-block__number-friends-subs {
+    position: absolute;
 
-      bottom: 0;
-      right: 0;
+    bottom: 0;
+    right: .5vw;
 
-      font: normal 400 calc(8px + 14 * (100vw / 1920)) 'Iceberg';
+    font: normal 400 calc(8px + 14 * (100vw / 1920)) 'Iceberg';
 
-      span:first-child {
-        margin-right: 1vw;
-      }
+    @media (width < 460px) {
+      font: normal 400 calc(2px + 10 * (100vw / 460)) 'Iceberg';
+    }
+
+    span:first-child {
+      margin-right: 1vw;
     }
   }
 }

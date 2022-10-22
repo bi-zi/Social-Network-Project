@@ -1,55 +1,56 @@
-@media (width > 460px) and (height > 420px) {
-  .avatar {
-    width: 100%;
+.avatar {
+  width: 100%;
 
-    padding: calc(5px + 10 * (100vh / 1080)) calc(5px + 10 * (100vw / 1920));
+  padding: calc(5px + 10 * (100vh / 1080)) calc(5px + 10 * (100vw / 1920));
 
-    border-radius: var(--borderRadius-interface);
-    box-shadow: var(--box-shadow);
+  border-radius: var(--borderRadius-interface);
+  box-shadow: var(--box-shadow);
 
-    background-color: var(--interface-color);
+  background-color: var(--interface-color);
+  color: var(--text-color);
+
+  @media (width < 460px) {
+   padding: calc(2px + 4 * (100vh / 1080)) calc(2px + 4 * (100vw / 460));
+  }
+
+  .avatar__send-message-user-interaction {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .avatar_send-message-user-interaction___interaction,
+  .avatar_send-message-user-interaction__send {
+    width: 48%;
+    height: calc(10px + 31 * (100vw / 1920));
+
     color: var(--text-color);
 
-    .avatar__send-message-user-interaction {
-      display: flex;
-      justify-content: space-between;
-    }
+    border: 0;
+    border-radius: var(--borderRadius-interface);
 
-    .avatar_send-message-user-interaction___interaction,
-    .avatar_send-message-user-interaction__send {
-      width: 48%;
-      height: calc(10px + 31 * (100vw / 1920));
+    background-image: linear-gradient(to right, #000000 0%, #0164f8 50%, #000000 105%);
+    background-size: 200% auto;
 
-      color: var(--text-color);
+    box-shadow: 0 0 0.5vh rgb(162, 162, 162);
 
-      border: 0;
-      border-radius: var(--borderRadius-interface);
+    transition: 0.5s;
 
-      background-image: linear-gradient(to right, #000000 0%, #0164f8 50%, #000000 105%);
-      background-size: 200% auto;
+    text-decoration: none;
+    font: normal 400 calc(2px + 14 * (100vw / 1920)) 'Iceberg';
 
-      box-shadow: 0 0 .5vh rgb(162, 162, 162);
+    cursor: pointer;
+  }
 
-      transition: 0.5s;
+  .change__avatar-button:hover,
+  .avatar_send-message-user-interaction___interaction:hover,
+  .avatar_send-message-user-interaction__send:hover {
+    background-position: right center;
+  }
 
-      text-decoration: none;
-      font: normal 400 calc(2px + 14 * (100vw / 1920)) 'Iceberg';
-
-      cursor: pointer;
-    }
-
-
-    .change__avatar-button:hover,
-    .avatar_send-message-user-interaction___interaction:hover,
-    .avatar_send-message-user-interaction__send:hover {
-      background-position: right center;
-    }
-
-    .change__avatar-button:active,
-    .avatar_send-message-user-interaction___interaction:active,
-    .avatar_send-message-user-interaction__send:active {
-      transform: scale(0.9);
-      transition: 0.2s;
-    }
+  .change__avatar-button:active,
+  .avatar_send-message-user-interaction___interaction:active,
+  .avatar_send-message-user-interaction__send:active {
+    transform: scale(0.9);
+    transition: 0.2s;
   }
 }

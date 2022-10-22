@@ -1,158 +1,192 @@
-@media (width > 460px) and (height > 420px) {
-  .chats-container {
-    position: relative;
+.chats-container {
+  position: relative;
 
-    width: 35%;
-    height: auto;
+  width: 35%;
+  height: auto;
 
-    border-radius: var(--borderRadius-interface);
-    box-shadow: var(--box-shadow);
+  border-radius: var(--borderRadius-interface);
+  box-shadow: var(--box-shadow);
 
-    background-color: var(--interface-color);
-    color: var(--text-color);
+  background-color: var(--interface-color);
+  color: var(--text-color);
 
-    .chats-form__find-chat {
-      .chats-form__search-icon {
-        margin: 0 1vw;
+  .chats-form__find-chat {
+    .chats-form__search-icon {
+      margin: 0 1vw;
 
-        font-size: calc(4px + 25 * (100vh / 1080));
+      font-size: calc(4px + 25 * (100vh / 1080));
 
-        color: var(--text-color);
+      color: var(--text-color);
 
-        cursor: pointer;
+      cursor: pointer;
 
-        z-index: 999;
-      }
+      z-index: 999;
 
-      .chats-form__input {
-        position: absolute;
-
-        padding-left: calc(18px + 50 * (100vw / 1920));
-        padding-right: 2vw;
-
-        width: 100%;
-        height: 100%;
-
-        border-top-left-radius: var(--borderRadius-interface);
-        border-top-right-radius: var(--borderRadius-interface);
-        box-shadow: var(--box-shadow);
-
-        font: normal 400 calc(2px + 22 * (100vh / 1080)) 'Iceberg';
-
-        border: 0;
-
-        background-color: var(--miniInterface-color);
-        color: var(--text-color);
+      @media (width < 460px) {
+        font-size: calc(4px + 18 * (100vh / 1080));
       }
     }
 
-    .chats-users {
+    .chats-form__input {
+      position: absolute;
+
+      padding-left: calc(18px + 50 * (100vw / 1920));
+      padding-right: 2vw;
+
       width: 100%;
-      height: calc(100% - 8.2vh);
+      height: 100%;
 
-      overflow: auto;
-      overflow-x: hidden;
+      border-top-left-radius: var(--borderRadius-interface);
+      border-top-right-radius: var(--borderRadius-interface);
+      box-shadow: var(--box-shadow);
 
-      .chats-users__item--selected {
-        background-color: rgb(65, 65, 65);
+      font: normal 400 calc(2px + 22 * (100vh / 1080)) 'Iceberg';
+
+      border: 0;
+
+      background-color: var(--miniInterface-color);
+      color: var(--text-color);
+
+      @media (width < 460px) {
+        font: normal 400 calc(2px + 14 * (100vh / 1080)) 'Iceberg';
+      }
+    }
+  }
+
+  .chats-users {
+    width: 100%;
+    height: calc(100% - 8.2vh);
+
+    @media (width < 460px) {
+      height: 92%;
+    }
+
+    overflow: auto;
+    overflow-x: hidden;
+
+    .chats-users__item--selected {
+      background-color: rgb(65, 65, 65);
+    }
+
+    .chats-users__item--selected,
+    .chats-users__item {
+      position: relative;
+
+      width: 100%;
+
+      border-top: 0.2vh solid var(--miniInterface-color);
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--interface-color-hover);
       }
 
-      .chats-users__item--selected,
-      .chats-users__item {
-        position: relative;
+      &:active {
+        background-color: var(--interface-color-active);
+      }
 
-        width: 100%;
+      .chats-users__item__avatar {
+        margin: 1vh 1vh 0.8vh 1vh;
 
-        border-top: 0.2vh solid var(--miniInterface-color);
-        cursor: pointer;
+        width: calc(30px + 55 * (100vw / 1920));
+        height: calc(30px + 55 * (100vw / 1920));
+
+        border-radius: 50%;
+
+        @media (width < 460px) {
+          margin: 0.5vh 0.5vh 0.3vh 0.5vh;
+
+          width: calc(10px + 25 * (100vw / 460));
+          height: calc(10px + 25 * (100vw / 460));
+        }
 
         &:hover {
-          background-color: var(--interface-color-hover);
+          border: var(--borderImages);
         }
+      }
+    }
 
-        &:active {
-          background-color: var(--interface-color-active);
-        }
+    .chats-users__item__full-name-last-message {
+      position: absolute;
 
-        .chats-users__item__avatar {
-          margin: 1vh 1vh 0.8vh 1vh;
+      top: calc(2px + 30 * (100vh / 1080));
+      left: calc(34px + 75 * (100vw / 1920));
 
-          width: calc(30px + 55 * (100vw / 1920));
-          height: calc(30px + 55 * (100vw / 1920));
-
-          border-radius: 50%;
-
-          &:hover {
-            border: var(--borderImages);
-          }
+      @media (height > 718px) and (height < 1370px) {
+        @media (width > 475px) and (width < 1300px) {
+          top: calc(2px + 20 * (100vh / 1080));
+          left: calc(40px + 75 * (100vw / 1920));
         }
       }
 
-      .chats-users__item__full-name-last-message {
-        position: absolute;
-
-        top: calc(2px + 30 * (100vh / 1080));
-        left: calc(34px + 75 * (100vw / 1920));
-
-        @media (height > 718px) and (height < 1370px) {
-          @media (width > 475px) and (width < 1300px) {
-            top: calc(2px + 20 * (100vh / 1080));
-            left: calc(40px + 75 * (100vw / 1920));
-          }
-        }
-
-        .chats-users__item__full-name-last-message__full-name {
-          margin-bottom: calc(2px + 15 * (100vw / 1920));
-
-          font: normal 400 calc(5px + 20 * (100vw / 1920)) / 1vh 'Iceberg';
-          color: var(--text-color);
-        }
-
-        .chats-users__item__full-name-last-message__message {
-          display: flex;
-        }
-
-        .chats-users__item__full-name-last-message__message__name,
-        .chats-users__item__full-name-last-message__message_last-message {
-          font: normal 400 calc(3px + 15 * (100vw / 1920)) 'Iceberg';
-          color: var(--text-color);
-        }
-
-        .chats-users__item__full-name-last-message__message_last-message {
-          margin-right: 0.2vw;
-          word-break: break-all;
-        }
-
-        .chats-users__item__full-name-last-message__message__name {
-          position: relative;
-          margin-right: 0.2vw;
-        }
+      @media (width < 460px) {
+        top: calc(4px + 6 * (100vh / 1080));
+        left: calc(20px + 20 * (100vw / 460));
       }
 
-      .chats-users__item__time {
-        position: absolute;
+      .chats-users__item__full-name-last-message__full-name {
+        margin-bottom: calc(2px + 15 * (100vw / 1920));
 
-        top: 0.3vh;
-        right: 0.5vw;
-
-        font: normal 400 calc(6px + 9 * (100vh / 1080)) 'Iceberg';
+        font: normal 400 calc(5px + 20 * (100vw / 1920)) / 1vh 'Iceberg';
         color: var(--text-color);
+
+        @media (width < 460px) {
+          font: normal 400 calc(2px + 8 * (100vw / 460)) / 1vh 'Iceberg';
+        }
+      }
+
+      .chats-users__item__full-name-last-message__message {
+        display: flex;
+      }
+
+      .chats-users__item__full-name-last-message__message__name,
+      .chats-users__item__full-name-last-message__message_last-message {
+        font: normal 400 calc(3px + 15 * (100vw / 1920)) 'Iceberg';
+        color: var(--text-color);
+
+        @media (width < 460px) {
+          font: normal 400 calc(2px + 6 * (100vw / 460)) / 1vh 'Iceberg';
+        }
+      }
+
+      .chats-users__item__full-name-last-message__message_last-message {
+        margin-right: 0.2vw;
+        word-break: break-all;
+      }
+
+      .chats-users__item__full-name-last-message__message__name {
+        position: relative;
+        margin-right: 0.2vw;
       }
     }
 
-    .chats-empty {
-      position: relative;
-      margin: 0 auto;
+    .chats-users__item__time {
+      position: absolute;
 
-      width: calc(120px + 140 * (100vw / 1920));
+      top: 0.3vh;
+      right: 0.5vw;
 
-      top: 40%;
-
-      text-decoration: underline;
-      text-align: center;
-
-      font: normal 400 calc(20px + 20 * (100vw / 1920)) 'Iceberg';
+      font: normal 400 calc(6px + 9 * (100vh / 1080)) 'Iceberg';
       color: var(--text-color);
+
+      @media (width < 460px) {
+        font: normal 400 calc(3px + 4 * (100vw / 460)) / 1vh 'Iceberg';
+      }
     }
+  }
+
+  .chats-empty {
+    position: relative;
+    margin: 0 auto;
+
+    width: calc(120px + 140 * (100vw / 1920));
+
+    top: 40%;
+
+    text-decoration: underline;
+    text-align: center;
+
+    font: normal 400 calc(20px + 20 * (100vw / 1920)) 'Iceberg';
+    color: var(--text-color);
   }
 }
