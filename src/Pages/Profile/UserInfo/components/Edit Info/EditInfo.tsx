@@ -13,7 +13,7 @@ import './style.scss';
 
 interface MyParams {
   id: string;
-};
+}
 
 export const EditInfo: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export const EditInfo: React.FC = () => {
 
   // отправка информации о пользователе на сервер
   const onSubmit = async (values: About) => {
-    about !== null
+    about.data !== null
       ? await dispatch(fetchAboutUpdate({ values, id }))
       : await dispatch(fetchAboutPost({ values }));
 
@@ -96,6 +96,7 @@ export const EditInfo: React.FC = () => {
               className="about__form__input"
               defaultValue={aboutInfo.default !== undefined ? `${aboutInfo.default}` : ''}
               maxLength={25}
+              required
               placeholder={aboutInfo.title}
               {...register(
                 aboutInfo.checkTitle === 'livesIn'
@@ -119,13 +120,9 @@ export const EditInfo: React.FC = () => {
               title="Only latin characters can be used"
             />
             {aboutInfo.error && aboutInfo.errorType === 'minLength' ? (
-              <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
-                Minimum length 2 characters
-              </span>
+              <span className="about__form-error">Minimum length 2 characters</span>
             ) : aboutInfo.error && aboutInfo.errorType === 'maxLength' ? (
-              <span style={{ color: 'red', paddingLeft: 20, fontSize: 16 }}>
-                Max length 25 characters
-              </span>
+              <span className="about__form-error">Max length 25 characters</span>
             ) : (
               ''
             )}
@@ -138,7 +135,7 @@ export const EditInfo: React.FC = () => {
             Save
           </button>
         ) : (
-          <button className="about__form__buttton">Submit</button>
+          <button className="about__form__buttton">Save</button>
         )}
       </form>
     </>

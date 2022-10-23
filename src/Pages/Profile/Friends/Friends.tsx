@@ -16,7 +16,15 @@ export const Friends: React.FC = () => {
 
   const { id } = useParams<keyof MyParams>() as MyParams;
 
-  const userFriends = user?.findUserFriends;
+  let userFriends = [...user?.findUserFriends?.slice(0, 12)]?.sort(function (a, b) {
+    if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
+      return 1;
+    }
+    if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
+      return -1;
+    }
+    return 0;
+  });
 
   React.useEffect(() => {
     dispatch(fetchUserFriends(id));
@@ -27,15 +35,14 @@ export const Friends: React.FC = () => {
       <Link
         to={`/Friends/${id}`}
         className="profile-friends__title"
-        style={{ textDecoration: 'none' }}
         onClick={() => dispatch(setCatergorySort('friends'))}>
-        Friends - {userFriends?.length}
+        Friends - {user?.findUserFriends?.length}
       </Link>
 
       <div className="profile-friends__container">
-        {userFriends.map((friend) => (
-          <div key={friend._id}>
-            <Link to={`/Profile/${friend._id}`} key={friend._id} style={{ textDecoration: 'none' }}>
+        {userFriends.map((friend, index) => (
+          <div key={friend._id} className={`${index}`}>
+            <Link to={`/Profile/${friend._id}`}>
               <div
                 className="profile-friends__container__friend"
                 onClick={() => {
@@ -52,7 +59,6 @@ export const Friends: React.FC = () => {
             </Link>
           </div>
         ))}
-        <div style={{ clear: 'both' }}> </div>
       </div>
     </div>
   );

@@ -31,9 +31,13 @@ export const PhotoSlider: React.FC = () => {
     swipeToSlide: true,
   };
 
-  async function onPhotoDelete(index: number) {
-    await dispatch(fetchSliderDelete({ deleteId: index, user: id }));
-    dispatch(fetchSlider(id));
+  async function onPhotoDelete(e: React.MouseEvent<SVGSVGElement>, index: number) {
+    e.preventDefault();
+
+    if (window.confirm('Are you sure you want to delete the image?')) {
+      await dispatch(fetchSliderDelete({ deleteId: index, user: id }));
+      dispatch(fetchSlider(id));
+    }
   }
 
   React.useEffect(() => {
@@ -50,7 +54,7 @@ export const PhotoSlider: React.FC = () => {
                 <FontAwesomeIcon
                   className="profile__slider__image-delete"
                   icon={faXmark}
-                  onClick={() => onPhotoDelete(index)}
+                  onClick={(e) => onPhotoDelete(e, index)}
                 />
               ) : (
                 ''

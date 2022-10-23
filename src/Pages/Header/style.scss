@@ -16,7 +16,6 @@
 
   @media (width < 460px) {
     height: calc(10px + 20 * (100vw / 460));
-    background: rgb(171, 70, 31);
   }
 
   .header__container {
@@ -66,6 +65,10 @@
 
     font-size: 1.5vw;
     animation: header_error 1s linear infinite;
+
+    @media (width < 770px) {
+       font-size: 3vw;
+    }
   }
 
   @keyframes header_error {
@@ -82,7 +85,6 @@
   width: 65%;
 
   justify-content: space-between;
-
 
   .header__control-panel__icons {
     width: calc(15px + 20 * (100vw / 1920));
@@ -224,7 +226,7 @@
       radius: 100%;
     }
 
-    animation: spin .9s linear infinite;
+    animation: spin 0.9s linear infinite;
 
     @media (width < 460px) {
       width: calc(6px + 12 * (100vw / 460));
@@ -234,10 +236,10 @@
       right: calc(10px + 10 * (100vw / 460));
 
       border: {
-        top: .6vw solid rgb(0, 149, 255);
-        right: .6vw solid rgb(254, 255, 255);
-        bottom: .6vw solid rgb(255, 255, 255);
-        left: .6vw solid rgb(248, 248, 247);
+        top: 0.6vw solid rgb(0, 149, 255);
+        right: 0.6vw solid rgb(254, 255, 255);
+        bottom: 0.6vw solid rgb(255, 255, 255);
+        left: 0.6vw solid rgb(248, 248, 247);
 
         radius: 100%;
       }

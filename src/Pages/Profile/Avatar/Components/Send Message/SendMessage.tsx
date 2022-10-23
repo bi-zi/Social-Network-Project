@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 interface MyParams {
   id: string;
-};
+}
 
 export const SendMessage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -65,9 +65,13 @@ export const SendMessage: React.FC = () => {
     <>
       {auth?._id !== id ? (
         <button className="avatar_send-message-user-interaction__send">
-          <Link to="/Messages" onClick={() => (loadStatus ? createMessages() : '')}>
-            Send a message
-          </Link>
+          {loadStatus ? (
+            <Link to="/Messages" onClick={() => createMessages()}>
+              Send a message
+            </Link>
+          ) : (
+            'Send a message'
+          )}
         </button>
       ) : (
         ''

@@ -6,7 +6,7 @@ import './style.scss';
 
 interface MyParams {
   id: string;
-};
+}
 
 export const AvatarImage: React.FC = () => {
   const state = useAppSelector((state) => state);
@@ -22,7 +22,9 @@ export const AvatarImage: React.FC = () => {
     <>
       {loadStatus ? (
         <Link to={`/${id}/PhotoAvatar/0`}>
-          <img src={user?.imageUrl} width={10} alt="" className="avatar__image" />
+          <div>
+            <img src={user?.imageUrl} alt="" className="avatar__image" />
+          </div>
         </Link>
       ) : (
         <img src={user?.imageUrl} width={10} alt="" className="avatar__image" />

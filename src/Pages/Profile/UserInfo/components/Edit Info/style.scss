@@ -4,52 +4,61 @@
   top: 0.2vh;
 
   @media (width < 460px) {
-    top: -5px;
+    top: -4px;
   }
 
   @media (width < 460px) {
     .about__div {
-      height: calc(7px + 12 * (100vh / 1080));
+      position: relative;
+      height: calc(7px + 14.5 * (100vh / 1080));
     }
   }
 
   .about__form__input {
     position: relative;
-    margin-bottom: 0.7vh;
+    margin-bottom: .8vh;
 
     padding-left: 1vw;
     padding-right: 1vw;
 
-    width: 100%;
+    width: 60%;
     height: calc(10px + 18 * (100vh / 1080));
 
     font: normal 400 calc(6px + 16 * (100vw / 1920)) 'Iceberg';
+
+    border: 0;
+    box-shadow: 0 0 0 0.1vh gray;
 
     background-color: var(--backgroundInput-color);
     color: var(--text-color);
 
     @media (width < 460px) {
-      height: calc(6px + 8 * (100vh / 1080));
-      border: 0;
-      font: normal 400 calc(2px + 6 * (100vw / 460)) 'Iceberg';
+      margin-bottom: 0vh;
+      height: 70%;
+      font-size: calc(4px + 14 * (100vw / 1920));
     }
   }
 
+  .about__form-error {
+    padding-left: 1vw;
+    color: red !important;
+
+    font: normal 400 calc(4px + 10 * (100vw / 1920)) 'Iceberg' !important;
+  }
+
   .about__form__buttton {
-    position: absolute;
+    position: relative;
 
     width: 100%;
     height: calc(10px + 20 * (100vh / 1080));
 
+    bottom: 0;
+
     border: 0;
     border-radius: var(--borderRadius-interface);
 
-    background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
-    background-size: 200% auto;
-
-    box-shadow: 0 0 0.5vh rgb(162, 162, 162);
-
-    transition: 0.5s;
+    background-color: black;
+    box-shadow: 0 0 0.2vw rgb(255, 254, 254);
 
     text-transform: uppercase;
     font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
@@ -59,12 +68,13 @@
     color: var(--text-color);
 
     cursor: pointer;
+    z-index: 999;
 
     @media (width < 460px) {
-      margin-top: 1vh;
-      height: calc(4px + 10 * (100vh / 1080));
-      font: normal 400 calc(4px + 6 * (100vw / 460)) 'Iceberg';
+      height: calc(6px + 12 * (100vh / 1080));
+      font: normal 400 calc(2px + 6 * (100vw / 460)) 'Iceberg';
     }
+
     &:hover {
       background-position: right center;
     }

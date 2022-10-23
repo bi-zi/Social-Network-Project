@@ -10,7 +10,7 @@
   box-shadow: var(--box-shadow);
 
   background: var(--interface-color);
-  color: var(--text-color);
+    color: gray;
 
   @media (width < 460px) {
     margin-bottom: 1vh;

@@ -4,13 +4,12 @@
 
   margin-bottom: 1vh;
 
-
-
   .post__avatar-input-container__avatar {
     margin-right: 1vw;
 
     width: calc(20px + 50 * (100vh / 1080));
     height: calc(20px + 50 * (100vh / 1080));
+
     border-radius: 100%;
 
     cursor: pointer;
@@ -33,17 +32,18 @@
 
     width: 90%;
 
+    border: 0;
     border-radius: var(--borderRadius-interface);
-    box-shadow: var(--box-shadow);
+    box-shadow: 0 0 0 0.1vh gray;
 
     font: normal 400 calc(10px + 15 * (100vw / 1920)) / 3vh 'Iceberg';
 
     background-color: var(--backgroundInput-color);
     color: var(--text-color);
 
-     @media (width < 460px) {
+    @media (width < 460px) {
       margin: 0 auto;
-        font: normal 400 calc(2px + 8 * (100vw / 460)) / 3vh 'Iceberg';
+      font: normal 400 calc(2px + 8 * (100vw / 460)) / 3vh 'Iceberg';
     }
   }
 }

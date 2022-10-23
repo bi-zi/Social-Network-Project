@@ -4,25 +4,23 @@
   margin-bottom: 2vh;
 
   width: 100%;
- height: calc(40px + 100 * (100vh / 1080));
+  height: calc(40px + 100 * (100vh / 1080));
 
   border-radius: var(--borderRadius-interface);
   box-shadow: var(--box-shadow);
 
   background: var(--interface-color);
-  color: var(--text-color);
+  color: gray;
 
   @media (width < 460px) {
     margin-bottom: 1vh;
   }
 
   .profile__groups__title {
-
     position: absolute;
 
     height: calc(10px + 20 * (100vw / 1080));
-     left: calc(2px + 12 * (100vw / 1920));
-
+    left: calc(2px + 12 * (100vw / 1920));
 
     font: normal 400 calc(6px + 18 * (100vw / 1920)) / calc(15px + 25 * (100vw / 1920)) 'Iceberg';
   }

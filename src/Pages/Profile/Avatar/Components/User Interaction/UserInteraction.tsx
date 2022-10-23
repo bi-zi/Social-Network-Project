@@ -120,7 +120,7 @@ export const UserInteraction: React.FC = () => {
 
   return (
     <>
-      {mainUser?._id !== id ? (
+      {mainUser?._id !== id && loadStatus ? (
         <button
           className="avatar_send-message-user-interaction___interaction"
           onClick={() =>

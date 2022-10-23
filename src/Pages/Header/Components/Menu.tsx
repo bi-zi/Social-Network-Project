@@ -12,8 +12,10 @@ export const Menu: React.FC = () => {
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth);
 
-  const onClickLogout = () => {
-    if (window.confirm('Вы действительно хотите выйти?')) {
+  const onClickLogout = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+
+    if (window.confirm('Do you really want to leave?')) {
       dispatch(logout());
       localStorage.clear();
       dispatch(setCreatText(''));
@@ -31,10 +33,10 @@ export const Menu: React.FC = () => {
         <div className="header__menu-burger__block">
           <NavLink
             to="/Login"
-            onClick={() =>
+            onClick={(e) =>
               !(auth.status === 'loading')
                 ? localStorage.isAuth === 'true'
-                  ? onClickLogout()
+                  ? onClickLogout(e)
                   : dispatch(setAttention(1))
                 : 'Loading, please wait'
             }>
@@ -43,10 +45,10 @@ export const Menu: React.FC = () => {
 
           <NavLink
             to="/Register"
-            onClick={() =>
+            onClick={(e) =>
               !(auth.status === 'loading')
                 ? localStorage.isAuth === 'true'
-                  ? onClickLogout()
+                  ? onClickLogout(e)
                   : dispatch(setAttention(1))
                 : 'Loading, please wait'
             }>

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 interface MyParams {
   id: string;
-};
+}
 
 export const Subscribers: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +15,15 @@ export const Subscribers: React.FC = () => {
 
   const { id } = useParams<keyof MyParams>() as MyParams;
 
-  const subscribers = user?.findUserSubscribers;
+  const subscribers = [...user?.findUserSubscribers?.slice(0, 12)]?.sort(function (a, b) {
+    if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
+      return 1;
+    }
+    if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
+      return -1;
+    }
+    return 0;
+  });
 
   React.useEffect(() => {
     dispatch(fetchUserSubscribers(id));
@@ -29,7 +37,7 @@ export const Subscribers: React.FC = () => {
         style={{ textDecoration: 'none' }}
         onClick={() => dispatch(setCatergorySort('subscribers'))}>
         Subscribers -&nbsp;
-        {subscribers.length}
+        {user?.findUserSubscribers?.length}
       </Link>
 
       <div className="profile-friends__container">
@@ -55,7 +63,6 @@ export const Subscribers: React.FC = () => {
             </Link>
           </div>
         ))}
-        <div style={{ clear: 'both' }}> </div>
       </div>
     </div>
   );

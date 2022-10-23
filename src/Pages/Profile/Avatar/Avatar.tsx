@@ -6,6 +6,7 @@ export const Avatar: React.FC = () => {
   return (
     <div className="avatar">
       <AvatarImage />
+
       <ChangeButton />
 
       <div className="avatar__send-message-user-interaction">
