@@ -39,18 +39,20 @@ export const ControlPanel: React.FC = () => {
   const textLength = state.post?.createText?.length;
   const postText = state.post.createText;
   const numImg = readyPhotos.length;
+  console.log(state.post?.createText);
 
   // отправка поста если поле текста или количество видео или картинок больше 0
   // так же идет проверка есть ли вообще у пользователя база данных на сервере если нет она создается
   // возможно эту проверку нужно делать на сервере ну я думаю тут нет разницы особо
   const sendPost = async () => {
     const createPostBool =
-      (textLength > 0 || numImg > 0 || localStorage.postVideo?.split('/').length > 1) &&
-      post === undefined;
+      (numImg > 0 || localStorage.postVideo?.split('/').length > 1) &&
+      post === undefined &&
+      textLength > 0;
 
     const postPushBool =
-      ((textLength > 0 || numImg > 0 || localStorage.postVideo?.split('/').length > 1) &&
-        post?.post?.length === 0) ||
+      numImg > 0 ||
+      (localStorage.postVideo?.split('/').length > 1 && post?.post?.length === 0 && textLength > 0) ||
       post?.post!?.length > 0;
 
     if (createPostBool) {
@@ -74,7 +76,7 @@ export const ControlPanel: React.FC = () => {
       );
     }
 
-    if (textLength > 0 || numImg > 0 || localStorage.postVideo?.split('/').length > 1) {
+    if (numImg > 0 || (localStorage.postVideo?.split('/').length > 1 && textLength > 0)) {
       await dispatch(fetchUserPostsAll(id));
 
       dispatch(setCreateImgDelete([]));
