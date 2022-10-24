@@ -17,7 +17,9 @@
     }
 
     &:hover {
-      color: red !important;
+      @media (width > 460px) {
+        color: red !important;
+      }
     }
 
     &:active {
@@ -28,7 +30,9 @@
 
   .wall__control-panel__comment-icon {
     &:hover {
-      color: black !important;
+      @media (width > 460px) {
+        color: black !important;
+      }
     }
 
     &:active {
@@ -50,13 +54,5 @@
   .wall__control-panel__share-icon {
     color: grey;
     cursor: auto;
-
-    &:hover {
-      color: grey !important;
-    }
-
-    &:active {
-      color: grey !important;
-    }
   }
 }

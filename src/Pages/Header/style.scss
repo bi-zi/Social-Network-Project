@@ -15,7 +15,7 @@
   z-index: 999;
 
   @media (width < 460px) {
-    height: calc(10px + 20 * (100vw / 460));
+    height: calc(10px + 30 * (100vw / 460));
   }
 
   .header__container {
@@ -55,7 +55,7 @@
 
     @media (width < 460px) {
       height: 100%;
-      padding-top: 0.4vh;
+      padding-top: 0.8vh;
       font: normal 400 calc(8px + 10 * (100vw / 460)) 'Iceberg';
     }
   }
@@ -67,7 +67,7 @@
     animation: header_error 1s linear infinite;
 
     @media (width < 770px) {
-       font-size: 3vw;
+      font-size: 3vw;
     }
   }
 
@@ -94,8 +94,8 @@
 
     @media (width < 460px) {
       padding-top: 3px;
-      width: calc(8px + 6 * (100vw / 460));
-      height: calc(8px + 6 * (100vw / 460));
+      width: calc(8px + 8 * (100vw / 460));
+      height: calc(8px + 8 * (100vw / 460));
     }
   }
 
@@ -283,7 +283,7 @@
   right: 0;
 
   @media (width < 460px) {
-    padding-top: calc(16px + 34 * (100vw / 1920));
+    padding-top: calc(20px + 40 * (100vw / 1920));
 
     width: calc(50px + 50 * (100vw / 460));
     height: calc(50px + 50 * (100vw / 460));
@@ -315,9 +315,10 @@
   }
 
   &:hover {
-    border: 0.2vh solid var(--miniInterface-color);
-
-    background-color: var(--miniInterface-color-hover);
-    color: var(--miniInterface-color);
+    @media (width > 460px) {
+      border: 0.2vh solid var(--miniInterface-color);
+      background-color: var(--miniInterface-color-hover);
+      color: var(--miniInterface-color);
+    }
   }
 }

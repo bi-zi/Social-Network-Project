@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import './style.scss';
 
-interface MyParams  {
+interface MyParams {
   id: string;
-};
+}
 interface MyProps {
   data: Post;
 }
@@ -46,7 +46,7 @@ export const WallHeader: React.FC<MyProps> = ({ data }: MyProps) => {
           <div className="wall__header-right__menu-block">
             <span
               className="wall__header-right__menu-block__delete-post"
-              onClick={() => (postStatus ? deletePost(data?._id, id) : '')}>
+              onClick={(e) => (postStatus ? deletePost(e, data?._id, id) : '')}>
               Delete post
             </span>
           </div>

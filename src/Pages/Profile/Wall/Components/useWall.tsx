@@ -18,11 +18,14 @@ export function useWall(wall: UserPost) {
     return (wallPost = buffer);
   };
 
-  const deletePost = async (index: string, id: string) => {
+  const deletePost = async (e: React.MouseEvent<HTMLSpanElement>, index: string, id: string) => {
+    e.preventDefault();
     const postIndex = userPost.post?.[0]?.post.findIndex((post) => post._id === index);
 
-    await dispatch(fetchPostDelete({ deleteId: postIndex, user: id }));
-    dispatch(fetchUserPostsAll(id));
+    if (window.confirm('Are you sure you want to delete your post?')) {
+      await dispatch(fetchPostDelete({ deleteId: postIndex, user: id }));
+      dispatch(fetchUserPostsAll(id));
+    }
   };
 
   return { reverseWallPost, deletePost };

@@ -12,7 +12,7 @@
   max-width: 75vw;
 
   height: 92vh;
-  min-height: 330px;
+  min-height: 150px;
 
   @media (width < 1320px) {
     max-width: 100%;
@@ -28,6 +28,18 @@
     }
     @media (height < 600px) {
       height: 84vh;
+    }
+
+    @media (height < 361px) {
+      height: 82vh;
+    }
+
+    @media (height < 310px) {
+      height: 78vh;
+    }
+
+    @media (height < 250px) {
+      height: 74vh;
     }
   }
 

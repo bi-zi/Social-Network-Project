@@ -26,23 +26,33 @@
 
     .wall__header-left__header-left__full-name-date {
       position: relative;
-      padding: 0.5vh 0 0 0.5vw;
 
+      padding: 0.5vh 0 0 0.5vw;
+      width: 100%;
+      
       @media (width < 460px) {
         padding: 0 1vw;
       }
 
       .wall__header-left__full-name-date__full-name {
+        width: 100%;
         font: normal 400 calc(8px + 16 * (100vw / 1920)) 'Iceberg';
+
+        @media (width < 460px) {
+          position: absolute;
+          bottom: calc(6px + 8 * (100vh / 1080));
+          font-size: calc(0px + 12 * (100vw / 460));
+        }
       }
 
       .wall__header-left__full-name-date__date {
         width: calc(50px + 120 * (100vw / 1920));
         font: normal 400 calc(6px + 12 * (100vw / 1920)) 'Iceberg';
 
-         @media (width < 460px) {
+        @media (width < 460px) {
           position: absolute;
-          top: 2vh;
+          top: calc(7px + 16 * (100vh / 1080));
+          font-size: calc(0px + 8 * (100vw / 460));
         }
       }
     }
@@ -85,13 +95,23 @@
       cursor: pointer;
 
       z-index: 999;
+
+      @media (width < 460px) {
+        padding-top: 7vw;
+
+        width: auto;
+        left: -0.1vh;
+
+        font-size: calc(2px + 8 * (100vw / 460));
+      }
+
       &:hover {
         display: block;
       }
 
       .wall__header-right__menu-block__delete-post {
         padding: 0.5vh 0.5vw;
-        border: 0.3vh solid white;
+        border: 0.1vh solid white;
         background-color: black;
       }
     }

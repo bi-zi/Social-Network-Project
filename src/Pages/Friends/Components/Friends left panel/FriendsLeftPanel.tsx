@@ -33,26 +33,29 @@ export const FriendsLeftPanel: React.FC<MyProps> = ({ data, lastFriend }: MyProp
 
   const friend = data;
 
-  const deleteFriend = async (userId: string) => {
-    const mainUserIndex = state.user.findUserFriends
-      .find((user) => user._id === userId)!
-      .friends.findIndex((friendId) => friendId === state.user.mainUser?._id);
+  const deleteFriend = async (e: React.MouseEvent<HTMLDivElement>, userId: string) => {
+    e.preventDefault();
 
-    const secondUserIndex = state.user.mainUser?.friends.findIndex((friendId) => friendId === userId);
+    if (window.confirm('Are you sure you want to delete your friend?')) {
+      const mainUserIndex = state.user.findUserFriends
+        .find((user) => user._id === userId)!
+        .friends.findIndex((friendId) => friendId === state.user.mainUser?._id);
 
-    await dispatch(
-      fetchDeleteFriend({
-        id: userId,
-        index: mainUserIndex,
-        index2: secondUserIndex,
-        user: id,
-      }),
-    );
+      const secondUserIndex = state.user.mainUser?.friends.findIndex((friendId) => friendId === userId);
+      await dispatch(
+        fetchDeleteFriend({
+          id: userId,
+          index: mainUserIndex,
+          index2: secondUserIndex,
+          user: id,
+        }),
+      );
 
-    dispatch(fetchOneUser(id));
-    dispatch(fetchMainUser(state.auth.data?._id));
-    dispatch(fetchUserFriends(id));
-    dispatch(fetchUserSubscribers(id));
+      dispatch(fetchOneUser(id));
+      dispatch(fetchMainUser(state.auth.data?._id));
+      dispatch(fetchUserFriends(id));
+      dispatch(fetchUserSubscribers(id));
+    }
   };
 
   const loadStatus = state.user.status === 'loaded' && state.auth.status === 'loaded';
@@ -81,7 +84,7 @@ export const FriendsLeftPanel: React.FC<MyProps> = ({ data, lastFriend }: MyProp
           <div className="users__left-panel__user-block__menu-content">
             <div
               className="users__left-panel__user-block__menu-content-delete"
-              onClick={() => (loadStatus ? deleteFriend(friend?._id) : '')}>
+              onClick={(e) => (loadStatus ? deleteFriend(e, friend?._id) : '')}>
               Delete friend
             </div>
           </div>

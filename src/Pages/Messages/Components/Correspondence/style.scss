@@ -112,6 +112,10 @@
     font: normal 400 calc(20px + 20 * (100vw / 1920)) 'Iceberg';
 
     color: var(--text-color);
+
+    @media (width < 460px) {
+      font-size: calc(10px + 10 * (100vw / 1920));
+    }
   }
 
   .correspondence-message {

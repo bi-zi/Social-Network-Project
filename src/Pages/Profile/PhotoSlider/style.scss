@@ -35,7 +35,9 @@
 
     border-radius: var(--borderRadius-interface);
     &:hover {
-      border: var(--borderImages);
+      @media (width > 460px) {
+        border: var(--borderImages);
+      }
     }
   }
 
@@ -62,6 +64,7 @@
     @media (width < 460px) {
       top: 0.2vh;
     }
+
     &:hover {
       color: var(--text-color-hover);
     }
@@ -82,7 +85,14 @@
       height: calc(49px + 248 * (100vw / 1920)) !important;
       top: 49.5%;
     }
+
     &:hover {
+      @media (width > 460px) {
+        background-color: var(--interface-color-hover);
+      }
+    }
+
+    &:active {
       background-color: var(--interface-color-hover);
     }
   }
@@ -142,12 +152,11 @@
 
     font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
 
-
     letter-spacing: 0.2vw;
     color: var(--text-color);
 
     @media (width < 460px) {
-      margin: 0.5vh auto 1vh auto !important;
+      margin: 1vh auto 0.5vh auto !important;
 
       height: calc(8px + 14 * (100vh / 1080));
       font: normal 400 calc(3px + 6 * (100vw / 460)) 'Iceberg';

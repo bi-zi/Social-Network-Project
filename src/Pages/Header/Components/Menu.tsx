@@ -25,7 +25,7 @@ export const Menu: React.FC = () => {
 
   return (
     <>
-      <div className="header__menu">
+      <div className="header__menu" >
         <Loading />
 
         <FontAwesomeIcon className="header__menu-burger" icon={faAlignJustify} />

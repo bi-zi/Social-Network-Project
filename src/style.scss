@@ -69,6 +69,11 @@ body {
   color: rgba(255, 255, 255, 0.835);
 }
 
+:hover {
+ user-select: none;
+  -webkit-touch-callout: none;
+}
+
 h1,
 h2,
 h3,

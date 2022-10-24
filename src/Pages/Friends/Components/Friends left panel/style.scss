@@ -69,11 +69,13 @@
 
       text-align: center;
 
+      z-index: 999;
+
       @media (height < 888px) {
         padding-top: 4.5vh;
 
         @media (width < 460px) {
-          padding-top: 2vh;
+          padding-top: 3.5vh;
 
           width: 9vw;
           height: auto;
@@ -101,8 +103,10 @@
     }
 
     .users__left-panel__user-block__menu-content-delete:hover {
-      background-color: var(--miniInterface-color-hover);
-      color: var(--miniInterface-color);
+      @media (width > 460px) {
+        background-color: var(--miniInterface-color-hover);
+        color: var(--miniInterface-color);
+      }
 
       cursor: pointer;
     }
@@ -121,7 +125,7 @@
     position: absolute;
 
     bottom: 0;
-    right: .5vw;
+    right: 0.5vw;
 
     font: normal 400 calc(8px + 14 * (100vw / 1920)) 'Iceberg';
 
