@@ -61,8 +61,8 @@ export const ImageParsing: React.FC = () => {
     [dispatch, id, parsing.inputNumber, slider, sliderImgLength],
   );
 
-// Сюда картинка попадает после загрукзки и сжимается на 90% от изначального размера
-// После сжатия она уходит в useState на 85строке на это реагирует useEffect
+  // Сюда картинка попадает после загрукзки и сжимается на 90% от изначального размера
+  // После сжатия она уходит в useState на 85строке на это реагирует useEffect
   async function handleImageUpload(e: any) {
     const imageFile = e.target.files[0];
 
@@ -77,6 +77,7 @@ export const ImageParsing: React.FC = () => {
       maxSizeMB: +size,
       useWebWorker: true,
     };
+
     try {
       const compressedFile = await imageCompression(imageFile, options);
 
@@ -88,7 +89,7 @@ export const ImageParsing: React.FC = () => {
     }
   }
 
-// useEffect просто превращет картинку в нужный формат и вызывает функции отправки на бэк
+  // useEffect просто превращет картинку в нужный формат и вызывает функции отправки на бэк
   useEffect(() => {
     if (images.length < 1) return;
 

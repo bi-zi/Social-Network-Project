@@ -11,37 +11,38 @@
 
   max-width: 75vw;
 
-  height: 92vh;
-  min-height: 150px;
-
   @media (width < 1320px) {
     max-width: 100%;
   }
 
-  @media (height < 2500px) {
-    height: 90vh;
-    @media (height < 2100px) {
-      height: 88vh;
-    }
-    @media (height < 1000px) {
-      height: 86vh;
-    }
-    @media (height < 750px) {
-      height: 84vh;
-    }
 
-    @media (height < 361px) {
-      height: 82vh;
-    }
+  height: 86vh;
 
-    @media (height < 310px) {
-      height: 78vh;
-    }
 
-    @media (height < 250px) {
-      height: 74vh;
-    }
-  }
+  // @media (height < 2500px) {
+  //   height: 90vh;
+  //   @media (height < 2100px) {
+  //     height: 88vh;
+  //   }
+  //   @media (height < 1000px) {
+  //     height: 86vh;
+  //   }
+  //   @media (height < 750px) {
+  //     height: 84vh;
+  //   }
+
+  //   @media (height < 361px) {
+  //     height: 82vh;
+  //   }
+
+  //   @media (height < 310px) {
+  //     height: 78vh;
+  //   }
+
+  //   @media (height < 250px) {
+  //     height: 74vh;
+  //   }
+  // }
 
   user-select: none;
 }

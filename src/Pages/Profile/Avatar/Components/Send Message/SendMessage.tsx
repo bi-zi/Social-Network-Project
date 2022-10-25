@@ -24,7 +24,7 @@ export const SendMessage: React.FC = () => {
 
   // проверка есть ли у пользователей чат в базе данных
   const mainUser = !messages.mainUserMessages?.[0];
-  const secondUserMessages = !messages.secondUserMessages;
+  const secondUserMessages = !messages.secondUserMessages?.[0];
 
   // так как в базе данных учитывается создание чата сразу у двух юзеров можно проверять
   // только одного на наличие чата с другим если его нет тогда создаст у двух
@@ -33,6 +33,7 @@ export const SendMessage: React.FC = () => {
   );
 
   const createMessages = async () => {
+    console.log(0);
     if (mainUser) {
       await dispatch(fetchCreateMessages({ withWho: id, user: auth?._id }));
     }

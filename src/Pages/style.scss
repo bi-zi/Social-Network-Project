@@ -4,7 +4,6 @@
   padding: 0.2vh 2vw;
 
   max-width: 71vw;
-
   border-radius: 2vh;
 
   font-size: calc(10px + 14 * (100vw / 1920));
@@ -30,4 +29,8 @@
   .layout__link a {
     color: rgb(56, 169, 250);
   }
+}
+
+.wrapper {
+  min-height: calc(100vh - 40px);
 }

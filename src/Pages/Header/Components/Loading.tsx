@@ -23,13 +23,11 @@ export const Loading: React.FC = () => {
     state.auth.status === 'loading' ||
     state.user.status === 'loading';
 
-  const nonePage = state.auth.status === 'loading' || state.user.status === 'loading';
+  const nonePage = state.auth.status === 'loading';
 
 
   const path = window.location.pathname.split('/')[1];
-  // console.log(nonePage);
 
-  // console.log(state.auth.status);
   return (
     <>
       {profilePage && path === 'Profile' ? (

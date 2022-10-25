@@ -81,7 +81,7 @@ export const Layout: React.FC = () => {
 
 
   // не уверен что это правильный способ но я пока не придумал ничего лучше
-  // этот useEffect очищает state которые уже не нужен при переходе на новую страницу 
+  // этот useEffect очищает state которые уже не нужен при переходе на новую страницу
   React.useEffect(() => {
     if (!profile && !friends && user.findUserFriends.length > 0) dispatch(setClearFindUserFriends());
     if (!profile && !friends && user.findUserSubscribers.length > 0)
@@ -97,7 +97,7 @@ export const Layout: React.FC = () => {
   ]);
 
   return (
-    <>
+    <div className='wrapper'>
       <Header />
       {window.location.pathname.split(' ')[0] === '/' && close && user.deleteAttention === 0 ? (
         <div className="layout">
@@ -134,7 +134,7 @@ export const Layout: React.FC = () => {
         ''
       )}
       <Outlet></Outlet>
-      {window.location.pathname.split(' ')[0] === '/Messages' ? <Footer /> : ''}
-    </>
+       <Footer />
+    </div>
   );
 };

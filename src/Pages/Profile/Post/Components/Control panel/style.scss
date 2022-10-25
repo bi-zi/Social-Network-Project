@@ -62,6 +62,14 @@
       font: normal 400 calc(3px + 12 * (100vw / 1920)) 'Iceberg';
 
       opacity: 1;
+
+      &::-webkit-input-placeholder {
+
+        font-size:calc(3px + 10 * (100vw / 1920)) ;
+
+        color: #000 !important;
+        opacity: .7;
+      }
     }
 
     .post__control-panel__iframe-delete {

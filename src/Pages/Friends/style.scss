@@ -5,6 +5,8 @@
   margin: 2vh auto 0 auto;
   padding: 0 2vw 8vh 2vw;
 
+  min-height: calc(100vh - calc(10px + 30 * (100vh / 1080)));
+
   max-width: 75vw;
   height: 100%;
 
