@@ -11,9 +11,13 @@ interface MyParams {
 
 export const Wall: React.FC = () => {
   const dispatch = useAppDispatch();
+
   const wall = useAppSelector((state) => state.post.userPosts);
 
   const { id } = useParams<keyof MyParams>() as MyParams;
+
+
+  const [hello, setHello] = React.useState('')
 
   const { reverseWallPost } = useWall(wall.post?.[0]);
   const wallPost = reverseWallPost();

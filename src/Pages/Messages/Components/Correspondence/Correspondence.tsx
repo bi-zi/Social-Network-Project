@@ -87,6 +87,11 @@ export const Correspondence: React.FC = () => {
     setTimeout(scrollToBottom, 400);
   };
 
+  if (loadStatus) {
+    document.body.style.setProperty('--back-chat1', 'var(--back--background-color-chat2)');
+    document.body.style.setProperty('--height1', 'var(--height-chat2)');
+  }
+
   useEffect(() => {
     if (auth?._id !== undefined) {
       dispatch(fetchMainUserMessages(auth?._id));
@@ -174,26 +179,24 @@ export const Correspondence: React.FC = () => {
           <form
             className="correspondence-sending-message"
             onSubmit={(e) => (text?.length !== 0 && loadStatus ? onSendMessage(e, text) : '')}>
-            <label>
-              <input
-                type="text"
-                ref={firstRef}
-                className="correspondence-sending-message__input"
-                required={true}
-                minLength={1}
-                maxLength={300}
-                placeholder="Write your message here"
-                pattern="^[a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
-                title="Only these characters can be used a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~"
-                onChange={(e) => setText(e.target.value)}
-              />
-            </label>
+            <input
+              type="text"
+              ref={firstRef}
+              className="correspondence-sending-message__input"
+              required={true}
+              minLength={1}
+              maxLength={300}
+              placeholder="Write your message here"
+              pattern="^[a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
+              title="Only these characters can be used a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~"
+              onChange={(e) => setText(e.target.value)}
+            />
             {messages.status !== 'loading' ? (
               <button type="submit" className="correspondence-sending-message__button">
-                Submit
+                Send
               </button>
             ) : (
-              <div className="correspondence-sending-message__wait">Wait</div>
+              <button className="correspondence-sending-message__wait">Wait</button>
             )}
           </form>
         </>

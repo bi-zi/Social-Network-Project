@@ -9,7 +9,7 @@ import './style.scss';
 
 export const Chats: React.FC = () => {
   const dispatch = useAppDispatch();
-
+  const state = useAppSelector((state) => state);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const auth = useAppSelector((state) => state.auth?.data);
@@ -42,6 +42,9 @@ export const Chats: React.FC = () => {
     setTimeout(scrollToBottom, 0);
   };
 
+  const loadStatus =
+    messages.status === 'loaded' && state.user.status === 'loaded' && state.auth.status === 'loaded';
+
   return (
     <div className="chats-container">
       <form className="chats-form__find-chat">
@@ -68,27 +71,27 @@ export const Chats: React.FC = () => {
               }}>
               <img src={friend.imageUrl} width="10" alt="" className="chats-users__item__avatar" />
               <div className="chats-users__item__full-name-last-message">
-                <div className="chats-users__item__full-name-last-message__full-name">
+                <span className="chats-users__item__full-name-last-message__full-name">
                   {friend.firstName + ' ' + friend.lastName}
-                </div>
+                </span>
 
                 {lastMessage![index] !== undefined ? (
                   <div className="chats-users__item__full-name-last-message__message">
-                    <div className="chats-users__item__full-name-last-message__message__name">
+                    <span className="chats-users__item__full-name-last-message__message__name">
                       {lastMessage![index]?.userId === friend._id
                         ? friend.firstName + ':'
                         : lastMessage![index].message === undefined
                         ? 'Write the first message'
                         : 'You:'}
-                    </div>
+                    </span>
 
-                    <div className="chats-users__item__full-name-last-message__message_last-message">
+                    <span className="chats-users__item__full-name-last-message__message_last-message">
                       {lastMessage![index]?.message?.split(' ').filter((x) => x.length >= 20).length ===
                       1
                         ? 'The message is too big'
                         : lastMessage![index]?.message?.slice(0, 40)}
                       {lastMessage![index]?.message?.length > 40 ? '...' : ''}
-                    </div>
+                    </span>
                   </div>
                 ) : (
                   ''
@@ -108,6 +111,15 @@ export const Chats: React.FC = () => {
         <div className="chats-empty">
           <NavLink to={`/Friends/${auth?._id}`}>Find friends to chat</NavLink>
         </div>
+      )}
+      {loadStatus ? (
+        <div className="chats-footer">
+          <a href="https://github.com/bi-zi" className="chats-footer__link">
+            Github
+          </a>
+        </div>
+      ) : (
+        ''
       )}
     </div>
   );

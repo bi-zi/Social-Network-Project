@@ -5,7 +5,6 @@
   max-width: 75vw;
   height: 90vh;
 
-
   @media (width < 460px) {
     max-width: 90vw;
   }
@@ -61,25 +60,20 @@
     .registration__block__form-last-name,
     .registration__block__form-pass-block__password {
       width: 60%;
-      height: 6vh;
+      height: calc(6px + 40 * (100vh / 1080));
 
       margin-bottom: 0.5vh;
 
       padding-left: 1vw;
       padding-right: 1vw;
 
-      font: normal 400 calc(10px + 25 * (100vw / 1920)) 'Iceberg';
-
+      font: normal 400 calc(2px + 25 * (100vw / 1920)) 'Iceberg';
+      border: 0;
       border-radius: var(--borderRadius-interface);
       box-shadow: var(--box-shadow);
 
       background-color: var(--backgroundInput-color);
       color: var(--text-color);
-
-      @media (width < 460px) {
-        height: 4vh;
-         font: normal 400 calc(6px + 18 * (100vw / 1920)) 'Iceberg';
-      }
     }
 
     .registration__block__form-pass-block__password {
@@ -95,10 +89,10 @@
     .registration__block__form-pass-block__password-icon-unlock {
       position: absolute;
 
-      font-size: 3vh;
+      font-size: 2vh;
 
-      right: 11.6vw;
-      bottom: 2.5vh;
+      right: 12vw !important;
+      bottom: calc(3px + 20 * (100vh / 1080));
 
       color: var(--text-color);
 
@@ -107,16 +101,14 @@
 
       @media (width < 460px) {
         right: 18vw !important;
-        bottom: 2vh !important;
-        font-size: 2vh;
       }
     }
 
     .registration__block__form-pass-block__password-icon-unlock {
-      right: 11.2vw;
+      right: 12vw !important;
 
       @media (width < 460px) {
-        right: 18vw;
+        right: 18vw !important;
       }
     }
 

@@ -12,6 +12,7 @@ export type MyProps = {
 export const FriendsControlPanel: React.FC<MyProps> = ({ data }: MyProps) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
+  
   const category = state.friendsPage.categorySort;
   const sortBy = state.friendsPage.sortBy;
 

@@ -89,7 +89,7 @@ export const ControlPanel: React.FC = () => {
             </div>
           </div>
 
-          <FontAwesomeIcon className="header__control-panel__icons" icon={faPager} />
+          <FontAwesomeIcon className="header__control-panel__icons header-closed-icon" icon={faPager} />
 
           <NavLink to="/Messages" style={path !== 'Messages' ? { color: 'white' } : { color: 'black' }}>
             <FontAwesomeIcon className="header__control-panel__icons" icon={faComment} />

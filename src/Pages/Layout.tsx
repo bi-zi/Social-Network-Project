@@ -21,9 +21,8 @@ export const Layout: React.FC = () => {
 
   let friends = window.location.pathname.split('/')[1] === 'Friends';
 
-
-// код ниже я использую для дебага первый console.log проверяет загрузку всех fetch
-// а функция показывает размер файла который в нее закинешь
+  // код ниже я использую для дебага первый console.log проверяет загрузку всех fetch
+  // а функция показывает размер файла который в нее закинешь
 
   // console.log([
   //   `-AUTH- ${state.auth.status}`,
@@ -79,6 +78,7 @@ export const Layout: React.FC = () => {
   //   return console.log(fsize);
   // }
 
+  const secondRef = React.useRef<HTMLInputElement>(null);
 
   // не уверен что это правильный способ но я пока не придумал ничего лучше
   // этот useEffect очищает state которые уже не нужен при переходе на новую страницу
@@ -97,8 +97,9 @@ export const Layout: React.FC = () => {
   ]);
 
   return (
-    <div className='wrapper'>
+    <div className="wrapper" ref={secondRef}>
       <Header />
+     
       {window.location.pathname.split(' ')[0] === '/' && close && user.deleteAttention === 0 ? (
         <div className="layout">
           <p>
@@ -134,7 +135,7 @@ export const Layout: React.FC = () => {
         ''
       )}
       <Outlet></Outlet>
-       <Footer />
+      <Footer />
     </div>
   );
 };

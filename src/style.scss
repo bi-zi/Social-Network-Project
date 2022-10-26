@@ -10,6 +10,18 @@ body {
 }
 
 :root {
+  --height-chat1: 78vh;
+  --height-chat2: auto;
+
+  --height1: var(--height-chat1);
+  --height2: var(--height-chat2);
+
+  --back--background-color-chat1: #222222;
+  --back--background-color-chat2: hsla(0, 0%, 0%, 0);
+
+  --back-chat1: var(--back--background-color-chat1);
+  --back-chat2: var(--back--background-color-chat2);
+
   --background-color-darkTheme: #141414;
 
   --interface-color-darkTheme: #222222;
@@ -86,7 +98,6 @@ a {
 input {
   outline: 0 !important;
 }
-
 
 input::-webkit-file-upload-button {
   display: none;
