@@ -19,6 +19,12 @@
     justify-content: space-between;
   }
 
+  .avatar_send-message-user-interaction__skeleton {
+    padding: 0;
+    width: 48%;
+    height: calc(10px + 30 * (100vw / 1920)) !important;
+  }
+
   .avatar_send-message-user-interaction___interaction,
   .avatar_send-message-user-interaction__send {
     padding: 0;

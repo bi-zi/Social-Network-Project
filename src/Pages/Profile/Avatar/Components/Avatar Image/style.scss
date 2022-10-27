@@ -1,6 +1,6 @@
 .avatar__image {
-  width: 100%;
-  margin-bottom: 0.5vh;
+  width: 100% !important;
+  margin-bottom: 0.5vh !important;
 
   border-radius: var(--borderRadius-interface);
   border: 0.2vw solid transparent;

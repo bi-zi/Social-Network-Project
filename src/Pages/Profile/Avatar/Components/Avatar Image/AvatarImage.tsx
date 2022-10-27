@@ -2,6 +2,8 @@ import React from 'react';
 import { useAppSelector } from '../../../../../store/store';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
 
 interface MyParams {
@@ -27,7 +29,7 @@ export const AvatarImage: React.FC = () => {
           </div>
         </Link>
       ) : (
-        <img src={user?.imageUrl} width={10} alt="" className="avatar__image" />
+        <Skeleton height={'24vw'} style={{ marginBottom: '1vw', borderRadius: '1.5vh' }} />
       )}
     </>
   );

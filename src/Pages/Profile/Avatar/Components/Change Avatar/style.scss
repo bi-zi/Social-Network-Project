@@ -1,3 +1,9 @@
+.change_avatar-button-skeleton {
+  width: 100%;
+
+  height: calc(10px + 30 * (100vw / 1920));
+}
+
 .change__avatar-button {
   position: relative;
   width: 100%;
@@ -10,11 +16,9 @@
   background-color: black;
   box-shadow: 0 0 0.2vw rgb(255, 254, 254);
 
-
   text-transform: uppercase;
   font: normal 400 calc(2px + 16 * (100vw / 1920)) 'Iceberg';
   letter-spacing: calc(2px + 2 * (100vw / 1920));
-
 
   color: var(--text-color);
 

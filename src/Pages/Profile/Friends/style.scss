@@ -47,6 +47,10 @@
     padding-bottom: 0;
   }
 
+  .profile-friends__friend-skeleton {
+    width: 100%;
+  }
+
   .profile-friends__container__friend {
     margin: 0 0.5vw 1vh 0;
     width: 100%;
@@ -63,8 +67,8 @@
     }
 
     .profile-friends__container__friend__avatar {
-      width: calc(15px + 50 * (100vw / 1920));
-      height: calc(15px + 50 * (100vw / 1920));
+      width: calc(15px + 50 * (100vw / 1920)) !important;
+      height: calc(15px + 50 * (100vw / 1920)) !important;
       border-radius: 100%;
     }
 

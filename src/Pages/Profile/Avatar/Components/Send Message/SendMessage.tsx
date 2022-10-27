@@ -9,6 +9,8 @@ import {
 } from '../../../../../store/messages/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 interface MyParams {
   id: string;
@@ -65,15 +67,17 @@ export const SendMessage: React.FC = () => {
   return (
     <>
       {auth?._id !== id ? (
-        <button className="avatar_send-message-user-interaction__send">
-          {loadStatus ? (
+        loadStatus ? (
+          <button className="avatar_send-message-user-interaction__send">
             <Link to="/Messages" onClick={() => createMessages()}>
               Send a message
             </Link>
-          ) : (
-            'Send a message'
-          )}
-        </button>
+          </button>
+        ) : (
+          <div className="avatar_send-message-user-interaction__skeleton">
+            <Skeleton height={'100%'} style={{ borderRadius: '1.5vh' }} />
+          </div>
+        )
       ) : (
         ''
       )}

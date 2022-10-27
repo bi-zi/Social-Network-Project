@@ -3,11 +3,13 @@ import { useAppDispatch, useAppSelector } from '../../../../../store/store';
 import { setInputNumber } from '../../../../../store/user/slice';
 import { ImageParsing } from '../../../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
 
 interface MyParams {
   id: string;
-};
+}
 
 export const ChangeButton: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -23,20 +25,21 @@ export const ChangeButton: React.FC = () => {
     <>
       {auth?._id === id ? (
         <>
-          <button
-            className="change__avatar-button"
-            onChange={() => {
-              dispatch(setInputNumber('0'));
-            }}>
+          {loadStatus ? (
+            <button
+              className="change__avatar-button"
+              onChange={() => {
+                dispatch(setInputNumber('0'));
+              }}>
+              {auth === null ? '' : 'Change photo'}
 
-            {auth === null ? '' : 'Change photo'}
-
-            {auth?._id === id && loadStatus ? (
               <ImageParsing />
-            ) : (
-              <div className="image_input_parser"></div>
-            )}
-          </button>
+            </button>
+          ) : (
+            <div className="change_avatar-button-skeleton ">
+              <Skeleton height={'100%'} style={{ borderRadius: '1.5vh' }} />
+            </div>
+          )}
         </>
       ) : (
         ''

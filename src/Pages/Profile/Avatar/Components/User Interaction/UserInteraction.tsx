@@ -18,6 +18,9 @@ import {
 } from '../../../../../store/notifications/slice';
 import { useParams } from 'react-router-dom';
 
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+
 interface MyParams {
   id: string;
 }
@@ -147,7 +150,9 @@ export const UserInteraction: React.FC = () => {
             : ''}
         </button>
       ) : (
-        ''
+        <div className="avatar_send-message-user-interaction__skeleton">
+          <Skeleton height={'100%'} style={{ borderRadius: '1.5vh' }} />
+        </div>
       )}
     </>
   );
