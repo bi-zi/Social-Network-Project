@@ -1,6 +1,8 @@
 import React from 'react';
 import { useAppSelector } from '../../../store/store';
 import { AboutInfo, EditInfo } from './components/index';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
 
 export const UserInfo: React.FC = () => {
@@ -8,10 +10,17 @@ export const UserInfo: React.FC = () => {
 
   const user = state.user?.userOne?.[0];
 
+
   return (
     <>
       <div className="about">
-        <div className="about__fullName">{`${user?.firstName + ' ' + user?.lastName || ''}`}</div>
+        {state.about?.status === 'loaded' && state.user?.status === 'loaded' ? (
+          <div className="about__full-name">{`${user?.firstName + ' ' + user?.lastName || ''}`}</div>
+        ) : (
+          <div className="about__full-name-skeleton">
+            <Skeleton height={'80%'} />
+          </div>
+        )}
 
         {state.about?.closeInfo === 0 ? <AboutInfo /> : <EditInfo />}
       </div>

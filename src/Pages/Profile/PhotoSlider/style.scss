@@ -132,6 +132,12 @@
     margin: 1.1% 0;
   }
 
+  .profile__slider__skeleton {
+    margin: 1vh auto 0 auto !important;
+    width: 40%;
+    height: calc(10px + 30 * (100vh / 1080));
+  }
+
   .profile__slider__button {
     position: relative;
     margin: 1vh auto 0 auto !important;

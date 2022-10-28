@@ -5,6 +5,8 @@ import { Post } from '../../../../../store/post/types';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
 
 interface MyParams {
@@ -24,19 +26,35 @@ export const WallHeader: React.FC<MyProps> = ({ data }: MyProps) => {
 
   const userOne = user?.userOne?.[0];
 
-  const postStatus = wall.status === 'loaded';
+  const wallStatus = wall.status === 'loaded' && user.status === 'loaded';
 
   return (
     <div className="wall__header">
       <div className="wall__header-left">
-        <img src={userOne?.imageUrl} width={10} alt="" className="wall__header-left__avatar" />
+        {wallStatus ? (
+          <img src={userOne?.imageUrl} width={10} alt="" className="wall__header-left__avatar" />
+        ) : (
+          <Skeleton className="wall__header-left__avatar" />
+        )}
 
         <div className="wall__header-left__header-left__full-name-date">
-          <span className="wall__header-left__full-name-date__full-name">
-            {userOne?.firstName + ' ' + userOne?.lastName}
-          </span>
+          {wallStatus ? (
+            <span className="wall__header-left__full-name-date__full-name">
+              {userOne?.firstName + ' ' + userOne?.lastName}
+            </span>
+          ) : (
+            <Skeleton className="wall__header-left__full-name-date__full-name" width={'30%'} />
+          )}
           <br />
-          <span className="wall__header-left__full-name-date__date">{data?.date}</span>
+          {wallStatus ? (
+            <span className="wall__header-left__full-name-date__date">{data?.date}</span>
+          ) : (
+            <Skeleton
+              className="wall__header-left__full-name-date__date"
+              width={'20%'}
+              style={{ top: '-1vh' }}
+            />
+          )}
         </div>
       </div>
 
@@ -46,7 +64,7 @@ export const WallHeader: React.FC<MyProps> = ({ data }: MyProps) => {
           <div className="wall__header-right__menu-block">
             <span
               className="wall__header-right__menu-block__delete-post"
-              onClick={(e) => (postStatus ? deletePost(e, data?._id, id) : '')}>
+              onClick={(e) => (wallStatus ? deletePost(e, data?._id, id) : '')}>
               Delete post
             </span>
           </div>

@@ -99,7 +99,7 @@ export const Layout: React.FC = () => {
   return (
     <div className="wrapper" ref={secondRef}>
       <Header />
-     
+
       {window.location.pathname.split(' ')[0] === '/' && close && user.deleteAttention === 0 ? (
         <div className="layout">
           <p>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/store';
 import { setCreatText } from '../../../../../store/post/slice';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
 
 export const AvatarInput: React.FC = () => {
@@ -16,13 +18,18 @@ export const AvatarInput: React.FC = () => {
 
   return (
     <div className="post__avatar-input-container">
-      <img
-        src={state.user?.userOne?.[0]?.imageUrl}
-        width={10}
-        alt=""
-        className="post__avatar-input-container__avatar"
-        onClick={() => window.scrollTo(0, 0)}
-      />
+      {state.user.status === 'loaded' ? (
+        <img
+          src={state.user?.userOne?.[0]?.imageUrl}
+          width={10}
+          alt=""
+          className="post__avatar-input-container__avatar"
+          onClick={() => window.scrollTo(0, 0)}
+        />
+      ) : (
+        <Skeleton className="post__avatar-input-container__avatar" />
+      )}
+      {state.post.userPosts.status === 'loaded' ? (
         <input
           ref={textRef}
           type="text"
@@ -34,6 +41,9 @@ export const AvatarInput: React.FC = () => {
           title="Only latin characters can be used"
           onChange={(e) => dispatch(setCreatText(e.target.value))}
         />
+      ) : (
+        <Skeleton className="post__avatar-input-container__skeleton" />
+      )}
     </div>
   );
 };

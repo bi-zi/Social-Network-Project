@@ -3,6 +3,7 @@
   margin: 2vh 0;
 
   width: 100%;
+  min-height: 11vh;
 
   border-radius: var(--borderRadius-interface);
   box-shadow: var(--box-shadow);
@@ -49,6 +50,8 @@
 
   .profile-friends__friend-skeleton {
     width: 100%;
+
+    cursor: auto !important;
   }
 
   .profile-friends__container__friend {

@@ -21,6 +21,8 @@ import {
   faCircleExclamation,
 } from '@fortawesome/free-solid-svg-icons';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
 
 interface MyParams {
@@ -98,9 +100,13 @@ export const ControlPanel: React.FC = () => {
   return (
     <div className="post__control-panel">
       <div className="post__control-panel__icons-container">
-        {numImg < 3 ? (
+        {numImg < 3 && state.user.status === 'loaded' && state.slider.status === 'loaded' ? (
           <>
-            <FontAwesomeIcon className="post__control-panel__image-icon" icon={faImage} />
+            <FontAwesomeIcon
+              className="post__control-panel__icons"
+              icon={faImage}
+              style={{ marginLeft: 0 }}
+            />
             <button
               onChange={() => dispatch(setInputNumber('2'))}
               className="post__control-panel__image-icon-input">
@@ -108,13 +114,17 @@ export const ControlPanel: React.FC = () => {
             </button>
           </>
         ) : (
-          <FontAwesomeIcon className="post__control-panel__image-icon" icon={faCircleExclamation} />
+          <FontAwesomeIcon className="post__control-panel__icons" icon={faCircleExclamation} />
         )}
 
         <FontAwesomeIcon
-          className="post__control-panel__video-icon"
+          className="post__control-panel__icons"
           icon={faFilm}
-          onClick={() => (postEffect !== '0' ? setPostEffect('0') : setPostEffect('1'))}
+          onClick={() =>
+            postEffect !== '0' && state.post.userPosts.status === 'loaded'
+              ? setPostEffect('0')
+              : setPostEffect('1')
+          }
         />
 
         {localStorage.postVideo?.split('/')?.[0] === 'https:' ? (
@@ -131,23 +141,26 @@ export const ControlPanel: React.FC = () => {
             type="text"
             className="post__control-panel__input-iframe"
             placeholder="Insert YouTube video link"
-            onChange={(e) => dispatch(setCreateVid(e.target.value))}
+            onChange={(e) =>
+              state.post.userPosts.status === 'loaded' ? dispatch(setCreateVid(e.target.value)) : ''
+            }
           />
         ) : (
           ''
         )}
 
-        <FontAwesomeIcon className="post__control-panel__audio-icon" icon={faMusic} />
-        <FontAwesomeIcon className="post__control-panel__location-icon" icon={faLocationPin} />
-        <FontAwesomeIcon className="post__control-panel__file-icon" icon={faFileLines} />
+        <FontAwesomeIcon className="post__control-panel__icons post__grey-icons" icon={faMusic} />
+        <FontAwesomeIcon className="post__control-panel__icons post__grey-icons" icon={faLocationPin} />
+        <FontAwesomeIcon className="post__control-panel__icons post__grey-icons" icon={faFileLines} />
       </div>
 
-      <button
-        className="post__control-panel__make-button"
-        type="submit"
-        onClick={() => (postStatus ? sendPost() : '')}>
-        <FontAwesomeIcon className="post__control-panel__make-button-icon" icon={faPlay} />
-      </button>
+      {postStatus ? (
+        <button className="post__control-panel__make-button" type="submit" onClick={() => sendPost()}>
+          <FontAwesomeIcon className="post__control-panel__make-button-icon" icon={faPlay} />
+        </button>
+      ) : (
+        <Skeleton className="post__control-panel__skeleton" />
+      )}
     </div>
   );
 };

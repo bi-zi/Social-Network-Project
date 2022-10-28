@@ -9,11 +9,7 @@
   justify-content: space-between;
 
   .post__control-panel__icons-container {
-    .post__control-panel__image-icon,
-    .post__control-panel__video-icon,
-    .post__control-panel__audio-icon,
-    .post__control-panel__location-icon,
-    .post__control-panel__file-icon {
+    .post__control-panel__icons {
       position: relative;
 
       margin: 1vh 2vw;
@@ -29,14 +25,8 @@
       }
     }
 
-    .post__control-panel__image-icon {
-      cursor: auto;
-      margin-left: 0;
-    }
 
-    .post__control-panel__audio-icon,
-    .post__control-panel__location-icon,
-    .post__control-panel__file-icon {
+    .post__grey-icons {
       color: grey;
       cursor: auto;
     }
@@ -64,11 +54,10 @@
       opacity: 1;
 
       &::-webkit-input-placeholder {
-
-        font-size:calc(3px + 10 * (100vw / 1920)) ;
+        font-size: calc(3px + 10 * (100vw / 1920));
 
         color: #000 !important;
-        opacity: .7;
+        opacity: 0.7;
       }
     }
 
@@ -99,6 +88,11 @@
         font: normal 400 calc(2px + 16 * (100vw / 1920)) 'Iceberg';
       }
     }
+  }
+
+  .post__control-panel__skeleton {
+    width: 20vw;
+    height: calc(12px + 22 * (100vh / 1080));
   }
 
   .post__control-panel__make-button {

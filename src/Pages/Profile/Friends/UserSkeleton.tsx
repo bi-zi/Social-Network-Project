@@ -18,9 +18,9 @@ export const UserSkeleton: React.FC<MyProps> = ({ users }: MyProps) => {
               <Skeleton
                 circle
                 className="profile-friends__container__friend__avatar"
-                style={{ borderWidth: 0 }}
+                style={{ borderWidth: 0, cursor: 'auto' }}
               />
-              <Skeleton width={'90%'} height={'1vh'} style={{ marginTop: '1vh' }} />
+              <Skeleton width={'90%'} height={'1vh'} style={{ marginTop: '1vh', cursor: 'auto' }} />
             </div>
           </div>
         ))}

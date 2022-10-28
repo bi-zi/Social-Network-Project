@@ -24,6 +24,14 @@
     }
   }
 
+  .post__avatar-input-container__skeleton {
+    position: relative;
+    margin: 0 auto;
+    width: calc(52px + 750 * (100vw / 1920));
+    height: 98%;
+    border-radius: var(--borderRadius-interface);
+  }
+
   .post__avatar-input-container__text-input {
     position: relative;
 

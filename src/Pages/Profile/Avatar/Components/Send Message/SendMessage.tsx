@@ -58,11 +58,6 @@ export const SendMessage: React.FC = () => {
     state.auth.status === 'loaded' &&
     state.messages.status === 'loaded';
 
-  React.useEffect(() => {
-    if (auth?._id !== undefined) dispatch(fetchMainUserMessages(auth?._id));
-
-    if (auth._id !== undefined && auth._id !== id) dispatch(fetchSecondUserMessages(id));
-  }, [dispatch, auth?._id, id]);
 
   return (
     <>

@@ -8,6 +8,8 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './style.scss';
@@ -40,6 +42,8 @@ export const PhotoSlider: React.FC = () => {
     }
   }
 
+  const loadStatus = state.slider.status === 'loaded' && state.user.status === 'loaded';
+
   React.useEffect(() => {
     dispatch(fetchSlider(id));
   }, [dispatch, id]);
@@ -47,53 +51,52 @@ export const PhotoSlider: React.FC = () => {
   return (
     <div className="profile__slider">
       <Slider {...settings}>
-        {readyPhotos?.map((image, index) => {
-          return state.slider.status === 'loaded' ? (
-            <span key={index} className="profile__slider__image">
-              {state.auth.data?._id === id ? (
-                <FontAwesomeIcon
-                  className="profile__slider__image-delete"
-                  icon={faXmark}
-                  onClick={(e) => onPhotoDelete(e, index)}
+        {state.slider.status === 'loaded'
+          ? readyPhotos?.map((image, index) => {
+              return (
+                <span key={index} className="profile__slider__image">
+                  {state.auth.data?._id === id ? (
+                    <FontAwesomeIcon
+                      className="profile__slider__image-delete"
+                      icon={faXmark}
+                      onClick={(e) => onPhotoDelete(e, index)}
+                    />
+                  ) : (
+                    ''
+                  )}
+                  <Link to={`/${id}/PhotoSlider/${index}`} key={index}>
+                    <div>
+                      <img
+                        src={image}
+                        alt=""
+                        className="profile__slider__image-img"
+                        width="10px"
+                        height="10px"
+                      />
+                    </div>
+                  </Link>
+                </span>
+              );
+            })
+          : new Array(5).fill(0).map((jsx, i) => (
+              <span className="profile__slider__image" key={i}>
+                <Skeleton
+                  className="profile__slider__image-img"
+                  style={{ borderWidth: 0, cursor: 'auto' }}
                 />
-              ) : (
-                ''
-              )}
-              <Link to={`/${id}/PhotoSlider/${index}`} key={index}>
-                <div>
-                  <img
-                    src={image}
-                    alt=""
-                    className="profile__slider__image-img"
-                    width="10px"
-                    height="10px"
-                  />
-                </div>
-              </Link>
-            </span>
-          ) : (
-            <div className="profile__slider__image" key={index}>
-              <img
-                src={image}
-                alt=""
-                className="profile__slider__image-img"
-                width="10px"
-                height="10px"
-              />
-            </div>
-          );
-        })}
+              </span>
+            ))}
       </Slider>
 
-      {state.auth.data?._id === id ? (
+      {loadStatus && state.auth.data?._id === id ? (
         <button className="profile__slider__button" onChange={() => dispatch(setInputNumber('1'))}>
-          {state.slider.status === 'loaded' && state.user.status === 'loaded' ? (
-            <ImageParsing />
-          ) : (
-            <div className="image_input_parser"></div>
-          )}
+          <ImageParsing />
           Add photos
         </button>
+      ) : state.auth.data?._id === id ? (
+        <div className="profile__slider__skeleton">
+          <Skeleton height={'100%'} style={{ borderRadius: '1.5vh' }} />
+        </div>
       ) : (
         ''
       )}

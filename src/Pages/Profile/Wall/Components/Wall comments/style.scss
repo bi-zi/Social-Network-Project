@@ -39,11 +39,23 @@
     }
   }
 
+  .wall__comments__submit-skeleton {
+    position: absolute;
+    width: 14%;
+    height: calc(16px + 60 * (100vw / 1920));
+    border-radius: var(--borderRadius-interface);
+    top: 1vh;
+    right: 0px;
+  }
+
   .wall__comments__submit-button {
     position: absolute;
 
     width: 14%;
     height: calc(16px + 60 * (100vw / 1920));
+
+    top: 1vh;
+    right: 0px;
 
     border: 0;
     border-radius: var(--borderRadius-interface);
@@ -67,9 +79,6 @@
       transform: scale(0.9);
       transition: 0.2s;
     }
-
-    top: 1vh;
-    right: 0px;
   }
 
   .wall__comments__submit-button-icon {

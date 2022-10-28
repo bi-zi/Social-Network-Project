@@ -131,9 +131,15 @@ export const EditInfo: React.FC = () => {
         ))}
 
         {!aboutStatus ? (
-          <button className="about__form__buttton" type="submit">
-            Save
-          </button>
+          <div className="about__form-save-close">
+            <button className="about__form__buttton" type="submit">
+              Save
+            </button>
+
+            <button className="about__form__buttton" onClick={e=>  dispatch(setCloseInfo(0))}>
+              Close
+            </button>
+          </div>
         ) : (
           <button className="about__form__buttton">Save</button>
         )}

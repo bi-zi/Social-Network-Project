@@ -12,6 +12,8 @@ import { Post } from '../../../../../store/post/types';
 import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faPlay } from '@fortawesome/free-solid-svg-icons';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
 
 interface MyParams {
@@ -86,23 +88,31 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
     <>
       {state.post.comments === postIndex ? (
         <div className="wall__comments">
-          <input
-            className="wall__comments__input"
-            placeholder="Write your comment here"
-            maxLength={280}
-            pattern="^[a-zA-Z0-9 ]+$"
-            title="Only latin characters can be used"
-            onChange={(e) => dispatch(setCreateComment(e.target.value))}
-            ref={firstRef}
-          />
+          {postStatus ? (
+            <input
+              className="wall__comments__input"
+              placeholder="Write your comment here"
+              maxLength={280}
+              pattern="^[a-zA-Z0-9 ]+$"
+              title="Only latin characters can be used"
+              onChange={(e) => dispatch(setCreateComment(e.target.value))}
+              ref={firstRef}
+            />
+          ) : (
+            <Skeleton className="wall__comments__input" />
+          )}
 
-          <button
-            className="wall__comments__submit-button"
-            onClick={() =>
-              postStatus && state.post.createComment.length > 0 ? addComment(data._id) : ''
-            }>
-            <FontAwesomeIcon className="wall__comments__submit-button-icon" icon={faPlay} />
-          </button>
+          {postStatus ? (
+            <button
+              className="wall__comments__submit-button"
+              onClick={() =>
+                postStatus && state.post.createComment.length > 0 ? addComment(data._id) : ''
+              }>
+              <FontAwesomeIcon className="wall__comments__submit-button-icon" icon={faPlay} />
+            </button>
+          ) : (
+            <Skeleton className="wall__comments__submit-skeleton" />
+          )}
 
           {data.commentPost?.map((comment, index) => (
             <div className="wall__comments__comment" key={index}>
@@ -114,24 +124,38 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
                       window.scrollTo(0, 0);
                       dispatch(setComments(999999));
                     }}>
-                    <img
-                      src={
-                        state.user.commentators.find((user) => user._id === comment.userId)!?.imageUrl[0]
-                      }
-                      width={10}
-                      alt=""
-                      className="wall__comments__comment-avatar"
-                    />
+                    {state.user.status === 'loaded' ? (
+                      <img
+                        src={
+                          state.user.commentators.find((user) => user._id === comment.userId)!
+                            ?.imageUrl[0]
+                        }
+                        width={10}
+                        alt=""
+                        className="wall__comments__comment-avatar"
+                      />
+                    ) : (
+                      <Skeleton className="wall__comments__comment-avatar" />
+                    )}
                   </Link>
 
                   <div className="wall__comments__comment-full-name-time">
-                    <div className="wall__comments__comment-full-name-time__full-name">
-                      {comment.firstName + ' ' + comment.lastName}
-                    </div>
+                    {postStatus ? (
+                      <>
+                        <div className="wall__comments__comment-full-name-time__full-name">
+                          {comment.firstName + ' ' + comment.lastName}
+                        </div>
 
-                    <div className="wall__comments__comment-full-name-time__time">
-                      {comment.commentDate}
-                    </div>
+                        <div className="wall__comments__comment-full-name-time__time">
+                          {comment.commentDate}
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <Skeleton width={'4vw'} height={'1.5vh'} style={{ marginTop: '0.5vh' }} />
+                        <Skeleton width={'6vw'} height={'1vh'} />
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -149,7 +173,11 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
                 </div>
               </div>
 
-              <div className="wall__comments__comment-text">{comment.commentText}</div>
+              {postStatus ? (
+                <div className="wall__comments__comment-text">{comment.commentText}</div>
+              ) : (
+                <Skeleton className="wall__comments__comment-text" />
+              )}
             </div>
           ))}
         </div>

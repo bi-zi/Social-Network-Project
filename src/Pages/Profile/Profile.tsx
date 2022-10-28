@@ -31,7 +31,7 @@ export const Profile: React.FC = () => {
   const postLength = state.post.userPosts.post?.[0]?.post?.length;
 
   React.useEffect(() => {
-    dispatch(fetchOneUser(id))
+    dispatch(fetchOneUser(id));
     dispatch(fetchNotifications(id));
   }, [dispatch, id]);
 
@@ -55,7 +55,7 @@ export const Profile: React.FC = () => {
         <UserInfo />
         <PhotoSlider />
         {data?._id === id ? <Post /> : ''}
-        <Wall />
+        {state.auth.status === 'loaded' ? <Wall /> : ''}
       </div>
     </div>
   );

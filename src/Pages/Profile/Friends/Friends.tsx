@@ -43,7 +43,7 @@ export const Friends: React.FC = () => {
           Friends - {user?.findUserFriends?.length}
         </Link>
       ) : (
-        <Skeleton width={'40%'} height="2vh" style={{margin: '.5vh 0 1vh 1.5vh'}} />
+        <Skeleton width={'40%'} height="2vh" style={{ margin: '.5vh 0 1vh 1.5vh' }} />
       )}
 
       <div className="profile-friends__container">

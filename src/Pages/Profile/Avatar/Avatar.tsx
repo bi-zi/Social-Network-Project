@@ -1,18 +1,24 @@
 import React from 'react';
-import { useAppSelector } from '../../../store/store';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { fetchMainUserMessages, fetchSecondUserMessages } from '../../../store/messages/slice';
 import { AvatarImage, ChangeButton, SendMessage, UserInteraction } from './Components/index';
-import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
-import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
-import { Loading } from '../../Header/Components/Loading';
 interface MyParams {
   id: string;
 }
 
 export const Avatar: React.FC = () => {
+    const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
   const { id } = useParams<keyof MyParams>() as MyParams;
+
+  React.useEffect(() => {
+    if (state.auth.data?._id !== undefined) dispatch(fetchMainUserMessages(state.auth.data?._id));
+
+    if (state.auth.data?._id !== undefined && state.auth.data?._id !== id)
+      dispatch(fetchSecondUserMessages(id));
+  }, [dispatch, id, state.auth.data?._id]);
 
   return (
     <div className="avatar">

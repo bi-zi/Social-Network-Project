@@ -1,5 +1,6 @@
 .about__form {
   position: relative;
+  height: 100%;
 
   top: 0.2vh;
 
@@ -10,24 +11,23 @@
   @media (width < 460px) {
     .about__div {
       position: relative;
-      height: calc(7px + 14.5 * (100vh / 1080));
+      height: calc(5.5px + 32 * (100vh / 1080));
     }
   }
 
   .about__form__input {
     position: relative;
-    margin-bottom: .8vh;
+    margin-top: 1vh;
 
     padding-left: 1vw;
     padding-right: 1vw;
 
     width: 60%;
-    height: calc(10px + 18 * (100vh / 1080));
+    height: calc(5px + 20 * (100vh / 1080));
 
     font: normal 400 calc(6px + 16 * (100vw / 1920)) 'Iceberg';
 
     border: 0;
-    box-shadow: 0 0 0 0.1vh gray;
 
     background-color: var(--backgroundInput-color);
     color: var(--text-color);
@@ -46,42 +46,43 @@
     font: normal 400 calc(4px + 10 * (100vw / 1920)) 'Iceberg' !important;
   }
 
-  .about__form__buttton {
-    position: relative;
+  .about__form-save-close {
+    display: flex;
+    justify-content: space-between;
+    .about__form__buttton {
+      position: relative;
 
-    width: 100%;
-    height: calc(10px + 20 * (100vh / 1080));
+      margin-top: 1.5vh;
 
-    bottom: 0;
+      width: 48%;
+      height: calc(4px + 20 * (100vh / 1080));
 
-    border: 0;
-    border-radius: var(--borderRadius-interface);
+      bottom: 0;
 
-    background-color: black;
-    box-shadow: 0 0 0.2vw rgb(255, 254, 254);
+      border: 0;
+      border-radius: var(--borderRadius-interface);
 
-    text-transform: uppercase;
-    font: normal 400 calc(8px + 10 * (100vw / 1920)) 'Iceberg';
+      background-color: black;
+      box-shadow: 0 0 0.2vw rgb(255, 254, 254);
 
-    letter-spacing: 0.2vw;
+      text-transform: uppercase;
+      font: normal 400 calc(6px + 10 * (100vw / 1920)) 'Iceberg';
 
-    color: var(--text-color);
+      letter-spacing: 0.2vw;
 
-    cursor: pointer;
-    z-index: 999;
+      color: var(--text-color);
 
-    @media (width < 460px) {
-      height: calc(6px + 12 * (100vh / 1080));
-      font: normal 400 calc(2px + 6 * (100vw / 460)) 'Iceberg';
-    }
+      cursor: pointer;
+      z-index: 999;
 
-    &:hover {
-      background-position: right center;
-    }
+      &:hover {
+        background-position: right center;
+      }
 
-    &:active {
-      transform: scale(0.9);
-      transition: 0.2s;
+      &:active {
+        transform: scale(0.9);
+        transition: 0.2s;
+      }
     }
   }
 }

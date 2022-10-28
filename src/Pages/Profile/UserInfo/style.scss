@@ -1,6 +1,6 @@
 .about {
   width: 100%;
-  height: calc(100px + 220 * (100vh / 1080));
+  height: calc(40px + 280 * (100vh / 1080));
 
   padding: 1.5vh 1vw;
 
@@ -10,31 +10,21 @@
   background-color: var(--interface-color);
   color: var(--text-color);
 
-
-  @media (width < 460px) {
-    height: calc(60px + 120 * (100vh / 1080));
-  }
-
-  .about__fullName {
+  .about__full-name {
     position: relative;
     width: 100%;
 
-    height: calc(10px + 30 * (100vh / 1080));
-
-    font: normal 600 calc(12px + 20 * (100vw / 1920)) / calc(5px + 30 * (100vh / 1080)) 'Iceberg';
+    font: normal 600 calc(6px + 22 * (100vw / 1920)) 'Iceberg';
 
     letter-spacing: 0.2vw;
 
     border-bottom: 0.5vh solid black;
 
     color: var(--text-color);
-
-    @media (width < 460px) {
-      height: calc(6px + 10 * (100vh / 1080));
-
-      font: normal 600 calc(6px + 8 * (100vw / 460)) / calc(2px + 6 * (100vh / 1080)) 'Iceberg';
-
-      border-bottom: 0.3vh solid black;
-    }
+  }
+  .about__full-name-skeleton {
+    padding-bottom: 1vh;
+    height: 15%;
+    border-bottom: 0.5vh solid black;
   }
 }
