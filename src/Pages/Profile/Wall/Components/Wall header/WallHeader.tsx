@@ -43,16 +43,15 @@ export const WallHeader: React.FC<MyProps> = ({ data }: MyProps) => {
               {userOne?.firstName + ' ' + userOne?.lastName}
             </span>
           ) : (
-            <Skeleton className="wall__header-left__full-name-date__full-name" width={'30%'} />
+            <Skeleton className="wall__header-left__full-name-date__full-skeleton" />
           )}
           <br />
           {wallStatus ? (
             <span className="wall__header-left__full-name-date__date">{data?.date}</span>
           ) : (
             <Skeleton
-              className="wall__header-left__full-name-date__date"
-              width={'20%'}
-              style={{ top: '-1vh' }}
+              className="wall__header-left__full-name-date__date-skeleton"
+
             />
           )}
         </div>

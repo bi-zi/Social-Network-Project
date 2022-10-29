@@ -2,11 +2,9 @@
   opacity: 1;
   position: relative;
   width: 63.5%;
-  height: var(--height1);
+  height: auto;
 
   color: var(--text-color);
-
-  background-color: var(--back-chat1);
 
   .correspondence-header {
     justify-content: space-between;
@@ -16,12 +14,6 @@
 
       font: normal 400 calc(-6px + 30 * (100vh / 1080)) 'Iceberg';
       color: var(--text-color);
-
-      // @media (height > 718px) and (height < 1370px) {
-      //   @media (width > 475px) and (width < 1300px) {
-      //     font: normal 400 calc(4px + 20 * (100vh / 1080)) 'Iceberg';
-      //   }
-      // }
 
       &:hover {
         color: var(--interface-color-hover);
@@ -101,10 +93,11 @@
     width: 100%;
 
     .correspondence-message__avatar {
+      margin-left: 1vw;
+      margin-bottom: 1vh;
+
       width: calc(16px + 45 * (100vw / 1920));
       height: calc(16px + 45 * (100vw / 1920));
-
-      margin-left: 1vw;
 
       border-radius: 100%;
     }
@@ -179,8 +172,8 @@
       color: var(--text-color);
     }
 
-    .correspondence-sending-message__button,
-    .correspondence-sending-message__wait {
+    .correspondence-sending-message__skeleton,
+    .correspondence-sending-message__button {
       position: absolute;
 
       margin-top: calc(2.5px + 9 * (100vh / 1080));
@@ -208,8 +201,9 @@
       }
     }
 
-  }
-  .correspondence-sending-message__wait {
-    border: 0.1vh solid #f80101 !important;
+    .correspondence-sending-message__skeleton {
+      margin-top: calc(-6px - 22 * (100vh / 1080));
+      border: 0;
+    }
   }
 }

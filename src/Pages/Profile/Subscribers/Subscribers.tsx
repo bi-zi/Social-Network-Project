@@ -28,13 +28,15 @@ export const Subscribers: React.FC = () => {
     return 0;
   });
 
+  const loadStatus = user.status === 'loaded';
+
   React.useEffect(() => {
     dispatch(fetchUserSubscribers(id));
   }, [dispatch, id]);
 
   return (
     <div className="profile-friends subscribers">
-      {user.status === 'loaded' ? (
+      {loadStatus ? (
         <Link
           to={`/Friends/${id}`}
           className="profile-friends__title"
@@ -44,11 +46,11 @@ export const Subscribers: React.FC = () => {
           {user?.findUserSubscribers?.length}
         </Link>
       ) : (
-        <Skeleton width={'40%'} height="2vh" style={{ margin: '.5vh 0 1vh 1.5vh' }} />
+        <Skeleton className="profile-friends__title-skeleton" />
       )}
 
       <div className="profile-friends__container">
-        {user.status === 'loaded' ? (
+        {loadStatus ? (
           subscribers.map((subscriber) => (
             <div key={subscriber._id}>
               <Link

@@ -2,11 +2,8 @@
   position: relative;
 
   width: 35%;
-  height: var(--height1);
-
-
+  height: auto;
   color: var(--text-color);
-  background-color: var(--back-chat1);
 
   .chats-form__find-chat {
     .chats-form__search-icon {
@@ -24,6 +21,8 @@
         font-size: calc(4px + 18 * (100vh / 1080));
       }
     }
+
+
 
     .chats-form__input {
       position: absolute;
@@ -49,6 +48,10 @@
         font: normal 400 calc(2px + 14 * (100vh / 1080)) 'Iceberg';
       }
     }
+  }
+
+  .chats-skeletons-fix-bag {
+    opacity: 0;
   }
 
   .chats-users {
@@ -178,7 +181,7 @@
 
     width: calc(120px + 140 * (100vw / 1920));
 
-    top: 40%;
+    top: 30%;
 
     text-decoration: underline;
     text-align: center;

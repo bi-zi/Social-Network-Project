@@ -93,6 +93,11 @@ export const ControlPanel: React.FC = () => {
     state.user.status === 'loaded' &&
     state.auth.status === 'loaded';
 
+  const imageLoadStatus =
+    numImg < 3 && state.user.status === 'loaded' && state.slider.status === 'loaded';
+
+
+
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));
   }, [dispatch, id]);
@@ -100,7 +105,7 @@ export const ControlPanel: React.FC = () => {
   return (
     <div className="post__control-panel">
       <div className="post__control-panel__icons-container">
-        {numImg < 3 && state.user.status === 'loaded' && state.slider.status === 'loaded' ? (
+        {imageLoadStatus ? (
           <>
             <FontAwesomeIcon
               className="post__control-panel__icons"

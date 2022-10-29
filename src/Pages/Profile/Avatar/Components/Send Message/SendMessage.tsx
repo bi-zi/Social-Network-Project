@@ -7,8 +7,10 @@ import {
   fetchCreateChat,
   setSelectedUser,
 } from '../../../../../store/messages/slice';
+import { fetchUsersForChats } from '../../../../../store/user/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useSort } from '../../../../Messages/Components/useSort';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
@@ -35,7 +37,6 @@ export const SendMessage: React.FC = () => {
   );
 
   const createMessages = async () => {
-    console.log(0);
     if (mainUser) {
       await dispatch(fetchCreateMessages({ withWho: id, user: auth?._id }));
     }
@@ -49,15 +50,15 @@ export const SendMessage: React.FC = () => {
     // выбор пользователя при переходе на страницу чатов
     dispatch(setSelectedUser(id));
 
-    dispatch(fetchMainUserMessages(auth?._id));
-    dispatch(fetchSecondUserMessages(id));
+    await dispatch(fetchMainUserMessages(auth?._id));
+    await dispatch(fetchSecondUserMessages(id));
+    await dispatch(fetchUsersForChats(auth?._id));
   };
 
   const loadStatus =
     state.user.status === 'loaded' &&
     state.auth.status === 'loaded' &&
     state.messages.status === 'loaded';
-
 
   return (
     <>

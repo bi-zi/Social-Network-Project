@@ -13,14 +13,14 @@ export const UserSkeleton: React.FC<MyProps> = ({ users }: MyProps) => {
       {Array(users)
         .fill(0)
         .map((user, i) => (
-          <div key={i}>
-            <div className="profile-friends__container__friend">
+          <div key={i} className={`${i}`}>
+            <div className="profile-friends__container__friend-skeleton">
               <Skeleton
                 circle
                 className="profile-friends__container__friend__avatar"
                 style={{ borderWidth: 0, cursor: 'auto' }}
               />
-              <Skeleton width={'90%'} height={'1vh'} style={{ marginTop: '1vh', cursor: 'auto' }} />
+              <Skeleton width={'90%'} height={'1vh'} style={{ marginTop: '.5vh', cursor: 'auto' }} />
             </div>
           </div>
         ))}

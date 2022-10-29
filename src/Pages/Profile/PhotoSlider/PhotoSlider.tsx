@@ -43,6 +43,7 @@ export const PhotoSlider: React.FC = () => {
   }
 
   const loadStatus = state.slider.status === 'loaded' && state.user.status === 'loaded';
+  const buttonStatus = loadStatus && state.auth.data?._id === id
 
   React.useEffect(() => {
     dispatch(fetchSlider(id));
@@ -51,7 +52,7 @@ export const PhotoSlider: React.FC = () => {
   return (
     <div className="profile__slider">
       <Slider {...settings}>
-        {state.slider.status === 'loaded'
+        {loadStatus
           ? readyPhotos?.map((image, index) => {
               return (
                 <span key={index} className="profile__slider__image">
@@ -88,7 +89,7 @@ export const PhotoSlider: React.FC = () => {
             ))}
       </Slider>
 
-      {loadStatus && state.auth.data?._id === id ? (
+      {buttonStatus ? (
         <button className="profile__slider__button" onChange={() => dispatch(setInputNumber('1'))}>
           <ImageParsing />
           Add photos

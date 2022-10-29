@@ -87,5 +87,5 @@ export function useSort(data: Messages) {
     return chat;
   };
 
-  return { evryChatLastMessage, sortedUsers, selectedChat };
+  return { evryChatLastMessage, sortedUsers, selectedChat, sortedChatsByLastMessageTime };
 }

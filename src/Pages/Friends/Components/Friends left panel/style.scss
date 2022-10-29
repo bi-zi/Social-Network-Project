@@ -121,6 +121,7 @@
     }
   }
 
+  .users__left-panel__user-block__skeleton,
   .users__left-panel__user-block__number-friends-subs {
     position: absolute;
 
@@ -136,5 +137,10 @@
     span:first-child {
       margin-right: 1vw;
     }
+  }
+  .users__left-panel__user-block__skeleton {
+    display: flex;
+    right: 0;
+
   }
 }

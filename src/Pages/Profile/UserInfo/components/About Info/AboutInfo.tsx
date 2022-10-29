@@ -18,13 +18,15 @@ export const AboutInfo: React.FC = () => {
 
   const { id } = useParams<keyof MyParams>() as MyParams;
 
+  const loadStatus = state.about?.status === 'loaded';
+
   React.useEffect(() => {
     dispatch(fetchAbout(id));
   }, [dispatch, id]);
 
   return (
     <>
-      {state.about?.status === 'loaded' ? (
+      {loadStatus ? (
         <div className="about__container">
           {state.user?.mainUser?._id === id ? (
             <div

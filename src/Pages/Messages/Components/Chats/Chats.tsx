@@ -5,6 +5,9 @@ import { useSort } from '../useSort';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { ChatsSkeleton } from './ChatsSkeleton';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
 
 export const Chats: React.FC = () => {
@@ -20,6 +23,7 @@ export const Chats: React.FC = () => {
   const { evryChatLastMessage, sortedUsers } = useSort(messages.mainUserMessages?.[0]);
 
   const lastMessage = evryChatLastMessage();
+  
   const users = sortedUsers();
 
   const selectedUser = users?.[localStorage.chatIndexWithSort];
@@ -42,23 +46,32 @@ export const Chats: React.FC = () => {
     setTimeout(scrollToBottom, 0);
   };
 
-  const loadStatus =
-    messages.status === 'loaded' && state.user.status === 'loaded' && state.auth.status === 'loaded';
+  const loadStatus = messages.status === 'loaded' && state.auth.status === 'loaded';
+
+  React.useEffect(() => {
+    sortedUsers();
+  }, [messages.mainUserMessages, sortedUsers]);
 
   return (
     <div className="chats-container">
       <form className="chats-form__find-chat">
-        <FontAwesomeIcon className="chats-form__search-icon" icon={faMagnifyingGlass} />
-        <input
-          ref={inputRef}
-          type="text"
-          pattern="^[a-zA-Z0-9 ]+$"
-          onChange={(e) => dispatch(setFindChat(e.target.value))}
-          className="chats-form__input"
-        />
+        {loadStatus ? (
+          <>
+            <FontAwesomeIcon className="chats-form__search-icon" icon={faMagnifyingGlass} />
+            <input
+              ref={inputRef}
+              type="text"
+              pattern="^[a-zA-Z0-9 ]+$"
+              onChange={(e) => dispatch(setFindChat(e.target.value))}
+              className="chats-form__input"
+            />
+          </>
+        ) : (
+          <Skeleton className="chats-form__search-icon" />
+        )}
       </form>
 
-      {users.length !== 0 ? (
+      {users.length !== 0 && loadStatus ? (
         <div className="chats-users">
           {users.map((friend, index) => (
             <div
@@ -107,20 +120,51 @@ export const Chats: React.FC = () => {
             </div>
           ))}
         </div>
-      ) : (
-        <div className="chats-empty">
-          <NavLink to={`/Friends/${auth?._id}`}>Find friends to chat</NavLink>
-        </div>
-      )}
-      {loadStatus ? (
-        <div className="chats-footer">
-          <a href="https://github.com/bi-zi" className="chats-footer__link">
-            Github
-          </a>
+      ) : users.length !== 0 && !loadStatus ? (
+        <ChatsSkeleton chats={10} />
+      ) : !loadStatus || (users.length === 0 && loadStatus) ? (
+        <div className="chats-users">
+          <div className="chats-skeletons-fix-bag ">
+            <Skeleton className="chats-users__item__avatar" />
+            <div className="chats-users__item__full-name-last-message">
+              <Skeleton
+                className="chats-users__item__full-name-last-message__full-name"
+                height={'2vh'}
+                width={'12vw'}
+              />
+
+              <div className="chats-users__item__full-name-last-message__message">
+                <Skeleton
+                  className="chats-users__item__full-name-last-message__message__name"
+                  height={'1.5vh'}
+                  width={'3vw'}
+                />
+                <Skeleton
+                  className="chats-users__item__full-name-last-message__message_last-message"
+                  height={'1.5vh'}
+                  width={'15vw'}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="chats-empty">
+            <NavLink to={`/Friends/${auth?._id}`}>Find friends to chat</NavLink>
+          </div>
         </div>
       ) : (
         ''
       )}
+
+      <div className="chats-footer">
+        {loadStatus ? (
+          <a href="https://github.com/bi-zi" className="chats-footer__link">
+            Github
+          </a>
+        ) : (
+          <Skeleton className="chats-footer__link" width={'8vw'} />
+        )}
+      </div>
     </div>
   );
 };

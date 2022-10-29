@@ -6,11 +6,10 @@ import { fetchNotifications } from '../../store/notifications/slice';
 
 import { useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-
-import './style.scss';
-
 import { FriendsControlPanel } from './Components/Friends control panel/FriendsControlPanel';
 import { FriendsLeftPanel } from './Components/Friends left panel/FriendsLeftPanel';
+import { UserSkeleton } from './Components/Friends left panel/UserSkeleton';
+import './style.scss';
 
 export type MyParams = {
   id: string;
@@ -108,7 +107,7 @@ export const Friends: React.FC = () => {
   return (
     <div className="users">
       <div className="users__left-panel">
-        {sortedFriends!.length > 0 ? (
+        {sortedFriends!.length > 0 && state.friendsPage.status === 'loaded' ? (
           sortedFriends!.map((friend) => (
             <FriendsLeftPanel
               data={friend}
@@ -116,6 +115,8 @@ export const Friends: React.FC = () => {
               key={friend?._id}
             />
           ))
+        ) : state.friendsPage.status === 'loading' ? (
+          <UserSkeleton users={10} />
         ) : state.friendsPage.categorySort === 'friends' ? (
           <div className="users__left-panel__zero-friends-subs">No friends 😭</div>
         ) : (

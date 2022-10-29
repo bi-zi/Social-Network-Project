@@ -57,7 +57,6 @@
     text-align: center;
 
     .registration__block__form-first-name,
-    .registration__block__form-last-name,
     .registration__block__form-pass-block__password {
       width: 60%;
       height: calc(6px + 40 * (100vh / 1080));
@@ -110,6 +109,14 @@
       @media (width < 460px) {
         right: 18vw !important;
       }
+    }
+
+    .registration__block__form-submit-skeleton {
+      margin-bottom: 10vh;
+
+      width: 60%;
+      height: auto;
+      border-radius: var(--borderRadius-interface);
     }
 
     .registration__block__form-submit {

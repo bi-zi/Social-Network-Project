@@ -10,11 +10,12 @@ export const UserInfo: React.FC = () => {
 
   const user = state.user?.userOne?.[0];
 
+  const loadStatus = state.about?.status === 'loaded' && state.user?.status === 'loaded';
 
   return (
     <>
       <div className="about">
-        {state.about?.status === 'loaded' && state.user?.status === 'loaded' ? (
+        {loadStatus ? (
           <div className="about__full-name">{`${user?.firstName + ' ' + user?.lastName || ''}`}</div>
         ) : (
           <div className="about__full-name-skeleton">

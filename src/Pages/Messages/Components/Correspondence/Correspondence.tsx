@@ -9,6 +9,8 @@ import {
 } from '../../../../store/messages/slice';
 import { useSort } from '../useSort';
 import { NavLink } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
 
 export const Correspondence: React.FC = () => {
@@ -87,11 +89,6 @@ export const Correspondence: React.FC = () => {
     setTimeout(scrollToBottom, 400);
   };
 
-  if (loadStatus) {
-    document.body.style.setProperty('--back-chat1', 'var(--back--background-color-chat2)');
-    document.body.style.setProperty('--height1', 'var(--height-chat2)');
-  }
-
   useEffect(() => {
     if (auth?._id !== undefined) {
       dispatch(fetchMainUserMessages(auth?._id));
@@ -105,20 +102,28 @@ export const Correspondence: React.FC = () => {
       {selectedUser !== undefined ? (
         <>
           <div className="correspondence-header">
-            <NavLink to={`/Profile/${selectedUser?._id}`}>
-              <div className="correspondence-header__full-name">
-                {selectedUser?.firstName + ' ' + selectedUser?.lastName}
-              </div>
-            </NavLink>
-
-            <NavLink to={`/Profile/${selectedUser?._id}`}>
-              <img
-                src={selectedUser?.imageUrl}
-                width="10"
-                alt=""
-                className="correspondence-header__avatar"
-              />
-            </NavLink>
+            {loadStatus ? (
+              <>
+                <NavLink to={`/Profile/${selectedUser?._id}`}>
+                  <div className="correspondence-header__full-name">
+                    {selectedUser?.firstName + ' ' + selectedUser?.lastName}
+                  </div>
+                </NavLink>
+                <NavLink to={`/Profile/${selectedUser?._id}`}>
+                  <img
+                    src={selectedUser?.imageUrl}
+                    width="10"
+                    alt=""
+                    className="correspondence-header__avatar"
+                  />
+                </NavLink>
+              </>
+            ) : (
+              <>
+                <Skeleton className="correspondence-header__full-name" width={'12vw'} />
+                <Skeleton className="correspondence-header__avatar" style={{ margin: '0 1.5vw 0 0' }} />
+              </>
+            )}
           </div>
 
           <div className="correspondence" ref={divRef}>
@@ -131,12 +136,13 @@ export const Correspondence: React.FC = () => {
                 }}>
                 Add more messages
               </div>
+            ) : messagesLength! > messages?.addMessages ? (
+              <Skeleton className="correspondence__add-20" />
             ) : (
               ''
             )}
-            {chat?.length === 0 ? (
-              <div className="correspondence-empty">Write the first message in the chat</div>
-            ) : (
+
+            {chat?.length !== 0 ? (
               chat?.map((message, index) => (
                 <div className="correspondence-message" key={index}>
                   {(message?.userId !== chat[index - 1]?.userId ||
@@ -144,59 +150,94 @@ export const Correspondence: React.FC = () => {
                       Number(new Date(chat[index - 1]?.date)) + 60000 * 3) &&
                   message.userId !== undefined ? (
                     <>
-                      <img
-                        src={
-                          state.user?.chatUsers.filter((user) => message.userId?.includes(user._id))[0]
-                            ?.imageUrl
-                        }
-                        alt=""
-                        width="10"
-                        className="correspondence-message__avatar"
-                      />
+                      {loadStatus ? (
+                        <img
+                          src={
+                            state.user?.chatUsers.filter((user) => message.userId?.includes(user._id))[0]
+                              ?.imageUrl
+                          }
+                          alt=""
+                          width="10"
+                          className="correspondence-message__avatar"
+                        />
+                      ) : (
+                        <Skeleton className="correspondence-message__avatar" />
+                      )}
 
                       <div className="correspondence-message__full-name-date">
-                        <div className="correspondence-message__full-name-date__full-name">
-                          {
-                            state.user?.chatUsers?.filter((user) =>
-                              message?.userId?.includes(user._id),
-                            )[0]?.firstName
-                          }
-                        </div>
-                        <div className="correspondence-message__full-name-date__date">{`${new Date(
-                          message.date,
-                        ).toLocaleDateString()} - ${new Date(message.date).toLocaleTimeString()}`}</div>
+                        {loadStatus ? (
+                          <>
+                            <div className="correspondence-message__full-name-date__full-name">
+                              {
+                                state.user?.chatUsers?.filter((user) =>
+                                  message?.userId?.includes(user._id),
+                                )[0]?.firstName
+                              }
+                            </div>
+
+                            <div className="correspondence-message__full-name-date__date">{`${new Date(
+                              message.date,
+                            ).toLocaleDateString()} - ${new Date(
+                              message.date,
+                            ).toLocaleTimeString()}`}</div>
+                          </>
+                        ) : (
+                          <>
+                            <Skeleton
+                              className="correspondence-message__full-name-date__full-name"
+                              width={'6vh'}
+                            />
+                            <Skeleton
+                              className="correspondence-message__full-name-date__date"
+                              width={'12vh'}
+                            />
+                          </>
+                        )}
                       </div>
                     </>
                   ) : (
                     ''
                   )}
-                  <div className="correspondence-message__message">{message.message}</div>
+                  {loadStatus ? (
+                    <div className="correspondence-message__message">{message.message}</div>
+                  ) : message?.message !== undefined ? (
+                    <Skeleton className="correspondence-message__message" width={'20vw'} />
+                  ) : (
+                    ''
+                  )}
                 </div>
               ))
+            ) : (
+              <div className="correspondence-empty">Write the first message in the chat</div>
             )}
           </div>
 
           <form
             className="correspondence-sending-message"
             onSubmit={(e) => (text?.length !== 0 && loadStatus ? onSendMessage(e, text) : '')}>
-            <input
-              type="text"
-              ref={firstRef}
-              className="correspondence-sending-message__input"
-              required={true}
-              minLength={1}
-              maxLength={300}
-              placeholder="Write your message here"
-              pattern="^[a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
-              title="Only these characters can be used a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~"
-              onChange={(e) => setText(e.target.value)}
-            />
-            {messages.status !== 'loading' ? (
-              <button type="submit" className="correspondence-sending-message__button">
-                Send
-              </button>
+            {messages.status === 'loaded' ? (
+              <>
+                <input
+                  type="text"
+                  ref={firstRef}
+                  className="correspondence-sending-message__input"
+                  required={true}
+                  minLength={1}
+                  maxLength={300}
+                  placeholder="Write your message here"
+                  pattern="^[a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
+                  title="Only these characters can be used a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~"
+                  onChange={(e) => setText(e.target.value)}
+                />
+                <button type="submit" className="correspondence-sending-message__button">
+                  Send
+                </button>
+              </>
             ) : (
-              <button className="correspondence-sending-message__wait">Wait</button>
+              <>
+                <Skeleton className="correspondence-sending-message__input" />
+                <Skeleton className="correspondence-sending-message__skeleton" />
+              </>
             )}
           </form>
         </>

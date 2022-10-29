@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
 
 type FormValues = {
@@ -16,6 +18,7 @@ export const Login = () => {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(selectIsAuth);
   const data = useAppSelector((state) => state.auth?.data);
+  const state = useAppSelector((state) => state);
 
   const [passwordShown, setPasswordShown] = React.useState(false);
 
@@ -61,47 +64,62 @@ export const Login = () => {
         Authorization
         <form className="registration__block__form" onSubmit={handleSubmit(onSubmit)}>
           <label>
-            <input
-              className="registration__block__form-last-name"
-              type="email"
-              pattern="^[a-zA-Z0-9-.@_]*$"
-              title="Only these characters can be used a-z A-Z 0-9 - . @ _"
-              minLength={5}
-              maxLength={64}
-              placeholder="@gmail.com"
-              {...register('email', { required: 'Укажите почту' })}
-            />
+            {state.auth.status === 'error' ? (
+              <input
+                className="registration__block__form-first-name"
+                type="email"
+                pattern="^[a-zA-Z0-9-.@_]*$"
+                title="Only these characters can be used a-z A-Z 0-9 - . @ _"
+                minLength={5}
+                maxLength={64}
+                placeholder="@gmail.com"
+                {...register('email', { required: 'Укажите почту' })}
+              />
+            ) : (
+              <Skeleton className="registration__block__form-first-name" />
+            )}
 
             <div className="registration__block__form-pass-block">
-              <input
-                className="registration__block__form-pass-block__password"
-                type={passwordShown ? 'text' : 'password'}
-                placeholder="password"
-                pattern="^[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
-                title="Only these characters can be used a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~"
-                minLength={8}
-                maxLength={32}
-                {...register('password', { required: 'Укажите пароль' })}
-              />
-              {passwordShown ? (
-                <FontAwesomeIcon
-                  icon={faLockOpen}
-                  className="registration__block__form-pass-block__password-icon-lock"
-                  onClick={togglePassword}
-                />
+              {state.auth.status === 'error' ? (
+                <>
+                  <input
+                    className="registration__block__form-pass-block__password"
+                    type={passwordShown ? 'text' : 'password'}
+                    placeholder="password"
+                    pattern="^[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
+                    title="Only these characters can be used a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~"
+                    minLength={8}
+                    maxLength={32}
+                    {...register('password', { required: 'Укажите пароль' })}
+                  />
+                  {passwordShown ? (
+                    <FontAwesomeIcon
+                      icon={faLockOpen}
+                      className="registration__block__form-pass-block__password-icon-lock"
+                      onClick={togglePassword}
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faLock}
+                      className="registration__block__form-pass-block__password-icon-unlock"
+                      onClick={togglePassword}
+                    />
+                  )}
+                </>
               ) : (
-                <FontAwesomeIcon
-                  icon={faLock}
-                  className="registration__block__form-pass-block__password-icon-unlock"
-                  onClick={togglePassword}
-                />
+                <Skeleton className="registration__block__form-pass-block__password" />
               )}
             </div>
           </label>
           <br />
-          <button type="submit" className="registration__block__form-submit" disabled={!isValid}>
-            Submit
-          </button>
+
+          {state.auth.status === 'error' ? (
+            <button type="submit" className="registration__block__form-submit" disabled={!isValid}>
+              Submit
+            </button>
+          ) : (
+            <Skeleton className="registration__block__form-submit-skeleton" />
+          )}
 
           <div className="registration__block__form-link-to">
             <NavLink to="/Register">Register an account</NavLink>

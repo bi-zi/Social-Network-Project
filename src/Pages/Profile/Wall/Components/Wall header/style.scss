@@ -29,11 +29,12 @@
 
       padding: 0.5vh 0 0 0.5vw;
       width: 100%;
-      
+
       @media (width < 460px) {
         padding: 0 1vw;
       }
 
+      .wall__header-left__full-name-date__full-skeleton,
       .wall__header-left__full-name-date__full-name {
         width: 100%;
         font: normal 400 calc(8px + 16 * (100vw / 1920)) 'Iceberg';
@@ -45,6 +46,14 @@
         }
       }
 
+      .wall__header-left__full-name-date__full-skeleton {
+        width: 30%;
+        @media (width < 460px) {
+          bottom: calc(42px + -8 * (100vh / 1080));
+        }
+      }
+
+      .wall__header-left__full-name-date__date-skeleton,
       .wall__header-left__full-name-date__date {
         width: calc(50px + 120 * (100vw / 1920));
         font: normal 400 calc(6px + 12 * (100vw / 1920)) 'Iceberg';
@@ -53,6 +62,12 @@
           position: absolute;
           top: calc(7px + 16 * (100vh / 1080));
           font-size: calc(0px + 8 * (100vw / 460));
+        }
+      }
+
+      .wall__header-left__full-name-date__date-skeleton {
+        @media (width < 460px) {
+          top: calc(10px + 12 * (100vh / 1080));
         }
       }
     }
@@ -65,7 +80,7 @@
 
     text-align: right;
 
-    z-index: 0;
+    z-index: 999;
 
     .wall__header-right__menu {
       padding: 0.5vh 0.5vw;

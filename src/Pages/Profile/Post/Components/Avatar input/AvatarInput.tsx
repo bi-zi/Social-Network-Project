@@ -16,9 +16,12 @@ export const AvatarInput: React.FC = () => {
       textRef.current.value = '';
   }
 
+  const userStatus = state.user.status === 'loaded';
+  const postStatus = state.post.userPosts.status === 'loaded';
+
   return (
     <div className="post__avatar-input-container">
-      {state.user.status === 'loaded' ? (
+      {userStatus ? (
         <img
           src={state.user?.userOne?.[0]?.imageUrl}
           width={10}
@@ -29,7 +32,8 @@ export const AvatarInput: React.FC = () => {
       ) : (
         <Skeleton className="post__avatar-input-container__avatar" />
       )}
-      {state.post.userPosts.status === 'loaded' ? (
+      
+      {postStatus ? (
         <input
           ref={textRef}
           type="text"
