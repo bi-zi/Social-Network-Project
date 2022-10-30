@@ -73,11 +73,27 @@ export const WallControlPanel: React.FC<MyProps> = ({ data, index }: MyProps) =>
   const postStatus = state.post.userPosts.status === 'loaded';
 
   const openCloseComment = async (postIndex: number) => {
-    const commentators = wallPost?.[postIndex].commentPost.map((x) => x.userId).join(',');
+    const commentators = data.commentPost.map((x) => x.userId).join(',');
+
+    const filteredCommentators = commentators.split(',').sort((a, b) => (a > b ? 1 : -1));
+
+    const buffer: string[] = [filteredCommentators[0]];
+
+    filteredCommentators.filter(function (element, index) {
+      if (element === element[index < filteredCommentators.length - 1 ? index + 1 : index - 1]) {
+        buffer.push(element);
+      } else if (element !== filteredCommentators[index > 0 ? index + 1 : index]) {
+        buffer.push(element);
+      }
+      return buffer;
+    });
+
 
     if (postStatus) {
       if (state.post.comments !== postIndex) {
-        await dispatch(fetchCommentators(commentators));
+        if (commentators.length > 0) {
+          await dispatch(fetchCommentators(buffer.join(',')));
+        }
         dispatch(setComments(postIndex));
       } else {
         dispatch(setComments(999999));
@@ -136,7 +152,7 @@ export const WallControlPanel: React.FC<MyProps> = ({ data, index }: MyProps) =>
           <FontAwesomeIcon className="wall__control-panel__share-icon" icon={faShareNodes} />{' '}
         </>
       ) : (
-        <Skeleton height={'4vh'} width={'40%'} style={{ marginTop: '1vh' }} />
+        <Skeleton height={'3vh'} width={'40%'} style={{ margin: '1vh 0' }} />
       )}
     </div>
   );

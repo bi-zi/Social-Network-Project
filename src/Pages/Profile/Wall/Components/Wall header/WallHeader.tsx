@@ -30,6 +30,7 @@ export const WallHeader: React.FC<MyProps> = ({ data }: MyProps) => {
 
   return (
     <div className="wall__header">
+
       <div className="wall__header-left">
         {wallStatus ? (
           <img src={userOne?.imageUrl} width={10} alt="" className="wall__header-left__avatar" />
@@ -37,22 +38,21 @@ export const WallHeader: React.FC<MyProps> = ({ data }: MyProps) => {
           <Skeleton className="wall__header-left__avatar" />
         )}
 
-        <div className="wall__header-left__header-left__full-name-date">
+        <div className="wall__header-left__header-left__info">
           {wallStatus ? (
-            <span className="wall__header-left__full-name-date__full-name">
+            <span className="wall__header-left__info-full-name">
               {userOne?.firstName + ' ' + userOne?.lastName}
             </span>
           ) : (
-            <Skeleton className="wall__header-left__full-name-date__full-skeleton" />
+            <Skeleton className="wall__header-left__info-skeleton-name" />
           )}
-          <br />
-          {wallStatus ? (
-            <span className="wall__header-left__full-name-date__date">{data?.date}</span>
-          ) : (
-            <Skeleton
-              className="wall__header-left__full-name-date__date-skeleton"
 
-            />
+          <br />
+
+          {wallStatus ? (
+            <span className="wall__header-left__info-date">{data?.date}</span>
+          ) : (
+            <Skeleton className="wall__header-left__info-skeleton-date" />
           )}
         </div>
       </div>

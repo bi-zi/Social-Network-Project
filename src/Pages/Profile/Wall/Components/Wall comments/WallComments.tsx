@@ -39,22 +39,21 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
     let date: any = new Date();
     date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-    const commentators = data.commentPost.map((x) => x.userId).join(',');
+     const commentators = data.commentPost.map((x) => x.userId).join(',');
 
-    const filteredCommenters = (commentators + ',' + auth?._id)
-      .split(',')
-      .sort((a, b) => (a > b ? 1 : -1));
+    const filteredCommentators = commentators.split(',').sort((a, b) => (a > b ? 1 : -1));
 
-    const buffer: string[] = [];
+    const buffer: string[] = [filteredCommentators[0], auth._id];
 
-    filteredCommenters.filter(function (element, index) {
-      if (element === element[index < filteredCommenters.length - 1 ? index + 1 : index - 1]) {
+    filteredCommentators.filter(function (element, index) {
+      if (element === element[index < filteredCommentators.length - 1 ? index + 1 : index - 1]) {
         buffer.push(element);
-      } else if (element !== filteredCommenters[index > 0 ? index + 1 : index]) {
+      } else if (element !== filteredCommentators[index > 0 ? index + 1 : index]) {
         buffer.push(element);
       }
       return buffer;
     });
+
 
     await dispatch(fetchCommentators(commentators.length === 0 ? auth._id : buffer.join(',')));
     await dispatch(

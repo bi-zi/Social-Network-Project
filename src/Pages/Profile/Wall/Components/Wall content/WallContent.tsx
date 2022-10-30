@@ -23,20 +23,23 @@ export const WallContent: React.FC<MyProps> = ({ data, index, postLength }: MyPr
   const { id } = useParams<keyof MyParams>() as MyParams;
   const postIndex = index;
 
+  const textStatus = data?.text?.length > 0 && state.post.userPosts.status === 'loaded';
+  const postStatus = state.post.userPosts.status === 'loaded';
+
   return (
     <>
       <div className="wall__content-container">
-        {data?.text?.length > 0 && state.post.userPosts.status === 'loaded' ? (
+        {textStatus ? (
           <div className="wall_content-container__text">{data?.text}</div>
         ) : data?.text?.length > 0 ? (
-          <Skeleton height={'4vh'} />
+          <Skeleton height={'2vh'} style={{ marginBottom: '1vh' }} />
         ) : (
           ''
         )}
 
         {data?.imagesPost?.length > 0 ? (
           <div className="wall__content-container__images">
-            {state.post.userPosts.status === 'loaded' ? (
+            {postStatus ? (
               data?.imagesPost.map((image, index) => {
                 return (
                   <span key={index}>
@@ -71,7 +74,7 @@ export const WallContent: React.FC<MyProps> = ({ data, index, postLength }: MyPr
           ''
         )}
 
-        {data?.videoPost?.length > 0 && state.post.userPosts.status === 'loaded' ? (
+        {data?.videoPost?.length > 0 && postStatus ? (
           <>
             <iframe
               src={data.videoPost}
@@ -87,12 +90,12 @@ export const WallContent: React.FC<MyProps> = ({ data, index, postLength }: MyPr
           ''
         )}
 
-        {state.post.userPosts.status === 'loaded' ? (
+        {postStatus ? (
           <div className="wall_from">
             Post from {`${state.user.userOne?.[0]?.firstName + ' ' + state.user.userOne?.[0]?.lastName}`}
           </div>
         ) : (
-          <Skeleton className="wall_from" width={'30%'}/>
+          <Skeleton className="wall_from" width={'30%'} />
         )}
       </div>
     </>

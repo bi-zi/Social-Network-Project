@@ -89,7 +89,7 @@
         background-color: var(--interface-color-active);
       }
 
-      .chats-users__item__avatar {
+      .chats-users__item-avatar {
         margin: 1vh 0.5vh 0.8vh 1vh;
 
         width: calc(10px + 60 * (100vh / 1080));
@@ -103,51 +103,6 @@
       }
     }
 
-    .chats-users__item__full-name-last-message {
-      position: relative;
-
-      margin-top: calc(-6px + 28 * (100vh / 1080));
-
-      .chats-users__item__full-name-last-message__full-name {
-        position: relative;
-
-        white-space: nowrap;
-
-        font: normal 400 calc(2px + 20 * (100vw / 1920)) / 1vh 'Iceberg';
-        color: var(--text-color);
-      }
-
-      .chats-users__item__full-name-last-message__message {
-        display: flex;
-      }
-
-      .chats-users__item__full-name-last-message__message__name,
-      .chats-users__item__full-name-last-message__message_last-message {
-        margin-top: 0.5vh;
-        font: normal 400 calc(2px + 14 * (100vw / 1920)) 'Iceberg';
-        color: var(--text-color);
-      }
-
-      .chats-users__item__full-name-last-message__message_last-message {
-        margin-right: 0.3vw;
-        word-break: break-all;
-      }
-
-      .chats-users__item__full-name-last-message__message__name {
-        position: relative;
-        margin-right: 0.2vw;
-      }
-    }
-
-    .chats-users__item__time {
-      position: absolute;
-
-      top: 0.3vh;
-      right: 0.5vw;
-
-      font: normal 400 calc(2px + 9 * (100vh / 1080)) 'Iceberg';
-      color: var(--text-color);
-    }
   }
 
   .chats-footer {

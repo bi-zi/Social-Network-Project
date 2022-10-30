@@ -120,8 +120,8 @@ export const Correspondence: React.FC = () => {
               </>
             ) : (
               <>
-                <Skeleton className="correspondence-header__full-name" width={'12vw'} />
-                <Skeleton className="correspondence-header__avatar" style={{ margin: '0 1.5vw 0 0' }} />
+                <Skeleton className="correspondence-header__skeleton-name" />
+                <Skeleton className="correspondence-header__skeleton-avatar" />
               </>
             )}
           </div>
@@ -164,10 +164,10 @@ export const Correspondence: React.FC = () => {
                         <Skeleton className="correspondence-message__avatar" />
                       )}
 
-                      <div className="correspondence-message__full-name-date">
+                      <div className="correspondence-message__info">
                         {loadStatus ? (
                           <>
-                            <div className="correspondence-message__full-name-date__full-name">
+                            <div className="correspondence-message__info-name">
                               {
                                 state.user?.chatUsers?.filter((user) =>
                                   message?.userId?.includes(user._id),
@@ -175,7 +175,7 @@ export const Correspondence: React.FC = () => {
                               }
                             </div>
 
-                            <div className="correspondence-message__full-name-date__date">{`${new Date(
+                            <div className="correspondence-message__info-date">{`${new Date(
                               message.date,
                             ).toLocaleDateString()} - ${new Date(
                               message.date,
@@ -183,14 +183,8 @@ export const Correspondence: React.FC = () => {
                           </>
                         ) : (
                           <>
-                            <Skeleton
-                              className="correspondence-message__full-name-date__full-name"
-                              width={'6vh'}
-                            />
-                            <Skeleton
-                              className="correspondence-message__full-name-date__date"
-                              width={'12vh'}
-                            />
+                            <Skeleton className="correspondence-message__info-skeleton-name" />
+                            <Skeleton className="correspondence-message__info-skeleton-date" />
                           </>
                         )}
                       </div>
@@ -201,7 +195,9 @@ export const Correspondence: React.FC = () => {
                   {loadStatus ? (
                     <div className="correspondence-message__message">{message.message}</div>
                   ) : message?.message !== undefined ? (
-                    <Skeleton className="correspondence-message__message" width={'20vw'} />
+                    <div className="correspondence-message__skeleton-message">
+                      <Skeleton  />
+                    </div>
                   ) : (
                     ''
                   )}

@@ -9,10 +9,11 @@
   .correspondence-header {
     justify-content: space-between;
 
+    .correspondence-header__skeleton-name,
     .correspondence-header__full-name {
       margin-left: 1.5vw;
 
-      font: normal 400 calc(-6px + 30 * (100vh / 1080)) 'Iceberg';
+      font: normal 400 calc(-0px + 30 * (100vh / 1080)) 'Iceberg';
       color: var(--text-color);
 
       &:hover {
@@ -20,6 +21,15 @@
       }
     }
 
+    .correspondence-header__skeleton-name {
+      position: absolute;
+
+      width: 20vw;
+      height: 50%;
+      top: 1vh;
+    }
+
+    .correspondence-header__skeleton-avatar,
     .correspondence-header__avatar {
       margin-top: calc(2px + 2 * (100vh / 1080));
       margin-right: 1.5vw;
@@ -32,6 +42,10 @@
       &:hover {
         border: var(--borderImages);
       }
+    }
+
+    .correspondence-header__skeleton-avatar {
+      margin-top: calc(3px + 1 * (100vh / 1080));
     }
   }
 
@@ -96,35 +110,47 @@
       margin-left: 1vw;
       margin-bottom: 1vh;
 
-      width: calc(16px + 45 * (100vw / 1920));
-      height: calc(16px + 45 * (100vw / 1920));
+      width: calc(12px + 50 * (100vh / 1080));
+      height: calc(12px + 50 * (100vh / 1080));
 
       border-radius: 100%;
     }
 
-    .correspondence-message__full-name-date {
+    .correspondence-message__info {
       position: absolute;
 
-      top: calc(1px + 5 * (100vh / 1080));
-      left: calc(18px + 70 * (100vw / 1920));
+      top: calc(4px + 3 * (100vh / 1080));
+      left: calc(26px + 62 * (100vw / 1920));
 
-      @media (height > 718px) and (height < 1370px) {
-        @media (width > 475px) and (width < 1300px) {
-          top: 0.3vh;
-        }
-      }
-
-      .correspondence-message__full-name-date__full-name {
-        font: normal 400 calc(4px + 22 * (100vw / 1920)) 'Iceberg';
+      .correspondence-message__info-name {
+        font: normal 400 calc(4px + 20 * (100vw / 1920)) 'Iceberg';
         color: var(--text-color);
       }
 
-      .correspondence-message__full-name-date__date {
-        font: normal 400 calc(4px + 12 * (100vw / 1920)) 'Iceberg';
+      .correspondence-message__info-skeleton-name {
+        position: absolute;
+        width: 6vw;
+        height: calc(4px + 8 * (100vh / 1080));
+
+        top: calc(-1px + 7 * (100vh / 1080));
+      }
+
+      .correspondence-message__info-date {
+        font: normal 400 calc(4px + 10 * (100vw / 1920)) 'Iceberg';
+
         color: var(--text-color);
+      }
+
+      .correspondence-message__info-skeleton-date {
+        position: absolute;
+        width: 12vw;
+        height: calc(4px + 7 * (100vh / 1080));
+
+        top: calc(4px + 22 * (100vh / 1080));
       }
     }
 
+    .correspondence-message__skeleton-message,
     .correspondence-message__message {
       margin: 0 1vw;
 
@@ -132,6 +158,10 @@
 
       font: normal 400 calc(4px + 24 * (100vw / 1920)) 'Iceberg';
       color: var(--text-color);
+    }
+
+    .correspondence-message__skeleton-message {
+      width: 80%;
     }
   }
 

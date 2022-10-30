@@ -88,7 +88,10 @@ export const Friends: React.FC = () => {
 
   const checkPagination =
     state.friendsPage.users[1] >= state.friendsPage.users[0] &&
-    state.friendsPage.categorySort === 'people';
+    state.friendsPage.categorySort === 'people' &&
+    state.friendsPage.status === 'loaded';
+
+  const skeletonLength = state.friendsPage.users[0] === 0 ? 10 : state.friendsPage.users[0];
 
   React.useEffect(() => {
     dispatch(fetchOneUser(id));
@@ -116,7 +119,7 @@ export const Friends: React.FC = () => {
             />
           ))
         ) : state.friendsPage.status === 'loading' ? (
-          <UserSkeleton users={10} />
+          <UserSkeleton users={skeletonLength} />
         ) : state.friendsPage.categorySort === 'friends' ? (
           <div className="users__left-panel__zero-friends-subs">No friends 😭</div>
         ) : (
