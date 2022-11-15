@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-// const port = 'http://localhost:4444' || 'https://backend-for-wave.onrender.com/';
 
+console.log(process.env.REACT_APP_DATA_BASE_LINK);
 const instance = axios.create({
-  baseURL: 'https://backend-for-wave.onrender.com/',
+  baseURL: process.env.REACT_APP_DATA_BASE_LINK,
 });
 
 instance.interceptors.request.use((config: any) => {

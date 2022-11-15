@@ -4,6 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    "noImplicitAny": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -16,11 +17,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/@types","src/**/*.tsx?"],
-   "exclude": [
-    "node_modules",
-    "**/__snapshots__/*",
-    "**/*.snap",
-    "**/*.test.jsx?"
-  ]
+  "include": ["src", "src/@types", "src/**/*.tsx?"],
+  "exclude": ["node_modules", "**/__snapshots__/*", "**/*.snap", "**/*.test.jsx?"]
 }

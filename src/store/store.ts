@@ -11,6 +11,8 @@ import { NoteReducer } from './notifications/slice';
 
 import { friendsPageReducer } from './friends/slice';
 
+import { apiSlice } from './apiSlice';
+
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -23,7 +25,11 @@ export const store = configureStore({
     post: postReducer,
     note: NoteReducer,
     messages: messagesReducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
+
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
+  devTools: true,
 });
 
 export type RootState = ReturnType<typeof store.getState>;

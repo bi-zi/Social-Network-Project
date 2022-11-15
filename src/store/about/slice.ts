@@ -70,5 +70,6 @@ const aboutSlice = createSlice({
     });
   },
 });
+
 export const { setCloseInfo } = aboutSlice.actions;
 export const aboutReducer = aboutSlice.reducer;
