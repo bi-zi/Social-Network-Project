@@ -1,9 +1,8 @@
 import axios from 'axios';
 
 
-console.log(process.env.REACT_APP_DATA_BASE_LINK);
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_DATA_BASE_LINK,
+  baseURL: process.env.REACT_APP_CUSTOM_ENV_VAR,
 });
 
 instance.interceptors.request.use((config: any) => {
