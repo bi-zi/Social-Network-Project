@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { useGetUsersQuery } from '../../store/friends/slice';
+import { useGetUsersQuery, useGetAllUsersQuery, selectAllUsers } from '../../store/friends/friendsApi';
 import { fetchOneUser, fetchUserFriends, fetchUserSubscribers } from '../../store/user/slice';
 import { fetchNotifications } from '../../store/notifications/slice';
 
@@ -22,11 +22,14 @@ export const Friends: React.FC = () => {
 
   const [pagination, setPagination] = React.useState(10);
 
-  const { data, isLoading, isSuccess, isError, error, isFetching } = useGetUsersQuery(pagination);
+  const { data, isSuccess, isError, error, isFetching } = useGetUsersQuery(pagination);
 
-  const users = data !== undefined ? data : [];
 
-  // console.log(data, isLoading, isSuccess, isError, error);
+  const allUsers = useAppSelector(selectAllUsers);
+  console.log(allUsers);
+  
+
+  const users: any = data !== undefined && data !== null ? data : [];
 
   let sortedFriends = users[2];
 
@@ -41,7 +44,6 @@ export const Friends: React.FC = () => {
   if (state.friendsPage.categorySort === 'subscribers') {
     sortedFriends = state.user.findUserSubscribers;
   }
-
 
   // все эти if else я пытался выносить в функции но у меня не получалось достичь нужного результата поэтому
   // я решил оставть так тут нет ничего сложного просто сортировки
@@ -100,7 +102,6 @@ export const Friends: React.FC = () => {
 
   const skeletonLength = users?.[0] === undefined || users?.[0] === 0 ? 10 : users?.[0];
 
-
   React.useEffect(() => {
     dispatch(fetchOneUser(id));
 
@@ -118,7 +119,7 @@ export const Friends: React.FC = () => {
     <div className="users">
       <div className="users__left-panel">
         {sortedFriends!?.length > 0 && !isFetching ? (
-          sortedFriends!?.map((friend) => (
+          sortedFriends!?.map((friend: any) => (
             <FriendsLeftPanel
               data={friend}
               lastFriend={sortedFriends?.[sortedFriends!.length - 1]}
