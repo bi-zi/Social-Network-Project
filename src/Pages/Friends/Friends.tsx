@@ -24,10 +24,7 @@ export const Friends: React.FC = () => {
 
   const { data, isSuccess, isError, error, isFetching } = useGetUsersQuery(pagination);
 
-
   const allUsers = useAppSelector(selectAllUsers);
-  console.log(allUsers);
-  
 
   const users: any = data !== undefined && data !== null ? data : [];
 

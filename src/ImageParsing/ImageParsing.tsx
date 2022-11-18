@@ -5,6 +5,7 @@ import { fetchUserUpdate, fetchOneUser } from '../store/user/slice';
 import { fetchSlider, fetchSliderPost, fetchSliderPush } from '../store/slider/slice';
 import { useParams } from 'react-router-dom';
 import imageCompression from 'browser-image-compression';
+import { Line } from 'rc-progress';
 import './style.scss';
 
 export type MyParams = {
@@ -19,6 +20,72 @@ export const ImageParsing: React.FC = () => {
 
   const { id } = useParams<keyof MyParams>() as MyParams;
   const [images, setImages] = React.useState<any>([]);
+
+  const [web, setWeb] = React.useState({
+    webWorker: {
+      progress: undefined,
+    },
+    mainThread: {
+      progress: undefined,
+    },
+  });
+
+  function onProgress(p: any, useWebWorker: any) {
+    const targetName = useWebWorker ? 'webWorker' : 'mainThread';
+    setWeb((prevState) => ({
+      ...prevState,
+      [targetName]: {
+        ...prevState[targetName],
+        progress: p,
+      },
+    }));
+  }
+
+  async function compressImage(event: any, useWebWorker: any) {
+    const file = event.target.files[0];
+
+    let size = (
+      +(file.size / 1024 / 1024).toFixed(2) -
+      (+(file.size / 1024 / 1024).toFixed(2) * 90) / 100
+    ).toFixed(2);
+
+    const options = {
+      maxSizeMB: +size,
+      useWebWorker: true,
+      onProgress: (p: any) => onProgress(p, useWebWorker),
+    };
+
+    const output = await imageCompression(file, options);
+    if (+(output.size / 1024 / 1024).toFixed(2) > 0.1) {
+      let file = new File([output], 'name', {
+        type: output.type,
+      });
+
+      compressImage2(file, true);
+    } else {
+      setImages(output);
+    }
+
+    // console.log(1, size, +(file.size / 1024 / 1024).toFixed(2), +(output.size / 1024 / 1024).toFixed(2));
+  }
+
+  async function compressImage2(file: any, useWebWorker: any) {
+    let size = (
+      +(file.size / 1024 / 1024).toFixed(2) -
+      (+(file.size / 1024 / 1024).toFixed(2) * 60) / 100
+    ).toFixed(2);
+
+    const options = {
+      maxSizeMB: +size,
+      useWebWorker: true,
+      onProgress: (p: any) => onProgress(p, useWebWorker),
+    };
+
+    const output = await imageCompression(file, options);
+
+    // console.log(2, size, +(file.size / 1024 / 1024).toFixed(2), +(output.size / 1024 / 1024).toFixed(2));
+    setImages(output);
+  }
 
   const slider = state.slider?.slider?.find((x) => x?.user === id);
   const sliderImgLength = slider?.sliderImg.length;
@@ -55,45 +122,14 @@ export const ImageParsing: React.FC = () => {
       }
 
       if (parsing.inputNumber === '2') {
-        dispatch(setCreateImg(value));
+        dispatch(setCreateImg([value]));
       }
     },
     [dispatch, id, parsing.inputNumber, slider, sliderImgLength],
   );
-
-  // Сюда картинка попадает после загрукзки и сжимается на 90% от изначального размера
-  // После сжатия она уходит в useState на 85строке на это реагирует useEffect
-  async function handleImageUpload(e: any) {
-    const imageFile = e.target.files[0];
-
-    let size = (
-      +(imageFile['size'] / (1024 * 1024)).toFixed(2) -
-      (+(imageFile['size'] / (1024 * 1024)).toFixed(2) * 90) / 100
-    ).toFixed(2);
-
-    // console.log('до', +(imageFile['size'] / (1024 * 1024)).toFixed(2));
-
-    const options = {
-      maxSizeMB: +size,
-      useWebWorker: true,
-    };
-
-    try {
-      const compressedFile = await imageCompression(imageFile, options);
-
-      // console.log(+(compressedFile['size'] / (1024 * 1024)).toFixed(2));
-
-      setImages(compressedFile);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   // useEffect просто превращет картинку в нужный формат и вызывает функции отправки на бэк
   useEffect(() => {
     if (images.length < 1) return;
-
-    let file = images;
 
     let fileReader: FileReader = new FileReader();
 
@@ -102,20 +138,33 @@ export const ImageParsing: React.FC = () => {
         onSendingPicture([fileReader.result]);
       }
     };
-    fileReader.readAsDataURL(file);
+    fileReader.readAsDataURL(images);
 
     setImages([]);
   }, [images, onSendingPicture]);
 
+  console.log(web.webWorker.progress);
   return (
     <>
-      <input
-        type="file"
-        name="file"
-        accept="image/*"
-        onChange={(e) => handleImageUpload(e)}
-        className="image_input_parser"
-      />
+      {web.webWorker.progress !== undefined && web.webWorker.progress !== 100 ? (
+        <Line
+          percent={web.webWorker.progress}
+          strokeWidth={4}
+          strokeColor="#ffffff"
+          trailColor="#ffffff"
+          className="image_input_load"
+        />
+      ) : (
+        <input
+          type="file"
+          name="file"
+          accept="image/*"
+          onChange={(e) => {
+            compressImage(e, true);
+          }}
+          className="image_input_parser"
+        />
+      )}
     </>
   );
 };

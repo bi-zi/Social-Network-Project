@@ -43,7 +43,7 @@ export const PhotoSlider: React.FC = () => {
   }
 
   const loadStatus = state.slider.status === 'loaded' && state.user.status === 'loaded';
-  const buttonStatus = loadStatus && state.auth.data?._id === id
+  const buttonStatus = loadStatus && state.auth.data?._id === id;
 
   React.useEffect(() => {
     dispatch(fetchSlider(id));
@@ -90,10 +90,16 @@ export const PhotoSlider: React.FC = () => {
       </Slider>
 
       {buttonStatus ? (
-        <button className="profile__slider__button" onChange={() => dispatch(setInputNumber('1'))}>
-          <ImageParsing />
-          Add photos
-        </button>
+        readyPhotos === undefined || readyPhotos?.length < 8 ? (
+          <button className="profile__slider__button" onChange={() => dispatch(setInputNumber('1'))}>
+            <ImageParsing />
+            Add photos
+          </button>
+        ) : (
+          <button className="profile__slider__button" onChange={() => dispatch(setInputNumber('1'))}>
+            Max 8 images
+          </button>
+        )
       ) : state.auth.data?._id === id ? (
         <div className="profile__slider__skeleton">
           <Skeleton height={'100%'} style={{ borderRadius: '1.5vh' }} />

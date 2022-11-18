@@ -30,6 +30,7 @@
   .profile__slider__image-img {
     width: 98%;
     height: calc(48px + 225 * (100vw / 1920));
+    object-fit: cover;
 
     margin-bottom: 4vh;
 

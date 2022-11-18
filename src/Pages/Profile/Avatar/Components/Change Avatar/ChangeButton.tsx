@@ -18,6 +18,8 @@ export const ChangeButton: React.FC = () => {
 
   const { id } = useParams<keyof MyParams>() as MyParams;
 
+  const readyPhotos = state.slider?.slider?.[0]?.sliderImg;
+
   const loadStatus =
     state.user.status === 'loaded' && state.auth.status === 'loaded' && state.slider.status === 'loaded';
 
@@ -26,15 +28,19 @@ export const ChangeButton: React.FC = () => {
       {auth?._id === id ? (
         <>
           {loadStatus ? (
-            <button
-              className="change__avatar-button"
-              onChange={() => {
-                dispatch(setInputNumber('0'));
-              }}>
-              {auth === null ? '' : 'Change photo'}
+            readyPhotos === undefined || readyPhotos?.length < 8 ? (
+              <button
+                className="change__avatar-button"
+                onChange={() => {
+                  dispatch(setInputNumber('0'));
+                }}>
+                {auth === null ? '' : 'Change photo'}
 
-              <ImageParsing />
-            </button>
+                <ImageParsing />
+              </button>
+            ) : (
+              <button className="change__avatar-button">Delete images in slider</button>
+            )
           ) : (
             <div className="change_avatar-button-skeleton ">
               <Skeleton height={'100%'} style={{ borderRadius: '1.5vh' }} />
