@@ -9,7 +9,7 @@
   padding-left: 2vw;
   padding-right: 2vw;
 
-  max-width: 75vw;
+  max-width: var(--max-width-wave);
 
   @media (width < 1320px) {
     max-width: 100%;

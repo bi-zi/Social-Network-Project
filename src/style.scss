@@ -11,6 +11,8 @@ body {
 
 :root {
 
+  --max-width-wave: 66vw;
+
   --background-color-darkTheme: #141414;
 
   --interface-color-darkTheme: #222222;
@@ -45,6 +47,7 @@ body {
   --box-shadow: var(--box-shadow-darkTheme);
   --borderImages: var(--borderImages-darkTheme);
   --borderRadius-interface: 1vh;
+  --max-width: var(--max-width-wave)
 }
 
 *,

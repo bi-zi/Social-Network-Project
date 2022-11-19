@@ -41,35 +41,50 @@ export const ImageParsing: React.FC = () => {
     }));
   }
 
-  async function compressImage(event: any, useWebWorker: any) {
-    const file = event.target.files[0];
+  const compressImage = async (event: any, useWebWorker: any) => {
+    const file = event.target.files;
 
-    let size = (
-      +(file.size / 1024 / 1024).toFixed(2) -
-      (+(file.size / 1024 / 1024).toFixed(2) * 90) / 100
-    ).toFixed(2);
+    const readyBlob = [];
 
-    const options = {
-      maxSizeMB: +size,
-      useWebWorker: true,
-      onProgress: (p: any) => onProgress(p, useWebWorker),
-    };
+    for (let i = 0; i < file.length; ) {
+      let size = (
+        +(file[i].size / 1024 / 1024).toFixed(2) -
+        (+(file[i].size / 1024 / 1024).toFixed(2) * 90) / 100
+      ).toFixed(2);
 
-    const output = await imageCompression(file, options);
-    if (+(output.size / 1024 / 1024).toFixed(2) > 0.1) {
-      let file = new File([output], 'name', {
-        type: output.type,
-      });
+      const options = {
+        maxSizeMB: +size,
+        useWebWorker: true,
+        onProgress: (p: any) => onProgress(p, useWebWorker),
+      };
 
-      compressImage2(file, true);
-    } else {
-      setImages(output);
+      const output = await imageCompression(file[i], options);
+
+      const ouputSize = +(output.size / 1024 / 1024).toFixed(2);
+
+      console.log(
+        1,
+        size,
+        +(file[i].size / 1024 / 1024).toFixed(2),
+        +(output.size / 1024 / 1024).toFixed(2),
+      );
+
+      if (ouputSize > 0.1) {
+        let file = new File([output], 'name', {
+          type: output.type,
+        });
+
+        compressImage2(file, true);
+        i++
+      } else {
+        readyBlob.push(output);
+        i++;
+      }
     }
+    setImages(readyBlob);
+  };
 
-    // console.log(1, size, +(file.size / 1024 / 1024).toFixed(2), +(output.size / 1024 / 1024).toFixed(2));
-  }
-
-  async function compressImage2(file: any, useWebWorker: any) {
+  const compressImage2 = async (file: any, useWebWorker: any) => {
     let size = (
       +(file.size / 1024 / 1024).toFixed(2) -
       (+(file.size / 1024 / 1024).toFixed(2) * 60) / 100
@@ -83,9 +98,10 @@ export const ImageParsing: React.FC = () => {
 
     const output = await imageCompression(file, options);
 
-    // console.log(2, size, +(file.size / 1024 / 1024).toFixed(2), +(output.size / 1024 / 1024).toFixed(2));
-    setImages(output);
-  }
+    console.log(2, size, +(file.size / 1024 / 1024).toFixed(2), +(output.size / 1024 / 1024).toFixed(2));
+
+    setImages(images.concat(output));
+  };
 
   const slider = state.slider?.slider?.find((x) => x?.user === id);
   const sliderImgLength = slider?.sliderImg.length;
@@ -127,23 +143,26 @@ export const ImageParsing: React.FC = () => {
     },
     [dispatch, id, parsing.inputNumber, slider, sliderImgLength],
   );
+
+  console.log(images);
+
   // useEffect просто превращет картинку в нужный формат и вызывает функции отправки на бэк
   useEffect(() => {
     if (images.length < 1) return;
 
-    let fileReader: FileReader = new FileReader();
+    for (let i = 0; i < images.length; i++) {
+      let fileReader: FileReader = new FileReader();
 
-    fileReader.onload = () => {
-      if (typeof fileReader.result === 'string') {
-        onSendingPicture([fileReader.result]);
-      }
-    };
-    fileReader.readAsDataURL(images);
-
+      fileReader.onload = () => {
+        if (typeof fileReader.result === 'string') {
+          onSendingPicture([fileReader.result]);
+        }
+      };
+      fileReader.readAsDataURL(images[i]);
+    }
     setImages([]);
   }, [images, onSendingPicture]);
 
-  console.log(web.webWorker.progress);
   return (
     <>
       {web.webWorker.progress !== undefined && web.webWorker.progress !== 100 ? (
@@ -159,6 +178,7 @@ export const ImageParsing: React.FC = () => {
           type="file"
           name="file"
           accept="image/*"
+          multiple={state.slider?.slider?.[0]?.sliderImg?.length < 10 ? true : false}
           onChange={(e) => {
             compressImage(e, true);
           }}

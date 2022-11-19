@@ -7,7 +7,7 @@
 
   min-height: calc(100vh - calc(10px + 30 * (100vh / 1080)));
 
-  max-width: 75vw;
+  max-width: var(--max-width-wave);
   height: 100%;
 
   flex-wrap: wrap;
