@@ -13,6 +13,7 @@ export const Avatar: React.FC = () => {
   const state = useAppSelector((state) => state);
   const { id } = useParams<keyof MyParams>() as MyParams;
 
+
   React.useEffect(() => {
     if (state.auth.data?._id !== undefined) dispatch(fetchMainUserMessages(state.auth.data?._id));
 

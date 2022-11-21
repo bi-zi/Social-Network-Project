@@ -91,12 +91,12 @@ export const PhotoSlider: React.FC = () => {
 
       {buttonStatus ? (
         readyPhotos === undefined || readyPhotos?.length < 8 ? (
-          <button className="profile__slider__button" onChange={() => dispatch(setInputNumber('1'))}>
+          <button className="profile__slider__button" onClick={() => dispatch(setInputNumber('1'))}>
             <ImageParsing />
             Add photos
           </button>
         ) : (
-          <button className="profile__slider__button" onChange={() => dispatch(setInputNumber('1'))}>
+          <button className="profile__slider__button" >
             Max 8 images
           </button>
         )

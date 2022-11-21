@@ -113,7 +113,7 @@ export const ControlPanel: React.FC = () => {
               style={{ marginLeft: 0 }}
             />
             <button
-              onChange={() => dispatch(setInputNumber('2'))}
+              onClick={() => dispatch(setInputNumber('2'))}
               className="post__control-panel__image-icon-input">
               <ImageParsing />
             </button>

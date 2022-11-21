@@ -31,7 +31,7 @@ export const ChangeButton: React.FC = () => {
             readyPhotos === undefined || readyPhotos?.length < 8 ? (
               <button
                 className="change__avatar-button"
-                onChange={() => {
+                onClick={() => {
                   dispatch(setInputNumber('0'));
                 }}>
                 {auth === null ? '' : 'Change photo'}
@@ -39,7 +39,7 @@ export const ChangeButton: React.FC = () => {
                 <ImageParsing />
               </button>
             ) : (
-              <button className="change__avatar-button">Delete images in slider</button>
+              <button className="change__avatar-button-delete">Delete images in slider</button>
             )
           ) : (
             <div className="change_avatar-button-skeleton ">

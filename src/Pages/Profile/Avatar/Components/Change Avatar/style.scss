@@ -4,7 +4,7 @@
   height: calc(10px + 30 * (100vw / 1920));
 }
 
-.change__avatar-button {
+.change__avatar-button,.change__avatar-button-delete {
   position: relative;
   width: 100%;
 
@@ -28,4 +28,8 @@
     font-size: calc(4px + 8 * (100vw / 1920));
     letter-spacing: calc(1px + 1 * (100vw / 1920));
   }
+}
+
+.change__avatar-button-delete {
+  font: normal 400 calc(2px + 14 * (100vw / 1920)) 'Iceberg';
 }

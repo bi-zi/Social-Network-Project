@@ -2,10 +2,9 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { setClearFindUserFriends, setClearFindUserSubscribers } from '../store/user/slice';
 import { setClearUsers } from '../store/friends/slice';
-import { Outlet } from 'react-router-dom';
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import './style.scss';
 
 export const Layout: React.FC = () => {
