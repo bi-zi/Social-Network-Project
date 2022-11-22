@@ -4,7 +4,7 @@
   width: 100%;
 
   .wall__comments__input {
-    margin: 1vh 0;
+    margin: 1vh 0 2vh 0;
     padding: 1vh 1vw;
 
     width: 84%;
@@ -52,7 +52,7 @@
     position: absolute;
 
     width: 14%;
-    height: calc(16px + 60 * (100vw / 1920));
+    height: calc(9px + 68 * (100vw / 1920));
 
     top: 1vh;
     right: 0px;
@@ -60,16 +60,14 @@
     border: 0;
     border-radius: var(--borderRadius-interface);
 
-    background-image: linear-gradient(to right, #000000 0%, #0164f8 51%, #000000 100%);
-    background-size: 200% auto;
+    background-color: black;
+    box-shadow: 0 0 0.2vw rgb(255, 254, 254);
 
-    transition: 0.5s;
+    letter-spacing: calc(2px + 2 * (100vw / 1920));
+
+    color: var(--text-color);
 
     cursor: pointer;
-
-    @media (width < 460px) {
-      height: calc(20px + 60 * (100vw / 1920));
-    }
 
     &:hover {
       background-position: right center;
@@ -84,7 +82,7 @@
   .wall__comments__submit-button-icon {
     position: relative;
 
-    font-size: calc(10px + 20 * (100vw / 1920));
+    font-size: calc(8px + 20 * (100vw / 1920));
     color: var(--text-color);
   }
 
@@ -115,11 +113,6 @@
 
           border-radius: 100%;
 
-          @media (width < 460px) {
-            width: calc(4px + 30 * (100vh / 1080));
-            height: calc(4px + 30 * (100vh / 1080));
-          }
-
           &:hover {
             border: var(--borderImages);
             cursor: pointer;
@@ -127,7 +120,7 @@
         }
 
         .wall__comments__comment-full-name-time {
-          margin-top: 0.5vh;
+          margin-top: 0.4vh;
           margin-left: 0.5vw;
 
           .wall__comments__comment-full-name-time__full-name,
@@ -146,9 +139,11 @@
       }
 
       .wall__comments__comment__right-block {
+        height: 0;
         .wall__comments__comment-delete {
-          margin-right: 0.5vw;
-          font-size: calc(10px + 22 * (100vw / 1920));
+          margin-top: calc(0px + 4 * (100vh / 1080));
+          margin-right: calc(4px + 4 * (100vw / 1920));
+          font-size: calc(8px + 22 * (100vw / 1920));
 
           color: var(--text-color);
 
@@ -164,10 +159,10 @@
       }
     }
     .wall__comments__comment-text {
-      padding: 0.5vh 0.5vw;
+      padding: 0.5vh 0;
 
       overflow-wrap: break-word;
-      font: normal 400 calc(4px + 14 * (100vw / 1920)) 'Iceberg';
+      font: normal 400 calc(6px + 14 * (100vw / 1920)) 'Iceberg';
 
       color: var(--text-color);
     }

@@ -89,7 +89,7 @@ export const ControlPanel: React.FC = () => {
             </div>
           </div>
 
-          <FontAwesomeIcon className="header__control-panel__icons header-closed-icon" icon={faPager} />
+
 
           <NavLink to="/Messages" style={path !== 'Messages' ? { color: 'white' } : { color: 'black' }}>
             <FontAwesomeIcon className="header__control-panel__icons" icon={faComment} />
@@ -109,10 +109,7 @@ export const ControlPanel: React.FC = () => {
             <FontAwesomeIcon className="header__control-panel__icons" icon={faUserGroup} />
           </NavLink>
 
-          <FontAwesomeIcon className="header__control-panel__icons header-closed-icon" icon={faUsers} />
-          <FontAwesomeIcon className="header__control-panel__icons header-closed-icon" icon={faImage} />
-          <FontAwesomeIcon className="header__control-panel__icons header-closed-icon" icon={faFilm} />
-          <FontAwesomeIcon className="header__control-panel__icons header-closed-icon" icon={faMusic} />
+   
         </div>
       ) : error ? (
         <div className="header__error" style={{ color: 'green' }}>

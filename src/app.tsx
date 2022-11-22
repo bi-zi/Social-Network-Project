@@ -26,7 +26,7 @@ export const App: React.FC = () => {
   }, [dispatch, auth?._id]);
 
   return (
-    <SkeletonTheme baseColor='#313131' highlightColor='#525252'>
+    <SkeletonTheme baseColor="#313131" highlightColor="#525252">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="Profile/:id" element={<Profile />} />,

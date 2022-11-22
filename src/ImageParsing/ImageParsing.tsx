@@ -30,8 +30,7 @@ export const ImageParsing: React.FC = () => {
     (sliderImgLength! < 8 || sliderImgLength === undefined) &&
     (parsing.inputNumber === '0' || parsing.inputNumber === '1');
 
-  const postImagesBool = parsing.inputNumber === '2' && postImgLength < 3;
-
+  const postImagesBool = parsing.inputNumber === '2' && postImgLength < 6;
 
   const [web, setWeb] = React.useState({
     webWorker: {
@@ -62,7 +61,7 @@ export const ImageParsing: React.FC = () => {
     }
 
     if (parsing.inputNumber === '2') {
-      file = [...file].splice(0, postImgLength === 0 ? 3 : 3 - postImgLength);
+      file = [...file].splice(0, postImgLength === 0 ? 6 : 6 - postImgLength);
     }
 
     const readyBlob = [];
@@ -96,8 +95,9 @@ export const ImageParsing: React.FC = () => {
       }
     }
 
-    setImages(images.concat(readyBlob));
+    if (readyBlob.length > 0) setImages(images.concat(readyBlob));
   };
+
 
   const compressImage2 = async (file: any, useWebWorker: any) => {
     let size = (
@@ -111,12 +111,15 @@ export const ImageParsing: React.FC = () => {
       onProgress: (p: any) => onProgress(p, useWebWorker),
     };
 
+
     const output = await imageCompression(file, options);
 
     // console.log(2, size, +(file.size / 1024 / 1024).toFixed(2), +(output.size / 1024 / 1024).toFixed(2));
 
-    setImages(images.push(output));
+    if (images.length === 0) setImages([output]);
+    if (images.length > 0) setImages(images.push(output));
   };
+
 
   // Эта функция отправляет картинку на бэк в 3 направлениях все зависит от места загрузки их 3(аватар,слайдер и пост)
   // Если аватар тогда картинка отправится еще и в слайдер в остальных случаях обычное поведение
@@ -163,21 +166,18 @@ export const ImageParsing: React.FC = () => {
         for (let i = 0; i < value.length; i++) {
           dispatch(setCreateImg(value[i]));
         }
-
-
       }
     },
 
     [dispatch, id, parsing.inputNumber, slider, sliderImgLength],
   );
 
-
-
   // useEffect просто превращет картинку в нужный формат и вызывает функции отправки на бэк
   useEffect(() => {
     if (images.length < 1) return;
 
     const arr: any = [];
+
 
     for (let i = 0; i < images.length; i++) {
       let fileReader: FileReader = new FileReader();

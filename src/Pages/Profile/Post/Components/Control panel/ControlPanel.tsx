@@ -94,9 +94,7 @@ export const ControlPanel: React.FC = () => {
     state.auth.status === 'loaded';
 
   const imageLoadStatus =
-    numImg < 3 && state.user.status === 'loaded' && state.slider.status === 'loaded';
-
-
+    numImg < 6 && state.user.status === 'loaded' && state.slider.status === 'loaded';
 
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));
@@ -153,10 +151,6 @@ export const ControlPanel: React.FC = () => {
         ) : (
           ''
         )}
-
-        <FontAwesomeIcon className="post__control-panel__icons post__grey-icons" icon={faMusic} />
-        <FontAwesomeIcon className="post__control-panel__icons post__grey-icons" icon={faLocationPin} />
-        <FontAwesomeIcon className="post__control-panel__icons post__grey-icons" icon={faFileLines} />
       </div>
 
       {postStatus ? (

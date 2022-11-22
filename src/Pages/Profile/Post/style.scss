@@ -13,6 +13,39 @@
   color: var(--text-color);
 
   @media (width < 460px) {
-     margin: 1vh 0;
+    margin: 1vh 0;
+  }
+}
+
+.post_img-container {
+  position: relative;
+  border: 0 !important;
+
+  &:hover {
+    border: rgba(0, 0, 0, 0) !important;
+  }
+}
+
+.post-images-delete {
+  position: absolute;
+
+  top: calc(0px + 8 * (100vh / 1080));
+  right: calc(2px + 26 * (100vw / 1920));
+
+  font: normal 400 calc(12px + 28 * (100vw / 1920)) 'Iceberg';
+
+  filter: drop-shadow(0px 0px 0.2vh rgb(0, 0, 0));
+
+  color: var(--text-color);
+
+  cursor: pointer;
+  z-index: 999;
+
+  @media (width < 460px) {
+    top: 0.2vh;
+  }
+
+  &:hover {
+    color: var(--text-color-hover);
   }
 }

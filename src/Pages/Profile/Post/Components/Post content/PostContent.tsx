@@ -1,14 +1,19 @@
 import React from 'react';
-import { useAppSelector } from '../../../../../store/store';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../../../../store/store';
+import { setCreateImgDelete } from '../../../../../store/post/slice';
+import { useParams, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface MyParams {
   id: string;
 }
 
 export const PostContent: React.FC = () => {
+  const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
+
+  let navigate = useNavigate();
   const { id } = useParams<keyof MyParams>() as MyParams;
 
   localStorage.setItem('postImages', JSON.stringify(state.post.createImg));
@@ -33,36 +38,88 @@ export const PostContent: React.FC = () => {
   if (splitVideoLink?.[0] === 'https:') localStorage.setItem('postVideo', readyVideoLink);
   if (state.post.createVid?.length === 0) localStorage.setItem('postVideo', videoLink);
 
+  const imagesLength = readyImages?.length;
+  const picturesClassName =
+    imagesLength === 1
+      ? 'wall__content-container__images-1'
+      : imagesLength === 2
+      ? 'wall__content-container__images-2'
+      : imagesLength === 3
+      ? 'wall__content-container__images-3'
+      : imagesLength === 4
+      ? 'wall__content-container__images-4'
+      : imagesLength === 5
+      ? 'wall__content-container__images-5'
+      : imagesLength === 6
+      ? 'wall__content-container__images-6'
+      : '';
+
+  const onImageClick = (imgIndex: number) => {
+    navigate(`/${id}/CreatePost/${imgIndex}`);
+  };
+
   return (
     <>
       <div className="wall__content-container">
         {textLength > 0 ? <div className="wall_content-container__text">{postText}</div> : ''}
 
         {numberOfImages > 0 ? (
-          <div className="wall__content-container__images">
-            {readyImages?.map((image, index) => {
-              return (
-                <span key={index}>
-                  <Link to={`/${id}/CreatePost/${index}`}>
-                    <img
-                      src={image}
-                      width={10}
-                      alt=""
-                      className={`
+          <div className={picturesClassName}>
+            {readyImages?.map((image, index) => (
+              <span
+                className={`post_img-container
                     ${
-                      index === 0
-                        ? 'wall__content-container__images-first'
-                        : index === 1
-                        ? 'wall__content-container__images-second'
+                      index === 1
+                        ? 'wall-image-second'
                         : index === 2
-                        ? 'wall__content-container__images-third'
+                        ? 'wall-image-third'
+                        : index === 3
+                        ? 'wall-image-fourth'
+                        : index === 4
+                        ? 'wall-image-fifth'
+                        : index === 5
+                        ? 'wall-image-sixth'
                         : ''
                     }`}
-                    />
-                  </Link>
-                </span>
-              );
-            })}
+                key={index}>
+                <img
+                  src={image}
+                  alt=""
+                  className={`
+                    ${
+                      index === 0
+                        ? 'wall-image-first'
+                        : index === 1
+                        ? 'wall-image-second'
+                        : index === 2
+                        ? 'wall-image-third'
+                        : index === 3
+                        ? 'wall-image-fourth'
+                        : index === 4
+                        ? 'wall-image-fifth'
+                        : index === 5
+                        ? 'wall-image-sixth'
+                        : ''
+                    }`}
+                  onClick={() => onImageClick(index)}
+                />
+                {state.auth.data?._id === id ? (
+                  <FontAwesomeIcon
+                    className="post-images-delete"
+                    icon={faXmark}
+                    onClick={() =>
+                      dispatch(
+                        setCreateImgDelete(
+                          readyImages!.filter((image, thisIndex) => thisIndex !== index),
+                        ),
+                      )
+                    }
+                  />
+                ) : (
+                  ''
+                )}
+              </span>
+            ))}
           </div>
         ) : (
           ''

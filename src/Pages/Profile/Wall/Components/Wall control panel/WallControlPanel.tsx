@@ -149,7 +149,6 @@ export const WallControlPanel: React.FC<MyProps> = ({ data, index }: MyProps) =>
             }}
           />
           <span className="wall__control-panel__dislike-number">{data.commentPost.length}</span>
-          <FontAwesomeIcon className="wall__control-panel__share-icon" icon={faShareNodes} />{' '}
         </>
       ) : (
         <Skeleton height={'3vh'} width={'40%'} style={{ margin: '1vh 0' }} />
