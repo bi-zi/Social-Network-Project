@@ -2,8 +2,7 @@ import React from 'react';
 import { useAppSelector, useAppDispatch } from '../../../../../store/store';
 import { setCreateImgDelete } from '../../../../../store/post/slice';
 import { useParams, useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { Garbage } from '../../../../../Svg';
 
 interface MyParams {
   id: string;
@@ -104,17 +103,17 @@ export const PostContent: React.FC = () => {
                   onClick={() => onImageClick(index)}
                 />
                 {state.auth.data?._id === id ? (
-                  <FontAwesomeIcon
+                  <div
                     className="post-images-delete"
-                    icon={faXmark}
                     onClick={() =>
                       dispatch(
                         setCreateImgDelete(
                           readyImages!.filter((image, thisIndex) => thisIndex !== index),
                         ),
                       )
-                    }
-                  />
+                    }>
+                    <Garbage />
+                  </div>
                 ) : (
                   ''
                 )}

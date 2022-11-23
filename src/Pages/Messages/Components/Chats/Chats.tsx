@@ -4,8 +4,8 @@ import { setFindChat } from '../../../../store/messages/slice';
 import { useSort } from '../useSort';
 import { NavLink } from 'react-router-dom';
 import { ChatComponent } from '../Chat/ChatComponent';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+
+import { Search } from '../../../../Svg';
 import { ChatsSkeleton } from '../Chat/ChatsSkeleton';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -35,7 +35,9 @@ export const Chats: React.FC = () => {
       <form className="chats-form__find-chat">
         {loadStatus ? (
           <>
-            <FontAwesomeIcon className="chats-form__search-icon" icon={faMagnifyingGlass} />
+            <div className="chats-form__search-icon">
+              <Search />
+            </div>
             <input
               ref={inputRef}
               type="text"

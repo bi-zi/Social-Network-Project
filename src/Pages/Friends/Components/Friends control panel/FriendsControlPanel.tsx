@@ -32,13 +32,13 @@ export const FriendsControlPanel: React.FC<MyProps> = ({ data }: MyProps) => {
       <div
         className="users__right-panel__friends"
         style={category === 'friends' ? { color: 'black' } : {}}
-        onClick={() => (loadStatus ? dispatch(setCatergorySort('friends')) : '')}>
+        onClick={() => (!loadStatus ? dispatch(setCatergorySort('friends')) : '')}>
         Friends
       </div>
       <div
         className="users__right-panel__subscribers"
         style={category === 'subscribers' ? { color: 'black' } : {}}
-        onClick={() => (loadStatus ? dispatch(setCatergorySort('subscribers')) : '')}>
+        onClick={() => (!loadStatus ? dispatch(setCatergorySort('subscribers')) : '')}>
         Subscribers
       </div>
 

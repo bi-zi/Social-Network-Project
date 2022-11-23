@@ -3,8 +3,8 @@ import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchAuth, selectIsAuth } from '../../store/auth/slice';
 import { useForm } from 'react-hook-form';
 import { NavLink, Navigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
+
+import { Lock, Unlock } from '../../Svg';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
@@ -93,17 +93,17 @@ export const Login = () => {
                     {...register('password', { required: 'Укажите пароль' })}
                   />
                   {passwordShown ? (
-                    <FontAwesomeIcon
-                      icon={faLockOpen}
+                    <div
                       className="registration__block__form-pass-block__password-icon-lock"
-                      onClick={togglePassword}
-                    />
+                      onClick={togglePassword}>
+                      <Unlock />
+                    </div>
                   ) : (
-                    <FontAwesomeIcon
-                      icon={faLock}
-                      className="registration__block__form-pass-block__password-icon-unlock"
-                      onClick={togglePassword}
-                    />
+                    <div
+                      className="registration__block__form-pass-block__password-icon-lock"
+                      onClick={togglePassword}>
+                      <Lock />
+                    </div>
                   )}
                 </>
               ) : (

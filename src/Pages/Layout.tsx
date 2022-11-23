@@ -106,10 +106,16 @@ export const Layout: React.FC = () => {
   }, [navigate, state.auth.data._id]);
 
   return (
-    <div className="wrapper" ref={secondRef}>
-      <Header />
-      <Outlet></Outlet>
-      <Footer />
-    </div>
+    <>
+      {1 > 1 ? (
+        <div className="wrapper" ref={secondRef}>
+          <Header />
+          <Outlet></Outlet>
+          <Footer />
+        </div>
+      ) : (
+        <div className="tex_works">До 26.11.2022 ведутся технические работы</div>
+      )}
+    </>
   );
 };

@@ -4,8 +4,7 @@ import { fetchUserUpdate, fetchOneUser } from '../../store/user/slice';
 import { fetchSlider, fetchSliderDelete } from '../../store/slider/slice';
 import { setCreateImgDelete } from '../../store/post/slice';
 import { Link, useParams, Navigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faCircleChevronRight, faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { Left, Right, Cross } from '../../Svg';
 import './style.scss';
 
 export type MyParams = {
@@ -70,8 +69,9 @@ export const Photo: React.FC = () => {
         <Link
           to={`/Profile/${user}`}
           style={{ color: '#000000' }}
+
           className="selected-image__container-close">
-          <FontAwesomeIcon icon={faXmark} />
+            <Cross/>
         </Link>
 
         <img src={readyPhotos?.[+id]} width={10} alt="" className="selected-image__container-img" />
@@ -79,17 +79,15 @@ export const Photo: React.FC = () => {
         {readyPhotos?.length !== 1 ? (
           <>
             <Link to={`/${user}/${category}/${+id === 0 ? readyPhotos!?.length - 1 : +id - 1}`}>
-              <FontAwesomeIcon
-                className="selected-image__container__swap-left"
-                icon={faCircleChevronLeft}
-              />
+              <div className="selected-image__container__swap-left">
+                <Left />
+              </div>
             </Link>
 
             <Link to={`/${user}/${category}/${readyPhotos!?.length - 1 === +id ? 0 : +id + 1}`}>
-              <FontAwesomeIcon
-                className="selected-image__container__swap-right"
-                icon={faCircleChevronRight}
-              />
+              <div className="selected-image__container__swap-right">
+                <Right />
+              </div>
             </Link>
           </>
         ) : (

@@ -3,8 +3,7 @@ import { useAppSelector } from '../../../../../store/store';
 import { useWall } from '../useWall';
 import { Post } from '../../../../../store/post/types';
 import { useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import { Settings } from '../../../../../Svg';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
@@ -30,7 +29,6 @@ export const WallHeader: React.FC<MyProps> = ({ data }: MyProps) => {
 
   return (
     <div className="wall__header">
-
       <div className="wall__header-left">
         {wallStatus ? (
           <img src={userOne?.imageUrl} width={10} alt="" className="wall__header-left__avatar" />
@@ -59,7 +57,9 @@ export const WallHeader: React.FC<MyProps> = ({ data }: MyProps) => {
 
       {user.mainUser?._id === id ? (
         <div className="wall__header-right">
-          <FontAwesomeIcon className="wall__header-right__menu" icon={faEllipsis} />
+          <div className="wall__header-right__menu">
+            <Settings />
+          </div>
           <div className="wall__header-right__menu-block">
             <span
               className="wall__header-right__menu-block__delete-post"

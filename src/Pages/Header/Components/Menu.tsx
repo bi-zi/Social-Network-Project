@@ -5,8 +5,7 @@ import { setAttention } from '../../../store/user/slice';
 import { setCreatText, setCreateVid } from '../../../store/post/slice';
 import { Loading } from './Loading';
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAlignJustify } from '@fortawesome/free-solid-svg-icons';
+import { Burger } from '../../../Svg';
 
 export const Menu: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -25,10 +24,12 @@ export const Menu: React.FC = () => {
 
   return (
     <>
-      <div className="header__menu" >
+      <div className="header__menu">
         <Loading />
 
-        <FontAwesomeIcon className="header__menu-burger" icon={faAlignJustify} />
+        <div className="header__menu-burger">
+          <Burger />
+        </div>
 
         <div className="header__menu-burger__block">
           <NavLink

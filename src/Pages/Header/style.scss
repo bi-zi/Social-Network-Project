@@ -1,3 +1,14 @@
+.header-test-block {
+  width: calc(15px + 20 * (100vw / 1920));
+  height: calc(15px + 20 * (100vw / 1920));
+
+  @media (width < 460px) {
+    padding-top: 3px;
+    width: calc(8px + 8 * (100vw / 460));
+    height: calc(8px + 8 * (100vw / 460));
+  }
+}
+
 .header {
   position: sticky;
 
@@ -74,8 +85,8 @@
   justify-content: space-between;
 
   .header__control-panel__icons {
-    width: calc(15px + 20 * (100vw / 1920));
-    height: calc(15px + 20 * (100vw / 1920));
+    width: calc(15px + 25 * (100vw / 1920));
+    height: calc(15px + 25 * (100vw / 1920));
 
     text-decoration: none;
 

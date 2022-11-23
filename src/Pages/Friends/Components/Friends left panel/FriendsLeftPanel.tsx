@@ -7,15 +7,11 @@ import {
   fetchUserFriends,
   fetchUserSubscribers,
 } from '../../../../store/user/slice';
-
+import { FriendsPageUser } from '../../../../store/friends/types';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import { Settings } from '../../../../Svg';
 import './style.scss';
-
-import { FriendsPageUser } from '../../../../store/friends/types';
 
 export type MyParams = {
   id: string;
@@ -88,7 +84,9 @@ export const FriendsLeftPanel: React.FC<MyProps> = ({ data, lastFriend }: MyProp
               Delete friend
             </div>
           </div>
-          <FontAwesomeIcon className="users__left-panel__user-block__menu-icon" icon={faEllipsis} />
+          <div className="users__left-panel__user-block__menu-icon">
+            <Settings />
+          </div>
         </div>
       ) : (
         ''

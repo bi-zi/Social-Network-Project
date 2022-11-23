@@ -10,11 +10,11 @@ import {
 import { fetchCommentators } from '../../../../../store/user/slice';
 import { Post } from '../../../../../store/post/types';
 import { useParams, Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { Garbage, Submit } from '../../../../../Svg';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
+
 
 interface MyParams {
   id: string;
@@ -39,7 +39,7 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
     let date: any = new Date();
     date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-     const commentators = data.commentPost.map((x) => x.userId).join(',');
+    const commentators = data.commentPost.map((x) => x.userId).join(',');
 
     const filteredCommentators = commentators.split(',').sort((a, b) => (a > b ? 1 : -1));
 
@@ -53,7 +53,6 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
       }
       return buffer;
     });
-
 
     await dispatch(fetchCommentators(commentators.length === 0 ? auth._id : buffer.join(',')));
     await dispatch(
@@ -107,7 +106,9 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
               onClick={() =>
                 postStatus && state.post.createComment.length > 0 ? addComment(data._id) : ''
               }>
-              <FontAwesomeIcon className="wall__comments__submit-button-icon" icon={faPlay} />
+              <div className="wall__comments__submit-button-icon">
+                <Submit />
+              </div>
             </button>
           ) : (
             <Skeleton className="wall__comments__submit-skeleton" />
@@ -161,11 +162,11 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
                 <div className="wall__comments__comment__right-block">
                   {wall.post.find((userPost) => userPost.user === id)?.user === auth?._id ||
                   auth?._id === comment.userId ? (
-                    <FontAwesomeIcon
+                    <div
                       className="wall__comments__comment-delete"
-                      icon={faXmark}
-                      onClick={() => (postStatus ? deleteComment(data?._id, index) : '')}
-                    />
+                      onClick={() => (postStatus ? deleteComment(data?._id, index) : '')}>
+                      <Garbage />
+                    </div>
                   ) : (
                     ''
                   )}

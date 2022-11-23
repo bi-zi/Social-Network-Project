@@ -10,9 +10,7 @@ import { fetchCommentators, setClearCommentators } from '../../../../../store/us
 import { useWall } from '../useWall';
 import { useParams } from 'react-router-dom';
 import { Post } from '../../../../../store/post/types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShareNodes } from '@fortawesome/free-solid-svg-icons';
-import { faThumbsUp, faThumbsDown, faCommentDots } from '@fortawesome/free-regular-svg-icons';
+import { Like, Dislike, Comments } from '../../../../../Svg';
 import './style.scss';
 import Skeleton from 'react-loading-skeleton';
 interface MyParams {
@@ -88,7 +86,6 @@ export const WallControlPanel: React.FC<MyProps> = ({ data, index }: MyProps) =>
       return buffer;
     });
 
-
     if (postStatus) {
       if (state.post.comments !== postIndex) {
         if (commentators.length > 0) {
@@ -102,52 +99,53 @@ export const WallControlPanel: React.FC<MyProps> = ({ data, index }: MyProps) =>
     }
   };
 
+  //  style={
+  //             data.likePost.find((userId) => userId === auth?._id)
+  //               ? { color: 'red' }
+  //               : { color: 'white' }
+  //           }
+
   return (
     <div className="wall__control-panel">
       {postStatus ? (
         <>
-          <FontAwesomeIcon
-            className="wall__control-panel__like-icon"
-            icon={faThumbsUp}
-            style={
-              data.likePost.find((userId) => userId === auth?._id)
-                ? { color: 'red' }
-                : { color: 'white' }
-            }
+          <div
+            className="wall__control-panel__dislike-icon"
             onClick={() => {
               if (postStatus) {
                 data.likePost?.find((userId) => userId === auth?._id)
                   ? like(data._id, false)
                   : like(data._id, true);
               }
-            }}
-          />
+            }}>
+            <Like />
+          </div>
+
           <span className="wall__control-panel__like-number">{data.likePost?.length}</span>
-          <FontAwesomeIcon
+
+          <div
             className="wall__control-panel__dislike-icon"
-            icon={faThumbsDown}
-            style={
-              data.dislikePost.find((userId) => userId === auth?._id)
-                ? { color: 'red' }
-                : { color: 'white' }
-            }
             onClick={() => {
               if (postStatus) {
                 data.dislikePost?.find((userId) => userId === auth?._id)
                   ? dislike(data._id, false)
                   : dislike(data._id, true);
               }
-            }}
-          />
+            }}>
+            <Dislike />
+          </div>
+
           <span className="wall__control-panel__dislike-number ">{data.dislikePost?.length}</span>
-          <FontAwesomeIcon
+
+          <div
             className="wall__control-panel__comment-icon"
-            icon={faCommentDots}
             style={state.post.comments === postIndex ? { color: 'black' } : { color: 'white' }}
             onClick={() => {
               openCloseComment(postIndex);
-            }}
-          />
+            }}>
+            <Comments />
+          </div>
+
           <span className="wall__control-panel__dislike-number">{data.commentPost.length}</span>
         </>
       ) : (

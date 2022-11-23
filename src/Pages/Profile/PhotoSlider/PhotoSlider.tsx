@@ -6,9 +6,9 @@ import { setInputNumber } from '../../../store/user/slice';
 import { ImageParsing } from '../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import Skeleton from 'react-loading-skeleton';
+
+import { Garbage } from '../../../Svg';
 import 'react-loading-skeleton/dist/skeleton.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -33,7 +33,7 @@ export const PhotoSlider: React.FC = () => {
     swipeToSlide: true,
   };
 
-  async function onPhotoDelete(e: React.MouseEvent<SVGSVGElement>, index: number) {
+  async function onPhotoDelete(e: React.MouseEvent<HTMLDivElement>, index: number) {
     e.preventDefault();
 
     if (window.confirm('Are you sure you want to delete the image?')) {
@@ -57,11 +57,11 @@ export const PhotoSlider: React.FC = () => {
               return (
                 <span key={index} className="profile__slider__image">
                   {state.auth.data?._id === id ? (
-                    <FontAwesomeIcon
+                    <div
                       className="profile__slider__image-delete"
-                      icon={faXmark}
-                      onClick={(e) => onPhotoDelete(e, index)}
-                    />
+                      onClick={(e) => onPhotoDelete(e, index)}>
+                      <Garbage />
+                    </div>
                   ) : (
                     ''
                   )}
@@ -96,9 +96,7 @@ export const PhotoSlider: React.FC = () => {
             Add photos
           </button>
         ) : (
-          <button className="profile__slider__button" >
-            Max 8 images
-          </button>
+          <button className="profile__slider__button">Max 8 images</button>
         )
       ) : state.auth.data?._id === id ? (
         <div className="profile__slider__skeleton">

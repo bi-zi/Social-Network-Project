@@ -11,6 +11,7 @@ import { Friends } from './Pages/Friends/Friends';
 import { Messages } from './Pages/Messages/Messages';
 import { Routes, Route } from 'react-router-dom';
 import { SkeletonTheme } from 'react-loading-skeleton'
+import './Svg/style.scss';
 import './style.scss';
 
 export const App: React.FC = () => {

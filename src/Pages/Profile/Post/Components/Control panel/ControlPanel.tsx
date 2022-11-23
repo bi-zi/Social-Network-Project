@@ -11,16 +11,8 @@ import {
 import { setInputNumber } from '../../../../../store/user/slice';
 import { ImageParsing } from '../../../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faPlay,
-  faMusic,
-  faLocationPin,
-  faFileLines,
-  faFilm,
-  faCircleExclamation,
-} from '@fortawesome/free-solid-svg-icons';
-import { faImage } from '@fortawesome/free-regular-svg-icons';
+import { Image, Close, Video, Submit } from '../../../../../Svg/index';
+
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
@@ -105,30 +97,30 @@ export const ControlPanel: React.FC = () => {
       <div className="post__control-panel__icons-container">
         {imageLoadStatus ? (
           <>
-            <FontAwesomeIcon
-              className="post__control-panel__icons"
-              icon={faImage}
-              style={{ marginLeft: 0 }}
-            />
-            <button
-              onClick={() => dispatch(setInputNumber('2'))}
-              className="post__control-panel__image-icon-input">
-              <ImageParsing />
-            </button>
+            <div className="post__control-panel__icons">
+              <Image />
+              <button
+                onClick={() => dispatch(setInputNumber('2'))}
+                className="post__control-panel__image-icon-input">
+                <ImageParsing />
+              </button>
+            </div>
           </>
         ) : (
-          <FontAwesomeIcon className="post__control-panel__icons" icon={faCircleExclamation} />
+          <div className="post__control-panel__icons">
+            <Close />
+          </div>
         )}
 
-        <FontAwesomeIcon
+        <div
           className="post__control-panel__icons"
-          icon={faFilm}
           onClick={() =>
             postEffect !== '0' && state.post.userPosts.status === 'loaded'
               ? setPostEffect('0')
               : setPostEffect('1')
-          }
-        />
+          }>
+          <Video />
+        </div>
 
         {localStorage.postVideo?.split('/')?.[0] === 'https:' ? (
           <button
@@ -155,7 +147,9 @@ export const ControlPanel: React.FC = () => {
 
       {postStatus ? (
         <button className="post__control-panel__make-button" type="submit" onClick={() => sendPost()}>
-          <FontAwesomeIcon className="post__control-panel__make-button-icon" icon={faPlay} />
+          <div className="post__control-panel__make-button-icon">
+            <Submit />
+          </div>
         </button>
       ) : (
         <Skeleton className="post__control-panel__skeleton" />

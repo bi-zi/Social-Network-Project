@@ -2,6 +2,8 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/store';
 import { setCreatText } from '../../../../../store/post/slice';
 import Skeleton from 'react-loading-skeleton';
+
+
 import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
 
@@ -21,6 +23,8 @@ export const AvatarInput: React.FC = () => {
 
   return (
     <div className="post__avatar-input-container">
+      
+
       {userStatus ? (
         <img
           src={state.user?.userOne?.[0]?.imageUrl}
@@ -32,7 +36,7 @@ export const AvatarInput: React.FC = () => {
       ) : (
         <Skeleton className="post__avatar-input-container__avatar" />
       )}
-      
+
       {postStatus ? (
         <input
           ref={textRef}

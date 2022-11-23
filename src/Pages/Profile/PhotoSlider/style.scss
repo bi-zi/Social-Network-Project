@@ -53,11 +53,8 @@
     top: calc(0px + 8 * (100vh / 1080));
     right: calc(2px + 26 * (100vw / 1920));
 
-    font: normal 400 calc(12px + 28 * (100vw / 1920)) 'Iceberg';
-
+    width: calc(12px + 28 * (100vw / 1920));
     filter: drop-shadow(0px 0px 0.2vh rgb(0, 0, 0));
-
-    color: var(--text-color);
 
     cursor: pointer;
     z-index: 20;

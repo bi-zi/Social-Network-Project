@@ -34,3 +34,9 @@
 .wrapper {
   min-height: calc(100vh - 40px);
 }
+
+.tex_works {
+  text-align: center;
+  color: white;
+  font-size: calc(10px + 40 * (100vw / 1920));
+}
