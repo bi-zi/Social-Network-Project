@@ -15,7 +15,6 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
 
-
 interface MyParams {
   id: string;
 }
@@ -86,33 +85,35 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
     <>
       {state.post.comments === postIndex ? (
         <div className="wall__comments">
-          {postStatus ? (
-            <input
-              className="wall__comments__input"
-              placeholder="Write your comment here"
-              maxLength={280}
-              pattern="^[a-zA-Z0-9 ]+$"
-              title="Only latin characters can be used"
-              onChange={(e) => dispatch(setCreateComment(e.target.value))}
-              ref={firstRef}
-            />
-          ) : (
-            <Skeleton className="wall__comments__input" />
-          )}
+          <div className='wall__comments-input-submit'>
+            {postStatus ? (
+              <input
+                className="wall__comments__input"
+                placeholder="Write your comment here"
+                maxLength={280}
+                pattern="^[a-zA-Z0-9 ]+$"
+                title="Only latin characters can be used"
+                onChange={(e) => dispatch(setCreateComment(e.target.value))}
+                ref={firstRef}
+              />
+            ) : (
+              <Skeleton className="wall__comments__input" />
+            )}
 
-          {postStatus ? (
-            <button
-              className="wall__comments__submit-button"
-              onClick={() =>
-                postStatus && state.post.createComment.length > 0 ? addComment(data._id) : ''
-              }>
-              <div className="wall__comments__submit-button-icon">
-                <Submit />
-              </div>
-            </button>
-          ) : (
-            <Skeleton className="wall__comments__submit-skeleton" />
-          )}
+            {postStatus ? (
+              <button
+                className="wall__comments__submit-button"
+                onClick={() =>
+                  postStatus && state.post.createComment.length > 0 ? addComment(data._id) : ''
+                }>
+                <div className="wall__comments__submit-button-icon">
+                  <Submit />
+                </div>
+              </button>
+            ) : (
+              <Skeleton className="wall__comments__submit-skeleton" />
+            )}
+          </div>
 
           {data.commentPost?.map((comment, index) => (
             <div className="wall__comments__comment" key={index}>

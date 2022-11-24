@@ -19,7 +19,6 @@
   .profile-friends__title {
     position: relative;
 
-
     height: calc(10px + 20 * (100vw / 1080));
     left: calc(2px + 12 * (100vw / 1920));
 
@@ -84,6 +83,8 @@
     .profile-friends__container__friend__avatar {
       width: calc(15px + 50 * (100vw / 1920)) !important;
       height: calc(15px + 50 * (100vw / 1920)) !important;
+
+      object-fit: cover;
       border-radius: 100%;
     }
 

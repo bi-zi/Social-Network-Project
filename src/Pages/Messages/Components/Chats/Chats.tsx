@@ -4,7 +4,6 @@ import { setFindChat } from '../../../../store/messages/slice';
 import { useSort } from '../useSort';
 import { NavLink } from 'react-router-dom';
 import { ChatComponent } from '../Chat/ChatComponent';
-
 import { Search } from '../../../../Svg';
 import { ChatsSkeleton } from '../Chat/ChatsSkeleton';
 import Skeleton from 'react-loading-skeleton';
@@ -14,7 +13,7 @@ import './style.scss';
 export const Chats: React.FC = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const searchRef = React.useRef<HTMLInputElement>(null);
 
   const auth = useAppSelector((state) => state.auth?.data);
   const messages = useAppSelector((state) => state?.messages);
@@ -25,10 +24,10 @@ export const Chats: React.FC = () => {
   const selectedUser = users?.[localStorage.chatIndexWithSort];
 
   const loadStatus = messages.status === 'loaded' && state.auth.status === 'loaded';
-
   React.useEffect(() => {
     sortedUsers();
   }, [messages.mainUserMessages, sortedUsers]);
+
 
   return (
     <div className="chats-container">
@@ -39,7 +38,7 @@ export const Chats: React.FC = () => {
               <Search />
             </div>
             <input
-              ref={inputRef}
+              ref={searchRef}
               type="text"
               pattern="^[a-zA-Z0-9 ]+$"
               onChange={(e) => dispatch(setFindChat(e.target.value))}
@@ -62,7 +61,7 @@ export const Chats: React.FC = () => {
       ) : !loadStatus || (users.length === 0 && loadStatus) ? (
         <div className="chats-users">
           <div className="chats-empty">
-            <NavLink to={`/Friends/${auth?._id}`}>Find friends to chat</NavLink>
+            <NavLink to={`/Users/${auth?._id}`}>Find friends to chat</NavLink>
           </div>
         </div>
       ) : (

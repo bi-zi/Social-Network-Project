@@ -1,5 +1,4 @@
 .svg__colors-stroke {
-  stroke: var(--text-color) ;
 
   &:hover {
     stroke: var(--text-color-hover) ;
@@ -11,7 +10,7 @@
 }
 
 .svg__colors-fill {
-  fill: var(--text-color);
+
   &:hover {
     fill: var(--text-color-hover) ;
   }

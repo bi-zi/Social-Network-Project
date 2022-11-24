@@ -38,7 +38,7 @@ export const Subscribers: React.FC = () => {
     <div className="profile-friends subscribers">
       {loadStatus ? (
         <Link
-          to={`/Friends/${id}`}
+          to={`/Users/${id}`}
           className="profile-friends__title"
           style={{ textDecoration: 'none' }}
           onClick={() => dispatch(setCatergorySort('subscribers'))}>

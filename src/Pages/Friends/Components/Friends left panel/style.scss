@@ -13,11 +13,13 @@
   }
 
   .users__left-panel__user-block__avatar {
+     margin: 1vh 0;
     width: calc(40px + 40 * (100vw / 1920));
     height: calc(40px + 40 * (100vw / 1920));
 
-    margin: 1vh 0;
 
+
+    object-fit: cover;
     border-radius: 100%;
     cursor: pointer;
 
@@ -141,6 +143,5 @@
   .users__left-panel__user-block__skeleton {
     display: flex;
     right: 0;
-
   }
 }

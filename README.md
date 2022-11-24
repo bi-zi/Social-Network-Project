@@ -15,16 +15,20 @@ https://wave-social-network.netlify.app запуск может занять о�
 
 ## TypeScript / React / Redux-Toolkit / SASS
 
-Проект в разработке уже 4 месяца на момент 26-10-2022
+Проект в разработке уже 5 месяцев на момент 23-11-2022
 
-Date : 26-10-2022 09:47:10 <br/>
-Total : 101 files, 6174 codes, 132 comments, 1510 blanks, all 7816 lines
+Вот ссылка на репозиторий с бэкендом https://github.com/bi-zi/Backend-for-Social-Network
+
+Date : 23-11-2022 13:41:21 <br/>
+Total : 131 files, 7306 codes, 132 comments, 1668 blanks, all 9106 lines
 
 | language         | files |  code | comment | blank | total |
 | :--------------- | ----: | ----: | ------: | ----: | ----: |
-| TypeScript React |    44 | 2,833 |      84 |   477 | 3,394 |
-| SCSS             |    33 | 2,013 |       5 |   806 | 2,824 |
-| TypeScript       |    24 | 1,328 |      43 |   227 | 1,598 |
+| TypeScript React |    69 | 3,685 |      90 |   569 | 4,344 |
+| SCSS             |    35 | 2,242 |       0 |   852 | 3,094 |
+| TypeScript       |    25 | 1,323 |      42 |   234 | 1,599 |
+| JavaScript       |     1 |    38 |       0 |     8 |    46 |
+| JavaScript React |     1 |    18 |       0 |     5 |    23 |
 
 ---
 

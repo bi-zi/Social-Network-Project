@@ -31,7 +31,13 @@ export const WallHeader: React.FC<MyProps> = ({ data }: MyProps) => {
     <div className="wall__header">
       <div className="wall__header-left">
         {wallStatus ? (
-          <img src={userOne?.imageUrl} width={10} alt="" className="wall__header-left__avatar" />
+          <img
+            src={userOne?.imageUrl}
+            width={10}
+            alt=""
+            className="wall__header-left__avatar"
+            onClick={() => window.scrollTo(0, 0)}
+          />
         ) : (
           <Skeleton className="wall__header-left__avatar" />
         )}
@@ -57,7 +63,7 @@ export const WallHeader: React.FC<MyProps> = ({ data }: MyProps) => {
 
       {user.mainUser?._id === id ? (
         <div className="wall__header-right">
-          <div className="wall__header-right__menu">
+          <div style={{ stroke: 'white' }} className="wall__header-right__menu">
             <Settings />
           </div>
           <div className="wall__header-right__menu-block">

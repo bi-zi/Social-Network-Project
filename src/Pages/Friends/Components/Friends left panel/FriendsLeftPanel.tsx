@@ -27,6 +27,7 @@ export const FriendsLeftPanel: React.FC<MyProps> = ({ data, lastFriend }: MyProp
   const state = useAppSelector((state) => state);
   const { id } = useParams<keyof MyParams>() as MyParams;
 
+
   const friend = data;
 
   const deleteFriend = async (e: React.MouseEvent<HTMLDivElement>, userId: string) => {

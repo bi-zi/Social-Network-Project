@@ -69,25 +69,24 @@ export const Photo: React.FC = () => {
         <Link
           to={`/Profile/${user}`}
           style={{ color: '#000000' }}
-
           className="selected-image__container-close">
-            <Cross/>
+          <Cross />
         </Link>
 
         <img src={readyPhotos?.[+id]} width={10} alt="" className="selected-image__container-img" />
 
         {readyPhotos?.length !== 1 ? (
           <>
-            <Link to={`/${user}/${category}/${+id === 0 ? readyPhotos!?.length - 1 : +id - 1}`}>
-              <div className="selected-image__container__swap-left">
-                <Left />
-              </div>
+            <Link
+              to={`/${user}/${category}/${+id === 0 ? readyPhotos!?.length - 1 : +id - 1}`}
+              className="selected-image__container__swap-left">
+              <Left />
             </Link>
 
-            <Link to={`/${user}/${category}/${readyPhotos!?.length - 1 === +id ? 0 : +id + 1}`}>
-              <div className="selected-image__container__swap-right">
-                <Right />
-              </div>
+            <Link
+              to={`/${user}/${category}/${readyPhotos!?.length - 1 === +id ? 0 : +id + 1}`}
+              className="selected-image__container__swap-right">
+              <Right />
             </Link>
           </>
         ) : (

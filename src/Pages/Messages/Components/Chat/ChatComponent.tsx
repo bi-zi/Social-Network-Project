@@ -19,6 +19,8 @@ export const ChatComponent: React.FC<MyProps> = ({ users, indexId, selected }: M
   const index = indexId;
   const selectedUser = selected;
 
+
+
   const messages = useAppSelector((state) => state?.messages);
 
   const divRef = useRef<HTMLDivElement>(null);
@@ -33,10 +35,15 @@ export const ChatComponent: React.FC<MyProps> = ({ users, indexId, selected }: M
     }
   };
 
+
+  console.log(index,friend === selectedUser);
+
   // при выборе чата подгружаются данные переписки и обнуляются данные input
   const selectUser = (friendId: string) => {
     dispatch(setSelectedUser(friendId));
-    if (selectedUser?._id !== friendId) dispatch(fetchSecondUserMessages(selectedUser?._id));
+    if (selectedUser?._id !== friendId) {
+      dispatch(fetchSecondUserMessages(selectedUser?._id));
+    }
     dispatch(setFindChat(''));
 
     if (inputRef.current != null) {
@@ -49,7 +56,7 @@ export const ChatComponent: React.FC<MyProps> = ({ users, indexId, selected }: M
     <div
       className={`chats-users__item${friend?._id === messages?.selectedUser ? '--selected' : ''}`}
       key={friend._id}
-      onClick={() => {
+      onClick={(e) => {
         selectUser(friend._id);
       }}>
       <img src={friend.imageUrl} width="10" alt="" className="chats-users__item-avatar" />

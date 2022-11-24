@@ -1,0 +1,111 @@
+.header__control-panel {
+  display: flex;
+
+  margin: auto 0;
+  width: 40%;
+
+  justify-content: space-between;
+
+  .header__control-panel__icons {
+    width: calc(12px + 25 * (100vw / 1920));
+    height: calc(12px + 25 * (100vw / 1920));
+
+    text-decoration: none;
+  }
+
+  .header__control-panel__icons:hover {
+    color: var(--text-color-hover);
+    cursor: pointer;
+  }
+
+  .header-closed-icon {
+    color: var(--text-color-hover);
+  }
+}
+
+.header__control-panel__profile-icon__bell-block,
+.header__control-panel__icons {
+  width: calc(15px + 20 * (100vw / 1920));
+  height: calc(15px + 20 * (100vw / 1920));
+
+  text-decoration: none;
+
+  &:hover {
+    color: var(--text-color-hover);
+    cursor: pointer;
+  }
+
+  &:active .header__notifications {
+    display: block;
+  }
+
+  .header__notifications-number {
+    position: relative;
+
+    padding-top: 3vh;
+
+    width: 25px;
+    height: 25px;
+
+    top: -40px;
+    left: 20px;
+
+    text-align: center;
+    font: normal 400 14px 'Iceberg';
+
+    border-radius: 100%;
+    background-color: red;
+  }
+}
+
+
+.header__notifications {
+  display: none;
+  position: relative;
+
+  width: 60px;
+  height: 110px;
+
+  top: -80px;
+  left: -10px;
+
+  &:hover {
+    display: block;
+  }
+
+  .header__notifications__friend-requests,
+  .header__notifications__no-note {
+    display: flex;
+    position: absolute;
+
+    padding-top: 5px;
+    padding-left: 5px;
+
+    width: 330px;
+    height: 40px;
+
+    top: 65px;
+
+    border: 2px solid white;
+
+    font: normal 400 20px 'Iceberg';
+
+    color: white;
+
+    background-color: rgb(0, 0, 0);
+  }
+
+  .header__notifications-show,
+  .header__notifications-hide {
+    text-decoration: none;
+    color: #ffffff;
+
+    &:hover {
+      color: #9e9b9b;
+    }
+  }
+
+  .header__notifications__no-note {
+    top: 90px;
+  }
+}

@@ -82,6 +82,8 @@ export const ImageParsing: React.FC = () => {
 
       const ouputSize = +(output.size / 1024 / 1024).toFixed(2);
 
+      console.log('первая до', +(file[i].size / 1024 / 1024).toFixed(2), 'первая после', ouputSize);
+
       if (ouputSize > 0.1) {
         let file = new File([output], 'name', {
           type: output.type,
@@ -98,7 +100,6 @@ export const ImageParsing: React.FC = () => {
     if (readyBlob.length > 0) setImages(images.concat(readyBlob));
   };
 
-
   const compressImage2 = async (file: any, useWebWorker: any) => {
     let size = (
       +(file.size / 1024 / 1024).toFixed(2) -
@@ -111,15 +112,20 @@ export const ImageParsing: React.FC = () => {
       onProgress: (p: any) => onProgress(p, useWebWorker),
     };
 
-
     const output = await imageCompression(file, options);
+
+    console.log(
+      'вторая до',
+      +(file.size / 1024 / 1024).toFixed(2),
+      'вторая после',
+      +(output.size / 1024 / 1024).toFixed(2),
+    );
 
     // console.log(2, size, +(file.size / 1024 / 1024).toFixed(2), +(output.size / 1024 / 1024).toFixed(2));
 
     if (images.length === 0) setImages([output]);
     if (images.length > 0) setImages(images.push(output));
   };
-
 
   // Эта функция отправляет картинку на бэк в 3 направлениях все зависит от места загрузки их 3(аватар,слайдер и пост)
   // Если аватар тогда картинка отправится еще и в слайдер в остальных случаях обычное поведение
@@ -177,7 +183,6 @@ export const ImageParsing: React.FC = () => {
     if (images.length < 1) return;
 
     const arr: any = [];
-
 
     for (let i = 0; i < images.length; i++) {
       let fileReader: FileReader = new FileReader();

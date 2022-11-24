@@ -32,7 +32,7 @@ export const App: React.FC = () => {
         <Route path="/" element={<Layout />}>
           <Route path="Profile/:id" element={<Profile />} />,
           <Route path="Messages" element={<Messages />} />,
-          <Route path="Friends/:id" element={<Friends />} />,
+          <Route path="Users/:id" element={<Friends />} />,
           <Route path="/:user/:category/:id" element={<Photo />} />,
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Registration />} />

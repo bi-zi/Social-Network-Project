@@ -9,20 +9,18 @@
     .chats-form__search-icon {
       margin: 0 1vw;
 
-      font-size: calc(4px + 25 * (100vh / 1080));
+      width: calc(4px + 25 * (100vh / 1080));
 
-      color: var(--text-color);
+      stroke: var(--text-color);
 
-      cursor: pointer;
+      cursor: text;
 
-      z-index: 2;
+      z-index: 1;
 
       @media (width < 460px) {
         font-size: calc(4px + 18 * (100vh / 1080));
       }
     }
-
-
 
     .chats-form__input {
       position: absolute;
@@ -41,9 +39,10 @@
 
       border: 0;
 
-      background-color: var(--miniInterface-color);
+      background-color: rgba(245, 222, 179, 0);
       color: var(--text-color);
 
+      z-index: 10;
       @media (width < 460px) {
         font: normal 400 calc(2px + 14 * (100vh / 1080)) 'Iceberg';
       }
@@ -95,6 +94,7 @@
         width: calc(10px + 60 * (100vh / 1080));
         height: calc(10px + 60 * (100vh / 1080));
 
+        object-fit: cover;
         border-radius: 50%;
 
         &:hover {
@@ -102,14 +102,11 @@
         }
       }
     }
-
   }
 
   .chats-footer {
     position: relative;
     margin-bottom: 2vh;
-
-    padding-top: 1.3vh;
 
     width: 100%;
     height: calc(10px + 42 * (100vh / 1080));
@@ -126,27 +123,33 @@
     color: var(--text-color);
 
     .chats-footer__link {
+      position: absolute;
+      margin: auto 0;
+
+      height: 65%;
+
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
       text-decoration: underline;
     }
   }
 
   .chats-empty {
-    position: relative;
-    margin: 0 auto;
+    position: absolute;
+    margin: auto 0;
 
-    width: calc(120px + 140 * (100vw / 1920));
+    width: 100%;
+    height: 10%;
 
-    top: 30%;
+    top: 0;
+    bottom: 0;
 
     text-decoration: underline;
     text-align: center;
 
-    font: normal 400 calc(20px + 20 * (100vw / 1920)) 'Iceberg';
+    font: normal 400 calc(10px + 24 * (100vw / 1920)) 'Iceberg';
     color: var(--text-color);
-
-    @media (width < 460px) {
-      width: auto;
-      font-size: calc(6px + 10 * (100vw / 1920));
-    }
   }
 }

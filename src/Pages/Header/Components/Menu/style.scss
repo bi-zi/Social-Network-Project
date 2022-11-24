@@ -1,0 +1,122 @@
+.header__menu {
+  position: relative;
+  margin: auto 0;
+
+  &:active .header__menu-burger__block {
+    display: block;
+  }
+
+  .header__menu-loader {
+    position: absolute;
+
+    width: calc(20px + 25 * (100vw / 1920));
+    height: calc(20px + 25 * (100vw / 1920));
+
+    top: -0.3vh;
+    right: calc(20px + 30 * (100vw / 1920));
+
+    border: {
+      top: 0.5vw solid rgb(0, 149, 255);
+      right: 0.5vw solid rgb(253, 253, 253);
+      bottom: 0.5vw solid rgb(253, 253, 253);
+      left: 0.5vw solid rgb(255, 255, 255);
+
+      radius: 100%;
+    }
+
+    animation: spin 0.9s linear infinite;
+
+    @media (width < 460px) {
+      width: calc(6px + 12 * (100vw / 460));
+      height: calc(6px + 12 * (100vw / 460));
+
+      top: calc(1px + 2 * (100vw / 460));
+      right: calc(10px + 10 * (100vw / 460));
+
+      border: {
+        top: 0.6vw solid rgb(0, 149, 255);
+        right: 0.6vw solid rgb(254, 255, 255);
+        bottom: 0.6vw solid rgb(255, 255, 255);
+        left: 0.6vw solid rgb(248, 248, 247);
+
+        radius: 100%;
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  .header__menu-burger {
+    width: calc(20px + 20 * (100vw / 1920));
+    height: calc(20px + 20 * (100vw / 1920));
+
+    cursor: pointer;
+    z-index: 999;
+
+    @media (width < 460px) {
+      padding-top: 3px;
+      width: calc(8px + 10 * (100vw / 460));
+      height: calc(8px + 10 * (100vw / 460));
+    }
+  }
+}
+
+.header__menu-burger__block {
+  display: none;
+  position: absolute;
+
+  padding-top: calc(27px + 28 * (100vw / 1920));
+
+  width: calc(100px + 200 * (100vw / 1920));
+  height: calc(100px + 200 * (100vw / 1920));
+
+  top: 0;
+  right: 0;
+
+  @media (width < 460px) {
+    padding-top: calc(20px + 40 * (100vw / 1920));
+
+    width: calc(50px + 50 * (100vw / 460));
+    height: calc(50px + 50 * (100vw / 460));
+  }
+
+  &:hover {
+    display: block;
+  }
+}
+
+.header__menu-burger__block-login,
+.header__menu-burger__block-register {
+  position: relative;
+
+  padding: 1vh 0 1vh 0;
+
+  width: 100%;
+
+  text-align: center;
+  font: normal 400 calc(20px + 20 * (100vw / 1920)) 'Iceberg';
+
+  border: 0.1vh solid var(--miniInterface-color-hover);
+
+  background-color: var(--miniInterface-color);
+  color: var(--miniInterface-color-hover);
+
+  @media (width < 460px) {
+    font: normal 400 calc(10px + 10 * (100vw / 460)) 'Iceberg';
+  }
+
+  &:hover {
+    @media (width > 460px) {
+      border: 0.2vh solid var(--miniInterface-color);
+      background-color: var(--miniInterface-color-hover);
+      color: var(--miniInterface-color);
+    }
+  }
+}

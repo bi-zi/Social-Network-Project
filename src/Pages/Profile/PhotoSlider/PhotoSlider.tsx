@@ -7,7 +7,6 @@ import { ImageParsing } from '../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
-
 import { Garbage } from '../../../Svg';
 import 'react-loading-skeleton/dist/skeleton.css';
 import 'slick-carousel/slick/slick.css';
@@ -57,7 +56,7 @@ export const PhotoSlider: React.FC = () => {
               return (
                 <span key={index} className="profile__slider__image">
                   {state.auth.data?._id === id ? (
-                    <div
+                    <div style={{stroke: 'white'}}
                       className="profile__slider__image-delete"
                       onClick={(e) => onPhotoDelete(e, index)}>
                       <Garbage />

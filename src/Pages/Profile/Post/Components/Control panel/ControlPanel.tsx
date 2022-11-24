@@ -11,7 +11,7 @@ import {
 import { setInputNumber } from '../../../../../store/user/slice';
 import { ImageParsing } from '../../../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
-import { Image, Close, Video, Submit } from '../../../../../Svg/index';
+import { Image, Close, Video, Submit, Garbage } from '../../../../../Svg/index';
 
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -96,41 +96,38 @@ export const ControlPanel: React.FC = () => {
     <div className="post__control-panel">
       <div className="post__control-panel__icons-container">
         {imageLoadStatus ? (
-          <>
-            <div className="post__control-panel__icons">
+          <div
+            style={{ fill: 'white' }}
+            className="post__control-panel__icons"
+            onClick={() => dispatch(setInputNumber('2'))}>
+            <span className='post__control-panel__image-hover'>
               <Image />
-              <button
-                onClick={() => dispatch(setInputNumber('2'))}
-                className="post__control-panel__image-icon-input">
-                <ImageParsing />
-              </button>
-            </div>
-          </>
+            </span>
+            <ImageParsing />
+          </div>
         ) : (
-          <div className="post__control-panel__icons">
+          <div style={{ stroke: 'white' }} className="post__control-panel__icons">
             <Close />
           </div>
         )}
 
         <div
+          style={{ stroke: 'white' }}
           className="post__control-panel__icons"
           onClick={() =>
             postEffect !== '0' && state.post.userPosts.status === 'loaded'
               ? setPostEffect('0')
               : setPostEffect('1')
           }>
-          <Video />
+          {localStorage.postVideo?.split('/')?.[0] === 'https:' ? (
+            <span onClick={() => (postStatus ? dispatch(setCreateVid('')) : '')}>
+              <Garbage />
+            </span>
+          ) : (
+            <Video />
+          )}
         </div>
 
-        {localStorage.postVideo?.split('/')?.[0] === 'https:' ? (
-          <button
-            className="post__control-panel__iframe-delete"
-            onClick={() => (postStatus ? dispatch(setCreateVid('')) : '')}>
-            Delete video
-          </button>
-        ) : (
-          ''
-        )}
         {postEffect === '0' && localStorage.postVideo?.split('/')?.[0] !== 'https:' ? (
           <input
             type="text"
@@ -147,7 +144,7 @@ export const ControlPanel: React.FC = () => {
 
       {postStatus ? (
         <button className="post__control-panel__make-button" type="submit" onClick={() => sendPost()}>
-          <div className="post__control-panel__make-button-icon">
+          <div style={{ stroke: 'white' }} className="post__control-panel__make-button-icon">
             <Submit />
           </div>
         </button>

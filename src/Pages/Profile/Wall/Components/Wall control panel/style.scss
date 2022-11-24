@@ -1,20 +1,16 @@
 .wall__control-panel {
+  margin-top: 1vh;
+
   .wall__control-panel__like-icon,
   .wall__control-panel__dislike-icon,
-  .wall__control-panel__comment-icon,
-  .wall__control-panel__share-icon {
+  .wall__control-panel__comment-icon {
+    display: inline-block;
     position: relative;
 
-    padding: 1vh 0.5vw 1vh 0;
-
-    width: calc(10px + 20 * (100vw / 1920));
-    height: calc(10px + 20 * (100vw / 1920));
+    width: calc(8px + 20 * (100vw / 1920));
+    height: calc(8px + 20 * (100vw / 1920));
 
     cursor: pointer;
-
-    @media (width < 460px) {
-      padding: 0.5vh 0.5vw 1vh 0;
-    }
 
     &:hover {
       @media (width > 460px) {
@@ -44,15 +40,8 @@
   .wall__control-panel__dislike-number {
     position: relative;
 
-    margin-right: 1vw;
-
-    top: -1vh;
+    margin: 0 calc(2px + 8 * (100vw / 1920));
 
     font: normal 400 calc(6px + 14 * (100vw / 1920)) 'Iceberg';
-  }
-
-  .wall__control-panel__share-icon {
-    color: grey;
-    cursor: auto;
   }
 }

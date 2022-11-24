@@ -104,6 +104,7 @@ export const PostContent: React.FC = () => {
                 />
                 {state.auth.data?._id === id ? (
                   <div
+                    style={{ stroke: 'white' }}
                     className="post-images-delete"
                     onClick={() =>
                       dispatch(

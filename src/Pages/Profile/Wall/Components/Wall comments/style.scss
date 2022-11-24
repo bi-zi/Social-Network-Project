@@ -3,28 +3,31 @@
 
   width: 100%;
 
+  .wall__comments-input-submit {
+    position: relative;
+    margin: 1.5vh 0;
+
+    height: calc(10px + 40 * (100vh / 1080));
+  }
+
   .wall__comments__input {
-    margin: 1vh 0 2vh 0;
-    padding: 1vh 1vw;
+    position: absolute;
+
+    padding: 0.5vh 1vw;
 
     width: 84%;
-    min-height: 7vh;
+    height: 100%;
 
+    top: 0;
     left: 0;
 
-    border-radius: var(--borderRadius-interface);
-    box-shadow: var(--box-shadow);
-
+    border: 0;
     font: normal 400 calc(5px + 15 * (100vw / 1920)) 'Iceberg';
 
     background-color: var(--backgroundInput-color);
     color: var(--text-color);
 
     resize: none;
-
-    @media (width < 460px) {
-      min-height: 3vh;
-    }
 
     &::-webkit-scrollbar-track {
       opacity: 0 !important;
@@ -42,7 +45,6 @@
   .wall__comments__submit-skeleton {
     position: absolute;
     width: 14%;
-    height: calc(16px + 60 * (100vw / 1920));
     border-radius: var(--borderRadius-interface);
     top: 1vh;
     right: 0px;
@@ -50,13 +52,10 @@
 
   .wall__comments__submit-button {
     position: absolute;
-
     width: 14%;
-    height: calc(9px + 68 * (100vw / 1920));
+    height: 100%;
 
-    top: 1vh;
-    right: 0px;
-
+    right: 0;
     border: 0;
     border-radius: var(--borderRadius-interface);
 
@@ -81,9 +80,11 @@
 
   .wall__comments__submit-button-icon {
     position: relative;
+    margin: 0 auto;
 
-    font-size: calc(8px + 20 * (100vw / 1920));
-    color: var(--text-color);
+    width: calc(10px + 30 * (100vw / 1920));
+
+    stroke: var(--text-color);
   }
 
   .wall__comments__comment {
@@ -91,7 +92,7 @@
 
     margin: 0 auto 1vh auto;
 
-    padding: 0.5vh 0.5vw;
+    padding: calc(2px + 5 * (100vh / 1080)) calc(4px + 8 * (100vw / 1920));
 
     width: 100%;
 
@@ -107,11 +108,22 @@
 
       .wall__comments__comment__left-block {
         display: flex;
+        position: relative;
         .wall__comments__comment-avatar {
-          width: calc(4px + 50 * (100vh / 1080));
-          height: calc(4px + 50 * (100vh / 1080));
+          position: relative;
 
+          margin-right: calc(4px + 4 * (100vw / 1920));
+
+          width: calc(2px + 55 * (100vh / 1080));
+          height: calc(2px + 55 * (100vh / 1080));
+
+          object-fit: cover;
           border-radius: 100%;
+
+          @media (width < 460px) {
+            width: calc(14px + 14 * (100vh / 1080));
+            height: calc(14px + 14 * (100vh / 1080));
+          }
 
           &:hover {
             border: var(--borderImages);
@@ -120,20 +132,26 @@
         }
 
         .wall__comments__comment-full-name-time {
-          margin-top: 0.4vh;
-          margin-left: 0.5vw;
+          position: relative;
 
           .wall__comments__comment-full-name-time__full-name,
           .wall__comments__comment-full-name-time__time {
-            font: normal 400 calc(6px + 16 * (100vw / 1920)) 'Iceberg';
+            position: absolute;
 
-            color: var(--text-color);
+            margin: auto 0;
+
+            width: 20vw;
+            height: 70%;
+
+            top: 0;
+            bottom: 0;
+
+            font: normal 400 calc(4px + 16 * (100vw / 1920)) 'Iceberg';
           }
 
           .wall__comments__comment-full-name-time__time {
-            top: calc(8px + 27 * (100vh / 1080)) !important;
-
-            font: normal 400 calc(4px + 12 * (100vw / 1920)) 'Iceberg';
+            height: 0%;
+            font: normal 400 calc(3px + 12 * (100vw / 1920)) 'Iceberg';
           }
         }
       }
@@ -143,9 +161,10 @@
         .wall__comments__comment-delete {
           margin-top: calc(0px + 4 * (100vh / 1080));
           margin-right: calc(4px + 4 * (100vw / 1920));
-          font-size: calc(8px + 22 * (100vw / 1920));
 
-          color: var(--text-color);
+          width: calc(8px + 22 * (100vw / 1920));
+
+          stroke: var(--text-color);
 
           filter: drop-shadow(0px 0px 0.2vh rgb(5, 5, 5));
           cursor: pointer;

@@ -11,8 +11,8 @@ import { useWall } from '../useWall';
 import { useParams } from 'react-router-dom';
 import { Post } from '../../../../../store/post/types';
 import { Like, Dislike, Comments } from '../../../../../Svg';
-import './style.scss';
 import Skeleton from 'react-loading-skeleton';
+import './style.scss';
 interface MyParams {
   id: string;
 }
@@ -43,7 +43,9 @@ export const WallControlPanel: React.FC<MyProps> = ({ data, index }: MyProps) =>
       await dispatch(
         fetchPostLike({
           _id: postId,
-          likeDislike: wallPost?.[0]?.likePost?.findIndex((userId) => userId === auth?._id),
+          likeDislike: wallPost
+            ?.find((id) => id._id === postId)
+            ?.likePost?.findIndex((userId) => userId === auth?._id),
           index: 0,
           user: id,
         }),
@@ -59,7 +61,9 @@ export const WallControlPanel: React.FC<MyProps> = ({ data, index }: MyProps) =>
       await dispatch(
         fetchPostDislike({
           _id: postId,
-          likeDislike: wallPost?.[0]?.dislikePost?.findIndex((userId) => userId === auth?._id),
+          likeDislike: wallPost
+            ?.find((id) => id._id === postId)
+            ?.dislikePost?.findIndex((userId) => userId === auth?._id),
           index: 0,
           user: id,
         }),
@@ -99,17 +103,16 @@ export const WallControlPanel: React.FC<MyProps> = ({ data, index }: MyProps) =>
     }
   };
 
-  //  style={
-  //             data.likePost.find((userId) => userId === auth?._id)
-  //               ? { color: 'red' }
-  //               : { color: 'white' }
-  //           }
-
   return (
     <div className="wall__control-panel">
       {postStatus ? (
         <>
           <div
+            style={
+              data.likePost.find((userId) => userId === auth?._id)
+                ? { stroke: 'red' }
+                : { stroke: 'white' }
+            }
             className="wall__control-panel__dislike-icon"
             onClick={() => {
               if (postStatus) {
@@ -118,12 +121,18 @@ export const WallControlPanel: React.FC<MyProps> = ({ data, index }: MyProps) =>
                   : like(data._id, true);
               }
             }}>
+            {}
             <Like />
           </div>
 
           <span className="wall__control-panel__like-number">{data.likePost?.length}</span>
 
           <div
+            style={
+              data.dislikePost.find((userId) => userId === auth?._id)
+                ? { stroke: 'red' }
+                : { stroke: 'white' }
+            }
             className="wall__control-panel__dislike-icon"
             onClick={() => {
               if (postStatus) {
@@ -139,7 +148,7 @@ export const WallControlPanel: React.FC<MyProps> = ({ data, index }: MyProps) =>
 
           <div
             className="wall__control-panel__comment-icon"
-            style={state.post.comments === postIndex ? { color: 'black' } : { color: 'white' }}
+            style={state.post.comments === postIndex ? { fill: 'black' } : { fill: 'white' }}
             onClick={() => {
               openCloseComment(postIndex);
             }}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from '../../../store/store';
+import { useAppSelector } from '../../../../store/store';
 
 export const Loading: React.FC = () => {
   const state = useAppSelector((state) => state);
@@ -24,7 +24,6 @@ export const Loading: React.FC = () => {
     state.user.status === 'loading';
 
   const nonePage = state.auth.status === 'loading';
-
 
   const path = window.location.pathname.split('/')[1];
 

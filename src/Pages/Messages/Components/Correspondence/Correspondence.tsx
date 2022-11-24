@@ -67,7 +67,6 @@ export const Correspondence: React.FC = () => {
 
   const onSendMessage = async (e: React.FormEvent<HTMLFormElement>, values: string) => {
     e.preventDefault();
-
     await dispatch(
       fetchAddMessage({
         message: values,
@@ -196,7 +195,7 @@ export const Correspondence: React.FC = () => {
                     <div className="correspondence-message__message">{message.message}</div>
                   ) : message?.message !== undefined ? (
                     <div className="correspondence-message__skeleton-message">
-                      <Skeleton  />
+                      <Skeleton />
                     </div>
                   ) : (
                     ''
@@ -238,7 +237,12 @@ export const Correspondence: React.FC = () => {
           </form>
         </>
       ) : (
-        <div className="correspondence-select-chat">Select chat</div>
+        <>
+          <div className="correspondence-header"></div>
+          <div className="correspondence"></div>
+          <form className="correspondence-sending-message"></form>
+          <div className="correspondence-select-chat">Select chat</div>
+        </>
       )}
     </div>
   );

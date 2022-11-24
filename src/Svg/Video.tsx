@@ -9,7 +9,7 @@ export const Video = () => {
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"
-      viewBox="0 1 24 24">
+      viewBox="0 1 23 22">
       <rect width="20" height="20" x="2" y="2" rx="2.18" ry="2.18"></rect>
       <path d="M7 2L7 22"></path>
       <path d="M17 2L17 22"></path>

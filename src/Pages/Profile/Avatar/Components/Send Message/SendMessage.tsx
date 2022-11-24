@@ -49,7 +49,6 @@ export const SendMessage: React.FC = () => {
 
     // выбор пользователя при переходе на страницу чатов
     dispatch(setSelectedUser(id));
-
     await dispatch(fetchMainUserMessages(auth?._id));
     await dispatch(fetchSecondUserMessages(id));
     await dispatch(fetchUsersForChats(auth?._id));
