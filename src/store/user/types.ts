@@ -6,11 +6,10 @@ export type User = {
   passwordHash: string;
   friends: string[];
   subscribers: string[];
-  imageUrl: string;
+  imageUrl: string[];
   createdAt: string;
   updatedAt: string;
   __v: number;
-  id: string;
 };
 
 export enum Status {

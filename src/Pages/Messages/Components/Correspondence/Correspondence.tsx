@@ -7,7 +7,7 @@ import {
   fetchAddMessage,
   setAddMessages,
 } from '../../../../store/messages/slice';
-import { useSort } from '../useSort';
+import { User } from '../../../../store/auth/types';
 import { NavLink } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -26,9 +26,47 @@ export const Correspondence: React.FC = () => {
 
   const [text, setText] = useState('');
 
-  const { sortedUsers, selectedChat } = useSort(mainUserMessages);
-  const users = sortedUsers();
-  const chat = selectedChat();
+  const data = messages.mainUserMessages?.[0];
+  let users: User[] = []; // Массив для отсортированных пользователей
+
+  // Поиск участников чатов
+  const chatsUsers = state.user?.chatUsers.filter((user) =>
+    data?.correspondence.map((chat) => chat?.withWho)?.includes(user._id),
+  );
+
+  const sortedChats = data?.correspondence
+    ?.map((chat) => chat?.messages[chat.messages.length - 1])
+    .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)));
+
+  // Массив id отсортированных участников чата
+  const usersId = sortedChats?.map((chat) => chat.withWho);
+
+  // Сортировка участников по времени написания последнего сообщения методом сравнения двух массивов
+  for (let i = 0; i < usersId!?.length; i++) {
+    for (let j = 0; j < chatsUsers?.length; j++)
+      if (usersId![i] === chatsUsers[j]?._id) {
+        users.push(chatsUsers[j]);
+      }
+  }
+
+  // Поиск по поисковому запросу
+  if (messages?.findChat?.length > 0) {
+    users = users.filter(
+      (user) =>
+        user.firstName[0].toLowerCase().includes(messages?.findChat[0]?.toLowerCase()) &&
+        user.firstName.toLowerCase().includes(messages?.findChat?.toLowerCase()),
+    );
+  }
+
+  if (users.length === 0) users = chatsUsers;
+
+  const chat = messages.mainUserMessages?.[0]?.correspondence[
+    localStorage.chatIndexWithoutSort
+  ]?.messages
+    ?.slice()
+    ?.reverse()
+    .filter((chat, messageIndex) => messageIndex < messages?.addMessages)
+    .reverse();
 
   const selectedUser = users?.[+localStorage.chatIndexWithSort];
 
@@ -110,7 +148,7 @@ export const Correspondence: React.FC = () => {
                 </NavLink>
                 <NavLink to={`/Profile/${selectedUser?._id}`}>
                   <img
-                    src={selectedUser?.imageUrl}
+                    src={selectedUser?.imageUrl?.[0]}
                     width="10"
                     alt=""
                     className="correspondence-header__avatar"
@@ -153,7 +191,7 @@ export const Correspondence: React.FC = () => {
                         <img
                           src={
                             state.user?.chatUsers.filter((user) => message.userId?.includes(user._id))[0]
-                              ?.imageUrl
+                              ?.imageUrl?.[0]
                           }
                           alt=""
                           width="10"

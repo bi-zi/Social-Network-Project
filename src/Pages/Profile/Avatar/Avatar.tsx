@@ -16,7 +16,6 @@ export const Avatar: React.FC = () => {
 
   React.useEffect(() => {
     if (state.auth.data?._id !== undefined) dispatch(fetchMainUserMessages(state.auth.data?._id));
-
     if (state.auth.data?._id !== undefined && state.auth.data?._id !== id)
       dispatch(fetchSecondUserMessages(id));
   }, [dispatch, id, state.auth.data?._id]);

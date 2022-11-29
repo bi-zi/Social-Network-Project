@@ -27,7 +27,6 @@ export const FriendsLeftPanel: React.FC<MyProps> = ({ data, lastFriend }: MyProp
   const state = useAppSelector((state) => state);
   const { id } = useParams<keyof MyParams>() as MyParams;
 
-
   const friend = data;
 
   const deleteFriend = async (e: React.MouseEvent<HTMLDivElement>, userId: string) => {
@@ -63,7 +62,7 @@ export const FriendsLeftPanel: React.FC<MyProps> = ({ data, lastFriend }: MyProp
       style={friend === lastFriend ? { borderBottom: 'none' } : { borderBottom: `` }}>
       <Link to={`/Profile/${friend?._id}`} onClick={() => window.scrollTo(0, 0)}>
         <img
-          src={friend?.imageUrl}
+          src={friend?.imageUrl?.[0]}
           alt=""
           width={10}
           className="users__left-panel__user-block__avatar"

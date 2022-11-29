@@ -1,9 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchRegister, selectIsAuth } from '../../store/auth/slice';
-
-import { usePostRegistrationMutation } from '../../store/1newStore/auth/authApi';
-
 import { useForm } from 'react-hook-form';
 import { NavLink, Navigate } from 'react-router-dom';
 import { Lock, Unlock } from '../../Svg';
@@ -24,8 +21,6 @@ export const Registration = () => {
   const data = useAppSelector((state) => state.auth.data);
   const state = useAppSelector((state) => state);
 
-  const [addPost, { isLoading }] = usePostRegistrationMutation();
-
   const [passwordShown, setPasswordShown] = React.useState(false);
 
   const togglePassword = () => {
@@ -39,20 +34,6 @@ export const Registration = () => {
   } = useForm<FormValues>({
     mode: 'onChange',
   });
-
-  let user = {
-    login: 'bi_zi',
-    firstName: 'Aleksey',
-    lastName: 'Tsvetkov',
-    gender: 'male',
-    age: 21,
-    email: 'the_bi_zi@mail.ru',
-    password: '12345678',
-  };
-
-  const onResg = async () => {
-    await addPost(user);
-  };
 
   const onSubmit = async (values: FormValues) => {
     const val = {
@@ -83,11 +64,7 @@ export const Registration = () => {
         Do not provide personal email addresses and passwords. The data is encrypted but available to
         everyone!
       </div>
-
       <div className="registration__block">
-        <div className="registration__block__form-first-name" onClick={() => onResg()}>
-          1111111
-        </div>
         Registration
         <form className="registration__block__form" onSubmit={handleSubmit(onSubmit)}>
           <label>
@@ -121,7 +98,7 @@ export const Registration = () => {
                   title="Only these characters can be used a-z A-Z 0-9 - . @ _"
                   {...register('email', { required: 'Укажите почту' })}
                   maxLength={60}
-                />{' '}
+                />
               </>
             ) : (
               <>

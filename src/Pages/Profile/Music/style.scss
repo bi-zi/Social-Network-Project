@@ -6,7 +6,7 @@
   width: 100%;
   height: calc(40px + 100 * (100vh / 1080));
 
-  border-radius: var(--borderRadius-interface);
+  border-radius: var(var(--interface-border-radius));
   box-shadow: var(--box-shadow);
 
   background: var(--interface-color);

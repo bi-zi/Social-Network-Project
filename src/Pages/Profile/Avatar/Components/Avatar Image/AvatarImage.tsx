@@ -25,7 +25,7 @@ export const AvatarImage: React.FC = () => {
       {loadStatus ? (
         <Link to={`/${id}/PhotoAvatar/0`}>
           <div>
-            <img src={user?.imageUrl} alt="" className="avatar__image" />
+            <img src={user?.imageUrl?.[0]} alt="" className="avatar__image" />
           </div>
         </Link>
       ) : (

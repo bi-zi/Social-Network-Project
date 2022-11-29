@@ -10,7 +10,6 @@ import {
 import { fetchUsersForChats } from '../../../../../store/user/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useSort } from '../../../../Messages/Components/useSort';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
@@ -46,7 +45,6 @@ export const SendMessage: React.FC = () => {
     if (checkChat) {
       await dispatch(fetchCreateChat({ withWho: id, user: auth?._id }));
     }
-
     // выбор пользователя при переходе на страницу чатов
     dispatch(setSelectedUser(id));
     await dispatch(fetchMainUserMessages(auth?._id));

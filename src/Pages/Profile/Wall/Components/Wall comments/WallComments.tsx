@@ -85,7 +85,7 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
     <>
       {state.post.comments === postIndex ? (
         <div className="wall__comments">
-          <div className='wall__comments-input-submit'>
+          <div className="wall__comments-input-submit">
             {postStatus ? (
               <input
                 className="wall__comments__input"
@@ -129,7 +129,7 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
                       <img
                         src={
                           state.user.commentators.find((user) => user._id === comment.userId)!
-                            ?.imageUrl[0]
+                            ?.imageUrl?.[0]
                         }
                         width={10}
                         alt=""

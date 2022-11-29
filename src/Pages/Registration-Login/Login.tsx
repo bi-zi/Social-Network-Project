@@ -79,37 +79,35 @@ export const Login = () => {
               <Skeleton className="registration__block__form-first-name" />
             )}
 
-            <div className="registration__block__form-pass-block">
-              {state.auth.status === 'error' ? (
-                <>
-                  <input
-                    className="registration__block__form-pass-block__password"
-                    type={passwordShown ? 'text' : 'password'}
-                    placeholder="password"
-                    pattern="^[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
-                    title="Only these characters can be used a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~"
-                    minLength={8}
-                    maxLength={32}
-                    {...register('password', { required: 'Укажите пароль' })}
-                  />
-                  {passwordShown ? (
-                    <div
-                      className="registration__block__form-pass-block__password-icon-lock"
-                      onClick={togglePassword}>
-                      <Unlock />
-                    </div>
-                  ) : (
-                    <div
-                      className="registration__block__form-pass-block__password-icon-lock"
-                      onClick={togglePassword}>
-                      <Lock />
-                    </div>
-                  )}
-                </>
-              ) : (
-                <Skeleton className="registration__block__form-pass-block__password" />
-              )}
-            </div>
+            {state.auth.status === 'error' ? (
+              <span className="block">
+                <input
+                  className="registration__block__form-pass-block__password"
+                  type={passwordShown ? 'text' : 'password'}
+                  placeholder="password"
+                  pattern="^[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
+                  title="Only these characters can be used a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~"
+                  minLength={8}
+                  maxLength={32}
+                  {...register('password', { required: 'Укажите пароль' })}
+                />
+                {passwordShown ? (
+                  <div
+                    className="registration__block__form-pass-block__password-icon-lock"
+                    onClick={togglePassword}>
+                    <Unlock />
+                  </div>
+                ) : (
+                  <div
+                    className="registration__block__form-pass-block__password-icon-lock"
+                    onClick={togglePassword}>
+                    <Lock />
+                  </div>
+                )}
+              </span>
+            ) : (
+              <Skeleton className="registration__block__form-pass-block__password" />
+            )}
           </label>
           <br />
 

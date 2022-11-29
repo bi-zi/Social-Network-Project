@@ -10,10 +10,10 @@
     height: 80vh;
 
     text-align: center;
-    border-radius: var(--borderRadius-interface);
+    border-radius: var(var(--interface-border-radius));
     box-shadow: var(--box-shadow);
 
-    background-color: var(--interface-color);
+    background-color: var(--interface-backgroundcolor);
     color: var(--text-color);
 
     @media (width < 460px) {
@@ -76,7 +76,7 @@
       bottom: 1vh;
 
       border: 0;
-      border-radius: var(--borderRadius-interface);
+      border-radius: var(var(--interface-border-radius));
 
       box-shadow: 0 0 0.2vw rgb(255, 254, 254);
 

@@ -23,11 +23,9 @@ export const AvatarInput: React.FC = () => {
 
   return (
     <div className="post__avatar-input-container">
-      
-
       {userStatus ? (
         <img
-          src={state.user?.userOne?.[0]?.imageUrl}
+          src={state.user?.userOne?.[0]?.imageUrl?.[0]}
           width={10}
           alt=""
           className="post__avatar-input-container__avatar"

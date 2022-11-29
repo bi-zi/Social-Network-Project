@@ -32,7 +32,7 @@ export const WallHeader: React.FC<MyProps> = ({ data }: MyProps) => {
       <div className="wall__header-left">
         {wallStatus ? (
           <img
-            src={userOne?.imageUrl}
+            src={userOne?.imageUrl?.[0]}
             width={10}
             alt=""
             className="wall__header-left__avatar"

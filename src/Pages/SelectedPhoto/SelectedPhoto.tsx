@@ -22,7 +22,7 @@ export const Photo: React.FC = () => {
 
   const readyPhotos =
     category === 'PhotoAvatar'
-      ? [avatar?.imageUrl]
+      ? [avatar?.imageUrl?.[0]]
       : category === 'PhotoSlider'
       ? slider?.sliderImg
       : category === 'WallPost'

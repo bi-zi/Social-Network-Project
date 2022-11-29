@@ -50,8 +50,8 @@
 
     top: -1vh;
 
-    border-bottom-left-radius: var(--borderRadius-interface);
-    border-bottom-right-radius: var(--borderRadius-interface);
+    border-bottom-left-radius: var(var(--interface-border-radius));
+    border-bottom-right-radius: var(var(--interface-border-radius));
 
     .users__right-panel__menu__category-a-z {
       padding-top: 15px !important;
@@ -63,14 +63,14 @@
 
       font: normal 400 calc(10px + 18 * (100vw / 1920)) 'Iceberg';
 
-      background-color: var(--interface-color);
+      background-color: var(--interface-backgroundcolor);
       color: var(--text-color);
 
       cursor: pointer;
 
       @media (width < 460px) {
         font: normal 400 calc(4px + 10 * (100vw / 460)) 'Iceberg';
-        padding: .9vh 1.5vw;
+        padding: 0.9vh 1.5vw;
       }
 
       &:hover {
@@ -79,8 +79,8 @@
     }
 
     .users__right-panel__menu__category-default {
-      border-bottom-left-radius: var(--borderRadius-interface);
-      border-bottom-right-radius: var(--borderRadius-interface);
+      border-bottom-left-radius: var(var(--interface-border-radius));
+      border-bottom-right-radius: var(var(--interface-border-radius));
 
       &:hover {
         color: rgba(255, 0, 0, 0.486) !important;

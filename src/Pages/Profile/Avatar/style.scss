@@ -4,10 +4,10 @@
 
   padding: calc(5px + 10 * (100vh / 1080)) calc(5px + 10 * (100vw / 1920));
 
-  border-radius: var(--borderRadius-interface);
+  border-radius: var(var(--interface-border-radius));
   box-shadow: var(--box-shadow);
 
-  background-color: var(--interface-color);
+  background-color: var(--interface-backgroundcolor);
   color: var(--text-color);
 
   @media (width < 460px) {
@@ -35,7 +35,7 @@
     color: var(--text-color);
 
     border: 0;
-    border-radius: var(--borderRadius-interface);
+    border-radius: var(var(--interface-border-radius));
 
     background-color: black;
     box-shadow: 0 0 0.2vw rgb(255, 254, 254);

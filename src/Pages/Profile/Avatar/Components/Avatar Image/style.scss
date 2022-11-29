@@ -2,7 +2,7 @@
   width: 100% !important;
   margin-bottom: 0.5vh !important;
 
-  border-radius: var(--borderRadius-interface);
+  border-radius: var(var(--interface-border-radius));
   border: 0.2vw solid transparent;
 
   &:hover {

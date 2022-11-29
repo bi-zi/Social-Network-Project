@@ -2,9 +2,6 @@ import { createSlice, createSelector, createEntityAdapter } from '@reduxjs/toolk
 import { FriendsPageUser, UserSliceState, Status } from './types';
 import { apiSlice } from '../apiSlice';
 
-
-
-
 const initialState: UserSliceState = {
   users: [0, 0, [] as FriendsPageUser[]],
   sortedUsers: [],
@@ -34,7 +31,6 @@ const friendsPageSlice = createSlice({
     },
   },
 });
-
 
 export const { setCatergorySort, setClearUsers, setSortedUsers, setSortBy } = friendsPageSlice.actions;
 export const friendsPageReducer = friendsPageSlice.reducer;

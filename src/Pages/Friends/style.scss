@@ -7,7 +7,7 @@
 
   min-height: calc(100vh - calc(10px + 30 * (100vh / 1080)));
 
-  max-width: var(--max-width-wave);
+  max-width: var(--max-width-container);
   height: 100%;
 
   flex-wrap: wrap;
@@ -25,7 +25,7 @@
   }
 
   .users__left-panel {
-    border-radius: var(--borderRadius-interface);
+    border-radius: var(var(--interface-border-radius));
 
     .users__left-panel__zero-friends-subs {
       display: flex;
@@ -42,18 +42,18 @@
       margin-top: 2vh;
       width: 100%;
 
-      border-bottom-left-radius: var(--borderRadius-interface);
-      border-bottom-right-radius: var(--borderRadius-interface);
-      box-shadow: var(--box-shadow);
+      border-bottom-left-radius: var(var(--interface-border-radius));
+      border-bottom-right-radius: var(var(--interface-border-radius));
+      box-shadow: var(--interface-box-shadow);
 
       text-align: center;
       font: normal 400 calc(10px + 40 * (100vw / 1920)) 'Iceberg';
       cursor: pointer;
 
       color: var(--text-color);
-      background-color: var(--interface-color);
+      background-color: var(--interface-backgroundcolor);
       &:hover {
-        background-color: var(--interface-color-hover);
+        background-color: var(--interface-backgroundcolor-hover);
       }
     }
   }
@@ -63,14 +63,14 @@
     width: 63%;
     height: 100%;
 
-    border-radius: var(--borderRadius-interface);
+    border-radius: var(var(--interface-border-radius));
     box-shadow: var(--box-shadow);
 
-    background-color: var(--interface-color);
+    background-color: var(--interface-backgroundcolor);
   }
 
   .users__right-panel {
     width: 35%;
-    border-radius: var(--borderRadius-interface);
+    border-radius: var(var(--interface-border-radius));
   }
 }

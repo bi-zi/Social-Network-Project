@@ -6,48 +6,60 @@ body {
   height: 100%;
   width: 100%;
 
-  background-color: var(--background-color);
+  background-color: var(--body-backgroundcolor);
 }
 
 :root {
+  //create
+  --max-width-container-wave: 66vw;
+  --body-backgroundcolor-darkTheme: #141414;
 
-  --max-width-wave: 66vw;
+  --interface-backgroundcolor-darkTheme: #222222;
+  --interface-backgroundcolor-hover-darkTheme: #2f2f2f;
+  --interface-backgroundcolor-active-darkTheme: #171717;
+  --interface-border-radius-interface: 1vh;
+  --interface-box-shadow-darkTheme: 0 0 0 0.1vh #424242;
 
-  --background-color-darkTheme: #141414;
+  --miniInterface-backgroundcolor-darkTheme: black;
+  --miniInterface-backgroundcolor-hover-darkTheme: rgb(255, 255, 255);
+  --miniInterface-textcolor-darkTheme: black;
+  --miniInterface-textcolor-hover-darkTheme: rgb(255, 255, 255);
 
-  --interface-color-darkTheme: #222222;
-  --interface-color-hover-darkTheme: #2f2f2f;
-  --interface-color-active-darkTheme: #171717;
+  --block-input-border-radius-darkTheme: 2vh;
+  --block-input-box-shadow-darkTheme: 0px 0px 10px 1px rgba(0, 0, 0, 0.89) inset;
 
-  --miniInterface-color-darkTheme: black;
-  --miniInterface-color-hover-darkTheme: rgb(255, 255, 255);
+  //finish
+  --max-width-container: var(--max-width-container-wave);
+  --body-backgroundcolor: var(--body-backgroundcolor-darkTheme);
 
+  --interface-backgroundcolor: var(--interface-backgroundcolor-darkTheme);
+  --interface-backgroundcolor-hover: var(--interface-backgroundcolor-hover-darkTheme);
+  --interface-backgroundcolor-active: var(--interface-backgroundcolor-active-darkTheme);
+  --interface-border-radius: var(--interface-border-radius-interface);
+  --interface-box-shadow: var(--interface-box-shadow-darkTheme);
+
+  --miniInterface-backgroundcolor: var(--miniInterface-backgroundcolor-darkTheme);
+  --miniInterface-backgroundcolor-hover: var(--miniInterface-backgroundcolor-hover-darkTheme);
+  --miniInterface-textcolor: var(--miniInterface-textcolor-darkTheme);
+  --miniInterface-textcolor-hover: var(--miniInterface-textcolor-hover-darkTheme);
+
+  --block-input-border-radius: var(--block-input-border-radius-darkTheme);
+  --block-input-box-shadow: var(--block-input-box-shadow-darkTheme);
+
+  //old
   --backgroundInput-color-darkTheme: #3c3c3c;
 
   --text-color-darkTheme: white;
   --text-color-hover-darkTheme: #929292;
 
-  --box-shadow-darkTheme: 0 0 0 0.08vh #424242;
   --borderImages-darkTheme: 0.2vw dashed white;
-
-  --background-color: var(--background-color-darkTheme);
-
-  --interface-color: var(--interface-color-darkTheme);
-  --interface-color-hover: var(--interface-color-hover-darkTheme);
-  --interface-color-active: var(--interface-color-active-darkTheme);
-
-  --miniInterface-color: var(--miniInterface-color-darkTheme);
-  --miniInterface-color-hover: var(--miniInterface-color-hover-darkTheme);
 
   --backgroundInput-color: var(--backgroundInput-color-darkTheme);
 
   --text-color: var(--text-color-darkTheme);
   --text-color-hover: var(--text-color-hover-darkTheme);
 
-  --box-shadow: var(--box-shadow-darkTheme);
   --borderImages: var(--borderImages-darkTheme);
-  --borderRadius-interface: 1vh;
-  --max-width: var(--max-width-wave)
 }
 
 *,
@@ -56,7 +68,7 @@ body {
   box-sizing: border-box;
 }
 
-::-webkit-scrollbar   {
+::-webkit-scrollbar {
   width: calc(2px + 10 * (100vw / 1920));
 }
 ::-webkit-scrollbar-track {

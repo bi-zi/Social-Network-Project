@@ -7,18 +7,17 @@ export type Messages = {
   __v: number;
 };
 
-
 interface UserCorrespondence {
   messages: UserMessage[];
   withWho: string;
 }
 
-interface UserMessage {
+export type UserMessage = {
   message: string;
   date: string;
   userId: string;
   withWho: string;
-}
+};
 
 export enum Status {
   LOADING = 'loading',

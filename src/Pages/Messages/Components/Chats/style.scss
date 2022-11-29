@@ -13,13 +13,9 @@
 
       stroke: var(--text-color);
 
-      cursor: text;
+      cursor: pointer;
 
       z-index: 1;
-
-      @media (width < 460px) {
-        font-size: calc(4px + 18 * (100vh / 1080));
-      }
     }
 
     .chats-form__input {
@@ -31,8 +27,8 @@
       width: 100%;
       height: 100%;
 
-      border-top-left-radius: var(--borderRadius-interface);
-      border-top-right-radius: var(--borderRadius-interface);
+      border-top-left-radius: var(var(--interface-border-radius));
+      border-top-right-radius: var(var(--interface-border-radius));
       box-shadow: var(--box-shadow);
 
       font: normal 400 calc(2px + 22 * (100vh / 1080)) 'Iceberg';
@@ -42,7 +38,6 @@
       background-color: rgba(245, 222, 179, 0);
       color: var(--text-color);
 
-      z-index: 10;
       @media (width < 460px) {
         font: normal 400 calc(2px + 14 * (100vh / 1080)) 'Iceberg';
       }
@@ -61,7 +56,7 @@
 
     box-shadow: var(--box-shadow);
 
-    background-color: var(--interface-color);
+    background-color: var(--interface-backgroundcolor);
 
     overflow: auto;
     overflow-x: hidden;
@@ -81,11 +76,11 @@
       cursor: pointer;
 
       &:hover {
-        background-color: var(--interface-color-hover);
+        background-color: var(--interface-backgroundcolor-hover);
       }
 
       &:active {
-        background-color: var(--interface-color-active);
+        background-color: var(--interface-backgroundcolor-active);
       }
 
       .chats-users__item-avatar {
@@ -111,15 +106,15 @@
     width: 100%;
     height: calc(10px + 42 * (100vh / 1080));
 
-    border-bottom-left-radius: var(--borderRadius-interface);
-    border-bottom-right-radius: var(--borderRadius-interface);
+    border-bottom-left-radius: var(var(--interface-border-radius));
+    border-bottom-right-radius: var(var(--interface-border-radius));
 
     box-shadow: var(--box-shadow);
 
     text-align: center;
     font: normal 400 calc(10px + 10 * (100vw / 1080)) 'Iceberg';
 
-    background-color: var(--miniInterface-color);
+    background-color: var(--miniInterface-backgroundcolor);
     color: var(--text-color);
 
     .chats-footer__link {

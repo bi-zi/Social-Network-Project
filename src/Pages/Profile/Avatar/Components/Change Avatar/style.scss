@@ -4,14 +4,15 @@
   height: calc(10px + 30 * (100vw / 1920));
 }
 
-.change__avatar-button,.change__avatar-button-delete {
+.change__avatar-button,
+.change__avatar-button-delete {
   position: relative;
   width: 100%;
 
   height: calc(10px + 30 * (100vw / 1920));
 
   border: 0;
-  border-radius: var(--borderRadius-interface);
+  border-radius: var(var(--interface-border-radius));
 
   background-color: black;
   box-shadow: 0 0 0.2vw rgb(255, 254, 254);

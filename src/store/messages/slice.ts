@@ -73,6 +73,7 @@ const initialState: MessagesSliceState = {
   addMessages: 40,
   findChat: '',
   sortedChats: [],
+
   status: Status.LOADING,
 };
 
@@ -92,6 +93,7 @@ const messagesSlice = createSlice({
     setSortedChats: (state, action) => {
       state.sortedChats = action.payload;
     },
+
   },
 
   extraReducers: (builder) => {

@@ -59,7 +59,7 @@ export const Friends: React.FC = () => {
                     window.scrollTo(0, 0);
                   }}>
                   <img
-                    src={friend.imageUrl}
+                    src={friend.imageUrl?.[0]}
                     width={10}
                     alt=""
                     className="profile-friends__container__friend__avatar"
