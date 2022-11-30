@@ -174,8 +174,8 @@
     width: 100%;
     height: calc(10px + 42 * (100vh / 1080));
 
-    border-bottom-left-radius: var(var(--interface-border-radius));
-    border-bottom-right-radius: var(var(--interface-border-radius));
+    border-bottom-left-radius: var(--interface-border-radius);
+    border-bottom-right-radius: var(--interface-border-radius);
 
     background-color: var(--miniInterface-backgroundcolor);
     box-shadow: var(--box-shadow);
@@ -192,7 +192,7 @@
       height: calc(4px + 25 * (100vh / 1080));
 
       border: 0;
-      border-radius: var(var(--interface-border-radius));
+      border-radius: var(--interface-border-radius);
       box-shadow: var(--box-shadow);
 
       font: normal 400 calc(4px + 10 * (100vw / 1920)) 'Iceberg';
@@ -213,7 +213,7 @@
       right: 2vw;
 
       border: 0.1vh solid #fdfffd;
-      border-radius: var(var(--interface-border-radius));
+      border-radius: var(--interface-border-radius);
 
       font: normal 400 calc(-1px + 15 * (100vh / 1080)) 'Iceberg';
 

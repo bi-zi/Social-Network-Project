@@ -37,15 +37,15 @@
     &::-webkit-scrollbar-thumb {
       height: 30px;
 
-      border-top-right-radius: var(var(--interface-border-radius));
-      border-bottom-right-radius: var(var(--interface-border-radius));
+      border-top-right-radius: var(--interface-border-radius);
+      border-bottom-right-radius: var(--interface-border-radius);
     }
   }
 
   .wall__comments__submit-skeleton {
     position: absolute;
     width: 14%;
-    border-radius: var(var(--interface-border-radius));
+    border-radius: var(--interface-border-radius);
     top: 1vh;
     right: 0px;
   }
@@ -57,7 +57,7 @@
 
     right: 0;
     border: 0;
-    border-radius: var(var(--interface-border-radius));
+    border-radius: var(--interface-border-radius);
 
     background-color: black;
     box-shadow: 0 0 0.2vw rgb(255, 254, 254);
@@ -96,7 +96,7 @@
 
     width: 100%;
 
-    border-radius: var(var(--interface-border-radius));
+    border-radius: var(--interface-border-radius);
     box-shadow: var(--box-shadow);
 
     background-color: rgb(14, 14, 14);

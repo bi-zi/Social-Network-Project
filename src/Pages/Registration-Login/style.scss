@@ -35,7 +35,7 @@
   width: 70%;
   height: auto;
 
-  border-radius: var(var(--interface-border-radius));
+  border-radius: var(--interface-border-radius);
   box-shadow: var(--box-shadow);
 
   text-align: center;
@@ -68,7 +68,7 @@
 
       font: normal 400 calc(2px + 25 * (100vw / 1920)) 'Iceberg';
       border: 0;
-      border-radius: var(var(--interface-border-radius));
+      border-radius: var(--interface-border-radius);
       box-shadow: var(--box-shadow);
 
       background-color: var(--backgroundInput-color);
@@ -105,7 +105,7 @@
 
       width: 60%;
       height: auto;
-      border-radius: var(var(--interface-border-radius));
+      border-radius: var(--interface-border-radius);
     }
 
     .registration__block__form-submit {
@@ -118,7 +118,7 @@
 
       font: normal 400 2vw 'Iceberg';
 
-      border-radius: var(var(--interface-border-radius));
+      border-radius: var(--interface-border-radius);
 
       color: var(--text-color);
       background-color: var(--backgroundInput-color);
@@ -136,24 +136,6 @@
 
         border: 0.2vh solid white;
         background-color: black;
-      }
-    }
-
-    .registration__block__form-link-to {
-      position: absolute;
-
-      width: 100%;
-      bottom: 5px;
-
-      text-align: center;
-      text-decoration: underline;
-
-      font: normal 400 2vw 'Iceberg';
-
-      color: var(--text-color);
-
-      @media (width < 460px) {
-        font-size: 2vh;
       }
     }
   }

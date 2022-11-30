@@ -25,7 +25,7 @@
   }
 
   .users__left-panel {
-    border-radius: var(var(--interface-border-radius));
+    border-radius: var(--interface-border-radius);
 
     .users__left-panel__zero-friends-subs {
       display: flex;
@@ -42,8 +42,8 @@
       margin-top: 2vh;
       width: 100%;
 
-      border-bottom-left-radius: var(var(--interface-border-radius));
-      border-bottom-right-radius: var(var(--interface-border-radius));
+      border-bottom-left-radius: var(--interface-border-radius);
+      border-bottom-right-radius: var(--interface-border-radius);
       box-shadow: var(--interface-box-shadow);
 
       text-align: center;
@@ -63,7 +63,7 @@
     width: 63%;
     height: 100%;
 
-    border-radius: var(var(--interface-border-radius));
+    border-radius: var(--interface-border-radius);
     box-shadow: var(--box-shadow);
 
     background-color: var(--interface-backgroundcolor);
@@ -71,6 +71,6 @@
 
   .users__right-panel {
     width: 35%;
-    border-radius: var(var(--interface-border-radius));
+    border-radius: var(--interface-border-radius);
   }
 }

@@ -9,7 +9,7 @@
   width: 100%;
   height: auto;
 
-  border-radius: var(var(--interface-border-radius));
+  border-radius: var(--interface-border-radius);
   box-shadow: var(--box-shadow);
 
   background-color: var(--interface-backgroundcolor);
@@ -34,7 +34,7 @@
     height: calc(48px + 225 * (100vw / 1920));
     object-fit: cover;
 
-    border-radius: var(var(--interface-border-radius));
+    border-radius: var(--interface-border-radius);
     &:hover {
       @media (width > 460px) {
         border: var(--borderImages);
@@ -102,7 +102,7 @@
     width: 88%;
     height: calc(49.3px + 246 * (100vw / 1920));
 
-    border-radius: var(var(--interface-border-radius)) !important;
+    border-radius: var(--interface-border-radius) !important;
     box-shadow: var(--box-shadow);
 
     text-align: left !important;
@@ -138,7 +138,7 @@
     left: 28%;
 
     border: 0;
-    border-radius: var(var(--interface-border-radius));
+    border-radius: var(--interface-border-radius);
 
     background-color: black;
     box-shadow: 0 0 0.2vw rgb(255, 254, 254);

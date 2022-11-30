@@ -107,14 +107,14 @@ export const Layout: React.FC = () => {
 
   return (
     <>
-      {1 > 0 ? (
+      {1 > 1 ? (
         <div className="wrapper" ref={secondRef}>
           <Header />
           <Outlet></Outlet>
           <Footer />
         </div>
       ) : (
-        <div className="tex_works">До 26.11.2022 ведутся технические работы</div>
+        <div className="tex_works">До 2.12.2022 ведутся технические работы</div>
       )}
     </>
   );

@@ -33,7 +33,7 @@
     width: calc(52px + 750 * (100vw / 1920));
     height: 98%;
 
-    border-radius: var(var(--interface-border-radius));
+    border-radius: var(--interface-border-radius);
   }
 
   .post__avatar-input-container__text-input {
@@ -45,7 +45,7 @@
     width: 90%;
 
     border: 0;
-    border-radius: var(var(--interface-border-radius));
+    border-radius: var(--interface-border-radius);
     box-shadow: 0 0 0 0.1vh gray;
 
     font: normal 400 calc(10px + 15 * (100vw / 1920)) / 3vh 'Iceberg';

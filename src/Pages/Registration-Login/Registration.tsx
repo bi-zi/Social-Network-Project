@@ -85,9 +85,7 @@ export const Registration = () => {
       </div>
 
       <div className="registration__block">
-        <div className="registration__block__form-first-name" onClick={() => onResg()}>
-          1111111
-        </div>
+
         Registration
         <form className="registration__block__form" onSubmit={handleSubmit(onSubmit)}>
           <label>

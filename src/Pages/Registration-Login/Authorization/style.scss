@@ -14,10 +14,10 @@
   position: absolute;
 
   margin: auto auto;
-  padding: 3vh 2vw;
+  padding: 2vh 2vw;
 
   width: 50%;
-  height: 700px;
+  height: 76vh;
 
   top: 0;
   right: 0;
@@ -34,23 +34,26 @@
 }
 
 .authorization__container-logo {
-  width: calc(30px + 100 * (100vw / 1920)) !important;
-  height: calc(30px + 100 * (100vw / 1920)) !important;
+  margin-top: 0.5vh;
+
+  width: calc(10px + 100 * (100vw / 1920));
+  height: calc(10px + 100 * (100vw / 1920));
 
   border-radius: 100%;
 
-  box-shadow: 0px 0px 0px 5px #ecf0f3;
+  box-shadow: 0px 0px 0px 0.5vh #ecf0f3;
 
   object-fit: cover;
+  user-select: none;
 }
 
 .authorization__container__form {
+  position: relative;
   width: 100%;
-  height: 100%;
+  height: auto;
 
   & input {
     width: 100%;
-    padding: 2vh 1vw;
 
     font: normal 400 calc(4px + 18 * (100vw / 1920)) 'Iceberg';
 
@@ -66,15 +69,17 @@
     display: flex;
     justify-content: space-between;
 
-    margin-top: 3vh;
+    margin-top: 2vh;
 
     .authorization__container__form-first-name,
     .authorization__container__form-last-name,
     .authorization__container__form-date-input {
       margin: auto 0;
 
+      padding: calc(-20px + 36 * (100vh / 1080)) 1vw;
+
       width: 49%;
-      height: 6vh;
+      height: calc(4px + 60 * (100vh / 1080));
 
       border-radius: var(--block-input-border-radius);
       box-shadow: var(--block-input-box-shadow);
@@ -82,29 +87,37 @@
 
     .authorization__container__form-block-date {
       margin: auto 0;
-      width: 12vw;
-      font: normal 400 calc(4px + 18 * (100vw / 1920)) 'Iceberg';
+
+      width: 50%;
+
+      text-align: left;
+      font: normal 400 calc(4px + 14 * (100vw / 1920)) 'Iceberg';
 
       color: var(--text-color);
+      user-select: none;
     }
 
     .authorization__container__form-date-input {
       width: 100%;
+
+      ::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+        filter: invert(1);
+      }
     }
 
     .authorization__container__form-block-radio {
       display: grid;
 
-
-
-      font: normal 400 calc(4px + 18 * (100vw / 1920)) 'Iceberg';
+      font: normal 400 calc(4px + 16 * (100vw / 1920)) 'Iceberg';
 
       color: var(--text-color);
+      user-select: none;
 
       & input {
         margin: 0 auto;
-        width: 20px;
-        height: 20px;
+        width: 3vw;
+        height: 3vh;
       }
     }
   }
@@ -112,34 +125,67 @@
   .authorization__container__form-inputs {
     margin-top: 2vh;
 
+    padding: calc(-20px + 36 * (100vh / 1080)) 1vw;
+
     width: 100%;
-    height: 6vh;
+    height: calc(4px + 60 * (100vh / 1080));
 
     border-radius: var(--block-input-border-radius);
     box-shadow: var(--block-input-box-shadow);
   }
 }
 
-.signin-button {
-  overflow: none;
-  border: none;
-  cursor: pointer;
+.authorization__container__form-button-down {
+  margin-top: 2vh;
+  padding: 0;
+
   width: 100%;
-  height: 60px;
-  border-radius: 30px;
-  font-size: 20px;
-  font-weight: 700;
-  color: white;
-  text-align: center;
-  background-color: #02c8db;
-  box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #fff;
-  transition: all 0.5s;
+
+  height: 6vh;
+
+  box-shadow: var(--button-down-box-shadow);
+
+  background-color: var(--button-down-background-color-darkTheme);
+
+  border: none;
+  border-radius: var(--button-border-radius);
+
+  cursor: pointer;
+  user-select: none;
 }
 
-.signin-button:hover {
-  background-color: #50e5b9;
+.authorization__container__form-button-up {
+  display: block;
+  padding: 1.2vh 4.2vw;
+
+  font: normal 400 calc(6px + 20 * (100vw / 1920)) 'Iceberg';
+
+  color: var(--text-color);
+  background-color: var(--button-up-background-color);
+
+  border-radius: var(--button-border-radius);
+  transition: all 0.2s;
+
+  transform: translateY(calc(-2px - 4 * (100vh / 1080)));
+  user-select: none;
 }
 
-.signin-button:active {
-  background-color: #88ef9e;
+.authorization__container__form-button-down:active .authorization__container__form-button-up {
+  transform: translateY(calc(-1px - 1 * (100vh / 1080)));
+}
+
+.authorization__container__form-link-to {
+
+  margin-top: 2vh;
+
+  width: 100%;
+
+
+  text-decoration: underline;
+
+  font: normal 400 2vw 'Iceberg';
+
+  @media (width < 460px) {
+    font-size: 2vh;
+  }
 }

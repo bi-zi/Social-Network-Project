@@ -5,7 +5,7 @@
   width: 100%;
   min-height: 11vh;
 
-  border-radius: var(var(--interface-border-radius));
+  border-radius: var(--interface-border-radius);
   box-shadow: var(--box-shadow);
 
   background: var(--interface-color);
@@ -37,7 +37,7 @@
     width: calc(35px + 100 * (100vw / 1920));
     height: 3vh;
 
-    border-radius: var(var(--interface-border-radius));
+    border-radius: var(--interface-border-radius);
   }
 }
 

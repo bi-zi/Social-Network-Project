@@ -279,4 +279,4 @@ export const {
   setClearFindUserSubscribers,
   setClearCommentators,
 } = userSlice.actions;
-export const userReducer = userSlice.reducer;
+export const playerReducer = userSlice.reducer;

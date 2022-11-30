@@ -12,7 +12,7 @@
   height: calc(10px + 30 * (100vw / 1920));
 
   border: 0;
-  border-radius: var(var(--interface-border-radius));
+  border-radius: var(--interface-border-radius);
 
   background-color: black;
   box-shadow: 0 0 0.2vw rgb(255, 254, 254);

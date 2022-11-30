@@ -50,8 +50,8 @@
 
     top: -1vh;
 
-    border-bottom-left-radius: var(var(--interface-border-radius));
-    border-bottom-right-radius: var(var(--interface-border-radius));
+    border-bottom-left-radius: var(--interface-border-radius);
+    border-bottom-right-radius: var(--interface-border-radius);
 
     .users__right-panel__menu__category-a-z {
       padding-top: 15px !important;
@@ -79,8 +79,8 @@
     }
 
     .users__right-panel__menu__category-default {
-      border-bottom-left-radius: var(var(--interface-border-radius));
-      border-bottom-right-radius: var(var(--interface-border-radius));
+      border-bottom-left-radius: var(--interface-border-radius);
+      border-bottom-right-radius: var(--interface-border-radius);
 
       &:hover {
         color: rgba(255, 0, 0, 0.486) !important;

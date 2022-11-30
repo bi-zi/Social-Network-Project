@@ -26,7 +26,12 @@ body {
   --miniInterface-textcolor-hover-darkTheme: rgb(255, 255, 255);
 
   --block-input-border-radius-darkTheme: 2vh;
-  --block-input-box-shadow-darkTheme: 0px 0px 10px 1px rgba(0, 0, 0, 0.89) inset;
+  --block-input-box-shadow-darkTheme: 0px 0px 1vh 0.2vh rgb(0, 0, 0, 0.7) inset;
+
+  --button-down-background-color-darkTheme: #000000;
+  --button-down-box-shadow-darkTheme: 0 0px .5vh white;
+  --button-up-background-color-darkTheme: #2f2f2f;
+  --button-border-radius-darkTheme: 1vh;
 
   //finish
   --max-width-container: var(--max-width-container-wave);
@@ -45,6 +50,11 @@ body {
 
   --block-input-border-radius: var(--block-input-border-radius-darkTheme);
   --block-input-box-shadow: var(--block-input-box-shadow-darkTheme);
+
+  --button-down-background-color: var(--button-down-background-color-darkTheme);
+  --button-down-box-shadow: var(--button-down-box-shadow-darkTheme);
+  --button-up-background-color: var(--button-up-background-color-darkTheme);
+  --button-border-radius: var(--button-border-radius-darkTheme);
 
   //old
   --backgroundInput-color-darkTheme: #3c3c3c;
