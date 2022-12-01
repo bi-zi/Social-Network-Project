@@ -11,13 +11,13 @@
 }
 
 .authorization__container {
-  position: absolute;
+  position: relative;
 
-  margin: auto auto;
+  margin: 4vh auto;
   padding: 2vh 2vw;
 
   width: 50%;
-  height: 76vh;
+  height: auto;
 
   top: 0;
   right: 0;
@@ -171,19 +171,17 @@
 }
 
 .authorization__container__form-button-down:active .authorization__container__form-button-up {
-  transform: translateY(calc(-1px - 1 * (100vh / 1080)));
+  transform: translateY(calc(-1px - 0 * (100vh / 1080)));
 }
 
 .authorization__container__form-link-to {
-
   margin-top: 2vh;
 
   width: 100%;
 
-
   text-decoration: underline;
 
-  font: normal 400 2vw 'Iceberg';
+  font: normal 400 2vh 'Iceberg';
 
   @media (width < 460px) {
     font-size: 2vh;

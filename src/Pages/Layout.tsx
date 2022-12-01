@@ -107,7 +107,7 @@ export const Layout: React.FC = () => {
 
   return (
     <>
-      {1 > 1 ? (
+      {1 > 0 ? (
         <div className="wrapper" ref={secondRef}>
           <Header />
           <Outlet></Outlet>

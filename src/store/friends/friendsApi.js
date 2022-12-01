@@ -22,7 +22,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
 
     getAllUsers: builder.query({
-      query: () => '/user/all',
+      query: () => '',
       transformResponse: (res) => {
         return usersAdapter.setAll(initialState, res)
       },

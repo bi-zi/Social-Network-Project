@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchRegister, selectIsAuth } from '../../../store/auth/slice';
+import { selectIsAuth } from '../../../store/1newStore/auth/slice';
 
 import { usePostRegistrationMutation } from '../../../store/1newStore/auth/authApi';
 import { logo } from '../logo';
@@ -22,18 +22,17 @@ type FormValues = {
   password: string;
 };
 
-export const Reg = () => {
+export const Registration = () => {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(selectIsAuth);
-  const data = useAppSelector((state) => state.auth.data);
+  const auth = useAppSelector((state) => state.secondAuth.authorizedUser);
   const state = useAppSelector((state) => state);
 
-  console.log(state)
-
-  const [addPost, { isLoading }] = usePostRegistrationMutation();
   const [value, setValue] = React.useState(0);
 
   const [passwordShown, setPasswordShown] = React.useState(false);
+
+  const [registration, { isLoading }] = usePostRegistrationMutation();
 
   const {
     register,
@@ -58,16 +57,18 @@ export const Reg = () => {
       password: values.password,
     };
 
-    const response:any = await addPost(userInfo);
+    const data: any = await registration(userInfo);
 
-     localStorage.setItem('token', response.data?.accessToken);
-
-    console.log(response.data);
+    if (data.error) {
+      return alert(data.error?.data?.message);
+    }
+    if (data.data) {
+      localStorage.setItem('token', data.data?.accessToken);
+    }
   };
 
   if (isAuth) {
-    localStorage.setItem('isAuth', 'true');
-    return <Navigate to={`/Profile/${data?._id}`} />;
+    return <Navigate to={`/Profile/${auth?._id}`} />;
   }
 
   return (
@@ -80,6 +81,7 @@ export const Reg = () => {
             <div className="authorization__container__form-first-name">
               <input
                 type="text"
+                defaultValue={'Aleksey'}
                 placeholder="First name"
                 pattern="^[a-zA-Z]*$"
                 title="You can only use latin characters without spaces"
@@ -93,6 +95,7 @@ export const Reg = () => {
             <div className="authorization__container__form-last-name">
               <input
                 type="text"
+                defaultValue={'Tsvetkov'}
                 placeholder="Last name"
                 pattern="^[a-zA-Z]*$"
                 title="You can only use latin characters without spaces"
@@ -107,6 +110,7 @@ export const Reg = () => {
           <div className="authorization__container__form-inputs">
             <input
               type="text"
+              defaultValue={'bi_zi'}
               placeholder="Login"
               pattern="^[a-zA-Z_-]*$"
               title="You can only use latin characters with these two characters - _ without spaces"
@@ -120,6 +124,7 @@ export const Reg = () => {
           <div className="authorization__container__form-inputs">
             <input
               type="email"
+              defaultValue={'thebizi15@gmail.com'}
               placeholder="Email*"
               pattern="^[a-zA-Z0-9-.@_]*$"
               minLength={5}
@@ -133,6 +138,7 @@ export const Reg = () => {
           <div className="authorization__container__form-inputs">
             <input
               type="password"
+              defaultValue={13213131312}
               placeholder="Password"
               pattern="^[a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$"
               title="Only these characters can be used a-zA-Z0-9!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~"

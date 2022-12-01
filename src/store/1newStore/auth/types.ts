@@ -1,17 +1,8 @@
+import { Registration } from './../../../Pages/Registration-Login/Registration';
 export type Registration = {
-  avatar: Avatar;
-  birdayDate: string;
   email: string;
-  firstName: string;
-  friends: Friends[];
-  gender: string;
   isActivated: boolean;
-  lastName: string;
   login: string;
-  online: boolean;
-  password: string;
-  subscribers: Friends[];
-  wasOnline: string;
   _id: string;
 };
 
@@ -32,5 +23,5 @@ export enum Status {
 }
 
 export interface UserSliceState {
-  mainUser: Registration | {};
+  authorizedUser: Registration;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { fetchRegister, selectIsAuth } from '../../store/auth/slice';
+import { fetchRegister } from '../../store/auth/slice';
+import {  selectIsAuth } from '../../store/1newStore/auth/slice';
 import { useForm } from 'react-hook-form';
 import { NavLink, Navigate } from 'react-router-dom';
 import { Lock, Unlock } from '../../Svg';
@@ -53,10 +54,6 @@ export const Registration = () => {
     }
   };
 
-  if (isAuth) {
-    localStorage.setItem('isAuth', 'true');
-    return <Navigate to={`/Profile/${data?._id}`} />;
-  }
 
   return (
     <div className="registration">

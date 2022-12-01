@@ -56,12 +56,13 @@ export const Photo: React.FC = () => {
     dispatch(fetchOneUser(user));
   }, [dispatch, user]);
 
-  if (localStorage.isAuth === undefined) {
-    return <Navigate to="/Login" />;
-  }
 
   const loadStatus =
     state.user.status === 'loaded' && state.auth.status === 'loaded' && state.slider.status === 'loaded';
+
+  if (localStorage.isAuth === undefined) {
+    return <Navigate to="/Login" />;
+  }
 
   return (
     <div className="selected-image">

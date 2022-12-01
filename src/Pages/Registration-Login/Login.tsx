@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { fetchAuth, selectIsAuth } from '../../store/auth/slice';
+import { fetchAuth } from '../../store/auth/slice';
+import { selectIsAuth } from '../../store/1newStore/auth/slice';
 import { useForm } from 'react-hook-form';
 import { NavLink, Navigate } from 'react-router-dom';
 
@@ -47,11 +48,6 @@ export const Login = () => {
       window.localStorage.setItem('token', data.payload.token);
     }
   };
-
-  if (isAuth) {
-    localStorage.setItem('isAuth', 'true');
-    return <Navigate to={`/Profile/${data?._id}`} />;
-  }
 
   return (
     <div className="registration">
@@ -120,7 +116,7 @@ export const Login = () => {
           )}
 
           <div className="registration__block__form-link-to">
-            <NavLink to="/Register">Register an account</NavLink>
+            <NavLink to="/Registration">Register an account</NavLink>
           </div>
         </form>
       </div>

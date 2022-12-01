@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { fetchRegister, selectIsAuth } from '../../store/auth/slice';
+import { fetchRegister } from '../../store/auth/slice';
+import { selectIsAuth } from '../../store/1newStore/auth/slice';
 
 import { usePostRegistrationMutation } from '../../store/1newStore/auth/authApi';
 
@@ -72,11 +73,7 @@ export const Registration = () => {
     }
   };
 
-  if (isAuth) {
-    localStorage.setItem('isAuth', 'true');
-    return <Navigate to={`/Profile/${data?._id}`} />;
-  }
-
+ 
   return (
     <div className="registration">
       <div className="registration__attention">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchNotifications } from '../../store/notifications/slice';
+import { useGetRefreshQuery } from '../../store/1newStore/auth/authApi';
 import { fetchOneUser } from '../../store/user/slice';
 import { Avatar } from './Avatar/Avatar';
 import { UserInfo } from './UserInfo/UserInfo';
@@ -23,10 +24,12 @@ export type MyParams = {
 export const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const data = useAppSelector((state) => state.auth.data);
+  const auth = useAppSelector((state) => state.auth.data);
   const state = useAppSelector((state) => state);
-
   const { id } = useParams<keyof MyParams>() as MyParams;
+
+  const { data, isLoading } = useGetRefreshQuery(123);
+  console.log(data)
 
   const postLength = state.post.userPosts.post?.[0]?.post?.length;
 
@@ -38,6 +41,7 @@ export const Profile: React.FC = () => {
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
   }
+
   return (
     <div className="profile" style={postLength === 0 ? { paddingBottom: 0 } : { paddingBottom: 0 }}>
       <div className="profile__left-container">
@@ -54,7 +58,7 @@ export const Profile: React.FC = () => {
       <div className="profile__right-container">
         <UserInfo />
         <PhotoSlider />
-        {data?._id === id ? <Post /> : ''}
+        {auth?._id === id ? <Post /> : ''}
         {state.auth.status === 'loaded' ? <Wall /> : ''}
       </div>
     </div>

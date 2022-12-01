@@ -33,7 +33,7 @@ export const ControlPanel: React.FC = () => {
 
   return (
     <>
-      {localStorage.isAuth !== undefined && state.auth.status === 'loaded' ? (
+      { state.auth.status === 'loaded' ? (
         <div className="header__control-panel">
           <NavLink
             to={`/Profile/${state.auth?.data?._id}`}
