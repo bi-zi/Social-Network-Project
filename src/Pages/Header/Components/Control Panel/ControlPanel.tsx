@@ -15,28 +15,29 @@ export const ControlPanel: React.FC = () => {
   const state = useAppSelector((state) => state);
   const { id } = useParams<keyof MyParams>() as MyParams;
 
-  const loading = state.auth.status === 'loading' || state.user.status === 'loading';
+  const loading = state.oldAuth.status === 'loading' || state.user.status === 'loading';
 
-  const error = state.auth.status === 'error' || state.user.status === 'error';
+  const error = state.oldAuth.status === 'error' || state.user.status === 'error';
 
   const firstPath = window.location.pathname.split('/')[1];
   const secondPath = window.location.pathname.split('/')[2];
 
   const profileIconColor =
-    firstPath === 'Profile' && secondPath === state.auth?.data?._id ? 'black' : 'white';
+    firstPath === 'Profile' && secondPath === state.oldAuth?.data?._id ? 'black' : 'white';
 
   const chatsIconColor = firstPath === 'Messages' ? 'black' : 'white';
 
   const usersIconColor =
-    firstPath === 'Users' || (firstPath === 'Profile' && state.auth?.data?._id !== id) ? 'black' : 'white';
-
+    firstPath === 'Users' || (firstPath === 'Profile' && state.oldAuth?.data?._id !== id)
+      ? 'black'
+      : 'white';
 
   return (
     <>
-      { state.auth.status === 'loaded' ? (
+      {state.oldAuth.status === 'loaded' ? (
         <div className="header__control-panel">
           <NavLink
-            to={`/Profile/${state.auth?.data?._id}`}
+            to={`/Profile/${state.oldAuth?.data?._id}`}
             style={{ stroke: profileIconColor }}
             className="header__control-panel__icons">
             <Profile />
@@ -51,7 +52,7 @@ export const ControlPanel: React.FC = () => {
             <Chats />
           </NavLink>
           <NavLink
-            to={`/Users/${state.auth?.data?._id}`}
+            to={`/Users/${state.oldAuth?.data?._id}`}
             style={{ stroke: usersIconColor }}
             className="header__control-panel__icons">
             <Users />

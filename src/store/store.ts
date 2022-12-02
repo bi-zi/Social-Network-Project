@@ -1,28 +1,35 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-import { playerReducer } from './user/slice';
-import { aboutReducer } from './about/slice';
-import { messagesReducer } from './messages/slice';
-import { sliderReducer } from './slider/slice';
-import { postReducer } from './post/slice';
-import { NoteReducer } from './notifications/slice';
 import { authReducer } from './auth/slice';
-import { secondAuthReducer } from './1newStore/auth/slice';
-import { friendsPageReducer } from './friends/slice';
+
+
+
+import { playerReducer } from './old store/user/slice';
+import { aboutReducer } from './old store/about/slice';
+import { messagesReducer } from './old store/messages/slice';
+import { sliderReducer } from './old store/slider/slice';
+import { postReducer } from './old store/post/slice';
+import { NoteReducer } from './old store/notifications/slice';
+import { oldAuthReducer } from './old store/auth/slice';
+
+import { friendsPageReducer } from './old store/friends/slice';
 
 import { apiSlice } from './apiSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    secondAuth: secondAuthReducer,
 
+
+
+
+
+
+    oldAuth: oldAuthReducer,
     about: aboutReducer,
     user: playerReducer,
-
     friendsPage: friendsPageReducer,
-
     slider: sliderReducer,
     post: postReducer,
     note: NoteReducer,

@@ -18,7 +18,9 @@ export const AvatarImage: React.FC = () => {
   const user = state.user?.userOne?.[0];
 
   const loadStatus =
-    state.user.status === 'loaded' && state.auth.status === 'loaded' && state.slider.status === 'loaded';
+    state.user.status === 'loaded' &&
+    state.oldAuth.status === 'loaded' &&
+    state.slider.status === 'loaded';
 
   return (
     <>

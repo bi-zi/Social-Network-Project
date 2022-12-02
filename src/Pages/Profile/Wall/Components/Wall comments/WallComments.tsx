@@ -6,9 +6,9 @@ import {
   fetchCommentPush,
   fetchCommentDelete,
   setComments,
-} from '../../../../../store/post/slice';
-import { fetchCommentators } from '../../../../../store/user/slice';
-import { Post } from '../../../../../store/post/types';
+} from '../../../../../store/old store/post/slice';
+import { fetchCommentators } from '../../../../../store/old store/user/slice';
+import { Post } from '../../../../../store/old store/post/types';
 import { useParams, Link } from 'react-router-dom';
 import { Garbage, Submit } from '../../../../../Svg';
 import Skeleton from 'react-loading-skeleton';
@@ -27,7 +27,7 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
   const wall = useAppSelector((state) => state.post.userPosts);
-  const auth = useAppSelector((state) => state.auth?.data);
+  const auth = useAppSelector((state) => state.oldAuth?.data);
 
   const { id } = useParams<keyof MyParams>() as MyParams;
   const firstRef = React.useRef<HTMLInputElement>(null);

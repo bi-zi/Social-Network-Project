@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../store/store';
-import { setClearFindUserFriends, setClearFindUserSubscribers } from '../store/user/slice';
-import { setClearUsers } from '../store/friends/slice';
+import { setClearFindUserFriends, setClearFindUserSubscribers } from '../store/old store/user/slice';
+import { setClearUsers } from '../store/old store/friends/slice';
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
 import { Navigate, Outlet, useNavigate } from 'react-router-dom';
@@ -15,7 +15,7 @@ export const Layout: React.FC = () => {
 
   let navigate = useNavigate();
 
-  if (state.auth.data?._id !== undefined) localStorage.setItem('mainUser', state.auth.data?._id);
+  if (state.oldAuth.data?._id !== undefined) localStorage.setItem('mainUser', state.oldAuth.data?._id);
 
   let profile = window.location.pathname.split('/')[1] === 'Profile';
 
@@ -25,7 +25,7 @@ export const Layout: React.FC = () => {
   // а функция показывает размер файла который в нее закинешь
 
   // console.log([
-  //   `-AUTH- ${state.auth.status}`,
+  //   `-AUTH- ${state.oldAuth.status}`,
   //   `-USER- ${state.user.status}`,
   //   `-NOTE- ${state.note.status}`,
   //   `-MESSAGES- ${state.messages.status}`,
@@ -97,17 +97,17 @@ export const Layout: React.FC = () => {
   ]);
 
   React.useEffect(() => {
-    if (window.location.pathname.split(' ')[0] === '/' && state.auth.data?._id !== undefined) {
-      return navigate(`/Profile/${state.auth.data._id}`);
+    if (window.location.pathname.split(' ')[0] === '/' && state.oldAuth.data?._id !== undefined) {
+      return navigate(`/Profile/${state.oldAuth.data._id}`);
     }
     if (window.location.pathname.split(' ')[0] === '/') {
       return navigate('/Login');
     }
-  }, [navigate, state.auth.data._id]);
+  }, [navigate, state.oldAuth.data._id]);
 
   return (
     <>
-      {1 > 0 ? (
+      {1 > 1 ? (
         <div className="wrapper" ref={secondRef}>
           <Header />
           <Outlet></Outlet>

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Messages, MessagesSliceState, Status } from './types';
-import axios from '../../backend/axios';
+import axios from '../../../backend/axios';
 
 export const fetchMainUserMessages = createAsyncThunk(
   'messages/id/fetchMainUserMessages',
@@ -93,7 +93,6 @@ const messagesSlice = createSlice({
     setSortedChats: (state, action) => {
       state.sortedChats = action.payload;
     },
-
   },
 
   extraReducers: (builder) => {

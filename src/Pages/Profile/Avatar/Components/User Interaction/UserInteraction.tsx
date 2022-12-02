@@ -9,13 +9,13 @@ import {
   fetchDeleteFriend,
   fetchUserFriends,
   fetchUserSubscribers,
-} from '../../../../../store/user/slice';
+} from '../../../../../store/old store/user/slice';
 import {
   fetchNotifications,
   fetchNotificationsPost,
   fetchNotificationsPush,
   fetchDeleteRequest,
-} from '../../../../../store/notifications/slice';
+} from '../../../../../store/old store/notifications/slice';
 import { useParams } from 'react-router-dom';
 
 import Skeleton from 'react-loading-skeleton';
@@ -50,7 +50,7 @@ export const UserInteraction: React.FC = () => {
       await dispatch(fetchNotificationsPost({ fromWho: mainUser?._id, user: id }));
     }
 
-    dispatch(fetchMainUser(state.auth?.data?._id));
+    dispatch(fetchMainUser(state.oldAuth?.data?._id));
     dispatch(fetchOneUser(id));
     dispatch(fetchUserSubscribers(id));
     dispatch(fetchNotifications(id));
@@ -72,7 +72,7 @@ export const UserInteraction: React.FC = () => {
       }),
     );
     dispatch(fetchNotifications(id));
-    dispatch(fetchMainUser(state.auth?.data?._id));
+    dispatch(fetchMainUser(state.oldAuth?.data?._id));
     dispatch(fetchUserSubscribers(id));
     dispatch(fetchOneUser(id));
   };
@@ -86,7 +86,7 @@ export const UserInteraction: React.FC = () => {
         user: id,
       }),
     );
-    dispatch(fetchMainUser(state.auth?.data?._id));
+    dispatch(fetchMainUser(state.oldAuth?.data?._id));
     dispatch(fetchUserFriends(id));
     dispatch(fetchOneUser(id));
   };
@@ -101,14 +101,14 @@ export const UserInteraction: React.FC = () => {
         user: id,
       }),
     );
-    dispatch(fetchMainUser(state.auth?.data?._id));
+    dispatch(fetchMainUser(state.oldAuth?.data?._id));
     dispatch(fetchUserFriends(id));
     dispatch(fetchOneUser(id));
   };
 
   const loadStatus =
     state.user.status === 'loaded' &&
-    state.auth.status === 'loaded' &&
+    state.oldAuth.status === 'loaded' &&
     state.note.status === 'loaded' &&
     state.messages.status === 'loaded';
 

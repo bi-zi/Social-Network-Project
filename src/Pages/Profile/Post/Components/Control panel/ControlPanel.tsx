@@ -7,8 +7,8 @@ import {
   fetchUserPostsAll,
   fetchCreatePost,
   fetchPostPush,
-} from '../../../../../store/post/slice';
-import { setInputNumber } from '../../../../../store/user/slice';
+} from '../../../../../store/old store/post/slice';
+import { setInputNumber } from '../../../../../store/old store/user/slice';
 import { ImageParsing } from '../../../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
 import { Image, Close, Video, Submit, Garbage } from '../../../../../Svg/index';
@@ -83,7 +83,7 @@ export const ControlPanel: React.FC = () => {
   const postStatus =
     state.post.userPosts.status === 'loaded' &&
     state.user.status === 'loaded' &&
-    state.auth.status === 'loaded';
+    state.oldAuth.status === 'loaded';
 
   const imageLoadStatus =
     numImg < 6 && state.user.status === 'loaded' && state.slider.status === 'loaded';
@@ -100,7 +100,7 @@ export const ControlPanel: React.FC = () => {
             style={{ fill: 'white' }}
             className="post__control-panel__icons"
             onClick={() => dispatch(setInputNumber('2'))}>
-            <span className='post__control-panel__image-hover'>
+            <span className="post__control-panel__image-hover">
               <Image />
             </span>
             <ImageParsing />

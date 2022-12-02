@@ -1,8 +1,12 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { useGetUsersQuery, useGetAllUsersQuery, selectAllUsers } from '../../store/friends/friendsApi';
-import { fetchOneUser, fetchUserFriends, fetchUserSubscribers } from '../../store/user/slice';
-import { fetchNotifications } from '../../store/notifications/slice';
+import {
+  useGetUsersQuery,
+  useGetAllUsersQuery,
+  selectAllUsers,
+} from '../../store/old store/friends/friendsApi';
+import { fetchOneUser, fetchUserFriends, fetchUserSubscribers } from '../../store/old store/user/slice';
+import { fetchNotifications } from '../../store/old store/notifications/slice';
 
 import { useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';

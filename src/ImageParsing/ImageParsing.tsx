@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/store';
-import { setCreateImg } from '../store/post/slice';
-import { fetchUserUpdate, fetchOneUser } from '../store/user/slice';
-import { fetchSlider, fetchSliderPost, fetchSliderPush } from '../store/slider/slice';
+import { setCreateImg } from '../store/old store/post/slice';
+import { fetchUserUpdate, fetchOneUser } from '../store/old store/user/slice';
+import { fetchSlider, fetchSliderPost, fetchSliderPush } from '../store/old store/slider/slice';
 import { useParams } from 'react-router-dom';
 import imageCompression from 'browser-image-compression';
 import { Line } from 'rc-progress';

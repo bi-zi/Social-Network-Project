@@ -5,8 +5,8 @@ import {
   fetchAbout,
   fetchAboutUpdate,
   setCloseInfo,
-} from '../../../../../store/about/slice';
-import { About } from '../../../../../store/about/types';
+} from '../../../../../store/old store/about/slice';
+import { About } from '../../../../../store/old store/about/types';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import './style.scss';
@@ -136,7 +136,7 @@ export const EditInfo: React.FC = () => {
               Save
             </button>
 
-            <button className="about__form__buttton" onClick={e=>  dispatch(setCloseInfo(0))}>
+            <button className="about__form__buttton" onClick={(e) => dispatch(setCloseInfo(0))}>
               Close
             </button>
           </div>

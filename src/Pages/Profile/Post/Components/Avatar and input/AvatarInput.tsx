@@ -1,8 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/store';
-import { setCreatText } from '../../../../../store/post/slice';
+import { setCreatText } from '../../../../../store/old store/post/slice';
 import Skeleton from 'react-loading-skeleton';
-
 
 import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';

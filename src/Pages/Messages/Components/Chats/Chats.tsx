@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
-import { setFindChat } from '../../../../store/messages/slice';
+import { setFindChat } from '../../../../store/old store/messages/slice';
 import { NavLink } from 'react-router-dom';
 import { ChatComponent } from '../Chat/ChatComponent';
 import { Search } from '../../../../Svg';
@@ -8,7 +8,7 @@ import { ChatsSkeleton } from '../Chat/ChatsSkeleton';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
-import { User } from '../../../../store/auth/types';
+import { User } from '../../../../store/old store/auth/types';
 
 export const Chats: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ export const Chats: React.FC = () => {
   const searchRef = React.useRef<HTMLInputElement>(null);
 
   // dispatch(setFindChat(e.target.value)
-  const auth = useAppSelector((state) => state.auth?.data);
+  const auth = useAppSelector((state) => state.oldAuth?.data);
   const messages = useAppSelector((state) => state?.messages);
 
   const data = messages.mainUserMessages?.[0];
@@ -43,11 +43,11 @@ export const Chats: React.FC = () => {
   }
 
   // Поиск по поисковому запросу
-    users = users.filter(
-      (user) =>
-        user.firstName[0].toLowerCase().includes(messages?.findChat[0]?.toLowerCase()) &&
-        user.firstName.toLowerCase().includes(messages?.findChat?.toLowerCase()),
-    );
+  users = users.filter(
+    (user) =>
+      user.firstName[0].toLowerCase().includes(messages?.findChat[0]?.toLowerCase()) &&
+      user.firstName.toLowerCase().includes(messages?.findChat?.toLowerCase()),
+  );
 
   if (users.length === 0) users = chatsUsers;
 
@@ -71,7 +71,7 @@ export const Chats: React.FC = () => {
 
   const selectedUser = users?.[localStorage.chatIndexWithSort];
 
-  const loadStatus = messages.status === 'loaded' && state.auth.status === 'loaded';
+  const loadStatus = messages.status === 'loaded' && state.oldAuth.status === 'loaded';
 
   return (
     <div className="chats-container">

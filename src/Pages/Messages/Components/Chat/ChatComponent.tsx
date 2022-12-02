@@ -1,8 +1,12 @@
 import React, { useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
-import { fetchSecondUserMessages, setSelectedUser, setFindChat } from '../../../../store/messages/slice';
-import { User } from '../../../../store/user/types';
-import { UserMessage } from '../../../../store/messages/types';
+import {
+  fetchSecondUserMessages,
+  setSelectedUser,
+  setFindChat,
+} from '../../../../store/old store/messages/slice';
+import { User } from '../../../../store/old store/user/types';
+import { UserMessage } from '../../../../store/old store/messages/types';
 import './style.scss';
 
 interface MyProps {
@@ -12,7 +16,12 @@ interface MyProps {
   lastMessages: UserMessage[];
 }
 
-export const ChatComponent: React.FC<MyProps> = ({ users, indexId, selected, lastMessages }: MyProps) => {
+export const ChatComponent: React.FC<MyProps> = ({
+  users,
+  indexId,
+  selected,
+  lastMessages,
+}: MyProps) => {
   const dispatch = useAppDispatch();
   const messages = useAppSelector((state) => state?.messages);
   const inputRef = React.useRef<HTMLInputElement>(null);

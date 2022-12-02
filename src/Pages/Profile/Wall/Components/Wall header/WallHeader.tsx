@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppSelector } from '../../../../../store/store';
 import { useWall } from '../useWall';
-import { Post } from '../../../../../store/post/types';
+import { Post } from '../../../../../store/old store/post/types';
 import { useParams } from 'react-router-dom';
 import { Settings } from '../../../../../Svg';
 import Skeleton from 'react-loading-skeleton';

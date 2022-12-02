@@ -1,6 +1,6 @@
 import { createSlice, createSelector, createEntityAdapter } from '@reduxjs/toolkit';
 import { FriendsPageUser, UserSliceState, Status } from './types';
-import { apiSlice } from '../apiSlice';
+import { apiSlice } from '../../apiSlice';
 
 const initialState: UserSliceState = {
   users: [0, 0, [] as FriendsPageUser[]],

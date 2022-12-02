@@ -1,31 +1,23 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { selectIsAuth } from '../../../store/1newStore/auth/slice';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { selectIsAuth } from '../../store/auth/slice';
 
-import { usePostRegistrationMutation } from '../../../store/1newStore/auth/authApi';
-import { logo } from '../logo';
+import { usePostRegistrationMutation } from '../../store/auth/authApi';
+import { logo } from './logo';
 
 import { useForm } from 'react-hook-form';
 import { NavLink, Navigate } from 'react-router-dom';
-import { Lock, Unlock } from '../../../Svg';
+import { Lock, Unlock } from '../../Svg';
+
+import { FormValues, BackendData } from './types';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './style.scss';
 
-type FormValues = {
-  login: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  birdayDate: Date;
-  email: string;
-  password: string;
-};
-
 export const Registration = () => {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(selectIsAuth);
-  const auth = useAppSelector((state) => state.secondAuth.authorizedUser);
+  const auth = useAppSelector((state) => state.auth.authorizedUser);
   const state = useAppSelector((state) => state);
 
   const [value, setValue] = React.useState(0);

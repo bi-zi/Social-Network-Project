@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/store';
-import { setPostIndex } from '../../../../../store/post/slice';
-import { Post } from '../../../../../store/post/types';
+import { setPostIndex } from '../../../../../store/old store/post/slice';
+import { Post } from '../../../../../store/old store/post/types';
 import { useParams, useNavigate } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';

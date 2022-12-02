@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
-import { usePostLogoutMutation } from '../../../../store/1newStore/auth/authApi';
-import { setCreatText, setCreateVid } from '../../../../store/post/slice';
+import { usePostLogoutMutation } from '../../../../store/auth/authApi';
+import { setCreatText, setCreateVid } from '../../../../store/old store/post/slice';
 import { Loading } from '../Loading/Loading';
 import { NavLink } from 'react-router-dom';
 import { Burger } from '../../../../Svg';
@@ -9,7 +9,7 @@ import './style.scss';
 
 export const Menu: React.FC = () => {
   const dispatch = useAppDispatch();
-  const auth = useAppSelector((state) => state.auth);
+  const auth = useAppSelector((state) => state.oldAuth);
   const state = useAppSelector((state) => state);
 
   const [logout, { isLoading }] = usePostLogoutMutation();

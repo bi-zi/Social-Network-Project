@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { fetchUserUpdate, fetchOneUser } from '../../store/user/slice';
-import { fetchSlider, fetchSliderDelete } from '../../store/slider/slice';
-import { setCreateImgDelete } from '../../store/post/slice';
+import { fetchUserUpdate, fetchOneUser } from '../../store/old store/user/slice';
+import { fetchSlider, fetchSliderDelete } from '../../store/old store/slider/slice';
+import { setCreateImgDelete } from '../../store/old store/post/slice';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { Left, Right, Cross } from '../../Svg';
 import './style.scss';
@@ -56,9 +56,10 @@ export const Photo: React.FC = () => {
     dispatch(fetchOneUser(user));
   }, [dispatch, user]);
 
-
   const loadStatus =
-    state.user.status === 'loaded' && state.auth.status === 'loaded' && state.slider.status === 'loaded';
+    state.user.status === 'loaded' &&
+    state.oldAuth.status === 'loaded' &&
+    state.slider.status === 'loaded';
 
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
@@ -94,7 +95,7 @@ export const Photo: React.FC = () => {
           ''
         )}
         <>
-          {state.auth.data?._id === user && loadStatus && category !== 'WallPost' ? (
+          {state.oldAuth.data?._id === user && loadStatus && category !== 'WallPost' ? (
             <button className="selected-image__container__delete-img">
               <Link
                 to={`/Profile/${user}`}

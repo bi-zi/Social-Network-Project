@@ -7,12 +7,13 @@ export const apiSlice = createApi({
     baseUrl: 'http://localhost:3500',
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem('token');
       if (token) {
         headers.set('authentication', `Bearer ${token}`);
       }
       return headers;
     },
+    credentials: 'include',
   }),
   tagTypes: ['Post', 'User', 'Auth'],
 

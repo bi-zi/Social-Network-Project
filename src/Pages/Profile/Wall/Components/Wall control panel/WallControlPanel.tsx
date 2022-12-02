@@ -5,11 +5,11 @@ import {
   fetchPostLike,
   fetchPostDislike,
   setComments,
-} from '../../../../../store/post/slice';
-import { fetchCommentators, setClearCommentators } from '../../../../../store/user/slice';
+} from '../../../../../store/old store/post/slice';
+import { fetchCommentators, setClearCommentators } from '../../../../../store/old store/user/slice';
 import { useWall } from '../useWall';
 import { useParams } from 'react-router-dom';
-import { Post } from '../../../../../store/post/types';
+import { Post } from '../../../../../store/old store/post/types';
 import { Like, Dislike, Comments } from '../../../../../Svg';
 import Skeleton from 'react-loading-skeleton';
 import './style.scss';
@@ -25,7 +25,7 @@ export const WallControlPanel: React.FC<MyProps> = ({ data, index }: MyProps) =>
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
   const wall = useAppSelector((state) => state.post.userPosts);
-  const auth = useAppSelector((state) => state.auth?.data);
+  const auth = useAppSelector((state) => state.oldAuth?.data);
 
   const { id } = useParams<keyof MyParams>() as MyParams;
 

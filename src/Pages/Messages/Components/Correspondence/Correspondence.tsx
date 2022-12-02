@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
-import { fetchUsersForChats } from '../../../../store/user/slice';
+import { fetchUsersForChats } from '../../../../store/old store/user/slice';
 import {
   fetchMainUserMessages,
   fetchSecondUserMessages,
   fetchAddMessage,
   setAddMessages,
-} from '../../../../store/messages/slice';
-import { User } from '../../../../store/auth/types';
+} from '../../../../store/old store/messages/slice';
+import { User } from '../../../../store/old store/auth/types';
 import { NavLink } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -17,7 +17,7 @@ export const Correspondence: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const state = useAppSelector((state) => state);
-  const auth = useAppSelector((state) => state.auth?.data);
+  const auth = useAppSelector((state) => state.oldAuth?.data);
   const messages = useAppSelector((state) => state.messages);
   const mainUserMessages = useAppSelector((state) => state.messages?.mainUserMessages?.[0]);
 
@@ -89,7 +89,7 @@ export const Correspondence: React.FC = () => {
     mainUserMessages?.correspondence[localStorage.chatIndexWithoutSort]?.messages.length;
 
   const loadStatus =
-    messages.status === 'loaded' && state.user.status === 'loaded' && state.auth.status === 'loaded';
+    messages.status === 'loaded' && state.user.status === 'loaded' && state.oldAuth.status === 'loaded';
 
   const scrollToTop = () => {
     if (divRef.current !== null) {

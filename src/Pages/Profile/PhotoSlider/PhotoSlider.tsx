@@ -1,8 +1,8 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchSlider, fetchSliderDelete } from '../../../store/slider/slice';
-import { setInputNumber } from '../../../store/user/slice';
+import { fetchSlider, fetchSliderDelete } from '../../../store/old store/slider/slice';
+import { setInputNumber } from '../../../store/old store/user/slice';
 import { ImageParsing } from '../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -42,7 +42,7 @@ export const PhotoSlider: React.FC = () => {
   }
 
   const loadStatus = state.slider.status === 'loaded' && state.user.status === 'loaded';
-  const buttonStatus = loadStatus && state.auth.data?._id === id;
+  const buttonStatus = loadStatus && state.oldAuth.data?._id === id;
 
   React.useEffect(() => {
     dispatch(fetchSlider(id));
@@ -55,8 +55,9 @@ export const PhotoSlider: React.FC = () => {
           ? readyPhotos?.map((image, index) => {
               return (
                 <span key={index} className="profile__slider__image">
-                  {state.auth.data?._id === id ? (
-                    <div style={{stroke: 'white'}}
+                  {state.oldAuth.data?._id === id ? (
+                    <div
+                      style={{ stroke: 'white' }}
                       className="profile__slider__image-delete"
                       onClick={(e) => onPhotoDelete(e, index)}>
                       <Garbage />
@@ -97,7 +98,7 @@ export const PhotoSlider: React.FC = () => {
         ) : (
           <button className="profile__slider__button">Max 8 images</button>
         )
-      ) : state.auth.data?._id === id ? (
+      ) : state.oldAuth.data?._id === id ? (
         <div className="profile__slider__skeleton">
           <Skeleton height={'100%'} style={{ borderRadius: '1.5vh' }} />
         </div>

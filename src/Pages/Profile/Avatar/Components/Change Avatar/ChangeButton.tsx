@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/store';
-import { setInputNumber } from '../../../../../store/user/slice';
+import { setInputNumber } from '../../../../../store/old store/user/slice';
 import { ImageParsing } from '../../../../../ImageParsing/ImageParsing';
 import { useParams } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
@@ -14,14 +14,16 @@ interface MyParams {
 export const ChangeButton: React.FC = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
-  const auth = useAppSelector((state) => state.auth?.data);
+  const auth = useAppSelector((state) => state.oldAuth?.data);
 
   const { id } = useParams<keyof MyParams>() as MyParams;
 
   const readyPhotos = state.slider?.slider?.[0]?.sliderImg;
 
   const loadStatus =
-    state.user.status === 'loaded' && state.auth.status === 'loaded' && state.slider.status === 'loaded';
+    state.user.status === 'loaded' &&
+    state.oldAuth.status === 'loaded' &&
+    state.slider.status === 'loaded';
 
   return (
     <>

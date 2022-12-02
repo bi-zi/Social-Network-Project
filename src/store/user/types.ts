@@ -1,16 +1,31 @@
-export type User = {
+export type MainUser = {
   _id: string;
+  login: string;
   firstName: string;
   lastName: string;
+  gender: string;
+  birdayDate: string;
   email: string;
-  passwordHash: string;
-  friends: string[];
-  subscribers: string[];
-  imageUrl: string[];
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+  password: string;
+  friends: FriendsSubscribers[];
+  subscribers: FriendsSubscribers[];
+  avatar: Avatar;
+  wasOnline: string;
+  online: boolean;
+  isActivated: boolean;
+  activationLink: string;
 };
+
+interface FriendsSubscribers {
+  user: string;
+  _id: string;
+}
+
+interface Avatar {
+  image: string;
+  sizeUpTo: string;
+  sizeAfter: string;
+}
 
 export enum Status {
   LOADING = 'loading',
@@ -19,19 +34,5 @@ export enum Status {
 }
 
 export interface UserSliceState {
-  usersAll: User[];
-
-  userOne: User[];
-  mainUser: User;
-
-  findUserFriends: User[];
-  findUserSubscribers: User[];
-
-  chatUsers: User[];
-  commentators: User[];
-
-  inputNumber: string;
-
-  deleteAttention: number;
-  status: Status;
+  mainUser: MainUser;
 }

@@ -6,8 +6,8 @@ import {
   fetchCreateMessages,
   fetchCreateChat,
   setSelectedUser,
-} from '../../../../../store/messages/slice';
-import { fetchUsersForChats } from '../../../../../store/user/slice';
+} from '../../../../../store/old store/messages/slice';
+import { fetchUsersForChats } from '../../../../../store/old store/user/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
@@ -20,7 +20,7 @@ interface MyParams {
 export const SendMessage: React.FC = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
-  const auth = useAppSelector((state) => state.auth?.data);
+  const auth = useAppSelector((state) => state.oldAuth?.data);
   const messages = useAppSelector((state) => state.messages);
 
   const { id } = useParams<keyof MyParams>() as MyParams;
@@ -54,7 +54,7 @@ export const SendMessage: React.FC = () => {
 
   const loadStatus =
     state.user.status === 'loaded' &&
-    state.auth.status === 'loaded' &&
+    state.oldAuth.status === 'loaded' &&
     state.messages.status === 'loaded';
 
   return (

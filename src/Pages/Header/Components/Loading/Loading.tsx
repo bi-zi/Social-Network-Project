@@ -10,20 +10,20 @@ export const Loading: React.FC = () => {
     state.post.userPosts.status === 'loading' ||
     state.note.status === 'loading' ||
     state.messages.status === 'loading' ||
-    state.auth.status === 'loading' ||
+    state.oldAuth.status === 'loading' ||
     state.about.status === 'loading';
 
   const friendPage =
     state.user.status === 'loading' ||
     state.note.status === 'loading' ||
-    state.auth.status === 'loading';
+    state.oldAuth.status === 'loading';
 
   const messagesPage =
     state.messages.status === 'loading' ||
-    state.auth.status === 'loading' ||
+    state.oldAuth.status === 'loading' ||
     state.user.status === 'loading';
 
-  const nonePage = state.auth.status === 'loading';
+  const nonePage = state.oldAuth.status === 'loading';
 
   const path = window.location.pathname.split('/')[1];
 

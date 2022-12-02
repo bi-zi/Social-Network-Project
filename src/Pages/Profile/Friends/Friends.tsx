@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchUserFriends } from '../../../store/user/slice';
-import { setCatergorySort } from '../../../store/friends/slice';
+import { fetchUserFriends } from '../../../store/old store/user/slice';
+import { setCatergorySort } from '../../../store/old store/friends/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './style.scss';

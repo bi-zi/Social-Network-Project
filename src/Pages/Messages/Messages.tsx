@@ -8,7 +8,7 @@ export const Messages: React.FC = () => {
   if (localStorage.isAuth === undefined) {
     return <Navigate to="/Login" />;
   }
-  
+
   return (
     <div className="messages__container">
       <Chats />

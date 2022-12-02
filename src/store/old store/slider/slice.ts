@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Slider, SliderSliceState, Status } from './types';
-import axios from '../../backend/axios';
+import axios from '../../../backend/axios';
 
 export const fetchSlider = createAsyncThunk<Slider[], string>(
   'slider/user/fetchSlider',

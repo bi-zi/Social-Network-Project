@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchUserSubscribers } from '../../../store/user/slice';
-import { setCatergorySort } from '../../../store/friends/slice';
+import { fetchUserSubscribers } from '../../../store/old store/user/slice';
+import { setCatergorySort } from '../../../store/old store/friends/slice';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { UserSkeleton } from '../Friends/UserSkeleton';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/store';
-import { fetchAbout, setCloseInfo } from '../../../../../store/about/slice';
+import { fetchAbout, setCloseInfo } from '../../../../../store/old store/about/slice';
 import { useParams } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';

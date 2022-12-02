@@ -1,78 +1,44 @@
-import axios from '../../backend/axios';
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { AuthSliceState, User, Error } from './types';
 import { RootState } from '../store';
-import { User, AuthSliceState, Status, FormValuesLogin, FormValuesRegistr } from './types';
-
-export const fetchAuth = createAsyncThunk('auth/fetchAuth', async (params: FormValuesLogin) => {
-  const { data } = await axios.post('/auth/login', params);
-  return data;
-});
-
-export const fetchRegister = createAsyncThunk(
-  'auth/fetchRegister',
-  async (params: FormValuesRegistr) => {
-    const { data } = await axios.post('/auth/register', params);
-    return data;
-  },
-);
-
-export const fetchAuthMe = createAsyncThunk<User>('auth/fetchAuthMe', async () => {
-  const { data } = await axios.get('/auth/me');
-  return data;
-});
+import { authApiSlice } from './authApi';
 
 const initialState: AuthSliceState = {
-  data: {} as User,
-  status: Status.LOADING,
+  authorizedUser: {} as User,
+  error: {} as any,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    logout: (state) => {
-      state.data = {} as User;
+    setAuthorizedUser: (state, action) => {
+      state.authorizedUser = action.payload;
     },
   },
-
   extraReducers: (builder) => {
-    builder.addCase(fetchAuth.pending, (state) => {
-      state.status = Status.LOADING;
-    });
-    builder.addCase(fetchAuth.fulfilled, (state, action) => {
-      state.status = Status.SUCCESS;
-      state.data = action.payload;
-    });
-    builder.addCase(fetchAuth.rejected, (state, action) => {
-      state.status = Status.ERROR;
+    builder.addMatcher(authApiSlice.endpoints.getRefresh.matchFulfilled, (state, { payload }) => {
+      state.authorizedUser = payload.user;
+      localStorage.setItem('token', payload.data?.accessToken);
     });
 
-    builder.addCase(fetchAuthMe.pending, (state) => {
-      state.status = Status.LOADING;
+    builder.addMatcher(authApiSlice.endpoints.postLogin.matchFulfilled, (state, { payload }) => {
+      state.authorizedUser = payload.user;
     });
-    builder.addCase(fetchAuthMe.fulfilled, (state, action) => {
-      state.status = Status.SUCCESS;
-      state.data = action.payload;
-    });
-    builder.addCase(fetchAuthMe.rejected, (state) => {
-      state.status = Status.ERROR;
+    builder.addMatcher(authApiSlice.endpoints.postLogin.matchRejected, (state, { payload }) => {
+      state.error = payload;
     });
 
-    builder.addCase(fetchRegister.pending, (state) => {
-      state.status = Status.LOADING;
+    builder.addMatcher(authApiSlice.endpoints.postRegistration.matchFulfilled, (state, { payload }) => {
+      state.authorizedUser = payload.user;
     });
-    builder.addCase(fetchRegister.fulfilled, (state, action) => {
-      state.status = Status.SUCCESS;
-      state.data = action.payload;
-    });
-    builder.addCase(fetchRegister.rejected, (state) => {
-      state.status = Status.ERROR;
+    builder.addMatcher(authApiSlice.endpoints.postLogout.matchPending, (state) => {
+      state.authorizedUser = {} as User;
     });
   },
 });
 
-export const selectIsAuth = (state: RootState) => state.auth.data?._id !== undefined;
+export const selectIsAuth = (state: RootState) => state.auth.authorizedUser?._id !== undefined;
 
+export const { setAuthorizedUser } = authSlice.actions;
 export const authReducer = authSlice.reducer;
-
-export const { logout } = authSlice.actions;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../../../../../store/store';
-import { setCreateImgDelete } from '../../../../../store/post/slice';
+import { setCreateImgDelete } from '../../../../../store/old store/post/slice';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Garbage } from '../../../../../Svg';
 
@@ -102,7 +102,7 @@ export const PostContent: React.FC = () => {
                     }`}
                   onClick={() => onImageClick(index)}
                 />
-                {state.auth.data?._id === id ? (
+                {state.oldAuth.data?._id === id ? (
                   <div
                     style={{ stroke: 'white' }}
                     className="post-images-delete"

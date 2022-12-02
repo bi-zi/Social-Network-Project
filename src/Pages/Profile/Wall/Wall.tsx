@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { fetchUserPostsAll, setComments } from '../../../store/post/slice';
+import { fetchUserPostsAll, setComments } from '../../../store/old store/post/slice';
 import { WallHeader, WallContent, WallControlPanel, WallComments } from './Components/index';
 import { useParams } from 'react-router-dom';
 import { useWall } from './Components/useWall';

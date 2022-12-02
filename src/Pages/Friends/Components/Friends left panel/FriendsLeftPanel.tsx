@@ -6,8 +6,8 @@ import {
   fetchOneUser,
   fetchUserFriends,
   fetchUserSubscribers,
-} from '../../../../store/user/slice';
-import { FriendsPageUser } from '../../../../store/friends/types';
+} from '../../../../store/old store/user/slice';
+import { FriendsPageUser } from '../../../../store/old store/friends/types';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Settings } from '../../../../Svg';
@@ -48,13 +48,13 @@ export const FriendsLeftPanel: React.FC<MyProps> = ({ data, lastFriend }: MyProp
       );
 
       dispatch(fetchOneUser(id));
-      dispatch(fetchMainUser(state.auth.data?._id));
+      dispatch(fetchMainUser(state.oldAuth.data?._id));
       dispatch(fetchUserFriends(id));
       dispatch(fetchUserSubscribers(id));
     }
   };
 
-  const loadStatus = state.user.status === 'loaded' && state.auth.status === 'loaded';
+  const loadStatus = state.user.status === 'loaded' && state.oldAuth.status === 'loaded';
 
   return (
     <div

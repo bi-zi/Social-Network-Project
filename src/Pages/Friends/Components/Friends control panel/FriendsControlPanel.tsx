@@ -1,9 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
-import { setCatergorySort, setSortBy } from '../../../../store/friends/slice';
+import { setCatergorySort, setSortBy } from '../../../../store/old store/friends/slice';
 import './style.scss';
-
-
 
 export type MyProps = {
   data: string;
@@ -18,7 +16,7 @@ export const FriendsControlPanel: React.FC<MyProps> = ({ data }: MyProps) => {
 
   const loadStatus =
     state.user.status === 'loaded' &&
-    state.auth.status === 'loaded' &&
+    state.oldAuth.status === 'loaded' &&
     state.friendsPage.status === 'loaded';
 
   return (

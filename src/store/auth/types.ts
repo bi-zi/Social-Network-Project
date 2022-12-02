@@ -1,28 +1,42 @@
-export type User = {
+export type Registration = {
+  login: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  birdayDate: Date;
+  email: string;
+  password: string;
+  user: User;
   _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  passwordHash: string;
-  friends: string[];
-  subscribers: string[];
-  imageUrl: string[];
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-};
-
-export type FormValuesLogin = {
-  email: string;
-  password: string;
 };
 
 
-export type FormValuesRegistr = {
-  firstName: string;
-  lastName: string;
+export type Login = {
   email: string;
   password: string;
+  user: User;
+  data: Data;
+};
+
+interface Data {
+  accessToken: string;
+  refreshToken: string;
+  user: User;
+}
+
+export type User = {
+  login: string;
+  email: string;
+  isActivated: boolean;
+  _id: string;
+}
+
+export type Error = {
+  status: number;
+  data: {
+    errors: [];
+    message: string;
+  };
 };
 
 export enum Status {
@@ -32,6 +46,6 @@ export enum Status {
 }
 
 export interface AuthSliceState {
-  data: User;
-  status: Status;
+  authorizedUser: User;
+  error: any;
 }
