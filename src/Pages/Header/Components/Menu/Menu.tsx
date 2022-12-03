@@ -6,6 +6,7 @@ import { Loading } from '../Loading/Loading';
 import { NavLink } from 'react-router-dom';
 import { Burger } from '../../../../Svg';
 import './style.scss';
+import { setUser } from '../../../../store/user/slice';
 
 export const Menu: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -19,9 +20,9 @@ export const Menu: React.FC = () => {
 
     if (window.confirm('Do you really want to leave?')) {
       localStorage.clear();
+      dispatch(setUser());
       dispatch(setCreatText(''));
-      dispatch(setCreateVid(''));
-      logout('');
+      logout(''); 
     }
   };
 

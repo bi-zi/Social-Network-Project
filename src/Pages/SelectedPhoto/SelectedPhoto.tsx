@@ -17,7 +17,7 @@ export const Photo: React.FC = () => {
   const dispatch = useAppDispatch();
   const { user, category, id } = useParams<keyof MyParams>() as MyParams;
   const state = useAppSelector((state) => state);
-  const avatar = state.user?.userOne?.[0];
+  const avatar = state.player?.userOne?.[0];
   const slider = state.slider.slider?.find((userSlider) => userSlider?.user === user);
 
   const readyPhotos =
@@ -57,7 +57,7 @@ export const Photo: React.FC = () => {
   }, [dispatch, user]);
 
   const loadStatus =
-    state.user.status === 'loaded' &&
+    state.player.status === 'loaded' &&
     state.oldAuth.status === 'loaded' &&
     state.slider.status === 'loaded';
 

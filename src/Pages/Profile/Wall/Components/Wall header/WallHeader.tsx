@@ -16,7 +16,7 @@ interface MyProps {
 }
 
 export const WallHeader: React.FC<MyProps> = ({ data }: MyProps) => {
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state.player);
   const wall = useAppSelector((state) => state.post.userPosts);
 
   const { id } = useParams<keyof MyParams>() as MyParams;

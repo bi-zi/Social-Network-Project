@@ -39,11 +39,11 @@ export const Friends: React.FC = () => {
   }
 
   if (state.friendsPage.categorySort === 'friends') {
-    sortedFriends = state.user.findUserFriends;
+    sortedFriends = state.player.findUserFriends;
   }
 
   if (state.friendsPage.categorySort === 'subscribers') {
-    sortedFriends = state.user.findUserSubscribers;
+    sortedFriends = state.player.findUserSubscribers;
   }
 
   // все эти if else я пытался выносить в функции но у меня не получалось достичь нужного результата поэтому

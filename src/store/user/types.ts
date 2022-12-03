@@ -34,5 +34,5 @@ export enum Status {
 }
 
 export interface UserSliceState {
-  mainUser: MainUser;
+  user: MainUser;
 }

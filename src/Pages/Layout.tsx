@@ -10,7 +10,7 @@ import './style.scss';
 
 export const Layout: React.FC = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state.player);
   const state = useAppSelector((state) => state);
 
   let navigate = useNavigate();
@@ -26,7 +26,7 @@ export const Layout: React.FC = () => {
 
   // console.log([
   //   `-AUTH- ${state.oldAuth.status}`,
-  //   `-USER- ${state.user.status}`,
+  //   `-USER- ${state.player.status}`,
   //   `-NOTE- ${state.note.status}`,
   //   `-MESSAGES- ${state.messages.status}`,
   //   `-ABOUT- ${state.about.status}`,
@@ -114,7 +114,7 @@ export const Layout: React.FC = () => {
           <Footer />
         </div>
       ) : (
-        <div className="tex_works">До 2.12.2022 ведутся технические работы</div>
+        <div className="tex_works">До 12.12.2022 ведутся технические работы</div>
       )}
     </>
   );

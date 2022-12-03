@@ -5,11 +5,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getMainUser: builder.query({
       query: (login) => ({
-        url: `/api/MainUser/${login}`,
+        url: `/api/mainUser/${login}`,
         method: 'GET',
+        credentials: 'include',
+        
       }),
     }),
   }),
 });
 
-export const {useGetMainUserQuery} = userApiSlice;
+export const { useGetMainUserQuery } = userApiSlice;

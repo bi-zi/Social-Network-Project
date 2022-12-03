@@ -15,7 +15,7 @@ export type MyParams = {
 export const ImageParsing: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const parsing = useAppSelector((state) => state.user);
+  const parsing = useAppSelector((state) => state.player);
   const state = useAppSelector((state) => state);
 
   const { id } = useParams<keyof MyParams>() as MyParams;

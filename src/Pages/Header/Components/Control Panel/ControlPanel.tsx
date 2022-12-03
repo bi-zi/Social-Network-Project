@@ -15,9 +15,9 @@ export const ControlPanel: React.FC = () => {
   const state = useAppSelector((state) => state);
   const { id } = useParams<keyof MyParams>() as MyParams;
 
-  const loading = state.oldAuth.status === 'loading' || state.user.status === 'loading';
+  const loading = state.oldAuth.status === 'loading' || state.player.status === 'loading';
 
-  const error = state.oldAuth.status === 'error' || state.user.status === 'error';
+  const error = state.oldAuth.status === 'error' || state.player.status === 'error';
 
   const firstPath = window.location.pathname.split('/')[1];
   const secondPath = window.location.pathname.split('/')[2];

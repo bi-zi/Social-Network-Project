@@ -23,7 +23,7 @@ export const Chats: React.FC = () => {
   let users: User[] = []; // Массив для отсортированных пользователей
 
   // Поиск участников чатов
-  const chatsUsers = state.user?.chatUsers.filter((user) =>
+  const chatsUsers = state.player?.chatUsers.filter((user) =>
     data?.correspondence.map((chat) => chat?.withWho)?.includes(user._id),
   );
 

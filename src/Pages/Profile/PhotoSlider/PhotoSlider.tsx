@@ -41,7 +41,7 @@ export const PhotoSlider: React.FC = () => {
     }
   }
 
-  const loadStatus = state.slider.status === 'loaded' && state.user.status === 'loaded';
+  const loadStatus = state.slider.status === 'loaded' && state.player.status === 'loaded';
   const buttonStatus = loadStatus && state.oldAuth.data?._id === id;
 
   React.useEffect(() => {

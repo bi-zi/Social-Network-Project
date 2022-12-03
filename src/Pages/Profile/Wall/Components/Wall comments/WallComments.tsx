@@ -125,10 +125,10 @@ export const WallComments: React.FC<MyProps> = ({ data, index }: MyProps) => {
                       window.scrollTo(0, 0);
                       dispatch(setComments(999999));
                     }}>
-                    {state.user.status === 'loaded' ? (
+                    {state.player.status === 'loaded' ? (
                       <img
                         src={
-                          state.user.commentators.find((user) => user._id === comment.userId)!
+                          state.player.commentators.find((user) => user._id === comment.userId)!
                             ?.imageUrl?.[0]
                         }
                         width={10}

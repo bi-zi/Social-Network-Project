@@ -8,9 +8,9 @@ import './style.scss';
 export const UserInfo: React.FC = () => {
   const state = useAppSelector((state) => state);
 
-  const user = state.user?.userOne?.[0];
+  const user = state.player?.userOne?.[0];
 
-  const loadStatus = state.about?.status === 'loaded' && state.user?.status === 'loaded';
+  const loadStatus = state.about?.status === 'loaded' && state.player?.status === 'loaded';
 
   return (
     <>

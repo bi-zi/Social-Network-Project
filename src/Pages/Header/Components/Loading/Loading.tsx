@@ -5,7 +5,7 @@ export const Loading: React.FC = () => {
   const state = useAppSelector((state) => state);
 
   const profilePage =
-    state.user.status === 'loading' ||
+    state.player.status === 'loading' ||
     state.slider.status === 'loading' ||
     state.post.userPosts.status === 'loading' ||
     state.note.status === 'loading' ||
@@ -14,14 +14,14 @@ export const Loading: React.FC = () => {
     state.about.status === 'loading';
 
   const friendPage =
-    state.user.status === 'loading' ||
+    state.player.status === 'loading' ||
     state.note.status === 'loading' ||
     state.oldAuth.status === 'loading';
 
   const messagesPage =
     state.messages.status === 'loading' ||
     state.oldAuth.status === 'loading' ||
-    state.user.status === 'loading';
+    state.player.status === 'loading';
 
   const nonePage = state.oldAuth.status === 'loading';
 

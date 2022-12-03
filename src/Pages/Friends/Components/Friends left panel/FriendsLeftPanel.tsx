@@ -33,11 +33,13 @@ export const FriendsLeftPanel: React.FC<MyProps> = ({ data, lastFriend }: MyProp
     e.preventDefault();
 
     if (window.confirm('Are you sure you want to delete your friend?')) {
-      const mainUserIndex = state.user.findUserFriends
+      const mainUserIndex = state.player.findUserFriends
         .find((user) => user._id === userId)!
-        .friends.findIndex((friendId) => friendId === state.user.mainUser?._id);
+        .friends.findIndex((friendId) => friendId === state.player.mainUser?._id);
 
-      const secondUserIndex = state.user.mainUser?.friends.findIndex((friendId) => friendId === userId);
+      const secondUserIndex = state.player.mainUser?.friends.findIndex(
+        (friendId) => friendId === userId,
+      );
       await dispatch(
         fetchDeleteFriend({
           id: userId,
@@ -54,7 +56,7 @@ export const FriendsLeftPanel: React.FC<MyProps> = ({ data, lastFriend }: MyProp
     }
   };
 
-  const loadStatus = state.user.status === 'loaded' && state.oldAuth.status === 'loaded';
+  const loadStatus = state.player.status === 'loaded' && state.oldAuth.status === 'loaded';
 
   return (
     <div

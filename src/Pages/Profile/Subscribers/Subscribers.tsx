@@ -14,7 +14,7 @@ interface MyParams {
 
 export const Subscribers: React.FC = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state.player);
 
   const { id } = useParams<keyof MyParams>() as MyParams;
 

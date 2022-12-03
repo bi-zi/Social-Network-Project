@@ -3,24 +3,30 @@ import { UserSliceState, MainUser } from './types';
 import { userApiSlice } from './userApi';
 
 const initialState: UserSliceState = {
-  mainUser: {} as MainUser,
+  user: {} as MainUser,
 };
 
-const userSlice = createSlice({
+const mainUserSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-
+    setUser: (state) => {
+      state.user = {} as MainUser;
+    },
   },
   extraReducers: (builder) => {
-    // builder.addMatcher(userApiSlice.endpoints.getRefresh.matchFulfilled, (state, { payload }) => {
-    //   state.authorizedUser = payload.user;
-    //   localStorage.setItem('token', payload.data?.accessToken);
-    // });
+    builder.addMatcher(userApiSlice.endpoints.getMainUser.matchFulfilled, (state, { payload }) => {
+      state.user = payload;
+      console.log(payload)
+    });
+    builder.addMatcher(userApiSlice.endpoints.getMainUser.matchRejected, (state, { payload }) => {
+      console.log('rejected');
+    });
+      builder.addMatcher(userApiSlice.endpoints.getMainUser.matchPending, (state, { payload }) => {
+        console.log('----');
+      });
   },
 });
 
-
-
-export const {  } = userSlice.actions;
-export const userReducer = userSlice.reducer;
+export const { setUser } = mainUserSlice.actions;
+export const mainUserReducer = mainUserSlice.reducer;

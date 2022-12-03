@@ -82,11 +82,11 @@ export const ControlPanel: React.FC = () => {
 
   const postStatus =
     state.post.userPosts.status === 'loaded' &&
-    state.user.status === 'loaded' &&
+    state.player.status === 'loaded' &&
     state.oldAuth.status === 'loaded';
 
   const imageLoadStatus =
-    numImg < 6 && state.user.status === 'loaded' && state.slider.status === 'loaded';
+    numImg < 6 && state.player.status === 'loaded' && state.slider.status === 'loaded';
 
   React.useEffect(() => {
     dispatch(fetchUserPostsAll(id));

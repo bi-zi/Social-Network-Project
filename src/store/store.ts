@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import { authReducer } from './auth/slice';
-
+import { mainUserReducer } from './user/slice';
 
 
 import { playerReducer } from './old store/user/slice';
@@ -20,15 +20,13 @@ import { apiSlice } from './apiSlice';
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-
-
-
+    mainUser: mainUserReducer,
 
 
 
     oldAuth: oldAuthReducer,
     about: aboutReducer,
-    user: playerReducer,
+    player: playerReducer,
     friendsPage: friendsPageReducer,
     slider: sliderReducer,
     post: postReducer,

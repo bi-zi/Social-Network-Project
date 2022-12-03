@@ -5,7 +5,7 @@ export const apiSlice = createApi({
   reducerPath: 'api', // optional
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3500',
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
       const token = localStorage.getItem('token');
       if (token) {

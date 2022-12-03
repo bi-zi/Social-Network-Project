@@ -147,7 +147,7 @@ const userSlice = createSlice({
     // });
     // builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
     //   state.status = Status.SUCCESS;
-    //   state.usersAll = action.payload;
+    //   state.playersAll = action.payload;
     // });
     // builder.addCase(fetchAllUsers.rejected, (state) => {
     //   state.status = Status.ERROR;

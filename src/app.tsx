@@ -22,16 +22,17 @@ import './style.scss';
 
 export const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  const auth = useAppSelector((state) => state.oldAuth.data);
+  const auth = useAppSelector((state) => state.auth?.authorizedUser);
   const state = useAppSelector((state) => state);
 
   const isAuth = useAppSelector(selectIsAuth);
 
-  const { data: authUser } = useGetRefreshQuery(true);
-  const { data: mainUser } = useGetMainUserQuery(1);
-  
-  console.log(mainUser);
-// authUser?.user ? authUser.user.login : skipToken;
+  const { data: authUser, } = useGetRefreshQuery(true);
+
+  const { data: mainUser,isLoading } = useGetMainUserQuery(auth?.login? auth?.login : skipToken);
+
+  console.log(state?.mainUser);
+
   return (
     <SkeletonTheme baseColor="#313131" highlightColor="#525252">
       <Routes>

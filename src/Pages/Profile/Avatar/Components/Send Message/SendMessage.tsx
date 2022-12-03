@@ -53,7 +53,7 @@ export const SendMessage: React.FC = () => {
   };
 
   const loadStatus =
-    state.user.status === 'loaded' &&
+    state.player.status === 'loaded' &&
     state.oldAuth.status === 'loaded' &&
     state.messages.status === 'loaded';
 

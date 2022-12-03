@@ -8,6 +8,9 @@ export type Registration = {
   password: string;
   user: User;
   _id: string;
+
+  accessToken: string;
+  refreshToken: string;
 };
 
 
@@ -15,7 +18,8 @@ export type Login = {
   email: string;
   password: string;
   user: User;
-  data: Data;
+  accessToken: string;
+  refreshToken: string;
 };
 
 interface Data {

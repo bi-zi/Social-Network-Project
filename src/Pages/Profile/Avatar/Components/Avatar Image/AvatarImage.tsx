@@ -15,10 +15,10 @@ export const AvatarImage: React.FC = () => {
 
   const { id } = useParams<keyof MyParams>() as MyParams;
 
-  const user = state.user?.userOne?.[0];
+  const user = state.player?.userOne?.[0];
 
   const loadStatus =
-    state.user.status === 'loaded' &&
+    state.player.status === 'loaded' &&
     state.oldAuth.status === 'loaded' &&
     state.slider.status === 'loaded';
 

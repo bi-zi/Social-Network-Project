@@ -30,7 +30,7 @@ export const Correspondence: React.FC = () => {
   let users: User[] = []; // Массив для отсортированных пользователей
 
   // Поиск участников чатов
-  const chatsUsers = state.user?.chatUsers.filter((user) =>
+  const chatsUsers = state.player?.chatUsers.filter((user) =>
     data?.correspondence.map((chat) => chat?.withWho)?.includes(user._id),
   );
 
@@ -89,7 +89,9 @@ export const Correspondence: React.FC = () => {
     mainUserMessages?.correspondence[localStorage.chatIndexWithoutSort]?.messages.length;
 
   const loadStatus =
-    messages.status === 'loaded' && state.user.status === 'loaded' && state.oldAuth.status === 'loaded';
+    messages.status === 'loaded' &&
+    state.player.status === 'loaded' &&
+    state.oldAuth.status === 'loaded';
 
   const scrollToTop = () => {
     if (divRef.current !== null) {
@@ -190,8 +192,9 @@ export const Correspondence: React.FC = () => {
                       {loadStatus ? (
                         <img
                           src={
-                            state.user?.chatUsers.filter((user) => message.userId?.includes(user._id))[0]
-                              ?.imageUrl?.[0]
+                            state.player?.chatUsers.filter((user) =>
+                              message.userId?.includes(user._id),
+                            )[0]?.imageUrl?.[0]
                           }
                           alt=""
                           width="10"
@@ -206,7 +209,7 @@ export const Correspondence: React.FC = () => {
                           <>
                             <div className="correspondence-message__info-name">
                               {
-                                state.user?.chatUsers?.filter((user) =>
+                                state.player?.chatUsers?.filter((user) =>
                                   message?.userId?.includes(user._id),
                                 )[0]?.firstName
                               }

@@ -112,7 +112,8 @@ export const WallContent: React.FC<MyProps> = ({ data, index, postLength }: MyPr
 
         {postStatus ? (
           <div className="wall_from">
-            Post from {`${state.user.userOne?.[0]?.firstName + ' ' + state.user.userOne?.[0]?.lastName}`}
+            Post from{' '}
+            {`${state.player.userOne?.[0]?.firstName + ' ' + state.player.userOne?.[0]?.lastName}`}
           </div>
         ) : (
           <Skeleton className="wall_from" width={'30%'} />

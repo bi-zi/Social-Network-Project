@@ -15,7 +15,7 @@ export const FriendsControlPanel: React.FC<MyProps> = ({ data }: MyProps) => {
   const sortBy = state.friendsPage.sortBy;
 
   const loadStatus =
-    state.user.status === 'loaded' &&
+    state.player.status === 'loaded' &&
     state.oldAuth.status === 'loaded' &&
     state.friendsPage.status === 'loaded';
 

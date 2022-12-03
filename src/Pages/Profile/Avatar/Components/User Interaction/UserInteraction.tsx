@@ -28,11 +28,11 @@ interface MyParams {
 export const UserInteraction: React.FC = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
-  const mainUser = useAppSelector((state) => state.user?.mainUser);
+  const mainUser = useAppSelector((state) => state.player?.mainUser);
 
   const { id } = useParams<keyof MyParams>() as MyParams;
 
-  const user = state.user?.userOne?.[0];
+  const user = state.player?.userOne?.[0];
 
   // Подписаться на пользователя
   const subscribe = async () => {
@@ -107,7 +107,7 @@ export const UserInteraction: React.FC = () => {
   };
 
   const loadStatus =
-    state.user.status === 'loaded' &&
+    state.player.status === 'loaded' &&
     state.oldAuth.status === 'loaded' &&
     state.note.status === 'loaded' &&
     state.messages.status === 'loaded';

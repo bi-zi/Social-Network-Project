@@ -51,12 +51,13 @@ export const Registration = () => {
 
     const data: any = await registration(userInfo);
 
+
     if (data.error) {
       return alert(data.error?.data?.message);
     }
-    if (data.data) {
-      localStorage.setItem('token', data.data?.accessToken);
-    }
+    // if (data.data) {
+    //   localStorage.setItem('token', data.data?.accessToken);
+    // }
   };
 
   if (isAuth) {

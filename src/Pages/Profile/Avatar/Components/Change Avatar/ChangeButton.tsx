@@ -21,7 +21,7 @@ export const ChangeButton: React.FC = () => {
   const readyPhotos = state.slider?.slider?.[0]?.sliderImg;
 
   const loadStatus =
-    state.user.status === 'loaded' &&
+    state.player.status === 'loaded' &&
     state.oldAuth.status === 'loaded' &&
     state.slider.status === 'loaded';
 

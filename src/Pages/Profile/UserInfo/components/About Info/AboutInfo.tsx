@@ -28,7 +28,7 @@ export const AboutInfo: React.FC = () => {
     <>
       {loadStatus ? (
         <div className="about__container">
-          {state.user?.mainUser?._id === id ? (
+          {state.player?.mainUser?._id === id ? (
             <div
               className="about__info"
               onClick={() => {
